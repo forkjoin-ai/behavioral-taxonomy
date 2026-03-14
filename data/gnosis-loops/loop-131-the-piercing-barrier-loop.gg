@@ -1,0 +1,33 @@
+// behavioral-loop-131.gg
+// Executable Gnosis projection for The Piercing Barrier Loop.
+
+// Nodes
+(loop_131_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_131_context_branch: BehaviorEmit { emission: 'context' })
+(loop_131_given_gate: BehaviorAssess { stage: 'given', text: 'Facial%20metalwork' })
+(loop_131_inactive: BehaviorTerminal { loopId: 131, loopName: 'The%20Piercing%20Barrier%20Loop' })
+(loop_131_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_131_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_131_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_131_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%2FRejection%20Operator', mechanism: 'it%20acts%20as%20a%20%22Filter%22%20for%20disapproval' })
+(loop_131_result_branch: BehaviorEmit { emission: 'result', text: 'the%20rapid%20formation%20of%20**Tribal%20Bonds**%20with%20other%20alternative%20subcultures%20(Instant%20In-Group)' })
+(loop_131_sink: BehaviorSink)
+(loop_131_start: BehaviorStart { loopId: 131, loopName: 'The%20Piercing%20Barrier%20Loop', given: 'Facial%20metalwork', when: 'interacting%20with%20older%20generations%20or%20conservatives', then: 'it%20acts%20as%20a%20%22Filter%22%20for%20disapproval%20(The%20Disgust%2FRejection%20Operator)', result: 'the%20rapid%20formation%20of%20**Tribal%20Bonds**%20with%20other%20alternative%20subcultures%20(Instant%20In-Group)', operatorName: 'The%20Disgust%2FRejection%20Operator', operatorMechanism: 'it%20acts%20as%20a%20%22Filter%22%20for%20disapproval', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_131_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_131_then_branch: BehaviorEmit { emission: 'then', text: 'it%20acts%20as%20a%20%22Filter%22%20for%20disapproval%20(The%20Disgust%2FRejection%20Operator)' })
+(loop_131_verdict: BehaviorVerdict { loopId: 131, loopName: 'The%20Piercing%20Barrier%20Loop', then: 'it%20acts%20as%20a%20%22Filter%22%20for%20disapproval%20(The%20Disgust%2FRejection%20Operator)', result: 'the%20rapid%20formation%20of%20**Tribal%20Bonds**%20with%20other%20alternative%20subcultures%20(Instant%20In-Group)', operatorName: 'The%20Disgust%2FRejection%20Operator', operatorMechanism: 'it%20acts%20as%20a%20%22Filter%22%20for%20disapproval', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_131_when_gate: BehaviorAssess { stage: 'when', text: 'interacting%20with%20older%20generations%20or%20conservatives' })
+
+// Topology
+(loop_131_start)-[:PROCESS]->(loop_131_given_gate)
+(loop_131_given_gate)-[:PROCESS { case: "ok" }]->(loop_131_when_gate)
+(loop_131_given_gate)-[:PROCESS { case: "err" }]->(loop_131_inactive)
+(loop_131_when_gate)-[:PROCESS { case: "ok" }]->(loop_131_context)
+(loop_131_when_gate)-[:PROCESS { case: "err" }]->(loop_131_inactive)
+(loop_131_context)-[:FORK { strategy: "behavior-branches" }]->(loop_131_context_branch | loop_131_then_branch | loop_131_operator_branch | loop_131_result_branch | loop_131_taxonomy_branch | loop_131_intervention_recognize | loop_131_intervention_interdict | loop_131_intervention_minimize)
+(loop_131_context_branch | loop_131_then_branch | loop_131_operator_branch | loop_131_result_branch | loop_131_taxonomy_branch | loop_131_intervention_recognize | loop_131_intervention_interdict | loop_131_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_131_verdict)
+(loop_131_inactive)-[:PROCESS]->(loop_131_sink)
+(loop_131_verdict)-[:PROCESS]->(loop_131_sink)
+(loop_131_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_131_then_branch)
+(loop_131_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_131_then_branch)
+(loop_131_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_131_then_branch)

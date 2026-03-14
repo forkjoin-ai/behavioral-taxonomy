@@ -1,0 +1,33 @@
+// behavioral-loop-569.gg
+// Executable Gnosis projection for The Knobby Knee Loop.
+
+// Nodes
+(loop_569_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_569_context_branch: BehaviorEmit { emission: 'context' })
+(loop_569_given_gate: BehaviorAssess { stage: 'given', text: 'Prominent%20patella%2Fjoints%20relative%20to%20muscle' })
+(loop_569_inactive: BehaviorTerminal { loopId: 569, loopName: 'The%20Knobby%20Knee%20Loop' })
+(loop_569_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_569_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_569_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_569_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Colt%20Operator', mechanism: 'legs%20look%20%22Fragile%22%20or%20%22Boyish%22' })
+(loop_569_result_branch: BehaviorEmit { emission: 'result', text: 'being%20underestimated%20physically' })
+(loop_569_sink: BehaviorSink)
+(loop_569_start: BehaviorStart { loopId: 569, loopName: 'The%20Knobby%20Knee%20Loop', given: 'Prominent%20patella%2Fjoints%20relative%20to%20muscle', when: 'wearing%20shorts', then: 'legs%20look%20%22Fragile%22%20or%20%22Boyish%22%20(The%20Colt%20Operator)', result: 'being%20underestimated%20physically', operatorName: 'The%20Colt%20Operator', operatorMechanism: 'legs%20look%20%22Fragile%22%20or%20%22Boyish%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_569_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_569_then_branch: BehaviorEmit { emission: 'then', text: 'legs%20look%20%22Fragile%22%20or%20%22Boyish%22%20(The%20Colt%20Operator)' })
+(loop_569_verdict: BehaviorVerdict { loopId: 569, loopName: 'The%20Knobby%20Knee%20Loop', then: 'legs%20look%20%22Fragile%22%20or%20%22Boyish%22%20(The%20Colt%20Operator)', result: 'being%20underestimated%20physically', operatorName: 'The%20Colt%20Operator', operatorMechanism: 'legs%20look%20%22Fragile%22%20or%20%22Boyish%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_569_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20shorts' })
+
+// Topology
+(loop_569_start)-[:PROCESS]->(loop_569_given_gate)
+(loop_569_given_gate)-[:PROCESS { case: "ok" }]->(loop_569_when_gate)
+(loop_569_given_gate)-[:PROCESS { case: "err" }]->(loop_569_inactive)
+(loop_569_when_gate)-[:PROCESS { case: "ok" }]->(loop_569_context)
+(loop_569_when_gate)-[:PROCESS { case: "err" }]->(loop_569_inactive)
+(loop_569_context)-[:FORK { strategy: "behavior-branches" }]->(loop_569_context_branch | loop_569_then_branch | loop_569_operator_branch | loop_569_result_branch | loop_569_taxonomy_branch | loop_569_intervention_recognize | loop_569_intervention_interdict | loop_569_intervention_minimize)
+(loop_569_context_branch | loop_569_then_branch | loop_569_operator_branch | loop_569_result_branch | loop_569_taxonomy_branch | loop_569_intervention_recognize | loop_569_intervention_interdict | loop_569_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_569_verdict)
+(loop_569_inactive)-[:PROCESS]->(loop_569_sink)
+(loop_569_verdict)-[:PROCESS]->(loop_569_sink)
+(loop_569_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_569_then_branch)
+(loop_569_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_569_then_branch)
+(loop_569_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_569_then_branch)

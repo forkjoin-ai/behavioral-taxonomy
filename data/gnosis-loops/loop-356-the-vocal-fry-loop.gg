@@ -1,0 +1,33 @@
+// behavioral-loop-356.gg
+// Executable Gnosis projection for The Vocal Fry Loop.
+
+// Nodes
+(loop_356_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_356_context_branch: BehaviorEmit { emission: 'context' })
+(loop_356_given_gate: BehaviorAssess { stage: 'given', text: 'Low-register%20creaky%20voice%20in%20men%20(e.g.%2C%20Podcaster%20voice)' })
+(loop_356_inactive: BehaviorTerminal { loopId: 356, loopName: 'The%20Vocal%20Fry%20Loop' })
+(loop_356_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_356_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_356_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_356_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Guru%20Operator', mechanism: 'listeners%20perceive%20%22Relaxed%20Confidence%22%20or%20%22Expertise%22' })
+(loop_356_result_branch: BehaviorEmit { emission: 'result', text: 'the%20opposite%20effect%20of%20female%20vocal%20fry%20(where%20it%20signals%20incompetence)' })
+(loop_356_sink: BehaviorSink)
+(loop_356_start: BehaviorStart { loopId: 356, loopName: 'The%20Vocal%20Fry%20Loop', given: 'Low-register%20creaky%20voice%20in%20men%20(e.g.%2C%20Podcaster%20voice)', when: 'explaining%20a%20concept', then: 'listeners%20perceive%20%22Relaxed%20Confidence%22%20or%20%22Expertise%22%20(The%20Guru%20Operator)', result: 'the%20opposite%20effect%20of%20female%20vocal%20fry%20(where%20it%20signals%20incompetence)', operatorName: 'The%20Guru%20Operator', operatorMechanism: 'listeners%20perceive%20%22Relaxed%20Confidence%22%20or%20%22Expertise%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_356_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_356_then_branch: BehaviorEmit { emission: 'then', text: 'listeners%20perceive%20%22Relaxed%20Confidence%22%20or%20%22Expertise%22%20(The%20Guru%20Operator)' })
+(loop_356_verdict: BehaviorVerdict { loopId: 356, loopName: 'The%20Vocal%20Fry%20Loop', then: 'listeners%20perceive%20%22Relaxed%20Confidence%22%20or%20%22Expertise%22%20(The%20Guru%20Operator)', result: 'the%20opposite%20effect%20of%20female%20vocal%20fry%20(where%20it%20signals%20incompetence)', operatorName: 'The%20Guru%20Operator', operatorMechanism: 'listeners%20perceive%20%22Relaxed%20Confidence%22%20or%20%22Expertise%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_356_when_gate: BehaviorAssess { stage: 'when', text: 'explaining%20a%20concept' })
+
+// Topology
+(loop_356_start)-[:PROCESS]->(loop_356_given_gate)
+(loop_356_given_gate)-[:PROCESS { case: "ok" }]->(loop_356_when_gate)
+(loop_356_given_gate)-[:PROCESS { case: "err" }]->(loop_356_inactive)
+(loop_356_when_gate)-[:PROCESS { case: "ok" }]->(loop_356_context)
+(loop_356_when_gate)-[:PROCESS { case: "err" }]->(loop_356_inactive)
+(loop_356_context)-[:FORK { strategy: "behavior-branches" }]->(loop_356_context_branch | loop_356_then_branch | loop_356_operator_branch | loop_356_result_branch | loop_356_taxonomy_branch | loop_356_intervention_recognize | loop_356_intervention_interdict | loop_356_intervention_minimize)
+(loop_356_context_branch | loop_356_then_branch | loop_356_operator_branch | loop_356_result_branch | loop_356_taxonomy_branch | loop_356_intervention_recognize | loop_356_intervention_interdict | loop_356_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_356_verdict)
+(loop_356_inactive)-[:PROCESS]->(loop_356_sink)
+(loop_356_verdict)-[:PROCESS]->(loop_356_sink)
+(loop_356_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_356_then_branch)
+(loop_356_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_356_then_branch)
+(loop_356_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_356_then_branch)

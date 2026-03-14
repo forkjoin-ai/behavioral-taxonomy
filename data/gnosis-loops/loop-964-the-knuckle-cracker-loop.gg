@@ -1,0 +1,33 @@
+// behavioral-loop-964.gg
+// Executable Gnosis projection for The Knuckle Cracker Loop.
+
+// Nodes
+(loop_964_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_964_context_branch: BehaviorEmit { emission: 'context' })
+(loop_964_given_gate: BehaviorAssess { stage: 'given', text: 'Habitual%20cavitation%20of%20joints' })
+(loop_964_inactive: BehaviorTerminal { loopId: 964, loopName: 'The%20Knuckle%20Cracker%20Loop' })
+(loop_964_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_964_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_964_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_964_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Pop%20Operator', mechanism: 'a%20loud%20*crack*%20punctuates%20the%20silence' })
+(loop_964_result_branch: BehaviorEmit { emission: 'result', text: 'physical%20cringing%20from%20sensitive%20listeners' })
+(loop_964_sink: BehaviorSink)
+(loop_964_start: BehaviorStart { loopId: 964, loopName: 'The%20Knuckle%20Cracker%20Loop', given: 'Habitual%20cavitation%20of%20joints', when: 'a%20serious%20point%20is%20made', then: 'a%20loud%20*crack*%20punctuates%20the%20silence%20(The%20Pop%20Operator)', result: 'physical%20cringing%20from%20sensitive%20listeners', operatorName: 'The%20Pop%20Operator', operatorMechanism: 'a%20loud%20*crack*%20punctuates%20the%20silence', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_964_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_964_then_branch: BehaviorEmit { emission: 'then', text: 'a%20loud%20*crack*%20punctuates%20the%20silence%20(The%20Pop%20Operator)' })
+(loop_964_verdict: BehaviorVerdict { loopId: 964, loopName: 'The%20Knuckle%20Cracker%20Loop', then: 'a%20loud%20*crack*%20punctuates%20the%20silence%20(The%20Pop%20Operator)', result: 'physical%20cringing%20from%20sensitive%20listeners', operatorName: 'The%20Pop%20Operator', operatorMechanism: 'a%20loud%20*crack*%20punctuates%20the%20silence', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_964_when_gate: BehaviorAssess { stage: 'when', text: 'a%20serious%20point%20is%20made' })
+
+// Topology
+(loop_964_start)-[:PROCESS]->(loop_964_given_gate)
+(loop_964_given_gate)-[:PROCESS { case: "ok" }]->(loop_964_when_gate)
+(loop_964_given_gate)-[:PROCESS { case: "err" }]->(loop_964_inactive)
+(loop_964_when_gate)-[:PROCESS { case: "ok" }]->(loop_964_context)
+(loop_964_when_gate)-[:PROCESS { case: "err" }]->(loop_964_inactive)
+(loop_964_context)-[:FORK { strategy: "behavior-branches" }]->(loop_964_context_branch | loop_964_then_branch | loop_964_operator_branch | loop_964_result_branch | loop_964_taxonomy_branch | loop_964_intervention_recognize | loop_964_intervention_interdict | loop_964_intervention_minimize)
+(loop_964_context_branch | loop_964_then_branch | loop_964_operator_branch | loop_964_result_branch | loop_964_taxonomy_branch | loop_964_intervention_recognize | loop_964_intervention_interdict | loop_964_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_964_verdict)
+(loop_964_inactive)-[:PROCESS]->(loop_964_sink)
+(loop_964_verdict)-[:PROCESS]->(loop_964_sink)
+(loop_964_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_964_then_branch)
+(loop_964_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_964_then_branch)
+(loop_964_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_964_then_branch)

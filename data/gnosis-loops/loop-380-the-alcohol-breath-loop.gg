@@ -1,0 +1,33 @@
+// behavioral-loop-380.gg
+// Executable Gnosis projection for The Alcohol Breath Loop.
+
+// Nodes
+(loop_380_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_380_context_branch: BehaviorEmit { emission: 'context' })
+(loop_380_given_gate: BehaviorAssess { stage: 'given', text: 'Metabolizing%20ethanol%20at%2010%20AM' })
+(loop_380_inactive: BehaviorTerminal { loopId: 380, loopName: 'The%20Alcohol%20Breath%20Loop' })
+(loop_380_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_380_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_380_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_380_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Addiction%20Operator', mechanism: 'the%20smell%20triggers%20%22Alarm%22' })
+(loop_380_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20loss%20of%20professional%20standing' })
+(loop_380_sink: BehaviorSink)
+(loop_380_start: BehaviorStart { loopId: 380, loopName: 'The%20Alcohol%20Breath%20Loop', given: 'Metabolizing%20ethanol%20at%2010%20AM', when: 'whispering%20or%20leaning%20in', then: 'the%20smell%20triggers%20%22Alarm%22%20(The%20Addiction%20Operator)', result: 'immediate%20loss%20of%20professional%20standing', operatorName: 'The%20Addiction%20Operator', operatorMechanism: 'the%20smell%20triggers%20%22Alarm%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_380_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_380_then_branch: BehaviorEmit { emission: 'then', text: 'the%20smell%20triggers%20%22Alarm%22%20(The%20Addiction%20Operator)' })
+(loop_380_verdict: BehaviorVerdict { loopId: 380, loopName: 'The%20Alcohol%20Breath%20Loop', then: 'the%20smell%20triggers%20%22Alarm%22%20(The%20Addiction%20Operator)', result: 'immediate%20loss%20of%20professional%20standing', operatorName: 'The%20Addiction%20Operator', operatorMechanism: 'the%20smell%20triggers%20%22Alarm%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_380_when_gate: BehaviorAssess { stage: 'when', text: 'whispering%20or%20leaning%20in' })
+
+// Topology
+(loop_380_start)-[:PROCESS]->(loop_380_given_gate)
+(loop_380_given_gate)-[:PROCESS { case: "ok" }]->(loop_380_when_gate)
+(loop_380_given_gate)-[:PROCESS { case: "err" }]->(loop_380_inactive)
+(loop_380_when_gate)-[:PROCESS { case: "ok" }]->(loop_380_context)
+(loop_380_when_gate)-[:PROCESS { case: "err" }]->(loop_380_inactive)
+(loop_380_context)-[:FORK { strategy: "behavior-branches" }]->(loop_380_context_branch | loop_380_then_branch | loop_380_operator_branch | loop_380_result_branch | loop_380_taxonomy_branch | loop_380_intervention_recognize | loop_380_intervention_interdict | loop_380_intervention_minimize)
+(loop_380_context_branch | loop_380_then_branch | loop_380_operator_branch | loop_380_result_branch | loop_380_taxonomy_branch | loop_380_intervention_recognize | loop_380_intervention_interdict | loop_380_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_380_verdict)
+(loop_380_inactive)-[:PROCESS]->(loop_380_sink)
+(loop_380_verdict)-[:PROCESS]->(loop_380_sink)
+(loop_380_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_380_then_branch)
+(loop_380_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_380_then_branch)
+(loop_380_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_380_then_branch)

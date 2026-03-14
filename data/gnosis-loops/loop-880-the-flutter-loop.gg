@@ -1,0 +1,33 @@
+// behavioral-loop-880.gg
+// Executable Gnosis projection for The Flutter Loop.
+
+// Nodes
+(loop_880_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_880_context_branch: BehaviorEmit { emission: 'context' })
+(loop_880_given_gate: BehaviorAssess { stage: 'given', text: 'Rapid%20involuntary%20eye%20movement' })
+(loop_880_inactive: BehaviorTerminal { loopId: 880, loopName: 'The%20Flutter%20Loop' })
+(loop_880_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_880_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_880_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_880_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vibration%20Operator', mechanism: 'the%20eyes%20%22dance%22' })
+(loop_880_result_branch: BehaviorEmit { emission: 'result', text: 'assumptions%20of%20%22Intoxication%22%20or%20%22Neurological%20Damage.%22' })
+(loop_880_sink: BehaviorSink)
+(loop_880_start: BehaviorStart { loopId: 880, loopName: 'The%20Flutter%20Loop', given: 'Rapid%20involuntary%20eye%20movement', when: 'trying%20to%20fixate', then: 'the%20eyes%20%22dance%22%20(The%20Vibration%20Operator)', result: 'assumptions%20of%20%22Intoxication%22%20or%20%22Neurological%20Damage.%22', operatorName: 'The%20Vibration%20Operator', operatorMechanism: 'the%20eyes%20%22dance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_880_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_880_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20%22dance%22%20(The%20Vibration%20Operator)' })
+(loop_880_verdict: BehaviorVerdict { loopId: 880, loopName: 'The%20Flutter%20Loop', then: 'the%20eyes%20%22dance%22%20(The%20Vibration%20Operator)', result: 'assumptions%20of%20%22Intoxication%22%20or%20%22Neurological%20Damage.%22', operatorName: 'The%20Vibration%20Operator', operatorMechanism: 'the%20eyes%20%22dance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_880_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20to%20fixate' })
+
+// Topology
+(loop_880_start)-[:PROCESS]->(loop_880_given_gate)
+(loop_880_given_gate)-[:PROCESS { case: "ok" }]->(loop_880_when_gate)
+(loop_880_given_gate)-[:PROCESS { case: "err" }]->(loop_880_inactive)
+(loop_880_when_gate)-[:PROCESS { case: "ok" }]->(loop_880_context)
+(loop_880_when_gate)-[:PROCESS { case: "err" }]->(loop_880_inactive)
+(loop_880_context)-[:FORK { strategy: "behavior-branches" }]->(loop_880_context_branch | loop_880_then_branch | loop_880_operator_branch | loop_880_result_branch | loop_880_taxonomy_branch | loop_880_intervention_recognize | loop_880_intervention_interdict | loop_880_intervention_minimize)
+(loop_880_context_branch | loop_880_then_branch | loop_880_operator_branch | loop_880_result_branch | loop_880_taxonomy_branch | loop_880_intervention_recognize | loop_880_intervention_interdict | loop_880_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_880_verdict)
+(loop_880_inactive)-[:PROCESS]->(loop_880_sink)
+(loop_880_verdict)-[:PROCESS]->(loop_880_sink)
+(loop_880_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_880_then_branch)
+(loop_880_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_880_then_branch)
+(loop_880_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_880_then_branch)

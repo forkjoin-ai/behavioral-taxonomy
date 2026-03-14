@@ -1,0 +1,33 @@
+// behavioral-loop-563.gg
+// Executable Gnosis projection for The Crowded Bottom Loop.
+
+// Nodes
+(loop_563_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_563_context_branch: BehaviorEmit { emission: 'context' })
+(loop_563_given_gate: BehaviorAssess { stage: 'given', text: 'Jumbled%20lower%20front%20teeth' })
+(loop_563_inactive: BehaviorTerminal { loopId: 563, loopName: 'The%20Crowded%20Bottom%20Loop' })
+(loop_563_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_563_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_563_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_563_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Ortho%20Class%20Operator', mechanism: 'the%20irregularity%20signals%20%22British%22%20or%20%22Natural%22%20vs%20%22American%2FArtificial%22' })
+(loop_563_result_branch: BehaviorEmit { emission: 'result', text: 'regional-specific%20judgments%20on%20status' })
+(loop_563_sink: BehaviorSink)
+(loop_563_start: BehaviorStart { loopId: 563, loopName: 'The%20Crowded%20Bottom%20Loop', given: 'Jumbled%20lower%20front%20teeth', when: 'speaking%20with%20emphasis%20(lower%20lip%20drops)', then: 'the%20irregularity%20signals%20%22British%22%20or%20%22Natural%22%20vs%20%22American%2FArtificial%22%20(The%20Ortho%20Class%20Operator)', result: 'regional-specific%20judgments%20on%20status', operatorName: 'The%20Ortho%20Class%20Operator', operatorMechanism: 'the%20irregularity%20signals%20%22British%22%20or%20%22Natural%22%20vs%20%22American%2FArtificial%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_563_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_563_then_branch: BehaviorEmit { emission: 'then', text: 'the%20irregularity%20signals%20%22British%22%20or%20%22Natural%22%20vs%20%22American%2FArtificial%22%20(The%20Ortho%20Class%20Operator)' })
+(loop_563_verdict: BehaviorVerdict { loopId: 563, loopName: 'The%20Crowded%20Bottom%20Loop', then: 'the%20irregularity%20signals%20%22British%22%20or%20%22Natural%22%20vs%20%22American%2FArtificial%22%20(The%20Ortho%20Class%20Operator)', result: 'regional-specific%20judgments%20on%20status', operatorName: 'The%20Ortho%20Class%20Operator', operatorMechanism: 'the%20irregularity%20signals%20%22British%22%20or%20%22Natural%22%20vs%20%22American%2FArtificial%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_563_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20with%20emphasis%20(lower%20lip%20drops)' })
+
+// Topology
+(loop_563_start)-[:PROCESS]->(loop_563_given_gate)
+(loop_563_given_gate)-[:PROCESS { case: "ok" }]->(loop_563_when_gate)
+(loop_563_given_gate)-[:PROCESS { case: "err" }]->(loop_563_inactive)
+(loop_563_when_gate)-[:PROCESS { case: "ok" }]->(loop_563_context)
+(loop_563_when_gate)-[:PROCESS { case: "err" }]->(loop_563_inactive)
+(loop_563_context)-[:FORK { strategy: "behavior-branches" }]->(loop_563_context_branch | loop_563_then_branch | loop_563_operator_branch | loop_563_result_branch | loop_563_taxonomy_branch | loop_563_intervention_recognize | loop_563_intervention_interdict | loop_563_intervention_minimize)
+(loop_563_context_branch | loop_563_then_branch | loop_563_operator_branch | loop_563_result_branch | loop_563_taxonomy_branch | loop_563_intervention_recognize | loop_563_intervention_interdict | loop_563_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_563_verdict)
+(loop_563_inactive)-[:PROCESS]->(loop_563_sink)
+(loop_563_verdict)-[:PROCESS]->(loop_563_sink)
+(loop_563_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_563_then_branch)
+(loop_563_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_563_then_branch)
+(loop_563_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_563_then_branch)

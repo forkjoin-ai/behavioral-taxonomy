@@ -1,0 +1,33 @@
+// behavioral-loop-673.gg
+// Executable Gnosis projection for The Lip Licker Loop.
+
+// Nodes
+(loop_673_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_673_context_branch: BehaviorEmit { emission: 'context' })
+(loop_673_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20dry%20lips%20requiring%20constant%20wetting' })
+(loop_673_inactive: BehaviorTerminal { loopId: 673, loopName: 'The%20Lip%20Licker%20Loop' })
+(loop_673_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_673_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_673_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_673_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Lizard%20Operator', mechanism: 'the%20tongue%20darts%20out%20repeatedly' })
+(loop_673_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20misreading%20it%20as%20%22Nervousness%22%20or%20%22Predatory%20Hunger.%22' })
+(loop_673_sink: BehaviorSink)
+(loop_673_start: BehaviorStart { loopId: 673, loopName: 'The%20Lip%20Licker%20Loop', given: 'Chronic%20dry%20lips%20requiring%20constant%20wetting', when: 'speaking%20or%20listening', then: 'the%20tongue%20darts%20out%20repeatedly%20(The%20Lizard%20Operator)', result: 'observers%20misreading%20it%20as%20%22Nervousness%22%20or%20%22Predatory%20Hunger.%22', operatorName: 'The%20Lizard%20Operator', operatorMechanism: 'the%20tongue%20darts%20out%20repeatedly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_673_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_673_then_branch: BehaviorEmit { emission: 'then', text: 'the%20tongue%20darts%20out%20repeatedly%20(The%20Lizard%20Operator)' })
+(loop_673_verdict: BehaviorVerdict { loopId: 673, loopName: 'The%20Lip%20Licker%20Loop', then: 'the%20tongue%20darts%20out%20repeatedly%20(The%20Lizard%20Operator)', result: 'observers%20misreading%20it%20as%20%22Nervousness%22%20or%20%22Predatory%20Hunger.%22', operatorName: 'The%20Lizard%20Operator', operatorMechanism: 'the%20tongue%20darts%20out%20repeatedly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_673_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20or%20listening' })
+
+// Topology
+(loop_673_start)-[:PROCESS]->(loop_673_given_gate)
+(loop_673_given_gate)-[:PROCESS { case: "ok" }]->(loop_673_when_gate)
+(loop_673_given_gate)-[:PROCESS { case: "err" }]->(loop_673_inactive)
+(loop_673_when_gate)-[:PROCESS { case: "ok" }]->(loop_673_context)
+(loop_673_when_gate)-[:PROCESS { case: "err" }]->(loop_673_inactive)
+(loop_673_context)-[:FORK { strategy: "behavior-branches" }]->(loop_673_context_branch | loop_673_then_branch | loop_673_operator_branch | loop_673_result_branch | loop_673_taxonomy_branch | loop_673_intervention_recognize | loop_673_intervention_interdict | loop_673_intervention_minimize)
+(loop_673_context_branch | loop_673_then_branch | loop_673_operator_branch | loop_673_result_branch | loop_673_taxonomy_branch | loop_673_intervention_recognize | loop_673_intervention_interdict | loop_673_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_673_verdict)
+(loop_673_inactive)-[:PROCESS]->(loop_673_sink)
+(loop_673_verdict)-[:PROCESS]->(loop_673_sink)
+(loop_673_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_673_then_branch)
+(loop_673_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_673_then_branch)
+(loop_673_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_673_then_branch)

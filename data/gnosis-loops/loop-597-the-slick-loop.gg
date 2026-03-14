@@ -1,0 +1,33 @@
+// behavioral-loop-597.gg
+// Executable Gnosis projection for The Slick Loop.
+
+// Nodes
+(loop_597_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_597_context_branch: BehaviorEmit { emission: 'context' })
+(loop_597_given_gate: BehaviorAssess { stage: 'given', text: 'Hair%20that%20clumps%20from%20oil' })
+(loop_597_inactive: BehaviorTerminal { loopId: 597, loopName: 'The%20Slick%20Loop' })
+(loop_597_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_597_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_597_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_597_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Grease%20Operator', mechanism: 'it%20looks%20%22Wet%22%20or%20%22Dirty%22' })
+(loop_597_result_branch: BehaviorEmit { emission: 'result', text: 'perception%20of%20poor%20hygiene' })
+(loop_597_sink: BehaviorSink)
+(loop_597_start: BehaviorStart { loopId: 597, loopName: 'The%20Slick%20Loop', given: 'Hair%20that%20clumps%20from%20oil', when: 'seen%20at%204%20PM', then: 'it%20looks%20%22Wet%22%20or%20%22Dirty%22%20(The%20Grease%20Operator)', result: 'perception%20of%20poor%20hygiene', operatorName: 'The%20Grease%20Operator', operatorMechanism: 'it%20looks%20%22Wet%22%20or%20%22Dirty%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_597_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_597_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20%22Wet%22%20or%20%22Dirty%22%20(The%20Grease%20Operator)' })
+(loop_597_verdict: BehaviorVerdict { loopId: 597, loopName: 'The%20Slick%20Loop', then: 'it%20looks%20%22Wet%22%20or%20%22Dirty%22%20(The%20Grease%20Operator)', result: 'perception%20of%20poor%20hygiene', operatorName: 'The%20Grease%20Operator', operatorMechanism: 'it%20looks%20%22Wet%22%20or%20%22Dirty%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_597_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20at%204%20PM' })
+
+// Topology
+(loop_597_start)-[:PROCESS]->(loop_597_given_gate)
+(loop_597_given_gate)-[:PROCESS { case: "ok" }]->(loop_597_when_gate)
+(loop_597_given_gate)-[:PROCESS { case: "err" }]->(loop_597_inactive)
+(loop_597_when_gate)-[:PROCESS { case: "ok" }]->(loop_597_context)
+(loop_597_when_gate)-[:PROCESS { case: "err" }]->(loop_597_inactive)
+(loop_597_context)-[:FORK { strategy: "behavior-branches" }]->(loop_597_context_branch | loop_597_then_branch | loop_597_operator_branch | loop_597_result_branch | loop_597_taxonomy_branch | loop_597_intervention_recognize | loop_597_intervention_interdict | loop_597_intervention_minimize)
+(loop_597_context_branch | loop_597_then_branch | loop_597_operator_branch | loop_597_result_branch | loop_597_taxonomy_branch | loop_597_intervention_recognize | loop_597_intervention_interdict | loop_597_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_597_verdict)
+(loop_597_inactive)-[:PROCESS]->(loop_597_sink)
+(loop_597_verdict)-[:PROCESS]->(loop_597_sink)
+(loop_597_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_597_then_branch)
+(loop_597_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_597_then_branch)
+(loop_597_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_597_then_branch)

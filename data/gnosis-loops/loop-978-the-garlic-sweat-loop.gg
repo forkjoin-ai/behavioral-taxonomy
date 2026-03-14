@@ -1,0 +1,33 @@
+// behavioral-loop-978.gg
+// Executable Gnosis projection for The Garlic Sweat Loop.
+
+// Nodes
+(loop_978_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_978_context_branch: BehaviorEmit { emission: 'context' })
+(loop_978_given_gate: BehaviorAssess { stage: 'given', text: 'High%20allium%20diet' })
+(loop_978_inactive: BehaviorTerminal { loopId: 978, loopName: 'The%20Garlic%20Sweat%20Loop' })
+(loop_978_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_978_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_978_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_978_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Kitchen%20Operator', mechanism: 'the%20sweat%20smells%20%22Spicy%22' })
+(loop_978_result_branch: BehaviorEmit { emission: 'result', text: 'people%20abandoning%20adjacent%20gym%20machines' })
+(loop_978_sink: BehaviorSink)
+(loop_978_start: BehaviorStart { loopId: 978, loopName: 'The%20Garlic%20Sweat%20Loop', given: 'High%20allium%20diet', when: 'exercising', then: 'the%20sweat%20smells%20%22Spicy%22%20(The%20Kitchen%20Operator)', result: 'people%20abandoning%20adjacent%20gym%20machines', operatorName: 'The%20Kitchen%20Operator', operatorMechanism: 'the%20sweat%20smells%20%22Spicy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_978_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_978_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sweat%20smells%20%22Spicy%22%20(The%20Kitchen%20Operator)' })
+(loop_978_verdict: BehaviorVerdict { loopId: 978, loopName: 'The%20Garlic%20Sweat%20Loop', then: 'the%20sweat%20smells%20%22Spicy%22%20(The%20Kitchen%20Operator)', result: 'people%20abandoning%20adjacent%20gym%20machines', operatorName: 'The%20Kitchen%20Operator', operatorMechanism: 'the%20sweat%20smells%20%22Spicy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_978_when_gate: BehaviorAssess { stage: 'when', text: 'exercising' })
+
+// Topology
+(loop_978_start)-[:PROCESS]->(loop_978_given_gate)
+(loop_978_given_gate)-[:PROCESS { case: "ok" }]->(loop_978_when_gate)
+(loop_978_given_gate)-[:PROCESS { case: "err" }]->(loop_978_inactive)
+(loop_978_when_gate)-[:PROCESS { case: "ok" }]->(loop_978_context)
+(loop_978_when_gate)-[:PROCESS { case: "err" }]->(loop_978_inactive)
+(loop_978_context)-[:FORK { strategy: "behavior-branches" }]->(loop_978_context_branch | loop_978_then_branch | loop_978_operator_branch | loop_978_result_branch | loop_978_taxonomy_branch | loop_978_intervention_recognize | loop_978_intervention_interdict | loop_978_intervention_minimize)
+(loop_978_context_branch | loop_978_then_branch | loop_978_operator_branch | loop_978_result_branch | loop_978_taxonomy_branch | loop_978_intervention_recognize | loop_978_intervention_interdict | loop_978_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_978_verdict)
+(loop_978_inactive)-[:PROCESS]->(loop_978_sink)
+(loop_978_verdict)-[:PROCESS]->(loop_978_sink)
+(loop_978_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_978_then_branch)
+(loop_978_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_978_then_branch)
+(loop_978_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_978_then_branch)

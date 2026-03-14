@@ -1,0 +1,33 @@
+// behavioral-loop-653.gg
+// Executable Gnosis projection for The Perch Loop.
+
+// Nodes
+(loop_653_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_653_context_branch: BehaviorEmit { emission: 'context' })
+(loop_653_given_gate: BehaviorAssess { stage: 'given', text: 'Sitting%20on%20the%20front%202%20inches%20of%20a%20chair' })
+(loop_653_inactive: BehaviorTerminal { loopId: 653, loopName: 'The%20Perch%20Loop' })
+(loop_653_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_653_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_653_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_653_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Guest%20Operator', mechanism: 'it%20signals%20%22Ready%20to%20Run%22%20or%20%22Transient%22' })
+(loop_653_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20not%20being%20viewed%20as%20a%20permanent%2Fcore%20member%20of%20the%20group' })
+(loop_653_sink: BehaviorSink)
+(loop_653_start: BehaviorStart { loopId: 653, loopName: 'The%20Perch%20Loop', given: 'Sitting%20on%20the%20front%202%20inches%20of%20a%20chair', when: 'in%20a%20meeting', then: 'it%20signals%20%22Ready%20to%20Run%22%20or%20%22Transient%22%20(The%20Guest%20Operator)', result: 'the%20individual%20not%20being%20viewed%20as%20a%20permanent%2Fcore%20member%20of%20the%20group', operatorName: 'The%20Guest%20Operator', operatorMechanism: 'it%20signals%20%22Ready%20to%20Run%22%20or%20%22Transient%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_653_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_653_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Ready%20to%20Run%22%20or%20%22Transient%22%20(The%20Guest%20Operator)' })
+(loop_653_verdict: BehaviorVerdict { loopId: 653, loopName: 'The%20Perch%20Loop', then: 'it%20signals%20%22Ready%20to%20Run%22%20or%20%22Transient%22%20(The%20Guest%20Operator)', result: 'the%20individual%20not%20being%20viewed%20as%20a%20permanent%2Fcore%20member%20of%20the%20group', operatorName: 'The%20Guest%20Operator', operatorMechanism: 'it%20signals%20%22Ready%20to%20Run%22%20or%20%22Transient%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_653_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20meeting' })
+
+// Topology
+(loop_653_start)-[:PROCESS]->(loop_653_given_gate)
+(loop_653_given_gate)-[:PROCESS { case: "ok" }]->(loop_653_when_gate)
+(loop_653_given_gate)-[:PROCESS { case: "err" }]->(loop_653_inactive)
+(loop_653_when_gate)-[:PROCESS { case: "ok" }]->(loop_653_context)
+(loop_653_when_gate)-[:PROCESS { case: "err" }]->(loop_653_inactive)
+(loop_653_context)-[:FORK { strategy: "behavior-branches" }]->(loop_653_context_branch | loop_653_then_branch | loop_653_operator_branch | loop_653_result_branch | loop_653_taxonomy_branch | loop_653_intervention_recognize | loop_653_intervention_interdict | loop_653_intervention_minimize)
+(loop_653_context_branch | loop_653_then_branch | loop_653_operator_branch | loop_653_result_branch | loop_653_taxonomy_branch | loop_653_intervention_recognize | loop_653_intervention_interdict | loop_653_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_653_verdict)
+(loop_653_inactive)-[:PROCESS]->(loop_653_sink)
+(loop_653_verdict)-[:PROCESS]->(loop_653_sink)
+(loop_653_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_653_then_branch)
+(loop_653_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_653_then_branch)
+(loop_653_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_653_then_branch)

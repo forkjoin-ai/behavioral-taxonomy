@@ -1,0 +1,33 @@
+// behavioral-loop-405.gg
+// Executable Gnosis projection for The Jitterbug Loop.
+
+// Nodes
+(loop_405_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_405_context_branch: BehaviorEmit { emission: 'context' })
+(loop_405_given_gate: BehaviorAssess { stage: 'given', text: 'Vibrating%20extremities' })
+(loop_405_inactive: BehaviorTerminal { loopId: 405, loopName: 'The%20Jitterbug%20Loop' })
+(loop_405_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_405_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_405_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_405_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Earthquake%20Operator', mechanism: 'the%20vibration%20transfers%20to%20the%20table%2Ffloor' })
+(loop_405_result_branch: BehaviorEmit { emission: 'result', text: 'irritation%20of%20everyone%20nearby' })
+(loop_405_sink: BehaviorSink)
+(loop_405_start: BehaviorStart { loopId: 405, loopName: 'The%20Jitterbug%20Loop', given: 'Vibrating%20extremities', when: 'sitting%20still', then: 'the%20vibration%20transfers%20to%20the%20table%2Ffloor%20(The%20Earthquake%20Operator)', result: 'irritation%20of%20everyone%20nearby', operatorName: 'The%20Earthquake%20Operator', operatorMechanism: 'the%20vibration%20transfers%20to%20the%20table%2Ffloor', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_405_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_405_then_branch: BehaviorEmit { emission: 'then', text: 'the%20vibration%20transfers%20to%20the%20table%2Ffloor%20(The%20Earthquake%20Operator)' })
+(loop_405_verdict: BehaviorVerdict { loopId: 405, loopName: 'The%20Jitterbug%20Loop', then: 'the%20vibration%20transfers%20to%20the%20table%2Ffloor%20(The%20Earthquake%20Operator)', result: 'irritation%20of%20everyone%20nearby', operatorName: 'The%20Earthquake%20Operator', operatorMechanism: 'the%20vibration%20transfers%20to%20the%20table%2Ffloor', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_405_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20still' })
+
+// Topology
+(loop_405_start)-[:PROCESS]->(loop_405_given_gate)
+(loop_405_given_gate)-[:PROCESS { case: "ok" }]->(loop_405_when_gate)
+(loop_405_given_gate)-[:PROCESS { case: "err" }]->(loop_405_inactive)
+(loop_405_when_gate)-[:PROCESS { case: "ok" }]->(loop_405_context)
+(loop_405_when_gate)-[:PROCESS { case: "err" }]->(loop_405_inactive)
+(loop_405_context)-[:FORK { strategy: "behavior-branches" }]->(loop_405_context_branch | loop_405_then_branch | loop_405_operator_branch | loop_405_result_branch | loop_405_taxonomy_branch | loop_405_intervention_recognize | loop_405_intervention_interdict | loop_405_intervention_minimize)
+(loop_405_context_branch | loop_405_then_branch | loop_405_operator_branch | loop_405_result_branch | loop_405_taxonomy_branch | loop_405_intervention_recognize | loop_405_intervention_interdict | loop_405_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_405_verdict)
+(loop_405_inactive)-[:PROCESS]->(loop_405_sink)
+(loop_405_verdict)-[:PROCESS]->(loop_405_sink)
+(loop_405_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_405_then_branch)
+(loop_405_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_405_then_branch)
+(loop_405_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_405_then_branch)

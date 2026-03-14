@@ -1,0 +1,33 @@
+// behavioral-loop-832.gg
+// Executable Gnosis projection for The Soap Loop.
+
+// Nodes
+(loop_832_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_832_context_branch: BehaviorEmit { emission: 'context' })
+(loop_832_given_gate: BehaviorAssess { stage: 'given', text: 'Scent%20of%20industrial%20hand%20soap' })
+(loop_832_inactive: BehaviorTerminal { loopId: 832, loopName: 'The%20Soap%20Loop' })
+(loop_832_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_832_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_832_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_832_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cleanliness%20Operator', mechanism: 'it%20signals%20%22I%20just%20scrubbed%20up%22' })
+(loop_832_result_branch: BehaviorEmit { emission: 'result', text: 'a%20neutral-to-positive%20safety%20signal' })
+(loop_832_sink: BehaviorSink)
+(loop_832_start: BehaviorStart { loopId: 832, loopName: 'The%20Soap%20Loop', given: 'Scent%20of%20industrial%20hand%20soap', when: 'arriving%20at%20a%20date', then: 'it%20signals%20%22I%20just%20scrubbed%20up%22%20(The%20Cleanliness%20Operator)', result: 'a%20neutral-to-positive%20safety%20signal', operatorName: 'The%20Cleanliness%20Operator', operatorMechanism: 'it%20signals%20%22I%20just%20scrubbed%20up%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_832_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_832_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22I%20just%20scrubbed%20up%22%20(The%20Cleanliness%20Operator)' })
+(loop_832_verdict: BehaviorVerdict { loopId: 832, loopName: 'The%20Soap%20Loop', then: 'it%20signals%20%22I%20just%20scrubbed%20up%22%20(The%20Cleanliness%20Operator)', result: 'a%20neutral-to-positive%20safety%20signal', operatorName: 'The%20Cleanliness%20Operator', operatorMechanism: 'it%20signals%20%22I%20just%20scrubbed%20up%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_832_when_gate: BehaviorAssess { stage: 'when', text: 'arriving%20at%20a%20date' })
+
+// Topology
+(loop_832_start)-[:PROCESS]->(loop_832_given_gate)
+(loop_832_given_gate)-[:PROCESS { case: "ok" }]->(loop_832_when_gate)
+(loop_832_given_gate)-[:PROCESS { case: "err" }]->(loop_832_inactive)
+(loop_832_when_gate)-[:PROCESS { case: "ok" }]->(loop_832_context)
+(loop_832_when_gate)-[:PROCESS { case: "err" }]->(loop_832_inactive)
+(loop_832_context)-[:FORK { strategy: "behavior-branches" }]->(loop_832_context_branch | loop_832_then_branch | loop_832_operator_branch | loop_832_result_branch | loop_832_taxonomy_branch | loop_832_intervention_recognize | loop_832_intervention_interdict | loop_832_intervention_minimize)
+(loop_832_context_branch | loop_832_then_branch | loop_832_operator_branch | loop_832_result_branch | loop_832_taxonomy_branch | loop_832_intervention_recognize | loop_832_intervention_interdict | loop_832_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_832_verdict)
+(loop_832_inactive)-[:PROCESS]->(loop_832_sink)
+(loop_832_verdict)-[:PROCESS]->(loop_832_sink)
+(loop_832_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_832_then_branch)
+(loop_832_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_832_then_branch)
+(loop_832_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_832_then_branch)

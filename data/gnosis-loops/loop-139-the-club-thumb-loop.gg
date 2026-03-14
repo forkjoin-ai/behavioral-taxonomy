@@ -1,0 +1,33 @@
+// behavioral-loop-139.gg
+// Executable Gnosis projection for The Club Thumb Loop.
+
+// Nodes
+(loop_139_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_139_context_branch: BehaviorEmit { emission: 'context' })
+(loop_139_given_gate: BehaviorAssess { stage: 'given', text: 'Short%2C%20bulbous%20thumb' })
+(loop_139_inactive: BehaviorTerminal { loopId: 139, loopName: 'The%20Club%20Thumb%20Loop' })
+(loop_139_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_139_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_139_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_139_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'it%20draws%20visual%20attention%20and%20%22Cute%2FWeird%22%20comments' })
+(loop_139_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20hiding%20their%20hands%2C%20leading%20to%20**Gestural%20Inhibition**' })
+(loop_139_sink: BehaviorSink)
+(loop_139_start: BehaviorStart { loopId: 139, loopName: 'The%20Club%20Thumb%20Loop', given: 'Short%2C%20bulbous%20thumb', when: 'using%20a%20phone%20or%20giving%20a%20thumbs%20up', then: 'it%20draws%20visual%20attention%20and%20%22Cute%2FWeird%22%20comments%20(The%20Novelty%20Operator)', result: 'the%20individual%20hiding%20their%20hands%2C%20leading%20to%20**Gestural%20Inhibition**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'it%20draws%20visual%20attention%20and%20%22Cute%2FWeird%22%20comments', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_139_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_139_then_branch: BehaviorEmit { emission: 'then', text: 'it%20draws%20visual%20attention%20and%20%22Cute%2FWeird%22%20comments%20(The%20Novelty%20Operator)' })
+(loop_139_verdict: BehaviorVerdict { loopId: 139, loopName: 'The%20Club%20Thumb%20Loop', then: 'it%20draws%20visual%20attention%20and%20%22Cute%2FWeird%22%20comments%20(The%20Novelty%20Operator)', result: 'the%20individual%20hiding%20their%20hands%2C%20leading%20to%20**Gestural%20Inhibition**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'it%20draws%20visual%20attention%20and%20%22Cute%2FWeird%22%20comments', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_139_when_gate: BehaviorAssess { stage: 'when', text: 'using%20a%20phone%20or%20giving%20a%20thumbs%20up' })
+
+// Topology
+(loop_139_start)-[:PROCESS]->(loop_139_given_gate)
+(loop_139_given_gate)-[:PROCESS { case: "ok" }]->(loop_139_when_gate)
+(loop_139_given_gate)-[:PROCESS { case: "err" }]->(loop_139_inactive)
+(loop_139_when_gate)-[:PROCESS { case: "ok" }]->(loop_139_context)
+(loop_139_when_gate)-[:PROCESS { case: "err" }]->(loop_139_inactive)
+(loop_139_context)-[:FORK { strategy: "behavior-branches" }]->(loop_139_context_branch | loop_139_then_branch | loop_139_operator_branch | loop_139_result_branch | loop_139_taxonomy_branch | loop_139_intervention_recognize | loop_139_intervention_interdict | loop_139_intervention_minimize)
+(loop_139_context_branch | loop_139_then_branch | loop_139_operator_branch | loop_139_result_branch | loop_139_taxonomy_branch | loop_139_intervention_recognize | loop_139_intervention_interdict | loop_139_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_139_verdict)
+(loop_139_inactive)-[:PROCESS]->(loop_139_sink)
+(loop_139_verdict)-[:PROCESS]->(loop_139_sink)
+(loop_139_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_139_then_branch)
+(loop_139_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_139_then_branch)
+(loop_139_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_139_then_branch)

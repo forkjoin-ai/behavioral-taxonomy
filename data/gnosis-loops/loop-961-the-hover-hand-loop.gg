@@ -1,0 +1,33 @@
+// behavioral-loop-961.gg
+// Executable Gnosis projection for The Hover Hand Loop.
+
+// Nodes
+(loop_961_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_961_context_branch: BehaviorEmit { emission: 'context' })
+(loop_961_given_gate: BehaviorAssess { stage: 'given', text: 'Fear%20of%20impropriety%20or%20extreme%20social%20anxiety' })
+(loop_961_inactive: BehaviorTerminal { loopId: 961, loopName: 'The%20Hover%20Hand%20Loop' })
+(loop_961_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_961_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_961_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_961_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Force%20Field%20Operator', mechanism: 'the%20hand%20floats%201%20inch%20off%20the%20shoulder' })
+(loop_961_result_branch: BehaviorEmit { emission: 'result', text: 'the%20photo%20becoming%20a%20permanent%20record%20of%20**Social%20Ineptitude**' })
+(loop_961_sink: BehaviorSink)
+(loop_961_start: BehaviorStart { loopId: 961, loopName: 'The%20Hover%20Hand%20Loop', given: 'Fear%20of%20impropriety%20or%20extreme%20social%20anxiety', when: 'attempting%20to%20hug%20or%20pose%20for%20a%20photo', then: 'the%20hand%20floats%201%20inch%20off%20the%20shoulder%20(The%20Force%20Field%20Operator)', result: 'the%20photo%20becoming%20a%20permanent%20record%20of%20**Social%20Ineptitude**', operatorName: 'The%20Force%20Field%20Operator', operatorMechanism: 'the%20hand%20floats%201%20inch%20off%20the%20shoulder', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_961_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_961_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hand%20floats%201%20inch%20off%20the%20shoulder%20(The%20Force%20Field%20Operator)' })
+(loop_961_verdict: BehaviorVerdict { loopId: 961, loopName: 'The%20Hover%20Hand%20Loop', then: 'the%20hand%20floats%201%20inch%20off%20the%20shoulder%20(The%20Force%20Field%20Operator)', result: 'the%20photo%20becoming%20a%20permanent%20record%20of%20**Social%20Ineptitude**', operatorName: 'The%20Force%20Field%20Operator', operatorMechanism: 'the%20hand%20floats%201%20inch%20off%20the%20shoulder', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_961_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20to%20hug%20or%20pose%20for%20a%20photo' })
+
+// Topology
+(loop_961_start)-[:PROCESS]->(loop_961_given_gate)
+(loop_961_given_gate)-[:PROCESS { case: "ok" }]->(loop_961_when_gate)
+(loop_961_given_gate)-[:PROCESS { case: "err" }]->(loop_961_inactive)
+(loop_961_when_gate)-[:PROCESS { case: "ok" }]->(loop_961_context)
+(loop_961_when_gate)-[:PROCESS { case: "err" }]->(loop_961_inactive)
+(loop_961_context)-[:FORK { strategy: "behavior-branches" }]->(loop_961_context_branch | loop_961_then_branch | loop_961_operator_branch | loop_961_result_branch | loop_961_taxonomy_branch | loop_961_intervention_recognize | loop_961_intervention_interdict | loop_961_intervention_minimize)
+(loop_961_context_branch | loop_961_then_branch | loop_961_operator_branch | loop_961_result_branch | loop_961_taxonomy_branch | loop_961_intervention_recognize | loop_961_intervention_interdict | loop_961_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_961_verdict)
+(loop_961_inactive)-[:PROCESS]->(loop_961_sink)
+(loop_961_verdict)-[:PROCESS]->(loop_961_sink)
+(loop_961_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_961_then_branch)
+(loop_961_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_961_then_branch)
+(loop_961_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_961_then_branch)

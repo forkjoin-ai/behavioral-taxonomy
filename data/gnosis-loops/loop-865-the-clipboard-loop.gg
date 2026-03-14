@@ -1,0 +1,33 @@
+// behavioral-loop-865.gg
+// Executable Gnosis projection for The Clipboard Loop.
+
+// Nodes
+(loop_865_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_865_context_branch: BehaviorEmit { emission: 'context' })
+(loop_865_given_gate: BehaviorAssess { stage: 'given', text: 'Carrying%20a%20clipboard%20or%20tablet%20while%20walking%20briskly' })
+(loop_865_inactive: BehaviorTerminal { loopId: 865, loopName: 'The%20Clipboard%20Loop' })
+(loop_865_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_865_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_865_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_865_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Inspector%20Operator', mechanism: 'security%20assumes%20%22Official%20Business%22' })
+(loop_865_result_branch: BehaviorEmit { emission: 'result', text: 'unearned%20access%20to%20backstage%2Fsecure%20zones%20without%20ID' })
+(loop_865_sink: BehaviorSink)
+(loop_865_start: BehaviorStart { loopId: 865, loopName: 'The%20Clipboard%20Loop', given: 'Carrying%20a%20clipboard%20or%20tablet%20while%20walking%20briskly', when: 'entering%20a%20restricted%20area', then: 'security%20assumes%20%22Official%20Business%22%20(The%20Inspector%20Operator)', result: 'unearned%20access%20to%20backstage%2Fsecure%20zones%20without%20ID', operatorName: 'The%20Inspector%20Operator', operatorMechanism: 'security%20assumes%20%22Official%20Business%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_865_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_865_then_branch: BehaviorEmit { emission: 'then', text: 'security%20assumes%20%22Official%20Business%22%20(The%20Inspector%20Operator)' })
+(loop_865_verdict: BehaviorVerdict { loopId: 865, loopName: 'The%20Clipboard%20Loop', then: 'security%20assumes%20%22Official%20Business%22%20(The%20Inspector%20Operator)', result: 'unearned%20access%20to%20backstage%2Fsecure%20zones%20without%20ID', operatorName: 'The%20Inspector%20Operator', operatorMechanism: 'security%20assumes%20%22Official%20Business%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_865_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20restricted%20area' })
+
+// Topology
+(loop_865_start)-[:PROCESS]->(loop_865_given_gate)
+(loop_865_given_gate)-[:PROCESS { case: "ok" }]->(loop_865_when_gate)
+(loop_865_given_gate)-[:PROCESS { case: "err" }]->(loop_865_inactive)
+(loop_865_when_gate)-[:PROCESS { case: "ok" }]->(loop_865_context)
+(loop_865_when_gate)-[:PROCESS { case: "err" }]->(loop_865_inactive)
+(loop_865_context)-[:FORK { strategy: "behavior-branches" }]->(loop_865_context_branch | loop_865_then_branch | loop_865_operator_branch | loop_865_result_branch | loop_865_taxonomy_branch | loop_865_intervention_recognize | loop_865_intervention_interdict | loop_865_intervention_minimize)
+(loop_865_context_branch | loop_865_then_branch | loop_865_operator_branch | loop_865_result_branch | loop_865_taxonomy_branch | loop_865_intervention_recognize | loop_865_intervention_interdict | loop_865_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_865_verdict)
+(loop_865_inactive)-[:PROCESS]->(loop_865_sink)
+(loop_865_verdict)-[:PROCESS]->(loop_865_sink)
+(loop_865_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_865_then_branch)
+(loop_865_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_865_then_branch)
+(loop_865_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_865_then_branch)

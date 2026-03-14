@@ -1,0 +1,33 @@
+// behavioral-loop-199.gg
+// Executable Gnosis projection for The Loud Chewer Loop.
+
+// Nodes
+(loop_199_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_199_context_branch: BehaviorEmit { emission: 'context' })
+(loop_199_given_gate: BehaviorAssess { stage: 'given', text: 'Open-mouth%20mastication%20or%20wet%20palate%20sounds' })
+(loop_199_inactive: BehaviorTerminal { loopId: 199, loopName: 'The%20Loud%20Chewer%20Loop' })
+(loop_199_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_199_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_199_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_199_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%2FRage%20Operator', mechanism: 'peers%20experience%20a%20%22Fight%20or%20Flight%22%20rage%20response' })
+(loop_199_result_branch: BehaviorEmit { emission: 'result', text: 'sudden%2C%20unexplained%20**Social%20Exclusion**%20(people%20stop%20inviting%20them%20to%20lunch)' })
+(loop_199_sink: BehaviorSink)
+(loop_199_start: BehaviorStart { loopId: 199, loopName: 'The%20Loud%20Chewer%20Loop', given: 'Open-mouth%20mastication%20or%20wet%20palate%20sounds', when: 'eating%20in%20quiet%20proximity', then: 'peers%20experience%20a%20%22Fight%20or%20Flight%22%20rage%20response%20(The%20Disgust%2FRage%20Operator)', result: 'sudden%2C%20unexplained%20**Social%20Exclusion**%20(people%20stop%20inviting%20them%20to%20lunch)', operatorName: 'The%20Disgust%2FRage%20Operator', operatorMechanism: 'peers%20experience%20a%20%22Fight%20or%20Flight%22%20rage%20response', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_199_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_199_then_branch: BehaviorEmit { emission: 'then', text: 'peers%20experience%20a%20%22Fight%20or%20Flight%22%20rage%20response%20(The%20Disgust%2FRage%20Operator)' })
+(loop_199_verdict: BehaviorVerdict { loopId: 199, loopName: 'The%20Loud%20Chewer%20Loop', then: 'peers%20experience%20a%20%22Fight%20or%20Flight%22%20rage%20response%20(The%20Disgust%2FRage%20Operator)', result: 'sudden%2C%20unexplained%20**Social%20Exclusion**%20(people%20stop%20inviting%20them%20to%20lunch)', operatorName: 'The%20Disgust%2FRage%20Operator', operatorMechanism: 'peers%20experience%20a%20%22Fight%20or%20Flight%22%20rage%20response', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_199_when_gate: BehaviorAssess { stage: 'when', text: 'eating%20in%20quiet%20proximity' })
+
+// Topology
+(loop_199_start)-[:PROCESS]->(loop_199_given_gate)
+(loop_199_given_gate)-[:PROCESS { case: "ok" }]->(loop_199_when_gate)
+(loop_199_given_gate)-[:PROCESS { case: "err" }]->(loop_199_inactive)
+(loop_199_when_gate)-[:PROCESS { case: "ok" }]->(loop_199_context)
+(loop_199_when_gate)-[:PROCESS { case: "err" }]->(loop_199_inactive)
+(loop_199_context)-[:FORK { strategy: "behavior-branches" }]->(loop_199_context_branch | loop_199_then_branch | loop_199_operator_branch | loop_199_result_branch | loop_199_taxonomy_branch | loop_199_intervention_recognize | loop_199_intervention_interdict | loop_199_intervention_minimize)
+(loop_199_context_branch | loop_199_then_branch | loop_199_operator_branch | loop_199_result_branch | loop_199_taxonomy_branch | loop_199_intervention_recognize | loop_199_intervention_interdict | loop_199_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_199_verdict)
+(loop_199_inactive)-[:PROCESS]->(loop_199_sink)
+(loop_199_verdict)-[:PROCESS]->(loop_199_sink)
+(loop_199_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_199_then_branch)
+(loop_199_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_199_then_branch)
+(loop_199_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_199_then_branch)

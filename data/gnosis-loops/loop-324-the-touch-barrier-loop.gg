@@ -1,0 +1,33 @@
+// behavioral-loop-324.gg
+// Executable Gnosis projection for The Touch Barrier Loop.
+
+// Nodes
+(loop_324_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_324_context_branch: BehaviorEmit { emission: 'context' })
+(loop_324_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20flinch%20reflex%20upon%20light%20contact' })
+(loop_324_inactive: BehaviorTerminal { loopId: 324, loopName: 'The%20Touch%20Barrier%20Loop' })
+(loop_324_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_324_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_324_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_324_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Alarm%20Operator', mechanism: 'the%20recoil%20signals%20%22Rejection%22%20or%20%22Abuse%20History%22' })
+(loop_324_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20walking%20on%20eggshells%20and%20**Withholding%20Affection**' })
+(loop_324_sink: BehaviorSink)
+(loop_324_start: BehaviorStart { loopId: 324, loopName: 'The%20Touch%20Barrier%20Loop', given: 'Visible%20flinch%20reflex%20upon%20light%20contact', when: 'a%20peer%20attempts%20a%20friendly%20pat%20on%20the%20back', then: 'the%20recoil%20signals%20%22Rejection%22%20or%20%22Abuse%20History%22%20(The%20Alarm%20Operator)', result: 'peers%20walking%20on%20eggshells%20and%20**Withholding%20Affection**', operatorName: 'The%20Alarm%20Operator', operatorMechanism: 'the%20recoil%20signals%20%22Rejection%22%20or%20%22Abuse%20History%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_324_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_324_then_branch: BehaviorEmit { emission: 'then', text: 'the%20recoil%20signals%20%22Rejection%22%20or%20%22Abuse%20History%22%20(The%20Alarm%20Operator)' })
+(loop_324_verdict: BehaviorVerdict { loopId: 324, loopName: 'The%20Touch%20Barrier%20Loop', then: 'the%20recoil%20signals%20%22Rejection%22%20or%20%22Abuse%20History%22%20(The%20Alarm%20Operator)', result: 'peers%20walking%20on%20eggshells%20and%20**Withholding%20Affection**', operatorName: 'The%20Alarm%20Operator', operatorMechanism: 'the%20recoil%20signals%20%22Rejection%22%20or%20%22Abuse%20History%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_324_when_gate: BehaviorAssess { stage: 'when', text: 'a%20peer%20attempts%20a%20friendly%20pat%20on%20the%20back' })
+
+// Topology
+(loop_324_start)-[:PROCESS]->(loop_324_given_gate)
+(loop_324_given_gate)-[:PROCESS { case: "ok" }]->(loop_324_when_gate)
+(loop_324_given_gate)-[:PROCESS { case: "err" }]->(loop_324_inactive)
+(loop_324_when_gate)-[:PROCESS { case: "ok" }]->(loop_324_context)
+(loop_324_when_gate)-[:PROCESS { case: "err" }]->(loop_324_inactive)
+(loop_324_context)-[:FORK { strategy: "behavior-branches" }]->(loop_324_context_branch | loop_324_then_branch | loop_324_operator_branch | loop_324_result_branch | loop_324_taxonomy_branch | loop_324_intervention_recognize | loop_324_intervention_interdict | loop_324_intervention_minimize)
+(loop_324_context_branch | loop_324_then_branch | loop_324_operator_branch | loop_324_result_branch | loop_324_taxonomy_branch | loop_324_intervention_recognize | loop_324_intervention_interdict | loop_324_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_324_verdict)
+(loop_324_inactive)-[:PROCESS]->(loop_324_sink)
+(loop_324_verdict)-[:PROCESS]->(loop_324_sink)
+(loop_324_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_324_then_branch)
+(loop_324_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_324_then_branch)
+(loop_324_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_324_then_branch)

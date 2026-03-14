@@ -1,0 +1,33 @@
+// behavioral-loop-337.gg
+// Executable Gnosis projection for The Shoulder Roll Loop.
+
+// Nodes
+(loop_337_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_337_context_branch: BehaviorEmit { emission: 'context' })
+(loop_337_given_gate: BehaviorAssess { stage: 'given', text: 'Excessive%20lateral%20movement%20of%20shoulders' })
+(loop_337_inactive: BehaviorTerminal { loopId: 337, loopName: 'The%20Shoulder%20Roll%20Loop' })
+(loop_337_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_337_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_337_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_337_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Challenge%20Operator', mechanism: 'observers%20perceive%20%22Cockiness%22%20or%20%22Aggression%22' })
+(loop_337_result_branch: BehaviorEmit { emission: 'result', text: 'likely%20confrontation%20with%20other%20high-testosterone%20individuals' })
+(loop_337_sink: BehaviorSink)
+(loop_337_start: BehaviorStart { loopId: 337, loopName: 'The%20Shoulder%20Roll%20Loop', given: 'Excessive%20lateral%20movement%20of%20shoulders', when: 'walking%20down%20a%20hall', then: 'observers%20perceive%20%22Cockiness%22%20or%20%22Aggression%22%20(The%20Challenge%20Operator)', result: 'likely%20confrontation%20with%20other%20high-testosterone%20individuals', operatorName: 'The%20Challenge%20Operator', operatorMechanism: 'observers%20perceive%20%22Cockiness%22%20or%20%22Aggression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_337_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_337_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Cockiness%22%20or%20%22Aggression%22%20(The%20Challenge%20Operator)' })
+(loop_337_verdict: BehaviorVerdict { loopId: 337, loopName: 'The%20Shoulder%20Roll%20Loop', then: 'observers%20perceive%20%22Cockiness%22%20or%20%22Aggression%22%20(The%20Challenge%20Operator)', result: 'likely%20confrontation%20with%20other%20high-testosterone%20individuals', operatorName: 'The%20Challenge%20Operator', operatorMechanism: 'observers%20perceive%20%22Cockiness%22%20or%20%22Aggression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_337_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20down%20a%20hall' })
+
+// Topology
+(loop_337_start)-[:PROCESS]->(loop_337_given_gate)
+(loop_337_given_gate)-[:PROCESS { case: "ok" }]->(loop_337_when_gate)
+(loop_337_given_gate)-[:PROCESS { case: "err" }]->(loop_337_inactive)
+(loop_337_when_gate)-[:PROCESS { case: "ok" }]->(loop_337_context)
+(loop_337_when_gate)-[:PROCESS { case: "err" }]->(loop_337_inactive)
+(loop_337_context)-[:FORK { strategy: "behavior-branches" }]->(loop_337_context_branch | loop_337_then_branch | loop_337_operator_branch | loop_337_result_branch | loop_337_taxonomy_branch | loop_337_intervention_recognize | loop_337_intervention_interdict | loop_337_intervention_minimize)
+(loop_337_context_branch | loop_337_then_branch | loop_337_operator_branch | loop_337_result_branch | loop_337_taxonomy_branch | loop_337_intervention_recognize | loop_337_intervention_interdict | loop_337_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_337_verdict)
+(loop_337_inactive)-[:PROCESS]->(loop_337_sink)
+(loop_337_verdict)-[:PROCESS]->(loop_337_sink)
+(loop_337_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_337_then_branch)
+(loop_337_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_337_then_branch)
+(loop_337_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_337_then_branch)

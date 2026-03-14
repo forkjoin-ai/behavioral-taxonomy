@@ -1,0 +1,33 @@
+// behavioral-loop-387.gg
+// Executable Gnosis projection for The Bird Wrist Loop.
+
+// Nodes
+(loop_387_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_387_context_branch: BehaviorEmit { emission: 'context' })
+(loop_387_given_gate: BehaviorAssess { stage: 'given', text: 'Delicate%2Fthin%20wrist%20joints' })
+(loop_387_inactive: BehaviorTerminal { loopId: 387, loopName: 'The%20Bird%20Wrist%20Loop' })
+(loop_387_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_387_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_387_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_387_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Childlike%20Operator', mechanism: 'the%20accessory%20looks%20%22Oversized%22%20and%20%22Costume-like%22' })
+(loop_387_result_branch: BehaviorEmit { emission: 'result', text: 'difficulty%20being%20taken%20seriously%20in%20%22Tough%22%20industries%20(Construction%2FSecurity)' })
+(loop_387_sink: BehaviorSink)
+(loop_387_start: BehaviorStart { loopId: 387, loopName: 'The%20Bird%20Wrist%20Loop', given: 'Delicate%2Fthin%20wrist%20joints', when: 'wearing%20large%20watches%20or%20jewelry', then: 'the%20accessory%20looks%20%22Oversized%22%20and%20%22Costume-like%22%20(The%20Childlike%20Operator)', result: 'difficulty%20being%20taken%20seriously%20in%20%22Tough%22%20industries%20(Construction%2FSecurity)', operatorName: 'The%20Childlike%20Operator', operatorMechanism: 'the%20accessory%20looks%20%22Oversized%22%20and%20%22Costume-like%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_387_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_387_then_branch: BehaviorEmit { emission: 'then', text: 'the%20accessory%20looks%20%22Oversized%22%20and%20%22Costume-like%22%20(The%20Childlike%20Operator)' })
+(loop_387_verdict: BehaviorVerdict { loopId: 387, loopName: 'The%20Bird%20Wrist%20Loop', then: 'the%20accessory%20looks%20%22Oversized%22%20and%20%22Costume-like%22%20(The%20Childlike%20Operator)', result: 'difficulty%20being%20taken%20seriously%20in%20%22Tough%22%20industries%20(Construction%2FSecurity)', operatorName: 'The%20Childlike%20Operator', operatorMechanism: 'the%20accessory%20looks%20%22Oversized%22%20and%20%22Costume-like%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_387_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20large%20watches%20or%20jewelry' })
+
+// Topology
+(loop_387_start)-[:PROCESS]->(loop_387_given_gate)
+(loop_387_given_gate)-[:PROCESS { case: "ok" }]->(loop_387_when_gate)
+(loop_387_given_gate)-[:PROCESS { case: "err" }]->(loop_387_inactive)
+(loop_387_when_gate)-[:PROCESS { case: "ok" }]->(loop_387_context)
+(loop_387_when_gate)-[:PROCESS { case: "err" }]->(loop_387_inactive)
+(loop_387_context)-[:FORK { strategy: "behavior-branches" }]->(loop_387_context_branch | loop_387_then_branch | loop_387_operator_branch | loop_387_result_branch | loop_387_taxonomy_branch | loop_387_intervention_recognize | loop_387_intervention_interdict | loop_387_intervention_minimize)
+(loop_387_context_branch | loop_387_then_branch | loop_387_operator_branch | loop_387_result_branch | loop_387_taxonomy_branch | loop_387_intervention_recognize | loop_387_intervention_interdict | loop_387_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_387_verdict)
+(loop_387_inactive)-[:PROCESS]->(loop_387_sink)
+(loop_387_verdict)-[:PROCESS]->(loop_387_sink)
+(loop_387_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_387_then_branch)
+(loop_387_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_387_then_branch)
+(loop_387_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_387_then_branch)

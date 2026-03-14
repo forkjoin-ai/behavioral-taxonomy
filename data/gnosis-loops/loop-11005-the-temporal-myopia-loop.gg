@@ -1,0 +1,33 @@
+// behavioral-loop-11005.gg
+// Executable Gnosis projection for The Temporal Myopia Loop.
+
+// Nodes
+(loop_11005_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_11005_context_branch: BehaviorEmit { emission: 'context' })
+(loop_11005_given_gate: BehaviorAssess { stage: 'given', text: 'Subject%20chooses%20between%20Small%20Reward%20(Now)%20vs%20Large%20Reward%20(Later)' })
+(loop_11005_inactive: BehaviorTerminal { loopId: 11005, loopName: 'The%20Temporal%20Myopia%20Loop' })
+(loop_11005_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20pre-commitment%20devices%20(lock%20money%20away%2C%20schedule%20in%20advance)' })
+(loop_11005_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Visualize%20your%20future%20self%20vividly%20to%20increase%20empathy%20for%20them' })
+(loop_11005_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you%20hear%20yourself%20say%20'I'll%20start%20tomorrow'" })
+(loop_11005_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Present%20Bias%20Calculator', mechanism: "Future%20self%20is%20processed%20neurologically%20as%20a%20'stranger'%20(low%20dlPFC%20activity)%2C%20reducing%20resource%20sharing%20with%20one's%20own%20future." })
+(loop_11005_result_branch: BehaviorEmit { emission: 'result', text: 'Chronic%20failure%20to%20execute%20long-term%20goals%20despite%20rational%20intentions' })
+(loop_11005_sink: BehaviorSink)
+(loop_11005_start: BehaviorStart { loopId: 11005, loopName: 'The%20Temporal%20Myopia%20Loop', given: 'Subject%20chooses%20between%20Small%20Reward%20(Now)%20vs%20Large%20Reward%20(Later)', when: 'The%20time%20delay%20is%20salient%20in%20the%20decision', then: 'Hyperbolic%20discounting%20causes%20future%20value%20to%20crash%20near%20zero%20(V%20%3D%20A%20%2F%20(1%20%2B%20kD))', result: 'Chronic%20failure%20to%20execute%20long-term%20goals%20despite%20rational%20intentions', operatorName: 'The%20Present%20Bias%20Calculator', operatorMechanism: "Future%20self%20is%20processed%20neurologically%20as%20a%20'stranger'%20(low%20dlPFC%20activity)%2C%20reducing%20resource%20sharing%20with%20one's%20own%20future.", origin: 'NEUROBIOLOGICAL', modality: 'DOPAMINERGIC', mutability: 'FLUID', valences: 'CONSUMPTION|HEDONISM', interventionDifficulty: '6', intervention_recognize: "Notice%20when%20you%20hear%20yourself%20say%20'I'll%20start%20tomorrow'", intervention_interdict: 'Use%20pre-commitment%20devices%20(lock%20money%20away%2C%20schedule%20in%20advance)', intervention_minimize: 'Visualize%20your%20future%20self%20vividly%20to%20increase%20empathy%20for%20them' })
+(loop_11005_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'NEUROBIOLOGICAL', modality: 'DOPAMINERGIC', mutability: 'FLUID', valences: 'CONSUMPTION|HEDONISM' })
+(loop_11005_then_branch: BehaviorEmit { emission: 'then', text: 'Hyperbolic%20discounting%20causes%20future%20value%20to%20crash%20near%20zero%20(V%20%3D%20A%20%2F%20(1%20%2B%20kD))' })
+(loop_11005_verdict: BehaviorVerdict { loopId: 11005, loopName: 'The%20Temporal%20Myopia%20Loop', then: 'Hyperbolic%20discounting%20causes%20future%20value%20to%20crash%20near%20zero%20(V%20%3D%20A%20%2F%20(1%20%2B%20kD))', result: 'Chronic%20failure%20to%20execute%20long-term%20goals%20despite%20rational%20intentions', operatorName: 'The%20Present%20Bias%20Calculator', operatorMechanism: "Future%20self%20is%20processed%20neurologically%20as%20a%20'stranger'%20(low%20dlPFC%20activity)%2C%20reducing%20resource%20sharing%20with%20one's%20own%20future.", origin: 'NEUROBIOLOGICAL', modality: 'DOPAMINERGIC', mutability: 'FLUID', valences: 'CONSUMPTION|HEDONISM' })
+(loop_11005_when_gate: BehaviorAssess { stage: 'when', text: 'The%20time%20delay%20is%20salient%20in%20the%20decision' })
+
+// Topology
+(loop_11005_start)-[:PROCESS]->(loop_11005_given_gate)
+(loop_11005_given_gate)-[:PROCESS { case: "ok" }]->(loop_11005_when_gate)
+(loop_11005_given_gate)-[:PROCESS { case: "err" }]->(loop_11005_inactive)
+(loop_11005_when_gate)-[:PROCESS { case: "ok" }]->(loop_11005_context)
+(loop_11005_when_gate)-[:PROCESS { case: "err" }]->(loop_11005_inactive)
+(loop_11005_context)-[:FORK { strategy: "behavior-branches" }]->(loop_11005_context_branch | loop_11005_then_branch | loop_11005_operator_branch | loop_11005_result_branch | loop_11005_taxonomy_branch | loop_11005_intervention_recognize | loop_11005_intervention_interdict | loop_11005_intervention_minimize)
+(loop_11005_context_branch | loop_11005_then_branch | loop_11005_operator_branch | loop_11005_result_branch | loop_11005_taxonomy_branch | loop_11005_intervention_recognize | loop_11005_intervention_interdict | loop_11005_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_11005_verdict)
+(loop_11005_inactive)-[:PROCESS]->(loop_11005_sink)
+(loop_11005_verdict)-[:PROCESS]->(loop_11005_sink)
+(loop_11005_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_11005_then_branch)
+(loop_11005_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_11005_then_branch)
+(loop_11005_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_11005_then_branch)

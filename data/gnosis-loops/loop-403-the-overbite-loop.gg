@@ -1,0 +1,33 @@
+// behavioral-loop-403.gg
+// Executable Gnosis projection for The Overbite Loop.
+
+// Nodes
+(loop_403_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_403_context_branch: BehaviorEmit { emission: 'context' })
+(loop_403_given_gate: BehaviorAssess { stage: 'given', text: 'Upper%20teeth%20projecting%20past%20lower%20lip' })
+(loop_403_inactive: BehaviorTerminal { loopId: 403, loopName: 'The%20Overbite%20Loop' })
+(loop_403_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_403_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_403_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_403_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mouth-Breather%20Operator', mechanism: 'the%20mouth%20hangs%20open' })
+(loop_403_result_branch: BehaviorEmit { emission: 'result', text: 'assumptions%20of%20lower%20intelligence' })
+(loop_403_sink: BehaviorSink)
+(loop_403_start: BehaviorStart { loopId: 403, loopName: 'The%20Overbite%20Loop', given: 'Upper%20teeth%20projecting%20past%20lower%20lip', when: 'resting', then: 'the%20mouth%20hangs%20open%20(The%20Mouth-Breather%20Operator)', result: 'assumptions%20of%20lower%20intelligence', operatorName: 'The%20Mouth-Breather%20Operator', operatorMechanism: 'the%20mouth%20hangs%20open', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_403_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_403_then_branch: BehaviorEmit { emission: 'then', text: 'the%20mouth%20hangs%20open%20(The%20Mouth-Breather%20Operator)' })
+(loop_403_verdict: BehaviorVerdict { loopId: 403, loopName: 'The%20Overbite%20Loop', then: 'the%20mouth%20hangs%20open%20(The%20Mouth-Breather%20Operator)', result: 'assumptions%20of%20lower%20intelligence', operatorName: 'The%20Mouth-Breather%20Operator', operatorMechanism: 'the%20mouth%20hangs%20open', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_403_when_gate: BehaviorAssess { stage: 'when', text: 'resting' })
+
+// Topology
+(loop_403_start)-[:PROCESS]->(loop_403_given_gate)
+(loop_403_given_gate)-[:PROCESS { case: "ok" }]->(loop_403_when_gate)
+(loop_403_given_gate)-[:PROCESS { case: "err" }]->(loop_403_inactive)
+(loop_403_when_gate)-[:PROCESS { case: "ok" }]->(loop_403_context)
+(loop_403_when_gate)-[:PROCESS { case: "err" }]->(loop_403_inactive)
+(loop_403_context)-[:FORK { strategy: "behavior-branches" }]->(loop_403_context_branch | loop_403_then_branch | loop_403_operator_branch | loop_403_result_branch | loop_403_taxonomy_branch | loop_403_intervention_recognize | loop_403_intervention_interdict | loop_403_intervention_minimize)
+(loop_403_context_branch | loop_403_then_branch | loop_403_operator_branch | loop_403_result_branch | loop_403_taxonomy_branch | loop_403_intervention_recognize | loop_403_intervention_interdict | loop_403_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_403_verdict)
+(loop_403_inactive)-[:PROCESS]->(loop_403_sink)
+(loop_403_verdict)-[:PROCESS]->(loop_403_sink)
+(loop_403_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_403_then_branch)
+(loop_403_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_403_then_branch)
+(loop_403_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_403_then_branch)

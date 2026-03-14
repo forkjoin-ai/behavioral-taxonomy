@@ -1,0 +1,33 @@
+// behavioral-loop-640.gg
+// Executable Gnosis projection for The Backwards Knee Loop.
+
+// Nodes
+(loop_640_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_640_context_branch: BehaviorEmit { emission: 'context' })
+(loop_640_given_gate: BehaviorAssess { stage: 'given', text: 'Knees%20bending%20backward%20past%20straight' })
+(loop_640_inactive: BehaviorTerminal { loopId: 640, loopName: 'The%20Backwards%20Knee%20Loop' })
+(loop_640_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_640_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_640_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_640_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Flamingo%20Operator', mechanism: 'the%20legs%20look%20%22Ostrich-like%22%20or%20%22Unstable%22' })
+(loop_640_result_branch: BehaviorEmit { emission: 'result', text: 'visceral%20unease%20in%20observers%20fearing%20the%20leg%20will%20snap' })
+(loop_640_sink: BehaviorSink)
+(loop_640_start: BehaviorStart { loopId: 640, loopName: 'The%20Backwards%20Knee%20Loop', given: 'Knees%20bending%20backward%20past%20straight', when: 'standing', then: 'the%20legs%20look%20%22Ostrich-like%22%20or%20%22Unstable%22%20(The%20Flamingo%20Operator)', result: 'visceral%20unease%20in%20observers%20fearing%20the%20leg%20will%20snap', operatorName: 'The%20Flamingo%20Operator', operatorMechanism: 'the%20legs%20look%20%22Ostrich-like%22%20or%20%22Unstable%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_640_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_640_then_branch: BehaviorEmit { emission: 'then', text: 'the%20legs%20look%20%22Ostrich-like%22%20or%20%22Unstable%22%20(The%20Flamingo%20Operator)' })
+(loop_640_verdict: BehaviorVerdict { loopId: 640, loopName: 'The%20Backwards%20Knee%20Loop', then: 'the%20legs%20look%20%22Ostrich-like%22%20or%20%22Unstable%22%20(The%20Flamingo%20Operator)', result: 'visceral%20unease%20in%20observers%20fearing%20the%20leg%20will%20snap', operatorName: 'The%20Flamingo%20Operator', operatorMechanism: 'the%20legs%20look%20%22Ostrich-like%22%20or%20%22Unstable%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_640_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_640_start)-[:PROCESS]->(loop_640_given_gate)
+(loop_640_given_gate)-[:PROCESS { case: "ok" }]->(loop_640_when_gate)
+(loop_640_given_gate)-[:PROCESS { case: "err" }]->(loop_640_inactive)
+(loop_640_when_gate)-[:PROCESS { case: "ok" }]->(loop_640_context)
+(loop_640_when_gate)-[:PROCESS { case: "err" }]->(loop_640_inactive)
+(loop_640_context)-[:FORK { strategy: "behavior-branches" }]->(loop_640_context_branch | loop_640_then_branch | loop_640_operator_branch | loop_640_result_branch | loop_640_taxonomy_branch | loop_640_intervention_recognize | loop_640_intervention_interdict | loop_640_intervention_minimize)
+(loop_640_context_branch | loop_640_then_branch | loop_640_operator_branch | loop_640_result_branch | loop_640_taxonomy_branch | loop_640_intervention_recognize | loop_640_intervention_interdict | loop_640_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_640_verdict)
+(loop_640_inactive)-[:PROCESS]->(loop_640_sink)
+(loop_640_verdict)-[:PROCESS]->(loop_640_sink)
+(loop_640_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_640_then_branch)
+(loop_640_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_640_then_branch)
+(loop_640_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_640_then_branch)

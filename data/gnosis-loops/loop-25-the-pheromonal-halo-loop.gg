@@ -1,0 +1,31 @@
+// behavioral-loop-25.gg
+// Executable Gnosis projection for The Pheromonal Halo Loop.
+
+// Nodes
+(loop_25_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_25_context_branch: BehaviorEmit { emission: 'context' })
+(loop_25_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20a%20Major%20Histocompatibility%20Complex%20(MHC)%20distinct%20from%20the%20observer' })
+(loop_25_inactive: BehaviorTerminal { loopId: 25, loopName: 'The%20Pheromonal%20Halo%20Loop' })
+(loop_25_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Combine%20with%20approachability%20signals' })
+(loop_25_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_25_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sexual%20Opportunity%20Operator', mechanism: 'the%20observer%20feels%20inexplicable%20%22Chemistry%22%20or%20attraction' })
+(loop_25_result_branch: BehaviorEmit { emission: 'result', text: 'high%20%22unearned%22%20rapport%20and%20**Social%20Magnetism**' })
+(loop_25_sink: BehaviorSink)
+(loop_25_start: BehaviorStart { loopId: 25, loopName: 'The%20Pheromonal%20Halo%20Loop', given: 'an%20individual%20possesses%20a%20Major%20Histocompatibility%20Complex%20(MHC)%20distinct%20from%20the%20observer', when: 'they%20are%20in%20close%20proximity', then: 'the%20observer%20feels%20inexplicable%20%22Chemistry%22%20or%20attraction%20(The%20Sexual%20Opportunity%20Operator)', result: 'high%20%22unearned%22%20rapport%20and%20**Social%20Magnetism**', operatorName: 'The%20Sexual%20Opportunity%20Operator', operatorMechanism: 'the%20observer%20feels%20inexplicable%20%22Chemistry%22%20or%20attraction', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Combine%20with%20approachability%20signals' })
+(loop_25_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_25_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20feels%20inexplicable%20%22Chemistry%22%20or%20attraction%20(The%20Sexual%20Opportunity%20Operator)' })
+(loop_25_verdict: BehaviorVerdict { loopId: 25, loopName: 'The%20Pheromonal%20Halo%20Loop', then: 'the%20observer%20feels%20inexplicable%20%22Chemistry%22%20or%20attraction%20(The%20Sexual%20Opportunity%20Operator)', result: 'high%20%22unearned%22%20rapport%20and%20**Social%20Magnetism**', operatorName: 'The%20Sexual%20Opportunity%20Operator', operatorMechanism: 'the%20observer%20feels%20inexplicable%20%22Chemistry%22%20or%20attraction', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_25_when_gate: BehaviorAssess { stage: 'when', text: 'they%20are%20in%20close%20proximity' })
+
+// Topology
+(loop_25_start)-[:PROCESS]->(loop_25_given_gate)
+(loop_25_given_gate)-[:PROCESS { case: "ok" }]->(loop_25_when_gate)
+(loop_25_given_gate)-[:PROCESS { case: "err" }]->(loop_25_inactive)
+(loop_25_when_gate)-[:PROCESS { case: "ok" }]->(loop_25_context)
+(loop_25_when_gate)-[:PROCESS { case: "err" }]->(loop_25_inactive)
+(loop_25_context)-[:FORK { strategy: "behavior-branches" }]->(loop_25_context_branch | loop_25_then_branch | loop_25_operator_branch | loop_25_result_branch | loop_25_taxonomy_branch | loop_25_intervention_recognize | loop_25_intervention_leverage)
+(loop_25_context_branch | loop_25_then_branch | loop_25_operator_branch | loop_25_result_branch | loop_25_taxonomy_branch | loop_25_intervention_recognize | loop_25_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_25_verdict)
+(loop_25_inactive)-[:PROCESS]->(loop_25_sink)
+(loop_25_verdict)-[:PROCESS]->(loop_25_sink)
+(loop_25_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_25_then_branch)
+(loop_25_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_25_result_branch)

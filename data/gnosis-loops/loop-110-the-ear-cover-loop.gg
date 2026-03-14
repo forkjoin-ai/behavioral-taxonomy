@@ -1,0 +1,33 @@
+// behavioral-loop-110.gg
+// Executable Gnosis projection for The Ear Cover Loop.
+
+// Nodes
+(loop_110_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_110_context_branch: BehaviorEmit { emission: 'context' })
+(loop_110_given_gate: BehaviorAssess { stage: 'given', text: 'Hyperacusis%20(Sensitive%20to%20loud%20noise)' })
+(loop_110_inactive: BehaviorTerminal { loopId: 110, loopName: 'The%20Ear%20Cover%20Loop' })
+(loop_110_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_110_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_110_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_110_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20individual%20covers%20their%20ears%20visibly' })
+(loop_110_result_branch: BehaviorEmit { emission: 'result', text: 'exclusion%20from%20concerts%2Fclubs%2C%20leading%20to%20a%20**Quiet%2FDomestic%20Lifestyle**' })
+(loop_110_sink: BehaviorSink)
+(loop_110_start: BehaviorStart { loopId: 110, loopName: 'The%20Ear%20Cover%20Loop', given: 'Hyperacusis%20(Sensitive%20to%20loud%20noise)', when: 'a%20siren%20or%20loud%20noise%20occurs', then: 'the%20individual%20covers%20their%20ears%20visibly%20(The%20Fragility%20Operator)', result: 'exclusion%20from%20concerts%2Fclubs%2C%20leading%20to%20a%20**Quiet%2FDomestic%20Lifestyle**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20individual%20covers%20their%20ears%20visibly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_110_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_110_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20covers%20their%20ears%20visibly%20(The%20Fragility%20Operator)' })
+(loop_110_verdict: BehaviorVerdict { loopId: 110, loopName: 'The%20Ear%20Cover%20Loop', then: 'the%20individual%20covers%20their%20ears%20visibly%20(The%20Fragility%20Operator)', result: 'exclusion%20from%20concerts%2Fclubs%2C%20leading%20to%20a%20**Quiet%2FDomestic%20Lifestyle**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20individual%20covers%20their%20ears%20visibly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_110_when_gate: BehaviorAssess { stage: 'when', text: 'a%20siren%20or%20loud%20noise%20occurs' })
+
+// Topology
+(loop_110_start)-[:PROCESS]->(loop_110_given_gate)
+(loop_110_given_gate)-[:PROCESS { case: "ok" }]->(loop_110_when_gate)
+(loop_110_given_gate)-[:PROCESS { case: "err" }]->(loop_110_inactive)
+(loop_110_when_gate)-[:PROCESS { case: "ok" }]->(loop_110_context)
+(loop_110_when_gate)-[:PROCESS { case: "err" }]->(loop_110_inactive)
+(loop_110_context)-[:FORK { strategy: "behavior-branches" }]->(loop_110_context_branch | loop_110_then_branch | loop_110_operator_branch | loop_110_result_branch | loop_110_taxonomy_branch | loop_110_intervention_recognize | loop_110_intervention_interdict | loop_110_intervention_minimize)
+(loop_110_context_branch | loop_110_then_branch | loop_110_operator_branch | loop_110_result_branch | loop_110_taxonomy_branch | loop_110_intervention_recognize | loop_110_intervention_interdict | loop_110_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_110_verdict)
+(loop_110_inactive)-[:PROCESS]->(loop_110_sink)
+(loop_110_verdict)-[:PROCESS]->(loop_110_sink)
+(loop_110_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_110_then_branch)
+(loop_110_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_110_then_branch)
+(loop_110_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_110_then_branch)

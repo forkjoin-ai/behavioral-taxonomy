@@ -1,0 +1,33 @@
+// behavioral-loop-517.gg
+// Executable Gnosis projection for The Puller Loop.
+
+// Nodes
+(loop_517_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_517_context_branch: BehaviorEmit { emission: 'context' })
+(loop_517_given_gate: BehaviorAssess { stage: 'given', text: "Yanking%20the%20recipient's%20arm%20into%20personal%20space%20during%20a%20shake" })
+(loop_517_inactive: BehaviorTerminal { loopId: 517, loopName: 'The%20Puller%20Loop' })
+(loop_517_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Introduce%20environmental%20anchors%20for%20desired%20behavior' })
+(loop_517_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_517_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20who%20moves%20toward%2Faway%20from%20whom' })
+(loop_517_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Power%20Move%20Operator', mechanism: 'it%20signals%20%22Aggression%22%20and%20%22Control%22' })
+(loop_517_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20physical%20tension%20and%20a%20fight-or-flight%20response' })
+(loop_517_sink: BehaviorSink)
+(loop_517_start: BehaviorStart { loopId: 517, loopName: 'The%20Puller%20Loop', given: "Yanking%20the%20recipient's%20arm%20into%20personal%20space%20during%20a%20shake", when: 'greeting%20a%20rival', then: 'it%20signals%20%22Aggression%22%20and%20%22Control%22%20(The%20Power%20Move%20Operator)', result: 'immediate%20physical%20tension%20and%20a%20fight-or-flight%20response', operatorName: 'The%20Power%20Move%20Operator', operatorMechanism: 'it%20signals%20%22Aggression%22%20and%20%22Control%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Pay%20attention%20to%20who%20moves%20toward%2Faway%20from%20whom', intervention_interdict: 'Introduce%20environmental%20anchors%20for%20desired%20behavior', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_517_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_517_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Aggression%22%20and%20%22Control%22%20(The%20Power%20Move%20Operator)' })
+(loop_517_verdict: BehaviorVerdict { loopId: 517, loopName: 'The%20Puller%20Loop', then: 'it%20signals%20%22Aggression%22%20and%20%22Control%22%20(The%20Power%20Move%20Operator)', result: 'immediate%20physical%20tension%20and%20a%20fight-or-flight%20response', operatorName: 'The%20Power%20Move%20Operator', operatorMechanism: 'it%20signals%20%22Aggression%22%20and%20%22Control%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_517_when_gate: BehaviorAssess { stage: 'when', text: 'greeting%20a%20rival' })
+
+// Topology
+(loop_517_start)-[:PROCESS]->(loop_517_given_gate)
+(loop_517_given_gate)-[:PROCESS { case: "ok" }]->(loop_517_when_gate)
+(loop_517_given_gate)-[:PROCESS { case: "err" }]->(loop_517_inactive)
+(loop_517_when_gate)-[:PROCESS { case: "ok" }]->(loop_517_context)
+(loop_517_when_gate)-[:PROCESS { case: "err" }]->(loop_517_inactive)
+(loop_517_context)-[:FORK { strategy: "behavior-branches" }]->(loop_517_context_branch | loop_517_then_branch | loop_517_operator_branch | loop_517_result_branch | loop_517_taxonomy_branch | loop_517_intervention_recognize | loop_517_intervention_interdict | loop_517_intervention_minimize)
+(loop_517_context_branch | loop_517_then_branch | loop_517_operator_branch | loop_517_result_branch | loop_517_taxonomy_branch | loop_517_intervention_recognize | loop_517_intervention_interdict | loop_517_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_517_verdict)
+(loop_517_inactive)-[:PROCESS]->(loop_517_sink)
+(loop_517_verdict)-[:PROCESS]->(loop_517_sink)
+(loop_517_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_517_then_branch)
+(loop_517_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_517_then_branch)
+(loop_517_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_517_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-855.gg
+// Executable Gnosis projection for The Mullet Loop.
+
+// Nodes
+(loop_855_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_855_context_branch: BehaviorEmit { emission: 'context' })
+(loop_855_given_gate: BehaviorAssess { stage: 'given', text: 'Short%20front%2FLong%20back%20style' })
+(loop_855_inactive: BehaviorTerminal { loopId: 855, loopName: 'The%20Mullet%20Loop' })
+(loop_855_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_855_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_855_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_855_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Counter-Culture%20Operator', mechanism: 'it%20signals%20%22Irony%22%20or%20%22Redneck%20Chic%22' })
+(loop_855_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20sorting%20into%20%22alt%22%20social%20groups' })
+(loop_855_sink: BehaviorSink)
+(loop_855_start: BehaviorStart { loopId: 855, loopName: 'The%20Mullet%20Loop', given: 'Short%20front%2FLong%20back%20style', when: 'in%20a%20modern%20city', then: 'it%20signals%20%22Irony%22%20or%20%22Redneck%20Chic%22%20(The%20Counter-Culture%20Operator)', result: 'immediate%20sorting%20into%20%22alt%22%20social%20groups', operatorName: 'The%20Counter-Culture%20Operator', operatorMechanism: 'it%20signals%20%22Irony%22%20or%20%22Redneck%20Chic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_855_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_855_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Irony%22%20or%20%22Redneck%20Chic%22%20(The%20Counter-Culture%20Operator)' })
+(loop_855_verdict: BehaviorVerdict { loopId: 855, loopName: 'The%20Mullet%20Loop', then: 'it%20signals%20%22Irony%22%20or%20%22Redneck%20Chic%22%20(The%20Counter-Culture%20Operator)', result: 'immediate%20sorting%20into%20%22alt%22%20social%20groups', operatorName: 'The%20Counter-Culture%20Operator', operatorMechanism: 'it%20signals%20%22Irony%22%20or%20%22Redneck%20Chic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_855_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20modern%20city' })
+
+// Topology
+(loop_855_start)-[:PROCESS]->(loop_855_given_gate)
+(loop_855_given_gate)-[:PROCESS { case: "ok" }]->(loop_855_when_gate)
+(loop_855_given_gate)-[:PROCESS { case: "err" }]->(loop_855_inactive)
+(loop_855_when_gate)-[:PROCESS { case: "ok" }]->(loop_855_context)
+(loop_855_when_gate)-[:PROCESS { case: "err" }]->(loop_855_inactive)
+(loop_855_context)-[:FORK { strategy: "behavior-branches" }]->(loop_855_context_branch | loop_855_then_branch | loop_855_operator_branch | loop_855_result_branch | loop_855_taxonomy_branch | loop_855_intervention_recognize | loop_855_intervention_interdict | loop_855_intervention_minimize)
+(loop_855_context_branch | loop_855_then_branch | loop_855_operator_branch | loop_855_result_branch | loop_855_taxonomy_branch | loop_855_intervention_recognize | loop_855_intervention_interdict | loop_855_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_855_verdict)
+(loop_855_inactive)-[:PROCESS]->(loop_855_sink)
+(loop_855_verdict)-[:PROCESS]->(loop_855_sink)
+(loop_855_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_855_then_branch)
+(loop_855_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_855_then_branch)
+(loop_855_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_855_then_branch)

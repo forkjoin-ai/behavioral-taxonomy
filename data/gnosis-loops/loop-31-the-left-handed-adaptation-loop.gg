@@ -1,0 +1,33 @@
+// behavioral-loop-31.gg
+// Executable Gnosis projection for The Left-Handed Adaptation Loop.
+
+// Nodes
+(loop_31_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_31_context_branch: BehaviorEmit { emission: 'context' })
+(loop_31_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20is%20Sinistral%20(Left-handed)' })
+(loop_31_inactive: BehaviorTerminal { loopId: 31, loopName: 'The%20Left-Handed%20Adaptation%20Loop' })
+(loop_31_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_31_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_31_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_31_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Obstruction%20Operator', mechanism: 'they%20bump%20elbows%2Fstruggle%20with%20design' })
+(loop_31_result_branch: BehaviorEmit { emission: 'result', text: 'higher%20**Ambidexterity**%20and%20**Lateral%20Thinking**%20(adaptability)' })
+(loop_31_sink: BehaviorSink)
+(loop_31_start: BehaviorStart { loopId: 31, loopName: 'The%20Left-Handed%20Adaptation%20Loop', given: 'an%20individual%20is%20Sinistral%20(Left-handed)', when: 'using%20tools%20or%20eating%20at%20a%20crowded%20table', then: 'they%20bump%20elbows%2Fstruggle%20with%20design%20(The%20Obstruction%20Operator)', result: 'higher%20**Ambidexterity**%20and%20**Lateral%20Thinking**%20(adaptability)', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'they%20bump%20elbows%2Fstruggle%20with%20design', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_31_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_31_then_branch: BehaviorEmit { emission: 'then', text: 'they%20bump%20elbows%2Fstruggle%20with%20design%20(The%20Obstruction%20Operator)' })
+(loop_31_verdict: BehaviorVerdict { loopId: 31, loopName: 'The%20Left-Handed%20Adaptation%20Loop', then: 'they%20bump%20elbows%2Fstruggle%20with%20design%20(The%20Obstruction%20Operator)', result: 'higher%20**Ambidexterity**%20and%20**Lateral%20Thinking**%20(adaptability)', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'they%20bump%20elbows%2Fstruggle%20with%20design', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_31_when_gate: BehaviorAssess { stage: 'when', text: 'using%20tools%20or%20eating%20at%20a%20crowded%20table' })
+
+// Topology
+(loop_31_start)-[:PROCESS]->(loop_31_given_gate)
+(loop_31_given_gate)-[:PROCESS { case: "ok" }]->(loop_31_when_gate)
+(loop_31_given_gate)-[:PROCESS { case: "err" }]->(loop_31_inactive)
+(loop_31_when_gate)-[:PROCESS { case: "ok" }]->(loop_31_context)
+(loop_31_when_gate)-[:PROCESS { case: "err" }]->(loop_31_inactive)
+(loop_31_context)-[:FORK { strategy: "behavior-branches" }]->(loop_31_context_branch | loop_31_then_branch | loop_31_operator_branch | loop_31_result_branch | loop_31_taxonomy_branch | loop_31_intervention_recognize | loop_31_intervention_interdict | loop_31_intervention_minimize)
+(loop_31_context_branch | loop_31_then_branch | loop_31_operator_branch | loop_31_result_branch | loop_31_taxonomy_branch | loop_31_intervention_recognize | loop_31_intervention_interdict | loop_31_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_31_verdict)
+(loop_31_inactive)-[:PROCESS]->(loop_31_sink)
+(loop_31_verdict)-[:PROCESS]->(loop_31_sink)
+(loop_31_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_31_then_branch)
+(loop_31_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_31_then_branch)
+(loop_31_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_31_then_branch)

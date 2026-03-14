@@ -1,0 +1,33 @@
+// behavioral-loop-200.gg
+// Executable Gnosis projection for The Sweat-Eater Loop.
+
+// Nodes
+(loop_200_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_200_context_branch: BehaviorEmit { emission: 'context' })
+(loop_200_given_gate: BehaviorAssess { stage: 'given', text: 'Runny%20nose%20triggered%20by%20hot%20food' })
+(loop_200_inactive: BehaviorTerminal { loopId: 200, loopName: 'The%20Sweat-Eater%20Loop' })
+(loop_200_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_200_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_200_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_200_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hygiene%20Operator', mechanism: 'the%20individual%20must%20constantly%20blow%20their%20nose' })
+(loop_200_result_branch: BehaviorEmit { emission: 'result', text: 'being%20perceived%20as%20%22Sickly%2C%22%20leading%20to%20**Dining%20Isolation**' })
+(loop_200_sink: BehaviorSink)
+(loop_200_start: BehaviorStart { loopId: 200, loopName: 'The%20Sweat-Eater%20Loop', given: 'Runny%20nose%20triggered%20by%20hot%20food', when: 'eating%20spicy%20or%20hot%20meals', then: 'the%20individual%20must%20constantly%20blow%20their%20nose%20(The%20Hygiene%20Operator)', result: 'being%20perceived%20as%20%22Sickly%2C%22%20leading%20to%20**Dining%20Isolation**', operatorName: 'The%20Hygiene%20Operator', operatorMechanism: 'the%20individual%20must%20constantly%20blow%20their%20nose', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_200_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_200_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20must%20constantly%20blow%20their%20nose%20(The%20Hygiene%20Operator)' })
+(loop_200_verdict: BehaviorVerdict { loopId: 200, loopName: 'The%20Sweat-Eater%20Loop', then: 'the%20individual%20must%20constantly%20blow%20their%20nose%20(The%20Hygiene%20Operator)', result: 'being%20perceived%20as%20%22Sickly%2C%22%20leading%20to%20**Dining%20Isolation**', operatorName: 'The%20Hygiene%20Operator', operatorMechanism: 'the%20individual%20must%20constantly%20blow%20their%20nose', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_200_when_gate: BehaviorAssess { stage: 'when', text: 'eating%20spicy%20or%20hot%20meals' })
+
+// Topology
+(loop_200_start)-[:PROCESS]->(loop_200_given_gate)
+(loop_200_given_gate)-[:PROCESS { case: "ok" }]->(loop_200_when_gate)
+(loop_200_given_gate)-[:PROCESS { case: "err" }]->(loop_200_inactive)
+(loop_200_when_gate)-[:PROCESS { case: "ok" }]->(loop_200_context)
+(loop_200_when_gate)-[:PROCESS { case: "err" }]->(loop_200_inactive)
+(loop_200_context)-[:FORK { strategy: "behavior-branches" }]->(loop_200_context_branch | loop_200_then_branch | loop_200_operator_branch | loop_200_result_branch | loop_200_taxonomy_branch | loop_200_intervention_recognize | loop_200_intervention_interdict | loop_200_intervention_minimize)
+(loop_200_context_branch | loop_200_then_branch | loop_200_operator_branch | loop_200_result_branch | loop_200_taxonomy_branch | loop_200_intervention_recognize | loop_200_intervention_interdict | loop_200_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_200_verdict)
+(loop_200_inactive)-[:PROCESS]->(loop_200_sink)
+(loop_200_verdict)-[:PROCESS]->(loop_200_sink)
+(loop_200_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_200_then_branch)
+(loop_200_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_200_then_branch)
+(loop_200_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_200_then_branch)

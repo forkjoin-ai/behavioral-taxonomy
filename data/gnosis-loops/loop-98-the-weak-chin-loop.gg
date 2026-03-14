@@ -1,0 +1,33 @@
+// behavioral-loop-98.gg
+// Executable Gnosis projection for The Weak Chin Loop.
+
+// Nodes
+(loop_98_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_98_context_branch: BehaviorEmit { emission: 'context' })
+(loop_98_given_gate: BehaviorAssess { stage: 'given', text: 'Receding%20Mandible%2FChin' })
+(loop_98_inactive: BehaviorTerminal { loopId: 98, loopName: 'The%20Weak%20Chin%20Loop' })
+(loop_98_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_98_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_98_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_98_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Authority%20Operator', mechanism: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20or%20%22Lack%20of%20Character%22' })
+(loop_98_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20over-developing%20**Intellectual%20Aggression**%20or%20vocabulary%20to%20assert%20strength' })
+(loop_98_sink: BehaviorSink)
+(loop_98_start: BehaviorStart { loopId: 98, loopName: 'The%20Weak%20Chin%20Loop', given: 'Receding%20Mandible%2FChin', when: 'attempting%20to%20command%20a%20room%20or%20debate', then: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20or%20%22Lack%20of%20Character%22%20(The%20Authority%20Operator%20-%20Negative)', result: 'the%20individual%20over-developing%20**Intellectual%20Aggression**%20or%20vocabulary%20to%20assert%20strength', operatorName: 'The%20Authority%20Operator', operatorMechanism: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20or%20%22Lack%20of%20Character%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_98_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_98_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20or%20%22Lack%20of%20Character%22%20(The%20Authority%20Operator%20-%20Negative)' })
+(loop_98_verdict: BehaviorVerdict { loopId: 98, loopName: 'The%20Weak%20Chin%20Loop', then: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20or%20%22Lack%20of%20Character%22%20(The%20Authority%20Operator%20-%20Negative)', result: 'the%20individual%20over-developing%20**Intellectual%20Aggression**%20or%20vocabulary%20to%20assert%20strength', operatorName: 'The%20Authority%20Operator', operatorMechanism: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20or%20%22Lack%20of%20Character%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_98_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20to%20command%20a%20room%20or%20debate' })
+
+// Topology
+(loop_98_start)-[:PROCESS]->(loop_98_given_gate)
+(loop_98_given_gate)-[:PROCESS { case: "ok" }]->(loop_98_when_gate)
+(loop_98_given_gate)-[:PROCESS { case: "err" }]->(loop_98_inactive)
+(loop_98_when_gate)-[:PROCESS { case: "ok" }]->(loop_98_context)
+(loop_98_when_gate)-[:PROCESS { case: "err" }]->(loop_98_inactive)
+(loop_98_context)-[:FORK { strategy: "behavior-branches" }]->(loop_98_context_branch | loop_98_then_branch | loop_98_operator_branch | loop_98_result_branch | loop_98_taxonomy_branch | loop_98_intervention_recognize | loop_98_intervention_interdict | loop_98_intervention_minimize)
+(loop_98_context_branch | loop_98_then_branch | loop_98_operator_branch | loop_98_result_branch | loop_98_taxonomy_branch | loop_98_intervention_recognize | loop_98_intervention_interdict | loop_98_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_98_verdict)
+(loop_98_inactive)-[:PROCESS]->(loop_98_sink)
+(loop_98_verdict)-[:PROCESS]->(loop_98_sink)
+(loop_98_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_98_then_branch)
+(loop_98_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_98_then_branch)
+(loop_98_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_98_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-1030.gg
+// Executable Gnosis projection for The Now vs. Not Now Loop.
+
+// Nodes
+(loop_1030_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1030_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1030_given_gate: BehaviorAssess { stage: 'given', text: 'Lack%20of%20internal%20clock%20(Time%20Blindness)' })
+(loop_1030_inactive: BehaviorTerminal { loopId: 1030, loopName: 'The%20Now%20vs.%20Not%20Now%20Loop' })
+(loop_1030_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1030_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1030_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20internal%20narratives%20affect%20external%20behavior' })
+(loop_1030_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Panic%20Horizon', mechanism: 'Dopamine%20deficiency%20requires%20extreme%20urgency%20to%20trigger%20executive%20function.' })
+(loop_1030_result_branch: BehaviorEmit { emission: 'result', text: 'Calm%20demeanor%20followed%20by%20explosive%2C%20manic%20productivity' })
+(loop_1030_sink: BehaviorSink)
+(loop_1030_start: BehaviorStart { loopId: 1030, loopName: 'The%20Now%20vs.%20Not%20Now%20Loop', given: 'Lack%20of%20internal%20clock%20(Time%20Blindness)', when: 'Told%20an%20event%20is%20in%203%20weeks', then: 'The%20event%20does%20not%20exist%20until%20T-minus%201%20hour', result: 'Calm%20demeanor%20followed%20by%20explosive%2C%20manic%20productivity', operatorName: 'The%20Panic%20Horizon', operatorMechanism: 'Dopamine%20deficiency%20requires%20extreme%20urgency%20to%20trigger%20executive%20function.', origin: 'BEHAVIORAL', modality: 'META', mutability: 'STUBBORN', valences: 'DISRUPTION|SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20internal%20narratives%20affect%20external%20behavior', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1030_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'STUBBORN', valences: 'DISRUPTION|SUBMISSION' })
+(loop_1030_then_branch: BehaviorEmit { emission: 'then', text: 'The%20event%20does%20not%20exist%20until%20T-minus%201%20hour' })
+(loop_1030_verdict: BehaviorVerdict { loopId: 1030, loopName: 'The%20Now%20vs.%20Not%20Now%20Loop', then: 'The%20event%20does%20not%20exist%20until%20T-minus%201%20hour', result: 'Calm%20demeanor%20followed%20by%20explosive%2C%20manic%20productivity', operatorName: 'The%20Panic%20Horizon', operatorMechanism: 'Dopamine%20deficiency%20requires%20extreme%20urgency%20to%20trigger%20executive%20function.', origin: 'BEHAVIORAL', modality: 'META', mutability: 'STUBBORN', valences: 'DISRUPTION|SUBMISSION' })
+(loop_1030_when_gate: BehaviorAssess { stage: 'when', text: 'Told%20an%20event%20is%20in%203%20weeks' })
+
+// Topology
+(loop_1030_start)-[:PROCESS]->(loop_1030_given_gate)
+(loop_1030_given_gate)-[:PROCESS { case: "ok" }]->(loop_1030_when_gate)
+(loop_1030_given_gate)-[:PROCESS { case: "err" }]->(loop_1030_inactive)
+(loop_1030_when_gate)-[:PROCESS { case: "ok" }]->(loop_1030_context)
+(loop_1030_when_gate)-[:PROCESS { case: "err" }]->(loop_1030_inactive)
+(loop_1030_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1030_context_branch | loop_1030_then_branch | loop_1030_operator_branch | loop_1030_result_branch | loop_1030_taxonomy_branch | loop_1030_intervention_recognize | loop_1030_intervention_interdict | loop_1030_intervention_minimize)
+(loop_1030_context_branch | loop_1030_then_branch | loop_1030_operator_branch | loop_1030_result_branch | loop_1030_taxonomy_branch | loop_1030_intervention_recognize | loop_1030_intervention_interdict | loop_1030_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1030_verdict)
+(loop_1030_inactive)-[:PROCESS]->(loop_1030_sink)
+(loop_1030_verdict)-[:PROCESS]->(loop_1030_sink)
+(loop_1030_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1030_then_branch)
+(loop_1030_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1030_then_branch)
+(loop_1030_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1030_then_branch)

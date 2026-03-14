@@ -1,0 +1,33 @@
+// behavioral-loop-706.gg
+// Executable Gnosis projection for The Prey Loop.
+
+// Nodes
+(loop_706_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_706_context_branch: BehaviorEmit { emission: 'context' })
+(loop_706_given_gate: BehaviorAssess { stage: 'given', text: 'Lateral%20canthus%20lower%20than%20medial%20canthus%20(downward%20slope)' })
+(loop_706_inactive: BehaviorTerminal { loopId: 706, loopName: 'The%20Prey%20Loop' })
+(loop_706_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_706_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_706_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_706_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Puppy%20Dog%20Operator', mechanism: 'the%20face%20looks%20%22Sad%2C%22%20%22Empathetic%2C%22%20or%20%22Defeated%22' })
+(loop_706_result_branch: BehaviorEmit { emission: 'result', text: 'triggering%20the%20%22Nurture%22%20instinct%20in%20others%20(getting%20help%20easily)%20but%20losing%20respect%20in%20leadership' })
+(loop_706_sink: BehaviorSink)
+(loop_706_start: BehaviorStart { loopId: 706, loopName: 'The%20Prey%20Loop', given: 'Lateral%20canthus%20lower%20than%20medial%20canthus%20(downward%20slope)', when: 'asking%20for%20help', then: 'the%20face%20looks%20%22Sad%2C%22%20%22Empathetic%2C%22%20or%20%22Defeated%22%20(The%20Puppy%20Dog%20Operator)', result: 'triggering%20the%20%22Nurture%22%20instinct%20in%20others%20(getting%20help%20easily)%20but%20losing%20respect%20in%20leadership', operatorName: 'The%20Puppy%20Dog%20Operator', operatorMechanism: 'the%20face%20looks%20%22Sad%2C%22%20%22Empathetic%2C%22%20or%20%22Defeated%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_706_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_706_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Sad%2C%22%20%22Empathetic%2C%22%20or%20%22Defeated%22%20(The%20Puppy%20Dog%20Operator)' })
+(loop_706_verdict: BehaviorVerdict { loopId: 706, loopName: 'The%20Prey%20Loop', then: 'the%20face%20looks%20%22Sad%2C%22%20%22Empathetic%2C%22%20or%20%22Defeated%22%20(The%20Puppy%20Dog%20Operator)', result: 'triggering%20the%20%22Nurture%22%20instinct%20in%20others%20(getting%20help%20easily)%20but%20losing%20respect%20in%20leadership', operatorName: 'The%20Puppy%20Dog%20Operator', operatorMechanism: 'the%20face%20looks%20%22Sad%2C%22%20%22Empathetic%2C%22%20or%20%22Defeated%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_706_when_gate: BehaviorAssess { stage: 'when', text: 'asking%20for%20help' })
+
+// Topology
+(loop_706_start)-[:PROCESS]->(loop_706_given_gate)
+(loop_706_given_gate)-[:PROCESS { case: "ok" }]->(loop_706_when_gate)
+(loop_706_given_gate)-[:PROCESS { case: "err" }]->(loop_706_inactive)
+(loop_706_when_gate)-[:PROCESS { case: "ok" }]->(loop_706_context)
+(loop_706_when_gate)-[:PROCESS { case: "err" }]->(loop_706_inactive)
+(loop_706_context)-[:FORK { strategy: "behavior-branches" }]->(loop_706_context_branch | loop_706_then_branch | loop_706_operator_branch | loop_706_result_branch | loop_706_taxonomy_branch | loop_706_intervention_recognize | loop_706_intervention_interdict | loop_706_intervention_minimize)
+(loop_706_context_branch | loop_706_then_branch | loop_706_operator_branch | loop_706_result_branch | loop_706_taxonomy_branch | loop_706_intervention_recognize | loop_706_intervention_interdict | loop_706_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_706_verdict)
+(loop_706_inactive)-[:PROCESS]->(loop_706_sink)
+(loop_706_verdict)-[:PROCESS]->(loop_706_sink)
+(loop_706_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_706_then_branch)
+(loop_706_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_706_then_branch)
+(loop_706_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_706_then_branch)

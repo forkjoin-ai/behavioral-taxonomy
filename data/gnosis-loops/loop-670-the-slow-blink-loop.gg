@@ -1,0 +1,33 @@
+// behavioral-loop-670.gg
+// Executable Gnosis projection for The Slow Blink Loop.
+
+// Nodes
+(loop_670_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_670_context_branch: BehaviorEmit { emission: 'context' })
+(loop_670_given_gate: BehaviorAssess { stage: 'given', text: 'Languid%20eyelid%20closure' })
+(loop_670_inactive: BehaviorTerminal { loopId: 670, loopName: 'The%20Slow%20Blink%20Loop' })
+(loop_670_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_670_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_670_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_670_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Superiority%20Operator', mechanism: 'it%20signals%20%22Arrogance%22%20or%20%22Disinterest%22' })
+(loop_670_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20seeming%20%22Above%20it%20all.%22' })
+(loop_670_sink: BehaviorSink)
+(loop_670_start: BehaviorStart { loopId: 670, loopName: 'The%20Slow%20Blink%20Loop', given: 'Languid%20eyelid%20closure', when: 'listening', then: 'it%20signals%20%22Arrogance%22%20or%20%22Disinterest%22%20(The%20Superiority%20Operator)', result: 'the%20individual%20seeming%20%22Above%20it%20all.%22', operatorName: 'The%20Superiority%20Operator', operatorMechanism: 'it%20signals%20%22Arrogance%22%20or%20%22Disinterest%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_670_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_670_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Arrogance%22%20or%20%22Disinterest%22%20(The%20Superiority%20Operator)' })
+(loop_670_verdict: BehaviorVerdict { loopId: 670, loopName: 'The%20Slow%20Blink%20Loop', then: 'it%20signals%20%22Arrogance%22%20or%20%22Disinterest%22%20(The%20Superiority%20Operator)', result: 'the%20individual%20seeming%20%22Above%20it%20all.%22', operatorName: 'The%20Superiority%20Operator', operatorMechanism: 'it%20signals%20%22Arrogance%22%20or%20%22Disinterest%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_670_when_gate: BehaviorAssess { stage: 'when', text: 'listening' })
+
+// Topology
+(loop_670_start)-[:PROCESS]->(loop_670_given_gate)
+(loop_670_given_gate)-[:PROCESS { case: "ok" }]->(loop_670_when_gate)
+(loop_670_given_gate)-[:PROCESS { case: "err" }]->(loop_670_inactive)
+(loop_670_when_gate)-[:PROCESS { case: "ok" }]->(loop_670_context)
+(loop_670_when_gate)-[:PROCESS { case: "err" }]->(loop_670_inactive)
+(loop_670_context)-[:FORK { strategy: "behavior-branches" }]->(loop_670_context_branch | loop_670_then_branch | loop_670_operator_branch | loop_670_result_branch | loop_670_taxonomy_branch | loop_670_intervention_recognize | loop_670_intervention_interdict | loop_670_intervention_minimize)
+(loop_670_context_branch | loop_670_then_branch | loop_670_operator_branch | loop_670_result_branch | loop_670_taxonomy_branch | loop_670_intervention_recognize | loop_670_intervention_interdict | loop_670_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_670_verdict)
+(loop_670_inactive)-[:PROCESS]->(loop_670_sink)
+(loop_670_verdict)-[:PROCESS]->(loop_670_sink)
+(loop_670_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_670_then_branch)
+(loop_670_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_670_then_branch)
+(loop_670_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_670_then_branch)

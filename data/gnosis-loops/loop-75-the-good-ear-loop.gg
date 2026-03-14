@@ -1,0 +1,33 @@
+// behavioral-loop-75.gg
+// Executable Gnosis projection for The Good Ear Loop.
+
+// Nodes
+(loop_75_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_75_context_branch: BehaviorEmit { emission: 'context' })
+(loop_75_given_gate: BehaviorAssess { stage: 'given', text: 'Unilateral%20Hearing%20Loss%20(One%20bad%20ear)' })
+(loop_75_inactive: BehaviorTerminal { loopId: 75, loopName: 'The%20Good%20Ear%20Loop' })
+(loop_75_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_75_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_75_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_75_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intimacy%20Operator', mechanism: 'the%20individual%20leans%20in%20close%20and%20turns%20their%20head' })
+(loop_75_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20feeling%20%22Heard%22%20and%20%22Valued%2C%22%20accidentally%20creating%20**Charisma**' })
+(loop_75_sink: BehaviorSink)
+(loop_75_start: BehaviorStart { loopId: 75, loopName: 'The%20Good%20Ear%20Loop', given: 'Unilateral%20Hearing%20Loss%20(One%20bad%20ear)', when: 'communicating%20in%20noise', then: 'the%20individual%20leans%20in%20close%20and%20turns%20their%20head%20(The%20Intimacy%20Operator)', result: 'the%20speaker%20feeling%20%22Heard%22%20and%20%22Valued%2C%22%20accidentally%20creating%20**Charisma**', operatorName: 'The%20Intimacy%20Operator', operatorMechanism: 'the%20individual%20leans%20in%20close%20and%20turns%20their%20head', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_75_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_75_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20leans%20in%20close%20and%20turns%20their%20head%20(The%20Intimacy%20Operator)' })
+(loop_75_verdict: BehaviorVerdict { loopId: 75, loopName: 'The%20Good%20Ear%20Loop', then: 'the%20individual%20leans%20in%20close%20and%20turns%20their%20head%20(The%20Intimacy%20Operator)', result: 'the%20speaker%20feeling%20%22Heard%22%20and%20%22Valued%2C%22%20accidentally%20creating%20**Charisma**', operatorName: 'The%20Intimacy%20Operator', operatorMechanism: 'the%20individual%20leans%20in%20close%20and%20turns%20their%20head', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_75_when_gate: BehaviorAssess { stage: 'when', text: 'communicating%20in%20noise' })
+
+// Topology
+(loop_75_start)-[:PROCESS]->(loop_75_given_gate)
+(loop_75_given_gate)-[:PROCESS { case: "ok" }]->(loop_75_when_gate)
+(loop_75_given_gate)-[:PROCESS { case: "err" }]->(loop_75_inactive)
+(loop_75_when_gate)-[:PROCESS { case: "ok" }]->(loop_75_context)
+(loop_75_when_gate)-[:PROCESS { case: "err" }]->(loop_75_inactive)
+(loop_75_context)-[:FORK { strategy: "behavior-branches" }]->(loop_75_context_branch | loop_75_then_branch | loop_75_operator_branch | loop_75_result_branch | loop_75_taxonomy_branch | loop_75_intervention_recognize | loop_75_intervention_interdict | loop_75_intervention_minimize)
+(loop_75_context_branch | loop_75_then_branch | loop_75_operator_branch | loop_75_result_branch | loop_75_taxonomy_branch | loop_75_intervention_recognize | loop_75_intervention_interdict | loop_75_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_75_verdict)
+(loop_75_inactive)-[:PROCESS]->(loop_75_sink)
+(loop_75_verdict)-[:PROCESS]->(loop_75_sink)
+(loop_75_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_75_then_branch)
+(loop_75_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_75_then_branch)
+(loop_75_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_75_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-476.gg
+// Executable Gnosis projection for The Ear Tuft Loop.
+
+// Nodes
+(loop_476_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_476_context_branch: BehaviorEmit { emission: 'context' })
+(loop_476_given_gate: BehaviorAssess { stage: 'given', text: 'Hair%20growing%20from%20tragus%2Fear%20canal' })
+(loop_476_inactive: BehaviorTerminal { loopId: 476, loopName: 'The%20Ear%20Tuft%20Loop' })
+(loop_476_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_476_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_476_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_476_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Wizard%20Operator', mechanism: 'signals%20%22Advanced%20Age%22%20or%20%22eccentricity%22' })
+(loop_476_result_branch: BehaviorEmit { emission: 'result', text: 'being%20treated%20as%20harmless%20or%20senile' })
+(loop_476_sink: BehaviorSink)
+(loop_476_start: BehaviorStart { loopId: 476, loopName: 'The%20Ear%20Tuft%20Loop', given: 'Hair%20growing%20from%20tragus%2Fear%20canal', when: 'seen%20in%20profile', then: 'signals%20%22Advanced%20Age%22%20or%20%22eccentricity%22%20(The%20Wizard%20Operator)', result: 'being%20treated%20as%20harmless%20or%20senile', operatorName: 'The%20Wizard%20Operator', operatorMechanism: 'signals%20%22Advanced%20Age%22%20or%20%22eccentricity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_476_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_476_then_branch: BehaviorEmit { emission: 'then', text: 'signals%20%22Advanced%20Age%22%20or%20%22eccentricity%22%20(The%20Wizard%20Operator)' })
+(loop_476_verdict: BehaviorVerdict { loopId: 476, loopName: 'The%20Ear%20Tuft%20Loop', then: 'signals%20%22Advanced%20Age%22%20or%20%22eccentricity%22%20(The%20Wizard%20Operator)', result: 'being%20treated%20as%20harmless%20or%20senile', operatorName: 'The%20Wizard%20Operator', operatorMechanism: 'signals%20%22Advanced%20Age%22%20or%20%22eccentricity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_476_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20in%20profile' })
+
+// Topology
+(loop_476_start)-[:PROCESS]->(loop_476_given_gate)
+(loop_476_given_gate)-[:PROCESS { case: "ok" }]->(loop_476_when_gate)
+(loop_476_given_gate)-[:PROCESS { case: "err" }]->(loop_476_inactive)
+(loop_476_when_gate)-[:PROCESS { case: "ok" }]->(loop_476_context)
+(loop_476_when_gate)-[:PROCESS { case: "err" }]->(loop_476_inactive)
+(loop_476_context)-[:FORK { strategy: "behavior-branches" }]->(loop_476_context_branch | loop_476_then_branch | loop_476_operator_branch | loop_476_result_branch | loop_476_taxonomy_branch | loop_476_intervention_recognize | loop_476_intervention_interdict | loop_476_intervention_minimize)
+(loop_476_context_branch | loop_476_then_branch | loop_476_operator_branch | loop_476_result_branch | loop_476_taxonomy_branch | loop_476_intervention_recognize | loop_476_intervention_interdict | loop_476_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_476_verdict)
+(loop_476_inactive)-[:PROCESS]->(loop_476_sink)
+(loop_476_verdict)-[:PROCESS]->(loop_476_sink)
+(loop_476_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_476_then_branch)
+(loop_476_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_476_then_branch)
+(loop_476_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_476_then_branch)

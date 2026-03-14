@@ -1,0 +1,33 @@
+// behavioral-loop-512.gg
+// Executable Gnosis projection for The Wrinkle Loop.
+
+// Nodes
+(loop_512_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_512_context_branch: BehaviorEmit { emission: 'context' })
+(loop_512_given_gate: BehaviorAssess { stage: 'given', text: 'Linen%2FCotton%20crushed%20from%20travel' })
+(loop_512_inactive: BehaviorTerminal { loopId: 512, loopName: 'The%20Wrinkle%20Loop' })
+(loop_512_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_512_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_512_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_512_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Messy%20Operator', mechanism: 'it%20signals%20%22Disorganized%22%20or%20%22Slept%20in%20clothes%22' })
+(loop_512_result_branch: BehaviorEmit { emission: 'result', text: 'lowered%20expectations%20of%20work%20precision' })
+(loop_512_sink: BehaviorSink)
+(loop_512_start: BehaviorStart { loopId: 512, loopName: 'The%20Wrinkle%20Loop', given: 'Linen%2FCotton%20crushed%20from%20travel', when: 'meeting%20a%20client', then: 'it%20signals%20%22Disorganized%22%20or%20%22Slept%20in%20clothes%22%20(The%20Messy%20Operator)', result: 'lowered%20expectations%20of%20work%20precision', operatorName: 'The%20Messy%20Operator', operatorMechanism: 'it%20signals%20%22Disorganized%22%20or%20%22Slept%20in%20clothes%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_512_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_512_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Disorganized%22%20or%20%22Slept%20in%20clothes%22%20(The%20Messy%20Operator)' })
+(loop_512_verdict: BehaviorVerdict { loopId: 512, loopName: 'The%20Wrinkle%20Loop', then: 'it%20signals%20%22Disorganized%22%20or%20%22Slept%20in%20clothes%22%20(The%20Messy%20Operator)', result: 'lowered%20expectations%20of%20work%20precision', operatorName: 'The%20Messy%20Operator', operatorMechanism: 'it%20signals%20%22Disorganized%22%20or%20%22Slept%20in%20clothes%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_512_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20a%20client' })
+
+// Topology
+(loop_512_start)-[:PROCESS]->(loop_512_given_gate)
+(loop_512_given_gate)-[:PROCESS { case: "ok" }]->(loop_512_when_gate)
+(loop_512_given_gate)-[:PROCESS { case: "err" }]->(loop_512_inactive)
+(loop_512_when_gate)-[:PROCESS { case: "ok" }]->(loop_512_context)
+(loop_512_when_gate)-[:PROCESS { case: "err" }]->(loop_512_inactive)
+(loop_512_context)-[:FORK { strategy: "behavior-branches" }]->(loop_512_context_branch | loop_512_then_branch | loop_512_operator_branch | loop_512_result_branch | loop_512_taxonomy_branch | loop_512_intervention_recognize | loop_512_intervention_interdict | loop_512_intervention_minimize)
+(loop_512_context_branch | loop_512_then_branch | loop_512_operator_branch | loop_512_result_branch | loop_512_taxonomy_branch | loop_512_intervention_recognize | loop_512_intervention_interdict | loop_512_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_512_verdict)
+(loop_512_inactive)-[:PROCESS]->(loop_512_sink)
+(loop_512_verdict)-[:PROCESS]->(loop_512_sink)
+(loop_512_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_512_then_branch)
+(loop_512_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_512_then_branch)
+(loop_512_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_512_then_branch)

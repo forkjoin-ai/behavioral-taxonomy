@@ -1,0 +1,31 @@
+// behavioral-loop-153.gg
+// Executable Gnosis projection for The Strut Loop.
+
+// Nodes
+(loop_153_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_153_context_branch: BehaviorEmit { emission: 'context' })
+(loop_153_given_gate: BehaviorAssess { stage: 'given', text: 'Anterior%20Pelvic%20Tilt%20%2B%20Arm%20Swing' })
+(loop_153_inactive: BehaviorTerminal { loopId: 153, loopName: 'The%20Strut%20Loop' })
+(loop_153_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_153_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_153_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dominance%20Challenge%20Operator', mechanism: 'observers%20perceive%20%22Confidence%22%20or%20%22Arrogance%22' })
+(loop_153_result_branch: BehaviorEmit { emission: 'result', text: 'frequent%20challenges%20from%20other%20dominant%20males' })
+(loop_153_sink: BehaviorSink)
+(loop_153_start: BehaviorStart { loopId: 153, loopName: 'The%20Strut%20Loop', given: 'Anterior%20Pelvic%20Tilt%20%2B%20Arm%20Swing', when: 'walking%20down%20a%20hall', then: 'observers%20perceive%20%22Confidence%22%20or%20%22Arrogance%22%20(The%20Dominance%20Challenge%20Operator)', result: 'frequent%20challenges%20from%20other%20dominant%20males', operatorName: 'The%20Dominance%20Challenge%20Operator', operatorMechanism: 'observers%20perceive%20%22Confidence%22%20or%20%22Arrogance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_153_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_153_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Confidence%22%20or%20%22Arrogance%22%20(The%20Dominance%20Challenge%20Operator)' })
+(loop_153_verdict: BehaviorVerdict { loopId: 153, loopName: 'The%20Strut%20Loop', then: 'observers%20perceive%20%22Confidence%22%20or%20%22Arrogance%22%20(The%20Dominance%20Challenge%20Operator)', result: 'frequent%20challenges%20from%20other%20dominant%20males', operatorName: 'The%20Dominance%20Challenge%20Operator', operatorMechanism: 'observers%20perceive%20%22Confidence%22%20or%20%22Arrogance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_153_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20down%20a%20hall' })
+
+// Topology
+(loop_153_start)-[:PROCESS]->(loop_153_given_gate)
+(loop_153_given_gate)-[:PROCESS { case: "ok" }]->(loop_153_when_gate)
+(loop_153_given_gate)-[:PROCESS { case: "err" }]->(loop_153_inactive)
+(loop_153_when_gate)-[:PROCESS { case: "ok" }]->(loop_153_context)
+(loop_153_when_gate)-[:PROCESS { case: "err" }]->(loop_153_inactive)
+(loop_153_context)-[:FORK { strategy: "behavior-branches" }]->(loop_153_context_branch | loop_153_then_branch | loop_153_operator_branch | loop_153_result_branch | loop_153_taxonomy_branch | loop_153_intervention_recognize | loop_153_intervention_leverage)
+(loop_153_context_branch | loop_153_then_branch | loop_153_operator_branch | loop_153_result_branch | loop_153_taxonomy_branch | loop_153_intervention_recognize | loop_153_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_153_verdict)
+(loop_153_inactive)-[:PROCESS]->(loop_153_sink)
+(loop_153_verdict)-[:PROCESS]->(loop_153_sink)
+(loop_153_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_153_then_branch)
+(loop_153_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_153_result_branch)

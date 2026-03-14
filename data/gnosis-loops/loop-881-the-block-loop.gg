@@ -1,0 +1,33 @@
+// behavioral-loop-881.gg
+// Executable Gnosis projection for The Block Loop.
+
+// Nodes
+(loop_881_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_881_context_branch: BehaviorEmit { emission: 'context' })
+(loop_881_given_gate: BehaviorAssess { stage: 'given', text: 'Silent%20pause%20where%20sound%20cannot%20be%20produced' })
+(loop_881_inactive: BehaviorTerminal { loopId: 881, loopName: 'The%20Block%20Loop' })
+(loop_881_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_881_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_881_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_881_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Struggle%20Operator', mechanism: 'the%20face%20tenses%20up' })
+(loop_881_result_branch: BehaviorEmit { emission: 'result', text: 'listeners%20finishing%20the%20sentence%20for%20them%20(The%20Theft%20of%20Voice)' })
+(loop_881_sink: BehaviorSink)
+(loop_881_start: BehaviorStart { loopId: 881, loopName: 'The%20Block%20Loop', given: 'Silent%20pause%20where%20sound%20cannot%20be%20produced', when: 'starting%20a%20sentence', then: 'the%20face%20tenses%20up%20(The%20Struggle%20Operator)', result: 'listeners%20finishing%20the%20sentence%20for%20them%20(The%20Theft%20of%20Voice)', operatorName: 'The%20Struggle%20Operator', operatorMechanism: 'the%20face%20tenses%20up', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_881_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_881_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20tenses%20up%20(The%20Struggle%20Operator)' })
+(loop_881_verdict: BehaviorVerdict { loopId: 881, loopName: 'The%20Block%20Loop', then: 'the%20face%20tenses%20up%20(The%20Struggle%20Operator)', result: 'listeners%20finishing%20the%20sentence%20for%20them%20(The%20Theft%20of%20Voice)', operatorName: 'The%20Struggle%20Operator', operatorMechanism: 'the%20face%20tenses%20up', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_881_when_gate: BehaviorAssess { stage: 'when', text: 'starting%20a%20sentence' })
+
+// Topology
+(loop_881_start)-[:PROCESS]->(loop_881_given_gate)
+(loop_881_given_gate)-[:PROCESS { case: "ok" }]->(loop_881_when_gate)
+(loop_881_given_gate)-[:PROCESS { case: "err" }]->(loop_881_inactive)
+(loop_881_when_gate)-[:PROCESS { case: "ok" }]->(loop_881_context)
+(loop_881_when_gate)-[:PROCESS { case: "err" }]->(loop_881_inactive)
+(loop_881_context)-[:FORK { strategy: "behavior-branches" }]->(loop_881_context_branch | loop_881_then_branch | loop_881_operator_branch | loop_881_result_branch | loop_881_taxonomy_branch | loop_881_intervention_recognize | loop_881_intervention_interdict | loop_881_intervention_minimize)
+(loop_881_context_branch | loop_881_then_branch | loop_881_operator_branch | loop_881_result_branch | loop_881_taxonomy_branch | loop_881_intervention_recognize | loop_881_intervention_interdict | loop_881_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_881_verdict)
+(loop_881_inactive)-[:PROCESS]->(loop_881_sink)
+(loop_881_verdict)-[:PROCESS]->(loop_881_sink)
+(loop_881_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_881_then_branch)
+(loop_881_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_881_then_branch)
+(loop_881_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_881_then_branch)

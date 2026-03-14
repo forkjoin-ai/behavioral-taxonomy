@@ -1,0 +1,33 @@
+// behavioral-loop-985.gg
+// Executable Gnosis projection for The Lint Magnet Loop.
+
+// Nodes
+(loop_985_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_985_context_branch: BehaviorEmit { emission: 'context' })
+(loop_985_given_gate: BehaviorAssess { stage: 'given', text: 'Wearing%20black%20cotton%20without%20a%20lint%20roller' })
+(loop_985_inactive: BehaviorTerminal { loopId: 985, loopName: 'The%20Lint%20Magnet%20Loop' })
+(loop_985_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Modify%20or%20remove%20the%20triggering%20element' })
+(loop_985_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_985_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_985_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Attic%20Operator', mechanism: 'the%20garment%20looks%20%22Dusty%22' })
+(loop_985_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20the%20%22Sleek%22%20aesthetic' })
+(loop_985_sink: BehaviorSink)
+(loop_985_start: BehaviorStart { loopId: 985, loopName: 'The%20Lint%20Magnet%20Loop', given: 'Wearing%20black%20cotton%20without%20a%20lint%20roller', when: 'in%20sunlight', then: 'the%20garment%20looks%20%22Dusty%22%20(The%20Attic%20Operator)', result: 'loss%20of%20the%20%22Sleek%22%20aesthetic', operatorName: 'The%20Attic%20Operator', operatorMechanism: 'the%20garment%20looks%20%22Dusty%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Modify%20or%20remove%20the%20triggering%20element', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_985_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_985_then_branch: BehaviorEmit { emission: 'then', text: 'the%20garment%20looks%20%22Dusty%22%20(The%20Attic%20Operator)' })
+(loop_985_verdict: BehaviorVerdict { loopId: 985, loopName: 'The%20Lint%20Magnet%20Loop', then: 'the%20garment%20looks%20%22Dusty%22%20(The%20Attic%20Operator)', result: 'loss%20of%20the%20%22Sleek%22%20aesthetic', operatorName: 'The%20Attic%20Operator', operatorMechanism: 'the%20garment%20looks%20%22Dusty%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_985_when_gate: BehaviorAssess { stage: 'when', text: 'in%20sunlight' })
+
+// Topology
+(loop_985_start)-[:PROCESS]->(loop_985_given_gate)
+(loop_985_given_gate)-[:PROCESS { case: "ok" }]->(loop_985_when_gate)
+(loop_985_given_gate)-[:PROCESS { case: "err" }]->(loop_985_inactive)
+(loop_985_when_gate)-[:PROCESS { case: "ok" }]->(loop_985_context)
+(loop_985_when_gate)-[:PROCESS { case: "err" }]->(loop_985_inactive)
+(loop_985_context)-[:FORK { strategy: "behavior-branches" }]->(loop_985_context_branch | loop_985_then_branch | loop_985_operator_branch | loop_985_result_branch | loop_985_taxonomy_branch | loop_985_intervention_recognize | loop_985_intervention_interdict | loop_985_intervention_minimize)
+(loop_985_context_branch | loop_985_then_branch | loop_985_operator_branch | loop_985_result_branch | loop_985_taxonomy_branch | loop_985_intervention_recognize | loop_985_intervention_interdict | loop_985_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_985_verdict)
+(loop_985_inactive)-[:PROCESS]->(loop_985_sink)
+(loop_985_verdict)-[:PROCESS]->(loop_985_sink)
+(loop_985_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_985_then_branch)
+(loop_985_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_985_then_branch)
+(loop_985_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_985_then_branch)

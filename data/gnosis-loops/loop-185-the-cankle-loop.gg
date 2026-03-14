@@ -1,0 +1,33 @@
+// behavioral-loop-185.gg
+// Executable Gnosis projection for The Cankle Loop.
+
+// Nodes
+(loop_185_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_185_context_branch: BehaviorEmit { emission: 'context' })
+(loop_185_given_gate: BehaviorAssess { stage: 'given', text: 'Genetic%20fat%20storage%20around%20ankle%20joint' })
+(loop_185_inactive: BehaviorTerminal { loopId: 185, loopName: 'The%20Cankle%20Loop' })
+(loop_185_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20competence%20in%20areas%20that%20compensate' })
+(loop_185_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_185_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_185_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Health%20Scrutiny%20Operator', mechanism: 'observers%20assume%20%22Sedentary%20Lifestyle%22%20or%20%22Fluid%20Retention%22' })
+(loop_185_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20covering%20legs%2C%20leading%20to%20**Body%20Shame**' })
+(loop_185_sink: BehaviorSink)
+(loop_185_start: BehaviorStart { loopId: 185, loopName: 'The%20Cankle%20Loop', given: 'Genetic%20fat%20storage%20around%20ankle%20joint', when: 'wearing%20shorts%2Fskirts', then: 'observers%20assume%20%22Sedentary%20Lifestyle%22%20or%20%22Fluid%20Retention%22%20(The%20Health%20Scrutiny%20Operator)', result: 'the%20individual%20covering%20legs%2C%20leading%20to%20**Body%20Shame**', operatorName: 'The%20Health%20Scrutiny%20Operator', operatorMechanism: 'observers%20assume%20%22Sedentary%20Lifestyle%22%20or%20%22Fluid%20Retention%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20competence%20in%20areas%20that%20compensate', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_185_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_185_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Sedentary%20Lifestyle%22%20or%20%22Fluid%20Retention%22%20(The%20Health%20Scrutiny%20Operator)' })
+(loop_185_verdict: BehaviorVerdict { loopId: 185, loopName: 'The%20Cankle%20Loop', then: 'observers%20assume%20%22Sedentary%20Lifestyle%22%20or%20%22Fluid%20Retention%22%20(The%20Health%20Scrutiny%20Operator)', result: 'the%20individual%20covering%20legs%2C%20leading%20to%20**Body%20Shame**', operatorName: 'The%20Health%20Scrutiny%20Operator', operatorMechanism: 'observers%20assume%20%22Sedentary%20Lifestyle%22%20or%20%22Fluid%20Retention%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_185_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20shorts%2Fskirts' })
+
+// Topology
+(loop_185_start)-[:PROCESS]->(loop_185_given_gate)
+(loop_185_given_gate)-[:PROCESS { case: "ok" }]->(loop_185_when_gate)
+(loop_185_given_gate)-[:PROCESS { case: "err" }]->(loop_185_inactive)
+(loop_185_when_gate)-[:PROCESS { case: "ok" }]->(loop_185_context)
+(loop_185_when_gate)-[:PROCESS { case: "err" }]->(loop_185_inactive)
+(loop_185_context)-[:FORK { strategy: "behavior-branches" }]->(loop_185_context_branch | loop_185_then_branch | loop_185_operator_branch | loop_185_result_branch | loop_185_taxonomy_branch | loop_185_intervention_recognize | loop_185_intervention_interdict | loop_185_intervention_minimize)
+(loop_185_context_branch | loop_185_then_branch | loop_185_operator_branch | loop_185_result_branch | loop_185_taxonomy_branch | loop_185_intervention_recognize | loop_185_intervention_interdict | loop_185_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_185_verdict)
+(loop_185_inactive)-[:PROCESS]->(loop_185_sink)
+(loop_185_verdict)-[:PROCESS]->(loop_185_sink)
+(loop_185_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_185_then_branch)
+(loop_185_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_185_then_branch)
+(loop_185_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_185_then_branch)

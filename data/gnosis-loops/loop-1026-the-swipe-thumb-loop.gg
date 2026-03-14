@@ -1,0 +1,33 @@
+// behavioral-loop-1026.gg
+// Executable Gnosis projection for The Swipe Thumb Loop.
+
+// Nodes
+(loop_1026_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1026_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1026_given_gate: BehaviorAssess { stage: 'given', text: '10%2C000%20hours%20of%20scrolling' })
+(loop_1026_inactive: BehaviorTerminal { loopId: 1026, loopName: 'The%20Swipe%20Thumb%20Loop' })
+(loop_1026_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1026_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1026_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1026_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20thumb%20hovers%20in%20a%20flexion%20state%20(The%20Scroll%20Claw)' })
+(loop_1026_result_branch: BehaviorEmit { emission: 'result', text: 'the%20hand%20looking%20like%20it%20is%20holding%20an%20invisible%20object%20(The%20LEGO%20Hand)' })
+(loop_1026_sink: BehaviorSink)
+(loop_1026_start: BehaviorStart { loopId: 1026, loopName: 'The%20Swipe%20Thumb%20Loop', given: '10%2C000%20hours%20of%20scrolling', when: 'the%20hand%20is%20at%20rest', then: 'the%20thumb%20hovers%20in%20a%20flexion%20state%20(The%20Scroll%20Claw)', result: 'the%20hand%20looking%20like%20it%20is%20holding%20an%20invisible%20object%20(The%20LEGO%20Hand)', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20thumb%20hovers%20in%20a%20flexion%20state%20(The%20Scroll%20Claw)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1026_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1026_then_branch: BehaviorEmit { emission: 'then', text: 'the%20thumb%20hovers%20in%20a%20flexion%20state%20(The%20Scroll%20Claw)' })
+(loop_1026_verdict: BehaviorVerdict { loopId: 1026, loopName: 'The%20Swipe%20Thumb%20Loop', then: 'the%20thumb%20hovers%20in%20a%20flexion%20state%20(The%20Scroll%20Claw)', result: 'the%20hand%20looking%20like%20it%20is%20holding%20an%20invisible%20object%20(The%20LEGO%20Hand)', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20thumb%20hovers%20in%20a%20flexion%20state%20(The%20Scroll%20Claw)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1026_when_gate: BehaviorAssess { stage: 'when', text: 'the%20hand%20is%20at%20rest' })
+
+// Topology
+(loop_1026_start)-[:PROCESS]->(loop_1026_given_gate)
+(loop_1026_given_gate)-[:PROCESS { case: "ok" }]->(loop_1026_when_gate)
+(loop_1026_given_gate)-[:PROCESS { case: "err" }]->(loop_1026_inactive)
+(loop_1026_when_gate)-[:PROCESS { case: "ok" }]->(loop_1026_context)
+(loop_1026_when_gate)-[:PROCESS { case: "err" }]->(loop_1026_inactive)
+(loop_1026_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1026_context_branch | loop_1026_then_branch | loop_1026_operator_branch | loop_1026_result_branch | loop_1026_taxonomy_branch | loop_1026_intervention_recognize | loop_1026_intervention_interdict | loop_1026_intervention_minimize)
+(loop_1026_context_branch | loop_1026_then_branch | loop_1026_operator_branch | loop_1026_result_branch | loop_1026_taxonomy_branch | loop_1026_intervention_recognize | loop_1026_intervention_interdict | loop_1026_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1026_verdict)
+(loop_1026_inactive)-[:PROCESS]->(loop_1026_sink)
+(loop_1026_verdict)-[:PROCESS]->(loop_1026_sink)
+(loop_1026_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1026_then_branch)
+(loop_1026_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1026_then_branch)
+(loop_1026_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1026_then_branch)

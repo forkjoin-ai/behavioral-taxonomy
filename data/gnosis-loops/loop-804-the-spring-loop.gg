@@ -1,0 +1,33 @@
+// behavioral-loop-804.gg
+// Executable Gnosis projection for The Spring Loop.
+
+// Nodes
+(loop_804_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_804_context_branch: BehaviorEmit { emission: 'context' })
+(loop_804_given_gate: BehaviorAssess { stage: 'given', text: 'Bouncing%20on%20balls%20of%20feet%20while%20waiting' })
+(loop_804_inactive: BehaviorTerminal { loopId: 804, loopName: 'The%20Spring%20Loop' })
+(loop_804_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_804_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_804_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_804_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Athlete%20Operator', mechanism: 'it%20signals%20%22Excess%20Energy%22%20and%20%22Readiness%22' })
+(loop_804_result_branch: BehaviorEmit { emission: 'result', text: 'being%20picked%20first%20for%20physical%20tasks' })
+(loop_804_sink: BehaviorSink)
+(loop_804_start: BehaviorStart { loopId: 804, loopName: 'The%20Spring%20Loop', given: 'Bouncing%20on%20balls%20of%20feet%20while%20waiting', when: 'standing%20still', then: 'it%20signals%20%22Excess%20Energy%22%20and%20%22Readiness%22%20(The%20Athlete%20Operator)', result: 'being%20picked%20first%20for%20physical%20tasks', operatorName: 'The%20Athlete%20Operator', operatorMechanism: 'it%20signals%20%22Excess%20Energy%22%20and%20%22Readiness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_804_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_804_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Excess%20Energy%22%20and%20%22Readiness%22%20(The%20Athlete%20Operator)' })
+(loop_804_verdict: BehaviorVerdict { loopId: 804, loopName: 'The%20Spring%20Loop', then: 'it%20signals%20%22Excess%20Energy%22%20and%20%22Readiness%22%20(The%20Athlete%20Operator)', result: 'being%20picked%20first%20for%20physical%20tasks', operatorName: 'The%20Athlete%20Operator', operatorMechanism: 'it%20signals%20%22Excess%20Energy%22%20and%20%22Readiness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_804_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20still' })
+
+// Topology
+(loop_804_start)-[:PROCESS]->(loop_804_given_gate)
+(loop_804_given_gate)-[:PROCESS { case: "ok" }]->(loop_804_when_gate)
+(loop_804_given_gate)-[:PROCESS { case: "err" }]->(loop_804_inactive)
+(loop_804_when_gate)-[:PROCESS { case: "ok" }]->(loop_804_context)
+(loop_804_when_gate)-[:PROCESS { case: "err" }]->(loop_804_inactive)
+(loop_804_context)-[:FORK { strategy: "behavior-branches" }]->(loop_804_context_branch | loop_804_then_branch | loop_804_operator_branch | loop_804_result_branch | loop_804_taxonomy_branch | loop_804_intervention_recognize | loop_804_intervention_interdict | loop_804_intervention_minimize)
+(loop_804_context_branch | loop_804_then_branch | loop_804_operator_branch | loop_804_result_branch | loop_804_taxonomy_branch | loop_804_intervention_recognize | loop_804_intervention_interdict | loop_804_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_804_verdict)
+(loop_804_inactive)-[:PROCESS]->(loop_804_sink)
+(loop_804_verdict)-[:PROCESS]->(loop_804_sink)
+(loop_804_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_804_then_branch)
+(loop_804_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_804_then_branch)
+(loop_804_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_804_then_branch)

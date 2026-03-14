@@ -1,0 +1,33 @@
+// behavioral-loop-29.gg
+// Executable Gnosis projection for The Scar-Story Loop.
+
+// Nodes
+(loop_29_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_29_context_branch: BehaviorEmit { emission: 'context' })
+(loop_29_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20a%20visible%20facial%20scar%20(not%20disfigurement)' })
+(loop_29_inactive: BehaviorTerminal { loopId: 29, loopName: 'The%20Scar-Story%20Loop' })
+(loop_29_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait' })
+(loop_29_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_29_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_29_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'it%20acts%20as%20a%20conversation%20anchor' })
+(loop_29_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20rehearsing%20a%20specific%20narrative%2C%20developing%20**Storytelling%20Charisma**' })
+(loop_29_sink: BehaviorSink)
+(loop_29_start: BehaviorStart { loopId: 29, loopName: 'The%20Scar-Story%20Loop', given: 'an%20individual%20possesses%20a%20visible%20facial%20scar%20(not%20disfigurement)', when: 'meeting%20new%20people', then: 'it%20acts%20as%20a%20conversation%20anchor%20(The%20Novelty%20Operator)', result: 'the%20individual%20rehearsing%20a%20specific%20narrative%2C%20developing%20**Storytelling%20Charisma**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'it%20acts%20as%20a%20conversation%20anchor', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_29_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_29_then_branch: BehaviorEmit { emission: 'then', text: 'it%20acts%20as%20a%20conversation%20anchor%20(The%20Novelty%20Operator)' })
+(loop_29_verdict: BehaviorVerdict { loopId: 29, loopName: 'The%20Scar-Story%20Loop', then: 'it%20acts%20as%20a%20conversation%20anchor%20(The%20Novelty%20Operator)', result: 'the%20individual%20rehearsing%20a%20specific%20narrative%2C%20developing%20**Storytelling%20Charisma**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'it%20acts%20as%20a%20conversation%20anchor', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_29_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20new%20people' })
+
+// Topology
+(loop_29_start)-[:PROCESS]->(loop_29_given_gate)
+(loop_29_given_gate)-[:PROCESS { case: "ok" }]->(loop_29_when_gate)
+(loop_29_given_gate)-[:PROCESS { case: "err" }]->(loop_29_inactive)
+(loop_29_when_gate)-[:PROCESS { case: "ok" }]->(loop_29_context)
+(loop_29_when_gate)-[:PROCESS { case: "err" }]->(loop_29_inactive)
+(loop_29_context)-[:FORK { strategy: "behavior-branches" }]->(loop_29_context_branch | loop_29_then_branch | loop_29_operator_branch | loop_29_result_branch | loop_29_taxonomy_branch | loop_29_intervention_recognize | loop_29_intervention_interdict | loop_29_intervention_minimize)
+(loop_29_context_branch | loop_29_then_branch | loop_29_operator_branch | loop_29_result_branch | loop_29_taxonomy_branch | loop_29_intervention_recognize | loop_29_intervention_interdict | loop_29_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_29_verdict)
+(loop_29_inactive)-[:PROCESS]->(loop_29_sink)
+(loop_29_verdict)-[:PROCESS]->(loop_29_sink)
+(loop_29_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_29_then_branch)
+(loop_29_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_29_then_branch)
+(loop_29_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_29_then_branch)

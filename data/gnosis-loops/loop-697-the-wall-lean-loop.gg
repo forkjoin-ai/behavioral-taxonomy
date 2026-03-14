@@ -1,0 +1,33 @@
+// behavioral-loop-697.gg
+// Executable Gnosis projection for The Wall Lean Loop.
+
+// Nodes
+(loop_697_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_697_context_branch: BehaviorEmit { emission: 'context' })
+(loop_697_given_gate: BehaviorAssess { stage: 'given', text: 'Proprioceptive%20need%20for%20support' })
+(loop_697_inactive: BehaviorTerminal { loopId: 697, loopName: 'The%20Wall%20Lean%20Loop' })
+(loop_697_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_697_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_697_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_697_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rebel%20Operator', mechanism: 'the%20individual%20leans%20back%20against%20architecture' })
+(loop_697_result_branch: BehaviorEmit { emission: 'result', text: 'being%20seen%20as%20%22Disengaged%22%20or%20%22Too%20Cool.%22' })
+(loop_697_sink: BehaviorSink)
+(loop_697_start: BehaviorStart { loopId: 697, loopName: 'The%20Wall%20Lean%20Loop', given: 'Proprioceptive%20need%20for%20support', when: 'in%20a%20group%20standing%20up', then: 'the%20individual%20leans%20back%20against%20architecture%20(The%20Rebel%20Operator)', result: 'being%20seen%20as%20%22Disengaged%22%20or%20%22Too%20Cool.%22', operatorName: 'The%20Rebel%20Operator', operatorMechanism: 'the%20individual%20leans%20back%20against%20architecture', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_697_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_697_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20leans%20back%20against%20architecture%20(The%20Rebel%20Operator)' })
+(loop_697_verdict: BehaviorVerdict { loopId: 697, loopName: 'The%20Wall%20Lean%20Loop', then: 'the%20individual%20leans%20back%20against%20architecture%20(The%20Rebel%20Operator)', result: 'being%20seen%20as%20%22Disengaged%22%20or%20%22Too%20Cool.%22', operatorName: 'The%20Rebel%20Operator', operatorMechanism: 'the%20individual%20leans%20back%20against%20architecture', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_697_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20group%20standing%20up' })
+
+// Topology
+(loop_697_start)-[:PROCESS]->(loop_697_given_gate)
+(loop_697_given_gate)-[:PROCESS { case: "ok" }]->(loop_697_when_gate)
+(loop_697_given_gate)-[:PROCESS { case: "err" }]->(loop_697_inactive)
+(loop_697_when_gate)-[:PROCESS { case: "ok" }]->(loop_697_context)
+(loop_697_when_gate)-[:PROCESS { case: "err" }]->(loop_697_inactive)
+(loop_697_context)-[:FORK { strategy: "behavior-branches" }]->(loop_697_context_branch | loop_697_then_branch | loop_697_operator_branch | loop_697_result_branch | loop_697_taxonomy_branch | loop_697_intervention_recognize | loop_697_intervention_interdict | loop_697_intervention_minimize)
+(loop_697_context_branch | loop_697_then_branch | loop_697_operator_branch | loop_697_result_branch | loop_697_taxonomy_branch | loop_697_intervention_recognize | loop_697_intervention_interdict | loop_697_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_697_verdict)
+(loop_697_inactive)-[:PROCESS]->(loop_697_sink)
+(loop_697_verdict)-[:PROCESS]->(loop_697_sink)
+(loop_697_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_697_then_branch)
+(loop_697_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_697_then_branch)
+(loop_697_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_697_then_branch)

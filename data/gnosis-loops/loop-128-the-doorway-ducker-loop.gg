@@ -1,0 +1,33 @@
+// behavioral-loop-128.gg
+// Executable Gnosis projection for The Doorway ducker Loop.
+
+// Nodes
+(loop_128_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_128_context_branch: BehaviorEmit { emission: 'context' })
+(loop_128_given_gate: BehaviorAssess { stage: 'given', text: "Height%20%3E%206'6%22" })
+(loop_128_inactive: BehaviorTerminal { loopId: 128, loopName: 'The%20Doorway%20ducker%20Loop' })
+(loop_128_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_128_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_128_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_128_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Physical%20Constraint%20Operator', mechanism: 'the%20individual%20must%20physically%20bow' })
+(loop_128_result_branch: BehaviorEmit { emission: 'result', text: 'a%20subconscious%20habit%20of%20**Deferring%2FLowering%20Self**%20upon%20entry' })
+(loop_128_sink: BehaviorSink)
+(loop_128_start: BehaviorStart { loopId: 128, loopName: 'The%20Doorway%20ducker%20Loop', given: "Height%20%3E%206'6%22", when: 'entering%20standard%20rooms', then: 'the%20individual%20must%20physically%20bow%20(The%20Physical%20Constraint%20Operator)', result: 'a%20subconscious%20habit%20of%20**Deferring%2FLowering%20Self**%20upon%20entry', operatorName: 'The%20Physical%20Constraint%20Operator', operatorMechanism: 'the%20individual%20must%20physically%20bow', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_128_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_128_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20must%20physically%20bow%20(The%20Physical%20Constraint%20Operator)' })
+(loop_128_verdict: BehaviorVerdict { loopId: 128, loopName: 'The%20Doorway%20ducker%20Loop', then: 'the%20individual%20must%20physically%20bow%20(The%20Physical%20Constraint%20Operator)', result: 'a%20subconscious%20habit%20of%20**Deferring%2FLowering%20Self**%20upon%20entry', operatorName: 'The%20Physical%20Constraint%20Operator', operatorMechanism: 'the%20individual%20must%20physically%20bow', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_128_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20standard%20rooms' })
+
+// Topology
+(loop_128_start)-[:PROCESS]->(loop_128_given_gate)
+(loop_128_given_gate)-[:PROCESS { case: "ok" }]->(loop_128_when_gate)
+(loop_128_given_gate)-[:PROCESS { case: "err" }]->(loop_128_inactive)
+(loop_128_when_gate)-[:PROCESS { case: "ok" }]->(loop_128_context)
+(loop_128_when_gate)-[:PROCESS { case: "err" }]->(loop_128_inactive)
+(loop_128_context)-[:FORK { strategy: "behavior-branches" }]->(loop_128_context_branch | loop_128_then_branch | loop_128_operator_branch | loop_128_result_branch | loop_128_taxonomy_branch | loop_128_intervention_recognize | loop_128_intervention_interdict | loop_128_intervention_minimize)
+(loop_128_context_branch | loop_128_then_branch | loop_128_operator_branch | loop_128_result_branch | loop_128_taxonomy_branch | loop_128_intervention_recognize | loop_128_intervention_interdict | loop_128_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_128_verdict)
+(loop_128_inactive)-[:PROCESS]->(loop_128_sink)
+(loop_128_verdict)-[:PROCESS]->(loop_128_sink)
+(loop_128_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_128_then_branch)
+(loop_128_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_128_then_branch)
+(loop_128_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_128_then_branch)

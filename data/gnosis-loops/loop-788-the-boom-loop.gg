@@ -1,0 +1,33 @@
+// behavioral-loop-788.gg
+// Executable Gnosis projection for The Boom Loop.
+
+// Nodes
+(loop_788_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_788_context_branch: BehaviorEmit { emission: 'context' })
+(loop_788_given_gate: BehaviorAssess { stage: 'given', text: 'High%20natural%20volume' })
+(loop_788_inactive: BehaviorTerminal { loopId: 788, loopName: 'The%20Boom%20Loop' })
+(loop_788_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_788_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_788_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_788_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Foghorn%20Operator', mechanism: 'everyone%20still%20hears%20it' })
+(loop_788_result_branch: BehaviorEmit { emission: 'result', text: 'being%20shushed%20constantly%2C%20leading%20to%20resentment' })
+(loop_788_sink: BehaviorSink)
+(loop_788_start: BehaviorStart { loopId: 788, loopName: 'The%20Boom%20Loop', given: 'High%20natural%20volume', when: 'whispering', then: 'everyone%20still%20hears%20it%20(The%20Foghorn%20Operator)', result: 'being%20shushed%20constantly%2C%20leading%20to%20resentment', operatorName: 'The%20Foghorn%20Operator', operatorMechanism: 'everyone%20still%20hears%20it', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_788_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_788_then_branch: BehaviorEmit { emission: 'then', text: 'everyone%20still%20hears%20it%20(The%20Foghorn%20Operator)' })
+(loop_788_verdict: BehaviorVerdict { loopId: 788, loopName: 'The%20Boom%20Loop', then: 'everyone%20still%20hears%20it%20(The%20Foghorn%20Operator)', result: 'being%20shushed%20constantly%2C%20leading%20to%20resentment', operatorName: 'The%20Foghorn%20Operator', operatorMechanism: 'everyone%20still%20hears%20it', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_788_when_gate: BehaviorAssess { stage: 'when', text: 'whispering' })
+
+// Topology
+(loop_788_start)-[:PROCESS]->(loop_788_given_gate)
+(loop_788_given_gate)-[:PROCESS { case: "ok" }]->(loop_788_when_gate)
+(loop_788_given_gate)-[:PROCESS { case: "err" }]->(loop_788_inactive)
+(loop_788_when_gate)-[:PROCESS { case: "ok" }]->(loop_788_context)
+(loop_788_when_gate)-[:PROCESS { case: "err" }]->(loop_788_inactive)
+(loop_788_context)-[:FORK { strategy: "behavior-branches" }]->(loop_788_context_branch | loop_788_then_branch | loop_788_operator_branch | loop_788_result_branch | loop_788_taxonomy_branch | loop_788_intervention_recognize | loop_788_intervention_interdict | loop_788_intervention_minimize)
+(loop_788_context_branch | loop_788_then_branch | loop_788_operator_branch | loop_788_result_branch | loop_788_taxonomy_branch | loop_788_intervention_recognize | loop_788_intervention_interdict | loop_788_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_788_verdict)
+(loop_788_inactive)-[:PROCESS]->(loop_788_sink)
+(loop_788_verdict)-[:PROCESS]->(loop_788_sink)
+(loop_788_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_788_then_branch)
+(loop_788_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_788_then_branch)
+(loop_788_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_788_then_branch)

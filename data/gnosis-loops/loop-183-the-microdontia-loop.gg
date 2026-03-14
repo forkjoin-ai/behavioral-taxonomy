@@ -1,0 +1,31 @@
+// behavioral-loop-183.gg
+// Executable Gnosis projection for The Microdontia Loop.
+
+// Nodes
+(loop_183_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_183_context_branch: BehaviorEmit { emission: 'context' })
+(loop_183_given_gate: BehaviorAssess { stage: 'given', text: 'Teeth%20that%20appear%20small%20relative%20to%20gum%2Fjaw' })
+(loop_183_inactive: BehaviorTerminal { loopId: 183, loopName: 'The%20Microdontia%20Loop' })
+(loop_183_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_183_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_183_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nurture%20Operator', mechanism: 'the%20visual%20is%20%22Childlike%22' })
+(loop_183_result_branch: BehaviorEmit { emission: 'result', text: 'difficulty%20in%20commanding%20authority%20in%20aggressive%20industries%20(Law%2FFinance)' })
+(loop_183_sink: BehaviorSink)
+(loop_183_start: BehaviorStart { loopId: 183, loopName: 'The%20Microdontia%20Loop', given: 'Teeth%20that%20appear%20small%20relative%20to%20gum%2Fjaw', when: 'smiling', then: 'the%20visual%20is%20%22Childlike%22%20(The%20Nurture%20Operator)', result: 'difficulty%20in%20commanding%20authority%20in%20aggressive%20industries%20(Law%2FFinance)', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'the%20visual%20is%20%22Childlike%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_183_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_183_then_branch: BehaviorEmit { emission: 'then', text: 'the%20visual%20is%20%22Childlike%22%20(The%20Nurture%20Operator)' })
+(loop_183_verdict: BehaviorVerdict { loopId: 183, loopName: 'The%20Microdontia%20Loop', then: 'the%20visual%20is%20%22Childlike%22%20(The%20Nurture%20Operator)', result: 'difficulty%20in%20commanding%20authority%20in%20aggressive%20industries%20(Law%2FFinance)', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'the%20visual%20is%20%22Childlike%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_183_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_183_start)-[:PROCESS]->(loop_183_given_gate)
+(loop_183_given_gate)-[:PROCESS { case: "ok" }]->(loop_183_when_gate)
+(loop_183_given_gate)-[:PROCESS { case: "err" }]->(loop_183_inactive)
+(loop_183_when_gate)-[:PROCESS { case: "ok" }]->(loop_183_context)
+(loop_183_when_gate)-[:PROCESS { case: "err" }]->(loop_183_inactive)
+(loop_183_context)-[:FORK { strategy: "behavior-branches" }]->(loop_183_context_branch | loop_183_then_branch | loop_183_operator_branch | loop_183_result_branch | loop_183_taxonomy_branch | loop_183_intervention_recognize | loop_183_intervention_leverage)
+(loop_183_context_branch | loop_183_then_branch | loop_183_operator_branch | loop_183_result_branch | loop_183_taxonomy_branch | loop_183_intervention_recognize | loop_183_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_183_verdict)
+(loop_183_inactive)-[:PROCESS]->(loop_183_sink)
+(loop_183_verdict)-[:PROCESS]->(loop_183_sink)
+(loop_183_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_183_then_branch)
+(loop_183_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_183_result_branch)

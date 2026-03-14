@@ -1,0 +1,33 @@
+// behavioral-loop-385.gg
+// Executable Gnosis projection for The Linebacker Loop.
+
+// Nodes
+(loop_385_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_385_context_branch: BehaviorEmit { emission: 'context' })
+(loop_385_given_gate: BehaviorAssess { stage: 'given', text: 'Extreme%20shoulder-to-waist%20ratio' })
+(loop_385_inactive: BehaviorTerminal { loopId: 385, loopName: 'The%20Linebacker%20Loop' })
+(loop_385_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_385_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_385_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_385_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Moses%20Operator', mechanism: 'the%20crowd%20physically%20parts%20to%20avoid%20collision' })
+(loop_385_result_branch: BehaviorEmit { emission: 'result', text: 'an%20unconscious%20expectation%20of%20**Deference**%20and%20ease%20of%20movement' })
+(loop_385_sink: BehaviorSink)
+(loop_385_start: BehaviorStart { loopId: 385, loopName: 'The%20Linebacker%20Loop', given: 'Extreme%20shoulder-to-waist%20ratio', when: 'entering%20a%20crowded%20room', then: 'the%20crowd%20physically%20parts%20to%20avoid%20collision%20(The%20Moses%20Operator)', result: 'an%20unconscious%20expectation%20of%20**Deference**%20and%20ease%20of%20movement', operatorName: 'The%20Moses%20Operator', operatorMechanism: 'the%20crowd%20physically%20parts%20to%20avoid%20collision', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_385_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_385_then_branch: BehaviorEmit { emission: 'then', text: 'the%20crowd%20physically%20parts%20to%20avoid%20collision%20(The%20Moses%20Operator)' })
+(loop_385_verdict: BehaviorVerdict { loopId: 385, loopName: 'The%20Linebacker%20Loop', then: 'the%20crowd%20physically%20parts%20to%20avoid%20collision%20(The%20Moses%20Operator)', result: 'an%20unconscious%20expectation%20of%20**Deference**%20and%20ease%20of%20movement', operatorName: 'The%20Moses%20Operator', operatorMechanism: 'the%20crowd%20physically%20parts%20to%20avoid%20collision', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_385_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20crowded%20room' })
+
+// Topology
+(loop_385_start)-[:PROCESS]->(loop_385_given_gate)
+(loop_385_given_gate)-[:PROCESS { case: "ok" }]->(loop_385_when_gate)
+(loop_385_given_gate)-[:PROCESS { case: "err" }]->(loop_385_inactive)
+(loop_385_when_gate)-[:PROCESS { case: "ok" }]->(loop_385_context)
+(loop_385_when_gate)-[:PROCESS { case: "err" }]->(loop_385_inactive)
+(loop_385_context)-[:FORK { strategy: "behavior-branches" }]->(loop_385_context_branch | loop_385_then_branch | loop_385_operator_branch | loop_385_result_branch | loop_385_taxonomy_branch | loop_385_intervention_recognize | loop_385_intervention_interdict | loop_385_intervention_minimize)
+(loop_385_context_branch | loop_385_then_branch | loop_385_operator_branch | loop_385_result_branch | loop_385_taxonomy_branch | loop_385_intervention_recognize | loop_385_intervention_interdict | loop_385_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_385_verdict)
+(loop_385_inactive)-[:PROCESS]->(loop_385_sink)
+(loop_385_verdict)-[:PROCESS]->(loop_385_sink)
+(loop_385_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_385_then_branch)
+(loop_385_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_385_then_branch)
+(loop_385_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_385_then_branch)

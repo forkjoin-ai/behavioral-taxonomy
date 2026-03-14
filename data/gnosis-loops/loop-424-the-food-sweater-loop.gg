@@ -1,0 +1,33 @@
+// behavioral-loop-424.gg
+// Executable Gnosis projection for The Food Sweater Loop.
+
+// Nodes
+(loop_424_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_424_context_branch: BehaviorEmit { emission: 'context' })
+(loop_424_given_gate: BehaviorAssess { stage: 'given', text: "Frey's%20Syndrome%20or%20heat%20sensitivity" })
+(loop_424_inactive: BehaviorTerminal { loopId: 424, loopName: 'The%20Food%20Sweater%20Loop' })
+(loop_424_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_424_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_424_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_424_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Exertion%20Operator', mechanism: 'beads%20of%20sweat%20form%20on%20the%20forehead' })
+(loop_424_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20%22Unhealthy%22%20or%20%22Gross%22%20during%20consumption' })
+(loop_424_sink: BehaviorSink)
+(loop_424_start: BehaviorStart { loopId: 424, loopName: 'The%20Food%20Sweater%20Loop', given: "Frey's%20Syndrome%20or%20heat%20sensitivity", when: 'eating%20cheese%20or%20spice', then: 'beads%20of%20sweat%20form%20on%20the%20forehead%20(The%20Exertion%20Operator)', result: 'the%20individual%20looking%20%22Unhealthy%22%20or%20%22Gross%22%20during%20consumption', operatorName: 'The%20Exertion%20Operator', operatorMechanism: 'beads%20of%20sweat%20form%20on%20the%20forehead', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_424_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_424_then_branch: BehaviorEmit { emission: 'then', text: 'beads%20of%20sweat%20form%20on%20the%20forehead%20(The%20Exertion%20Operator)' })
+(loop_424_verdict: BehaviorVerdict { loopId: 424, loopName: 'The%20Food%20Sweater%20Loop', then: 'beads%20of%20sweat%20form%20on%20the%20forehead%20(The%20Exertion%20Operator)', result: 'the%20individual%20looking%20%22Unhealthy%22%20or%20%22Gross%22%20during%20consumption', operatorName: 'The%20Exertion%20Operator', operatorMechanism: 'beads%20of%20sweat%20form%20on%20the%20forehead', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_424_when_gate: BehaviorAssess { stage: 'when', text: 'eating%20cheese%20or%20spice' })
+
+// Topology
+(loop_424_start)-[:PROCESS]->(loop_424_given_gate)
+(loop_424_given_gate)-[:PROCESS { case: "ok" }]->(loop_424_when_gate)
+(loop_424_given_gate)-[:PROCESS { case: "err" }]->(loop_424_inactive)
+(loop_424_when_gate)-[:PROCESS { case: "ok" }]->(loop_424_context)
+(loop_424_when_gate)-[:PROCESS { case: "err" }]->(loop_424_inactive)
+(loop_424_context)-[:FORK { strategy: "behavior-branches" }]->(loop_424_context_branch | loop_424_then_branch | loop_424_operator_branch | loop_424_result_branch | loop_424_taxonomy_branch | loop_424_intervention_recognize | loop_424_intervention_interdict | loop_424_intervention_minimize)
+(loop_424_context_branch | loop_424_then_branch | loop_424_operator_branch | loop_424_result_branch | loop_424_taxonomy_branch | loop_424_intervention_recognize | loop_424_intervention_interdict | loop_424_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_424_verdict)
+(loop_424_inactive)-[:PROCESS]->(loop_424_sink)
+(loop_424_verdict)-[:PROCESS]->(loop_424_sink)
+(loop_424_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_424_then_branch)
+(loop_424_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_424_then_branch)
+(loop_424_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_424_then_branch)

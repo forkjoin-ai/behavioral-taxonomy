@@ -1,0 +1,33 @@
+// behavioral-loop-177.gg
+// Executable Gnosis projection for The Alcohol Flush Loop.
+
+// Nodes
+(loop_177_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_177_context_branch: BehaviorEmit { emission: 'context' })
+(loop_177_given_gate: BehaviorAssess { stage: 'given', text: 'Rapid%20facial%20redness%20upon%20drinking%20alcohol' })
+(loop_177_inactive: BehaviorTerminal { loopId: 177, loopName: 'The%20Alcohol%20Flush%20Loop' })
+(loop_177_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_177_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_177_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_177_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20reaction%20signals%20%22Weakness%22%20or%20%22Intoxication%22%20immediately' })
+(loop_177_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20avoiding%20alcohol%2C%20becoming%20the%20**%22Designated%20Driver%22%20%2F%20Responsible%20One**' })
+(loop_177_sink: BehaviorSink)
+(loop_177_start: BehaviorStart { loopId: 177, loopName: 'The%20Alcohol%20Flush%20Loop', given: 'Rapid%20facial%20redness%20upon%20drinking%20alcohol', when: 'drinking%20socially%20with%20clients%2Fpeers', then: 'the%20reaction%20signals%20%22Weakness%22%20or%20%22Intoxication%22%20immediately%20(The%20Fragility%20Operator)', result: 'the%20individual%20avoiding%20alcohol%2C%20becoming%20the%20**%22Designated%20Driver%22%20%2F%20Responsible%20One**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20reaction%20signals%20%22Weakness%22%20or%20%22Intoxication%22%20immediately', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_177_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_177_then_branch: BehaviorEmit { emission: 'then', text: 'the%20reaction%20signals%20%22Weakness%22%20or%20%22Intoxication%22%20immediately%20(The%20Fragility%20Operator)' })
+(loop_177_verdict: BehaviorVerdict { loopId: 177, loopName: 'The%20Alcohol%20Flush%20Loop', then: 'the%20reaction%20signals%20%22Weakness%22%20or%20%22Intoxication%22%20immediately%20(The%20Fragility%20Operator)', result: 'the%20individual%20avoiding%20alcohol%2C%20becoming%20the%20**%22Designated%20Driver%22%20%2F%20Responsible%20One**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20reaction%20signals%20%22Weakness%22%20or%20%22Intoxication%22%20immediately', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_177_when_gate: BehaviorAssess { stage: 'when', text: 'drinking%20socially%20with%20clients%2Fpeers' })
+
+// Topology
+(loop_177_start)-[:PROCESS]->(loop_177_given_gate)
+(loop_177_given_gate)-[:PROCESS { case: "ok" }]->(loop_177_when_gate)
+(loop_177_given_gate)-[:PROCESS { case: "err" }]->(loop_177_inactive)
+(loop_177_when_gate)-[:PROCESS { case: "ok" }]->(loop_177_context)
+(loop_177_when_gate)-[:PROCESS { case: "err" }]->(loop_177_inactive)
+(loop_177_context)-[:FORK { strategy: "behavior-branches" }]->(loop_177_context_branch | loop_177_then_branch | loop_177_operator_branch | loop_177_result_branch | loop_177_taxonomy_branch | loop_177_intervention_recognize | loop_177_intervention_interdict | loop_177_intervention_minimize)
+(loop_177_context_branch | loop_177_then_branch | loop_177_operator_branch | loop_177_result_branch | loop_177_taxonomy_branch | loop_177_intervention_recognize | loop_177_intervention_interdict | loop_177_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_177_verdict)
+(loop_177_inactive)-[:PROCESS]->(loop_177_sink)
+(loop_177_verdict)-[:PROCESS]->(loop_177_sink)
+(loop_177_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_177_then_branch)
+(loop_177_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_177_then_branch)
+(loop_177_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_177_then_branch)

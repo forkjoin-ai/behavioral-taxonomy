@@ -1,0 +1,33 @@
+// behavioral-loop-45.gg
+// Executable Gnosis projection for The Myopia Squint Loop.
+
+// Nodes
+(loop_45_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_45_context_branch: BehaviorEmit { emission: 'context' })
+(loop_45_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20Uncorrected%20Myopia%20(Squints%20to%20see)' })
+(loop_45_inactive: BehaviorTerminal { loopId: 45, loopName: 'The%20Myopia%20Squint%20Loop' })
+(loop_45_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait' })
+(loop_45_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_45_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_45_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dominance%20Challenge%20Operator', mechanism: 'the%20observer%20mistakes%20the%20squint%20for%20skepticism%2Fjudgment' })
+(loop_45_result_branch: BehaviorEmit { emission: 'result', text: 'unprovoked%20hostility%20from%20others%2C%20causing%20the%20individual%20to%20become%20**Defensive**' })
+(loop_45_sink: BehaviorSink)
+(loop_45_start: BehaviorStart { loopId: 45, loopName: 'The%20Myopia%20Squint%20Loop', given: 'an%20individual%20possesses%20Uncorrected%20Myopia%20(Squints%20to%20see)', when: 'listening%20to%20others', then: 'the%20observer%20mistakes%20the%20squint%20for%20skepticism%2Fjudgment%20(The%20Dominance%20Challenge%20Operator)', result: 'unprovoked%20hostility%20from%20others%2C%20causing%20the%20individual%20to%20become%20**Defensive**', operatorName: 'The%20Dominance%20Challenge%20Operator', operatorMechanism: 'the%20observer%20mistakes%20the%20squint%20for%20skepticism%2Fjudgment', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_45_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_45_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20mistakes%20the%20squint%20for%20skepticism%2Fjudgment%20(The%20Dominance%20Challenge%20Operator)' })
+(loop_45_verdict: BehaviorVerdict { loopId: 45, loopName: 'The%20Myopia%20Squint%20Loop', then: 'the%20observer%20mistakes%20the%20squint%20for%20skepticism%2Fjudgment%20(The%20Dominance%20Challenge%20Operator)', result: 'unprovoked%20hostility%20from%20others%2C%20causing%20the%20individual%20to%20become%20**Defensive**', operatorName: 'The%20Dominance%20Challenge%20Operator', operatorMechanism: 'the%20observer%20mistakes%20the%20squint%20for%20skepticism%2Fjudgment', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_45_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20to%20others' })
+
+// Topology
+(loop_45_start)-[:PROCESS]->(loop_45_given_gate)
+(loop_45_given_gate)-[:PROCESS { case: "ok" }]->(loop_45_when_gate)
+(loop_45_given_gate)-[:PROCESS { case: "err" }]->(loop_45_inactive)
+(loop_45_when_gate)-[:PROCESS { case: "ok" }]->(loop_45_context)
+(loop_45_when_gate)-[:PROCESS { case: "err" }]->(loop_45_inactive)
+(loop_45_context)-[:FORK { strategy: "behavior-branches" }]->(loop_45_context_branch | loop_45_then_branch | loop_45_operator_branch | loop_45_result_branch | loop_45_taxonomy_branch | loop_45_intervention_recognize | loop_45_intervention_interdict | loop_45_intervention_minimize)
+(loop_45_context_branch | loop_45_then_branch | loop_45_operator_branch | loop_45_result_branch | loop_45_taxonomy_branch | loop_45_intervention_recognize | loop_45_intervention_interdict | loop_45_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_45_verdict)
+(loop_45_inactive)-[:PROCESS]->(loop_45_sink)
+(loop_45_verdict)-[:PROCESS]->(loop_45_sink)
+(loop_45_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_45_then_branch)
+(loop_45_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_45_then_branch)
+(loop_45_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_45_then_branch)

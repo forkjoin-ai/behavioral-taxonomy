@@ -1,0 +1,33 @@
+// behavioral-loop-778.gg
+// Executable Gnosis projection for The Ice Block Loop.
+
+// Nodes
+(loop_778_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_778_context_branch: BehaviorEmit { emission: 'context' })
+(loop_778_given_gate: BehaviorAssess { stage: 'given', text: 'Vasoconstriction%20causing%20cold%2C%20white%20fingers' })
+(loop_778_inactive: BehaviorTerminal { loopId: 778, loopName: 'The%20Ice%20Block%20Loop' })
+(loop_778_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_778_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_778_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_778_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Death%20Operator', mechanism: 'the%20recipient%20recoils%20from%20the%20%22Corpse%22%20temperature' })
+(loop_778_result_branch: BehaviorEmit { emission: 'result', text: 'a%20visceral%20rejection%20of%20intimacy' })
+(loop_778_sink: BehaviorSink)
+(loop_778_start: BehaviorStart { loopId: 778, loopName: 'The%20Ice%20Block%20Loop', given: 'Vasoconstriction%20causing%20cold%2C%20white%20fingers', when: 'shaking%20hands', then: 'the%20recipient%20recoils%20from%20the%20%22Corpse%22%20temperature%20(The%20Death%20Operator)', result: 'a%20visceral%20rejection%20of%20intimacy', operatorName: 'The%20Death%20Operator', operatorMechanism: 'the%20recipient%20recoils%20from%20the%20%22Corpse%22%20temperature', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_778_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_778_then_branch: BehaviorEmit { emission: 'then', text: 'the%20recipient%20recoils%20from%20the%20%22Corpse%22%20temperature%20(The%20Death%20Operator)' })
+(loop_778_verdict: BehaviorVerdict { loopId: 778, loopName: 'The%20Ice%20Block%20Loop', then: 'the%20recipient%20recoils%20from%20the%20%22Corpse%22%20temperature%20(The%20Death%20Operator)', result: 'a%20visceral%20rejection%20of%20intimacy', operatorName: 'The%20Death%20Operator', operatorMechanism: 'the%20recipient%20recoils%20from%20the%20%22Corpse%22%20temperature', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_778_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_778_start)-[:PROCESS]->(loop_778_given_gate)
+(loop_778_given_gate)-[:PROCESS { case: "ok" }]->(loop_778_when_gate)
+(loop_778_given_gate)-[:PROCESS { case: "err" }]->(loop_778_inactive)
+(loop_778_when_gate)-[:PROCESS { case: "ok" }]->(loop_778_context)
+(loop_778_when_gate)-[:PROCESS { case: "err" }]->(loop_778_inactive)
+(loop_778_context)-[:FORK { strategy: "behavior-branches" }]->(loop_778_context_branch | loop_778_then_branch | loop_778_operator_branch | loop_778_result_branch | loop_778_taxonomy_branch | loop_778_intervention_recognize | loop_778_intervention_interdict | loop_778_intervention_minimize)
+(loop_778_context_branch | loop_778_then_branch | loop_778_operator_branch | loop_778_result_branch | loop_778_taxonomy_branch | loop_778_intervention_recognize | loop_778_intervention_interdict | loop_778_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_778_verdict)
+(loop_778_inactive)-[:PROCESS]->(loop_778_sink)
+(loop_778_verdict)-[:PROCESS]->(loop_778_sink)
+(loop_778_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_778_then_branch)
+(loop_778_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_778_then_branch)
+(loop_778_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_778_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-404.gg
+// Executable Gnosis projection for The Underbite Loop.
+
+// Nodes
+(loop_404_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_404_context_branch: BehaviorEmit { emission: 'context' })
+(loop_404_given_gate: BehaviorAssess { stage: 'given', text: 'Jaw%20jutting%20forward%20(Habsburg%20Jaw)' })
+(loop_404_inactive: BehaviorTerminal { loopId: 404, loopName: 'The%20Underbite%20Loop' })
+(loop_404_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_404_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_404_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_404_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tenacity%20Operator', mechanism: 'the%20face%20looks%20%22Bulldog-like%22%20or%20%22Stubborn%22' })
+(loop_404_result_branch: BehaviorEmit { emission: 'result', text: 'people%20assuming%20the%20individual%20is%20difficult%20to%20negotiate%20with' })
+(loop_404_sink: BehaviorSink)
+(loop_404_start: BehaviorStart { loopId: 404, loopName: 'The%20Underbite%20Loop', given: 'Jaw%20jutting%20forward%20(Habsburg%20Jaw)', when: 'neutral', then: 'the%20face%20looks%20%22Bulldog-like%22%20or%20%22Stubborn%22%20(The%20Tenacity%20Operator)', result: 'people%20assuming%20the%20individual%20is%20difficult%20to%20negotiate%20with', operatorName: 'The%20Tenacity%20Operator', operatorMechanism: 'the%20face%20looks%20%22Bulldog-like%22%20or%20%22Stubborn%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_404_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_404_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Bulldog-like%22%20or%20%22Stubborn%22%20(The%20Tenacity%20Operator)' })
+(loop_404_verdict: BehaviorVerdict { loopId: 404, loopName: 'The%20Underbite%20Loop', then: 'the%20face%20looks%20%22Bulldog-like%22%20or%20%22Stubborn%22%20(The%20Tenacity%20Operator)', result: 'people%20assuming%20the%20individual%20is%20difficult%20to%20negotiate%20with', operatorName: 'The%20Tenacity%20Operator', operatorMechanism: 'the%20face%20looks%20%22Bulldog-like%22%20or%20%22Stubborn%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_404_when_gate: BehaviorAssess { stage: 'when', text: 'neutral' })
+
+// Topology
+(loop_404_start)-[:PROCESS]->(loop_404_given_gate)
+(loop_404_given_gate)-[:PROCESS { case: "ok" }]->(loop_404_when_gate)
+(loop_404_given_gate)-[:PROCESS { case: "err" }]->(loop_404_inactive)
+(loop_404_when_gate)-[:PROCESS { case: "ok" }]->(loop_404_context)
+(loop_404_when_gate)-[:PROCESS { case: "err" }]->(loop_404_inactive)
+(loop_404_context)-[:FORK { strategy: "behavior-branches" }]->(loop_404_context_branch | loop_404_then_branch | loop_404_operator_branch | loop_404_result_branch | loop_404_taxonomy_branch | loop_404_intervention_recognize | loop_404_intervention_interdict | loop_404_intervention_minimize)
+(loop_404_context_branch | loop_404_then_branch | loop_404_operator_branch | loop_404_result_branch | loop_404_taxonomy_branch | loop_404_intervention_recognize | loop_404_intervention_interdict | loop_404_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_404_verdict)
+(loop_404_inactive)-[:PROCESS]->(loop_404_sink)
+(loop_404_verdict)-[:PROCESS]->(loop_404_sink)
+(loop_404_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_404_then_branch)
+(loop_404_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_404_then_branch)
+(loop_404_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_404_then_branch)

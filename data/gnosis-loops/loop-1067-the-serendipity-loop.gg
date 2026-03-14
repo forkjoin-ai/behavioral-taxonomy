@@ -1,0 +1,33 @@
+// behavioral-loop-1067.gg
+// Executable Gnosis projection for The Serendipity Loop.
+
+// Nodes
+(loop_1067_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1067_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1067_given_gate: BehaviorAssess { stage: 'given', text: 'High%20openness%20%2B%20High%20extraversion%20(talking%20to%20strangers)' })
+(loop_1067_inactive: BehaviorTerminal { loopId: 1067, loopName: 'The%20Serendipity%20Loop' })
+(loop_1067_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1067_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1067_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1067_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: '%22Lucky%22%20breaks%20happen%20statistically%20more%20often%20(The%20Network%20Effect)' })
+(loop_1067_result_branch: BehaviorEmit { emission: 'result', text: 'the%20illusion%20of%20fate%2C%20which%20is%20actually%20just%20math' })
+(loop_1067_sink: BehaviorSink)
+(loop_1067_start: BehaviorStart { loopId: 1067, loopName: 'The%20Serendipity%20Loop', given: 'High%20openness%20%2B%20High%20extraversion%20(talking%20to%20strangers)', when: 'moving%20through%20the%20world', then: '%22Lucky%22%20breaks%20happen%20statistically%20more%20often%20(The%20Network%20Effect)', result: 'the%20illusion%20of%20fate%2C%20which%20is%20actually%20just%20math', operatorName: 'Unknown%20Operator', operatorMechanism: '%22Lucky%22%20breaks%20happen%20statistically%20more%20often%20(The%20Network%20Effect)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1067_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1067_then_branch: BehaviorEmit { emission: 'then', text: '%22Lucky%22%20breaks%20happen%20statistically%20more%20often%20(The%20Network%20Effect)' })
+(loop_1067_verdict: BehaviorVerdict { loopId: 1067, loopName: 'The%20Serendipity%20Loop', then: '%22Lucky%22%20breaks%20happen%20statistically%20more%20often%20(The%20Network%20Effect)', result: 'the%20illusion%20of%20fate%2C%20which%20is%20actually%20just%20math', operatorName: 'Unknown%20Operator', operatorMechanism: '%22Lucky%22%20breaks%20happen%20statistically%20more%20often%20(The%20Network%20Effect)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1067_when_gate: BehaviorAssess { stage: 'when', text: 'moving%20through%20the%20world' })
+
+// Topology
+(loop_1067_start)-[:PROCESS]->(loop_1067_given_gate)
+(loop_1067_given_gate)-[:PROCESS { case: "ok" }]->(loop_1067_when_gate)
+(loop_1067_given_gate)-[:PROCESS { case: "err" }]->(loop_1067_inactive)
+(loop_1067_when_gate)-[:PROCESS { case: "ok" }]->(loop_1067_context)
+(loop_1067_when_gate)-[:PROCESS { case: "err" }]->(loop_1067_inactive)
+(loop_1067_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1067_context_branch | loop_1067_then_branch | loop_1067_operator_branch | loop_1067_result_branch | loop_1067_taxonomy_branch | loop_1067_intervention_recognize | loop_1067_intervention_interdict | loop_1067_intervention_minimize)
+(loop_1067_context_branch | loop_1067_then_branch | loop_1067_operator_branch | loop_1067_result_branch | loop_1067_taxonomy_branch | loop_1067_intervention_recognize | loop_1067_intervention_interdict | loop_1067_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1067_verdict)
+(loop_1067_inactive)-[:PROCESS]->(loop_1067_sink)
+(loop_1067_verdict)-[:PROCESS]->(loop_1067_sink)
+(loop_1067_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1067_then_branch)
+(loop_1067_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1067_then_branch)
+(loop_1067_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1067_then_branch)

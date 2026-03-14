@@ -1,0 +1,33 @@
+// behavioral-loop-913.gg
+// Executable Gnosis projection for The Cheek Biter Loop.
+
+// Nodes
+(loop_913_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_913_context_branch: BehaviorEmit { emission: 'context' })
+(loop_913_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20chewing%20of%20inner%20cheek%20tissue' })
+(loop_913_inactive: BehaviorTerminal { loopId: 913, loopName: 'The%20Cheek%20Biter%20Loop' })
+(loop_913_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_913_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_913_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_913_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Gnaw%20Operator', mechanism: 'the%20face%20contorts%20into%20a%20%22Fish%20Face%22' })
+(loop_913_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20high%20anxiety' })
+(loop_913_sink: BehaviorSink)
+(loop_913_start: BehaviorStart { loopId: 913, loopName: 'The%20Cheek%20Biter%20Loop', given: 'Chronic%20chewing%20of%20inner%20cheek%20tissue', when: 'thinking', then: 'the%20face%20contorts%20into%20a%20%22Fish%20Face%22%20(The%20Gnaw%20Operator)', result: 'observers%20assuming%20high%20anxiety', operatorName: 'The%20Gnaw%20Operator', operatorMechanism: 'the%20face%20contorts%20into%20a%20%22Fish%20Face%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_913_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_913_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20contorts%20into%20a%20%22Fish%20Face%22%20(The%20Gnaw%20Operator)' })
+(loop_913_verdict: BehaviorVerdict { loopId: 913, loopName: 'The%20Cheek%20Biter%20Loop', then: 'the%20face%20contorts%20into%20a%20%22Fish%20Face%22%20(The%20Gnaw%20Operator)', result: 'observers%20assuming%20high%20anxiety', operatorName: 'The%20Gnaw%20Operator', operatorMechanism: 'the%20face%20contorts%20into%20a%20%22Fish%20Face%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_913_when_gate: BehaviorAssess { stage: 'when', text: 'thinking' })
+
+// Topology
+(loop_913_start)-[:PROCESS]->(loop_913_given_gate)
+(loop_913_given_gate)-[:PROCESS { case: "ok" }]->(loop_913_when_gate)
+(loop_913_given_gate)-[:PROCESS { case: "err" }]->(loop_913_inactive)
+(loop_913_when_gate)-[:PROCESS { case: "ok" }]->(loop_913_context)
+(loop_913_when_gate)-[:PROCESS { case: "err" }]->(loop_913_inactive)
+(loop_913_context)-[:FORK { strategy: "behavior-branches" }]->(loop_913_context_branch | loop_913_then_branch | loop_913_operator_branch | loop_913_result_branch | loop_913_taxonomy_branch | loop_913_intervention_recognize | loop_913_intervention_interdict | loop_913_intervention_minimize)
+(loop_913_context_branch | loop_913_then_branch | loop_913_operator_branch | loop_913_result_branch | loop_913_taxonomy_branch | loop_913_intervention_recognize | loop_913_intervention_interdict | loop_913_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_913_verdict)
+(loop_913_inactive)-[:PROCESS]->(loop_913_sink)
+(loop_913_verdict)-[:PROCESS]->(loop_913_sink)
+(loop_913_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_913_then_branch)
+(loop_913_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_913_then_branch)
+(loop_913_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_913_then_branch)

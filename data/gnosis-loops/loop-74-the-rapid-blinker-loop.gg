@@ -1,0 +1,31 @@
+// behavioral-loop-74.gg
+// Executable Gnosis projection for The Rapid Blinker Loop.
+
+// Nodes
+(loop_74_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_74_context_branch: BehaviorEmit { emission: 'context' })
+(loop_74_given_gate: BehaviorAssess { stage: 'given', text: 'High%20Spontaneous%20Blink%20Rate%20(Anxiety%2FDry%20Eye)' })
+(loop_74_inactive: BehaviorTerminal { loopId: 74, loopName: 'The%20Rapid%20Blinker%20Loop' })
+(loop_74_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_74_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_74_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Scrutiny%20Operator', mechanism: 'observers%20perceive%20%22Guilt%22%20or%20%22Panic%22' })
+(loop_74_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20credibility%20during%20negotiations' })
+(loop_74_sink: BehaviorSink)
+(loop_74_start: BehaviorStart { loopId: 74, loopName: 'The%20Rapid%20Blinker%20Loop', given: 'High%20Spontaneous%20Blink%20Rate%20(Anxiety%2FDry%20Eye)', when: 'under%20pressure', then: 'observers%20perceive%20%22Guilt%22%20or%20%22Panic%22%20(The%20Scrutiny%20Operator)', result: 'loss%20of%20credibility%20during%20negotiations', operatorName: 'The%20Scrutiny%20Operator', operatorMechanism: 'observers%20perceive%20%22Guilt%22%20or%20%22Panic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_74_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_74_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Guilt%22%20or%20%22Panic%22%20(The%20Scrutiny%20Operator)' })
+(loop_74_verdict: BehaviorVerdict { loopId: 74, loopName: 'The%20Rapid%20Blinker%20Loop', then: 'observers%20perceive%20%22Guilt%22%20or%20%22Panic%22%20(The%20Scrutiny%20Operator)', result: 'loss%20of%20credibility%20during%20negotiations', operatorName: 'The%20Scrutiny%20Operator', operatorMechanism: 'observers%20perceive%20%22Guilt%22%20or%20%22Panic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_74_when_gate: BehaviorAssess { stage: 'when', text: 'under%20pressure' })
+
+// Topology
+(loop_74_start)-[:PROCESS]->(loop_74_given_gate)
+(loop_74_given_gate)-[:PROCESS { case: "ok" }]->(loop_74_when_gate)
+(loop_74_given_gate)-[:PROCESS { case: "err" }]->(loop_74_inactive)
+(loop_74_when_gate)-[:PROCESS { case: "ok" }]->(loop_74_context)
+(loop_74_when_gate)-[:PROCESS { case: "err" }]->(loop_74_inactive)
+(loop_74_context)-[:FORK { strategy: "behavior-branches" }]->(loop_74_context_branch | loop_74_then_branch | loop_74_operator_branch | loop_74_result_branch | loop_74_taxonomy_branch | loop_74_intervention_recognize | loop_74_intervention_leverage)
+(loop_74_context_branch | loop_74_then_branch | loop_74_operator_branch | loop_74_result_branch | loop_74_taxonomy_branch | loop_74_intervention_recognize | loop_74_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_74_verdict)
+(loop_74_inactive)-[:PROCESS]->(loop_74_sink)
+(loop_74_verdict)-[:PROCESS]->(loop_74_sink)
+(loop_74_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_74_then_branch)
+(loop_74_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_74_result_branch)

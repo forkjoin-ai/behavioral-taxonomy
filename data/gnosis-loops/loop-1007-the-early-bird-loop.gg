@@ -1,0 +1,33 @@
+// behavioral-loop-1007.gg
+// Executable Gnosis projection for The Early Bird Loop.
+
+// Nodes
+(loop_1007_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1007_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1007_given_gate: BehaviorAssess { stage: 'given', text: 'Arriving%2015%20minutes%20before%20the%20start%20time' })
+(loop_1007_inactive: BehaviorTerminal { loopId: 1007, loopName: 'The%20Early%20Bird%20Loop' })
+(loop_1007_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1007_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1007_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1007_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Inconvenience%20Operator', mechanism: 'the%20individual%20stands%20awkwardly%20in%20the%20empty%20room' })
+(loop_1007_result_branch: BehaviorEmit { emission: 'result', text: 'being%20put%20to%20work%20or%20ignored' })
+(loop_1007_sink: BehaviorSink)
+(loop_1007_start: BehaviorStart { loopId: 1007, loopName: 'The%20Early%20Bird%20Loop', given: 'Arriving%2015%20minutes%20before%20the%20start%20time', when: 'the%20host%20is%20still%20setting%20up', then: 'the%20individual%20stands%20awkwardly%20in%20the%20empty%20room%20(The%20Inconvenience%20Operator)', result: 'being%20put%20to%20work%20or%20ignored', operatorName: 'The%20Inconvenience%20Operator', operatorMechanism: 'the%20individual%20stands%20awkwardly%20in%20the%20empty%20room', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1007_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1007_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20stands%20awkwardly%20in%20the%20empty%20room%20(The%20Inconvenience%20Operator)' })
+(loop_1007_verdict: BehaviorVerdict { loopId: 1007, loopName: 'The%20Early%20Bird%20Loop', then: 'the%20individual%20stands%20awkwardly%20in%20the%20empty%20room%20(The%20Inconvenience%20Operator)', result: 'being%20put%20to%20work%20or%20ignored', operatorName: 'The%20Inconvenience%20Operator', operatorMechanism: 'the%20individual%20stands%20awkwardly%20in%20the%20empty%20room', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1007_when_gate: BehaviorAssess { stage: 'when', text: 'the%20host%20is%20still%20setting%20up' })
+
+// Topology
+(loop_1007_start)-[:PROCESS]->(loop_1007_given_gate)
+(loop_1007_given_gate)-[:PROCESS { case: "ok" }]->(loop_1007_when_gate)
+(loop_1007_given_gate)-[:PROCESS { case: "err" }]->(loop_1007_inactive)
+(loop_1007_when_gate)-[:PROCESS { case: "ok" }]->(loop_1007_context)
+(loop_1007_when_gate)-[:PROCESS { case: "err" }]->(loop_1007_inactive)
+(loop_1007_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1007_context_branch | loop_1007_then_branch | loop_1007_operator_branch | loop_1007_result_branch | loop_1007_taxonomy_branch | loop_1007_intervention_recognize | loop_1007_intervention_interdict | loop_1007_intervention_minimize)
+(loop_1007_context_branch | loop_1007_then_branch | loop_1007_operator_branch | loop_1007_result_branch | loop_1007_taxonomy_branch | loop_1007_intervention_recognize | loop_1007_intervention_interdict | loop_1007_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1007_verdict)
+(loop_1007_inactive)-[:PROCESS]->(loop_1007_sink)
+(loop_1007_verdict)-[:PROCESS]->(loop_1007_sink)
+(loop_1007_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1007_then_branch)
+(loop_1007_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1007_then_branch)
+(loop_1007_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1007_then_branch)

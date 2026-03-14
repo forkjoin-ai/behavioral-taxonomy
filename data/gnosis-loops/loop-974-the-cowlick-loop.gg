@@ -1,0 +1,33 @@
+// behavioral-loop-974.gg
+// Executable Gnosis projection for The Cowlick Loop.
+
+// Nodes
+(loop_974_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_974_context_branch: BehaviorEmit { emission: 'context' })
+(loop_974_given_gate: BehaviorAssess { stage: 'given', text: 'Stubborn%20hair%20whorl%20standing%20vertical' })
+(loop_974_inactive: BehaviorTerminal { loopId: 974, loopName: 'The%20Cowlick%20Loop' })
+(loop_974_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_974_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_974_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_974_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rascal%20Operator', mechanism: 'the%20tuft%20undermines%20the%20seriousness' })
+(loop_974_result_branch: BehaviorEmit { emission: 'result', text: 'being%20treated%20as%20%22Boyish%22%20or%20%22Messy.%22' })
+(loop_974_sink: BehaviorSink)
+(loop_974_start: BehaviorStart { loopId: 974, loopName: 'The%20Cowlick%20Loop', given: 'Stubborn%20hair%20whorl%20standing%20vertical', when: 'trying%20to%20look%20professional', then: 'the%20tuft%20undermines%20the%20seriousness%20(The%20Rascal%20Operator)', result: 'being%20treated%20as%20%22Boyish%22%20or%20%22Messy.%22', operatorName: 'The%20Rascal%20Operator', operatorMechanism: 'the%20tuft%20undermines%20the%20seriousness', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_974_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_974_then_branch: BehaviorEmit { emission: 'then', text: 'the%20tuft%20undermines%20the%20seriousness%20(The%20Rascal%20Operator)' })
+(loop_974_verdict: BehaviorVerdict { loopId: 974, loopName: 'The%20Cowlick%20Loop', then: 'the%20tuft%20undermines%20the%20seriousness%20(The%20Rascal%20Operator)', result: 'being%20treated%20as%20%22Boyish%22%20or%20%22Messy.%22', operatorName: 'The%20Rascal%20Operator', operatorMechanism: 'the%20tuft%20undermines%20the%20seriousness', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_974_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20to%20look%20professional' })
+
+// Topology
+(loop_974_start)-[:PROCESS]->(loop_974_given_gate)
+(loop_974_given_gate)-[:PROCESS { case: "ok" }]->(loop_974_when_gate)
+(loop_974_given_gate)-[:PROCESS { case: "err" }]->(loop_974_inactive)
+(loop_974_when_gate)-[:PROCESS { case: "ok" }]->(loop_974_context)
+(loop_974_when_gate)-[:PROCESS { case: "err" }]->(loop_974_inactive)
+(loop_974_context)-[:FORK { strategy: "behavior-branches" }]->(loop_974_context_branch | loop_974_then_branch | loop_974_operator_branch | loop_974_result_branch | loop_974_taxonomy_branch | loop_974_intervention_recognize | loop_974_intervention_interdict | loop_974_intervention_minimize)
+(loop_974_context_branch | loop_974_then_branch | loop_974_operator_branch | loop_974_result_branch | loop_974_taxonomy_branch | loop_974_intervention_recognize | loop_974_intervention_interdict | loop_974_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_974_verdict)
+(loop_974_inactive)-[:PROCESS]->(loop_974_sink)
+(loop_974_verdict)-[:PROCESS]->(loop_974_sink)
+(loop_974_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_974_then_branch)
+(loop_974_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_974_then_branch)
+(loop_974_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_974_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-831.gg
+// Executable Gnosis projection for The Gym Rat Loop.
+
+// Nodes
+(loop_831_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_831_context_branch: BehaviorEmit { emission: 'context' })
+(loop_831_given_gate: BehaviorAssess { stage: 'given', text: 'Smell%20of%20protein%20breakdown%20in%20sweat' })
+(loop_831_inactive: BehaviorTerminal { loopId: 831, loopName: 'The%20Gym%20Rat%20Loop' })
+(loop_831_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_831_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_831_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20scent-triggered%20emotional%20responses' })
+(loop_831_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nitrogen%20Operator', mechanism: 'it%20signals%20%22High%20Protein%20Diet%22' })
+(loop_831_result_branch: BehaviorEmit { emission: 'result', text: 'validation%20within%20fitness%20circles%2C%20revulsion%20outside%20them' })
+(loop_831_sink: BehaviorSink)
+(loop_831_start: BehaviorStart { loopId: 831, loopName: 'The%20Gym%20Rat%20Loop', given: 'Smell%20of%20protein%20breakdown%20in%20sweat', when: 'working%20out%20or%20post-workout', then: 'it%20signals%20%22High%20Protein%20Diet%22%20(The%20Nitrogen%20Operator)', result: 'validation%20within%20fitness%20circles%2C%20revulsion%20outside%20them', operatorName: 'The%20Nitrogen%20Operator', operatorMechanism: 'it%20signals%20%22High%20Protein%20Diet%22', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Be%20aware%20of%20scent-triggered%20emotional%20responses', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_831_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_831_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22High%20Protein%20Diet%22%20(The%20Nitrogen%20Operator)' })
+(loop_831_verdict: BehaviorVerdict { loopId: 831, loopName: 'The%20Gym%20Rat%20Loop', then: 'it%20signals%20%22High%20Protein%20Diet%22%20(The%20Nitrogen%20Operator)', result: 'validation%20within%20fitness%20circles%2C%20revulsion%20outside%20them', operatorName: 'The%20Nitrogen%20Operator', operatorMechanism: 'it%20signals%20%22High%20Protein%20Diet%22', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_831_when_gate: BehaviorAssess { stage: 'when', text: 'working%20out%20or%20post-workout' })
+
+// Topology
+(loop_831_start)-[:PROCESS]->(loop_831_given_gate)
+(loop_831_given_gate)-[:PROCESS { case: "ok" }]->(loop_831_when_gate)
+(loop_831_given_gate)-[:PROCESS { case: "err" }]->(loop_831_inactive)
+(loop_831_when_gate)-[:PROCESS { case: "ok" }]->(loop_831_context)
+(loop_831_when_gate)-[:PROCESS { case: "err" }]->(loop_831_inactive)
+(loop_831_context)-[:FORK { strategy: "behavior-branches" }]->(loop_831_context_branch | loop_831_then_branch | loop_831_operator_branch | loop_831_result_branch | loop_831_taxonomy_branch | loop_831_intervention_recognize | loop_831_intervention_interdict | loop_831_intervention_minimize)
+(loop_831_context_branch | loop_831_then_branch | loop_831_operator_branch | loop_831_result_branch | loop_831_taxonomy_branch | loop_831_intervention_recognize | loop_831_intervention_interdict | loop_831_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_831_verdict)
+(loop_831_inactive)-[:PROCESS]->(loop_831_sink)
+(loop_831_verdict)-[:PROCESS]->(loop_831_sink)
+(loop_831_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_831_then_branch)
+(loop_831_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_831_then_branch)
+(loop_831_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_831_then_branch)

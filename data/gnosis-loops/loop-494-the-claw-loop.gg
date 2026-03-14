@@ -1,0 +1,33 @@
+// behavioral-loop-494.gg
+// Executable Gnosis projection for The Claw Loop.
+
+// Nodes
+(loop_494_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_494_context_branch: BehaviorEmit { emission: 'context' })
+(loop_494_given_gate: BehaviorAssess { stage: 'given', text: 'Fingers%20curled%20permanently%20inward' })
+(loop_494_inactive: BehaviorTerminal { loopId: 494, loopName: 'The%20Claw%20Loop' })
+(loop_494_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_494_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_494_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_494_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Crone%20Operator', mechanism: 'it%20looks%20%22Witch-like%22%20or%20%22Arthritic%22' })
+(loop_494_result_branch: BehaviorEmit { emission: 'result', text: 'assumptions%20of%20**Advanced%20Age**%20or%20frailty' })
+(loop_494_sink: BehaviorSink)
+(loop_494_start: BehaviorStart { loopId: 494, loopName: 'The%20Claw%20Loop', given: 'Fingers%20curled%20permanently%20inward', when: 'resting%20hands%20on%20a%20table', then: 'it%20looks%20%22Witch-like%22%20or%20%22Arthritic%22%20(The%20Crone%20Operator)', result: 'assumptions%20of%20**Advanced%20Age**%20or%20frailty', operatorName: 'The%20Crone%20Operator', operatorMechanism: 'it%20looks%20%22Witch-like%22%20or%20%22Arthritic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_494_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_494_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20%22Witch-like%22%20or%20%22Arthritic%22%20(The%20Crone%20Operator)' })
+(loop_494_verdict: BehaviorVerdict { loopId: 494, loopName: 'The%20Claw%20Loop', then: 'it%20looks%20%22Witch-like%22%20or%20%22Arthritic%22%20(The%20Crone%20Operator)', result: 'assumptions%20of%20**Advanced%20Age**%20or%20frailty', operatorName: 'The%20Crone%20Operator', operatorMechanism: 'it%20looks%20%22Witch-like%22%20or%20%22Arthritic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_494_when_gate: BehaviorAssess { stage: 'when', text: 'resting%20hands%20on%20a%20table' })
+
+// Topology
+(loop_494_start)-[:PROCESS]->(loop_494_given_gate)
+(loop_494_given_gate)-[:PROCESS { case: "ok" }]->(loop_494_when_gate)
+(loop_494_given_gate)-[:PROCESS { case: "err" }]->(loop_494_inactive)
+(loop_494_when_gate)-[:PROCESS { case: "ok" }]->(loop_494_context)
+(loop_494_when_gate)-[:PROCESS { case: "err" }]->(loop_494_inactive)
+(loop_494_context)-[:FORK { strategy: "behavior-branches" }]->(loop_494_context_branch | loop_494_then_branch | loop_494_operator_branch | loop_494_result_branch | loop_494_taxonomy_branch | loop_494_intervention_recognize | loop_494_intervention_interdict | loop_494_intervention_minimize)
+(loop_494_context_branch | loop_494_then_branch | loop_494_operator_branch | loop_494_result_branch | loop_494_taxonomy_branch | loop_494_intervention_recognize | loop_494_intervention_interdict | loop_494_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_494_verdict)
+(loop_494_inactive)-[:PROCESS]->(loop_494_sink)
+(loop_494_verdict)-[:PROCESS]->(loop_494_sink)
+(loop_494_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_494_then_branch)
+(loop_494_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_494_then_branch)
+(loop_494_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_494_then_branch)

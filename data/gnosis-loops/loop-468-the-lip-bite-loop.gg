@@ -1,0 +1,33 @@
+// behavioral-loop-468.gg
+// Executable Gnosis projection for The Lip Bite Loop.
+
+// Nodes
+(loop_468_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_468_context_branch: BehaviorEmit { emission: 'context' })
+(loop_468_given_gate: BehaviorAssess { stage: 'given', text: 'Chewing%20on%20the%20lower%20lip' })
+(loop_468_inactive: BehaviorTerminal { loopId: 468, loopName: 'The%20Lip%20Bite%20Loop' })
+(loop_468_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_468_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_468_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_468_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'it%20signals%20%22Holding%20Back%20Tears%22%20or%20%22Submission%22' })
+(loop_468_result_branch: BehaviorEmit { emission: 'result', text: 'the%20critic%20softening%20their%20blow%20(Pity)%20or%20losing%20respect' })
+(loop_468_sink: BehaviorSink)
+(loop_468_start: BehaviorStart { loopId: 468, loopName: 'The%20Lip%20Bite%20Loop', given: 'Chewing%20on%20the%20lower%20lip', when: 'listening%20to%20feedback', then: 'it%20signals%20%22Holding%20Back%20Tears%22%20or%20%22Submission%22%20(The%20Fragility%20Operator)', result: 'the%20critic%20softening%20their%20blow%20(Pity)%20or%20losing%20respect', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'it%20signals%20%22Holding%20Back%20Tears%22%20or%20%22Submission%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_468_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_468_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Holding%20Back%20Tears%22%20or%20%22Submission%22%20(The%20Fragility%20Operator)' })
+(loop_468_verdict: BehaviorVerdict { loopId: 468, loopName: 'The%20Lip%20Bite%20Loop', then: 'it%20signals%20%22Holding%20Back%20Tears%22%20or%20%22Submission%22%20(The%20Fragility%20Operator)', result: 'the%20critic%20softening%20their%20blow%20(Pity)%20or%20losing%20respect', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'it%20signals%20%22Holding%20Back%20Tears%22%20or%20%22Submission%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_468_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20to%20feedback' })
+
+// Topology
+(loop_468_start)-[:PROCESS]->(loop_468_given_gate)
+(loop_468_given_gate)-[:PROCESS { case: "ok" }]->(loop_468_when_gate)
+(loop_468_given_gate)-[:PROCESS { case: "err" }]->(loop_468_inactive)
+(loop_468_when_gate)-[:PROCESS { case: "ok" }]->(loop_468_context)
+(loop_468_when_gate)-[:PROCESS { case: "err" }]->(loop_468_inactive)
+(loop_468_context)-[:FORK { strategy: "behavior-branches" }]->(loop_468_context_branch | loop_468_then_branch | loop_468_operator_branch | loop_468_result_branch | loop_468_taxonomy_branch | loop_468_intervention_recognize | loop_468_intervention_interdict | loop_468_intervention_minimize)
+(loop_468_context_branch | loop_468_then_branch | loop_468_operator_branch | loop_468_result_branch | loop_468_taxonomy_branch | loop_468_intervention_recognize | loop_468_intervention_interdict | loop_468_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_468_verdict)
+(loop_468_inactive)-[:PROCESS]->(loop_468_sink)
+(loop_468_verdict)-[:PROCESS]->(loop_468_sink)
+(loop_468_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_468_then_branch)
+(loop_468_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_468_then_branch)
+(loop_468_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_468_then_branch)

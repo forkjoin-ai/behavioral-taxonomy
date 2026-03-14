@@ -1,0 +1,31 @@
+// behavioral-loop-134.gg
+// Executable Gnosis projection for The Red Eye Loop.
+
+// Nodes
+(loop_134_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_134_context_branch: BehaviorEmit { emission: 'context' })
+(loop_134_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20dry%20eye%20or%20allergy%20(Redness)' })
+(loop_134_inactive: BehaviorTerminal { loopId: 134, loopName: 'The%20Red%20Eye%20Loop' })
+(loop_134_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_134_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_134_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Scrutiny%20Operator', mechanism: 'observers%20assume%20%22Intoxication%2C%22%20%22Fatigue%2C%22%20or%20%22Infection%22' })
+(loop_134_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20professional%20credibility%20and%20frequent%20drug%20testing%2Fquestioning' })
+(loop_134_sink: BehaviorSink)
+(loop_134_start: BehaviorStart { loopId: 134, loopName: 'The%20Red%20Eye%20Loop', given: 'Chronic%20dry%20eye%20or%20allergy%20(Redness)', when: 'making%20eye%20contact', then: 'observers%20assume%20%22Intoxication%2C%22%20%22Fatigue%2C%22%20or%20%22Infection%22%20(The%20Scrutiny%20Operator)', result: 'loss%20of%20professional%20credibility%20and%20frequent%20drug%20testing%2Fquestioning', operatorName: 'The%20Scrutiny%20Operator', operatorMechanism: 'observers%20assume%20%22Intoxication%2C%22%20%22Fatigue%2C%22%20or%20%22Infection%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_134_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_134_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Intoxication%2C%22%20%22Fatigue%2C%22%20or%20%22Infection%22%20(The%20Scrutiny%20Operator)' })
+(loop_134_verdict: BehaviorVerdict { loopId: 134, loopName: 'The%20Red%20Eye%20Loop', then: 'observers%20assume%20%22Intoxication%2C%22%20%22Fatigue%2C%22%20or%20%22Infection%22%20(The%20Scrutiny%20Operator)', result: 'loss%20of%20professional%20credibility%20and%20frequent%20drug%20testing%2Fquestioning', operatorName: 'The%20Scrutiny%20Operator', operatorMechanism: 'observers%20assume%20%22Intoxication%2C%22%20%22Fatigue%2C%22%20or%20%22Infection%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_134_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_134_start)-[:PROCESS]->(loop_134_given_gate)
+(loop_134_given_gate)-[:PROCESS { case: "ok" }]->(loop_134_when_gate)
+(loop_134_given_gate)-[:PROCESS { case: "err" }]->(loop_134_inactive)
+(loop_134_when_gate)-[:PROCESS { case: "ok" }]->(loop_134_context)
+(loop_134_when_gate)-[:PROCESS { case: "err" }]->(loop_134_inactive)
+(loop_134_context)-[:FORK { strategy: "behavior-branches" }]->(loop_134_context_branch | loop_134_then_branch | loop_134_operator_branch | loop_134_result_branch | loop_134_taxonomy_branch | loop_134_intervention_recognize | loop_134_intervention_leverage)
+(loop_134_context_branch | loop_134_then_branch | loop_134_operator_branch | loop_134_result_branch | loop_134_taxonomy_branch | loop_134_intervention_recognize | loop_134_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_134_verdict)
+(loop_134_inactive)-[:PROCESS]->(loop_134_sink)
+(loop_134_verdict)-[:PROCESS]->(loop_134_sink)
+(loop_134_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_134_then_branch)
+(loop_134_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_134_result_branch)

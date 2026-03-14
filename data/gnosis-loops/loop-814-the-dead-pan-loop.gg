@@ -1,0 +1,33 @@
+// behavioral-loop-814.gg
+// Executable Gnosis projection for The Dead Pan Loop.
+
+// Nodes
+(loop_814_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_814_context_branch: BehaviorEmit { emission: 'context' })
+(loop_814_given_gate: BehaviorAssess { stage: 'given', text: 'Inability%20to%20furrow%20brows%20due%20to%20neurotoxin' })
+(loop_814_inactive: BehaviorTerminal { loopId: 814, loopName: 'The%20Dead%20Pan%20Loop' })
+(loop_814_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_814_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_814_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_814_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mask%20Operator', mechanism: 'the%20upper%20face%20remains%20frozen' })
+(loop_814_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20appearing%20%22Cold%22%20or%20%22Psychopathic.%22' })
+(loop_814_sink: BehaviorSink)
+(loop_814_start: BehaviorStart { loopId: 814, loopName: 'The%20Dead%20Pan%20Loop', given: 'Inability%20to%20furrow%20brows%20due%20to%20neurotoxin', when: 'showing%20empathy', then: 'the%20upper%20face%20remains%20frozen%20(The%20Mask%20Operator)', result: 'the%20individual%20appearing%20%22Cold%22%20or%20%22Psychopathic.%22', operatorName: 'The%20Mask%20Operator', operatorMechanism: 'the%20upper%20face%20remains%20frozen', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_814_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_814_then_branch: BehaviorEmit { emission: 'then', text: 'the%20upper%20face%20remains%20frozen%20(The%20Mask%20Operator)' })
+(loop_814_verdict: BehaviorVerdict { loopId: 814, loopName: 'The%20Dead%20Pan%20Loop', then: 'the%20upper%20face%20remains%20frozen%20(The%20Mask%20Operator)', result: 'the%20individual%20appearing%20%22Cold%22%20or%20%22Psychopathic.%22', operatorName: 'The%20Mask%20Operator', operatorMechanism: 'the%20upper%20face%20remains%20frozen', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_814_when_gate: BehaviorAssess { stage: 'when', text: 'showing%20empathy' })
+
+// Topology
+(loop_814_start)-[:PROCESS]->(loop_814_given_gate)
+(loop_814_given_gate)-[:PROCESS { case: "ok" }]->(loop_814_when_gate)
+(loop_814_given_gate)-[:PROCESS { case: "err" }]->(loop_814_inactive)
+(loop_814_when_gate)-[:PROCESS { case: "ok" }]->(loop_814_context)
+(loop_814_when_gate)-[:PROCESS { case: "err" }]->(loop_814_inactive)
+(loop_814_context)-[:FORK { strategy: "behavior-branches" }]->(loop_814_context_branch | loop_814_then_branch | loop_814_operator_branch | loop_814_result_branch | loop_814_taxonomy_branch | loop_814_intervention_recognize | loop_814_intervention_interdict | loop_814_intervention_minimize)
+(loop_814_context_branch | loop_814_then_branch | loop_814_operator_branch | loop_814_result_branch | loop_814_taxonomy_branch | loop_814_intervention_recognize | loop_814_intervention_interdict | loop_814_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_814_verdict)
+(loop_814_inactive)-[:PROCESS]->(loop_814_sink)
+(loop_814_verdict)-[:PROCESS]->(loop_814_sink)
+(loop_814_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_814_then_branch)
+(loop_814_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_814_then_branch)
+(loop_814_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_814_then_branch)

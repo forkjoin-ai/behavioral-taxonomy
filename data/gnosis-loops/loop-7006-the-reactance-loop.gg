@@ -1,0 +1,33 @@
+// behavioral-loop-7006.gg
+// Executable Gnosis projection for The Reactance Loop.
+
+// Nodes
+(loop_7006_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_7006_context_branch: BehaviorEmit { emission: 'context' })
+(loop_7006_given_gate: BehaviorAssess { stage: 'given', text: 'A%20perceived%20threat%20to%20behavioral%20freedom' })
+(loop_7006_inactive: BehaviorTerminal { loopId: 7006, loopName: 'The%20Reactance%20Loop' })
+(loop_7006_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_7006_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_7006_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_7006_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_7006_result_branch: BehaviorEmit { emission: 'result', text: 'Defiance%20solely%20to%20restore%20the%20sensation%20of%20autonomy' })
+(loop_7006_sink: BehaviorSink)
+(loop_7006_start: BehaviorStart { loopId: 7006, loopName: 'The%20Reactance%20Loop', given: 'A%20perceived%20threat%20to%20behavioral%20freedom', when: 'An%20authority%20figure%20issues%20a%20command%20or%20prohibition', then: 'Subject%20generates%20a%20motivational%20drive%20to%20perform%20the%20prohibited%20act', result: 'Defiance%20solely%20to%20restore%20the%20sensation%20of%20autonomy', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_7006_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_7006_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20generates%20a%20motivational%20drive%20to%20perform%20the%20prohibited%20act' })
+(loop_7006_verdict: BehaviorVerdict { loopId: 7006, loopName: 'The%20Reactance%20Loop', then: 'Subject%20generates%20a%20motivational%20drive%20to%20perform%20the%20prohibited%20act', result: 'Defiance%20solely%20to%20restore%20the%20sensation%20of%20autonomy', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_7006_when_gate: BehaviorAssess { stage: 'when', text: 'An%20authority%20figure%20issues%20a%20command%20or%20prohibition' })
+
+// Topology
+(loop_7006_start)-[:PROCESS]->(loop_7006_given_gate)
+(loop_7006_given_gate)-[:PROCESS { case: "ok" }]->(loop_7006_when_gate)
+(loop_7006_given_gate)-[:PROCESS { case: "err" }]->(loop_7006_inactive)
+(loop_7006_when_gate)-[:PROCESS { case: "ok" }]->(loop_7006_context)
+(loop_7006_when_gate)-[:PROCESS { case: "err" }]->(loop_7006_inactive)
+(loop_7006_context)-[:FORK { strategy: "behavior-branches" }]->(loop_7006_context_branch | loop_7006_then_branch | loop_7006_operator_branch | loop_7006_result_branch | loop_7006_taxonomy_branch | loop_7006_intervention_recognize | loop_7006_intervention_interdict | loop_7006_intervention_minimize)
+(loop_7006_context_branch | loop_7006_then_branch | loop_7006_operator_branch | loop_7006_result_branch | loop_7006_taxonomy_branch | loop_7006_intervention_recognize | loop_7006_intervention_interdict | loop_7006_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_7006_verdict)
+(loop_7006_inactive)-[:PROCESS]->(loop_7006_sink)
+(loop_7006_verdict)-[:PROCESS]->(loop_7006_sink)
+(loop_7006_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_7006_then_branch)
+(loop_7006_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_7006_then_branch)
+(loop_7006_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_7006_then_branch)

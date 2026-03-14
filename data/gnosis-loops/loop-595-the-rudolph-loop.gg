@@ -1,0 +1,31 @@
+// behavioral-loop-595.gg
+// Executable Gnosis projection for The Rudolph Loop.
+
+// Nodes
+(loop_595_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_595_context_branch: BehaviorEmit { emission: 'context' })
+(loop_595_given_gate: BehaviorAssess { stage: 'given', text: 'Red%2C%20bulbous%20nose%20tip' })
+(loop_595_inactive: BehaviorTerminal { loopId: 595, loopName: 'The%20Rudolph%20Loop' })
+(loop_595_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_595_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_595_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Drinker%20Operator', mechanism: 'assumption%20of%20%22Alcoholism%22%20is%20immediate' })
+(loop_595_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20trust%20in%20roles%20requiring%20sobriety%2Fjudgment' })
+(loop_595_sink: BehaviorSink)
+(loop_595_start: BehaviorStart { loopId: 595, loopName: 'The%20Rudolph%20Loop', given: 'Red%2C%20bulbous%20nose%20tip', when: 'meeting%20strangers', then: 'assumption%20of%20%22Alcoholism%22%20is%20immediate%20(The%20Drinker%20Operator)', result: 'loss%20of%20trust%20in%20roles%20requiring%20sobriety%2Fjudgment', operatorName: 'The%20Drinker%20Operator', operatorMechanism: 'assumption%20of%20%22Alcoholism%22%20is%20immediate', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_595_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_595_then_branch: BehaviorEmit { emission: 'then', text: 'assumption%20of%20%22Alcoholism%22%20is%20immediate%20(The%20Drinker%20Operator)' })
+(loop_595_verdict: BehaviorVerdict { loopId: 595, loopName: 'The%20Rudolph%20Loop', then: 'assumption%20of%20%22Alcoholism%22%20is%20immediate%20(The%20Drinker%20Operator)', result: 'loss%20of%20trust%20in%20roles%20requiring%20sobriety%2Fjudgment', operatorName: 'The%20Drinker%20Operator', operatorMechanism: 'assumption%20of%20%22Alcoholism%22%20is%20immediate', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_595_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20strangers' })
+
+// Topology
+(loop_595_start)-[:PROCESS]->(loop_595_given_gate)
+(loop_595_given_gate)-[:PROCESS { case: "ok" }]->(loop_595_when_gate)
+(loop_595_given_gate)-[:PROCESS { case: "err" }]->(loop_595_inactive)
+(loop_595_when_gate)-[:PROCESS { case: "ok" }]->(loop_595_context)
+(loop_595_when_gate)-[:PROCESS { case: "err" }]->(loop_595_inactive)
+(loop_595_context)-[:FORK { strategy: "behavior-branches" }]->(loop_595_context_branch | loop_595_then_branch | loop_595_operator_branch | loop_595_result_branch | loop_595_taxonomy_branch | loop_595_intervention_recognize | loop_595_intervention_leverage)
+(loop_595_context_branch | loop_595_then_branch | loop_595_operator_branch | loop_595_result_branch | loop_595_taxonomy_branch | loop_595_intervention_recognize | loop_595_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_595_verdict)
+(loop_595_inactive)-[:PROCESS]->(loop_595_sink)
+(loop_595_verdict)-[:PROCESS]->(loop_595_sink)
+(loop_595_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_595_then_branch)
+(loop_595_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_595_result_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-9003.gg
+// Executable Gnosis projection for The Keynesian Beauty Contest Loop.
+
+// Nodes
+(loop_9003_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_9003_context_branch: BehaviorEmit { emission: 'context' })
+(loop_9003_given_gate: BehaviorAssess { stage: 'given', text: 'A%20competition%20to%20guess%20what%20*everyone%20else*%20will%20choose%20(not%20what%20is%20' })
+(loop_9003_inactive: BehaviorTerminal { loopId: 9003, loopName: 'The%20Keynesian%20Beauty%20Contest%20Loop' })
+(loop_9003_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_9003_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_9003_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_9003_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_9003_result_branch: BehaviorEmit { emission: 'result', text: 'A%20recursive%20spiral%20of%20' })
+(loop_9003_sink: BehaviorSink)
+(loop_9003_start: BehaviorStart { loopId: 9003, loopName: 'The%20Keynesian%20Beauty%20Contest%20Loop', given: 'A%20competition%20to%20guess%20what%20*everyone%20else*%20will%20choose%20(not%20what%20is%20', when: 'Subject%20selects%20an%20option', then: 'Subject%20ignores%20their%20own%20taste%20and%20attempts%20to%20model%20the%20', result: 'A%20recursive%20spiral%20of%20', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_9003_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_9003_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20ignores%20their%20own%20taste%20and%20attempts%20to%20model%20the%20' })
+(loop_9003_verdict: BehaviorVerdict { loopId: 9003, loopName: 'The%20Keynesian%20Beauty%20Contest%20Loop', then: 'Subject%20ignores%20their%20own%20taste%20and%20attempts%20to%20model%20the%20', result: 'A%20recursive%20spiral%20of%20', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_9003_when_gate: BehaviorAssess { stage: 'when', text: 'Subject%20selects%20an%20option' })
+
+// Topology
+(loop_9003_start)-[:PROCESS]->(loop_9003_given_gate)
+(loop_9003_given_gate)-[:PROCESS { case: "ok" }]->(loop_9003_when_gate)
+(loop_9003_given_gate)-[:PROCESS { case: "err" }]->(loop_9003_inactive)
+(loop_9003_when_gate)-[:PROCESS { case: "ok" }]->(loop_9003_context)
+(loop_9003_when_gate)-[:PROCESS { case: "err" }]->(loop_9003_inactive)
+(loop_9003_context)-[:FORK { strategy: "behavior-branches" }]->(loop_9003_context_branch | loop_9003_then_branch | loop_9003_operator_branch | loop_9003_result_branch | loop_9003_taxonomy_branch | loop_9003_intervention_recognize | loop_9003_intervention_interdict | loop_9003_intervention_minimize)
+(loop_9003_context_branch | loop_9003_then_branch | loop_9003_operator_branch | loop_9003_result_branch | loop_9003_taxonomy_branch | loop_9003_intervention_recognize | loop_9003_intervention_interdict | loop_9003_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_9003_verdict)
+(loop_9003_inactive)-[:PROCESS]->(loop_9003_sink)
+(loop_9003_verdict)-[:PROCESS]->(loop_9003_sink)
+(loop_9003_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_9003_then_branch)
+(loop_9003_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_9003_then_branch)
+(loop_9003_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_9003_then_branch)

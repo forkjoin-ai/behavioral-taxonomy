@@ -1,0 +1,33 @@
+// behavioral-loop-567.gg
+// Executable Gnosis projection for The Bottle Blonde Loop.
+
+// Nodes
+(loop_567_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_567_context_branch: BehaviorEmit { emission: 'context' })
+(loop_567_given_gate: BehaviorAssess { stage: 'given', text: 'Dark%20roots%20showing%20on%20bleached%20hair' })
+(loop_567_inactive: BehaviorTerminal { loopId: 567, loopName: 'The%20Bottle%20Blonde%20Loop' })
+(loop_567_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_567_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_567_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_567_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Upkeep%20Operator', mechanism: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%22' })
+(loop_567_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20the%20%22Polished%22%20status' })
+(loop_567_sink: BehaviorSink)
+(loop_567_start: BehaviorStart { loopId: 567, loopName: 'The%20Bottle%20Blonde%20Loop', given: 'Dark%20roots%20showing%20on%20bleached%20hair', when: 'seen%20from%20above', then: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%22%20(The%20Upkeep%20Operator)', result: 'loss%20of%20the%20%22Polished%22%20status', operatorName: 'The%20Upkeep%20Operator', operatorMechanism: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_567_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_567_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%22%20(The%20Upkeep%20Operator)' })
+(loop_567_verdict: BehaviorVerdict { loopId: 567, loopName: 'The%20Bottle%20Blonde%20Loop', then: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%22%20(The%20Upkeep%20Operator)', result: 'loss%20of%20the%20%22Polished%22%20status', operatorName: 'The%20Upkeep%20Operator', operatorMechanism: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_567_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20from%20above' })
+
+// Topology
+(loop_567_start)-[:PROCESS]->(loop_567_given_gate)
+(loop_567_given_gate)-[:PROCESS { case: "ok" }]->(loop_567_when_gate)
+(loop_567_given_gate)-[:PROCESS { case: "err" }]->(loop_567_inactive)
+(loop_567_when_gate)-[:PROCESS { case: "ok" }]->(loop_567_context)
+(loop_567_when_gate)-[:PROCESS { case: "err" }]->(loop_567_inactive)
+(loop_567_context)-[:FORK { strategy: "behavior-branches" }]->(loop_567_context_branch | loop_567_then_branch | loop_567_operator_branch | loop_567_result_branch | loop_567_taxonomy_branch | loop_567_intervention_recognize | loop_567_intervention_interdict | loop_567_intervention_minimize)
+(loop_567_context_branch | loop_567_then_branch | loop_567_operator_branch | loop_567_result_branch | loop_567_taxonomy_branch | loop_567_intervention_recognize | loop_567_intervention_interdict | loop_567_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_567_verdict)
+(loop_567_inactive)-[:PROCESS]->(loop_567_sink)
+(loop_567_verdict)-[:PROCESS]->(loop_567_sink)
+(loop_567_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_567_then_branch)
+(loop_567_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_567_then_branch)
+(loop_567_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_567_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-89.gg
+// Executable Gnosis projection for The Iron Gut Loop.
+
+// Nodes
+(loop_89_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_89_context_branch: BehaviorEmit { emission: 'context' })
+(loop_89_given_gate: BehaviorAssess { stage: 'given', text: 'Robust%20Digestion%20(No%20allergies%2Fsensitivities)' })
+(loop_89_inactive: BehaviorTerminal { loopId: 89, loopName: 'The%20Iron%20Gut%20Loop' })
+(loop_89_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_89_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_89_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_89_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Alliance%20Operator', mechanism: 'they%20can%20bond%20over%20any%20food%2Fculture' })
+(loop_89_result_branch: BehaviorEmit { emission: 'result', text: '**Openness%20to%20Experience**%20and%20high%20social%20capital' })
+(loop_89_sink: BehaviorSink)
+(loop_89_start: BehaviorStart { loopId: 89, loopName: 'The%20Iron%20Gut%20Loop', given: 'Robust%20Digestion%20(No%20allergies%2Fsensitivities)', when: 'traveling%20or%20dining%20socially', then: 'they%20can%20bond%20over%20any%20food%2Fculture%20(The%20Alliance%20Operator)', result: '**Openness%20to%20Experience**%20and%20high%20social%20capital', operatorName: 'The%20Alliance%20Operator', operatorMechanism: 'they%20can%20bond%20over%20any%20food%2Fculture', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_89_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_89_then_branch: BehaviorEmit { emission: 'then', text: 'they%20can%20bond%20over%20any%20food%2Fculture%20(The%20Alliance%20Operator)' })
+(loop_89_verdict: BehaviorVerdict { loopId: 89, loopName: 'The%20Iron%20Gut%20Loop', then: 'they%20can%20bond%20over%20any%20food%2Fculture%20(The%20Alliance%20Operator)', result: '**Openness%20to%20Experience**%20and%20high%20social%20capital', operatorName: 'The%20Alliance%20Operator', operatorMechanism: 'they%20can%20bond%20over%20any%20food%2Fculture', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_89_when_gate: BehaviorAssess { stage: 'when', text: 'traveling%20or%20dining%20socially' })
+
+// Topology
+(loop_89_start)-[:PROCESS]->(loop_89_given_gate)
+(loop_89_given_gate)-[:PROCESS { case: "ok" }]->(loop_89_when_gate)
+(loop_89_given_gate)-[:PROCESS { case: "err" }]->(loop_89_inactive)
+(loop_89_when_gate)-[:PROCESS { case: "ok" }]->(loop_89_context)
+(loop_89_when_gate)-[:PROCESS { case: "err" }]->(loop_89_inactive)
+(loop_89_context)-[:FORK { strategy: "behavior-branches" }]->(loop_89_context_branch | loop_89_then_branch | loop_89_operator_branch | loop_89_result_branch | loop_89_taxonomy_branch | loop_89_intervention_recognize | loop_89_intervention_interdict | loop_89_intervention_minimize)
+(loop_89_context_branch | loop_89_then_branch | loop_89_operator_branch | loop_89_result_branch | loop_89_taxonomy_branch | loop_89_intervention_recognize | loop_89_intervention_interdict | loop_89_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_89_verdict)
+(loop_89_inactive)-[:PROCESS]->(loop_89_sink)
+(loop_89_verdict)-[:PROCESS]->(loop_89_sink)
+(loop_89_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_89_then_branch)
+(loop_89_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_89_then_branch)
+(loop_89_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_89_then_branch)

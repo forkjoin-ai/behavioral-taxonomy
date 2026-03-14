@@ -1,0 +1,33 @@
+// behavioral-loop-1071.gg
+// Executable Gnosis projection for The Routine Loop.
+
+// Nodes
+(loop_1071_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1071_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1071_given_gate: BehaviorAssess { stage: 'given', text: 'Zero%20novelty%20in%20daily%20habits' })
+(loop_1071_inactive: BehaviorTerminal { loopId: 1071, loopName: 'The%20Routine%20Loop' })
+(loop_1071_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1071_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1071_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1071_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20brain%20compresses%20them%20into%20a%20single%20%22File%22%20(The%20Zip%20File)' })
+(loop_1071_result_branch: BehaviorEmit { emission: 'result', text: '%22Where%20did%20the%20decade%20go%3F%22' })
+(loop_1071_sink: BehaviorSink)
+(loop_1071_start: BehaviorStart { loopId: 1071, loopName: 'The%20Routine%20Loop', given: 'Zero%20novelty%20in%20daily%20habits', when: 'looking%20back%20on%203%20years', then: 'the%20brain%20compresses%20them%20into%20a%20single%20%22File%22%20(The%20Zip%20File)', result: '%22Where%20did%20the%20decade%20go%3F%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20brain%20compresses%20them%20into%20a%20single%20%22File%22%20(The%20Zip%20File)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1071_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1071_then_branch: BehaviorEmit { emission: 'then', text: 'the%20brain%20compresses%20them%20into%20a%20single%20%22File%22%20(The%20Zip%20File)' })
+(loop_1071_verdict: BehaviorVerdict { loopId: 1071, loopName: 'The%20Routine%20Loop', then: 'the%20brain%20compresses%20them%20into%20a%20single%20%22File%22%20(The%20Zip%20File)', result: '%22Where%20did%20the%20decade%20go%3F%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20brain%20compresses%20them%20into%20a%20single%20%22File%22%20(The%20Zip%20File)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1071_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20back%20on%203%20years' })
+
+// Topology
+(loop_1071_start)-[:PROCESS]->(loop_1071_given_gate)
+(loop_1071_given_gate)-[:PROCESS { case: "ok" }]->(loop_1071_when_gate)
+(loop_1071_given_gate)-[:PROCESS { case: "err" }]->(loop_1071_inactive)
+(loop_1071_when_gate)-[:PROCESS { case: "ok" }]->(loop_1071_context)
+(loop_1071_when_gate)-[:PROCESS { case: "err" }]->(loop_1071_inactive)
+(loop_1071_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1071_context_branch | loop_1071_then_branch | loop_1071_operator_branch | loop_1071_result_branch | loop_1071_taxonomy_branch | loop_1071_intervention_recognize | loop_1071_intervention_interdict | loop_1071_intervention_minimize)
+(loop_1071_context_branch | loop_1071_then_branch | loop_1071_operator_branch | loop_1071_result_branch | loop_1071_taxonomy_branch | loop_1071_intervention_recognize | loop_1071_intervention_interdict | loop_1071_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1071_verdict)
+(loop_1071_inactive)-[:PROCESS]->(loop_1071_sink)
+(loop_1071_verdict)-[:PROCESS]->(loop_1071_sink)
+(loop_1071_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1071_then_branch)
+(loop_1071_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1071_then_branch)
+(loop_1071_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1071_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-318.gg
+// Executable Gnosis projection for The Love Handles Loop.
+
+// Nodes
+(loop_318_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_318_context_branch: BehaviorEmit { emission: 'context' })
+(loop_318_given_gate: BehaviorAssess { stage: 'given', text: 'Spillover%20at%20waistband' })
+(loop_318_inactive: BehaviorTerminal { loopId: 318, loopName: 'The%20Love%20Handles%20Loop' })
+(loop_318_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_318_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_318_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_318_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Comfort%20Operator', mechanism: 'the%20silhouette%20looks%20%22Soft%22' })
+(loop_318_result_branch: BehaviorEmit { emission: 'result', text: 'being%20seen%20as%20a%20%22Dad%20Bod%22%20(Safe%2FNon-threatening)' })
+(loop_318_sink: BehaviorSink)
+(loop_318_start: BehaviorStart { loopId: 318, loopName: 'The%20Love%20Handles%20Loop', given: 'Spillover%20at%20waistband', when: 'wearing%20fitted%20shirts', then: 'the%20silhouette%20looks%20%22Soft%22%20(The%20Comfort%20Operator)', result: 'being%20seen%20as%20a%20%22Dad%20Bod%22%20(Safe%2FNon-threatening)', operatorName: 'The%20Comfort%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Soft%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_318_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_318_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20looks%20%22Soft%22%20(The%20Comfort%20Operator)' })
+(loop_318_verdict: BehaviorVerdict { loopId: 318, loopName: 'The%20Love%20Handles%20Loop', then: 'the%20silhouette%20looks%20%22Soft%22%20(The%20Comfort%20Operator)', result: 'being%20seen%20as%20a%20%22Dad%20Bod%22%20(Safe%2FNon-threatening)', operatorName: 'The%20Comfort%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Soft%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_318_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20fitted%20shirts' })
+
+// Topology
+(loop_318_start)-[:PROCESS]->(loop_318_given_gate)
+(loop_318_given_gate)-[:PROCESS { case: "ok" }]->(loop_318_when_gate)
+(loop_318_given_gate)-[:PROCESS { case: "err" }]->(loop_318_inactive)
+(loop_318_when_gate)-[:PROCESS { case: "ok" }]->(loop_318_context)
+(loop_318_when_gate)-[:PROCESS { case: "err" }]->(loop_318_inactive)
+(loop_318_context)-[:FORK { strategy: "behavior-branches" }]->(loop_318_context_branch | loop_318_then_branch | loop_318_operator_branch | loop_318_result_branch | loop_318_taxonomy_branch | loop_318_intervention_recognize | loop_318_intervention_interdict | loop_318_intervention_minimize)
+(loop_318_context_branch | loop_318_then_branch | loop_318_operator_branch | loop_318_result_branch | loop_318_taxonomy_branch | loop_318_intervention_recognize | loop_318_intervention_interdict | loop_318_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_318_verdict)
+(loop_318_inactive)-[:PROCESS]->(loop_318_sink)
+(loop_318_verdict)-[:PROCESS]->(loop_318_sink)
+(loop_318_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_318_then_branch)
+(loop_318_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_318_then_branch)
+(loop_318_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_318_then_branch)

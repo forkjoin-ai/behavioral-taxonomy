@@ -1,0 +1,33 @@
+// behavioral-loop-237.gg
+// Executable Gnosis projection for The Heavy Walker Loop.
+
+// Nodes
+(loop_237_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_237_context_branch: BehaviorEmit { emission: 'context' })
+(loop_237_given_gate: BehaviorAssess { stage: 'given', text: 'High%20impact%20gait%20(Stomping)' })
+(loop_237_inactive: BehaviorTerminal { loopId: 237, loopName: 'The%20Heavy%20Walker%20Loop' })
+(loop_237_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_237_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_237_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_237_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'observers%20assume%20%22Anger%22%20or%20%22Impatience%22' })
+(loop_237_result_branch: BehaviorEmit { emission: 'result', text: "family%2Fcoworkers%20asking%20%22What's%20wrong%3F%22%2C%20confusing%20the%20individual%20who%20was%20just%20walking" })
+(loop_237_sink: BehaviorSink)
+(loop_237_start: BehaviorStart { loopId: 237, loopName: 'The%20Heavy%20Walker%20Loop', given: 'High%20impact%20gait%20(Stomping)', when: 'walking%20through%20a%20house%2Foffice', then: 'observers%20assume%20%22Anger%22%20or%20%22Impatience%22%20(The%20Threat%20Operator)', result: "family%2Fcoworkers%20asking%20%22What's%20wrong%3F%22%2C%20confusing%20the%20individual%20who%20was%20just%20walking", operatorName: 'The%20Threat%20Operator', operatorMechanism: 'observers%20assume%20%22Anger%22%20or%20%22Impatience%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'DISRUPTION', interventionDifficulty: '8', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_237_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_237_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Anger%22%20or%20%22Impatience%22%20(The%20Threat%20Operator)' })
+(loop_237_verdict: BehaviorVerdict { loopId: 237, loopName: 'The%20Heavy%20Walker%20Loop', then: 'observers%20assume%20%22Anger%22%20or%20%22Impatience%22%20(The%20Threat%20Operator)', result: "family%2Fcoworkers%20asking%20%22What's%20wrong%3F%22%2C%20confusing%20the%20individual%20who%20was%20just%20walking", operatorName: 'The%20Threat%20Operator', operatorMechanism: 'observers%20assume%20%22Anger%22%20or%20%22Impatience%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_237_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20through%20a%20house%2Foffice' })
+
+// Topology
+(loop_237_start)-[:PROCESS]->(loop_237_given_gate)
+(loop_237_given_gate)-[:PROCESS { case: "ok" }]->(loop_237_when_gate)
+(loop_237_given_gate)-[:PROCESS { case: "err" }]->(loop_237_inactive)
+(loop_237_when_gate)-[:PROCESS { case: "ok" }]->(loop_237_context)
+(loop_237_when_gate)-[:PROCESS { case: "err" }]->(loop_237_inactive)
+(loop_237_context)-[:FORK { strategy: "behavior-branches" }]->(loop_237_context_branch | loop_237_then_branch | loop_237_operator_branch | loop_237_result_branch | loop_237_taxonomy_branch | loop_237_intervention_recognize | loop_237_intervention_interdict | loop_237_intervention_minimize)
+(loop_237_context_branch | loop_237_then_branch | loop_237_operator_branch | loop_237_result_branch | loop_237_taxonomy_branch | loop_237_intervention_recognize | loop_237_intervention_interdict | loop_237_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_237_verdict)
+(loop_237_inactive)-[:PROCESS]->(loop_237_sink)
+(loop_237_verdict)-[:PROCESS]->(loop_237_sink)
+(loop_237_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_237_then_branch)
+(loop_237_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_237_then_branch)
+(loop_237_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_237_then_branch)

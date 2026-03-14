@@ -1,0 +1,33 @@
+// behavioral-loop-443.gg
+// Executable Gnosis projection for The Back Pat Loop.
+
+// Nodes
+(loop_443_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_443_context_branch: BehaviorEmit { emission: 'context' })
+(loop_443_given_gate: BehaviorAssess { stage: 'given', text: 'Patting%20others%20on%20the%20back%2Fshoulder' })
+(loop_443_inactive: BehaviorTerminal { loopId: 443, loopName: 'The%20Back%20Pat%20Loop' })
+(loop_443_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_443_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_443_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_443_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Superior%20Operator', mechanism: 'it%20signals%20%22Dominance%22%20or%20%22Patronage%22' })
+(loop_443_result_branch: BehaviorEmit { emission: 'result', text: 'the%20recipient%20feeling%20%22Small%22%20or%20%22Managed.%22' })
+(loop_443_sink: BehaviorSink)
+(loop_443_start: BehaviorStart { loopId: 443, loopName: 'The%20Back%20Pat%20Loop', given: 'Patting%20others%20on%20the%20back%2Fshoulder', when: 'greeting%20a%20peer', then: 'it%20signals%20%22Dominance%22%20or%20%22Patronage%22%20(The%20Superior%20Operator)', result: 'the%20recipient%20feeling%20%22Small%22%20or%20%22Managed.%22', operatorName: 'The%20Superior%20Operator', operatorMechanism: 'it%20signals%20%22Dominance%22%20or%20%22Patronage%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_443_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_443_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Dominance%22%20or%20%22Patronage%22%20(The%20Superior%20Operator)' })
+(loop_443_verdict: BehaviorVerdict { loopId: 443, loopName: 'The%20Back%20Pat%20Loop', then: 'it%20signals%20%22Dominance%22%20or%20%22Patronage%22%20(The%20Superior%20Operator)', result: 'the%20recipient%20feeling%20%22Small%22%20or%20%22Managed.%22', operatorName: 'The%20Superior%20Operator', operatorMechanism: 'it%20signals%20%22Dominance%22%20or%20%22Patronage%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_443_when_gate: BehaviorAssess { stage: 'when', text: 'greeting%20a%20peer' })
+
+// Topology
+(loop_443_start)-[:PROCESS]->(loop_443_given_gate)
+(loop_443_given_gate)-[:PROCESS { case: "ok" }]->(loop_443_when_gate)
+(loop_443_given_gate)-[:PROCESS { case: "err" }]->(loop_443_inactive)
+(loop_443_when_gate)-[:PROCESS { case: "ok" }]->(loop_443_context)
+(loop_443_when_gate)-[:PROCESS { case: "err" }]->(loop_443_inactive)
+(loop_443_context)-[:FORK { strategy: "behavior-branches" }]->(loop_443_context_branch | loop_443_then_branch | loop_443_operator_branch | loop_443_result_branch | loop_443_taxonomy_branch | loop_443_intervention_recognize | loop_443_intervention_interdict | loop_443_intervention_minimize)
+(loop_443_context_branch | loop_443_then_branch | loop_443_operator_branch | loop_443_result_branch | loop_443_taxonomy_branch | loop_443_intervention_recognize | loop_443_intervention_interdict | loop_443_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_443_verdict)
+(loop_443_inactive)-[:PROCESS]->(loop_443_sink)
+(loop_443_verdict)-[:PROCESS]->(loop_443_sink)
+(loop_443_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_443_then_branch)
+(loop_443_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_443_then_branch)
+(loop_443_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_443_then_branch)

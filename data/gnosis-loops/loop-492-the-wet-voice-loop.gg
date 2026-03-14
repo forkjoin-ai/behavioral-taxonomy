@@ -1,0 +1,33 @@
+// behavioral-loop-492.gg
+// Executable Gnosis projection for The Wet Voice Loop.
+
+// Nodes
+(loop_492_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_492_context_branch: BehaviorEmit { emission: 'context' })
+(loop_492_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20post-nasal%20drip' })
+(loop_492_inactive: BehaviorTerminal { loopId: 492, loopName: 'The%20Wet%20Voice%20Loop' })
+(loop_492_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_492_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_492_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_492_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Phlegm%20Operator', mechanism: 'the%20voice%20sounds%20%22Gurgly%22' })
+(loop_492_result_branch: BehaviorEmit { emission: 'result', text: 'listeners%20constantly%20clearing%20their%20*own*%20throats%20(Mirror%20Neuron%20response)' })
+(loop_492_sink: BehaviorSink)
+(loop_492_start: BehaviorStart { loopId: 492, loopName: 'The%20Wet%20Voice%20Loop', given: 'Chronic%20post-nasal%20drip', when: 'speaking', then: 'the%20voice%20sounds%20%22Gurgly%22%20(The%20Phlegm%20Operator)', result: 'listeners%20constantly%20clearing%20their%20*own*%20throats%20(Mirror%20Neuron%20response)', operatorName: 'The%20Phlegm%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Gurgly%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_492_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_492_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20sounds%20%22Gurgly%22%20(The%20Phlegm%20Operator)' })
+(loop_492_verdict: BehaviorVerdict { loopId: 492, loopName: 'The%20Wet%20Voice%20Loop', then: 'the%20voice%20sounds%20%22Gurgly%22%20(The%20Phlegm%20Operator)', result: 'listeners%20constantly%20clearing%20their%20*own*%20throats%20(Mirror%20Neuron%20response)', operatorName: 'The%20Phlegm%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Gurgly%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_492_when_gate: BehaviorAssess { stage: 'when', text: 'speaking' })
+
+// Topology
+(loop_492_start)-[:PROCESS]->(loop_492_given_gate)
+(loop_492_given_gate)-[:PROCESS { case: "ok" }]->(loop_492_when_gate)
+(loop_492_given_gate)-[:PROCESS { case: "err" }]->(loop_492_inactive)
+(loop_492_when_gate)-[:PROCESS { case: "ok" }]->(loop_492_context)
+(loop_492_when_gate)-[:PROCESS { case: "err" }]->(loop_492_inactive)
+(loop_492_context)-[:FORK { strategy: "behavior-branches" }]->(loop_492_context_branch | loop_492_then_branch | loop_492_operator_branch | loop_492_result_branch | loop_492_taxonomy_branch | loop_492_intervention_recognize | loop_492_intervention_interdict | loop_492_intervention_minimize)
+(loop_492_context_branch | loop_492_then_branch | loop_492_operator_branch | loop_492_result_branch | loop_492_taxonomy_branch | loop_492_intervention_recognize | loop_492_intervention_interdict | loop_492_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_492_verdict)
+(loop_492_inactive)-[:PROCESS]->(loop_492_sink)
+(loop_492_verdict)-[:PROCESS]->(loop_492_sink)
+(loop_492_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_492_then_branch)
+(loop_492_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_492_then_branch)
+(loop_492_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_492_then_branch)

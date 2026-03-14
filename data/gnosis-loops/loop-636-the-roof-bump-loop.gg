@@ -1,0 +1,33 @@
+// behavioral-loop-636.gg
+// Executable Gnosis projection for The Roof Bump Loop.
+
+// Nodes
+(loop_636_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_636_context_branch: BehaviorEmit { emission: 'context' })
+(loop_636_given_gate: BehaviorAssess { stage: 'given', text: 'Bony%20growth%20on%20the%20roof%20of%20the%20mouth' })
+(loop_636_inactive: BehaviorTerminal { loopId: 636, loopName: 'The%20Roof%20Bump%20Loop' })
+(loop_636_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_636_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_636_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_636_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Alien%20Operator', mechanism: 'observers%20see%20a%20%22Bone%20Spur%22' })
+(loop_636_result_branch: BehaviorEmit { emission: 'result', text: 'curiosity%20or%20revulsion' })
+(loop_636_sink: BehaviorSink)
+(loop_636_start: BehaviorStart { loopId: 636, loopName: 'The%20Roof%20Bump%20Loop', given: 'Bony%20growth%20on%20the%20roof%20of%20the%20mouth', when: 'speaking%20or%20laughing%20mouth-open', then: 'observers%20see%20a%20%22Bone%20Spur%22%20(The%20Alien%20Operator)', result: 'curiosity%20or%20revulsion', operatorName: 'The%20Alien%20Operator', operatorMechanism: 'observers%20see%20a%20%22Bone%20Spur%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_636_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_636_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20see%20a%20%22Bone%20Spur%22%20(The%20Alien%20Operator)' })
+(loop_636_verdict: BehaviorVerdict { loopId: 636, loopName: 'The%20Roof%20Bump%20Loop', then: 'observers%20see%20a%20%22Bone%20Spur%22%20(The%20Alien%20Operator)', result: 'curiosity%20or%20revulsion', operatorName: 'The%20Alien%20Operator', operatorMechanism: 'observers%20see%20a%20%22Bone%20Spur%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_636_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20or%20laughing%20mouth-open' })
+
+// Topology
+(loop_636_start)-[:PROCESS]->(loop_636_given_gate)
+(loop_636_given_gate)-[:PROCESS { case: "ok" }]->(loop_636_when_gate)
+(loop_636_given_gate)-[:PROCESS { case: "err" }]->(loop_636_inactive)
+(loop_636_when_gate)-[:PROCESS { case: "ok" }]->(loop_636_context)
+(loop_636_when_gate)-[:PROCESS { case: "err" }]->(loop_636_inactive)
+(loop_636_context)-[:FORK { strategy: "behavior-branches" }]->(loop_636_context_branch | loop_636_then_branch | loop_636_operator_branch | loop_636_result_branch | loop_636_taxonomy_branch | loop_636_intervention_recognize | loop_636_intervention_interdict | loop_636_intervention_minimize)
+(loop_636_context_branch | loop_636_then_branch | loop_636_operator_branch | loop_636_result_branch | loop_636_taxonomy_branch | loop_636_intervention_recognize | loop_636_intervention_interdict | loop_636_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_636_verdict)
+(loop_636_inactive)-[:PROCESS]->(loop_636_sink)
+(loop_636_verdict)-[:PROCESS]->(loop_636_sink)
+(loop_636_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_636_then_branch)
+(loop_636_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_636_then_branch)
+(loop_636_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_636_then_branch)

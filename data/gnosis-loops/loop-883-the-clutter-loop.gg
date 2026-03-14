@@ -1,0 +1,33 @@
+// behavioral-loop-883.gg
+// Executable Gnosis projection for The Clutter Loop.
+
+// Nodes
+(loop_883_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_883_context_branch: BehaviorEmit { emission: 'context' })
+(loop_883_given_gate: BehaviorAssess { stage: 'given', text: 'bursts%20of%20rapid%20speech%20with%20dropped%20syllables' })
+(loop_883_inactive: BehaviorTerminal { loopId: 883, loopName: 'The%20Clutter%20Loop' })
+(loop_883_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_883_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_883_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_883_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Static%20Operator', mechanism: 'the%20message%20becomes%20%22Noise%22' })
+(loop_883_result_branch: BehaviorEmit { emission: 'result', text: 'being%20asked%20to%20%22Start%20over%22%20constantly' })
+(loop_883_sink: BehaviorSink)
+(loop_883_start: BehaviorStart { loopId: 883, loopName: 'The%20Clutter%20Loop', given: 'bursts%20of%20rapid%20speech%20with%20dropped%20syllables', when: 'excited', then: 'the%20message%20becomes%20%22Noise%22%20(The%20Static%20Operator)', result: 'being%20asked%20to%20%22Start%20over%22%20constantly', operatorName: 'The%20Static%20Operator', operatorMechanism: 'the%20message%20becomes%20%22Noise%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_883_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_883_then_branch: BehaviorEmit { emission: 'then', text: 'the%20message%20becomes%20%22Noise%22%20(The%20Static%20Operator)' })
+(loop_883_verdict: BehaviorVerdict { loopId: 883, loopName: 'The%20Clutter%20Loop', then: 'the%20message%20becomes%20%22Noise%22%20(The%20Static%20Operator)', result: 'being%20asked%20to%20%22Start%20over%22%20constantly', operatorName: 'The%20Static%20Operator', operatorMechanism: 'the%20message%20becomes%20%22Noise%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_883_when_gate: BehaviorAssess { stage: 'when', text: 'excited' })
+
+// Topology
+(loop_883_start)-[:PROCESS]->(loop_883_given_gate)
+(loop_883_given_gate)-[:PROCESS { case: "ok" }]->(loop_883_when_gate)
+(loop_883_given_gate)-[:PROCESS { case: "err" }]->(loop_883_inactive)
+(loop_883_when_gate)-[:PROCESS { case: "ok" }]->(loop_883_context)
+(loop_883_when_gate)-[:PROCESS { case: "err" }]->(loop_883_inactive)
+(loop_883_context)-[:FORK { strategy: "behavior-branches" }]->(loop_883_context_branch | loop_883_then_branch | loop_883_operator_branch | loop_883_result_branch | loop_883_taxonomy_branch | loop_883_intervention_recognize | loop_883_intervention_interdict | loop_883_intervention_minimize)
+(loop_883_context_branch | loop_883_then_branch | loop_883_operator_branch | loop_883_result_branch | loop_883_taxonomy_branch | loop_883_intervention_recognize | loop_883_intervention_interdict | loop_883_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_883_verdict)
+(loop_883_inactive)-[:PROCESS]->(loop_883_sink)
+(loop_883_verdict)-[:PROCESS]->(loop_883_sink)
+(loop_883_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_883_then_branch)
+(loop_883_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_883_then_branch)
+(loop_883_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_883_then_branch)

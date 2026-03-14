@@ -1,0 +1,33 @@
+// behavioral-loop-493.gg
+// Executable Gnosis projection for The Stub Loop.
+
+// Nodes
+(loop_493_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_493_context_branch: BehaviorEmit { emission: 'context' })
+(loop_493_given_gate: BehaviorAssess { stage: 'given', text: 'Missing%20digit%20(Trauma%2FCongenital)' })
+(loop_493_inactive: BehaviorTerminal { loopId: 493, loopName: 'The%20Stub%20Loop' })
+(loop_493_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_493_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_493_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_493_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Shock%2FNovelty%20Operator', mechanism: 'the%20recipient%20feels%20the%20void' })
+(loop_493_result_branch: BehaviorEmit { emission: 'result', text: 'an%20immediate%20%22Story%20Hook%22%20that%20can%20be%20used%20for%20**Charisma**%20or%20**Intimidation**' })
+(loop_493_sink: BehaviorSink)
+(loop_493_start: BehaviorStart { loopId: 493, loopName: 'The%20Stub%20Loop', given: 'Missing%20digit%20(Trauma%2FCongenital)', when: 'shaking%20hands', then: 'the%20recipient%20feels%20the%20void%20(The%20Shock%2FNovelty%20Operator)', result: 'an%20immediate%20%22Story%20Hook%22%20that%20can%20be%20used%20for%20**Charisma**%20or%20**Intimidation**', operatorName: 'The%20Shock%2FNovelty%20Operator', operatorMechanism: 'the%20recipient%20feels%20the%20void', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_493_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_493_then_branch: BehaviorEmit { emission: 'then', text: 'the%20recipient%20feels%20the%20void%20(The%20Shock%2FNovelty%20Operator)' })
+(loop_493_verdict: BehaviorVerdict { loopId: 493, loopName: 'The%20Stub%20Loop', then: 'the%20recipient%20feels%20the%20void%20(The%20Shock%2FNovelty%20Operator)', result: 'an%20immediate%20%22Story%20Hook%22%20that%20can%20be%20used%20for%20**Charisma**%20or%20**Intimidation**', operatorName: 'The%20Shock%2FNovelty%20Operator', operatorMechanism: 'the%20recipient%20feels%20the%20void', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_493_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_493_start)-[:PROCESS]->(loop_493_given_gate)
+(loop_493_given_gate)-[:PROCESS { case: "ok" }]->(loop_493_when_gate)
+(loop_493_given_gate)-[:PROCESS { case: "err" }]->(loop_493_inactive)
+(loop_493_when_gate)-[:PROCESS { case: "ok" }]->(loop_493_context)
+(loop_493_when_gate)-[:PROCESS { case: "err" }]->(loop_493_inactive)
+(loop_493_context)-[:FORK { strategy: "behavior-branches" }]->(loop_493_context_branch | loop_493_then_branch | loop_493_operator_branch | loop_493_result_branch | loop_493_taxonomy_branch | loop_493_intervention_recognize | loop_493_intervention_interdict | loop_493_intervention_minimize)
+(loop_493_context_branch | loop_493_then_branch | loop_493_operator_branch | loop_493_result_branch | loop_493_taxonomy_branch | loop_493_intervention_recognize | loop_493_intervention_interdict | loop_493_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_493_verdict)
+(loop_493_inactive)-[:PROCESS]->(loop_493_sink)
+(loop_493_verdict)-[:PROCESS]->(loop_493_sink)
+(loop_493_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_493_then_branch)
+(loop_493_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_493_then_branch)
+(loop_493_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_493_then_branch)

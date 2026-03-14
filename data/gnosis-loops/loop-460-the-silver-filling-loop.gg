@@ -1,0 +1,33 @@
+// behavioral-loop-460.gg
+// Executable Gnosis projection for The Silver Filling Loop.
+
+// Nodes
+(loop_460_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_460_context_branch: BehaviorEmit { emission: 'context' })
+(loop_460_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20dark%20metal%20fillings%20in%20molars' })
+(loop_460_inactive: BehaviorTerminal { loopId: 460, loopName: 'The%20Silver%20Filling%20Loop' })
+(loop_460_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_460_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_460_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_460_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dental%20Class%20Operator', mechanism: 'observers%20see%20the%20%22decay%20history%22' })
+(loop_460_result_branch: BehaviorEmit { emission: 'result', text: 'subtle%20judgment%20regarding%20childhood%20healthcare%20access' })
+(loop_460_sink: BehaviorSink)
+(loop_460_start: BehaviorStart { loopId: 460, loopName: 'The%20Silver%20Filling%20Loop', given: 'Visible%20dark%20metal%20fillings%20in%20molars', when: 'laughing%20loudly%20(head%20back)', then: 'observers%20see%20the%20%22decay%20history%22%20(The%20Dental%20Class%20Operator)', result: 'subtle%20judgment%20regarding%20childhood%20healthcare%20access', operatorName: 'The%20Dental%20Class%20Operator', operatorMechanism: 'observers%20see%20the%20%22decay%20history%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_460_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_460_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20see%20the%20%22decay%20history%22%20(The%20Dental%20Class%20Operator)' })
+(loop_460_verdict: BehaviorVerdict { loopId: 460, loopName: 'The%20Silver%20Filling%20Loop', then: 'observers%20see%20the%20%22decay%20history%22%20(The%20Dental%20Class%20Operator)', result: 'subtle%20judgment%20regarding%20childhood%20healthcare%20access', operatorName: 'The%20Dental%20Class%20Operator', operatorMechanism: 'observers%20see%20the%20%22decay%20history%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_460_when_gate: BehaviorAssess { stage: 'when', text: 'laughing%20loudly%20(head%20back)' })
+
+// Topology
+(loop_460_start)-[:PROCESS]->(loop_460_given_gate)
+(loop_460_given_gate)-[:PROCESS { case: "ok" }]->(loop_460_when_gate)
+(loop_460_given_gate)-[:PROCESS { case: "err" }]->(loop_460_inactive)
+(loop_460_when_gate)-[:PROCESS { case: "ok" }]->(loop_460_context)
+(loop_460_when_gate)-[:PROCESS { case: "err" }]->(loop_460_inactive)
+(loop_460_context)-[:FORK { strategy: "behavior-branches" }]->(loop_460_context_branch | loop_460_then_branch | loop_460_operator_branch | loop_460_result_branch | loop_460_taxonomy_branch | loop_460_intervention_recognize | loop_460_intervention_interdict | loop_460_intervention_minimize)
+(loop_460_context_branch | loop_460_then_branch | loop_460_operator_branch | loop_460_result_branch | loop_460_taxonomy_branch | loop_460_intervention_recognize | loop_460_intervention_interdict | loop_460_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_460_verdict)
+(loop_460_inactive)-[:PROCESS]->(loop_460_sink)
+(loop_460_verdict)-[:PROCESS]->(loop_460_sink)
+(loop_460_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_460_then_branch)
+(loop_460_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_460_then_branch)
+(loop_460_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_460_then_branch)

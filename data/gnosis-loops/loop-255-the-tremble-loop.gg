@@ -1,0 +1,33 @@
+// behavioral-loop-255.gg
+// Executable Gnosis projection for The Tremble Loop.
+
+// Nodes
+(loop_255_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_255_context_branch: BehaviorEmit { emission: 'context' })
+(loop_255_given_gate: BehaviorAssess { stage: 'given', text: 'Vocal%20cord%20spasm' })
+(loop_255_inactive: BehaviorTerminal { loopId: 255, loopName: 'The%20Tremble%20Loop' })
+(loop_255_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_255_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_255_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_255_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fear%20Operator', mechanism: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22' })
+(loop_255_result_branch: BehaviorEmit { emission: 'result', text: 'the%20audience%20feeling%20pity%20instead%20of%20respect' })
+(loop_255_sink: BehaviorSink)
+(loop_255_start: BehaviorStart { loopId: 255, loopName: 'The%20Tremble%20Loop', given: 'Vocal%20cord%20spasm', when: 'speaking%20with%20conviction', then: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22%20(The%20Fear%20Operator)', result: 'the%20audience%20feeling%20pity%20instead%20of%20respect', operatorName: 'The%20Fear%20Operator', operatorMechanism: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_255_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_255_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22%20(The%20Fear%20Operator)' })
+(loop_255_verdict: BehaviorVerdict { loopId: 255, loopName: 'The%20Tremble%20Loop', then: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22%20(The%20Fear%20Operator)', result: 'the%20audience%20feeling%20pity%20instead%20of%20respect', operatorName: 'The%20Fear%20Operator', operatorMechanism: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_255_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20with%20conviction' })
+
+// Topology
+(loop_255_start)-[:PROCESS]->(loop_255_given_gate)
+(loop_255_given_gate)-[:PROCESS { case: "ok" }]->(loop_255_when_gate)
+(loop_255_given_gate)-[:PROCESS { case: "err" }]->(loop_255_inactive)
+(loop_255_when_gate)-[:PROCESS { case: "ok" }]->(loop_255_context)
+(loop_255_when_gate)-[:PROCESS { case: "err" }]->(loop_255_inactive)
+(loop_255_context)-[:FORK { strategy: "behavior-branches" }]->(loop_255_context_branch | loop_255_then_branch | loop_255_operator_branch | loop_255_result_branch | loop_255_taxonomy_branch | loop_255_intervention_recognize | loop_255_intervention_interdict | loop_255_intervention_minimize)
+(loop_255_context_branch | loop_255_then_branch | loop_255_operator_branch | loop_255_result_branch | loop_255_taxonomy_branch | loop_255_intervention_recognize | loop_255_intervention_interdict | loop_255_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_255_verdict)
+(loop_255_inactive)-[:PROCESS]->(loop_255_sink)
+(loop_255_verdict)-[:PROCESS]->(loop_255_sink)
+(loop_255_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_255_then_branch)
+(loop_255_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_255_then_branch)
+(loop_255_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_255_then_branch)

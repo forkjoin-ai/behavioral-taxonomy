@@ -1,0 +1,33 @@
+// behavioral-loop-996.gg
+// Executable Gnosis projection for The Mascara Flake Loop.
+
+// Nodes
+(loop_996_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_996_context_branch: BehaviorEmit { emission: 'context' })
+(loop_996_given_gate: BehaviorAssess { stage: 'given', text: 'Old%20or%20dry%20cosmetics%20crumbling%20onto%20cheeks' })
+(loop_996_inactive: BehaviorTerminal { loopId: 996, loopName: 'The%20Mascara%20Flake%20Loop' })
+(loop_996_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_996_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_996_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_996_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Debris%20Operator', mechanism: 'black%20specks%20look%20like%20%22Dirt%22%20or%20%22Pepper%22' })
+(loop_996_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20%22Weary%22%20and%20%22Unfresh.%22' })
+(loop_996_sink: BehaviorSink)
+(loop_996_start: BehaviorStart { loopId: 996, loopName: 'The%20Mascara%20Flake%20Loop', given: 'Old%20or%20dry%20cosmetics%20crumbling%20onto%20cheeks', when: 'midday%20arrives', then: 'black%20specks%20look%20like%20%22Dirt%22%20or%20%22Pepper%22%20(The%20Debris%20Operator)', result: 'the%20individual%20looking%20%22Weary%22%20and%20%22Unfresh.%22', operatorName: 'The%20Debris%20Operator', operatorMechanism: 'black%20specks%20look%20like%20%22Dirt%22%20or%20%22Pepper%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_996_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_996_then_branch: BehaviorEmit { emission: 'then', text: 'black%20specks%20look%20like%20%22Dirt%22%20or%20%22Pepper%22%20(The%20Debris%20Operator)' })
+(loop_996_verdict: BehaviorVerdict { loopId: 996, loopName: 'The%20Mascara%20Flake%20Loop', then: 'black%20specks%20look%20like%20%22Dirt%22%20or%20%22Pepper%22%20(The%20Debris%20Operator)', result: 'the%20individual%20looking%20%22Weary%22%20and%20%22Unfresh.%22', operatorName: 'The%20Debris%20Operator', operatorMechanism: 'black%20specks%20look%20like%20%22Dirt%22%20or%20%22Pepper%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_996_when_gate: BehaviorAssess { stage: 'when', text: 'midday%20arrives' })
+
+// Topology
+(loop_996_start)-[:PROCESS]->(loop_996_given_gate)
+(loop_996_given_gate)-[:PROCESS { case: "ok" }]->(loop_996_when_gate)
+(loop_996_given_gate)-[:PROCESS { case: "err" }]->(loop_996_inactive)
+(loop_996_when_gate)-[:PROCESS { case: "ok" }]->(loop_996_context)
+(loop_996_when_gate)-[:PROCESS { case: "err" }]->(loop_996_inactive)
+(loop_996_context)-[:FORK { strategy: "behavior-branches" }]->(loop_996_context_branch | loop_996_then_branch | loop_996_operator_branch | loop_996_result_branch | loop_996_taxonomy_branch | loop_996_intervention_recognize | loop_996_intervention_interdict | loop_996_intervention_minimize)
+(loop_996_context_branch | loop_996_then_branch | loop_996_operator_branch | loop_996_result_branch | loop_996_taxonomy_branch | loop_996_intervention_recognize | loop_996_intervention_interdict | loop_996_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_996_verdict)
+(loop_996_inactive)-[:PROCESS]->(loop_996_sink)
+(loop_996_verdict)-[:PROCESS]->(loop_996_sink)
+(loop_996_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_996_then_branch)
+(loop_996_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_996_then_branch)
+(loop_996_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_996_then_branch)

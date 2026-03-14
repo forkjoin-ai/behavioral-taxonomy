@@ -1,0 +1,33 @@
+// behavioral-loop-609.gg
+// Executable Gnosis projection for The Flat Head Loop.
+
+// Nodes
+(loop_609_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_609_context_branch: BehaviorEmit { emission: 'context' })
+(loop_609_given_gate: BehaviorAssess { stage: 'given', text: 'Flattening%20of%20the%20occipital%20bone%20(back%20of%20head)' })
+(loop_609_inactive: BehaviorTerminal { loopId: 609, loopName: 'The%20Flat%20Head%20Loop' })
+(loop_609_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_609_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_609_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_609_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Block%20Operator', mechanism: 'the%20profile%20looks%20%22Boxy%22%20or%20%22Artificial%22' })
+(loop_609_result_branch: BehaviorEmit { emission: 'result', text: 'subtle%20assumptions%20of%20%22unnatural%22%20development%20or%20stubbornness' })
+(loop_609_sink: BehaviorSink)
+(loop_609_start: BehaviorStart { loopId: 609, loopName: 'The%20Flat%20Head%20Loop', given: 'Flattening%20of%20the%20occipital%20bone%20(back%20of%20head)', when: 'wearing%20short%20hair', then: 'the%20profile%20looks%20%22Boxy%22%20or%20%22Artificial%22%20(The%20Block%20Operator)', result: 'subtle%20assumptions%20of%20%22unnatural%22%20development%20or%20stubbornness', operatorName: 'The%20Block%20Operator', operatorMechanism: 'the%20profile%20looks%20%22Boxy%22%20or%20%22Artificial%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_609_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_609_then_branch: BehaviorEmit { emission: 'then', text: 'the%20profile%20looks%20%22Boxy%22%20or%20%22Artificial%22%20(The%20Block%20Operator)' })
+(loop_609_verdict: BehaviorVerdict { loopId: 609, loopName: 'The%20Flat%20Head%20Loop', then: 'the%20profile%20looks%20%22Boxy%22%20or%20%22Artificial%22%20(The%20Block%20Operator)', result: 'subtle%20assumptions%20of%20%22unnatural%22%20development%20or%20stubbornness', operatorName: 'The%20Block%20Operator', operatorMechanism: 'the%20profile%20looks%20%22Boxy%22%20or%20%22Artificial%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_609_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20short%20hair' })
+
+// Topology
+(loop_609_start)-[:PROCESS]->(loop_609_given_gate)
+(loop_609_given_gate)-[:PROCESS { case: "ok" }]->(loop_609_when_gate)
+(loop_609_given_gate)-[:PROCESS { case: "err" }]->(loop_609_inactive)
+(loop_609_when_gate)-[:PROCESS { case: "ok" }]->(loop_609_context)
+(loop_609_when_gate)-[:PROCESS { case: "err" }]->(loop_609_inactive)
+(loop_609_context)-[:FORK { strategy: "behavior-branches" }]->(loop_609_context_branch | loop_609_then_branch | loop_609_operator_branch | loop_609_result_branch | loop_609_taxonomy_branch | loop_609_intervention_recognize | loop_609_intervention_interdict | loop_609_intervention_minimize)
+(loop_609_context_branch | loop_609_then_branch | loop_609_operator_branch | loop_609_result_branch | loop_609_taxonomy_branch | loop_609_intervention_recognize | loop_609_intervention_interdict | loop_609_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_609_verdict)
+(loop_609_inactive)-[:PROCESS]->(loop_609_sink)
+(loop_609_verdict)-[:PROCESS]->(loop_609_sink)
+(loop_609_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_609_then_branch)
+(loop_609_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_609_then_branch)
+(loop_609_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_609_then_branch)

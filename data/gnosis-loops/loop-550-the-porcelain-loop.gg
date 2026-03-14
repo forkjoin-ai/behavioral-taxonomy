@@ -1,0 +1,33 @@
+// behavioral-loop-550.gg
+// Executable Gnosis projection for The Porcelain Loop.
+
+// Nodes
+(loop_550_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_550_context_branch: BehaviorEmit { emission: 'context' })
+(loop_550_given_gate: BehaviorAssess { stage: 'given', text: 'Extremely%20fine%20skin%20texture' })
+(loop_550_inactive: BehaviorTerminal { loopId: 550, loopName: 'The%20Porcelain%20Loop' })
+(loop_550_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_550_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_550_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_550_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Doll%20Operator', mechanism: 'the%20face%20retains%20%22Neoteny%22' })
+(loop_550_result_branch: BehaviorEmit { emission: 'result', text: "being%20carded%2FID'd%20well%20into%20the%2030s%2C%20delaying%20%22Adult%22%20respect" })
+(loop_550_sink: BehaviorSink)
+(loop_550_start: BehaviorStart { loopId: 550, loopName: 'The%20Porcelain%20Loop', given: 'Extremely%20fine%20skin%20texture', when: 'aging', then: 'the%20face%20retains%20%22Neoteny%22%20(The%20Doll%20Operator)', result: "being%20carded%2FID'd%20well%20into%20the%2030s%2C%20delaying%20%22Adult%22%20respect", operatorName: 'The%20Doll%20Operator', operatorMechanism: 'the%20face%20retains%20%22Neoteny%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_550_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_550_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20retains%20%22Neoteny%22%20(The%20Doll%20Operator)' })
+(loop_550_verdict: BehaviorVerdict { loopId: 550, loopName: 'The%20Porcelain%20Loop', then: 'the%20face%20retains%20%22Neoteny%22%20(The%20Doll%20Operator)', result: "being%20carded%2FID'd%20well%20into%20the%2030s%2C%20delaying%20%22Adult%22%20respect", operatorName: 'The%20Doll%20Operator', operatorMechanism: 'the%20face%20retains%20%22Neoteny%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_550_when_gate: BehaviorAssess { stage: 'when', text: 'aging' })
+
+// Topology
+(loop_550_start)-[:PROCESS]->(loop_550_given_gate)
+(loop_550_given_gate)-[:PROCESS { case: "ok" }]->(loop_550_when_gate)
+(loop_550_given_gate)-[:PROCESS { case: "err" }]->(loop_550_inactive)
+(loop_550_when_gate)-[:PROCESS { case: "ok" }]->(loop_550_context)
+(loop_550_when_gate)-[:PROCESS { case: "err" }]->(loop_550_inactive)
+(loop_550_context)-[:FORK { strategy: "behavior-branches" }]->(loop_550_context_branch | loop_550_then_branch | loop_550_operator_branch | loop_550_result_branch | loop_550_taxonomy_branch | loop_550_intervention_recognize | loop_550_intervention_interdict | loop_550_intervention_minimize)
+(loop_550_context_branch | loop_550_then_branch | loop_550_operator_branch | loop_550_result_branch | loop_550_taxonomy_branch | loop_550_intervention_recognize | loop_550_intervention_interdict | loop_550_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_550_verdict)
+(loop_550_inactive)-[:PROCESS]->(loop_550_sink)
+(loop_550_verdict)-[:PROCESS]->(loop_550_sink)
+(loop_550_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_550_then_branch)
+(loop_550_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_550_then_branch)
+(loop_550_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_550_then_branch)

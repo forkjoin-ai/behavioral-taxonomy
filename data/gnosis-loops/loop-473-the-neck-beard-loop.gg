@@ -1,0 +1,33 @@
+// behavioral-loop-473.gg
+// Executable Gnosis projection for The Neck Beard Loop.
+
+// Nodes
+(loop_473_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_473_context_branch: BehaviorEmit { emission: 'context' })
+(loop_473_given_gate: BehaviorAssess { stage: 'given', text: 'Hair%20growth%20below%20the%20jawline%2Fon%20throat' })
+(loop_473_inactive: BehaviorTerminal { loopId: 473, loopName: 'The%20Neck%20Beard%20Loop' })
+(loop_473_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_473_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_473_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_473_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Basement%20Operator', mechanism: 'it%20signals%20%22Neglect%22%20or%20%22Internet%20Subculture%22' })
+(loop_473_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20disqualification%20from%20%22High%20Status%22%20mating%20pools' })
+(loop_473_sink: BehaviorSink)
+(loop_473_start: BehaviorStart { loopId: 473, loopName: 'The%20Neck%20Beard%20Loop', given: 'Hair%20growth%20below%20the%20jawline%2Fon%20throat', when: 'seen%20in%20profile', then: 'it%20signals%20%22Neglect%22%20or%20%22Internet%20Subculture%22%20(The%20Basement%20Operator)', result: 'immediate%20disqualification%20from%20%22High%20Status%22%20mating%20pools', operatorName: 'The%20Basement%20Operator', operatorMechanism: 'it%20signals%20%22Neglect%22%20or%20%22Internet%20Subculture%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_473_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_473_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Neglect%22%20or%20%22Internet%20Subculture%22%20(The%20Basement%20Operator)' })
+(loop_473_verdict: BehaviorVerdict { loopId: 473, loopName: 'The%20Neck%20Beard%20Loop', then: 'it%20signals%20%22Neglect%22%20or%20%22Internet%20Subculture%22%20(The%20Basement%20Operator)', result: 'immediate%20disqualification%20from%20%22High%20Status%22%20mating%20pools', operatorName: 'The%20Basement%20Operator', operatorMechanism: 'it%20signals%20%22Neglect%22%20or%20%22Internet%20Subculture%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_473_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20in%20profile' })
+
+// Topology
+(loop_473_start)-[:PROCESS]->(loop_473_given_gate)
+(loop_473_given_gate)-[:PROCESS { case: "ok" }]->(loop_473_when_gate)
+(loop_473_given_gate)-[:PROCESS { case: "err" }]->(loop_473_inactive)
+(loop_473_when_gate)-[:PROCESS { case: "ok" }]->(loop_473_context)
+(loop_473_when_gate)-[:PROCESS { case: "err" }]->(loop_473_inactive)
+(loop_473_context)-[:FORK { strategy: "behavior-branches" }]->(loop_473_context_branch | loop_473_then_branch | loop_473_operator_branch | loop_473_result_branch | loop_473_taxonomy_branch | loop_473_intervention_recognize | loop_473_intervention_interdict | loop_473_intervention_minimize)
+(loop_473_context_branch | loop_473_then_branch | loop_473_operator_branch | loop_473_result_branch | loop_473_taxonomy_branch | loop_473_intervention_recognize | loop_473_intervention_interdict | loop_473_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_473_verdict)
+(loop_473_inactive)-[:PROCESS]->(loop_473_sink)
+(loop_473_verdict)-[:PROCESS]->(loop_473_sink)
+(loop_473_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_473_then_branch)
+(loop_473_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_473_then_branch)
+(loop_473_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_473_then_branch)

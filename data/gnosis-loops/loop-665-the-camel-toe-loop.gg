@@ -1,0 +1,35 @@
+// behavioral-loop-665.gg
+// Executable Gnosis projection for The Camel Toe Loop.
+
+// Nodes
+(loop_665_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_665_context_branch: BehaviorEmit { emission: 'context' })
+(loop_665_given_gate: BehaviorAssess { stage: 'given', text: 'Pants%20too%20tight%20in%20the%20crotch%20(Female)' })
+(loop_665_inactive: BehaviorTerminal { loopId: 665, loopName: 'The%20Camel%20Toe%20Loop' })
+(loop_665_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_665_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_665_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_665_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_665_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vulgar%20Operator', mechanism: 'it%20draws%20eyes%20to%20the%20groin' })
+(loop_665_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20professional%20credibility%20and%20%22Trashy%22%20labeling' })
+(loop_665_sink: BehaviorSink)
+(loop_665_start: BehaviorStart { loopId: 665, loopName: 'The%20Camel%20Toe%20Loop', given: 'Pants%20too%20tight%20in%20the%20crotch%20(Female)', when: 'standing', then: 'it%20draws%20eyes%20to%20the%20groin%20(The%20Vulgar%20Operator)', result: 'loss%20of%20professional%20credibility%20and%20%22Trashy%22%20labeling', operatorName: 'The%20Vulgar%20Operator', operatorMechanism: 'it%20draws%20eyes%20to%20the%20groin', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION|TRUST', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting', intervention_leverage: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_665_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION|TRUST' })
+(loop_665_then_branch: BehaviorEmit { emission: 'then', text: 'it%20draws%20eyes%20to%20the%20groin%20(The%20Vulgar%20Operator)' })
+(loop_665_verdict: BehaviorVerdict { loopId: 665, loopName: 'The%20Camel%20Toe%20Loop', then: 'it%20draws%20eyes%20to%20the%20groin%20(The%20Vulgar%20Operator)', result: 'loss%20of%20professional%20credibility%20and%20%22Trashy%22%20labeling', operatorName: 'The%20Vulgar%20Operator', operatorMechanism: 'it%20draws%20eyes%20to%20the%20groin', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION|TRUST' })
+(loop_665_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_665_start)-[:PROCESS]->(loop_665_given_gate)
+(loop_665_given_gate)-[:PROCESS { case: "ok" }]->(loop_665_when_gate)
+(loop_665_given_gate)-[:PROCESS { case: "err" }]->(loop_665_inactive)
+(loop_665_when_gate)-[:PROCESS { case: "ok" }]->(loop_665_context)
+(loop_665_when_gate)-[:PROCESS { case: "err" }]->(loop_665_inactive)
+(loop_665_context)-[:FORK { strategy: "behavior-branches" }]->(loop_665_context_branch | loop_665_then_branch | loop_665_operator_branch | loop_665_result_branch | loop_665_taxonomy_branch | loop_665_intervention_recognize | loop_665_intervention_interdict | loop_665_intervention_minimize | loop_665_intervention_leverage)
+(loop_665_context_branch | loop_665_then_branch | loop_665_operator_branch | loop_665_result_branch | loop_665_taxonomy_branch | loop_665_intervention_recognize | loop_665_intervention_interdict | loop_665_intervention_minimize | loop_665_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_665_verdict)
+(loop_665_inactive)-[:PROCESS]->(loop_665_sink)
+(loop_665_verdict)-[:PROCESS]->(loop_665_sink)
+(loop_665_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_665_then_branch)
+(loop_665_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_665_then_branch)
+(loop_665_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_665_then_branch)
+(loop_665_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_665_result_branch)

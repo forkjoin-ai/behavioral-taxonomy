@@ -1,0 +1,31 @@
+// behavioral-loop-726.gg
+// Executable Gnosis projection for The Sneak Loop.
+
+// Nodes
+(loop_726_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_726_context_branch: BehaviorEmit { emission: 'context' })
+(loop_726_given_gate: BehaviorAssess { stage: 'given', text: 'Silent%2C%20ball-of-foot%20gait' })
+(loop_726_inactive: BehaviorTerminal { loopId: 726, loopName: 'The%20Sneak%20Loop' })
+(loop_726_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_726_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_726_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Ninja%20Operator', mechanism: 'the%20individual%20startles%20the%20occupant' })
+(loop_726_result_branch: BehaviorEmit { emission: 'result', text: "being%20told%20%22Don't%20sneak%20up%20on%20me!%22%2C%20creating%20mistrust" })
+(loop_726_sink: BehaviorSink)
+(loop_726_start: BehaviorStart { loopId: 726, loopName: 'The%20Sneak%20Loop', given: 'Silent%2C%20ball-of-foot%20gait', when: 'approaching%20a%20desk', then: 'the%20individual%20startles%20the%20occupant%20(The%20Ninja%20Operator)', result: "being%20told%20%22Don't%20sneak%20up%20on%20me!%22%2C%20creating%20mistrust", operatorName: 'The%20Ninja%20Operator', operatorMechanism: 'the%20individual%20startles%20the%20occupant', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_726_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'TRUST' })
+(loop_726_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20startles%20the%20occupant%20(The%20Ninja%20Operator)' })
+(loop_726_verdict: BehaviorVerdict { loopId: 726, loopName: 'The%20Sneak%20Loop', then: 'the%20individual%20startles%20the%20occupant%20(The%20Ninja%20Operator)', result: "being%20told%20%22Don't%20sneak%20up%20on%20me!%22%2C%20creating%20mistrust", operatorName: 'The%20Ninja%20Operator', operatorMechanism: 'the%20individual%20startles%20the%20occupant', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'TRUST' })
+(loop_726_when_gate: BehaviorAssess { stage: 'when', text: 'approaching%20a%20desk' })
+
+// Topology
+(loop_726_start)-[:PROCESS]->(loop_726_given_gate)
+(loop_726_given_gate)-[:PROCESS { case: "ok" }]->(loop_726_when_gate)
+(loop_726_given_gate)-[:PROCESS { case: "err" }]->(loop_726_inactive)
+(loop_726_when_gate)-[:PROCESS { case: "ok" }]->(loop_726_context)
+(loop_726_when_gate)-[:PROCESS { case: "err" }]->(loop_726_inactive)
+(loop_726_context)-[:FORK { strategy: "behavior-branches" }]->(loop_726_context_branch | loop_726_then_branch | loop_726_operator_branch | loop_726_result_branch | loop_726_taxonomy_branch | loop_726_intervention_recognize | loop_726_intervention_leverage)
+(loop_726_context_branch | loop_726_then_branch | loop_726_operator_branch | loop_726_result_branch | loop_726_taxonomy_branch | loop_726_intervention_recognize | loop_726_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_726_verdict)
+(loop_726_inactive)-[:PROCESS]->(loop_726_sink)
+(loop_726_verdict)-[:PROCESS]->(loop_726_sink)
+(loop_726_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_726_then_branch)
+(loop_726_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_726_result_branch)

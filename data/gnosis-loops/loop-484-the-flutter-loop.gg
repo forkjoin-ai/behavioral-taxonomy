@@ -1,0 +1,33 @@
+// behavioral-loop-484.gg
+// Executable Gnosis projection for The Flutter Loop.
+
+// Nodes
+(loop_484_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_484_context_branch: BehaviorEmit { emission: 'context' })
+(loop_484_given_gate: BehaviorAssess { stage: 'given', text: 'Dry%20eyes%20or%20high%20anxiety' })
+(loop_484_inactive: BehaviorTerminal { loopId: 484, loopName: 'The%20Flutter%20Loop' })
+(loop_484_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_484_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_484_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_484_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Glitch%20Operator', mechanism: 'rapid%20blinking%20signals%20%22Processing%20Error%22%20or%20%22Flirtation%22' })
+(loop_484_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20pausing%2C%20confused%20by%20the%20ambiguous%20signal' })
+(loop_484_sink: BehaviorSink)
+(loop_484_start: BehaviorStart { loopId: 484, loopName: 'The%20Flutter%20Loop', given: 'Dry%20eyes%20or%20high%20anxiety', when: 'listening%20to%20a%20pitch', then: 'rapid%20blinking%20signals%20%22Processing%20Error%22%20or%20%22Flirtation%22%20(The%20Glitch%20Operator)', result: 'the%20speaker%20pausing%2C%20confused%20by%20the%20ambiguous%20signal', operatorName: 'The%20Glitch%20Operator', operatorMechanism: 'rapid%20blinking%20signals%20%22Processing%20Error%22%20or%20%22Flirtation%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_484_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_484_then_branch: BehaviorEmit { emission: 'then', text: 'rapid%20blinking%20signals%20%22Processing%20Error%22%20or%20%22Flirtation%22%20(The%20Glitch%20Operator)' })
+(loop_484_verdict: BehaviorVerdict { loopId: 484, loopName: 'The%20Flutter%20Loop', then: 'rapid%20blinking%20signals%20%22Processing%20Error%22%20or%20%22Flirtation%22%20(The%20Glitch%20Operator)', result: 'the%20speaker%20pausing%2C%20confused%20by%20the%20ambiguous%20signal', operatorName: 'The%20Glitch%20Operator', operatorMechanism: 'rapid%20blinking%20signals%20%22Processing%20Error%22%20or%20%22Flirtation%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_484_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20to%20a%20pitch' })
+
+// Topology
+(loop_484_start)-[:PROCESS]->(loop_484_given_gate)
+(loop_484_given_gate)-[:PROCESS { case: "ok" }]->(loop_484_when_gate)
+(loop_484_given_gate)-[:PROCESS { case: "err" }]->(loop_484_inactive)
+(loop_484_when_gate)-[:PROCESS { case: "ok" }]->(loop_484_context)
+(loop_484_when_gate)-[:PROCESS { case: "err" }]->(loop_484_inactive)
+(loop_484_context)-[:FORK { strategy: "behavior-branches" }]->(loop_484_context_branch | loop_484_then_branch | loop_484_operator_branch | loop_484_result_branch | loop_484_taxonomy_branch | loop_484_intervention_recognize | loop_484_intervention_interdict | loop_484_intervention_minimize)
+(loop_484_context_branch | loop_484_then_branch | loop_484_operator_branch | loop_484_result_branch | loop_484_taxonomy_branch | loop_484_intervention_recognize | loop_484_intervention_interdict | loop_484_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_484_verdict)
+(loop_484_inactive)-[:PROCESS]->(loop_484_sink)
+(loop_484_verdict)-[:PROCESS]->(loop_484_sink)
+(loop_484_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_484_then_branch)
+(loop_484_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_484_then_branch)
+(loop_484_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_484_then_branch)

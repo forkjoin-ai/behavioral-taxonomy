@@ -1,0 +1,33 @@
+// behavioral-loop-211.gg
+// Executable Gnosis projection for The Steepling Loop.
+
+// Nodes
+(loop_211_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_211_context_branch: BehaviorEmit { emission: 'context' })
+(loop_211_given_gate: BehaviorAssess { stage: 'given', text: 'Habitual%20touching%20of%20fingertips' })
+(loop_211_inactive: BehaviorTerminal { loopId: 211, loopName: 'The%20Steepling%20Loop' })
+(loop_211_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_211_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_211_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_211_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intellectual%20Operator', mechanism: 'observers%20perceive%20%22Analysis%22%20and%20%22Superiority%22' })
+(loop_211_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20feeling%20judged%2C%20often%20leading%20them%20to%20**Stutter%20or%20Flounder**' })
+(loop_211_sink: BehaviorSink)
+(loop_211_start: BehaviorStart { loopId: 211, loopName: 'The%20Steepling%20Loop', given: 'Habitual%20touching%20of%20fingertips', when: 'listening', then: 'observers%20perceive%20%22Analysis%22%20and%20%22Superiority%22%20(The%20Intellectual%20Operator)', result: 'the%20speaker%20feeling%20judged%2C%20often%20leading%20them%20to%20**Stutter%20or%20Flounder**', operatorName: 'The%20Intellectual%20Operator', operatorMechanism: 'observers%20perceive%20%22Analysis%22%20and%20%22Superiority%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_211_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_211_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Analysis%22%20and%20%22Superiority%22%20(The%20Intellectual%20Operator)' })
+(loop_211_verdict: BehaviorVerdict { loopId: 211, loopName: 'The%20Steepling%20Loop', then: 'observers%20perceive%20%22Analysis%22%20and%20%22Superiority%22%20(The%20Intellectual%20Operator)', result: 'the%20speaker%20feeling%20judged%2C%20often%20leading%20them%20to%20**Stutter%20or%20Flounder**', operatorName: 'The%20Intellectual%20Operator', operatorMechanism: 'observers%20perceive%20%22Analysis%22%20and%20%22Superiority%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_211_when_gate: BehaviorAssess { stage: 'when', text: 'listening' })
+
+// Topology
+(loop_211_start)-[:PROCESS]->(loop_211_given_gate)
+(loop_211_given_gate)-[:PROCESS { case: "ok" }]->(loop_211_when_gate)
+(loop_211_given_gate)-[:PROCESS { case: "err" }]->(loop_211_inactive)
+(loop_211_when_gate)-[:PROCESS { case: "ok" }]->(loop_211_context)
+(loop_211_when_gate)-[:PROCESS { case: "err" }]->(loop_211_inactive)
+(loop_211_context)-[:FORK { strategy: "behavior-branches" }]->(loop_211_context_branch | loop_211_then_branch | loop_211_operator_branch | loop_211_result_branch | loop_211_taxonomy_branch | loop_211_intervention_recognize | loop_211_intervention_interdict | loop_211_intervention_minimize)
+(loop_211_context_branch | loop_211_then_branch | loop_211_operator_branch | loop_211_result_branch | loop_211_taxonomy_branch | loop_211_intervention_recognize | loop_211_intervention_interdict | loop_211_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_211_verdict)
+(loop_211_inactive)-[:PROCESS]->(loop_211_sink)
+(loop_211_verdict)-[:PROCESS]->(loop_211_sink)
+(loop_211_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_211_then_branch)
+(loop_211_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_211_then_branch)
+(loop_211_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_211_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-702.gg
+// Executable Gnosis projection for The Sun Spot Loop.
+
+// Nodes
+(loop_702_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_702_context_branch: BehaviorEmit { emission: 'context' })
+(loop_702_given_gate: BehaviorAssess { stage: 'given', text: 'Asymmetric%20damage%20on%20the%20left%20side%20of%20face%20(driving%20side)' })
+(loop_702_inactive: BehaviorTerminal { loopId: 702, loopName: 'The%20Sun%20Spot%20Loop' })
+(loop_702_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_702_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_702_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_702_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Phantom%20Operator', mechanism: 'the%20individual%20looks%20%22Older%22%20than%20from%20the%20right' })
+(loop_702_result_branch: BehaviorEmit { emission: 'result', text: 'inconsistent%20age%20estimation' })
+(loop_702_sink: BehaviorSink)
+(loop_702_start: BehaviorStart { loopId: 702, loopName: 'The%20Sun%20Spot%20Loop', given: 'Asymmetric%20damage%20on%20the%20left%20side%20of%20face%20(driving%20side)', when: 'viewed%20from%20the%20left', then: 'the%20individual%20looks%20%22Older%22%20than%20from%20the%20right%20(The%20Phantom%20Operator)', result: 'inconsistent%20age%20estimation', operatorName: 'The%20Phantom%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Older%22%20than%20from%20the%20right', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_702_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_702_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20looks%20%22Older%22%20than%20from%20the%20right%20(The%20Phantom%20Operator)' })
+(loop_702_verdict: BehaviorVerdict { loopId: 702, loopName: 'The%20Sun%20Spot%20Loop', then: 'the%20individual%20looks%20%22Older%22%20than%20from%20the%20right%20(The%20Phantom%20Operator)', result: 'inconsistent%20age%20estimation', operatorName: 'The%20Phantom%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Older%22%20than%20from%20the%20right', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_702_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20from%20the%20left' })
+
+// Topology
+(loop_702_start)-[:PROCESS]->(loop_702_given_gate)
+(loop_702_given_gate)-[:PROCESS { case: "ok" }]->(loop_702_when_gate)
+(loop_702_given_gate)-[:PROCESS { case: "err" }]->(loop_702_inactive)
+(loop_702_when_gate)-[:PROCESS { case: "ok" }]->(loop_702_context)
+(loop_702_when_gate)-[:PROCESS { case: "err" }]->(loop_702_inactive)
+(loop_702_context)-[:FORK { strategy: "behavior-branches" }]->(loop_702_context_branch | loop_702_then_branch | loop_702_operator_branch | loop_702_result_branch | loop_702_taxonomy_branch | loop_702_intervention_recognize | loop_702_intervention_interdict | loop_702_intervention_minimize)
+(loop_702_context_branch | loop_702_then_branch | loop_702_operator_branch | loop_702_result_branch | loop_702_taxonomy_branch | loop_702_intervention_recognize | loop_702_intervention_interdict | loop_702_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_702_verdict)
+(loop_702_inactive)-[:PROCESS]->(loop_702_sink)
+(loop_702_verdict)-[:PROCESS]->(loop_702_sink)
+(loop_702_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_702_then_branch)
+(loop_702_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_702_then_branch)
+(loop_702_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_702_then_branch)

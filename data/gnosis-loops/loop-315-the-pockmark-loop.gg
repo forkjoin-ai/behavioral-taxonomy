@@ -1,0 +1,33 @@
+// behavioral-loop-315.gg
+// Executable Gnosis projection for The Pockmark Loop.
+
+// Nodes
+(loop_315_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_315_context_branch: BehaviorEmit { emission: 'context' })
+(loop_315_given_gate: BehaviorAssess { stage: 'given', text: 'Deep%20rolling%20scars' })
+(loop_315_inactive: BehaviorTerminal { loopId: 315, loopName: 'The%20Pockmark%20Loop' })
+(loop_315_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_315_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_315_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_315_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Class%20Bias%20Operator', mechanism: 'observers%20assume%20%22Tough%20Childhood%22%20or%20%22Bad%20Diet%22' })
+(loop_315_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20developing%20a%20**%22Thick%20Skin%22%20Persona**' })
+(loop_315_sink: BehaviorSink)
+(loop_315_start: BehaviorStart { loopId: 315, loopName: 'The%20Pockmark%20Loop', given: 'Deep%20rolling%20scars', when: 'viewed%20in%20sidelight', then: 'observers%20assume%20%22Tough%20Childhood%22%20or%20%22Bad%20Diet%22%20(The%20Class%20Bias%20Operator)', result: 'the%20individual%20developing%20a%20**%22Thick%20Skin%22%20Persona**', operatorName: 'The%20Class%20Bias%20Operator', operatorMechanism: 'observers%20assume%20%22Tough%20Childhood%22%20or%20%22Bad%20Diet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_315_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_315_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Tough%20Childhood%22%20or%20%22Bad%20Diet%22%20(The%20Class%20Bias%20Operator)' })
+(loop_315_verdict: BehaviorVerdict { loopId: 315, loopName: 'The%20Pockmark%20Loop', then: 'observers%20assume%20%22Tough%20Childhood%22%20or%20%22Bad%20Diet%22%20(The%20Class%20Bias%20Operator)', result: 'the%20individual%20developing%20a%20**%22Thick%20Skin%22%20Persona**', operatorName: 'The%20Class%20Bias%20Operator', operatorMechanism: 'observers%20assume%20%22Tough%20Childhood%22%20or%20%22Bad%20Diet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_315_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20in%20sidelight' })
+
+// Topology
+(loop_315_start)-[:PROCESS]->(loop_315_given_gate)
+(loop_315_given_gate)-[:PROCESS { case: "ok" }]->(loop_315_when_gate)
+(loop_315_given_gate)-[:PROCESS { case: "err" }]->(loop_315_inactive)
+(loop_315_when_gate)-[:PROCESS { case: "ok" }]->(loop_315_context)
+(loop_315_when_gate)-[:PROCESS { case: "err" }]->(loop_315_inactive)
+(loop_315_context)-[:FORK { strategy: "behavior-branches" }]->(loop_315_context_branch | loop_315_then_branch | loop_315_operator_branch | loop_315_result_branch | loop_315_taxonomy_branch | loop_315_intervention_recognize | loop_315_intervention_interdict | loop_315_intervention_minimize)
+(loop_315_context_branch | loop_315_then_branch | loop_315_operator_branch | loop_315_result_branch | loop_315_taxonomy_branch | loop_315_intervention_recognize | loop_315_intervention_interdict | loop_315_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_315_verdict)
+(loop_315_inactive)-[:PROCESS]->(loop_315_sink)
+(loop_315_verdict)-[:PROCESS]->(loop_315_sink)
+(loop_315_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_315_then_branch)
+(loop_315_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_315_then_branch)
+(loop_315_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_315_then_branch)

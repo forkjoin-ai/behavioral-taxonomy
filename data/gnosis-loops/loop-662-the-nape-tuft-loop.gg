@@ -1,0 +1,33 @@
+// behavioral-loop-662.gg
+// Executable Gnosis projection for The Nape Tuft Loop.
+
+// Nodes
+(loop_662_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_662_context_branch: BehaviorEmit { emission: 'context' })
+(loop_662_given_gate: BehaviorAssess { stage: 'given', text: 'Erratic%20growth%20at%20the%20neckline' })
+(loop_662_inactive: BehaviorTerminal { loopId: 662, loopName: 'The%20Nape%20Tuft%20Loop' })
+(loop_662_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_662_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_662_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_662_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Scruff%20Operator', mechanism: 'it%20looks%20%22Messy%22' })
+(loop_662_result_branch: BehaviorEmit { emission: 'result', text: 'needing%20frequent%20barber%20visits%20to%20maintain%20%22Clean%22%20status' })
+(loop_662_sink: BehaviorSink)
+(loop_662_start: BehaviorStart { loopId: 662, loopName: 'The%20Nape%20Tuft%20Loop', given: 'Erratic%20growth%20at%20the%20neckline', when: 'wearing%20a%20short%20haircut', then: 'it%20looks%20%22Messy%22%20(The%20Scruff%20Operator)', result: 'needing%20frequent%20barber%20visits%20to%20maintain%20%22Clean%22%20status', operatorName: 'The%20Scruff%20Operator', operatorMechanism: 'it%20looks%20%22Messy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_662_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_662_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20%22Messy%22%20(The%20Scruff%20Operator)' })
+(loop_662_verdict: BehaviorVerdict { loopId: 662, loopName: 'The%20Nape%20Tuft%20Loop', then: 'it%20looks%20%22Messy%22%20(The%20Scruff%20Operator)', result: 'needing%20frequent%20barber%20visits%20to%20maintain%20%22Clean%22%20status', operatorName: 'The%20Scruff%20Operator', operatorMechanism: 'it%20looks%20%22Messy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_662_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20a%20short%20haircut' })
+
+// Topology
+(loop_662_start)-[:PROCESS]->(loop_662_given_gate)
+(loop_662_given_gate)-[:PROCESS { case: "ok" }]->(loop_662_when_gate)
+(loop_662_given_gate)-[:PROCESS { case: "err" }]->(loop_662_inactive)
+(loop_662_when_gate)-[:PROCESS { case: "ok" }]->(loop_662_context)
+(loop_662_when_gate)-[:PROCESS { case: "err" }]->(loop_662_inactive)
+(loop_662_context)-[:FORK { strategy: "behavior-branches" }]->(loop_662_context_branch | loop_662_then_branch | loop_662_operator_branch | loop_662_result_branch | loop_662_taxonomy_branch | loop_662_intervention_recognize | loop_662_intervention_interdict | loop_662_intervention_minimize)
+(loop_662_context_branch | loop_662_then_branch | loop_662_operator_branch | loop_662_result_branch | loop_662_taxonomy_branch | loop_662_intervention_recognize | loop_662_intervention_interdict | loop_662_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_662_verdict)
+(loop_662_inactive)-[:PROCESS]->(loop_662_sink)
+(loop_662_verdict)-[:PROCESS]->(loop_662_sink)
+(loop_662_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_662_then_branch)
+(loop_662_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_662_then_branch)
+(loop_662_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_662_then_branch)

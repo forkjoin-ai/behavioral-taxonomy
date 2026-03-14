@@ -1,0 +1,33 @@
+// behavioral-loop-689.gg
+// Executable Gnosis projection for The Eye Roll Loop.
+
+// Nodes
+(loop_689_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_689_context_branch: BehaviorEmit { emission: 'context' })
+(loop_689_given_gate: BehaviorAssess { stage: 'given', text: 'Habitual%20upward%20saccade%20when%20frustrated' })
+(loop_689_inactive: BehaviorTerminal { loopId: 689, loopName: 'The%20Eye%20Roll%20Loop' })
+(loop_689_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_689_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_689_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_689_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Teenager%20Operator', mechanism: 'it%20signals%20%22Disrespect%22' })
+(loop_689_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20firing%20or%20disciplinary%20action%20in%20hierarchies' })
+(loop_689_sink: BehaviorSink)
+(loop_689_start: BehaviorStart { loopId: 689, loopName: 'The%20Eye%20Roll%20Loop', given: 'Habitual%20upward%20saccade%20when%20frustrated', when: 'receiving%20feedback', then: 'it%20signals%20%22Disrespect%22%20(The%20Teenager%20Operator)', result: 'immediate%20firing%20or%20disciplinary%20action%20in%20hierarchies', operatorName: 'The%20Teenager%20Operator', operatorMechanism: 'it%20signals%20%22Disrespect%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_689_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_689_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Disrespect%22%20(The%20Teenager%20Operator)' })
+(loop_689_verdict: BehaviorVerdict { loopId: 689, loopName: 'The%20Eye%20Roll%20Loop', then: 'it%20signals%20%22Disrespect%22%20(The%20Teenager%20Operator)', result: 'immediate%20firing%20or%20disciplinary%20action%20in%20hierarchies', operatorName: 'The%20Teenager%20Operator', operatorMechanism: 'it%20signals%20%22Disrespect%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_689_when_gate: BehaviorAssess { stage: 'when', text: 'receiving%20feedback' })
+
+// Topology
+(loop_689_start)-[:PROCESS]->(loop_689_given_gate)
+(loop_689_given_gate)-[:PROCESS { case: "ok" }]->(loop_689_when_gate)
+(loop_689_given_gate)-[:PROCESS { case: "err" }]->(loop_689_inactive)
+(loop_689_when_gate)-[:PROCESS { case: "ok" }]->(loop_689_context)
+(loop_689_when_gate)-[:PROCESS { case: "err" }]->(loop_689_inactive)
+(loop_689_context)-[:FORK { strategy: "behavior-branches" }]->(loop_689_context_branch | loop_689_then_branch | loop_689_operator_branch | loop_689_result_branch | loop_689_taxonomy_branch | loop_689_intervention_recognize | loop_689_intervention_interdict | loop_689_intervention_minimize)
+(loop_689_context_branch | loop_689_then_branch | loop_689_operator_branch | loop_689_result_branch | loop_689_taxonomy_branch | loop_689_intervention_recognize | loop_689_intervention_interdict | loop_689_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_689_verdict)
+(loop_689_inactive)-[:PROCESS]->(loop_689_sink)
+(loop_689_verdict)-[:PROCESS]->(loop_689_sink)
+(loop_689_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_689_then_branch)
+(loop_689_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_689_then_branch)
+(loop_689_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_689_then_branch)

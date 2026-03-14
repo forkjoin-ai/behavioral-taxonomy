@@ -1,0 +1,33 @@
+// behavioral-loop-824.gg
+// Executable Gnosis projection for The Crepey Skin Loop.
+
+// Nodes
+(loop_824_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_824_context_branch: BehaviorEmit { emission: 'context' })
+(loop_824_given_gate: BehaviorAssess { stage: 'given', text: 'Wrinkled%20texture%20on%20inner%20arms%2Fdecolletage' })
+(loop_824_inactive: BehaviorTerminal { loopId: 824, loopName: 'The%20Crepey%20Skin%20Loop' })
+(loop_824_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_824_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_824_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_824_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tissue%20Paper%20Operator', mechanism: 'it%20signals%20%22Fragility%22' })
+(loop_824_result_branch: BehaviorEmit { emission: 'result', text: 'being%20treated%20delicately' })
+(loop_824_sink: BehaviorSink)
+(loop_824_start: BehaviorStart { loopId: 824, loopName: 'The%20Crepey%20Skin%20Loop', given: 'Wrinkled%20texture%20on%20inner%20arms%2Fdecolletage', when: 'wearing%20sleeveless%20tops', then: 'it%20signals%20%22Fragility%22%20(The%20Tissue%20Paper%20Operator)', result: 'being%20treated%20delicately', operatorName: 'The%20Tissue%20Paper%20Operator', operatorMechanism: 'it%20signals%20%22Fragility%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_824_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_824_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Fragility%22%20(The%20Tissue%20Paper%20Operator)' })
+(loop_824_verdict: BehaviorVerdict { loopId: 824, loopName: 'The%20Crepey%20Skin%20Loop', then: 'it%20signals%20%22Fragility%22%20(The%20Tissue%20Paper%20Operator)', result: 'being%20treated%20delicately', operatorName: 'The%20Tissue%20Paper%20Operator', operatorMechanism: 'it%20signals%20%22Fragility%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_824_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20sleeveless%20tops' })
+
+// Topology
+(loop_824_start)-[:PROCESS]->(loop_824_given_gate)
+(loop_824_given_gate)-[:PROCESS { case: "ok" }]->(loop_824_when_gate)
+(loop_824_given_gate)-[:PROCESS { case: "err" }]->(loop_824_inactive)
+(loop_824_when_gate)-[:PROCESS { case: "ok" }]->(loop_824_context)
+(loop_824_when_gate)-[:PROCESS { case: "err" }]->(loop_824_inactive)
+(loop_824_context)-[:FORK { strategy: "behavior-branches" }]->(loop_824_context_branch | loop_824_then_branch | loop_824_operator_branch | loop_824_result_branch | loop_824_taxonomy_branch | loop_824_intervention_recognize | loop_824_intervention_interdict | loop_824_intervention_minimize)
+(loop_824_context_branch | loop_824_then_branch | loop_824_operator_branch | loop_824_result_branch | loop_824_taxonomy_branch | loop_824_intervention_recognize | loop_824_intervention_interdict | loop_824_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_824_verdict)
+(loop_824_inactive)-[:PROCESS]->(loop_824_sink)
+(loop_824_verdict)-[:PROCESS]->(loop_824_sink)
+(loop_824_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_824_then_branch)
+(loop_824_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_824_then_branch)
+(loop_824_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_824_then_branch)

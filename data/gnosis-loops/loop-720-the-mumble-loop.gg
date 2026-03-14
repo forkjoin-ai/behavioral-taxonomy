@@ -1,0 +1,33 @@
+// behavioral-loop-720.gg
+// Executable Gnosis projection for The Mumble Loop.
+
+// Nodes
+(loop_720_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_720_context_branch: BehaviorEmit { emission: 'context' })
+(loop_720_given_gate: BehaviorAssess { stage: 'given', text: 'Minimal%20lip%20movement' })
+(loop_720_inactive: BehaviorTerminal { loopId: 720, loopName: 'The%20Mumble%20Loop' })
+(loop_720_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_720_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_720_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_720_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Noise%20Operator', mechanism: 'the%20listener%20hears%20%22Drone%22' })
+(loop_720_result_branch: BehaviorEmit { emission: 'result', text: 'being%20asked%20to%20repeat%20oneself%20constantly%2C%20killing%20flow' })
+(loop_720_sink: BehaviorSink)
+(loop_720_start: BehaviorStart { loopId: 720, loopName: 'The%20Mumble%20Loop', given: 'Minimal%20lip%20movement', when: 'explaining%20complex%20ideas', then: 'the%20listener%20hears%20%22Drone%22%20(The%20Noise%20Operator)', result: 'being%20asked%20to%20repeat%20oneself%20constantly%2C%20killing%20flow', operatorName: 'The%20Noise%20Operator', operatorMechanism: 'the%20listener%20hears%20%22Drone%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_720_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_720_then_branch: BehaviorEmit { emission: 'then', text: 'the%20listener%20hears%20%22Drone%22%20(The%20Noise%20Operator)' })
+(loop_720_verdict: BehaviorVerdict { loopId: 720, loopName: 'The%20Mumble%20Loop', then: 'the%20listener%20hears%20%22Drone%22%20(The%20Noise%20Operator)', result: 'being%20asked%20to%20repeat%20oneself%20constantly%2C%20killing%20flow', operatorName: 'The%20Noise%20Operator', operatorMechanism: 'the%20listener%20hears%20%22Drone%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_720_when_gate: BehaviorAssess { stage: 'when', text: 'explaining%20complex%20ideas' })
+
+// Topology
+(loop_720_start)-[:PROCESS]->(loop_720_given_gate)
+(loop_720_given_gate)-[:PROCESS { case: "ok" }]->(loop_720_when_gate)
+(loop_720_given_gate)-[:PROCESS { case: "err" }]->(loop_720_inactive)
+(loop_720_when_gate)-[:PROCESS { case: "ok" }]->(loop_720_context)
+(loop_720_when_gate)-[:PROCESS { case: "err" }]->(loop_720_inactive)
+(loop_720_context)-[:FORK { strategy: "behavior-branches" }]->(loop_720_context_branch | loop_720_then_branch | loop_720_operator_branch | loop_720_result_branch | loop_720_taxonomy_branch | loop_720_intervention_recognize | loop_720_intervention_interdict | loop_720_intervention_minimize)
+(loop_720_context_branch | loop_720_then_branch | loop_720_operator_branch | loop_720_result_branch | loop_720_taxonomy_branch | loop_720_intervention_recognize | loop_720_intervention_interdict | loop_720_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_720_verdict)
+(loop_720_inactive)-[:PROCESS]->(loop_720_sink)
+(loop_720_verdict)-[:PROCESS]->(loop_720_sink)
+(loop_720_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_720_then_branch)
+(loop_720_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_720_then_branch)
+(loop_720_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_720_then_branch)

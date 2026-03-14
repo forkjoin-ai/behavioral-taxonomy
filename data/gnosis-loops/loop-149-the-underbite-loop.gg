@@ -1,0 +1,33 @@
+// behavioral-loop-149.gg
+// Executable Gnosis projection for The Underbite Loop.
+
+// Nodes
+(loop_149_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_149_context_branch: BehaviorEmit { emission: 'context' })
+(loop_149_given_gate: BehaviorAssess { stage: 'given', text: 'Lower%20jaw%20protrudes%20past%20upper' })
+(loop_149_inactive: BehaviorTerminal { loopId: 149, loopName: 'The%20Underbite%20Loop' })
+(loop_149_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_149_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_149_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_149_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'the%20face%20looks%20%22Pugnacious%22%20or%20%22Aggressive%22' })
+(loop_149_result_branch: BehaviorEmit { emission: 'result', text: 'people%20assuming%20the%20individual%20is%20%22looking%20for%20a%20fight%2C%22%20causing%20**Preemptive%20Hostility**' })
+(loop_149_sink: BehaviorSink)
+(loop_149_start: BehaviorStart { loopId: 149, loopName: 'The%20Underbite%20Loop', given: 'Lower%20jaw%20protrudes%20past%20upper', when: 'resting', then: 'the%20face%20looks%20%22Pugnacious%22%20or%20%22Aggressive%22%20(The%20Threat%20Operator)', result: 'people%20assuming%20the%20individual%20is%20%22looking%20for%20a%20fight%2C%22%20causing%20**Preemptive%20Hostility**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20face%20looks%20%22Pugnacious%22%20or%20%22Aggressive%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_149_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_149_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Pugnacious%22%20or%20%22Aggressive%22%20(The%20Threat%20Operator)' })
+(loop_149_verdict: BehaviorVerdict { loopId: 149, loopName: 'The%20Underbite%20Loop', then: 'the%20face%20looks%20%22Pugnacious%22%20or%20%22Aggressive%22%20(The%20Threat%20Operator)', result: 'people%20assuming%20the%20individual%20is%20%22looking%20for%20a%20fight%2C%22%20causing%20**Preemptive%20Hostility**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20face%20looks%20%22Pugnacious%22%20or%20%22Aggressive%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_149_when_gate: BehaviorAssess { stage: 'when', text: 'resting' })
+
+// Topology
+(loop_149_start)-[:PROCESS]->(loop_149_given_gate)
+(loop_149_given_gate)-[:PROCESS { case: "ok" }]->(loop_149_when_gate)
+(loop_149_given_gate)-[:PROCESS { case: "err" }]->(loop_149_inactive)
+(loop_149_when_gate)-[:PROCESS { case: "ok" }]->(loop_149_context)
+(loop_149_when_gate)-[:PROCESS { case: "err" }]->(loop_149_inactive)
+(loop_149_context)-[:FORK { strategy: "behavior-branches" }]->(loop_149_context_branch | loop_149_then_branch | loop_149_operator_branch | loop_149_result_branch | loop_149_taxonomy_branch | loop_149_intervention_recognize | loop_149_intervention_interdict | loop_149_intervention_minimize)
+(loop_149_context_branch | loop_149_then_branch | loop_149_operator_branch | loop_149_result_branch | loop_149_taxonomy_branch | loop_149_intervention_recognize | loop_149_intervention_interdict | loop_149_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_149_verdict)
+(loop_149_inactive)-[:PROCESS]->(loop_149_sink)
+(loop_149_verdict)-[:PROCESS]->(loop_149_sink)
+(loop_149_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_149_then_branch)
+(loop_149_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_149_then_branch)
+(loop_149_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_149_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-1064.gg
+// Executable Gnosis projection for The Cool Loop.
+
+// Nodes
+(loop_1064_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1064_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1064_given_gate: BehaviorAssess { stage: 'given', text: 'A%20high-status%20individual%20adopting%20a%20low-status%20trait%20(e.g.%2C%20trucker%20hats)' })
+(loop_1064_inactive: BehaviorTerminal { loopId: 1064, loopName: 'The%20Cool%20Loop' })
+(loop_1064_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1064_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1064_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1064_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20low-status%20trait%20becomes%20high-status%20(The%20Hipster%20Inversion)' })
+(loop_1064_result_branch: BehaviorEmit { emission: 'result', text: 'a%20market%20bubble%20for%20useless%20items' })
+(loop_1064_sink: BehaviorSink)
+(loop_1064_start: BehaviorStart { loopId: 1064, loopName: 'The%20Cool%20Loop', given: 'A%20high-status%20individual%20adopting%20a%20low-status%20trait%20(e.g.%2C%20trucker%20hats)', when: 'observed%20by%20the%20group', then: 'the%20low-status%20trait%20becomes%20high-status%20(The%20Hipster%20Inversion)', result: 'a%20market%20bubble%20for%20useless%20items', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20low-status%20trait%20becomes%20high-status%20(The%20Hipster%20Inversion)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1064_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1064_then_branch: BehaviorEmit { emission: 'then', text: 'the%20low-status%20trait%20becomes%20high-status%20(The%20Hipster%20Inversion)' })
+(loop_1064_verdict: BehaviorVerdict { loopId: 1064, loopName: 'The%20Cool%20Loop', then: 'the%20low-status%20trait%20becomes%20high-status%20(The%20Hipster%20Inversion)', result: 'a%20market%20bubble%20for%20useless%20items', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20low-status%20trait%20becomes%20high-status%20(The%20Hipster%20Inversion)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1064_when_gate: BehaviorAssess { stage: 'when', text: 'observed%20by%20the%20group' })
+
+// Topology
+(loop_1064_start)-[:PROCESS]->(loop_1064_given_gate)
+(loop_1064_given_gate)-[:PROCESS { case: "ok" }]->(loop_1064_when_gate)
+(loop_1064_given_gate)-[:PROCESS { case: "err" }]->(loop_1064_inactive)
+(loop_1064_when_gate)-[:PROCESS { case: "ok" }]->(loop_1064_context)
+(loop_1064_when_gate)-[:PROCESS { case: "err" }]->(loop_1064_inactive)
+(loop_1064_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1064_context_branch | loop_1064_then_branch | loop_1064_operator_branch | loop_1064_result_branch | loop_1064_taxonomy_branch | loop_1064_intervention_recognize | loop_1064_intervention_interdict | loop_1064_intervention_minimize)
+(loop_1064_context_branch | loop_1064_then_branch | loop_1064_operator_branch | loop_1064_result_branch | loop_1064_taxonomy_branch | loop_1064_intervention_recognize | loop_1064_intervention_interdict | loop_1064_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1064_verdict)
+(loop_1064_inactive)-[:PROCESS]->(loop_1064_sink)
+(loop_1064_verdict)-[:PROCESS]->(loop_1064_sink)
+(loop_1064_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1064_then_branch)
+(loop_1064_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1064_then_branch)
+(loop_1064_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1064_then_branch)

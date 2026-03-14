@@ -1,0 +1,33 @@
+// behavioral-loop-712.gg
+// Executable Gnosis projection for The Lean Loop.
+
+// Nodes
+(loop_712_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_712_context_branch: BehaviorEmit { emission: 'context' })
+(loop_712_given_gate: BehaviorAssess { stage: 'given', text: 'Preferring%20to%20lean%20against%20walls%20rather%20than%20stand' })
+(loop_712_inactive: BehaviorTerminal { loopId: 712, loopName: 'The%20Lean%20Loop' })
+(loop_712_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_712_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_712_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_712_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Outsider%20Operator', mechanism: 'it%20signals%20%22Disengagement%22%20or%20%22Cool%20Detachment%22' })
+(loop_712_result_branch: BehaviorEmit { emission: 'result', text: 'slowly%20being%20physically%20edged%20out%20of%20the%20circle' })
+(loop_712_sink: BehaviorSink)
+(loop_712_start: BehaviorStart { loopId: 712, loopName: 'The%20Lean%20Loop', given: 'Preferring%20to%20lean%20against%20walls%20rather%20than%20stand', when: 'in%20a%20group%20circle', then: 'it%20signals%20%22Disengagement%22%20or%20%22Cool%20Detachment%22%20(The%20Outsider%20Operator)', result: 'slowly%20being%20physically%20edged%20out%20of%20the%20circle', operatorName: 'The%20Outsider%20Operator', operatorMechanism: 'it%20signals%20%22Disengagement%22%20or%20%22Cool%20Detachment%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_712_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_712_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Disengagement%22%20or%20%22Cool%20Detachment%22%20(The%20Outsider%20Operator)' })
+(loop_712_verdict: BehaviorVerdict { loopId: 712, loopName: 'The%20Lean%20Loop', then: 'it%20signals%20%22Disengagement%22%20or%20%22Cool%20Detachment%22%20(The%20Outsider%20Operator)', result: 'slowly%20being%20physically%20edged%20out%20of%20the%20circle', operatorName: 'The%20Outsider%20Operator', operatorMechanism: 'it%20signals%20%22Disengagement%22%20or%20%22Cool%20Detachment%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_712_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20group%20circle' })
+
+// Topology
+(loop_712_start)-[:PROCESS]->(loop_712_given_gate)
+(loop_712_given_gate)-[:PROCESS { case: "ok" }]->(loop_712_when_gate)
+(loop_712_given_gate)-[:PROCESS { case: "err" }]->(loop_712_inactive)
+(loop_712_when_gate)-[:PROCESS { case: "ok" }]->(loop_712_context)
+(loop_712_when_gate)-[:PROCESS { case: "err" }]->(loop_712_inactive)
+(loop_712_context)-[:FORK { strategy: "behavior-branches" }]->(loop_712_context_branch | loop_712_then_branch | loop_712_operator_branch | loop_712_result_branch | loop_712_taxonomy_branch | loop_712_intervention_recognize | loop_712_intervention_interdict | loop_712_intervention_minimize)
+(loop_712_context_branch | loop_712_then_branch | loop_712_operator_branch | loop_712_result_branch | loop_712_taxonomy_branch | loop_712_intervention_recognize | loop_712_intervention_interdict | loop_712_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_712_verdict)
+(loop_712_inactive)-[:PROCESS]->(loop_712_sink)
+(loop_712_verdict)-[:PROCESS]->(loop_712_sink)
+(loop_712_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_712_then_branch)
+(loop_712_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_712_then_branch)
+(loop_712_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_712_then_branch)

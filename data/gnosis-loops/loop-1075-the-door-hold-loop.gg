@@ -1,0 +1,33 @@
+// behavioral-loop-1075.gg
+// Executable Gnosis projection for The Door Hold Loop.
+
+// Nodes
+(loop_1075_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1075_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1075_given_gate: BehaviorAssess { stage: 'given', text: 'Holding%20a%20door%20for%20someone%2010%20yards%20away' })
+(loop_1075_inactive: BehaviorTerminal { loopId: 1075, loopName: 'The%20Door%20Hold%20Loop' })
+(loop_1075_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1075_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1075_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1075_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20walker%20is%20forced%20to%20run%20(The%20Guilt%20Trot)' })
+(loop_1075_result_branch: BehaviorEmit { emission: 'result', text: 'a%20%22polite%22%20act%20actually%20causing%20stress' })
+(loop_1075_sink: BehaviorSink)
+(loop_1075_start: BehaviorStart { loopId: 1075, loopName: 'The%20Door%20Hold%20Loop', given: 'Holding%20a%20door%20for%20someone%2010%20yards%20away', when: 'eye%20contact%20is%20made', then: 'the%20walker%20is%20forced%20to%20run%20(The%20Guilt%20Trot)', result: 'a%20%22polite%22%20act%20actually%20causing%20stress', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20walker%20is%20forced%20to%20run%20(The%20Guilt%20Trot)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1075_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1075_then_branch: BehaviorEmit { emission: 'then', text: 'the%20walker%20is%20forced%20to%20run%20(The%20Guilt%20Trot)' })
+(loop_1075_verdict: BehaviorVerdict { loopId: 1075, loopName: 'The%20Door%20Hold%20Loop', then: 'the%20walker%20is%20forced%20to%20run%20(The%20Guilt%20Trot)', result: 'a%20%22polite%22%20act%20actually%20causing%20stress', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20walker%20is%20forced%20to%20run%20(The%20Guilt%20Trot)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1075_when_gate: BehaviorAssess { stage: 'when', text: 'eye%20contact%20is%20made' })
+
+// Topology
+(loop_1075_start)-[:PROCESS]->(loop_1075_given_gate)
+(loop_1075_given_gate)-[:PROCESS { case: "ok" }]->(loop_1075_when_gate)
+(loop_1075_given_gate)-[:PROCESS { case: "err" }]->(loop_1075_inactive)
+(loop_1075_when_gate)-[:PROCESS { case: "ok" }]->(loop_1075_context)
+(loop_1075_when_gate)-[:PROCESS { case: "err" }]->(loop_1075_inactive)
+(loop_1075_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1075_context_branch | loop_1075_then_branch | loop_1075_operator_branch | loop_1075_result_branch | loop_1075_taxonomy_branch | loop_1075_intervention_recognize | loop_1075_intervention_interdict | loop_1075_intervention_minimize)
+(loop_1075_context_branch | loop_1075_then_branch | loop_1075_operator_branch | loop_1075_result_branch | loop_1075_taxonomy_branch | loop_1075_intervention_recognize | loop_1075_intervention_interdict | loop_1075_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1075_verdict)
+(loop_1075_inactive)-[:PROCESS]->(loop_1075_sink)
+(loop_1075_verdict)-[:PROCESS]->(loop_1075_sink)
+(loop_1075_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1075_then_branch)
+(loop_1075_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1075_then_branch)
+(loop_1075_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1075_then_branch)

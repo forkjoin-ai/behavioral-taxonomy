@@ -1,0 +1,33 @@
+// behavioral-loop-54.gg
+// Executable Gnosis projection for The Gold Tooth/Grill Loop.
+
+// Nodes
+(loop_54_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_54_context_branch: BehaviorEmit { emission: 'context' })
+(loop_54_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20Dental%20Modification%20(Gold%2FJewels)' })
+(loop_54_inactive: BehaviorTerminal { loopId: 54, loopName: 'The%20Gold%20Tooth%2FGrill%20Loop' })
+(loop_54_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_54_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_54_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_54_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%2FThreat%20Operator', mechanism: 'the%20observer%20registers%20%22Counter-Culture%22%20or%20%22Risk%22' })
+(loop_54_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20needing%20to%20perform%20**Code-Switching**%20or%20extreme%20competence%20to%20overcome%20bias' })
+(loop_54_sink: BehaviorSink)
+(loop_54_start: BehaviorStart { loopId: 54, loopName: 'The%20Gold%20Tooth%2FGrill%20Loop', given: 'Visible%20Dental%20Modification%20(Gold%2FJewels)', when: 'in%20a%20mainstream%20corporate%20setting', then: 'the%20observer%20registers%20%22Counter-Culture%22%20or%20%22Risk%22%20(The%20Deception%2FThreat%20Operator)', result: 'the%20individual%20needing%20to%20perform%20**Code-Switching**%20or%20extreme%20competence%20to%20overcome%20bias', operatorName: 'The%20Deception%2FThreat%20Operator', operatorMechanism: 'the%20observer%20registers%20%22Counter-Culture%22%20or%20%22Risk%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_54_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_54_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20registers%20%22Counter-Culture%22%20or%20%22Risk%22%20(The%20Deception%2FThreat%20Operator)' })
+(loop_54_verdict: BehaviorVerdict { loopId: 54, loopName: 'The%20Gold%20Tooth%2FGrill%20Loop', then: 'the%20observer%20registers%20%22Counter-Culture%22%20or%20%22Risk%22%20(The%20Deception%2FThreat%20Operator)', result: 'the%20individual%20needing%20to%20perform%20**Code-Switching**%20or%20extreme%20competence%20to%20overcome%20bias', operatorName: 'The%20Deception%2FThreat%20Operator', operatorMechanism: 'the%20observer%20registers%20%22Counter-Culture%22%20or%20%22Risk%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_54_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20mainstream%20corporate%20setting' })
+
+// Topology
+(loop_54_start)-[:PROCESS]->(loop_54_given_gate)
+(loop_54_given_gate)-[:PROCESS { case: "ok" }]->(loop_54_when_gate)
+(loop_54_given_gate)-[:PROCESS { case: "err" }]->(loop_54_inactive)
+(loop_54_when_gate)-[:PROCESS { case: "ok" }]->(loop_54_context)
+(loop_54_when_gate)-[:PROCESS { case: "err" }]->(loop_54_inactive)
+(loop_54_context)-[:FORK { strategy: "behavior-branches" }]->(loop_54_context_branch | loop_54_then_branch | loop_54_operator_branch | loop_54_result_branch | loop_54_taxonomy_branch | loop_54_intervention_recognize | loop_54_intervention_interdict | loop_54_intervention_minimize)
+(loop_54_context_branch | loop_54_then_branch | loop_54_operator_branch | loop_54_result_branch | loop_54_taxonomy_branch | loop_54_intervention_recognize | loop_54_intervention_interdict | loop_54_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_54_verdict)
+(loop_54_inactive)-[:PROCESS]->(loop_54_sink)
+(loop_54_verdict)-[:PROCESS]->(loop_54_sink)
+(loop_54_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_54_then_branch)
+(loop_54_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_54_then_branch)
+(loop_54_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_54_then_branch)

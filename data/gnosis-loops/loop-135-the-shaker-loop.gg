@@ -1,0 +1,33 @@
+// behavioral-loop-135.gg
+// Executable Gnosis projection for The Shaker Loop.
+
+// Nodes
+(loop_135_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_135_context_branch: BehaviorEmit { emission: 'context' })
+(loop_135_given_gate: BehaviorAssess { stage: 'given', text: 'Raynaud%E2%80%99s%20or%20Low%20BMI%20(Shivering%20easily)' })
+(loop_135_inactive: BehaviorTerminal { loopId: 135, loopName: 'The%20Shaker%20Loop' })
+(loop_135_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_135_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_135_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_135_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20physical%20vibration%20signals%20%22Frailty%22%20or%20%22Nervousness%22' })
+(loop_135_result_branch: BehaviorEmit { emission: 'result', text: 'being%20wrapped%20in%20blankets%2Fjackets%20by%20others%2C%20reinforcing%20a%20**Dependent%20Dynamic**' })
+(loop_135_sink: BehaviorSink)
+(loop_135_start: BehaviorStart { loopId: 135, loopName: 'The%20Shaker%20Loop', given: 'Raynaud%E2%80%99s%20or%20Low%20BMI%20(Shivering%20easily)', when: 'in%20average-temperature%20rooms', then: 'the%20physical%20vibration%20signals%20%22Frailty%22%20or%20%22Nervousness%22%20(The%20Fragility%20Operator)', result: 'being%20wrapped%20in%20blankets%2Fjackets%20by%20others%2C%20reinforcing%20a%20**Dependent%20Dynamic**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20physical%20vibration%20signals%20%22Frailty%22%20or%20%22Nervousness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_135_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_135_then_branch: BehaviorEmit { emission: 'then', text: 'the%20physical%20vibration%20signals%20%22Frailty%22%20or%20%22Nervousness%22%20(The%20Fragility%20Operator)' })
+(loop_135_verdict: BehaviorVerdict { loopId: 135, loopName: 'The%20Shaker%20Loop', then: 'the%20physical%20vibration%20signals%20%22Frailty%22%20or%20%22Nervousness%22%20(The%20Fragility%20Operator)', result: 'being%20wrapped%20in%20blankets%2Fjackets%20by%20others%2C%20reinforcing%20a%20**Dependent%20Dynamic**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20physical%20vibration%20signals%20%22Frailty%22%20or%20%22Nervousness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_135_when_gate: BehaviorAssess { stage: 'when', text: 'in%20average-temperature%20rooms' })
+
+// Topology
+(loop_135_start)-[:PROCESS]->(loop_135_given_gate)
+(loop_135_given_gate)-[:PROCESS { case: "ok" }]->(loop_135_when_gate)
+(loop_135_given_gate)-[:PROCESS { case: "err" }]->(loop_135_inactive)
+(loop_135_when_gate)-[:PROCESS { case: "ok" }]->(loop_135_context)
+(loop_135_when_gate)-[:PROCESS { case: "err" }]->(loop_135_inactive)
+(loop_135_context)-[:FORK { strategy: "behavior-branches" }]->(loop_135_context_branch | loop_135_then_branch | loop_135_operator_branch | loop_135_result_branch | loop_135_taxonomy_branch | loop_135_intervention_recognize | loop_135_intervention_interdict | loop_135_intervention_minimize)
+(loop_135_context_branch | loop_135_then_branch | loop_135_operator_branch | loop_135_result_branch | loop_135_taxonomy_branch | loop_135_intervention_recognize | loop_135_intervention_interdict | loop_135_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_135_verdict)
+(loop_135_inactive)-[:PROCESS]->(loop_135_sink)
+(loop_135_verdict)-[:PROCESS]->(loop_135_sink)
+(loop_135_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_135_then_branch)
+(loop_135_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_135_then_branch)
+(loop_135_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_135_then_branch)

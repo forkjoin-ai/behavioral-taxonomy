@@ -1,0 +1,31 @@
+// behavioral-loop-909.gg
+// Executable Gnosis projection for The Creeper Loop.
+
+// Nodes
+(loop_909_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_909_context_branch: BehaviorEmit { emission: 'context' })
+(loop_909_given_gate: BehaviorAssess { stage: 'given', text: 'Photochromic%20lenses%20that%20stay%20dark%20indoors' })
+(loop_909_inactive: BehaviorTerminal { loopId: 909, loopName: 'The%20Creeper%20Loop' })
+(loop_909_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_909_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_909_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Shade%20Operator', mechanism: 'eye%20contact%20is%20blocked' })
+(loop_909_result_branch: BehaviorEmit { emission: 'result', text: 'mistrust%20and%20a%20%22Shady%22%20vibe' })
+(loop_909_sink: BehaviorSink)
+(loop_909_start: BehaviorStart { loopId: 909, loopName: 'The%20Creeper%20Loop', given: 'Photochromic%20lenses%20that%20stay%20dark%20indoors', when: 'entering%20a%20room', then: 'eye%20contact%20is%20blocked%20(The%20Shade%20Operator)', result: 'mistrust%20and%20a%20%22Shady%22%20vibe', operatorName: 'The%20Shade%20Operator', operatorMechanism: 'eye%20contact%20is%20blocked', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_909_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_909_then_branch: BehaviorEmit { emission: 'then', text: 'eye%20contact%20is%20blocked%20(The%20Shade%20Operator)' })
+(loop_909_verdict: BehaviorVerdict { loopId: 909, loopName: 'The%20Creeper%20Loop', then: 'eye%20contact%20is%20blocked%20(The%20Shade%20Operator)', result: 'mistrust%20and%20a%20%22Shady%22%20vibe', operatorName: 'The%20Shade%20Operator', operatorMechanism: 'eye%20contact%20is%20blocked', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_909_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20room' })
+
+// Topology
+(loop_909_start)-[:PROCESS]->(loop_909_given_gate)
+(loop_909_given_gate)-[:PROCESS { case: "ok" }]->(loop_909_when_gate)
+(loop_909_given_gate)-[:PROCESS { case: "err" }]->(loop_909_inactive)
+(loop_909_when_gate)-[:PROCESS { case: "ok" }]->(loop_909_context)
+(loop_909_when_gate)-[:PROCESS { case: "err" }]->(loop_909_inactive)
+(loop_909_context)-[:FORK { strategy: "behavior-branches" }]->(loop_909_context_branch | loop_909_then_branch | loop_909_operator_branch | loop_909_result_branch | loop_909_taxonomy_branch | loop_909_intervention_recognize | loop_909_intervention_leverage)
+(loop_909_context_branch | loop_909_then_branch | loop_909_operator_branch | loop_909_result_branch | loop_909_taxonomy_branch | loop_909_intervention_recognize | loop_909_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_909_verdict)
+(loop_909_inactive)-[:PROCESS]->(loop_909_sink)
+(loop_909_verdict)-[:PROCESS]->(loop_909_sink)
+(loop_909_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_909_then_branch)
+(loop_909_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_909_result_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-615.gg
+// Executable Gnosis projection for The Ridge Loop.
+
+// Nodes
+(loop_615_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_615_context_branch: BehaviorEmit { emission: 'context' })
+(loop_615_given_gate: BehaviorAssess { stage: 'given', text: 'Deep%20horizontal%20grooves%20in%20the%20nail' })
+(loop_615_inactive: BehaviorTerminal { loopId: 615, loopName: 'The%20Ridge%20Loop' })
+(loop_615_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_615_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_615_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_615_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20History%20Operator', mechanism: 'the%20texture%20signals%20%22Past%20Trauma%22%20or%20%22Systemic%20Shock%22' })
+(loop_615_result_branch: BehaviorEmit { emission: 'result', text: 'the%20body%20betraying%20a%20recent%20medical%20crisis' })
+(loop_615_sink: BehaviorSink)
+(loop_615_start: BehaviorStart { loopId: 615, loopName: 'The%20Ridge%20Loop', given: 'Deep%20horizontal%20grooves%20in%20the%20nail', when: 'shaking%20hands', then: 'the%20texture%20signals%20%22Past%20Trauma%22%20or%20%22Systemic%20Shock%22%20(The%20History%20Operator)', result: 'the%20body%20betraying%20a%20recent%20medical%20crisis', operatorName: 'The%20History%20Operator', operatorMechanism: 'the%20texture%20signals%20%22Past%20Trauma%22%20or%20%22Systemic%20Shock%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_615_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_615_then_branch: BehaviorEmit { emission: 'then', text: 'the%20texture%20signals%20%22Past%20Trauma%22%20or%20%22Systemic%20Shock%22%20(The%20History%20Operator)' })
+(loop_615_verdict: BehaviorVerdict { loopId: 615, loopName: 'The%20Ridge%20Loop', then: 'the%20texture%20signals%20%22Past%20Trauma%22%20or%20%22Systemic%20Shock%22%20(The%20History%20Operator)', result: 'the%20body%20betraying%20a%20recent%20medical%20crisis', operatorName: 'The%20History%20Operator', operatorMechanism: 'the%20texture%20signals%20%22Past%20Trauma%22%20or%20%22Systemic%20Shock%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_615_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_615_start)-[:PROCESS]->(loop_615_given_gate)
+(loop_615_given_gate)-[:PROCESS { case: "ok" }]->(loop_615_when_gate)
+(loop_615_given_gate)-[:PROCESS { case: "err" }]->(loop_615_inactive)
+(loop_615_when_gate)-[:PROCESS { case: "ok" }]->(loop_615_context)
+(loop_615_when_gate)-[:PROCESS { case: "err" }]->(loop_615_inactive)
+(loop_615_context)-[:FORK { strategy: "behavior-branches" }]->(loop_615_context_branch | loop_615_then_branch | loop_615_operator_branch | loop_615_result_branch | loop_615_taxonomy_branch | loop_615_intervention_recognize | loop_615_intervention_interdict | loop_615_intervention_minimize)
+(loop_615_context_branch | loop_615_then_branch | loop_615_operator_branch | loop_615_result_branch | loop_615_taxonomy_branch | loop_615_intervention_recognize | loop_615_intervention_interdict | loop_615_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_615_verdict)
+(loop_615_inactive)-[:PROCESS]->(loop_615_sink)
+(loop_615_verdict)-[:PROCESS]->(loop_615_sink)
+(loop_615_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_615_then_branch)
+(loop_615_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_615_then_branch)
+(loop_615_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_615_then_branch)

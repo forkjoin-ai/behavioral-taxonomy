@@ -1,0 +1,33 @@
+// behavioral-loop-32.gg
+// Executable Gnosis projection for The Redhead Passion Loop.
+
+// Nodes
+(loop_32_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_32_context_branch: BehaviorEmit { emission: 'context' })
+(loop_32_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20MC1R%20Mutation%20(Red%20hair)' })
+(loop_32_inactive: BehaviorTerminal { loopId: 32, loopName: 'The%20Redhead%20Passion%20Loop' })
+(loop_32_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait' })
+(loop_32_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_32_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_32_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stereotype%20Threat%20Operator', mechanism: 'observers%20attribute%20it%20to%20a%20%22fiery%20temper%22' })
+(loop_32_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20either%20embracing%20**Expressiveness**%20or%20strictly%20**Masking%20Anger**%20to%20avoid%20the%20label' })
+(loop_32_sink: BehaviorSink)
+(loop_32_start: BehaviorStart { loopId: 32, loopName: 'The%20Redhead%20Passion%20Loop', given: 'an%20individual%20possesses%20MC1R%20Mutation%20(Red%20hair)', when: 'they%20express%20mild%20frustration', then: 'observers%20attribute%20it%20to%20a%20%22fiery%20temper%22%20(The%20Stereotype%20Threat%20Operator)', result: 'the%20individual%20either%20embracing%20**Expressiveness**%20or%20strictly%20**Masking%20Anger**%20to%20avoid%20the%20label', operatorName: 'The%20Stereotype%20Threat%20Operator', operatorMechanism: 'observers%20attribute%20it%20to%20a%20%22fiery%20temper%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_32_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_32_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20attribute%20it%20to%20a%20%22fiery%20temper%22%20(The%20Stereotype%20Threat%20Operator)' })
+(loop_32_verdict: BehaviorVerdict { loopId: 32, loopName: 'The%20Redhead%20Passion%20Loop', then: 'observers%20attribute%20it%20to%20a%20%22fiery%20temper%22%20(The%20Stereotype%20Threat%20Operator)', result: 'the%20individual%20either%20embracing%20**Expressiveness**%20or%20strictly%20**Masking%20Anger**%20to%20avoid%20the%20label', operatorName: 'The%20Stereotype%20Threat%20Operator', operatorMechanism: 'observers%20attribute%20it%20to%20a%20%22fiery%20temper%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_32_when_gate: BehaviorAssess { stage: 'when', text: 'they%20express%20mild%20frustration' })
+
+// Topology
+(loop_32_start)-[:PROCESS]->(loop_32_given_gate)
+(loop_32_given_gate)-[:PROCESS { case: "ok" }]->(loop_32_when_gate)
+(loop_32_given_gate)-[:PROCESS { case: "err" }]->(loop_32_inactive)
+(loop_32_when_gate)-[:PROCESS { case: "ok" }]->(loop_32_context)
+(loop_32_when_gate)-[:PROCESS { case: "err" }]->(loop_32_inactive)
+(loop_32_context)-[:FORK { strategy: "behavior-branches" }]->(loop_32_context_branch | loop_32_then_branch | loop_32_operator_branch | loop_32_result_branch | loop_32_taxonomy_branch | loop_32_intervention_recognize | loop_32_intervention_interdict | loop_32_intervention_minimize)
+(loop_32_context_branch | loop_32_then_branch | loop_32_operator_branch | loop_32_result_branch | loop_32_taxonomy_branch | loop_32_intervention_recognize | loop_32_intervention_interdict | loop_32_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_32_verdict)
+(loop_32_inactive)-[:PROCESS]->(loop_32_sink)
+(loop_32_verdict)-[:PROCESS]->(loop_32_sink)
+(loop_32_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_32_then_branch)
+(loop_32_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_32_then_branch)
+(loop_32_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_32_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-861.gg
+// Executable Gnosis projection for The Bounce Loop.
+
+// Nodes
+(loop_861_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_861_context_branch: BehaviorEmit { emission: 'context' })
+(loop_861_given_gate: BehaviorAssess { stage: 'given', text: 'Springy%2C%20high-energy%20step' })
+(loop_861_inactive: BehaviorTerminal { loopId: 861, loopName: 'The%20Bounce%20Loop' })
+(loop_861_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_861_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_861_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_861_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tigger%20Operator', mechanism: 'it%20signals%20%22Optimism%22' })
+(loop_861_result_branch: BehaviorEmit { emission: 'result', text: 'people%20assuming%20the%20individual%20is%20in%20a%20good%20mood%2C%20inviting%20chat' })
+(loop_861_sink: BehaviorSink)
+(loop_861_start: BehaviorStart { loopId: 861, loopName: 'The%20Bounce%20Loop', given: 'Springy%2C%20high-energy%20step', when: 'walking%20to%20the%20copier', then: 'it%20signals%20%22Optimism%22%20(The%20Tigger%20Operator)', result: 'people%20assuming%20the%20individual%20is%20in%20a%20good%20mood%2C%20inviting%20chat', operatorName: 'The%20Tigger%20Operator', operatorMechanism: 'it%20signals%20%22Optimism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_861_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_861_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Optimism%22%20(The%20Tigger%20Operator)' })
+(loop_861_verdict: BehaviorVerdict { loopId: 861, loopName: 'The%20Bounce%20Loop', then: 'it%20signals%20%22Optimism%22%20(The%20Tigger%20Operator)', result: 'people%20assuming%20the%20individual%20is%20in%20a%20good%20mood%2C%20inviting%20chat', operatorName: 'The%20Tigger%20Operator', operatorMechanism: 'it%20signals%20%22Optimism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_861_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20to%20the%20copier' })
+
+// Topology
+(loop_861_start)-[:PROCESS]->(loop_861_given_gate)
+(loop_861_given_gate)-[:PROCESS { case: "ok" }]->(loop_861_when_gate)
+(loop_861_given_gate)-[:PROCESS { case: "err" }]->(loop_861_inactive)
+(loop_861_when_gate)-[:PROCESS { case: "ok" }]->(loop_861_context)
+(loop_861_when_gate)-[:PROCESS { case: "err" }]->(loop_861_inactive)
+(loop_861_context)-[:FORK { strategy: "behavior-branches" }]->(loop_861_context_branch | loop_861_then_branch | loop_861_operator_branch | loop_861_result_branch | loop_861_taxonomy_branch | loop_861_intervention_recognize | loop_861_intervention_interdict | loop_861_intervention_minimize)
+(loop_861_context_branch | loop_861_then_branch | loop_861_operator_branch | loop_861_result_branch | loop_861_taxonomy_branch | loop_861_intervention_recognize | loop_861_intervention_interdict | loop_861_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_861_verdict)
+(loop_861_inactive)-[:PROCESS]->(loop_861_sink)
+(loop_861_verdict)-[:PROCESS]->(loop_861_sink)
+(loop_861_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_861_then_branch)
+(loop_861_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_861_then_branch)
+(loop_861_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_861_then_branch)

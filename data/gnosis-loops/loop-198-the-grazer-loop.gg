@@ -1,0 +1,33 @@
+// behavioral-loop-198.gg
+// Executable Gnosis projection for The Grazer Loop.
+
+// Nodes
+(loop_198_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_198_context_branch: BehaviorEmit { emission: 'context' })
+(loop_198_given_gate: BehaviorAssess { stage: 'given', text: 'High%20caloric%20turnover%20requiring%20constant%20snacking' })
+(loop_198_inactive: BehaviorTerminal { loopId: 198, loopName: 'The%20Grazer%20Loop' })
+(loop_198_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_198_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_198_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_198_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Discipline%20Operator', mechanism: 'the%20constant%20presence%20of%20food%20signals%20%22Lack%20of%20Focus%22%20or%20%22Gluttony%22' })
+(loop_198_result_branch: BehaviorEmit { emission: 'result', text: 'negative%20judgments%20on%20professional%20seriousness' })
+(loop_198_sink: BehaviorSink)
+(loop_198_start: BehaviorStart { loopId: 198, loopName: 'The%20Grazer%20Loop', given: 'High%20caloric%20turnover%20requiring%20constant%20snacking', when: 'in%20an%20office%20environment', then: 'the%20constant%20presence%20of%20food%20signals%20%22Lack%20of%20Focus%22%20or%20%22Gluttony%22%20(The%20Discipline%20Operator)', result: 'negative%20judgments%20on%20professional%20seriousness', operatorName: 'The%20Discipline%20Operator', operatorMechanism: 'the%20constant%20presence%20of%20food%20signals%20%22Lack%20of%20Focus%22%20or%20%22Gluttony%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_198_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_198_then_branch: BehaviorEmit { emission: 'then', text: 'the%20constant%20presence%20of%20food%20signals%20%22Lack%20of%20Focus%22%20or%20%22Gluttony%22%20(The%20Discipline%20Operator)' })
+(loop_198_verdict: BehaviorVerdict { loopId: 198, loopName: 'The%20Grazer%20Loop', then: 'the%20constant%20presence%20of%20food%20signals%20%22Lack%20of%20Focus%22%20or%20%22Gluttony%22%20(The%20Discipline%20Operator)', result: 'negative%20judgments%20on%20professional%20seriousness', operatorName: 'The%20Discipline%20Operator', operatorMechanism: 'the%20constant%20presence%20of%20food%20signals%20%22Lack%20of%20Focus%22%20or%20%22Gluttony%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_198_when_gate: BehaviorAssess { stage: 'when', text: 'in%20an%20office%20environment' })
+
+// Topology
+(loop_198_start)-[:PROCESS]->(loop_198_given_gate)
+(loop_198_given_gate)-[:PROCESS { case: "ok" }]->(loop_198_when_gate)
+(loop_198_given_gate)-[:PROCESS { case: "err" }]->(loop_198_inactive)
+(loop_198_when_gate)-[:PROCESS { case: "ok" }]->(loop_198_context)
+(loop_198_when_gate)-[:PROCESS { case: "err" }]->(loop_198_inactive)
+(loop_198_context)-[:FORK { strategy: "behavior-branches" }]->(loop_198_context_branch | loop_198_then_branch | loop_198_operator_branch | loop_198_result_branch | loop_198_taxonomy_branch | loop_198_intervention_recognize | loop_198_intervention_interdict | loop_198_intervention_minimize)
+(loop_198_context_branch | loop_198_then_branch | loop_198_operator_branch | loop_198_result_branch | loop_198_taxonomy_branch | loop_198_intervention_recognize | loop_198_intervention_interdict | loop_198_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_198_verdict)
+(loop_198_inactive)-[:PROCESS]->(loop_198_sink)
+(loop_198_verdict)-[:PROCESS]->(loop_198_sink)
+(loop_198_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_198_then_branch)
+(loop_198_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_198_then_branch)
+(loop_198_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_198_then_branch)

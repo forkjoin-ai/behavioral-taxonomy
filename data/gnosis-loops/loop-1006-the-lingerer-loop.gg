@@ -1,0 +1,33 @@
+// behavioral-loop-1006.gg
+// Executable Gnosis projection for The Lingerer Loop.
+
+// Nodes
+(loop_1006_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1006_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1006_given_gate: BehaviorAssess { stage: 'given', text: "Inability%20to%20read%20%22Party's%20Over%22%20cues" })
+(loop_1006_inactive: BehaviorTerminal { loopId: 1006, loopName: 'The%20Lingerer%20Loop' })
+(loop_1006_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1006_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1006_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1006_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Last%20Man%20Operator', mechanism: 'the%20individual%20keeps%20talking' })
+(loop_1006_result_branch: BehaviorEmit { emission: 'result', text: 'the%20host%20resenting%20them%20for%20delaying%20sleep' })
+(loop_1006_sink: BehaviorSink)
+(loop_1006_start: BehaviorStart { loopId: 1006, loopName: 'The%20Lingerer%20Loop', given: "Inability%20to%20read%20%22Party's%20Over%22%20cues", when: 'the%20lights%20go%20up%20and%20music%20stops', then: 'the%20individual%20keeps%20talking%20(The%20Last%20Man%20Operator)', result: 'the%20host%20resenting%20them%20for%20delaying%20sleep', operatorName: 'The%20Last%20Man%20Operator', operatorMechanism: 'the%20individual%20keeps%20talking', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1006_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1006_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20keeps%20talking%20(The%20Last%20Man%20Operator)' })
+(loop_1006_verdict: BehaviorVerdict { loopId: 1006, loopName: 'The%20Lingerer%20Loop', then: 'the%20individual%20keeps%20talking%20(The%20Last%20Man%20Operator)', result: 'the%20host%20resenting%20them%20for%20delaying%20sleep', operatorName: 'The%20Last%20Man%20Operator', operatorMechanism: 'the%20individual%20keeps%20talking', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1006_when_gate: BehaviorAssess { stage: 'when', text: 'the%20lights%20go%20up%20and%20music%20stops' })
+
+// Topology
+(loop_1006_start)-[:PROCESS]->(loop_1006_given_gate)
+(loop_1006_given_gate)-[:PROCESS { case: "ok" }]->(loop_1006_when_gate)
+(loop_1006_given_gate)-[:PROCESS { case: "err" }]->(loop_1006_inactive)
+(loop_1006_when_gate)-[:PROCESS { case: "ok" }]->(loop_1006_context)
+(loop_1006_when_gate)-[:PROCESS { case: "err" }]->(loop_1006_inactive)
+(loop_1006_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1006_context_branch | loop_1006_then_branch | loop_1006_operator_branch | loop_1006_result_branch | loop_1006_taxonomy_branch | loop_1006_intervention_recognize | loop_1006_intervention_interdict | loop_1006_intervention_minimize)
+(loop_1006_context_branch | loop_1006_then_branch | loop_1006_operator_branch | loop_1006_result_branch | loop_1006_taxonomy_branch | loop_1006_intervention_recognize | loop_1006_intervention_interdict | loop_1006_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1006_verdict)
+(loop_1006_inactive)-[:PROCESS]->(loop_1006_sink)
+(loop_1006_verdict)-[:PROCESS]->(loop_1006_sink)
+(loop_1006_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1006_then_branch)
+(loop_1006_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1006_then_branch)
+(loop_1006_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1006_then_branch)

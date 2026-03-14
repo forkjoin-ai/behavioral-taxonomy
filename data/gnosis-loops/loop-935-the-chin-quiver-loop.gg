@@ -1,0 +1,33 @@
+// behavioral-loop-935.gg
+// Executable Gnosis projection for The Chin Quiver Loop.
+
+// Nodes
+(loop_935_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_935_context_branch: BehaviorEmit { emission: 'context' })
+(loop_935_given_gate: BehaviorAssess { stage: 'given', text: 'Spasm%20of%20the%20Mentalis%20muscle' })
+(loop_935_inactive: BehaviorTerminal { loopId: 935, loopName: 'The%20Chin%20Quiver%20Loop' })
+(loop_935_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_935_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_935_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20recursive%20self-doubt%20or%20self-fulfilling%20prophecies' })
+(loop_935_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Crumble%20Operator', mechanism: 'the%20chin%20skin%20dimples%2Fshakes' })
+(loop_935_result_branch: BehaviorEmit { emission: 'result', text: 'the%20%22Stiff%20Upper%20Lip%22%20failing%20and%20Pity%20being%20elicited' })
+(loop_935_sink: BehaviorSink)
+(loop_935_start: BehaviorStart { loopId: 935, loopName: 'The%20Chin%20Quiver%20Loop', given: 'Spasm%20of%20the%20Mentalis%20muscle', when: 'trying%20not%20to%20cry', then: 'the%20chin%20skin%20dimples%2Fshakes%20(The%20Crumble%20Operator)', result: 'the%20%22Stiff%20Upper%20Lip%22%20failing%20and%20Pity%20being%20elicited', operatorName: 'The%20Crumble%20Operator', operatorMechanism: 'the%20chin%20skin%20dimples%2Fshakes', origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20recursive%20self-doubt%20or%20self-fulfilling%20prophecies', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_935_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION' })
+(loop_935_then_branch: BehaviorEmit { emission: 'then', text: 'the%20chin%20skin%20dimples%2Fshakes%20(The%20Crumble%20Operator)' })
+(loop_935_verdict: BehaviorVerdict { loopId: 935, loopName: 'The%20Chin%20Quiver%20Loop', then: 'the%20chin%20skin%20dimples%2Fshakes%20(The%20Crumble%20Operator)', result: 'the%20%22Stiff%20Upper%20Lip%22%20failing%20and%20Pity%20being%20elicited', operatorName: 'The%20Crumble%20Operator', operatorMechanism: 'the%20chin%20skin%20dimples%2Fshakes', origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION' })
+(loop_935_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20not%20to%20cry' })
+
+// Topology
+(loop_935_start)-[:PROCESS]->(loop_935_given_gate)
+(loop_935_given_gate)-[:PROCESS { case: "ok" }]->(loop_935_when_gate)
+(loop_935_given_gate)-[:PROCESS { case: "err" }]->(loop_935_inactive)
+(loop_935_when_gate)-[:PROCESS { case: "ok" }]->(loop_935_context)
+(loop_935_when_gate)-[:PROCESS { case: "err" }]->(loop_935_inactive)
+(loop_935_context)-[:FORK { strategy: "behavior-branches" }]->(loop_935_context_branch | loop_935_then_branch | loop_935_operator_branch | loop_935_result_branch | loop_935_taxonomy_branch | loop_935_intervention_recognize | loop_935_intervention_interdict | loop_935_intervention_minimize)
+(loop_935_context_branch | loop_935_then_branch | loop_935_operator_branch | loop_935_result_branch | loop_935_taxonomy_branch | loop_935_intervention_recognize | loop_935_intervention_interdict | loop_935_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_935_verdict)
+(loop_935_inactive)-[:PROCESS]->(loop_935_sink)
+(loop_935_verdict)-[:PROCESS]->(loop_935_sink)
+(loop_935_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_935_then_branch)
+(loop_935_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_935_then_branch)
+(loop_935_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_935_then_branch)

@@ -1,0 +1,31 @@
+// behavioral-loop-96.gg
+// Executable Gnosis projection for The Small Hands Loop.
+
+// Nodes
+(loop_96_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_96_context_branch: BehaviorEmit { emission: 'context' })
+(loop_96_given_gate: BehaviorAssess { stage: 'given', text: 'Small%20hand%20size%20relative%20to%20body' })
+(loop_96_inactive: BehaviorTerminal { loopId: 96, loopName: 'The%20Small%20Hands%20Loop' })
+(loop_96_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_96_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_96_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dominance%20Challenge%20Operator', mechanism: 'the%20individual%20feels%20a%20lack%20of%20%22grip%20authority%22' })
+(loop_96_result_branch: BehaviorEmit { emission: 'result', text: 'compensation%20through%20**Verbal%20Dominance**%20or%20status%20displays%20(watches%2C%20cars)' })
+(loop_96_sink: BehaviorSink)
+(loop_96_start: BehaviorStart { loopId: 96, loopName: 'The%20Small%20Hands%20Loop', given: 'Small%20hand%20size%20relative%20to%20body', when: 'shaking%20hands%20or%20gesturing', then: 'the%20individual%20feels%20a%20lack%20of%20%22grip%20authority%22%20(The%20Dominance%20Challenge%20Operator)', result: 'compensation%20through%20**Verbal%20Dominance**%20or%20status%20displays%20(watches%2C%20cars)', operatorName: 'The%20Dominance%20Challenge%20Operator', operatorMechanism: 'the%20individual%20feels%20a%20lack%20of%20%22grip%20authority%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_leverage: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_96_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_96_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20feels%20a%20lack%20of%20%22grip%20authority%22%20(The%20Dominance%20Challenge%20Operator)' })
+(loop_96_verdict: BehaviorVerdict { loopId: 96, loopName: 'The%20Small%20Hands%20Loop', then: 'the%20individual%20feels%20a%20lack%20of%20%22grip%20authority%22%20(The%20Dominance%20Challenge%20Operator)', result: 'compensation%20through%20**Verbal%20Dominance**%20or%20status%20displays%20(watches%2C%20cars)', operatorName: 'The%20Dominance%20Challenge%20Operator', operatorMechanism: 'the%20individual%20feels%20a%20lack%20of%20%22grip%20authority%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_96_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands%20or%20gesturing' })
+
+// Topology
+(loop_96_start)-[:PROCESS]->(loop_96_given_gate)
+(loop_96_given_gate)-[:PROCESS { case: "ok" }]->(loop_96_when_gate)
+(loop_96_given_gate)-[:PROCESS { case: "err" }]->(loop_96_inactive)
+(loop_96_when_gate)-[:PROCESS { case: "ok" }]->(loop_96_context)
+(loop_96_when_gate)-[:PROCESS { case: "err" }]->(loop_96_inactive)
+(loop_96_context)-[:FORK { strategy: "behavior-branches" }]->(loop_96_context_branch | loop_96_then_branch | loop_96_operator_branch | loop_96_result_branch | loop_96_taxonomy_branch | loop_96_intervention_recognize | loop_96_intervention_leverage)
+(loop_96_context_branch | loop_96_then_branch | loop_96_operator_branch | loop_96_result_branch | loop_96_taxonomy_branch | loop_96_intervention_recognize | loop_96_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_96_verdict)
+(loop_96_inactive)-[:PROCESS]->(loop_96_sink)
+(loop_96_verdict)-[:PROCESS]->(loop_96_sink)
+(loop_96_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_96_then_branch)
+(loop_96_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_96_result_branch)

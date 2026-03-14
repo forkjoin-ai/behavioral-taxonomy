@@ -1,0 +1,33 @@
+// behavioral-loop-937.gg
+// Executable Gnosis projection for The Head Turtle Loop.
+
+// Nodes
+(loop_937_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_937_context_branch: BehaviorEmit { emission: 'context' })
+(loop_937_given_gate: BehaviorAssess { stage: 'given', text: 'Shoulders%20rising%20to%20protect%20the%20neck%20(Trapezius%20engagement)' })
+(loop_937_inactive: BehaviorTerminal { loopId: 937, loopName: 'The%20Head%20Turtle%20Loop' })
+(loop_937_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_937_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_937_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_937_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Shell%20Operator', mechanism: 'the%20neck%20disappears' })
+(loop_937_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20%22Beaten%22%20or%20%22Cowardly.%22' })
+(loop_937_sink: BehaviorSink)
+(loop_937_start: BehaviorStart { loopId: 937, loopName: 'The%20Head%20Turtle%20Loop', given: 'Shoulders%20rising%20to%20protect%20the%20neck%20(Trapezius%20engagement)', when: 'a%20loud%20noise%20or%20criticism%20occurs', then: 'the%20neck%20disappears%20(The%20Shell%20Operator)', result: 'the%20individual%20looking%20%22Beaten%22%20or%20%22Cowardly.%22', operatorName: 'The%20Shell%20Operator', operatorMechanism: 'the%20neck%20disappears', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_937_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_937_then_branch: BehaviorEmit { emission: 'then', text: 'the%20neck%20disappears%20(The%20Shell%20Operator)' })
+(loop_937_verdict: BehaviorVerdict { loopId: 937, loopName: 'The%20Head%20Turtle%20Loop', then: 'the%20neck%20disappears%20(The%20Shell%20Operator)', result: 'the%20individual%20looking%20%22Beaten%22%20or%20%22Cowardly.%22', operatorName: 'The%20Shell%20Operator', operatorMechanism: 'the%20neck%20disappears', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_937_when_gate: BehaviorAssess { stage: 'when', text: 'a%20loud%20noise%20or%20criticism%20occurs' })
+
+// Topology
+(loop_937_start)-[:PROCESS]->(loop_937_given_gate)
+(loop_937_given_gate)-[:PROCESS { case: "ok" }]->(loop_937_when_gate)
+(loop_937_given_gate)-[:PROCESS { case: "err" }]->(loop_937_inactive)
+(loop_937_when_gate)-[:PROCESS { case: "ok" }]->(loop_937_context)
+(loop_937_when_gate)-[:PROCESS { case: "err" }]->(loop_937_inactive)
+(loop_937_context)-[:FORK { strategy: "behavior-branches" }]->(loop_937_context_branch | loop_937_then_branch | loop_937_operator_branch | loop_937_result_branch | loop_937_taxonomy_branch | loop_937_intervention_recognize | loop_937_intervention_interdict | loop_937_intervention_minimize)
+(loop_937_context_branch | loop_937_then_branch | loop_937_operator_branch | loop_937_result_branch | loop_937_taxonomy_branch | loop_937_intervention_recognize | loop_937_intervention_interdict | loop_937_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_937_verdict)
+(loop_937_inactive)-[:PROCESS]->(loop_937_sink)
+(loop_937_verdict)-[:PROCESS]->(loop_937_sink)
+(loop_937_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_937_then_branch)
+(loop_937_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_937_then_branch)
+(loop_937_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_937_then_branch)

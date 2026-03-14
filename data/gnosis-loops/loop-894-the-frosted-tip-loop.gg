@@ -1,0 +1,33 @@
+// behavioral-loop-894.gg
+// Executable Gnosis projection for The Frosted Tip Loop.
+
+// Nodes
+(loop_894_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_894_context_branch: BehaviorEmit { emission: 'context' })
+(loop_894_given_gate: BehaviorAssess { stage: 'given', text: 'Dated%20highlighting%20style%20(90s)' })
+(loop_894_inactive: BehaviorTerminal { loopId: 894, loopName: 'The%20Frosted%20Tip%20Loop' })
+(loop_894_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_894_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_894_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_894_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Time%20Capsule%20Operator', mechanism: 'it%20signals%20%22Stuck%20in%20the%20Past%22' })
+(loop_894_result_branch: BehaviorEmit { emission: 'result', text: 'being%20viewed%20as%20out%20of%20touch%20with%20current%20trends' })
+(loop_894_sink: BehaviorSink)
+(loop_894_start: BehaviorStart { loopId: 894, loopName: 'The%20Frosted%20Tip%20Loop', given: 'Dated%20highlighting%20style%20(90s)', when: 'in%20a%20modern%20setting', then: 'it%20signals%20%22Stuck%20in%20the%20Past%22%20(The%20Time%20Capsule%20Operator)', result: 'being%20viewed%20as%20out%20of%20touch%20with%20current%20trends', operatorName: 'The%20Time%20Capsule%20Operator', operatorMechanism: 'it%20signals%20%22Stuck%20in%20the%20Past%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_894_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_894_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Stuck%20in%20the%20Past%22%20(The%20Time%20Capsule%20Operator)' })
+(loop_894_verdict: BehaviorVerdict { loopId: 894, loopName: 'The%20Frosted%20Tip%20Loop', then: 'it%20signals%20%22Stuck%20in%20the%20Past%22%20(The%20Time%20Capsule%20Operator)', result: 'being%20viewed%20as%20out%20of%20touch%20with%20current%20trends', operatorName: 'The%20Time%20Capsule%20Operator', operatorMechanism: 'it%20signals%20%22Stuck%20in%20the%20Past%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_894_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20modern%20setting' })
+
+// Topology
+(loop_894_start)-[:PROCESS]->(loop_894_given_gate)
+(loop_894_given_gate)-[:PROCESS { case: "ok" }]->(loop_894_when_gate)
+(loop_894_given_gate)-[:PROCESS { case: "err" }]->(loop_894_inactive)
+(loop_894_when_gate)-[:PROCESS { case: "ok" }]->(loop_894_context)
+(loop_894_when_gate)-[:PROCESS { case: "err" }]->(loop_894_inactive)
+(loop_894_context)-[:FORK { strategy: "behavior-branches" }]->(loop_894_context_branch | loop_894_then_branch | loop_894_operator_branch | loop_894_result_branch | loop_894_taxonomy_branch | loop_894_intervention_recognize | loop_894_intervention_interdict | loop_894_intervention_minimize)
+(loop_894_context_branch | loop_894_then_branch | loop_894_operator_branch | loop_894_result_branch | loop_894_taxonomy_branch | loop_894_intervention_recognize | loop_894_intervention_interdict | loop_894_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_894_verdict)
+(loop_894_inactive)-[:PROCESS]->(loop_894_sink)
+(loop_894_verdict)-[:PROCESS]->(loop_894_sink)
+(loop_894_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_894_then_branch)
+(loop_894_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_894_then_branch)
+(loop_894_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_894_then_branch)

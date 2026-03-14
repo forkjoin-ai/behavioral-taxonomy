@@ -1,0 +1,33 @@
+// behavioral-loop-687.gg
+// Executable Gnosis projection for The Pacer Loop.
+
+// Nodes
+(loop_687_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_687_context_branch: BehaviorEmit { emission: 'context' })
+(loop_687_given_gate: BehaviorAssess { stage: 'given', text: 'Inability%20to%20think%20while%20sitting' })
+(loop_687_inactive: BehaviorTerminal { loopId: 687, loopName: 'The%20Pacer%20Loop' })
+(loop_687_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_687_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_687_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_687_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cage%20Operator', mechanism: 'the%20individual%20walks%20circles%20around%20the%20room' })
+(loop_687_result_branch: BehaviorEmit { emission: 'result', text: 'making%20sedentary%20people%20feel%20anxious%2Fdizzy' })
+(loop_687_sink: BehaviorSink)
+(loop_687_start: BehaviorStart { loopId: 687, loopName: 'The%20Pacer%20Loop', given: 'Inability%20to%20think%20while%20sitting', when: 'on%20a%20phone%20call', then: 'the%20individual%20walks%20circles%20around%20the%20room%20(The%20Cage%20Operator)', result: 'making%20sedentary%20people%20feel%20anxious%2Fdizzy', operatorName: 'The%20Cage%20Operator', operatorMechanism: 'the%20individual%20walks%20circles%20around%20the%20room', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_687_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_687_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20walks%20circles%20around%20the%20room%20(The%20Cage%20Operator)' })
+(loop_687_verdict: BehaviorVerdict { loopId: 687, loopName: 'The%20Pacer%20Loop', then: 'the%20individual%20walks%20circles%20around%20the%20room%20(The%20Cage%20Operator)', result: 'making%20sedentary%20people%20feel%20anxious%2Fdizzy', operatorName: 'The%20Cage%20Operator', operatorMechanism: 'the%20individual%20walks%20circles%20around%20the%20room', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_687_when_gate: BehaviorAssess { stage: 'when', text: 'on%20a%20phone%20call' })
+
+// Topology
+(loop_687_start)-[:PROCESS]->(loop_687_given_gate)
+(loop_687_given_gate)-[:PROCESS { case: "ok" }]->(loop_687_when_gate)
+(loop_687_given_gate)-[:PROCESS { case: "err" }]->(loop_687_inactive)
+(loop_687_when_gate)-[:PROCESS { case: "ok" }]->(loop_687_context)
+(loop_687_when_gate)-[:PROCESS { case: "err" }]->(loop_687_inactive)
+(loop_687_context)-[:FORK { strategy: "behavior-branches" }]->(loop_687_context_branch | loop_687_then_branch | loop_687_operator_branch | loop_687_result_branch | loop_687_taxonomy_branch | loop_687_intervention_recognize | loop_687_intervention_interdict | loop_687_intervention_minimize)
+(loop_687_context_branch | loop_687_then_branch | loop_687_operator_branch | loop_687_result_branch | loop_687_taxonomy_branch | loop_687_intervention_recognize | loop_687_intervention_interdict | loop_687_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_687_verdict)
+(loop_687_inactive)-[:PROCESS]->(loop_687_sink)
+(loop_687_verdict)-[:PROCESS]->(loop_687_sink)
+(loop_687_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_687_then_branch)
+(loop_687_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_687_then_branch)
+(loop_687_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_687_then_branch)

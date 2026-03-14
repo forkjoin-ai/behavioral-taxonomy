@@ -1,0 +1,33 @@
+// behavioral-loop-566.gg
+// Executable Gnosis projection for The Salt and Pepper Loop.
+
+// Nodes
+(loop_566_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_566_context_branch: BehaviorEmit { emission: 'context' })
+(loop_566_given_gate: BehaviorAssess { stage: 'given', text: 'Even%20distribution%20of%20grey%20at%20temples' })
+(loop_566_inactive: BehaviorTerminal { loopId: 566, loopName: 'The%20Salt%20and%20Pepper%20Loop' })
+(loop_566_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_566_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_566_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_566_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Silver%20Fox%20Operator', mechanism: 'it%20signals%20%22Experience%22%20%2B%20%22Vitality%22' })
+(loop_566_result_branch: BehaviorEmit { emission: 'result', text: 'maximum%20employability%20(The%20sweet%20spot%20of%20age)' })
+(loop_566_sink: BehaviorSink)
+(loop_566_start: BehaviorStart { loopId: 566, loopName: 'The%20Salt%20and%20Pepper%20Loop', given: 'Even%20distribution%20of%20grey%20at%20temples', when: 'in%20a%20boardroom', then: 'it%20signals%20%22Experience%22%20%2B%20%22Vitality%22%20(The%20Silver%20Fox%20Operator)', result: 'maximum%20employability%20(The%20sweet%20spot%20of%20age)', operatorName: 'The%20Silver%20Fox%20Operator', operatorMechanism: 'it%20signals%20%22Experience%22%20%2B%20%22Vitality%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_566_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_566_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Experience%22%20%2B%20%22Vitality%22%20(The%20Silver%20Fox%20Operator)' })
+(loop_566_verdict: BehaviorVerdict { loopId: 566, loopName: 'The%20Salt%20and%20Pepper%20Loop', then: 'it%20signals%20%22Experience%22%20%2B%20%22Vitality%22%20(The%20Silver%20Fox%20Operator)', result: 'maximum%20employability%20(The%20sweet%20spot%20of%20age)', operatorName: 'The%20Silver%20Fox%20Operator', operatorMechanism: 'it%20signals%20%22Experience%22%20%2B%20%22Vitality%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_566_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20boardroom' })
+
+// Topology
+(loop_566_start)-[:PROCESS]->(loop_566_given_gate)
+(loop_566_given_gate)-[:PROCESS { case: "ok" }]->(loop_566_when_gate)
+(loop_566_given_gate)-[:PROCESS { case: "err" }]->(loop_566_inactive)
+(loop_566_when_gate)-[:PROCESS { case: "ok" }]->(loop_566_context)
+(loop_566_when_gate)-[:PROCESS { case: "err" }]->(loop_566_inactive)
+(loop_566_context)-[:FORK { strategy: "behavior-branches" }]->(loop_566_context_branch | loop_566_then_branch | loop_566_operator_branch | loop_566_result_branch | loop_566_taxonomy_branch | loop_566_intervention_recognize | loop_566_intervention_interdict | loop_566_intervention_minimize)
+(loop_566_context_branch | loop_566_then_branch | loop_566_operator_branch | loop_566_result_branch | loop_566_taxonomy_branch | loop_566_intervention_recognize | loop_566_intervention_interdict | loop_566_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_566_verdict)
+(loop_566_inactive)-[:PROCESS]->(loop_566_sink)
+(loop_566_verdict)-[:PROCESS]->(loop_566_sink)
+(loop_566_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_566_then_branch)
+(loop_566_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_566_then_branch)
+(loop_566_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_566_then_branch)

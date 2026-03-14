@@ -1,0 +1,33 @@
+// behavioral-loop-393.gg
+// Executable Gnosis projection for The Neck Rub Loop.
+
+// Nodes
+(loop_393_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_393_context_branch: BehaviorEmit { emission: 'context' })
+(loop_393_given_gate: BehaviorAssess { stage: 'given', text: 'Habitual%20massaging%20of%20the%20back%20of%20the%20neck' })
+(loop_393_inactive: BehaviorTerminal { loopId: 393, loopName: 'The%20Neck%20Rub%20Loop' })
+(loop_393_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_393_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_393_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_393_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Weakness%20Operator', mechanism: 'it%20signals%20%22Vulnerability%22%20or%20%22Overwhelm%22' })
+(loop_393_result_branch: BehaviorEmit { emission: 'result', text: 'sharks%20(negotiators)%20smelling%20blood%20and%20pressing%20harder' })
+(loop_393_sink: BehaviorSink)
+(loop_393_start: BehaviorStart { loopId: 393, loopName: 'The%20Neck%20Rub%20Loop', given: 'Habitual%20massaging%20of%20the%20back%20of%20the%20neck', when: 'asked%20a%20difficult%20question', then: 'it%20signals%20%22Vulnerability%22%20or%20%22Overwhelm%22%20(The%20Weakness%20Operator)', result: 'sharks%20(negotiators)%20smelling%20blood%20and%20pressing%20harder', operatorName: 'The%20Weakness%20Operator', operatorMechanism: 'it%20signals%20%22Vulnerability%22%20or%20%22Overwhelm%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_393_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_393_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Vulnerability%22%20or%20%22Overwhelm%22%20(The%20Weakness%20Operator)' })
+(loop_393_verdict: BehaviorVerdict { loopId: 393, loopName: 'The%20Neck%20Rub%20Loop', then: 'it%20signals%20%22Vulnerability%22%20or%20%22Overwhelm%22%20(The%20Weakness%20Operator)', result: 'sharks%20(negotiators)%20smelling%20blood%20and%20pressing%20harder', operatorName: 'The%20Weakness%20Operator', operatorMechanism: 'it%20signals%20%22Vulnerability%22%20or%20%22Overwhelm%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_393_when_gate: BehaviorAssess { stage: 'when', text: 'asked%20a%20difficult%20question' })
+
+// Topology
+(loop_393_start)-[:PROCESS]->(loop_393_given_gate)
+(loop_393_given_gate)-[:PROCESS { case: "ok" }]->(loop_393_when_gate)
+(loop_393_given_gate)-[:PROCESS { case: "err" }]->(loop_393_inactive)
+(loop_393_when_gate)-[:PROCESS { case: "ok" }]->(loop_393_context)
+(loop_393_when_gate)-[:PROCESS { case: "err" }]->(loop_393_inactive)
+(loop_393_context)-[:FORK { strategy: "behavior-branches" }]->(loop_393_context_branch | loop_393_then_branch | loop_393_operator_branch | loop_393_result_branch | loop_393_taxonomy_branch | loop_393_intervention_recognize | loop_393_intervention_interdict | loop_393_intervention_minimize)
+(loop_393_context_branch | loop_393_then_branch | loop_393_operator_branch | loop_393_result_branch | loop_393_taxonomy_branch | loop_393_intervention_recognize | loop_393_intervention_interdict | loop_393_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_393_verdict)
+(loop_393_inactive)-[:PROCESS]->(loop_393_sink)
+(loop_393_verdict)-[:PROCESS]->(loop_393_sink)
+(loop_393_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_393_then_branch)
+(loop_393_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_393_then_branch)
+(loop_393_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_393_then_branch)

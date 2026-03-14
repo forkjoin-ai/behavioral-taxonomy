@@ -1,0 +1,33 @@
+// behavioral-loop-306.gg
+// Executable Gnosis projection for The Floor Stare Loop.
+
+// Nodes
+(loop_306_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_306_context_branch: BehaviorEmit { emission: 'context' })
+(loop_306_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20status%20self-concept' })
+(loop_306_inactive: BehaviorTerminal { loopId: 306, loopName: 'The%20Floor%20Stare%20Loop' })
+(loop_306_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_306_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_306_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_306_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Prey%20Operator', mechanism: 'gaze%20is%20directed%20at%20feet' })
+(loop_306_result_branch: BehaviorEmit { emission: 'result', text: 'people%20bumping%20into%20them%20or%20ignoring%20their%20presence' })
+(loop_306_sink: BehaviorSink)
+(loop_306_start: BehaviorStart { loopId: 306, loopName: 'The%20Floor%20Stare%20Loop', given: 'Low%20status%20self-concept', when: 'walking%20or%20listening', then: 'gaze%20is%20directed%20at%20feet%20(The%20Prey%20Operator)', result: 'people%20bumping%20into%20them%20or%20ignoring%20their%20presence', operatorName: 'The%20Prey%20Operator', operatorMechanism: 'gaze%20is%20directed%20at%20feet', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_306_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_306_then_branch: BehaviorEmit { emission: 'then', text: 'gaze%20is%20directed%20at%20feet%20(The%20Prey%20Operator)' })
+(loop_306_verdict: BehaviorVerdict { loopId: 306, loopName: 'The%20Floor%20Stare%20Loop', then: 'gaze%20is%20directed%20at%20feet%20(The%20Prey%20Operator)', result: 'people%20bumping%20into%20them%20or%20ignoring%20their%20presence', operatorName: 'The%20Prey%20Operator', operatorMechanism: 'gaze%20is%20directed%20at%20feet', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_306_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20or%20listening' })
+
+// Topology
+(loop_306_start)-[:PROCESS]->(loop_306_given_gate)
+(loop_306_given_gate)-[:PROCESS { case: "ok" }]->(loop_306_when_gate)
+(loop_306_given_gate)-[:PROCESS { case: "err" }]->(loop_306_inactive)
+(loop_306_when_gate)-[:PROCESS { case: "ok" }]->(loop_306_context)
+(loop_306_when_gate)-[:PROCESS { case: "err" }]->(loop_306_inactive)
+(loop_306_context)-[:FORK { strategy: "behavior-branches" }]->(loop_306_context_branch | loop_306_then_branch | loop_306_operator_branch | loop_306_result_branch | loop_306_taxonomy_branch | loop_306_intervention_recognize | loop_306_intervention_interdict | loop_306_intervention_minimize)
+(loop_306_context_branch | loop_306_then_branch | loop_306_operator_branch | loop_306_result_branch | loop_306_taxonomy_branch | loop_306_intervention_recognize | loop_306_intervention_interdict | loop_306_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_306_verdict)
+(loop_306_inactive)-[:PROCESS]->(loop_306_sink)
+(loop_306_verdict)-[:PROCESS]->(loop_306_sink)
+(loop_306_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_306_then_branch)
+(loop_306_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_306_then_branch)
+(loop_306_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_306_then_branch)

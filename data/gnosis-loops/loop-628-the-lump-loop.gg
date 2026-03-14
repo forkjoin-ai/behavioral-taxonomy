@@ -1,0 +1,33 @@
+// behavioral-loop-628.gg
+// Executable Gnosis projection for The Lump Loop.
+
+// Nodes
+(loop_628_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_628_context_branch: BehaviorEmit { emission: 'context' })
+(loop_628_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%2C%20painless%20bump%20on%20eyelid' })
+(loop_628_inactive: BehaviorTerminal { loopId: 628, loopName: 'The%20Lump%20Loop' })
+(loop_628_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_628_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_628_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_628_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Distraction%20Operator', mechanism: 'it%20acts%20as%20a%20%22Third%20Eye%22%20distracting%20the%20listener' })
+(loop_628_result_branch: BehaviorEmit { emission: 'result', text: 'reduced%20eye%20contact%20from%20others' })
+(loop_628_sink: BehaviorSink)
+(loop_628_start: BehaviorStart { loopId: 628, loopName: 'The%20Lump%20Loop', given: 'Chronic%2C%20painless%20bump%20on%20eyelid', when: 'face-to-face', then: 'it%20acts%20as%20a%20%22Third%20Eye%22%20distracting%20the%20listener%20(The%20Distraction%20Operator)', result: 'reduced%20eye%20contact%20from%20others', operatorName: 'The%20Distraction%20Operator', operatorMechanism: 'it%20acts%20as%20a%20%22Third%20Eye%22%20distracting%20the%20listener', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_628_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_628_then_branch: BehaviorEmit { emission: 'then', text: 'it%20acts%20as%20a%20%22Third%20Eye%22%20distracting%20the%20listener%20(The%20Distraction%20Operator)' })
+(loop_628_verdict: BehaviorVerdict { loopId: 628, loopName: 'The%20Lump%20Loop', then: 'it%20acts%20as%20a%20%22Third%20Eye%22%20distracting%20the%20listener%20(The%20Distraction%20Operator)', result: 'reduced%20eye%20contact%20from%20others', operatorName: 'The%20Distraction%20Operator', operatorMechanism: 'it%20acts%20as%20a%20%22Third%20Eye%22%20distracting%20the%20listener', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_628_when_gate: BehaviorAssess { stage: 'when', text: 'face-to-face' })
+
+// Topology
+(loop_628_start)-[:PROCESS]->(loop_628_given_gate)
+(loop_628_given_gate)-[:PROCESS { case: "ok" }]->(loop_628_when_gate)
+(loop_628_given_gate)-[:PROCESS { case: "err" }]->(loop_628_inactive)
+(loop_628_when_gate)-[:PROCESS { case: "ok" }]->(loop_628_context)
+(loop_628_when_gate)-[:PROCESS { case: "err" }]->(loop_628_inactive)
+(loop_628_context)-[:FORK { strategy: "behavior-branches" }]->(loop_628_context_branch | loop_628_then_branch | loop_628_operator_branch | loop_628_result_branch | loop_628_taxonomy_branch | loop_628_intervention_recognize | loop_628_intervention_interdict | loop_628_intervention_minimize)
+(loop_628_context_branch | loop_628_then_branch | loop_628_operator_branch | loop_628_result_branch | loop_628_taxonomy_branch | loop_628_intervention_recognize | loop_628_intervention_interdict | loop_628_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_628_verdict)
+(loop_628_inactive)-[:PROCESS]->(loop_628_sink)
+(loop_628_verdict)-[:PROCESS]->(loop_628_sink)
+(loop_628_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_628_then_branch)
+(loop_628_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_628_then_branch)
+(loop_628_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_628_then_branch)

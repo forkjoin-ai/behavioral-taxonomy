@@ -1,0 +1,33 @@
+// behavioral-loop-776.gg
+// Executable Gnosis projection for The Uneven Lid Loop.
+
+// Nodes
+(loop_776_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_776_context_branch: BehaviorEmit { emission: 'context' })
+(loop_776_given_gate: BehaviorAssess { stage: 'given', text: 'One%20eyelid%20drooping%20significantly%20lower%20than%20the%20other' })
+(loop_776_inactive: BehaviorTerminal { loopId: 776, loopName: 'The%20Uneven%20Lid%20Loop' })
+(loop_776_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_776_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_776_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_776_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Glitch%20Operator', mechanism: 'the%20asymmetry%20distracts%20the%20viewer' })
+(loop_776_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20tilting%20their%20head%20back%20to%20compensate%2C%20looking%20%22Arrogant.%22' })
+(loop_776_sink: BehaviorSink)
+(loop_776_start: BehaviorStart { loopId: 776, loopName: 'The%20Uneven%20Lid%20Loop', given: 'One%20eyelid%20drooping%20significantly%20lower%20than%20the%20other', when: 'making%20intense%20eye%20contact', then: 'the%20asymmetry%20distracts%20the%20viewer%20(The%20Glitch%20Operator)', result: 'the%20individual%20tilting%20their%20head%20back%20to%20compensate%2C%20looking%20%22Arrogant.%22', operatorName: 'The%20Glitch%20Operator', operatorMechanism: 'the%20asymmetry%20distracts%20the%20viewer', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_776_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_776_then_branch: BehaviorEmit { emission: 'then', text: 'the%20asymmetry%20distracts%20the%20viewer%20(The%20Glitch%20Operator)' })
+(loop_776_verdict: BehaviorVerdict { loopId: 776, loopName: 'The%20Uneven%20Lid%20Loop', then: 'the%20asymmetry%20distracts%20the%20viewer%20(The%20Glitch%20Operator)', result: 'the%20individual%20tilting%20their%20head%20back%20to%20compensate%2C%20looking%20%22Arrogant.%22', operatorName: 'The%20Glitch%20Operator', operatorMechanism: 'the%20asymmetry%20distracts%20the%20viewer', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_776_when_gate: BehaviorAssess { stage: 'when', text: 'making%20intense%20eye%20contact' })
+
+// Topology
+(loop_776_start)-[:PROCESS]->(loop_776_given_gate)
+(loop_776_given_gate)-[:PROCESS { case: "ok" }]->(loop_776_when_gate)
+(loop_776_given_gate)-[:PROCESS { case: "err" }]->(loop_776_inactive)
+(loop_776_when_gate)-[:PROCESS { case: "ok" }]->(loop_776_context)
+(loop_776_when_gate)-[:PROCESS { case: "err" }]->(loop_776_inactive)
+(loop_776_context)-[:FORK { strategy: "behavior-branches" }]->(loop_776_context_branch | loop_776_then_branch | loop_776_operator_branch | loop_776_result_branch | loop_776_taxonomy_branch | loop_776_intervention_recognize | loop_776_intervention_interdict | loop_776_intervention_minimize)
+(loop_776_context_branch | loop_776_then_branch | loop_776_operator_branch | loop_776_result_branch | loop_776_taxonomy_branch | loop_776_intervention_recognize | loop_776_intervention_interdict | loop_776_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_776_verdict)
+(loop_776_inactive)-[:PROCESS]->(loop_776_sink)
+(loop_776_verdict)-[:PROCESS]->(loop_776_sink)
+(loop_776_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_776_then_branch)
+(loop_776_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_776_then_branch)
+(loop_776_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_776_then_branch)

@@ -1,0 +1,31 @@
+// behavioral-loop-982.gg
+// Executable Gnosis projection for The Sneak Loop.
+
+// Nodes
+(loop_982_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_982_context_branch: BehaviorEmit { emission: 'context' })
+(loop_982_given_gate: BehaviorAssess { stage: 'given', text: 'Silent%20gait%20(forefoot%20strike)' })
+(loop_982_inactive: BehaviorTerminal { loopId: 982, loopName: 'The%20Sneak%20Loop' })
+(loop_982_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_982_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_982_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Ninja%20Operator', mechanism: 'the%20individual%20startles%20the%20occupant' })
+(loop_982_result_branch: BehaviorEmit { emission: 'result', text: 'mistrust%20(%22Stop%20creeping%20up%20on%20me!%22)' })
+(loop_982_sink: BehaviorSink)
+(loop_982_start: BehaviorStart { loopId: 982, loopName: 'The%20Sneak%20Loop', given: 'Silent%20gait%20(forefoot%20strike)', when: 'entering%20a%20room', then: 'the%20individual%20startles%20the%20occupant%20(The%20Ninja%20Operator)', result: 'mistrust%20(%22Stop%20creeping%20up%20on%20me!%22)', operatorName: 'The%20Ninja%20Operator', operatorMechanism: 'the%20individual%20startles%20the%20occupant', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_982_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'TRUST' })
+(loop_982_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20startles%20the%20occupant%20(The%20Ninja%20Operator)' })
+(loop_982_verdict: BehaviorVerdict { loopId: 982, loopName: 'The%20Sneak%20Loop', then: 'the%20individual%20startles%20the%20occupant%20(The%20Ninja%20Operator)', result: 'mistrust%20(%22Stop%20creeping%20up%20on%20me!%22)', operatorName: 'The%20Ninja%20Operator', operatorMechanism: 'the%20individual%20startles%20the%20occupant', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'TRUST' })
+(loop_982_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20room' })
+
+// Topology
+(loop_982_start)-[:PROCESS]->(loop_982_given_gate)
+(loop_982_given_gate)-[:PROCESS { case: "ok" }]->(loop_982_when_gate)
+(loop_982_given_gate)-[:PROCESS { case: "err" }]->(loop_982_inactive)
+(loop_982_when_gate)-[:PROCESS { case: "ok" }]->(loop_982_context)
+(loop_982_when_gate)-[:PROCESS { case: "err" }]->(loop_982_inactive)
+(loop_982_context)-[:FORK { strategy: "behavior-branches" }]->(loop_982_context_branch | loop_982_then_branch | loop_982_operator_branch | loop_982_result_branch | loop_982_taxonomy_branch | loop_982_intervention_recognize | loop_982_intervention_leverage)
+(loop_982_context_branch | loop_982_then_branch | loop_982_operator_branch | loop_982_result_branch | loop_982_taxonomy_branch | loop_982_intervention_recognize | loop_982_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_982_verdict)
+(loop_982_inactive)-[:PROCESS]->(loop_982_sink)
+(loop_982_verdict)-[:PROCESS]->(loop_982_sink)
+(loop_982_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_982_then_branch)
+(loop_982_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_982_result_branch)

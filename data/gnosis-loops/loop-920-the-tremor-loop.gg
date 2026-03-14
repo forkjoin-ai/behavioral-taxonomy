@@ -1,0 +1,33 @@
+// behavioral-loop-920.gg
+// Executable Gnosis projection for The Tremor Loop.
+
+// Nodes
+(loop_920_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_920_context_branch: BehaviorEmit { emission: 'context' })
+(loop_920_given_gate: BehaviorAssess { stage: 'given', text: 'Fine%20motor%20shake%20(Caffeine%2FNerves%2FEssential)' })
+(loop_920_inactive: BehaviorTerminal { loopId: 920, loopName: 'The%20Tremor%20Loop' })
+(loop_920_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_920_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_920_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_920_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Earthquake%20Operator', mechanism: 'the%20movement%20is%20amplified' })
+(loop_920_result_branch: BehaviorEmit { emission: 'result', text: 'the%20audience%20focusing%20on%20the%20*shake*%20rather%20than%20the%20content' })
+(loop_920_sink: BehaviorSink)
+(loop_920_start: BehaviorStart { loopId: 920, loopName: 'The%20Tremor%20Loop', given: 'Fine%20motor%20shake%20(Caffeine%2FNerves%2FEssential)', when: 'holding%20a%20paper%20or%20laser%20pointer', then: 'the%20movement%20is%20amplified%20(The%20Earthquake%20Operator)', result: 'the%20audience%20focusing%20on%20the%20*shake*%20rather%20than%20the%20content', operatorName: 'The%20Earthquake%20Operator', operatorMechanism: 'the%20movement%20is%20amplified', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_920_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_920_then_branch: BehaviorEmit { emission: 'then', text: 'the%20movement%20is%20amplified%20(The%20Earthquake%20Operator)' })
+(loop_920_verdict: BehaviorVerdict { loopId: 920, loopName: 'The%20Tremor%20Loop', then: 'the%20movement%20is%20amplified%20(The%20Earthquake%20Operator)', result: 'the%20audience%20focusing%20on%20the%20*shake*%20rather%20than%20the%20content', operatorName: 'The%20Earthquake%20Operator', operatorMechanism: 'the%20movement%20is%20amplified', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_920_when_gate: BehaviorAssess { stage: 'when', text: 'holding%20a%20paper%20or%20laser%20pointer' })
+
+// Topology
+(loop_920_start)-[:PROCESS]->(loop_920_given_gate)
+(loop_920_given_gate)-[:PROCESS { case: "ok" }]->(loop_920_when_gate)
+(loop_920_given_gate)-[:PROCESS { case: "err" }]->(loop_920_inactive)
+(loop_920_when_gate)-[:PROCESS { case: "ok" }]->(loop_920_context)
+(loop_920_when_gate)-[:PROCESS { case: "err" }]->(loop_920_inactive)
+(loop_920_context)-[:FORK { strategy: "behavior-branches" }]->(loop_920_context_branch | loop_920_then_branch | loop_920_operator_branch | loop_920_result_branch | loop_920_taxonomy_branch | loop_920_intervention_recognize | loop_920_intervention_interdict | loop_920_intervention_minimize)
+(loop_920_context_branch | loop_920_then_branch | loop_920_operator_branch | loop_920_result_branch | loop_920_taxonomy_branch | loop_920_intervention_recognize | loop_920_intervention_interdict | loop_920_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_920_verdict)
+(loop_920_inactive)-[:PROCESS]->(loop_920_sink)
+(loop_920_verdict)-[:PROCESS]->(loop_920_sink)
+(loop_920_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_920_then_branch)
+(loop_920_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_920_then_branch)
+(loop_920_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_920_then_branch)

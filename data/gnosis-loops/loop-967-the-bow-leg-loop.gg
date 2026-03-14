@@ -1,0 +1,33 @@
+// behavioral-loop-967.gg
+// Executable Gnosis projection for The Bow Leg Loop.
+
+// Nodes
+(loop_967_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_967_context_branch: BehaviorEmit { emission: 'context' })
+(loop_967_given_gate: BehaviorAssess { stage: 'given', text: 'Knees%20staying%20apart%20when%20ankles%20touch' })
+(loop_967_inactive: BehaviorTerminal { loopId: 967, loopName: 'The%20Bow%20Leg%20Loop' })
+(loop_967_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_967_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_967_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_967_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cowboy%20Operator', mechanism: 'the%20silhouette%20looks%20%22Rough%22%20or%20%22Equestrian%22' })
+(loop_967_result_branch: BehaviorEmit { emission: 'result', text: 'assumptions%20of%20%22Toughness%22%20or%20%22Rickets.%22' })
+(loop_967_sink: BehaviorSink)
+(loop_967_start: BehaviorStart { loopId: 967, loopName: 'The%20Bow%20Leg%20Loop', given: 'Knees%20staying%20apart%20when%20ankles%20touch', when: 'standing%20still', then: 'the%20silhouette%20looks%20%22Rough%22%20or%20%22Equestrian%22%20(The%20Cowboy%20Operator)', result: 'assumptions%20of%20%22Toughness%22%20or%20%22Rickets.%22', operatorName: 'The%20Cowboy%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Rough%22%20or%20%22Equestrian%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_967_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_967_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20looks%20%22Rough%22%20or%20%22Equestrian%22%20(The%20Cowboy%20Operator)' })
+(loop_967_verdict: BehaviorVerdict { loopId: 967, loopName: 'The%20Bow%20Leg%20Loop', then: 'the%20silhouette%20looks%20%22Rough%22%20or%20%22Equestrian%22%20(The%20Cowboy%20Operator)', result: 'assumptions%20of%20%22Toughness%22%20or%20%22Rickets.%22', operatorName: 'The%20Cowboy%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Rough%22%20or%20%22Equestrian%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_967_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20still' })
+
+// Topology
+(loop_967_start)-[:PROCESS]->(loop_967_given_gate)
+(loop_967_given_gate)-[:PROCESS { case: "ok" }]->(loop_967_when_gate)
+(loop_967_given_gate)-[:PROCESS { case: "err" }]->(loop_967_inactive)
+(loop_967_when_gate)-[:PROCESS { case: "ok" }]->(loop_967_context)
+(loop_967_when_gate)-[:PROCESS { case: "err" }]->(loop_967_inactive)
+(loop_967_context)-[:FORK { strategy: "behavior-branches" }]->(loop_967_context_branch | loop_967_then_branch | loop_967_operator_branch | loop_967_result_branch | loop_967_taxonomy_branch | loop_967_intervention_recognize | loop_967_intervention_interdict | loop_967_intervention_minimize)
+(loop_967_context_branch | loop_967_then_branch | loop_967_operator_branch | loop_967_result_branch | loop_967_taxonomy_branch | loop_967_intervention_recognize | loop_967_intervention_interdict | loop_967_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_967_verdict)
+(loop_967_inactive)-[:PROCESS]->(loop_967_sink)
+(loop_967_verdict)-[:PROCESS]->(loop_967_sink)
+(loop_967_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_967_then_branch)
+(loop_967_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_967_then_branch)
+(loop_967_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_967_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-163.gg
+// Executable Gnosis projection for The Sanpaku Loop.
+
+// Nodes
+(loop_163_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_163_context_branch: BehaviorEmit { emission: 'context' })
+(loop_163_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20white%20space%20below%20the%20iris%20(Yin%20Sanpaku)' })
+(loop_163_inactive: BehaviorTerminal { loopId: 163, loopName: 'The%20Sanpaku%20Loop' })
+(loop_163_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Create%20transition%20rituals%20between%20contexts' })
+(loop_163_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_163_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20who%20moves%20toward%2Faway%20from%20whom' })
+(loop_163_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Uncanny%20Operator', mechanism: 'observers%20perceive%20%22Exhaustion%2C%22%20%22Madness%2C%22%20or%20%22Spiritual%20Stress%22' })
+(loop_163_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20treated%20with%20caution%2C%20reinforcing%20**Social%20Anxiety**' })
+(loop_163_sink: BehaviorSink)
+(loop_163_start: BehaviorStart { loopId: 163, loopName: 'The%20Sanpaku%20Loop', given: 'Visible%20white%20space%20below%20the%20iris%20(Yin%20Sanpaku)', when: 'the%20face%20is%20neutral', then: 'observers%20perceive%20%22Exhaustion%2C%22%20%22Madness%2C%22%20or%20%22Spiritual%20Stress%22%20(The%20Uncanny%20Operator)', result: 'the%20individual%20being%20treated%20with%20caution%2C%20reinforcing%20**Social%20Anxiety**', operatorName: 'The%20Uncanny%20Operator', operatorMechanism: 'observers%20perceive%20%22Exhaustion%2C%22%20%22Madness%2C%22%20or%20%22Spiritual%20Stress%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Pay%20attention%20to%20who%20moves%20toward%2Faway%20from%20whom', intervention_interdict: 'Create%20transition%20rituals%20between%20contexts', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_163_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_163_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Exhaustion%2C%22%20%22Madness%2C%22%20or%20%22Spiritual%20Stress%22%20(The%20Uncanny%20Operator)' })
+(loop_163_verdict: BehaviorVerdict { loopId: 163, loopName: 'The%20Sanpaku%20Loop', then: 'observers%20perceive%20%22Exhaustion%2C%22%20%22Madness%2C%22%20or%20%22Spiritual%20Stress%22%20(The%20Uncanny%20Operator)', result: 'the%20individual%20being%20treated%20with%20caution%2C%20reinforcing%20**Social%20Anxiety**', operatorName: 'The%20Uncanny%20Operator', operatorMechanism: 'observers%20perceive%20%22Exhaustion%2C%22%20%22Madness%2C%22%20or%20%22Spiritual%20Stress%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_163_when_gate: BehaviorAssess { stage: 'when', text: 'the%20face%20is%20neutral' })
+
+// Topology
+(loop_163_start)-[:PROCESS]->(loop_163_given_gate)
+(loop_163_given_gate)-[:PROCESS { case: "ok" }]->(loop_163_when_gate)
+(loop_163_given_gate)-[:PROCESS { case: "err" }]->(loop_163_inactive)
+(loop_163_when_gate)-[:PROCESS { case: "ok" }]->(loop_163_context)
+(loop_163_when_gate)-[:PROCESS { case: "err" }]->(loop_163_inactive)
+(loop_163_context)-[:FORK { strategy: "behavior-branches" }]->(loop_163_context_branch | loop_163_then_branch | loop_163_operator_branch | loop_163_result_branch | loop_163_taxonomy_branch | loop_163_intervention_recognize | loop_163_intervention_interdict | loop_163_intervention_minimize)
+(loop_163_context_branch | loop_163_then_branch | loop_163_operator_branch | loop_163_result_branch | loop_163_taxonomy_branch | loop_163_intervention_recognize | loop_163_intervention_interdict | loop_163_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_163_verdict)
+(loop_163_inactive)-[:PROCESS]->(loop_163_sink)
+(loop_163_verdict)-[:PROCESS]->(loop_163_sink)
+(loop_163_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_163_then_branch)
+(loop_163_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_163_then_branch)
+(loop_163_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_163_then_branch)

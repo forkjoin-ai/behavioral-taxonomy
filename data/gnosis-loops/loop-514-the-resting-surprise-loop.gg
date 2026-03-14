@@ -1,0 +1,33 @@
+// behavioral-loop-514.gg
+// Executable Gnosis projection for The Resting Surprise Loop.
+
+// Nodes
+(loop_514_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_514_context_branch: BehaviorEmit { emission: 'context' })
+(loop_514_given_gate: BehaviorAssess { stage: 'given', text: 'Naturally%20high-set%20eyebrows%20or%20Botox%20lift' })
+(loop_514_inactive: BehaviorTerminal { loopId: 514, loopName: 'The%20Resting%20Surprise%20Loop' })
+(loop_514_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_514_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_514_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_514_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deer%20in%20Headlights%20Operator', mechanism: 'the%20expression%20remains%20%22Shocked%22%20or%20%22Na%C3%AFve%22' })
+(loop_514_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20shielded%20from%20harsh%20realities%20by%20peers' })
+(loop_514_sink: BehaviorSink)
+(loop_514_start: BehaviorStart { loopId: 514, loopName: 'The%20Resting%20Surprise%20Loop', given: 'Naturally%20high-set%20eyebrows%20or%20Botox%20lift', when: 'hearing%20bad%20news', then: 'the%20expression%20remains%20%22Shocked%22%20or%20%22Na%C3%AFve%22%20(The%20Deer%20in%20Headlights%20Operator)', result: 'the%20individual%20being%20shielded%20from%20harsh%20realities%20by%20peers', operatorName: 'The%20Deer%20in%20Headlights%20Operator', operatorMechanism: 'the%20expression%20remains%20%22Shocked%22%20or%20%22Na%C3%AFve%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_514_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_514_then_branch: BehaviorEmit { emission: 'then', text: 'the%20expression%20remains%20%22Shocked%22%20or%20%22Na%C3%AFve%22%20(The%20Deer%20in%20Headlights%20Operator)' })
+(loop_514_verdict: BehaviorVerdict { loopId: 514, loopName: 'The%20Resting%20Surprise%20Loop', then: 'the%20expression%20remains%20%22Shocked%22%20or%20%22Na%C3%AFve%22%20(The%20Deer%20in%20Headlights%20Operator)', result: 'the%20individual%20being%20shielded%20from%20harsh%20realities%20by%20peers', operatorName: 'The%20Deer%20in%20Headlights%20Operator', operatorMechanism: 'the%20expression%20remains%20%22Shocked%22%20or%20%22Na%C3%AFve%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_514_when_gate: BehaviorAssess { stage: 'when', text: 'hearing%20bad%20news' })
+
+// Topology
+(loop_514_start)-[:PROCESS]->(loop_514_given_gate)
+(loop_514_given_gate)-[:PROCESS { case: "ok" }]->(loop_514_when_gate)
+(loop_514_given_gate)-[:PROCESS { case: "err" }]->(loop_514_inactive)
+(loop_514_when_gate)-[:PROCESS { case: "ok" }]->(loop_514_context)
+(loop_514_when_gate)-[:PROCESS { case: "err" }]->(loop_514_inactive)
+(loop_514_context)-[:FORK { strategy: "behavior-branches" }]->(loop_514_context_branch | loop_514_then_branch | loop_514_operator_branch | loop_514_result_branch | loop_514_taxonomy_branch | loop_514_intervention_recognize | loop_514_intervention_interdict | loop_514_intervention_minimize)
+(loop_514_context_branch | loop_514_then_branch | loop_514_operator_branch | loop_514_result_branch | loop_514_taxonomy_branch | loop_514_intervention_recognize | loop_514_intervention_interdict | loop_514_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_514_verdict)
+(loop_514_inactive)-[:PROCESS]->(loop_514_sink)
+(loop_514_verdict)-[:PROCESS]->(loop_514_sink)
+(loop_514_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_514_then_branch)
+(loop_514_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_514_then_branch)
+(loop_514_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_514_then_branch)

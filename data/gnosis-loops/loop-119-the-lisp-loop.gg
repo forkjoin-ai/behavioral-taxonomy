@@ -1,0 +1,33 @@
+// behavioral-loop-119.gg
+// Executable Gnosis projection for The Lisp Loop.
+
+// Nodes
+(loop_119_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_119_context_branch: BehaviorEmit { emission: 'context' })
+(loop_119_given_gate: BehaviorAssess { stage: 'given', text: 'Tongue%20thrust%20or%20dental%20issue' })
+(loop_119_inactive: BehaviorTerminal { loopId: 119, loopName: 'The%20Lisp%20Loop' })
+(loop_119_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_119_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_119_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_119_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nurture%20Operator', mechanism: 'the%20speech%20impediment%20signals%20%22Childishness%22' })
+(loop_119_result_branch: BehaviorEmit { emission: 'result', text: "the%20individual%20using%20**Complex%20Vocabulary**%20(avoiding%20's'%20sounds)%20to%20prove%20intelligence" })
+(loop_119_sink: BehaviorSink)
+(loop_119_start: BehaviorStart { loopId: 119, loopName: 'The%20Lisp%20Loop', given: 'Tongue%20thrust%20or%20dental%20issue', when: 'speaking%20authoritatively', then: 'the%20speech%20impediment%20signals%20%22Childishness%22%20(The%20Nurture%20Operator%20-%20Infantilizing)', result: "the%20individual%20using%20**Complex%20Vocabulary**%20(avoiding%20's'%20sounds)%20to%20prove%20intelligence", operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'the%20speech%20impediment%20signals%20%22Childishness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_119_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_119_then_branch: BehaviorEmit { emission: 'then', text: 'the%20speech%20impediment%20signals%20%22Childishness%22%20(The%20Nurture%20Operator%20-%20Infantilizing)' })
+(loop_119_verdict: BehaviorVerdict { loopId: 119, loopName: 'The%20Lisp%20Loop', then: 'the%20speech%20impediment%20signals%20%22Childishness%22%20(The%20Nurture%20Operator%20-%20Infantilizing)', result: "the%20individual%20using%20**Complex%20Vocabulary**%20(avoiding%20's'%20sounds)%20to%20prove%20intelligence", operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'the%20speech%20impediment%20signals%20%22Childishness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_119_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20authoritatively' })
+
+// Topology
+(loop_119_start)-[:PROCESS]->(loop_119_given_gate)
+(loop_119_given_gate)-[:PROCESS { case: "ok" }]->(loop_119_when_gate)
+(loop_119_given_gate)-[:PROCESS { case: "err" }]->(loop_119_inactive)
+(loop_119_when_gate)-[:PROCESS { case: "ok" }]->(loop_119_context)
+(loop_119_when_gate)-[:PROCESS { case: "err" }]->(loop_119_inactive)
+(loop_119_context)-[:FORK { strategy: "behavior-branches" }]->(loop_119_context_branch | loop_119_then_branch | loop_119_operator_branch | loop_119_result_branch | loop_119_taxonomy_branch | loop_119_intervention_recognize | loop_119_intervention_interdict | loop_119_intervention_minimize)
+(loop_119_context_branch | loop_119_then_branch | loop_119_operator_branch | loop_119_result_branch | loop_119_taxonomy_branch | loop_119_intervention_recognize | loop_119_intervention_interdict | loop_119_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_119_verdict)
+(loop_119_inactive)-[:PROCESS]->(loop_119_sink)
+(loop_119_verdict)-[:PROCESS]->(loop_119_sink)
+(loop_119_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_119_then_branch)
+(loop_119_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_119_then_branch)
+(loop_119_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_119_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-856.gg
+// Executable Gnosis projection for The Fade Loop.
+
+// Nodes
+(loop_856_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_856_context_branch: BehaviorEmit { emission: 'context' })
+(loop_856_given_gate: BehaviorAssess { stage: 'given', text: 'Immaculately%20blended%20barbering' })
+(loop_856_inactive: BehaviorTerminal { loopId: 856, loopName: 'The%20Fade%20Loop' })
+(loop_856_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_856_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_856_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_856_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Groomed%20Operator', mechanism: 'it%20signals%20%22High%20Maintenance%22%20and%20%22Self-Respect%22' })
+(loop_856_result_branch: BehaviorEmit { emission: 'result', text: 'assumption%20of%20competence%20and%20attention%20to%20detail' })
+(loop_856_sink: BehaviorSink)
+(loop_856_start: BehaviorStart { loopId: 856, loopName: 'The%20Fade%20Loop', given: 'Immaculately%20blended%20barbering', when: 'seen%20close%20up', then: 'it%20signals%20%22High%20Maintenance%22%20and%20%22Self-Respect%22%20(The%20Groomed%20Operator)', result: 'assumption%20of%20competence%20and%20attention%20to%20detail', operatorName: 'The%20Groomed%20Operator', operatorMechanism: 'it%20signals%20%22High%20Maintenance%22%20and%20%22Self-Respect%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_856_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_856_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22High%20Maintenance%22%20and%20%22Self-Respect%22%20(The%20Groomed%20Operator)' })
+(loop_856_verdict: BehaviorVerdict { loopId: 856, loopName: 'The%20Fade%20Loop', then: 'it%20signals%20%22High%20Maintenance%22%20and%20%22Self-Respect%22%20(The%20Groomed%20Operator)', result: 'assumption%20of%20competence%20and%20attention%20to%20detail', operatorName: 'The%20Groomed%20Operator', operatorMechanism: 'it%20signals%20%22High%20Maintenance%22%20and%20%22Self-Respect%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_856_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20close%20up' })
+
+// Topology
+(loop_856_start)-[:PROCESS]->(loop_856_given_gate)
+(loop_856_given_gate)-[:PROCESS { case: "ok" }]->(loop_856_when_gate)
+(loop_856_given_gate)-[:PROCESS { case: "err" }]->(loop_856_inactive)
+(loop_856_when_gate)-[:PROCESS { case: "ok" }]->(loop_856_context)
+(loop_856_when_gate)-[:PROCESS { case: "err" }]->(loop_856_inactive)
+(loop_856_context)-[:FORK { strategy: "behavior-branches" }]->(loop_856_context_branch | loop_856_then_branch | loop_856_operator_branch | loop_856_result_branch | loop_856_taxonomy_branch | loop_856_intervention_recognize | loop_856_intervention_interdict | loop_856_intervention_minimize)
+(loop_856_context_branch | loop_856_then_branch | loop_856_operator_branch | loop_856_result_branch | loop_856_taxonomy_branch | loop_856_intervention_recognize | loop_856_intervention_interdict | loop_856_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_856_verdict)
+(loop_856_inactive)-[:PROCESS]->(loop_856_sink)
+(loop_856_verdict)-[:PROCESS]->(loop_856_sink)
+(loop_856_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_856_then_branch)
+(loop_856_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_856_then_branch)
+(loop_856_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_856_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-688.gg
+// Executable Gnosis projection for The Rocker Loop.
+
+// Nodes
+(loop_688_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_688_context_branch: BehaviorEmit { emission: 'context' })
+(loop_688_given_gate: BehaviorAssess { stage: 'given', text: 'Rhythmic%20forward-backward%20body%20motion' })
+(loop_688_inactive: BehaviorTerminal { loopId: 688, loopName: 'The%20Rocker%20Loop' })
+(loop_688_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_688_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_688_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_688_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stimming%20Operator', mechanism: 'it%20signals%20%22Autism%20Spectrum%22%20or%20%22Institutionalization%22' })
+(loop_688_result_branch: BehaviorEmit { emission: 'result', text: "observers%20questioning%20the%20individual's%20neurotypicality" })
+(loop_688_sink: BehaviorSink)
+(loop_688_start: BehaviorStart { loopId: 688, loopName: 'The%20Rocker%20Loop', given: 'Rhythmic%20forward-backward%20body%20motion', when: 'sitting', then: 'it%20signals%20%22Autism%20Spectrum%22%20or%20%22Institutionalization%22%20(The%20Stimming%20Operator)', result: "observers%20questioning%20the%20individual's%20neurotypicality", operatorName: 'The%20Stimming%20Operator', operatorMechanism: 'it%20signals%20%22Autism%20Spectrum%22%20or%20%22Institutionalization%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_688_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_688_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Autism%20Spectrum%22%20or%20%22Institutionalization%22%20(The%20Stimming%20Operator)' })
+(loop_688_verdict: BehaviorVerdict { loopId: 688, loopName: 'The%20Rocker%20Loop', then: 'it%20signals%20%22Autism%20Spectrum%22%20or%20%22Institutionalization%22%20(The%20Stimming%20Operator)', result: "observers%20questioning%20the%20individual's%20neurotypicality", operatorName: 'The%20Stimming%20Operator', operatorMechanism: 'it%20signals%20%22Autism%20Spectrum%22%20or%20%22Institutionalization%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_688_when_gate: BehaviorAssess { stage: 'when', text: 'sitting' })
+
+// Topology
+(loop_688_start)-[:PROCESS]->(loop_688_given_gate)
+(loop_688_given_gate)-[:PROCESS { case: "ok" }]->(loop_688_when_gate)
+(loop_688_given_gate)-[:PROCESS { case: "err" }]->(loop_688_inactive)
+(loop_688_when_gate)-[:PROCESS { case: "ok" }]->(loop_688_context)
+(loop_688_when_gate)-[:PROCESS { case: "err" }]->(loop_688_inactive)
+(loop_688_context)-[:FORK { strategy: "behavior-branches" }]->(loop_688_context_branch | loop_688_then_branch | loop_688_operator_branch | loop_688_result_branch | loop_688_taxonomy_branch | loop_688_intervention_recognize | loop_688_intervention_interdict | loop_688_intervention_minimize)
+(loop_688_context_branch | loop_688_then_branch | loop_688_operator_branch | loop_688_result_branch | loop_688_taxonomy_branch | loop_688_intervention_recognize | loop_688_intervention_interdict | loop_688_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_688_verdict)
+(loop_688_inactive)-[:PROCESS]->(loop_688_sink)
+(loop_688_verdict)-[:PROCESS]->(loop_688_sink)
+(loop_688_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_688_then_branch)
+(loop_688_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_688_then_branch)
+(loop_688_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_688_then_branch)

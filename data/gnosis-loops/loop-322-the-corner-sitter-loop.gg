@@ -1,0 +1,33 @@
+// behavioral-loop-322.gg
+// Executable Gnosis projection for The Corner Sitter Loop.
+
+// Nodes
+(loop_322_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_322_context_branch: BehaviorEmit { emission: 'context' })
+(loop_322_given_gate: BehaviorAssess { stage: 'given', text: 'Hyper-vigilance%20or%20paranoia' })
+(loop_322_inactive: BehaviorTerminal { loopId: 322, loopName: 'The%20Corner%20Sitter%20Loop' })
+(loop_322_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_322_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_322_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_322_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Defense%20Operator', mechanism: 'the%20individual%20demands%20a%20seat%20with%20back%20to%20the%20wall' })
+(loop_322_result_branch: BehaviorEmit { emission: 'result', text: 'being%20perceived%20as%20%22Edgy%22%20or%20%22Tactical%22%20(The%20Bourne%20Identity%20Effect)' })
+(loop_322_sink: BehaviorSink)
+(loop_322_start: BehaviorStart { loopId: 322, loopName: 'The%20Corner%20Sitter%20Loop', given: 'Hyper-vigilance%20or%20paranoia', when: 'entering%20a%20restaurant%2Froom', then: 'the%20individual%20demands%20a%20seat%20with%20back%20to%20the%20wall%20(The%20Defense%20Operator)', result: 'being%20perceived%20as%20%22Edgy%22%20or%20%22Tactical%22%20(The%20Bourne%20Identity%20Effect)', operatorName: 'The%20Defense%20Operator', operatorMechanism: 'the%20individual%20demands%20a%20seat%20with%20back%20to%20the%20wall', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_322_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_322_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20demands%20a%20seat%20with%20back%20to%20the%20wall%20(The%20Defense%20Operator)' })
+(loop_322_verdict: BehaviorVerdict { loopId: 322, loopName: 'The%20Corner%20Sitter%20Loop', then: 'the%20individual%20demands%20a%20seat%20with%20back%20to%20the%20wall%20(The%20Defense%20Operator)', result: 'being%20perceived%20as%20%22Edgy%22%20or%20%22Tactical%22%20(The%20Bourne%20Identity%20Effect)', operatorName: 'The%20Defense%20Operator', operatorMechanism: 'the%20individual%20demands%20a%20seat%20with%20back%20to%20the%20wall', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_322_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20restaurant%2Froom' })
+
+// Topology
+(loop_322_start)-[:PROCESS]->(loop_322_given_gate)
+(loop_322_given_gate)-[:PROCESS { case: "ok" }]->(loop_322_when_gate)
+(loop_322_given_gate)-[:PROCESS { case: "err" }]->(loop_322_inactive)
+(loop_322_when_gate)-[:PROCESS { case: "ok" }]->(loop_322_context)
+(loop_322_when_gate)-[:PROCESS { case: "err" }]->(loop_322_inactive)
+(loop_322_context)-[:FORK { strategy: "behavior-branches" }]->(loop_322_context_branch | loop_322_then_branch | loop_322_operator_branch | loop_322_result_branch | loop_322_taxonomy_branch | loop_322_intervention_recognize | loop_322_intervention_interdict | loop_322_intervention_minimize)
+(loop_322_context_branch | loop_322_then_branch | loop_322_operator_branch | loop_322_result_branch | loop_322_taxonomy_branch | loop_322_intervention_recognize | loop_322_intervention_interdict | loop_322_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_322_verdict)
+(loop_322_inactive)-[:PROCESS]->(loop_322_sink)
+(loop_322_verdict)-[:PROCESS]->(loop_322_sink)
+(loop_322_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_322_then_branch)
+(loop_322_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_322_then_branch)
+(loop_322_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_322_then_branch)

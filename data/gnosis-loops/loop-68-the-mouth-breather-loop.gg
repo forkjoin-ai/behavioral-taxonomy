@@ -1,0 +1,33 @@
+// behavioral-loop-68.gg
+// Executable Gnosis projection for The Mouth Breather Loop.
+
+// Nodes
+(loop_68_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_68_context_branch: BehaviorEmit { emission: 'context' })
+(loop_68_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20Nasal%20Obstruction%20%2B%20Long%20Face%20Syndrome' })
+(loop_68_inactive: BehaviorTerminal { loopId: 68, loopName: 'The%20Mouth%20Breather%20Loop' })
+(loop_68_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_68_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_68_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_68_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intellectual%20Operator', mechanism: 'observers%20subconsciously%20dock%20IQ%20points' })
+(loop_68_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20struggling%20against%20a%20%22Slow%22%20stereotype%2C%20often%20leading%20to%20**Social%20Withdrawal**%20or%20**Over-Credentialing**' })
+(loop_68_sink: BehaviorSink)
+(loop_68_start: BehaviorStart { loopId: 68, loopName: 'The%20Mouth%20Breather%20Loop', given: 'Chronic%20Nasal%20Obstruction%20%2B%20Long%20Face%20Syndrome', when: 'in%20a%20resting%20state%20with%20mouth%20open', then: 'observers%20subconsciously%20dock%20IQ%20points%20(The%20Intellectual%20Operator%20-%20Negative)', result: 'the%20individual%20struggling%20against%20a%20%22Slow%22%20stereotype%2C%20often%20leading%20to%20**Social%20Withdrawal**%20or%20**Over-Credentialing**', operatorName: 'The%20Intellectual%20Operator', operatorMechanism: 'observers%20subconsciously%20dock%20IQ%20points', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_68_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_68_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20subconsciously%20dock%20IQ%20points%20(The%20Intellectual%20Operator%20-%20Negative)' })
+(loop_68_verdict: BehaviorVerdict { loopId: 68, loopName: 'The%20Mouth%20Breather%20Loop', then: 'observers%20subconsciously%20dock%20IQ%20points%20(The%20Intellectual%20Operator%20-%20Negative)', result: 'the%20individual%20struggling%20against%20a%20%22Slow%22%20stereotype%2C%20often%20leading%20to%20**Social%20Withdrawal**%20or%20**Over-Credentialing**', operatorName: 'The%20Intellectual%20Operator', operatorMechanism: 'observers%20subconsciously%20dock%20IQ%20points', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_68_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20resting%20state%20with%20mouth%20open' })
+
+// Topology
+(loop_68_start)-[:PROCESS]->(loop_68_given_gate)
+(loop_68_given_gate)-[:PROCESS { case: "ok" }]->(loop_68_when_gate)
+(loop_68_given_gate)-[:PROCESS { case: "err" }]->(loop_68_inactive)
+(loop_68_when_gate)-[:PROCESS { case: "ok" }]->(loop_68_context)
+(loop_68_when_gate)-[:PROCESS { case: "err" }]->(loop_68_inactive)
+(loop_68_context)-[:FORK { strategy: "behavior-branches" }]->(loop_68_context_branch | loop_68_then_branch | loop_68_operator_branch | loop_68_result_branch | loop_68_taxonomy_branch | loop_68_intervention_recognize | loop_68_intervention_interdict | loop_68_intervention_minimize)
+(loop_68_context_branch | loop_68_then_branch | loop_68_operator_branch | loop_68_result_branch | loop_68_taxonomy_branch | loop_68_intervention_recognize | loop_68_intervention_interdict | loop_68_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_68_verdict)
+(loop_68_inactive)-[:PROCESS]->(loop_68_sink)
+(loop_68_verdict)-[:PROCESS]->(loop_68_sink)
+(loop_68_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_68_then_branch)
+(loop_68_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_68_then_branch)
+(loop_68_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_68_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-485.gg
+// Executable Gnosis projection for The Foam Corner Loop.
+
+// Nodes
+(loop_485_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_485_context_branch: BehaviorEmit { emission: 'context' })
+(loop_485_given_gate: BehaviorAssess { stage: 'given', text: 'Dehydration%20causing%20white%20accumulation%20at%20mouth%20corners' })
+(loop_485_inactive: BehaviorTerminal { loopId: 485, loopName: 'The%20Foam%20Corner%20Loop' })
+(loop_485_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_485_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_485_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_485_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rabies%20Operator', mechanism: 'the%20listener%20stares%20at%20the%20foam' })
+(loop_485_result_branch: BehaviorEmit { emission: 'result', text: 'the%20verbal%20message%20being%20lost%20to%20**Visceral%20Disgust**' })
+(loop_485_sink: BehaviorSink)
+(loop_485_start: BehaviorStart { loopId: 485, loopName: 'The%20Foam%20Corner%20Loop', given: 'Dehydration%20causing%20white%20accumulation%20at%20mouth%20corners', when: 'speaking%20passionately', then: 'the%20listener%20stares%20at%20the%20foam%20(The%20Rabies%20Operator)', result: 'the%20verbal%20message%20being%20lost%20to%20**Visceral%20Disgust**', operatorName: 'The%20Rabies%20Operator', operatorMechanism: 'the%20listener%20stares%20at%20the%20foam', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_485_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_485_then_branch: BehaviorEmit { emission: 'then', text: 'the%20listener%20stares%20at%20the%20foam%20(The%20Rabies%20Operator)' })
+(loop_485_verdict: BehaviorVerdict { loopId: 485, loopName: 'The%20Foam%20Corner%20Loop', then: 'the%20listener%20stares%20at%20the%20foam%20(The%20Rabies%20Operator)', result: 'the%20verbal%20message%20being%20lost%20to%20**Visceral%20Disgust**', operatorName: 'The%20Rabies%20Operator', operatorMechanism: 'the%20listener%20stares%20at%20the%20foam', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_485_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20passionately' })
+
+// Topology
+(loop_485_start)-[:PROCESS]->(loop_485_given_gate)
+(loop_485_given_gate)-[:PROCESS { case: "ok" }]->(loop_485_when_gate)
+(loop_485_given_gate)-[:PROCESS { case: "err" }]->(loop_485_inactive)
+(loop_485_when_gate)-[:PROCESS { case: "ok" }]->(loop_485_context)
+(loop_485_when_gate)-[:PROCESS { case: "err" }]->(loop_485_inactive)
+(loop_485_context)-[:FORK { strategy: "behavior-branches" }]->(loop_485_context_branch | loop_485_then_branch | loop_485_operator_branch | loop_485_result_branch | loop_485_taxonomy_branch | loop_485_intervention_recognize | loop_485_intervention_interdict | loop_485_intervention_minimize)
+(loop_485_context_branch | loop_485_then_branch | loop_485_operator_branch | loop_485_result_branch | loop_485_taxonomy_branch | loop_485_intervention_recognize | loop_485_intervention_interdict | loop_485_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_485_verdict)
+(loop_485_inactive)-[:PROCESS]->(loop_485_sink)
+(loop_485_verdict)-[:PROCESS]->(loop_485_sink)
+(loop_485_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_485_then_branch)
+(loop_485_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_485_then_branch)
+(loop_485_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_485_then_branch)

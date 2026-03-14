@@ -1,0 +1,33 @@
+// behavioral-loop-710.gg
+// Executable Gnosis projection for The Swayback Loop.
+
+// Nodes
+(loop_710_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_710_context_branch: BehaviorEmit { emission: 'context' })
+(loop_710_given_gate: BehaviorAssess { stage: 'given', text: 'Excessive%20inward%20curve%20of%20the%20lower%20back' })
+(loop_710_inactive: BehaviorTerminal { loopId: 710, loopName: 'The%20Swayback%20Loop' })
+(loop_710_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_710_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_710_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_710_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Posturing%20Operator', mechanism: 'the%20stomach%20protrudes%20and%20buttocks%20lift' })
+(loop_710_result_branch: BehaviorEmit { emission: 'result', text: 'assumptions%20of%20%22Sexual%20Signaling%22%20(female)%20or%20%22Weak%20Core%22%20(male)' })
+(loop_710_sink: BehaviorSink)
+(loop_710_start: BehaviorStart { loopId: 710, loopName: 'The%20Swayback%20Loop', given: 'Excessive%20inward%20curve%20of%20the%20lower%20back', when: 'standing', then: 'the%20stomach%20protrudes%20and%20buttocks%20lift%20(The%20Posturing%20Operator)', result: 'assumptions%20of%20%22Sexual%20Signaling%22%20(female)%20or%20%22Weak%20Core%22%20(male)', operatorName: 'The%20Posturing%20Operator', operatorMechanism: 'the%20stomach%20protrudes%20and%20buttocks%20lift', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_710_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_710_then_branch: BehaviorEmit { emission: 'then', text: 'the%20stomach%20protrudes%20and%20buttocks%20lift%20(The%20Posturing%20Operator)' })
+(loop_710_verdict: BehaviorVerdict { loopId: 710, loopName: 'The%20Swayback%20Loop', then: 'the%20stomach%20protrudes%20and%20buttocks%20lift%20(The%20Posturing%20Operator)', result: 'assumptions%20of%20%22Sexual%20Signaling%22%20(female)%20or%20%22Weak%20Core%22%20(male)', operatorName: 'The%20Posturing%20Operator', operatorMechanism: 'the%20stomach%20protrudes%20and%20buttocks%20lift', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_710_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_710_start)-[:PROCESS]->(loop_710_given_gate)
+(loop_710_given_gate)-[:PROCESS { case: "ok" }]->(loop_710_when_gate)
+(loop_710_given_gate)-[:PROCESS { case: "err" }]->(loop_710_inactive)
+(loop_710_when_gate)-[:PROCESS { case: "ok" }]->(loop_710_context)
+(loop_710_when_gate)-[:PROCESS { case: "err" }]->(loop_710_inactive)
+(loop_710_context)-[:FORK { strategy: "behavior-branches" }]->(loop_710_context_branch | loop_710_then_branch | loop_710_operator_branch | loop_710_result_branch | loop_710_taxonomy_branch | loop_710_intervention_recognize | loop_710_intervention_interdict | loop_710_intervention_minimize)
+(loop_710_context_branch | loop_710_then_branch | loop_710_operator_branch | loop_710_result_branch | loop_710_taxonomy_branch | loop_710_intervention_recognize | loop_710_intervention_interdict | loop_710_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_710_verdict)
+(loop_710_inactive)-[:PROCESS]->(loop_710_sink)
+(loop_710_verdict)-[:PROCESS]->(loop_710_sink)
+(loop_710_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_710_then_branch)
+(loop_710_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_710_then_branch)
+(loop_710_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_710_then_branch)

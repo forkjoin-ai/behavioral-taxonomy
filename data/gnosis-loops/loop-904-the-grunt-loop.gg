@@ -1,0 +1,33 @@
+// behavioral-loop-904.gg
+// Executable Gnosis projection for The Grunt Loop.
+
+// Nodes
+(loop_904_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_904_context_branch: BehaviorEmit { emission: 'context' })
+(loop_904_given_gate: BehaviorAssess { stage: 'given', text: 'Exhaling%20audibly%20when%20sitting%20or%20standing' })
+(loop_904_inactive: BehaviorTerminal { loopId: 904, loopName: 'The%20Grunt%20Loop' })
+(loop_904_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_904_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_904_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_904_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Strain%20Operator', mechanism: 'it%20signals%20%22Effort%22%20and%20%22Age%22' })
+(loop_904_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20perceived%20as%20%22Past%20Prime%22%20regardless%20of%20actual%20fitness' })
+(loop_904_sink: BehaviorSink)
+(loop_904_start: BehaviorStart { loopId: 904, loopName: 'The%20Grunt%20Loop', given: 'Exhaling%20audibly%20when%20sitting%20or%20standing', when: 'moving', then: 'it%20signals%20%22Effort%22%20and%20%22Age%22%20(The%20Strain%20Operator)', result: 'the%20individual%20being%20perceived%20as%20%22Past%20Prime%22%20regardless%20of%20actual%20fitness', operatorName: 'The%20Strain%20Operator', operatorMechanism: 'it%20signals%20%22Effort%22%20and%20%22Age%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_904_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_904_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Effort%22%20and%20%22Age%22%20(The%20Strain%20Operator)' })
+(loop_904_verdict: BehaviorVerdict { loopId: 904, loopName: 'The%20Grunt%20Loop', then: 'it%20signals%20%22Effort%22%20and%20%22Age%22%20(The%20Strain%20Operator)', result: 'the%20individual%20being%20perceived%20as%20%22Past%20Prime%22%20regardless%20of%20actual%20fitness', operatorName: 'The%20Strain%20Operator', operatorMechanism: 'it%20signals%20%22Effort%22%20and%20%22Age%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_904_when_gate: BehaviorAssess { stage: 'when', text: 'moving' })
+
+// Topology
+(loop_904_start)-[:PROCESS]->(loop_904_given_gate)
+(loop_904_given_gate)-[:PROCESS { case: "ok" }]->(loop_904_when_gate)
+(loop_904_given_gate)-[:PROCESS { case: "err" }]->(loop_904_inactive)
+(loop_904_when_gate)-[:PROCESS { case: "ok" }]->(loop_904_context)
+(loop_904_when_gate)-[:PROCESS { case: "err" }]->(loop_904_inactive)
+(loop_904_context)-[:FORK { strategy: "behavior-branches" }]->(loop_904_context_branch | loop_904_then_branch | loop_904_operator_branch | loop_904_result_branch | loop_904_taxonomy_branch | loop_904_intervention_recognize | loop_904_intervention_interdict | loop_904_intervention_minimize)
+(loop_904_context_branch | loop_904_then_branch | loop_904_operator_branch | loop_904_result_branch | loop_904_taxonomy_branch | loop_904_intervention_recognize | loop_904_intervention_interdict | loop_904_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_904_verdict)
+(loop_904_inactive)-[:PROCESS]->(loop_904_sink)
+(loop_904_verdict)-[:PROCESS]->(loop_904_sink)
+(loop_904_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_904_then_branch)
+(loop_904_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_904_then_branch)
+(loop_904_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_904_then_branch)

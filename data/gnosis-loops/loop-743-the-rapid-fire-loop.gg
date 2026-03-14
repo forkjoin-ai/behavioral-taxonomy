@@ -1,0 +1,33 @@
+// behavioral-loop-743.gg
+// Executable Gnosis projection for The Rapid-Fire Loop.
+
+// Nodes
+(loop_743_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_743_context_branch: BehaviorEmit { emission: 'context' })
+(loop_743_given_gate: BehaviorAssess { stage: 'given', text: 'Speech%20rate%20exceeding%20articulation%20speed' })
+(loop_743_inactive: BehaviorTerminal { loopId: 743, loopName: 'The%20Rapid-Fire%20Loop' })
+(loop_743_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_743_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_743_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_743_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Manic%20Operator', mechanism: 'words%20telescope%20into%20a%20blur' })
+(loop_743_result_branch: BehaviorEmit { emission: 'result', text: 'listeners%20asking%20%22Slow%20down%2C%22%20killing%20the%20momentum' })
+(loop_743_sink: BehaviorSink)
+(loop_743_start: BehaviorStart { loopId: 743, loopName: 'The%20Rapid-Fire%20Loop', given: 'Speech%20rate%20exceeding%20articulation%20speed', when: 'excited', then: 'words%20telescope%20into%20a%20blur%20(The%20Manic%20Operator)', result: 'listeners%20asking%20%22Slow%20down%2C%22%20killing%20the%20momentum', operatorName: 'The%20Manic%20Operator', operatorMechanism: 'words%20telescope%20into%20a%20blur', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_743_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_743_then_branch: BehaviorEmit { emission: 'then', text: 'words%20telescope%20into%20a%20blur%20(The%20Manic%20Operator)' })
+(loop_743_verdict: BehaviorVerdict { loopId: 743, loopName: 'The%20Rapid-Fire%20Loop', then: 'words%20telescope%20into%20a%20blur%20(The%20Manic%20Operator)', result: 'listeners%20asking%20%22Slow%20down%2C%22%20killing%20the%20momentum', operatorName: 'The%20Manic%20Operator', operatorMechanism: 'words%20telescope%20into%20a%20blur', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_743_when_gate: BehaviorAssess { stage: 'when', text: 'excited' })
+
+// Topology
+(loop_743_start)-[:PROCESS]->(loop_743_given_gate)
+(loop_743_given_gate)-[:PROCESS { case: "ok" }]->(loop_743_when_gate)
+(loop_743_given_gate)-[:PROCESS { case: "err" }]->(loop_743_inactive)
+(loop_743_when_gate)-[:PROCESS { case: "ok" }]->(loop_743_context)
+(loop_743_when_gate)-[:PROCESS { case: "err" }]->(loop_743_inactive)
+(loop_743_context)-[:FORK { strategy: "behavior-branches" }]->(loop_743_context_branch | loop_743_then_branch | loop_743_operator_branch | loop_743_result_branch | loop_743_taxonomy_branch | loop_743_intervention_recognize | loop_743_intervention_interdict | loop_743_intervention_minimize)
+(loop_743_context_branch | loop_743_then_branch | loop_743_operator_branch | loop_743_result_branch | loop_743_taxonomy_branch | loop_743_intervention_recognize | loop_743_intervention_interdict | loop_743_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_743_verdict)
+(loop_743_inactive)-[:PROCESS]->(loop_743_sink)
+(loop_743_verdict)-[:PROCESS]->(loop_743_sink)
+(loop_743_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_743_then_branch)
+(loop_743_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_743_then_branch)
+(loop_743_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_743_then_branch)

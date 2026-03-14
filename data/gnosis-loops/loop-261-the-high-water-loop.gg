@@ -1,0 +1,33 @@
+// behavioral-loop-261.gg
+// Executable Gnosis projection for The High-Water Loop.
+
+// Nodes
+(loop_261_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_261_context_branch: BehaviorEmit { emission: 'context' })
+(loop_261_given_gate: BehaviorAssess { stage: 'given', text: 'Extremities%20longer%20than%20standard%20sizing' })
+(loop_261_inactive: BehaviorTerminal { loopId: 261, loopName: 'The%20High-Water%20Loop' })
+(loop_261_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_261_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_261_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_261_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Class%20Bias%20Operator', mechanism: 'ankles%2Fwrists%20show%20awkwardly%2C%20signaling%20%22Poverty%22or%20%22Goofiness%22' })
+(loop_261_result_branch: BehaviorEmit { emission: 'result', text: 'difficulty%20commanding%20respect%20in%20formal%20hierarchies' })
+(loop_261_sink: BehaviorSink)
+(loop_261_start: BehaviorStart { loopId: 261, loopName: 'The%20High-Water%20Loop', given: 'Extremities%20longer%20than%20standard%20sizing', when: 'wearing%20%22off-the-rack%22%20suits%2Fpants', then: 'ankles%2Fwrists%20show%20awkwardly%2C%20signaling%20%22Poverty%22%20(cannot%20afford%20tailor)%20or%20%22Goofiness%22%20(The%20Class%20Bias%20Operator)', result: 'difficulty%20commanding%20respect%20in%20formal%20hierarchies', operatorName: 'The%20Class%20Bias%20Operator', operatorMechanism: 'ankles%2Fwrists%20show%20awkwardly%2C%20signaling%20%22Poverty%22or%20%22Goofiness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_261_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_261_then_branch: BehaviorEmit { emission: 'then', text: 'ankles%2Fwrists%20show%20awkwardly%2C%20signaling%20%22Poverty%22%20(cannot%20afford%20tailor)%20or%20%22Goofiness%22%20(The%20Class%20Bias%20Operator)' })
+(loop_261_verdict: BehaviorVerdict { loopId: 261, loopName: 'The%20High-Water%20Loop', then: 'ankles%2Fwrists%20show%20awkwardly%2C%20signaling%20%22Poverty%22%20(cannot%20afford%20tailor)%20or%20%22Goofiness%22%20(The%20Class%20Bias%20Operator)', result: 'difficulty%20commanding%20respect%20in%20formal%20hierarchies', operatorName: 'The%20Class%20Bias%20Operator', operatorMechanism: 'ankles%2Fwrists%20show%20awkwardly%2C%20signaling%20%22Poverty%22or%20%22Goofiness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_261_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20%22off-the-rack%22%20suits%2Fpants' })
+
+// Topology
+(loop_261_start)-[:PROCESS]->(loop_261_given_gate)
+(loop_261_given_gate)-[:PROCESS { case: "ok" }]->(loop_261_when_gate)
+(loop_261_given_gate)-[:PROCESS { case: "err" }]->(loop_261_inactive)
+(loop_261_when_gate)-[:PROCESS { case: "ok" }]->(loop_261_context)
+(loop_261_when_gate)-[:PROCESS { case: "err" }]->(loop_261_inactive)
+(loop_261_context)-[:FORK { strategy: "behavior-branches" }]->(loop_261_context_branch | loop_261_then_branch | loop_261_operator_branch | loop_261_result_branch | loop_261_taxonomy_branch | loop_261_intervention_recognize | loop_261_intervention_interdict | loop_261_intervention_minimize)
+(loop_261_context_branch | loop_261_then_branch | loop_261_operator_branch | loop_261_result_branch | loop_261_taxonomy_branch | loop_261_intervention_recognize | loop_261_intervention_interdict | loop_261_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_261_verdict)
+(loop_261_inactive)-[:PROCESS]->(loop_261_sink)
+(loop_261_verdict)-[:PROCESS]->(loop_261_sink)
+(loop_261_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_261_then_branch)
+(loop_261_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_261_then_branch)
+(loop_261_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_261_then_branch)

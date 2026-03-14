@@ -1,0 +1,31 @@
+// behavioral-loop-502.gg
+// Executable Gnosis projection for The Grey Ghost Loop.
+
+// Nodes
+(loop_502_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_502_context_branch: BehaviorEmit { emission: 'context' })
+(loop_502_given_gate: BehaviorAssess { stage: 'given', text: 'Extreme%20pallor%20%2B%20dark%20circles' })
+(loop_502_inactive: BehaviorTerminal { loopId: 502, loopName: 'The%20Grey%20Ghost%20Loop' })
+(loop_502_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_502_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_502_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vampire%20Operator', mechanism: 'the%20individual%20looks%20%22Victorian%22%20or%20%22Terminally%20Ill%22' })
+(loop_502_result_branch: BehaviorEmit { emission: 'result', text: 'attracting%20%22Rescuers%22%20or%20%22Goths%22%20(Subculture%20sorting)' })
+(loop_502_sink: BehaviorSink)
+(loop_502_start: BehaviorStart { loopId: 502, loopName: 'The%20Grey%20Ghost%20Loop', given: 'Extreme%20pallor%20%2B%20dark%20circles', when: 'standing%20next%20to%20healthy%20peers', then: 'the%20individual%20looks%20%22Victorian%22%20or%20%22Terminally%20Ill%22%20(The%20Vampire%20Operator)', result: 'attracting%20%22Rescuers%22%20or%20%22Goths%22%20(Subculture%20sorting)', operatorName: 'The%20Vampire%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Victorian%22%20or%20%22Terminally%20Ill%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_502_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_502_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20looks%20%22Victorian%22%20or%20%22Terminally%20Ill%22%20(The%20Vampire%20Operator)' })
+(loop_502_verdict: BehaviorVerdict { loopId: 502, loopName: 'The%20Grey%20Ghost%20Loop', then: 'the%20individual%20looks%20%22Victorian%22%20or%20%22Terminally%20Ill%22%20(The%20Vampire%20Operator)', result: 'attracting%20%22Rescuers%22%20or%20%22Goths%22%20(Subculture%20sorting)', operatorName: 'The%20Vampire%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Victorian%22%20or%20%22Terminally%20Ill%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_502_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20next%20to%20healthy%20peers' })
+
+// Topology
+(loop_502_start)-[:PROCESS]->(loop_502_given_gate)
+(loop_502_given_gate)-[:PROCESS { case: "ok" }]->(loop_502_when_gate)
+(loop_502_given_gate)-[:PROCESS { case: "err" }]->(loop_502_inactive)
+(loop_502_when_gate)-[:PROCESS { case: "ok" }]->(loop_502_context)
+(loop_502_when_gate)-[:PROCESS { case: "err" }]->(loop_502_inactive)
+(loop_502_context)-[:FORK { strategy: "behavior-branches" }]->(loop_502_context_branch | loop_502_then_branch | loop_502_operator_branch | loop_502_result_branch | loop_502_taxonomy_branch | loop_502_intervention_recognize | loop_502_intervention_leverage)
+(loop_502_context_branch | loop_502_then_branch | loop_502_operator_branch | loop_502_result_branch | loop_502_taxonomy_branch | loop_502_intervention_recognize | loop_502_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_502_verdict)
+(loop_502_inactive)-[:PROCESS]->(loop_502_sink)
+(loop_502_verdict)-[:PROCESS]->(loop_502_sink)
+(loop_502_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_502_then_branch)
+(loop_502_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_502_result_branch)

@@ -1,0 +1,31 @@
+// behavioral-loop-300.gg
+// Executable Gnosis projection for The Shaved Head Loop.
+
+// Nodes
+(loop_300_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_300_context_branch: BehaviorEmit { emission: 'context' })
+(loop_300_given_gate: BehaviorAssess { stage: 'given', text: 'Razor-shaved%20scalp%20(not%20balding)' })
+(loop_300_inactive: BehaviorTerminal { loopId: 300, loopName: 'The%20Shaved%20Head%20Loop' })
+(loop_300_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_300_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_300_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%2FPower%20Operator', mechanism: 'observers%20perceive%20%22Aggression%2C%22%20%22Discipline%2C%22%20or%20%22Militancy%22' })
+(loop_300_result_branch: BehaviorEmit { emission: 'result', text: 'high%20respect%20from%20men%2C%20mixed%20fear%2Fattraction%20signals' })
+(loop_300_sink: BehaviorSink)
+(loop_300_start: BehaviorStart { loopId: 300, loopName: 'The%20Shaved%20Head%20Loop', given: 'Razor-shaved%20scalp%20(not%20balding)', when: 'entering%20a%20room', then: 'observers%20perceive%20%22Aggression%2C%22%20%22Discipline%2C%22%20or%20%22Militancy%22%20(The%20Threat%2FPower%20Operator)', result: 'high%20respect%20from%20men%2C%20mixed%20fear%2Fattraction%20signals', operatorName: 'The%20Threat%2FPower%20Operator', operatorMechanism: 'observers%20perceive%20%22Aggression%2C%22%20%22Discipline%2C%22%20or%20%22Militancy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_300_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_300_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Aggression%2C%22%20%22Discipline%2C%22%20or%20%22Militancy%22%20(The%20Threat%2FPower%20Operator)' })
+(loop_300_verdict: BehaviorVerdict { loopId: 300, loopName: 'The%20Shaved%20Head%20Loop', then: 'observers%20perceive%20%22Aggression%2C%22%20%22Discipline%2C%22%20or%20%22Militancy%22%20(The%20Threat%2FPower%20Operator)', result: 'high%20respect%20from%20men%2C%20mixed%20fear%2Fattraction%20signals', operatorName: 'The%20Threat%2FPower%20Operator', operatorMechanism: 'observers%20perceive%20%22Aggression%2C%22%20%22Discipline%2C%22%20or%20%22Militancy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_300_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20room' })
+
+// Topology
+(loop_300_start)-[:PROCESS]->(loop_300_given_gate)
+(loop_300_given_gate)-[:PROCESS { case: "ok" }]->(loop_300_when_gate)
+(loop_300_given_gate)-[:PROCESS { case: "err" }]->(loop_300_inactive)
+(loop_300_when_gate)-[:PROCESS { case: "ok" }]->(loop_300_context)
+(loop_300_when_gate)-[:PROCESS { case: "err" }]->(loop_300_inactive)
+(loop_300_context)-[:FORK { strategy: "behavior-branches" }]->(loop_300_context_branch | loop_300_then_branch | loop_300_operator_branch | loop_300_result_branch | loop_300_taxonomy_branch | loop_300_intervention_recognize | loop_300_intervention_leverage)
+(loop_300_context_branch | loop_300_then_branch | loop_300_operator_branch | loop_300_result_branch | loop_300_taxonomy_branch | loop_300_intervention_recognize | loop_300_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_300_verdict)
+(loop_300_inactive)-[:PROCESS]->(loop_300_sink)
+(loop_300_verdict)-[:PROCESS]->(loop_300_sink)
+(loop_300_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_300_then_branch)
+(loop_300_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_300_result_branch)

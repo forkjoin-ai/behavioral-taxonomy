@@ -1,0 +1,33 @@
+// behavioral-loop-170.gg
+// Executable Gnosis projection for The Low Hairline Loop.
+
+// Nodes
+(loop_170_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_170_context_branch: BehaviorEmit { emission: 'context' })
+(loop_170_given_gate: BehaviorAssess { stage: 'given', text: 'Small%20forehead%20verticality' })
+(loop_170_inactive: BehaviorTerminal { loopId: 170, loopName: 'The%20Low%20Hairline%20Loop' })
+(loop_170_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_170_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_170_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_170_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%2FStupidity%20Operator', mechanism: 'the%20visual%20aligns%20with%20%22Primitive%2FNeanderthal%22%20stereotypes' })
+(loop_170_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20needing%20to%20display%20**High%20Vocabulary**%20to%20prove%20intelligence' })
+(loop_170_sink: BehaviorSink)
+(loop_170_start: BehaviorStart { loopId: 170, loopName: 'The%20Low%20Hairline%20Loop', given: 'Small%20forehead%20verticality', when: 'displaying%20aggression%20or%20seriousness', then: 'the%20visual%20aligns%20with%20%22Primitive%2FNeanderthal%22%20stereotypes%20(The%20Threat%2FStupidity%20Operator)', result: 'the%20individual%20needing%20to%20display%20**High%20Vocabulary**%20to%20prove%20intelligence', operatorName: 'The%20Threat%2FStupidity%20Operator', operatorMechanism: 'the%20visual%20aligns%20with%20%22Primitive%2FNeanderthal%22%20stereotypes', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_170_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_170_then_branch: BehaviorEmit { emission: 'then', text: 'the%20visual%20aligns%20with%20%22Primitive%2FNeanderthal%22%20stereotypes%20(The%20Threat%2FStupidity%20Operator)' })
+(loop_170_verdict: BehaviorVerdict { loopId: 170, loopName: 'The%20Low%20Hairline%20Loop', then: 'the%20visual%20aligns%20with%20%22Primitive%2FNeanderthal%22%20stereotypes%20(The%20Threat%2FStupidity%20Operator)', result: 'the%20individual%20needing%20to%20display%20**High%20Vocabulary**%20to%20prove%20intelligence', operatorName: 'The%20Threat%2FStupidity%20Operator', operatorMechanism: 'the%20visual%20aligns%20with%20%22Primitive%2FNeanderthal%22%20stereotypes', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_170_when_gate: BehaviorAssess { stage: 'when', text: 'displaying%20aggression%20or%20seriousness' })
+
+// Topology
+(loop_170_start)-[:PROCESS]->(loop_170_given_gate)
+(loop_170_given_gate)-[:PROCESS { case: "ok" }]->(loop_170_when_gate)
+(loop_170_given_gate)-[:PROCESS { case: "err" }]->(loop_170_inactive)
+(loop_170_when_gate)-[:PROCESS { case: "ok" }]->(loop_170_context)
+(loop_170_when_gate)-[:PROCESS { case: "err" }]->(loop_170_inactive)
+(loop_170_context)-[:FORK { strategy: "behavior-branches" }]->(loop_170_context_branch | loop_170_then_branch | loop_170_operator_branch | loop_170_result_branch | loop_170_taxonomy_branch | loop_170_intervention_recognize | loop_170_intervention_interdict | loop_170_intervention_minimize)
+(loop_170_context_branch | loop_170_then_branch | loop_170_operator_branch | loop_170_result_branch | loop_170_taxonomy_branch | loop_170_intervention_recognize | loop_170_intervention_interdict | loop_170_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_170_verdict)
+(loop_170_inactive)-[:PROCESS]->(loop_170_sink)
+(loop_170_verdict)-[:PROCESS]->(loop_170_sink)
+(loop_170_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_170_then_branch)
+(loop_170_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_170_then_branch)
+(loop_170_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_170_then_branch)

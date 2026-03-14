@@ -1,0 +1,33 @@
+// behavioral-loop-271.gg
+// Executable Gnosis projection for The Fry Loop.
+
+// Nodes
+(loop_271_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_271_context_branch: BehaviorEmit { emission: 'context' })
+(loop_271_given_gate: BehaviorAssess { stage: 'given', text: 'Low-register%20creaky%20voice%20(Female)' })
+(loop_271_inactive: BehaviorTerminal { loopId: 271, loopName: 'The%20Fry%20Loop' })
+(loop_271_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_271_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_271_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_271_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stereotype%20Operator', mechanism: 'older%20observers%20perceive%20%22Valley%20Girl%22%20or%20%22Lack%20of%20Gravitas%22' })
+(loop_271_result_branch: BehaviorEmit { emission: 'result', text: 'the%20content%20of%20the%20speech%20being%20**Discounted**' })
+(loop_271_sink: BehaviorSink)
+(loop_271_start: BehaviorStart { loopId: 271, loopName: 'The%20Fry%20Loop', given: 'Low-register%20creaky%20voice%20(Female)', when: 'speaking%20in%20professional%20settings', then: 'older%20observers%20perceive%20%22Valley%20Girl%22%20or%20%22Lack%20of%20Gravitas%22%20(The%20Stereotype%20Operator)', result: 'the%20content%20of%20the%20speech%20being%20**Discounted**', operatorName: 'The%20Stereotype%20Operator', operatorMechanism: 'older%20observers%20perceive%20%22Valley%20Girl%22%20or%20%22Lack%20of%20Gravitas%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_271_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_271_then_branch: BehaviorEmit { emission: 'then', text: 'older%20observers%20perceive%20%22Valley%20Girl%22%20or%20%22Lack%20of%20Gravitas%22%20(The%20Stereotype%20Operator)' })
+(loop_271_verdict: BehaviorVerdict { loopId: 271, loopName: 'The%20Fry%20Loop', then: 'older%20observers%20perceive%20%22Valley%20Girl%22%20or%20%22Lack%20of%20Gravitas%22%20(The%20Stereotype%20Operator)', result: 'the%20content%20of%20the%20speech%20being%20**Discounted**', operatorName: 'The%20Stereotype%20Operator', operatorMechanism: 'older%20observers%20perceive%20%22Valley%20Girl%22%20or%20%22Lack%20of%20Gravitas%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_271_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20in%20professional%20settings' })
+
+// Topology
+(loop_271_start)-[:PROCESS]->(loop_271_given_gate)
+(loop_271_given_gate)-[:PROCESS { case: "ok" }]->(loop_271_when_gate)
+(loop_271_given_gate)-[:PROCESS { case: "err" }]->(loop_271_inactive)
+(loop_271_when_gate)-[:PROCESS { case: "ok" }]->(loop_271_context)
+(loop_271_when_gate)-[:PROCESS { case: "err" }]->(loop_271_inactive)
+(loop_271_context)-[:FORK { strategy: "behavior-branches" }]->(loop_271_context_branch | loop_271_then_branch | loop_271_operator_branch | loop_271_result_branch | loop_271_taxonomy_branch | loop_271_intervention_recognize | loop_271_intervention_interdict | loop_271_intervention_minimize)
+(loop_271_context_branch | loop_271_then_branch | loop_271_operator_branch | loop_271_result_branch | loop_271_taxonomy_branch | loop_271_intervention_recognize | loop_271_intervention_interdict | loop_271_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_271_verdict)
+(loop_271_inactive)-[:PROCESS]->(loop_271_sink)
+(loop_271_verdict)-[:PROCESS]->(loop_271_sink)
+(loop_271_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_271_then_branch)
+(loop_271_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_271_then_branch)
+(loop_271_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_271_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-90.gg
+// Executable Gnosis projection for The Picky Eater Loop.
+
+// Nodes
+(loop_90_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_90_context_branch: BehaviorEmit { emission: 'context' })
+(loop_90_given_gate: BehaviorAssess { stage: 'given', text: 'High%20fungiform%20papillae%20density%20(Bitter%20sensitivity)' })
+(loop_90_inactive: BehaviorTerminal { loopId: 90, loopName: 'The%20Picky%20Eater%20Loop' })
+(loop_90_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_90_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_90_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_90_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%20Operator', mechanism: 'they%20refuse%20or%20grimace' })
+(loop_90_result_branch: BehaviorEmit { emission: 'result', text: 'being%20viewed%20as%20%22Childish%22%20or%20%22Unsophisticated%2C%22%20leading%20to%20**Social%20Exclusion**%20from%20high-status%20dining' })
+(loop_90_sink: BehaviorSink)
+(loop_90_start: BehaviorStart { loopId: 90, loopName: 'The%20Picky%20Eater%20Loop', given: 'High%20fungiform%20papillae%20density%20(Bitter%20sensitivity)', when: 'presented%20with%20complex%2Fbitter%20foods%20(coffee%2C%20alcohol%2C%20dark%20greens)', then: 'they%20refuse%20or%20grimace%20(The%20Disgust%20Operator%20-%20Reciprocal)', result: 'being%20viewed%20as%20%22Childish%22%20or%20%22Unsophisticated%2C%22%20leading%20to%20**Social%20Exclusion**%20from%20high-status%20dining', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'they%20refuse%20or%20grimace', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_90_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_90_then_branch: BehaviorEmit { emission: 'then', text: 'they%20refuse%20or%20grimace%20(The%20Disgust%20Operator%20-%20Reciprocal)' })
+(loop_90_verdict: BehaviorVerdict { loopId: 90, loopName: 'The%20Picky%20Eater%20Loop', then: 'they%20refuse%20or%20grimace%20(The%20Disgust%20Operator%20-%20Reciprocal)', result: 'being%20viewed%20as%20%22Childish%22%20or%20%22Unsophisticated%2C%22%20leading%20to%20**Social%20Exclusion**%20from%20high-status%20dining', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'they%20refuse%20or%20grimace', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_90_when_gate: BehaviorAssess { stage: 'when', text: 'presented%20with%20complex%2Fbitter%20foods%20(coffee%2C%20alcohol%2C%20dark%20greens)' })
+
+// Topology
+(loop_90_start)-[:PROCESS]->(loop_90_given_gate)
+(loop_90_given_gate)-[:PROCESS { case: "ok" }]->(loop_90_when_gate)
+(loop_90_given_gate)-[:PROCESS { case: "err" }]->(loop_90_inactive)
+(loop_90_when_gate)-[:PROCESS { case: "ok" }]->(loop_90_context)
+(loop_90_when_gate)-[:PROCESS { case: "err" }]->(loop_90_inactive)
+(loop_90_context)-[:FORK { strategy: "behavior-branches" }]->(loop_90_context_branch | loop_90_then_branch | loop_90_operator_branch | loop_90_result_branch | loop_90_taxonomy_branch | loop_90_intervention_recognize | loop_90_intervention_interdict | loop_90_intervention_minimize)
+(loop_90_context_branch | loop_90_then_branch | loop_90_operator_branch | loop_90_result_branch | loop_90_taxonomy_branch | loop_90_intervention_recognize | loop_90_intervention_interdict | loop_90_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_90_verdict)
+(loop_90_inactive)-[:PROCESS]->(loop_90_sink)
+(loop_90_verdict)-[:PROCESS]->(loop_90_sink)
+(loop_90_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_90_then_branch)
+(loop_90_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_90_then_branch)
+(loop_90_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_90_then_branch)

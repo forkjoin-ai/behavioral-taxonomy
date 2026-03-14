@@ -1,0 +1,33 @@
+// behavioral-loop-23.gg
+// Executable Gnosis projection for The Limbal Ring Loop.
+
+// Nodes
+(loop_23_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_23_context_branch: BehaviorEmit { emission: 'context' })
+(loop_23_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20a%20thick%2C%20dark%20Limbal%20Ring%20(sign%20of%20youth%2Fhealth)' })
+(loop_23_inactive: BehaviorTerminal { loopId: 23, loopName: 'The%20Limbal%20Ring%20Loop' })
+(loop_23_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait' })
+(loop_23_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_23_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_23_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'the%20observer%20perceives%20%22Soulfulness%22%20or%20%22Intensity%22' })
+(loop_23_result_branch: BehaviorEmit { emission: 'result', text: 'prolonged%20eye%20contact%20from%20others%2C%20fostering%20**Intimacy%20Skills**' })
+(loop_23_sink: BehaviorSink)
+(loop_23_start: BehaviorStart { loopId: 23, loopName: 'The%20Limbal%20Ring%20Loop', given: 'an%20individual%20possesses%20a%20thick%2C%20dark%20Limbal%20Ring%20(sign%20of%20youth%2Fhealth)', when: 'making%20eye%20contact', then: 'the%20observer%20perceives%20%22Soulfulness%22%20or%20%22Intensity%22%20(The%20Novelty%20Operator)', result: 'prolonged%20eye%20contact%20from%20others%2C%20fostering%20**Intimacy%20Skills**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20observer%20perceives%20%22Soulfulness%22%20or%20%22Intensity%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_23_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_23_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20perceives%20%22Soulfulness%22%20or%20%22Intensity%22%20(The%20Novelty%20Operator)' })
+(loop_23_verdict: BehaviorVerdict { loopId: 23, loopName: 'The%20Limbal%20Ring%20Loop', then: 'the%20observer%20perceives%20%22Soulfulness%22%20or%20%22Intensity%22%20(The%20Novelty%20Operator)', result: 'prolonged%20eye%20contact%20from%20others%2C%20fostering%20**Intimacy%20Skills**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20observer%20perceives%20%22Soulfulness%22%20or%20%22Intensity%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_23_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_23_start)-[:PROCESS]->(loop_23_given_gate)
+(loop_23_given_gate)-[:PROCESS { case: "ok" }]->(loop_23_when_gate)
+(loop_23_given_gate)-[:PROCESS { case: "err" }]->(loop_23_inactive)
+(loop_23_when_gate)-[:PROCESS { case: "ok" }]->(loop_23_context)
+(loop_23_when_gate)-[:PROCESS { case: "err" }]->(loop_23_inactive)
+(loop_23_context)-[:FORK { strategy: "behavior-branches" }]->(loop_23_context_branch | loop_23_then_branch | loop_23_operator_branch | loop_23_result_branch | loop_23_taxonomy_branch | loop_23_intervention_recognize | loop_23_intervention_interdict | loop_23_intervention_minimize)
+(loop_23_context_branch | loop_23_then_branch | loop_23_operator_branch | loop_23_result_branch | loop_23_taxonomy_branch | loop_23_intervention_recognize | loop_23_intervention_interdict | loop_23_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_23_verdict)
+(loop_23_inactive)-[:PROCESS]->(loop_23_sink)
+(loop_23_verdict)-[:PROCESS]->(loop_23_sink)
+(loop_23_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_23_then_branch)
+(loop_23_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_23_then_branch)
+(loop_23_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_23_then_branch)

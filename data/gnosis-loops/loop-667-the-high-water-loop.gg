@@ -1,0 +1,33 @@
+// behavioral-loop-667.gg
+// Executable Gnosis projection for The High-Water Loop.
+
+// Nodes
+(loop_667_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_667_context_branch: BehaviorEmit { emission: 'context' })
+(loop_667_given_gate: BehaviorAssess { stage: 'given', text: 'Pants%20riding%20up%20when%20sitting' })
+(loop_667_inactive: BehaviorTerminal { loopId: 667, loopName: 'The%20High-Water%20Loop' })
+(loop_667_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_667_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_667_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_667_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Skin%20Gap%20Operator', mechanism: 'hairy%20leg%20is%20exposed%20between%20sock%20and%20pant' })
+(loop_667_result_branch: BehaviorEmit { emission: 'result', text: 'a%20break%20in%20the%20%22Suit%20Armor%2C%22%20signaling%20lack%20of%20polish' })
+(loop_667_sink: BehaviorSink)
+(loop_667_start: BehaviorStart { loopId: 667, loopName: 'The%20High-Water%20Loop', given: 'Pants%20riding%20up%20when%20sitting', when: 'crossing%20legs', then: 'hairy%20leg%20is%20exposed%20between%20sock%20and%20pant%20(The%20Skin%20Gap%20Operator)', result: 'a%20break%20in%20the%20%22Suit%20Armor%2C%22%20signaling%20lack%20of%20polish', operatorName: 'The%20Skin%20Gap%20Operator', operatorMechanism: 'hairy%20leg%20is%20exposed%20between%20sock%20and%20pant', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_667_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_667_then_branch: BehaviorEmit { emission: 'then', text: 'hairy%20leg%20is%20exposed%20between%20sock%20and%20pant%20(The%20Skin%20Gap%20Operator)' })
+(loop_667_verdict: BehaviorVerdict { loopId: 667, loopName: 'The%20High-Water%20Loop', then: 'hairy%20leg%20is%20exposed%20between%20sock%20and%20pant%20(The%20Skin%20Gap%20Operator)', result: 'a%20break%20in%20the%20%22Suit%20Armor%2C%22%20signaling%20lack%20of%20polish', operatorName: 'The%20Skin%20Gap%20Operator', operatorMechanism: 'hairy%20leg%20is%20exposed%20between%20sock%20and%20pant', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_667_when_gate: BehaviorAssess { stage: 'when', text: 'crossing%20legs' })
+
+// Topology
+(loop_667_start)-[:PROCESS]->(loop_667_given_gate)
+(loop_667_given_gate)-[:PROCESS { case: "ok" }]->(loop_667_when_gate)
+(loop_667_given_gate)-[:PROCESS { case: "err" }]->(loop_667_inactive)
+(loop_667_when_gate)-[:PROCESS { case: "ok" }]->(loop_667_context)
+(loop_667_when_gate)-[:PROCESS { case: "err" }]->(loop_667_inactive)
+(loop_667_context)-[:FORK { strategy: "behavior-branches" }]->(loop_667_context_branch | loop_667_then_branch | loop_667_operator_branch | loop_667_result_branch | loop_667_taxonomy_branch | loop_667_intervention_recognize | loop_667_intervention_interdict | loop_667_intervention_minimize)
+(loop_667_context_branch | loop_667_then_branch | loop_667_operator_branch | loop_667_result_branch | loop_667_taxonomy_branch | loop_667_intervention_recognize | loop_667_intervention_interdict | loop_667_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_667_verdict)
+(loop_667_inactive)-[:PROCESS]->(loop_667_sink)
+(loop_667_verdict)-[:PROCESS]->(loop_667_sink)
+(loop_667_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_667_then_branch)
+(loop_667_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_667_then_branch)
+(loop_667_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_667_then_branch)

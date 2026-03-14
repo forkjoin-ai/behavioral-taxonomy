@@ -1,0 +1,33 @@
+// behavioral-loop-234.gg
+// Executable Gnosis projection for The Paper Skin Loop.
+
+// Nodes
+(loop_234_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_234_context_branch: BehaviorEmit { emission: 'context' })
+(loop_234_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20veins%20and%20fragility' })
+(loop_234_inactive: BehaviorTerminal { loopId: 234, loopName: 'The%20Paper%20Skin%20Loop' })
+(loop_234_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_234_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_234_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_234_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'peers%20treat%20the%20individual%20like%20glass' })
+(loop_234_result_branch: BehaviorEmit { emission: 'result', text: 'exclusion%20from%20roughhousing%2C%20preventing%20the%20development%20of%20**Physical%20Resilience**' })
+(loop_234_sink: BehaviorSink)
+(loop_234_start: BehaviorStart { loopId: 234, loopName: 'The%20Paper%20Skin%20Loop', given: 'Visible%20veins%20and%20fragility', when: 'engaging%20in%20sports%20or%20rough%20play', then: 'peers%20treat%20the%20individual%20like%20glass%20(The%20Fragility%20Operator)', result: 'exclusion%20from%20roughhousing%2C%20preventing%20the%20development%20of%20**Physical%20Resilience**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'peers%20treat%20the%20individual%20like%20glass', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_234_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_234_then_branch: BehaviorEmit { emission: 'then', text: 'peers%20treat%20the%20individual%20like%20glass%20(The%20Fragility%20Operator)' })
+(loop_234_verdict: BehaviorVerdict { loopId: 234, loopName: 'The%20Paper%20Skin%20Loop', then: 'peers%20treat%20the%20individual%20like%20glass%20(The%20Fragility%20Operator)', result: 'exclusion%20from%20roughhousing%2C%20preventing%20the%20development%20of%20**Physical%20Resilience**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'peers%20treat%20the%20individual%20like%20glass', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_234_when_gate: BehaviorAssess { stage: 'when', text: 'engaging%20in%20sports%20or%20rough%20play' })
+
+// Topology
+(loop_234_start)-[:PROCESS]->(loop_234_given_gate)
+(loop_234_given_gate)-[:PROCESS { case: "ok" }]->(loop_234_when_gate)
+(loop_234_given_gate)-[:PROCESS { case: "err" }]->(loop_234_inactive)
+(loop_234_when_gate)-[:PROCESS { case: "ok" }]->(loop_234_context)
+(loop_234_when_gate)-[:PROCESS { case: "err" }]->(loop_234_inactive)
+(loop_234_context)-[:FORK { strategy: "behavior-branches" }]->(loop_234_context_branch | loop_234_then_branch | loop_234_operator_branch | loop_234_result_branch | loop_234_taxonomy_branch | loop_234_intervention_recognize | loop_234_intervention_interdict | loop_234_intervention_minimize)
+(loop_234_context_branch | loop_234_then_branch | loop_234_operator_branch | loop_234_result_branch | loop_234_taxonomy_branch | loop_234_intervention_recognize | loop_234_intervention_interdict | loop_234_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_234_verdict)
+(loop_234_inactive)-[:PROCESS]->(loop_234_sink)
+(loop_234_verdict)-[:PROCESS]->(loop_234_sink)
+(loop_234_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_234_then_branch)
+(loop_234_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_234_then_branch)
+(loop_234_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_234_then_branch)

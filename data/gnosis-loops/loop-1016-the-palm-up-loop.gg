@@ -1,0 +1,33 @@
+// behavioral-loop-1016.gg
+// Executable Gnosis projection for The Palm Up Loop.
+
+// Nodes
+(loop_1016_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1016_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1016_given_gate: BehaviorAssess { stage: 'given', text: 'Exposing%20wrists%20and%20palms' })
+(loop_1016_inactive: BehaviorTerminal { loopId: 1016, loopName: 'The%20Palm%20Up%20Loop' })
+(loop_1016_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1016_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1016_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1016_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Beggar%20Operator', mechanism: 'it%20signals%20%22Begging%22%20or%20%22%20honesty%22' })
+(loop_1016_result_branch: BehaviorEmit { emission: 'result', text: 'triggering%20the%20%22Charity%22%20instinct%20in%20others' })
+(loop_1016_sink: BehaviorSink)
+(loop_1016_start: BehaviorStart { loopId: 1016, loopName: 'The%20Palm%20Up%20Loop', given: 'Exposing%20wrists%20and%20palms', when: 'asking%20for%20something', then: 'it%20signals%20%22Begging%22%20or%20%22%20honesty%22%20(The%20Beggar%20Operator)', result: 'triggering%20the%20%22Charity%22%20instinct%20in%20others', operatorName: 'The%20Beggar%20Operator', operatorMechanism: 'it%20signals%20%22Begging%22%20or%20%22%20honesty%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1016_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1016_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Begging%22%20or%20%22%20honesty%22%20(The%20Beggar%20Operator)' })
+(loop_1016_verdict: BehaviorVerdict { loopId: 1016, loopName: 'The%20Palm%20Up%20Loop', then: 'it%20signals%20%22Begging%22%20or%20%22%20honesty%22%20(The%20Beggar%20Operator)', result: 'triggering%20the%20%22Charity%22%20instinct%20in%20others', operatorName: 'The%20Beggar%20Operator', operatorMechanism: 'it%20signals%20%22Begging%22%20or%20%22%20honesty%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1016_when_gate: BehaviorAssess { stage: 'when', text: 'asking%20for%20something' })
+
+// Topology
+(loop_1016_start)-[:PROCESS]->(loop_1016_given_gate)
+(loop_1016_given_gate)-[:PROCESS { case: "ok" }]->(loop_1016_when_gate)
+(loop_1016_given_gate)-[:PROCESS { case: "err" }]->(loop_1016_inactive)
+(loop_1016_when_gate)-[:PROCESS { case: "ok" }]->(loop_1016_context)
+(loop_1016_when_gate)-[:PROCESS { case: "err" }]->(loop_1016_inactive)
+(loop_1016_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1016_context_branch | loop_1016_then_branch | loop_1016_operator_branch | loop_1016_result_branch | loop_1016_taxonomy_branch | loop_1016_intervention_recognize | loop_1016_intervention_interdict | loop_1016_intervention_minimize)
+(loop_1016_context_branch | loop_1016_then_branch | loop_1016_operator_branch | loop_1016_result_branch | loop_1016_taxonomy_branch | loop_1016_intervention_recognize | loop_1016_intervention_interdict | loop_1016_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1016_verdict)
+(loop_1016_inactive)-[:PROCESS]->(loop_1016_sink)
+(loop_1016_verdict)-[:PROCESS]->(loop_1016_sink)
+(loop_1016_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1016_then_branch)
+(loop_1016_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1016_then_branch)
+(loop_1016_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1016_then_branch)

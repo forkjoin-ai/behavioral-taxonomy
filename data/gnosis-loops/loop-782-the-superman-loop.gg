@@ -1,0 +1,33 @@
+// behavioral-loop-782.gg
+// Executable Gnosis projection for The Superman Loop.
+
+// Nodes
+(loop_782_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_782_context_branch: BehaviorEmit { emission: 'context' })
+(loop_782_given_gate: BehaviorAssess { stage: 'given', text: 'Hands%20on%20hips%2C%20elbows%20out' })
+(loop_782_inactive: BehaviorTerminal { loopId: 782, loopName: 'The%20Superman%20Loop' })
+(loop_782_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_782_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_782_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_782_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Coach%20Operator', mechanism: 'it%20signals%20%22Dominance%22%20and%20%22Territoriality%22' })
+(loop_782_result_branch: BehaviorEmit { emission: 'result', text: 'others%20submitting%20or%20challenging%20the%20%22Bossy%22%20demeanor' })
+(loop_782_sink: BehaviorSink)
+(loop_782_start: BehaviorStart { loopId: 782, loopName: 'The%20Superman%20Loop', given: 'Hands%20on%20hips%2C%20elbows%20out', when: 'standing%20in%20a%20group', then: 'it%20signals%20%22Dominance%22%20and%20%22Territoriality%22%20(The%20Coach%20Operator)', result: 'others%20submitting%20or%20challenging%20the%20%22Bossy%22%20demeanor', operatorName: 'The%20Coach%20Operator', operatorMechanism: 'it%20signals%20%22Dominance%22%20and%20%22Territoriality%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_782_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_782_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Dominance%22%20and%20%22Territoriality%22%20(The%20Coach%20Operator)' })
+(loop_782_verdict: BehaviorVerdict { loopId: 782, loopName: 'The%20Superman%20Loop', then: 'it%20signals%20%22Dominance%22%20and%20%22Territoriality%22%20(The%20Coach%20Operator)', result: 'others%20submitting%20or%20challenging%20the%20%22Bossy%22%20demeanor', operatorName: 'The%20Coach%20Operator', operatorMechanism: 'it%20signals%20%22Dominance%22%20and%20%22Territoriality%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_782_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20in%20a%20group' })
+
+// Topology
+(loop_782_start)-[:PROCESS]->(loop_782_given_gate)
+(loop_782_given_gate)-[:PROCESS { case: "ok" }]->(loop_782_when_gate)
+(loop_782_given_gate)-[:PROCESS { case: "err" }]->(loop_782_inactive)
+(loop_782_when_gate)-[:PROCESS { case: "ok" }]->(loop_782_context)
+(loop_782_when_gate)-[:PROCESS { case: "err" }]->(loop_782_inactive)
+(loop_782_context)-[:FORK { strategy: "behavior-branches" }]->(loop_782_context_branch | loop_782_then_branch | loop_782_operator_branch | loop_782_result_branch | loop_782_taxonomy_branch | loop_782_intervention_recognize | loop_782_intervention_interdict | loop_782_intervention_minimize)
+(loop_782_context_branch | loop_782_then_branch | loop_782_operator_branch | loop_782_result_branch | loop_782_taxonomy_branch | loop_782_intervention_recognize | loop_782_intervention_interdict | loop_782_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_782_verdict)
+(loop_782_inactive)-[:PROCESS]->(loop_782_sink)
+(loop_782_verdict)-[:PROCESS]->(loop_782_sink)
+(loop_782_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_782_then_branch)
+(loop_782_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_782_then_branch)
+(loop_782_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_782_then_branch)

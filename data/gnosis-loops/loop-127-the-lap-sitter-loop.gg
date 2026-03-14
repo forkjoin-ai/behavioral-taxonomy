@@ -1,0 +1,33 @@
+// behavioral-loop-127.gg
+// Executable Gnosis projection for The Lap Sitter Loop.
+
+// Nodes
+(loop_127_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_127_context_branch: BehaviorEmit { emission: 'context' })
+(loop_127_given_gate: BehaviorAssess { stage: 'given', text: 'Very%20small%20stature%2Fweight' })
+(loop_127_inactive: BehaviorTerminal { loopId: 127, loopName: 'The%20Lap%20Sitter%20Loop' })
+(loop_127_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_127_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_127_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_127_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Objectification%2FNurture%20Operator', mechanism: 'the%20individual%20is%20told%20to%20%22sit%20on%20a%20lap%22%20or%20squeeze%20in' })
+(loop_127_result_branch: BehaviorEmit { emission: 'result', text: 'a%20loss%20of%20autonomy%20and%20being%20treated%20like%20%22Cargo%22%20rather%20than%20a%20participant' })
+(loop_127_sink: BehaviorSink)
+(loop_127_start: BehaviorStart { loopId: 127, loopName: 'The%20Lap%20Sitter%20Loop', given: 'Very%20small%20stature%2Fweight', when: 'seating%20is%20limited%20(car%2Fparty)', then: 'the%20individual%20is%20told%20to%20%22sit%20on%20a%20lap%22%20or%20squeeze%20in%20(The%20Objectification%2FNurture%20Operator)', result: 'a%20loss%20of%20autonomy%20and%20being%20treated%20like%20%22Cargo%22%20rather%20than%20a%20participant', operatorName: 'The%20Objectification%2FNurture%20Operator', operatorMechanism: 'the%20individual%20is%20told%20to%20%22sit%20on%20a%20lap%22%20or%20squeeze%20in', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_127_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_127_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20is%20told%20to%20%22sit%20on%20a%20lap%22%20or%20squeeze%20in%20(The%20Objectification%2FNurture%20Operator)' })
+(loop_127_verdict: BehaviorVerdict { loopId: 127, loopName: 'The%20Lap%20Sitter%20Loop', then: 'the%20individual%20is%20told%20to%20%22sit%20on%20a%20lap%22%20or%20squeeze%20in%20(The%20Objectification%2FNurture%20Operator)', result: 'a%20loss%20of%20autonomy%20and%20being%20treated%20like%20%22Cargo%22%20rather%20than%20a%20participant', operatorName: 'The%20Objectification%2FNurture%20Operator', operatorMechanism: 'the%20individual%20is%20told%20to%20%22sit%20on%20a%20lap%22%20or%20squeeze%20in', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_127_when_gate: BehaviorAssess { stage: 'when', text: 'seating%20is%20limited%20(car%2Fparty)' })
+
+// Topology
+(loop_127_start)-[:PROCESS]->(loop_127_given_gate)
+(loop_127_given_gate)-[:PROCESS { case: "ok" }]->(loop_127_when_gate)
+(loop_127_given_gate)-[:PROCESS { case: "err" }]->(loop_127_inactive)
+(loop_127_when_gate)-[:PROCESS { case: "ok" }]->(loop_127_context)
+(loop_127_when_gate)-[:PROCESS { case: "err" }]->(loop_127_inactive)
+(loop_127_context)-[:FORK { strategy: "behavior-branches" }]->(loop_127_context_branch | loop_127_then_branch | loop_127_operator_branch | loop_127_result_branch | loop_127_taxonomy_branch | loop_127_intervention_recognize | loop_127_intervention_interdict | loop_127_intervention_minimize)
+(loop_127_context_branch | loop_127_then_branch | loop_127_operator_branch | loop_127_result_branch | loop_127_taxonomy_branch | loop_127_intervention_recognize | loop_127_intervention_interdict | loop_127_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_127_verdict)
+(loop_127_inactive)-[:PROCESS]->(loop_127_sink)
+(loop_127_verdict)-[:PROCESS]->(loop_127_sink)
+(loop_127_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_127_then_branch)
+(loop_127_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_127_then_branch)
+(loop_127_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_127_then_branch)

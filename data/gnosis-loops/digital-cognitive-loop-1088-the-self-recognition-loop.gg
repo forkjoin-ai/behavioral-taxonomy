@@ -1,0 +1,33 @@
+// behavioral-loop-1088.gg
+// Executable Gnosis projection for The Self-Recognition Loop.
+
+// Nodes
+(loop_1088_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1088_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1088_given_gate: BehaviorAssess { stage: 'given', text: 'Seeing%20a%20reflection' })
+(loop_1088_inactive: BehaviorTerminal { loopId: 1088, loopName: 'The%20Self-Recognition%20Loop' })
+(loop_1088_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_1088_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_1088_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20recursive%20self-doubt%20or%20self-fulfilling%20prophecies' })
+(loop_1088_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20User', mechanism: "The%20'Mirror%20Stage'%20of%20development%20where%20subjectivity%20separates%20from%20the%20environment." })
+(loop_1088_result_branch: BehaviorEmit { emission: 'result', text: 'The%20beginning%20of%20anxiety%2C%20vanity%2C%20and%20the%20social%20self' })
+(loop_1088_sink: BehaviorSink)
+(loop_1088_start: BehaviorStart { loopId: 1088, loopName: 'The%20Self-Recognition%20Loop', given: 'Seeing%20a%20reflection', when: "Realizing%20'That%20is%20Me'", then: 'The%20Ego%20is%20born', result: 'The%20beginning%20of%20anxiety%2C%20vanity%2C%20and%20the%20social%20self', operatorName: 'The%20User', operatorMechanism: "The%20'Mirror%20Stage'%20of%20development%20where%20subjectivity%20separates%20from%20the%20environment.", origin: 'GENETIC', modality: 'META', mutability: 'IMMUTABLE', valences: 'TRUST|DOMINANCE', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20recursive%20self-doubt%20or%20self-fulfilling%20prophecies', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_1088_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'META', mutability: 'IMMUTABLE', valences: 'TRUST|DOMINANCE' })
+(loop_1088_then_branch: BehaviorEmit { emission: 'then', text: 'The%20Ego%20is%20born' })
+(loop_1088_verdict: BehaviorVerdict { loopId: 1088, loopName: 'The%20Self-Recognition%20Loop', then: 'The%20Ego%20is%20born', result: 'The%20beginning%20of%20anxiety%2C%20vanity%2C%20and%20the%20social%20self', operatorName: 'The%20User', operatorMechanism: "The%20'Mirror%20Stage'%20of%20development%20where%20subjectivity%20separates%20from%20the%20environment.", origin: 'GENETIC', modality: 'META', mutability: 'IMMUTABLE', valences: 'TRUST|DOMINANCE' })
+(loop_1088_when_gate: BehaviorAssess { stage: 'when', text: "Realizing%20'That%20is%20Me'" })
+
+// Topology
+(loop_1088_start)-[:PROCESS]->(loop_1088_given_gate)
+(loop_1088_given_gate)-[:PROCESS { case: "ok" }]->(loop_1088_when_gate)
+(loop_1088_given_gate)-[:PROCESS { case: "err" }]->(loop_1088_inactive)
+(loop_1088_when_gate)-[:PROCESS { case: "ok" }]->(loop_1088_context)
+(loop_1088_when_gate)-[:PROCESS { case: "err" }]->(loop_1088_inactive)
+(loop_1088_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1088_context_branch | loop_1088_then_branch | loop_1088_operator_branch | loop_1088_result_branch | loop_1088_taxonomy_branch | loop_1088_intervention_recognize | loop_1088_intervention_minimize | loop_1088_intervention_leverage)
+(loop_1088_context_branch | loop_1088_then_branch | loop_1088_operator_branch | loop_1088_result_branch | loop_1088_taxonomy_branch | loop_1088_intervention_recognize | loop_1088_intervention_minimize | loop_1088_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1088_verdict)
+(loop_1088_inactive)-[:PROCESS]->(loop_1088_sink)
+(loop_1088_verdict)-[:PROCESS]->(loop_1088_sink)
+(loop_1088_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1088_then_branch)
+(loop_1088_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1088_then_branch)
+(loop_1088_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_1088_result_branch)

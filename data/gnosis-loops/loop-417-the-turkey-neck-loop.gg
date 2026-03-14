@@ -1,0 +1,33 @@
+// behavioral-loop-417.gg
+// Executable Gnosis projection for The Turkey Neck Loop.
+
+// Nodes
+(loop_417_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_417_context_branch: BehaviorEmit { emission: 'context' })
+(loop_417_given_gate: BehaviorAssess { stage: 'given', text: 'Loss%20of%20elasticity%20in%20neck%20skin' })
+(loop_417_inactive: BehaviorTerminal { loopId: 417, loopName: 'The%20Turkey%20Neck%20Loop' })
+(loop_417_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_417_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_417_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_417_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mortality%20Operator', mechanism: 'the%20neck%20muscles%20cord%20out%20visibly' })
+(loop_417_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20being%20viewed%20as%20%22Past%20Their%20Prime%2C%22%20leading%20to%20dismissal%20of%20their%20innovative%20ideas' })
+(loop_417_sink: BehaviorSink)
+(loop_417_start: BehaviorStart { loopId: 417, loopName: 'The%20Turkey%20Neck%20Loop', given: 'Loss%20of%20elasticity%20in%20neck%20skin', when: 'speaking%20with%20passion', then: 'the%20neck%20muscles%20cord%20out%20visibly%20(The%20Mortality%20Operator)', result: 'the%20speaker%20being%20viewed%20as%20%22Past%20Their%20Prime%2C%22%20leading%20to%20dismissal%20of%20their%20innovative%20ideas', operatorName: 'The%20Mortality%20Operator', operatorMechanism: 'the%20neck%20muscles%20cord%20out%20visibly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_417_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_417_then_branch: BehaviorEmit { emission: 'then', text: 'the%20neck%20muscles%20cord%20out%20visibly%20(The%20Mortality%20Operator)' })
+(loop_417_verdict: BehaviorVerdict { loopId: 417, loopName: 'The%20Turkey%20Neck%20Loop', then: 'the%20neck%20muscles%20cord%20out%20visibly%20(The%20Mortality%20Operator)', result: 'the%20speaker%20being%20viewed%20as%20%22Past%20Their%20Prime%2C%22%20leading%20to%20dismissal%20of%20their%20innovative%20ideas', operatorName: 'The%20Mortality%20Operator', operatorMechanism: 'the%20neck%20muscles%20cord%20out%20visibly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_417_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20with%20passion' })
+
+// Topology
+(loop_417_start)-[:PROCESS]->(loop_417_given_gate)
+(loop_417_given_gate)-[:PROCESS { case: "ok" }]->(loop_417_when_gate)
+(loop_417_given_gate)-[:PROCESS { case: "err" }]->(loop_417_inactive)
+(loop_417_when_gate)-[:PROCESS { case: "ok" }]->(loop_417_context)
+(loop_417_when_gate)-[:PROCESS { case: "err" }]->(loop_417_inactive)
+(loop_417_context)-[:FORK { strategy: "behavior-branches" }]->(loop_417_context_branch | loop_417_then_branch | loop_417_operator_branch | loop_417_result_branch | loop_417_taxonomy_branch | loop_417_intervention_recognize | loop_417_intervention_interdict | loop_417_intervention_minimize)
+(loop_417_context_branch | loop_417_then_branch | loop_417_operator_branch | loop_417_result_branch | loop_417_taxonomy_branch | loop_417_intervention_recognize | loop_417_intervention_interdict | loop_417_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_417_verdict)
+(loop_417_inactive)-[:PROCESS]->(loop_417_sink)
+(loop_417_verdict)-[:PROCESS]->(loop_417_sink)
+(loop_417_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_417_then_branch)
+(loop_417_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_417_then_branch)
+(loop_417_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_417_then_branch)

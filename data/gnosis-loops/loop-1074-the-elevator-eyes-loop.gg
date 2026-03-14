@@ -1,0 +1,33 @@
+// behavioral-loop-1074.gg
+// Executable Gnosis projection for The Elevator Eyes Loop.
+
+// Nodes
+(loop_1074_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1074_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1074_given_gate: BehaviorAssess { stage: 'given', text: 'A%20vertical%20scan%20of%20a%20new%20person' })
+(loop_1074_inactive: BehaviorTerminal { loopId: 1074, loopName: 'The%20Elevator%20Eyes%20Loop' })
+(loop_1074_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1074_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1074_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1074_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'a%20%22Value%22%20is%20assigned%20(The%20Pricing%20Gun)' })
+(loop_1074_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20hierarchical%20sorting' })
+(loop_1074_sink: BehaviorSink)
+(loop_1074_start: BehaviorStart { loopId: 1074, loopName: 'The%20Elevator%20Eyes%20Loop', given: 'A%20vertical%20scan%20of%20a%20new%20person', when: 'the%20scan%20stops%20at%20the%20shoes%20or%20watch', then: 'a%20%22Value%22%20is%20assigned%20(The%20Pricing%20Gun)', result: 'immediate%20hierarchical%20sorting', operatorName: 'Unknown%20Operator', operatorMechanism: 'a%20%22Value%22%20is%20assigned%20(The%20Pricing%20Gun)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1074_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1074_then_branch: BehaviorEmit { emission: 'then', text: 'a%20%22Value%22%20is%20assigned%20(The%20Pricing%20Gun)' })
+(loop_1074_verdict: BehaviorVerdict { loopId: 1074, loopName: 'The%20Elevator%20Eyes%20Loop', then: 'a%20%22Value%22%20is%20assigned%20(The%20Pricing%20Gun)', result: 'immediate%20hierarchical%20sorting', operatorName: 'Unknown%20Operator', operatorMechanism: 'a%20%22Value%22%20is%20assigned%20(The%20Pricing%20Gun)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1074_when_gate: BehaviorAssess { stage: 'when', text: 'the%20scan%20stops%20at%20the%20shoes%20or%20watch' })
+
+// Topology
+(loop_1074_start)-[:PROCESS]->(loop_1074_given_gate)
+(loop_1074_given_gate)-[:PROCESS { case: "ok" }]->(loop_1074_when_gate)
+(loop_1074_given_gate)-[:PROCESS { case: "err" }]->(loop_1074_inactive)
+(loop_1074_when_gate)-[:PROCESS { case: "ok" }]->(loop_1074_context)
+(loop_1074_when_gate)-[:PROCESS { case: "err" }]->(loop_1074_inactive)
+(loop_1074_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1074_context_branch | loop_1074_then_branch | loop_1074_operator_branch | loop_1074_result_branch | loop_1074_taxonomy_branch | loop_1074_intervention_recognize | loop_1074_intervention_interdict | loop_1074_intervention_minimize)
+(loop_1074_context_branch | loop_1074_then_branch | loop_1074_operator_branch | loop_1074_result_branch | loop_1074_taxonomy_branch | loop_1074_intervention_recognize | loop_1074_intervention_interdict | loop_1074_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1074_verdict)
+(loop_1074_inactive)-[:PROCESS]->(loop_1074_sink)
+(loop_1074_verdict)-[:PROCESS]->(loop_1074_sink)
+(loop_1074_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1074_then_branch)
+(loop_1074_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1074_then_branch)
+(loop_1074_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1074_then_branch)

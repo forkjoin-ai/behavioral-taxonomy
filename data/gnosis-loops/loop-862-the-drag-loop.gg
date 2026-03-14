@@ -1,0 +1,33 @@
+// behavioral-loop-862.gg
+// Executable Gnosis projection for The Drag Loop.
+
+// Nodes
+(loop_862_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_862_context_branch: BehaviorEmit { emission: 'context' })
+(loop_862_given_gate: BehaviorAssess { stage: 'given', text: 'Feet%20not%20lifting%20fully' })
+(loop_862_inactive: BehaviorTerminal { loopId: 862, loopName: 'The%20Drag%20Loop' })
+(loop_862_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_862_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_862_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_862_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Zombie%20Operator', mechanism: 'the%20sound%20is%20%22Scrape...%20Scrape%22' })
+(loop_862_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20depression%20or%20laziness' })
+(loop_862_sink: BehaviorSink)
+(loop_862_start: BehaviorStart { loopId: 862, loopName: 'The%20Drag%20Loop', given: 'Feet%20not%20lifting%20fully', when: 'moving%20down%20a%20hall', then: 'the%20sound%20is%20%22Scrape...%20Scrape%22%20(The%20Zombie%20Operator)', result: 'observers%20assuming%20depression%20or%20laziness', operatorName: 'The%20Zombie%20Operator', operatorMechanism: 'the%20sound%20is%20%22Scrape...%20Scrape%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_862_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_862_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20is%20%22Scrape...%20Scrape%22%20(The%20Zombie%20Operator)' })
+(loop_862_verdict: BehaviorVerdict { loopId: 862, loopName: 'The%20Drag%20Loop', then: 'the%20sound%20is%20%22Scrape...%20Scrape%22%20(The%20Zombie%20Operator)', result: 'observers%20assuming%20depression%20or%20laziness', operatorName: 'The%20Zombie%20Operator', operatorMechanism: 'the%20sound%20is%20%22Scrape...%20Scrape%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_862_when_gate: BehaviorAssess { stage: 'when', text: 'moving%20down%20a%20hall' })
+
+// Topology
+(loop_862_start)-[:PROCESS]->(loop_862_given_gate)
+(loop_862_given_gate)-[:PROCESS { case: "ok" }]->(loop_862_when_gate)
+(loop_862_given_gate)-[:PROCESS { case: "err" }]->(loop_862_inactive)
+(loop_862_when_gate)-[:PROCESS { case: "ok" }]->(loop_862_context)
+(loop_862_when_gate)-[:PROCESS { case: "err" }]->(loop_862_inactive)
+(loop_862_context)-[:FORK { strategy: "behavior-branches" }]->(loop_862_context_branch | loop_862_then_branch | loop_862_operator_branch | loop_862_result_branch | loop_862_taxonomy_branch | loop_862_intervention_recognize | loop_862_intervention_interdict | loop_862_intervention_minimize)
+(loop_862_context_branch | loop_862_then_branch | loop_862_operator_branch | loop_862_result_branch | loop_862_taxonomy_branch | loop_862_intervention_recognize | loop_862_intervention_interdict | loop_862_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_862_verdict)
+(loop_862_inactive)-[:PROCESS]->(loop_862_sink)
+(loop_862_verdict)-[:PROCESS]->(loop_862_sink)
+(loop_862_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_862_then_branch)
+(loop_862_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_862_then_branch)
+(loop_862_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_862_then_branch)

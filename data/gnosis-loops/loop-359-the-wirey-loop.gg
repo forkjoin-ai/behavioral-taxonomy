@@ -1,0 +1,33 @@
+// behavioral-loop-359.gg
+// Executable Gnosis projection for The Wirey Loop.
+
+// Nodes
+(loop_359_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_359_context_branch: BehaviorEmit { emission: 'context' })
+(loop_359_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20body%20fat%20%2B%20visible%20tendon%20definition' })
+(loop_359_inactive: BehaviorTerminal { loopId: 359, loopName: 'The%20Wirey%20Loop' })
+(loop_359_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_359_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_359_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_359_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sleeper%20Operator', mechanism: 'observers%20are%20surprised%20by%20%22Old%20Man%20Strength%22' })
+(loop_359_result_branch: BehaviorEmit { emission: 'result', text: 'underestimation%20followed%20by%20grudging%20respect' })
+(loop_359_sink: BehaviorSink)
+(loop_359_start: BehaviorStart { loopId: 359, loopName: 'The%20Wirey%20Loop', given: 'Low%20body%20fat%20%2B%20visible%20tendon%20definition', when: 'performing%20physical%20tasks', then: 'observers%20are%20surprised%20by%20%22Old%20Man%20Strength%22%20(The%20Sleeper%20Operator)', result: 'underestimation%20followed%20by%20grudging%20respect', operatorName: 'The%20Sleeper%20Operator', operatorMechanism: 'observers%20are%20surprised%20by%20%22Old%20Man%20Strength%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_359_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_359_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20are%20surprised%20by%20%22Old%20Man%20Strength%22%20(The%20Sleeper%20Operator)' })
+(loop_359_verdict: BehaviorVerdict { loopId: 359, loopName: 'The%20Wirey%20Loop', then: 'observers%20are%20surprised%20by%20%22Old%20Man%20Strength%22%20(The%20Sleeper%20Operator)', result: 'underestimation%20followed%20by%20grudging%20respect', operatorName: 'The%20Sleeper%20Operator', operatorMechanism: 'observers%20are%20surprised%20by%20%22Old%20Man%20Strength%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_359_when_gate: BehaviorAssess { stage: 'when', text: 'performing%20physical%20tasks' })
+
+// Topology
+(loop_359_start)-[:PROCESS]->(loop_359_given_gate)
+(loop_359_given_gate)-[:PROCESS { case: "ok" }]->(loop_359_when_gate)
+(loop_359_given_gate)-[:PROCESS { case: "err" }]->(loop_359_inactive)
+(loop_359_when_gate)-[:PROCESS { case: "ok" }]->(loop_359_context)
+(loop_359_when_gate)-[:PROCESS { case: "err" }]->(loop_359_inactive)
+(loop_359_context)-[:FORK { strategy: "behavior-branches" }]->(loop_359_context_branch | loop_359_then_branch | loop_359_operator_branch | loop_359_result_branch | loop_359_taxonomy_branch | loop_359_intervention_recognize | loop_359_intervention_interdict | loop_359_intervention_minimize)
+(loop_359_context_branch | loop_359_then_branch | loop_359_operator_branch | loop_359_result_branch | loop_359_taxonomy_branch | loop_359_intervention_recognize | loop_359_intervention_interdict | loop_359_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_359_verdict)
+(loop_359_inactive)-[:PROCESS]->(loop_359_sink)
+(loop_359_verdict)-[:PROCESS]->(loop_359_sink)
+(loop_359_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_359_then_branch)
+(loop_359_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_359_then_branch)
+(loop_359_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_359_then_branch)

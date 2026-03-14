@@ -1,0 +1,33 @@
+// behavioral-loop-369.gg
+// Executable Gnosis projection for The Sloped Forehead Loop.
+
+// Nodes
+(loop_369_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_369_context_branch: BehaviorEmit { emission: 'context' })
+(loop_369_given_gate: BehaviorAssess { stage: 'given', text: 'Receding%20frontal%20bone%20angle' })
+(loop_369_inactive: BehaviorTerminal { loopId: 369, loopName: 'The%20Sloped%20Forehead%20Loop' })
+(loop_369_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_369_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_369_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_369_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'observers%20subconsciously%20trigger%20%22Primitive%22%20or%20%22Criminal%22%20archetypes%20(The%20Lombroso%20Bias)' })
+(loop_369_result_branch: BehaviorEmit { emission: 'result', text: 'harsher%20judgment%20for%20minor%20behavioral%20infractions' })
+(loop_369_sink: BehaviorSink)
+(loop_369_start: BehaviorStart { loopId: 369, loopName: 'The%20Sloped%20Forehead%20Loop', given: 'Receding%20frontal%20bone%20angle', when: 'viewed%20in%20profile', then: 'observers%20subconsciously%20trigger%20%22Primitive%22%20or%20%22Criminal%22%20archetypes%20(The%20Lombroso%20Bias)', result: 'harsher%20judgment%20for%20minor%20behavioral%20infractions', operatorName: 'Unknown%20Operator', operatorMechanism: 'observers%20subconsciously%20trigger%20%22Primitive%22%20or%20%22Criminal%22%20archetypes%20(The%20Lombroso%20Bias)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_369_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_369_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20subconsciously%20trigger%20%22Primitive%22%20or%20%22Criminal%22%20archetypes%20(The%20Lombroso%20Bias)' })
+(loop_369_verdict: BehaviorVerdict { loopId: 369, loopName: 'The%20Sloped%20Forehead%20Loop', then: 'observers%20subconsciously%20trigger%20%22Primitive%22%20or%20%22Criminal%22%20archetypes%20(The%20Lombroso%20Bias)', result: 'harsher%20judgment%20for%20minor%20behavioral%20infractions', operatorName: 'Unknown%20Operator', operatorMechanism: 'observers%20subconsciously%20trigger%20%22Primitive%22%20or%20%22Criminal%22%20archetypes%20(The%20Lombroso%20Bias)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_369_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20in%20profile' })
+
+// Topology
+(loop_369_start)-[:PROCESS]->(loop_369_given_gate)
+(loop_369_given_gate)-[:PROCESS { case: "ok" }]->(loop_369_when_gate)
+(loop_369_given_gate)-[:PROCESS { case: "err" }]->(loop_369_inactive)
+(loop_369_when_gate)-[:PROCESS { case: "ok" }]->(loop_369_context)
+(loop_369_when_gate)-[:PROCESS { case: "err" }]->(loop_369_inactive)
+(loop_369_context)-[:FORK { strategy: "behavior-branches" }]->(loop_369_context_branch | loop_369_then_branch | loop_369_operator_branch | loop_369_result_branch | loop_369_taxonomy_branch | loop_369_intervention_recognize | loop_369_intervention_interdict | loop_369_intervention_minimize)
+(loop_369_context_branch | loop_369_then_branch | loop_369_operator_branch | loop_369_result_branch | loop_369_taxonomy_branch | loop_369_intervention_recognize | loop_369_intervention_interdict | loop_369_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_369_verdict)
+(loop_369_inactive)-[:PROCESS]->(loop_369_sink)
+(loop_369_verdict)-[:PROCESS]->(loop_369_sink)
+(loop_369_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_369_then_branch)
+(loop_369_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_369_then_branch)
+(loop_369_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_369_then_branch)

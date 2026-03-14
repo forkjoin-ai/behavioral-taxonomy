@@ -1,0 +1,33 @@
+// behavioral-loop-486.gg
+// Executable Gnosis projection for The Spitter Loop.
+
+// Nodes
+(loop_486_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_486_context_branch: BehaviorEmit { emission: 'context' })
+(loop_486_given_gate: BehaviorAssess { stage: 'given', text: 'Dental%20gap%20or%20tongue%20thrust' })
+(loop_486_inactive: BehaviorTerminal { loopId: 486, loopName: 'The%20Spitter%20Loop' })
+(loop_486_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_486_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_486_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_486_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Contagion%20Operator', mechanism: "droplets%20hit%20the%20listener's%20face" })
+(loop_486_result_branch: BehaviorEmit { emission: 'result', text: 'the%20listener%20physically%20backing%20away%2C%20creating%20**Social%20Distance**' })
+(loop_486_sink: BehaviorSink)
+(loop_486_start: BehaviorStart { loopId: 486, loopName: 'The%20Spitter%20Loop', given: 'Dental%20gap%20or%20tongue%20thrust', when: "pronouncing%20'S'%20or%20'P'", then: "droplets%20hit%20the%20listener's%20face%20(The%20Contagion%20Operator)", result: 'the%20listener%20physically%20backing%20away%2C%20creating%20**Social%20Distance**', operatorName: 'The%20Contagion%20Operator', operatorMechanism: "droplets%20hit%20the%20listener's%20face", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_486_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_486_then_branch: BehaviorEmit { emission: 'then', text: "droplets%20hit%20the%20listener's%20face%20(The%20Contagion%20Operator)" })
+(loop_486_verdict: BehaviorVerdict { loopId: 486, loopName: 'The%20Spitter%20Loop', then: "droplets%20hit%20the%20listener's%20face%20(The%20Contagion%20Operator)", result: 'the%20listener%20physically%20backing%20away%2C%20creating%20**Social%20Distance**', operatorName: 'The%20Contagion%20Operator', operatorMechanism: "droplets%20hit%20the%20listener's%20face", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_486_when_gate: BehaviorAssess { stage: 'when', text: "pronouncing%20'S'%20or%20'P'" })
+
+// Topology
+(loop_486_start)-[:PROCESS]->(loop_486_given_gate)
+(loop_486_given_gate)-[:PROCESS { case: "ok" }]->(loop_486_when_gate)
+(loop_486_given_gate)-[:PROCESS { case: "err" }]->(loop_486_inactive)
+(loop_486_when_gate)-[:PROCESS { case: "ok" }]->(loop_486_context)
+(loop_486_when_gate)-[:PROCESS { case: "err" }]->(loop_486_inactive)
+(loop_486_context)-[:FORK { strategy: "behavior-branches" }]->(loop_486_context_branch | loop_486_then_branch | loop_486_operator_branch | loop_486_result_branch | loop_486_taxonomy_branch | loop_486_intervention_recognize | loop_486_intervention_interdict | loop_486_intervention_minimize)
+(loop_486_context_branch | loop_486_then_branch | loop_486_operator_branch | loop_486_result_branch | loop_486_taxonomy_branch | loop_486_intervention_recognize | loop_486_intervention_interdict | loop_486_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_486_verdict)
+(loop_486_inactive)-[:PROCESS]->(loop_486_sink)
+(loop_486_verdict)-[:PROCESS]->(loop_486_sink)
+(loop_486_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_486_then_branch)
+(loop_486_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_486_then_branch)
+(loop_486_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_486_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-984.gg
+// Executable Gnosis projection for The Fast Twitch Loop.
+
+// Nodes
+(loop_984_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_984_context_branch: BehaviorEmit { emission: 'context' })
+(loop_984_given_gate: BehaviorAssess { stage: 'given', text: 'Sudden%2C%20rapid%20movements%20(High%20caffeine%2Fanxiety)' })
+(loop_984_inactive: BehaviorTerminal { loopId: 984, loopName: 'The%20Fast%20Twitch%20Loop' })
+(loop_984_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_984_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_984_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_984_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Robot%20Operator', mechanism: 'it%20looks%20like%20a%20%22Glitch%22' })
+(loop_984_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20feeling%20unsettled%20by%20the%20lack%20of%20fluid%20motion' })
+(loop_984_sink: BehaviorSink)
+(loop_984_start: BehaviorStart { loopId: 984, loopName: 'The%20Fast%20Twitch%20Loop', given: 'Sudden%2C%20rapid%20movements%20(High%20caffeine%2Fanxiety)', when: 'handling%20objects', then: 'it%20looks%20like%20a%20%22Glitch%22%20(The%20Robot%20Operator)', result: 'observers%20feeling%20unsettled%20by%20the%20lack%20of%20fluid%20motion', operatorName: 'The%20Robot%20Operator', operatorMechanism: 'it%20looks%20like%20a%20%22Glitch%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_984_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_984_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20a%20%22Glitch%22%20(The%20Robot%20Operator)' })
+(loop_984_verdict: BehaviorVerdict { loopId: 984, loopName: 'The%20Fast%20Twitch%20Loop', then: 'it%20looks%20like%20a%20%22Glitch%22%20(The%20Robot%20Operator)', result: 'observers%20feeling%20unsettled%20by%20the%20lack%20of%20fluid%20motion', operatorName: 'The%20Robot%20Operator', operatorMechanism: 'it%20looks%20like%20a%20%22Glitch%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_984_when_gate: BehaviorAssess { stage: 'when', text: 'handling%20objects' })
+
+// Topology
+(loop_984_start)-[:PROCESS]->(loop_984_given_gate)
+(loop_984_given_gate)-[:PROCESS { case: "ok" }]->(loop_984_when_gate)
+(loop_984_given_gate)-[:PROCESS { case: "err" }]->(loop_984_inactive)
+(loop_984_when_gate)-[:PROCESS { case: "ok" }]->(loop_984_context)
+(loop_984_when_gate)-[:PROCESS { case: "err" }]->(loop_984_inactive)
+(loop_984_context)-[:FORK { strategy: "behavior-branches" }]->(loop_984_context_branch | loop_984_then_branch | loop_984_operator_branch | loop_984_result_branch | loop_984_taxonomy_branch | loop_984_intervention_recognize | loop_984_intervention_interdict | loop_984_intervention_minimize)
+(loop_984_context_branch | loop_984_then_branch | loop_984_operator_branch | loop_984_result_branch | loop_984_taxonomy_branch | loop_984_intervention_recognize | loop_984_intervention_interdict | loop_984_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_984_verdict)
+(loop_984_inactive)-[:PROCESS]->(loop_984_sink)
+(loop_984_verdict)-[:PROCESS]->(loop_984_sink)
+(loop_984_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_984_then_branch)
+(loop_984_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_984_then_branch)
+(loop_984_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_984_then_branch)

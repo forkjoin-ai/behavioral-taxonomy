@@ -1,0 +1,33 @@
+// behavioral-loop-774.gg
+// Executable Gnosis projection for The Pinpoint Loop.
+
+// Nodes
+(loop_774_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_774_context_branch: BehaviorEmit { emission: 'context' })
+(loop_774_given_gate: BehaviorAssess { stage: 'given', text: 'Constricted%20pupils%20(due%20to%20opioids%20or%20light%20eyes)' })
+(loop_774_inactive: BehaviorTerminal { loopId: 774, loopName: 'The%20Pinpoint%20Loop' })
+(loop_774_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_774_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_774_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_774_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Shark%20Operator', mechanism: 'the%20gaze%20feels%20%22Cold%22%20and%20%22Impenetrable%22' })
+(loop_774_result_branch: BehaviorEmit { emission: 'result', text: 'the%20recipient%20feeling%20judged%20rather%20than%20connected' })
+(loop_774_sink: BehaviorSink)
+(loop_774_start: BehaviorStart { loopId: 774, loopName: 'The%20Pinpoint%20Loop', given: 'Constricted%20pupils%20(due%20to%20opioids%20or%20light%20eyes)', when: 'attempting%20to%20bond', then: 'the%20gaze%20feels%20%22Cold%22%20and%20%22Impenetrable%22%20(The%20Shark%20Operator)', result: 'the%20recipient%20feeling%20judged%20rather%20than%20connected', operatorName: 'The%20Shark%20Operator', operatorMechanism: 'the%20gaze%20feels%20%22Cold%22%20and%20%22Impenetrable%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_774_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_774_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gaze%20feels%20%22Cold%22%20and%20%22Impenetrable%22%20(The%20Shark%20Operator)' })
+(loop_774_verdict: BehaviorVerdict { loopId: 774, loopName: 'The%20Pinpoint%20Loop', then: 'the%20gaze%20feels%20%22Cold%22%20and%20%22Impenetrable%22%20(The%20Shark%20Operator)', result: 'the%20recipient%20feeling%20judged%20rather%20than%20connected', operatorName: 'The%20Shark%20Operator', operatorMechanism: 'the%20gaze%20feels%20%22Cold%22%20and%20%22Impenetrable%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_774_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20to%20bond' })
+
+// Topology
+(loop_774_start)-[:PROCESS]->(loop_774_given_gate)
+(loop_774_given_gate)-[:PROCESS { case: "ok" }]->(loop_774_when_gate)
+(loop_774_given_gate)-[:PROCESS { case: "err" }]->(loop_774_inactive)
+(loop_774_when_gate)-[:PROCESS { case: "ok" }]->(loop_774_context)
+(loop_774_when_gate)-[:PROCESS { case: "err" }]->(loop_774_inactive)
+(loop_774_context)-[:FORK { strategy: "behavior-branches" }]->(loop_774_context_branch | loop_774_then_branch | loop_774_operator_branch | loop_774_result_branch | loop_774_taxonomy_branch | loop_774_intervention_recognize | loop_774_intervention_interdict | loop_774_intervention_minimize)
+(loop_774_context_branch | loop_774_then_branch | loop_774_operator_branch | loop_774_result_branch | loop_774_taxonomy_branch | loop_774_intervention_recognize | loop_774_intervention_interdict | loop_774_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_774_verdict)
+(loop_774_inactive)-[:PROCESS]->(loop_774_sink)
+(loop_774_verdict)-[:PROCESS]->(loop_774_sink)
+(loop_774_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_774_then_branch)
+(loop_774_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_774_then_branch)
+(loop_774_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_774_then_branch)

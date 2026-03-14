@@ -1,0 +1,31 @@
+// behavioral-loop-518.gg
+// Executable Gnosis projection for The Topper Loop.
+
+// Nodes
+(loop_518_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_518_context_branch: BehaviorEmit { emission: 'context' })
+(loop_518_given_gate: BehaviorAssess { stage: 'given', text: 'Placing%20the%20left%20hand%20*over*%20the%20handshake%20(sandwiching)' })
+(loop_518_inactive: BehaviorTerminal { loopId: 518, loopName: 'The%20Topper%20Loop' })
+(loop_518_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_518_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_518_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Senator%20Operator', mechanism: 'it%20signals%20%22Condescension%22%20or%20%22Political%20Fakeness%22' })
+(loop_518_result_branch: BehaviorEmit { emission: 'result', text: 'distrust%3B%20the%20recipient%20feels%20%22handled%22%20rather%20than%20greeted' })
+(loop_518_sink: BehaviorSink)
+(loop_518_start: BehaviorStart { loopId: 518, loopName: 'The%20Topper%20Loop', given: 'Placing%20the%20left%20hand%20*over*%20the%20handshake%20(sandwiching)', when: 'meeting%20a%20peer', then: 'it%20signals%20%22Condescension%22%20or%20%22Political%20Fakeness%22%20(The%20Senator%20Operator)', result: 'distrust%3B%20the%20recipient%20feels%20%22handled%22%20rather%20than%20greeted', operatorName: 'The%20Senator%20Operator', operatorMechanism: 'it%20signals%20%22Condescension%22%20or%20%22Political%20Fakeness%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_518_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'TRUST' })
+(loop_518_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Condescension%22%20or%20%22Political%20Fakeness%22%20(The%20Senator%20Operator)' })
+(loop_518_verdict: BehaviorVerdict { loopId: 518, loopName: 'The%20Topper%20Loop', then: 'it%20signals%20%22Condescension%22%20or%20%22Political%20Fakeness%22%20(The%20Senator%20Operator)', result: 'distrust%3B%20the%20recipient%20feels%20%22handled%22%20rather%20than%20greeted', operatorName: 'The%20Senator%20Operator', operatorMechanism: 'it%20signals%20%22Condescension%22%20or%20%22Political%20Fakeness%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'TRUST' })
+(loop_518_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20a%20peer' })
+
+// Topology
+(loop_518_start)-[:PROCESS]->(loop_518_given_gate)
+(loop_518_given_gate)-[:PROCESS { case: "ok" }]->(loop_518_when_gate)
+(loop_518_given_gate)-[:PROCESS { case: "err" }]->(loop_518_inactive)
+(loop_518_when_gate)-[:PROCESS { case: "ok" }]->(loop_518_context)
+(loop_518_when_gate)-[:PROCESS { case: "err" }]->(loop_518_inactive)
+(loop_518_context)-[:FORK { strategy: "behavior-branches" }]->(loop_518_context_branch | loop_518_then_branch | loop_518_operator_branch | loop_518_result_branch | loop_518_taxonomy_branch | loop_518_intervention_recognize | loop_518_intervention_leverage)
+(loop_518_context_branch | loop_518_then_branch | loop_518_operator_branch | loop_518_result_branch | loop_518_taxonomy_branch | loop_518_intervention_recognize | loop_518_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_518_verdict)
+(loop_518_inactive)-[:PROCESS]->(loop_518_sink)
+(loop_518_verdict)-[:PROCESS]->(loop_518_sink)
+(loop_518_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_518_then_branch)
+(loop_518_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_518_result_branch)

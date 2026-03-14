@@ -1,0 +1,33 @@
+// behavioral-loop-933.gg
+// Executable Gnosis projection for The Micro-Snarl Loop.
+
+// Nodes
+(loop_933_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_933_context_branch: BehaviorEmit { emission: 'context' })
+(loop_933_given_gate: BehaviorAssess { stage: 'given', text: 'Involuntary%20contraction%20of%20the%20Levator%20Labii%20(upper%20lip%20lifter)' })
+(loop_933_inactive: BehaviorTerminal { loopId: 933, loopName: 'The%20Micro-Snarl%20Loop' })
+(loop_933_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_933_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_933_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_933_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Wolf%20Operator', mechanism: 'the%20lip%20twitches%20upward%20for%20%3C0.5s' })
+(loop_933_result_branch: BehaviorEmit { emission: 'result', text: 'the%20rival%20sensing%20deep%20hostility%20despite%20polite%20words' })
+(loop_933_sink: BehaviorSink)
+(loop_933_start: BehaviorStart { loopId: 933, loopName: 'The%20Micro-Snarl%20Loop', given: 'Involuntary%20contraction%20of%20the%20Levator%20Labii%20(upper%20lip%20lifter)', when: 'hearing%20a%20rival%20speak', then: 'the%20lip%20twitches%20upward%20for%20%3C0.5s%20(The%20Wolf%20Operator)', result: 'the%20rival%20sensing%20deep%20hostility%20despite%20polite%20words', operatorName: 'The%20Wolf%20Operator', operatorMechanism: 'the%20lip%20twitches%20upward%20for%20%3C0.5s', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_933_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_933_then_branch: BehaviorEmit { emission: 'then', text: 'the%20lip%20twitches%20upward%20for%20%3C0.5s%20(The%20Wolf%20Operator)' })
+(loop_933_verdict: BehaviorVerdict { loopId: 933, loopName: 'The%20Micro-Snarl%20Loop', then: 'the%20lip%20twitches%20upward%20for%20%3C0.5s%20(The%20Wolf%20Operator)', result: 'the%20rival%20sensing%20deep%20hostility%20despite%20polite%20words', operatorName: 'The%20Wolf%20Operator', operatorMechanism: 'the%20lip%20twitches%20upward%20for%20%3C0.5s', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_933_when_gate: BehaviorAssess { stage: 'when', text: 'hearing%20a%20rival%20speak' })
+
+// Topology
+(loop_933_start)-[:PROCESS]->(loop_933_given_gate)
+(loop_933_given_gate)-[:PROCESS { case: "ok" }]->(loop_933_when_gate)
+(loop_933_given_gate)-[:PROCESS { case: "err" }]->(loop_933_inactive)
+(loop_933_when_gate)-[:PROCESS { case: "ok" }]->(loop_933_context)
+(loop_933_when_gate)-[:PROCESS { case: "err" }]->(loop_933_inactive)
+(loop_933_context)-[:FORK { strategy: "behavior-branches" }]->(loop_933_context_branch | loop_933_then_branch | loop_933_operator_branch | loop_933_result_branch | loop_933_taxonomy_branch | loop_933_intervention_recognize | loop_933_intervention_interdict | loop_933_intervention_minimize)
+(loop_933_context_branch | loop_933_then_branch | loop_933_operator_branch | loop_933_result_branch | loop_933_taxonomy_branch | loop_933_intervention_recognize | loop_933_intervention_interdict | loop_933_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_933_verdict)
+(loop_933_inactive)-[:PROCESS]->(loop_933_sink)
+(loop_933_verdict)-[:PROCESS]->(loop_933_sink)
+(loop_933_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_933_then_branch)
+(loop_933_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_933_then_branch)
+(loop_933_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_933_then_branch)

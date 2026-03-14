@@ -1,0 +1,33 @@
+// behavioral-loop-627.gg
+// Executable Gnosis projection for The Fat Pad Loop.
+
+// Nodes
+(loop_627_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_627_context_branch: BehaviorEmit { emission: 'context' })
+(loop_627_given_gate: BehaviorAssess { stage: 'given', text: 'Yellow%20fatty%20plaques%20on%20eyelids' })
+(loop_627_inactive: BehaviorTerminal { loopId: 627, loopName: 'The%20Fat%20Pad%20Loop' })
+(loop_627_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_627_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_627_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_627_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Lipid%20Operator', mechanism: 'it%20signals%20%22High%20Cholesterol%22%20or%20%22Poor%20Diet%22' })
+(loop_627_result_branch: BehaviorEmit { emission: 'result', text: 'judgment%20of%20health%20habits' })
+(loop_627_sink: BehaviorSink)
+(loop_627_start: BehaviorStart { loopId: 627, loopName: 'The%20Fat%20Pad%20Loop', given: 'Yellow%20fatty%20plaques%20on%20eyelids', when: 'blinking', then: 'it%20signals%20%22High%20Cholesterol%22%20or%20%22Poor%20Diet%22%20(The%20Lipid%20Operator)', result: 'judgment%20of%20health%20habits', operatorName: 'The%20Lipid%20Operator', operatorMechanism: 'it%20signals%20%22High%20Cholesterol%22%20or%20%22Poor%20Diet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_627_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_627_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22High%20Cholesterol%22%20or%20%22Poor%20Diet%22%20(The%20Lipid%20Operator)' })
+(loop_627_verdict: BehaviorVerdict { loopId: 627, loopName: 'The%20Fat%20Pad%20Loop', then: 'it%20signals%20%22High%20Cholesterol%22%20or%20%22Poor%20Diet%22%20(The%20Lipid%20Operator)', result: 'judgment%20of%20health%20habits', operatorName: 'The%20Lipid%20Operator', operatorMechanism: 'it%20signals%20%22High%20Cholesterol%22%20or%20%22Poor%20Diet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_627_when_gate: BehaviorAssess { stage: 'when', text: 'blinking' })
+
+// Topology
+(loop_627_start)-[:PROCESS]->(loop_627_given_gate)
+(loop_627_given_gate)-[:PROCESS { case: "ok" }]->(loop_627_when_gate)
+(loop_627_given_gate)-[:PROCESS { case: "err" }]->(loop_627_inactive)
+(loop_627_when_gate)-[:PROCESS { case: "ok" }]->(loop_627_context)
+(loop_627_when_gate)-[:PROCESS { case: "err" }]->(loop_627_inactive)
+(loop_627_context)-[:FORK { strategy: "behavior-branches" }]->(loop_627_context_branch | loop_627_then_branch | loop_627_operator_branch | loop_627_result_branch | loop_627_taxonomy_branch | loop_627_intervention_recognize | loop_627_intervention_interdict | loop_627_intervention_minimize)
+(loop_627_context_branch | loop_627_then_branch | loop_627_operator_branch | loop_627_result_branch | loop_627_taxonomy_branch | loop_627_intervention_recognize | loop_627_intervention_interdict | loop_627_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_627_verdict)
+(loop_627_inactive)-[:PROCESS]->(loop_627_sink)
+(loop_627_verdict)-[:PROCESS]->(loop_627_sink)
+(loop_627_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_627_then_branch)
+(loop_627_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_627_then_branch)
+(loop_627_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_627_then_branch)

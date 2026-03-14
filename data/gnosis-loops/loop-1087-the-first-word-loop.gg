@@ -1,0 +1,33 @@
+// behavioral-loop-1087.gg
+// Executable Gnosis projection for The First Word Loop.
+
+// Nodes
+(loop_1087_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1087_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1087_given_gate: BehaviorAssess { stage: 'given', text: 'The%20attempt%20to%20control%20the%20environment' })
+(loop_1087_inactive: BehaviorTerminal { loopId: 1087, loopName: 'The%20First%20Word%20Loop' })
+(loop_1087_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Change%20or%20modify%20the%20triggering%20environment' })
+(loop_1087_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1087_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1087_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20%22Sorcery%22%20of%20language%20is%20discovered%20(The%20Command%20Line)' })
+(loop_1087_result_branch: BehaviorEmit { emission: 'result', text: 'the%20separation%20of%20Self%20and%20World' })
+(loop_1087_sink: BehaviorSink)
+(loop_1087_start: BehaviorStart { loopId: 1087, loopName: 'The%20First%20Word%20Loop', given: 'The%20attempt%20to%20control%20the%20environment', when: 'a%20sound%20yields%20a%20result%20(Mama%20%3D%20Food)', then: 'the%20%22Sorcery%22%20of%20language%20is%20discovered%20(The%20Command%20Line)', result: 'the%20separation%20of%20Self%20and%20World', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20%22Sorcery%22%20of%20language%20is%20discovered%20(The%20Command%20Line)', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Change%20or%20modify%20the%20triggering%20environment', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1087_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1087_then_branch: BehaviorEmit { emission: 'then', text: 'the%20%22Sorcery%22%20of%20language%20is%20discovered%20(The%20Command%20Line)' })
+(loop_1087_verdict: BehaviorVerdict { loopId: 1087, loopName: 'The%20First%20Word%20Loop', then: 'the%20%22Sorcery%22%20of%20language%20is%20discovered%20(The%20Command%20Line)', result: 'the%20separation%20of%20Self%20and%20World', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20%22Sorcery%22%20of%20language%20is%20discovered%20(The%20Command%20Line)', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1087_when_gate: BehaviorAssess { stage: 'when', text: 'a%20sound%20yields%20a%20result%20(Mama%20%3D%20Food)' })
+
+// Topology
+(loop_1087_start)-[:PROCESS]->(loop_1087_given_gate)
+(loop_1087_given_gate)-[:PROCESS { case: "ok" }]->(loop_1087_when_gate)
+(loop_1087_given_gate)-[:PROCESS { case: "err" }]->(loop_1087_inactive)
+(loop_1087_when_gate)-[:PROCESS { case: "ok" }]->(loop_1087_context)
+(loop_1087_when_gate)-[:PROCESS { case: "err" }]->(loop_1087_inactive)
+(loop_1087_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1087_context_branch | loop_1087_then_branch | loop_1087_operator_branch | loop_1087_result_branch | loop_1087_taxonomy_branch | loop_1087_intervention_recognize | loop_1087_intervention_interdict | loop_1087_intervention_minimize)
+(loop_1087_context_branch | loop_1087_then_branch | loop_1087_operator_branch | loop_1087_result_branch | loop_1087_taxonomy_branch | loop_1087_intervention_recognize | loop_1087_intervention_interdict | loop_1087_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1087_verdict)
+(loop_1087_inactive)-[:PROCESS]->(loop_1087_sink)
+(loop_1087_verdict)-[:PROCESS]->(loop_1087_sink)
+(loop_1087_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1087_then_branch)
+(loop_1087_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1087_then_branch)
+(loop_1087_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1087_then_branch)

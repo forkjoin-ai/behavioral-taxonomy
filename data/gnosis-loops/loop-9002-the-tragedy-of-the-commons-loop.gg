@@ -1,0 +1,33 @@
+// behavioral-loop-9002.gg
+// Executable Gnosis projection for The Tragedy of the Commons Loop.
+
+// Nodes
+(loop_9002_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_9002_context_branch: BehaviorEmit { emission: 'context' })
+(loop_9002_given_gate: BehaviorAssess { stage: 'given', text: 'A%20shared%2C%20finite%20resource%20(The%20Commons)%20with%20unrestricted%20access' })
+(loop_9002_inactive: BehaviorTerminal { loopId: 9002, loopName: 'The%20Tragedy%20of%20the%20Commons%20Loop' })
+(loop_9002_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_9002_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_9002_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_9002_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_9002_result_branch: BehaviorEmit { emission: 'result', text: 'Total%20collapse%20of%20the%20resource%20for%20everyone' })
+(loop_9002_sink: BehaviorSink)
+(loop_9002_start: BehaviorStart { loopId: 9002, loopName: 'The%20Tragedy%20of%20the%20Commons%20Loop', given: 'A%20shared%2C%20finite%20resource%20(The%20Commons)%20with%20unrestricted%20access', when: 'Individual%20agents%20seek%20to%20maximize%20personal%20utility', then: 'Each%20agent%20takes%20', result: 'Total%20collapse%20of%20the%20resource%20for%20everyone', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_9002_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_9002_then_branch: BehaviorEmit { emission: 'then', text: 'Each%20agent%20takes%20' })
+(loop_9002_verdict: BehaviorVerdict { loopId: 9002, loopName: 'The%20Tragedy%20of%20the%20Commons%20Loop', then: 'Each%20agent%20takes%20', result: 'Total%20collapse%20of%20the%20resource%20for%20everyone', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_9002_when_gate: BehaviorAssess { stage: 'when', text: 'Individual%20agents%20seek%20to%20maximize%20personal%20utility' })
+
+// Topology
+(loop_9002_start)-[:PROCESS]->(loop_9002_given_gate)
+(loop_9002_given_gate)-[:PROCESS { case: "ok" }]->(loop_9002_when_gate)
+(loop_9002_given_gate)-[:PROCESS { case: "err" }]->(loop_9002_inactive)
+(loop_9002_when_gate)-[:PROCESS { case: "ok" }]->(loop_9002_context)
+(loop_9002_when_gate)-[:PROCESS { case: "err" }]->(loop_9002_inactive)
+(loop_9002_context)-[:FORK { strategy: "behavior-branches" }]->(loop_9002_context_branch | loop_9002_then_branch | loop_9002_operator_branch | loop_9002_result_branch | loop_9002_taxonomy_branch | loop_9002_intervention_recognize | loop_9002_intervention_interdict | loop_9002_intervention_minimize)
+(loop_9002_context_branch | loop_9002_then_branch | loop_9002_operator_branch | loop_9002_result_branch | loop_9002_taxonomy_branch | loop_9002_intervention_recognize | loop_9002_intervention_interdict | loop_9002_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_9002_verdict)
+(loop_9002_inactive)-[:PROCESS]->(loop_9002_sink)
+(loop_9002_verdict)-[:PROCESS]->(loop_9002_sink)
+(loop_9002_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_9002_then_branch)
+(loop_9002_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_9002_then_branch)
+(loop_9002_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_9002_then_branch)

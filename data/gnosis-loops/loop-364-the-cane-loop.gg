@@ -1,0 +1,33 @@
+// behavioral-loop-364.gg
+// Executable Gnosis projection for The Cane Loop.
+
+// Nodes
+(loop_364_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_364_context_branch: BehaviorEmit { emission: 'context' })
+(loop_364_given_gate: BehaviorAssess { stage: 'given', text: 'Mobility%20aid%20usage' })
+(loop_364_inactive: BehaviorTerminal { loopId: 364, loopName: 'The%20Cane%20Loop' })
+(loop_364_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_364_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_364_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_364_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Pity%2FRespect%20Operator', mechanism: 'the%20%22Red%20Sea%22%20parts' })
+(loop_364_result_branch: BehaviorEmit { emission: 'result', text: 'physical%20ease%20but%20social%20isolation%20(people%20are%20afraid%20to%20bump%2Ftouch)' })
+(loop_364_sink: BehaviorSink)
+(loop_364_start: BehaviorStart { loopId: 364, loopName: 'The%20Cane%20Loop', given: 'Mobility%20aid%20usage', when: 'entering%20a%20crowded%20room', then: 'the%20%22Red%20Sea%22%20parts%20(The%20Pity%2FRespect%20Operator)', result: 'physical%20ease%20but%20social%20isolation%20(people%20are%20afraid%20to%20bump%2Ftouch)', operatorName: 'The%20Pity%2FRespect%20Operator', operatorMechanism: 'the%20%22Red%20Sea%22%20parts', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_364_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_364_then_branch: BehaviorEmit { emission: 'then', text: 'the%20%22Red%20Sea%22%20parts%20(The%20Pity%2FRespect%20Operator)' })
+(loop_364_verdict: BehaviorVerdict { loopId: 364, loopName: 'The%20Cane%20Loop', then: 'the%20%22Red%20Sea%22%20parts%20(The%20Pity%2FRespect%20Operator)', result: 'physical%20ease%20but%20social%20isolation%20(people%20are%20afraid%20to%20bump%2Ftouch)', operatorName: 'The%20Pity%2FRespect%20Operator', operatorMechanism: 'the%20%22Red%20Sea%22%20parts', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_364_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20crowded%20room' })
+
+// Topology
+(loop_364_start)-[:PROCESS]->(loop_364_given_gate)
+(loop_364_given_gate)-[:PROCESS { case: "ok" }]->(loop_364_when_gate)
+(loop_364_given_gate)-[:PROCESS { case: "err" }]->(loop_364_inactive)
+(loop_364_when_gate)-[:PROCESS { case: "ok" }]->(loop_364_context)
+(loop_364_when_gate)-[:PROCESS { case: "err" }]->(loop_364_inactive)
+(loop_364_context)-[:FORK { strategy: "behavior-branches" }]->(loop_364_context_branch | loop_364_then_branch | loop_364_operator_branch | loop_364_result_branch | loop_364_taxonomy_branch | loop_364_intervention_recognize | loop_364_intervention_interdict | loop_364_intervention_minimize)
+(loop_364_context_branch | loop_364_then_branch | loop_364_operator_branch | loop_364_result_branch | loop_364_taxonomy_branch | loop_364_intervention_recognize | loop_364_intervention_interdict | loop_364_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_364_verdict)
+(loop_364_inactive)-[:PROCESS]->(loop_364_sink)
+(loop_364_verdict)-[:PROCESS]->(loop_364_sink)
+(loop_364_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_364_then_branch)
+(loop_364_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_364_then_branch)
+(loop_364_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_364_then_branch)

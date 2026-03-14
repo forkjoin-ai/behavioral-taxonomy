@@ -1,0 +1,33 @@
+// behavioral-loop-472.gg
+// Executable Gnosis projection for The Wide Eyed Loop.
+
+// Nodes
+(loop_472_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_472_context_branch: BehaviorEmit { emission: 'context' })
+(loop_472_given_gate: BehaviorAssess { stage: 'given', text: 'High%20upper%20eyelid%20position%20(showing%20sclera)' })
+(loop_472_inactive: BehaviorTerminal { loopId: 472, loopName: 'The%20Wide%20Eyed%20Loop' })
+(loop_472_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_472_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_472_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_472_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Naivety%20Operator', mechanism: 'it%20looks%20like%20%22Fear%22%20or%20%22Surprise%22' })
+(loop_472_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20protected%2Fsheltered%20rather%20than%20challenged' })
+(loop_472_sink: BehaviorSink)
+(loop_472_start: BehaviorStart { loopId: 472, loopName: 'The%20Wide%20Eyed%20Loop', given: 'High%20upper%20eyelid%20position%20(showing%20sclera)', when: 'in%20a%20normal%20meeting', then: 'it%20looks%20like%20%22Fear%22%20or%20%22Surprise%22%20(The%20Naivety%20Operator)', result: 'the%20individual%20being%20protected%2Fsheltered%20rather%20than%20challenged', operatorName: 'The%20Naivety%20Operator', operatorMechanism: 'it%20looks%20like%20%22Fear%22%20or%20%22Surprise%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_472_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_472_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Fear%22%20or%20%22Surprise%22%20(The%20Naivety%20Operator)' })
+(loop_472_verdict: BehaviorVerdict { loopId: 472, loopName: 'The%20Wide%20Eyed%20Loop', then: 'it%20looks%20like%20%22Fear%22%20or%20%22Surprise%22%20(The%20Naivety%20Operator)', result: 'the%20individual%20being%20protected%2Fsheltered%20rather%20than%20challenged', operatorName: 'The%20Naivety%20Operator', operatorMechanism: 'it%20looks%20like%20%22Fear%22%20or%20%22Surprise%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_472_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20normal%20meeting' })
+
+// Topology
+(loop_472_start)-[:PROCESS]->(loop_472_given_gate)
+(loop_472_given_gate)-[:PROCESS { case: "ok" }]->(loop_472_when_gate)
+(loop_472_given_gate)-[:PROCESS { case: "err" }]->(loop_472_inactive)
+(loop_472_when_gate)-[:PROCESS { case: "ok" }]->(loop_472_context)
+(loop_472_when_gate)-[:PROCESS { case: "err" }]->(loop_472_inactive)
+(loop_472_context)-[:FORK { strategy: "behavior-branches" }]->(loop_472_context_branch | loop_472_then_branch | loop_472_operator_branch | loop_472_result_branch | loop_472_taxonomy_branch | loop_472_intervention_recognize | loop_472_intervention_interdict | loop_472_intervention_minimize)
+(loop_472_context_branch | loop_472_then_branch | loop_472_operator_branch | loop_472_result_branch | loop_472_taxonomy_branch | loop_472_intervention_recognize | loop_472_intervention_interdict | loop_472_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_472_verdict)
+(loop_472_inactive)-[:PROCESS]->(loop_472_sink)
+(loop_472_verdict)-[:PROCESS]->(loop_472_sink)
+(loop_472_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_472_then_branch)
+(loop_472_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_472_then_branch)
+(loop_472_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_472_then_branch)

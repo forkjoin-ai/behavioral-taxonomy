@@ -1,0 +1,33 @@
+// behavioral-loop-997.gg
+// Executable Gnosis projection for The Knuckle Pop Loop.
+
+// Nodes
+(loop_997_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_997_context_branch: BehaviorEmit { emission: 'context' })
+(loop_997_given_gate: BehaviorAssess { stage: 'given', text: 'Cracking%20fingers%20one%20by%20one%20during%20a%20silence' })
+(loop_997_inactive: BehaviorTerminal { loopId: 997, loopName: 'The%20Knuckle%20Pop%20Loop' })
+(loop_997_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_997_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_997_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_997_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Gunshot%20Operator', mechanism: 'the%20*pop-pop-pop*%20sounds%20like%20%22Aggression%22%20or%20%22Boredom%22' })
+(loop_997_result_branch: BehaviorEmit { emission: 'result', text: 'physical%20cringing%20from%20sensitive%20opponents' })
+(loop_997_sink: BehaviorSink)
+(loop_997_start: BehaviorStart { loopId: 997, loopName: 'The%20Knuckle%20Pop%20Loop', given: 'Cracking%20fingers%20one%20by%20one%20during%20a%20silence', when: 'negotiating', then: 'the%20*pop-pop-pop*%20sounds%20like%20%22Aggression%22%20or%20%22Boredom%22%20(The%20Gunshot%20Operator)', result: 'physical%20cringing%20from%20sensitive%20opponents', operatorName: 'The%20Gunshot%20Operator', operatorMechanism: 'the%20*pop-pop-pop*%20sounds%20like%20%22Aggression%22%20or%20%22Boredom%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_997_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_997_then_branch: BehaviorEmit { emission: 'then', text: 'the%20*pop-pop-pop*%20sounds%20like%20%22Aggression%22%20or%20%22Boredom%22%20(The%20Gunshot%20Operator)' })
+(loop_997_verdict: BehaviorVerdict { loopId: 997, loopName: 'The%20Knuckle%20Pop%20Loop', then: 'the%20*pop-pop-pop*%20sounds%20like%20%22Aggression%22%20or%20%22Boredom%22%20(The%20Gunshot%20Operator)', result: 'physical%20cringing%20from%20sensitive%20opponents', operatorName: 'The%20Gunshot%20Operator', operatorMechanism: 'the%20*pop-pop-pop*%20sounds%20like%20%22Aggression%22%20or%20%22Boredom%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_997_when_gate: BehaviorAssess { stage: 'when', text: 'negotiating' })
+
+// Topology
+(loop_997_start)-[:PROCESS]->(loop_997_given_gate)
+(loop_997_given_gate)-[:PROCESS { case: "ok" }]->(loop_997_when_gate)
+(loop_997_given_gate)-[:PROCESS { case: "err" }]->(loop_997_inactive)
+(loop_997_when_gate)-[:PROCESS { case: "ok" }]->(loop_997_context)
+(loop_997_when_gate)-[:PROCESS { case: "err" }]->(loop_997_inactive)
+(loop_997_context)-[:FORK { strategy: "behavior-branches" }]->(loop_997_context_branch | loop_997_then_branch | loop_997_operator_branch | loop_997_result_branch | loop_997_taxonomy_branch | loop_997_intervention_recognize | loop_997_intervention_interdict | loop_997_intervention_minimize)
+(loop_997_context_branch | loop_997_then_branch | loop_997_operator_branch | loop_997_result_branch | loop_997_taxonomy_branch | loop_997_intervention_recognize | loop_997_intervention_interdict | loop_997_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_997_verdict)
+(loop_997_inactive)-[:PROCESS]->(loop_997_sink)
+(loop_997_verdict)-[:PROCESS]->(loop_997_sink)
+(loop_997_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_997_then_branch)
+(loop_997_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_997_then_branch)
+(loop_997_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_997_then_branch)

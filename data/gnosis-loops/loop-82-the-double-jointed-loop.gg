@@ -1,0 +1,33 @@
+// behavioral-loop-82.gg
+// Executable Gnosis projection for The Double-Jointed Loop.
+
+// Nodes
+(loop_82_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_82_context_branch: BehaviorEmit { emission: 'context' })
+(loop_82_given_gate: BehaviorAssess { stage: 'given', text: 'Ehlers-Danlos%20or%20benign%20hypermobility' })
+(loop_82_inactive: BehaviorTerminal { loopId: 82, loopName: 'The%20Double-Jointed%20Loop' })
+(loop_82_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_82_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_82_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_82_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%2FDisgust%20Operator', mechanism: 'the%20body%20adopts%20%22weird%22%20contorted%20positions' })
+(loop_82_result_branch: BehaviorEmit { emission: 'result', text: 'being%20seen%20as%20a%20%22Freak%22%20or%20%22Alien%2C%22%20fostering%20an%20**Outsider%20Identity**' })
+(loop_82_sink: BehaviorSink)
+(loop_82_start: BehaviorStart { loopId: 82, loopName: 'The%20Double-Jointed%20Loop', given: 'Ehlers-Danlos%20or%20benign%20hypermobility', when: 'sitting%20or%20standing', then: 'the%20body%20adopts%20%22weird%22%20contorted%20positions%20(The%20Novelty%2FDisgust%20Operator)', result: 'being%20seen%20as%20a%20%22Freak%22%20or%20%22Alien%2C%22%20fostering%20an%20**Outsider%20Identity**', operatorName: 'The%20Novelty%2FDisgust%20Operator', operatorMechanism: 'the%20body%20adopts%20%22weird%22%20contorted%20positions', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_82_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_82_then_branch: BehaviorEmit { emission: 'then', text: 'the%20body%20adopts%20%22weird%22%20contorted%20positions%20(The%20Novelty%2FDisgust%20Operator)' })
+(loop_82_verdict: BehaviorVerdict { loopId: 82, loopName: 'The%20Double-Jointed%20Loop', then: 'the%20body%20adopts%20%22weird%22%20contorted%20positions%20(The%20Novelty%2FDisgust%20Operator)', result: 'being%20seen%20as%20a%20%22Freak%22%20or%20%22Alien%2C%22%20fostering%20an%20**Outsider%20Identity**', operatorName: 'The%20Novelty%2FDisgust%20Operator', operatorMechanism: 'the%20body%20adopts%20%22weird%22%20contorted%20positions', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_82_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20or%20standing' })
+
+// Topology
+(loop_82_start)-[:PROCESS]->(loop_82_given_gate)
+(loop_82_given_gate)-[:PROCESS { case: "ok" }]->(loop_82_when_gate)
+(loop_82_given_gate)-[:PROCESS { case: "err" }]->(loop_82_inactive)
+(loop_82_when_gate)-[:PROCESS { case: "ok" }]->(loop_82_context)
+(loop_82_when_gate)-[:PROCESS { case: "err" }]->(loop_82_inactive)
+(loop_82_context)-[:FORK { strategy: "behavior-branches" }]->(loop_82_context_branch | loop_82_then_branch | loop_82_operator_branch | loop_82_result_branch | loop_82_taxonomy_branch | loop_82_intervention_recognize | loop_82_intervention_interdict | loop_82_intervention_minimize)
+(loop_82_context_branch | loop_82_then_branch | loop_82_operator_branch | loop_82_result_branch | loop_82_taxonomy_branch | loop_82_intervention_recognize | loop_82_intervention_interdict | loop_82_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_82_verdict)
+(loop_82_inactive)-[:PROCESS]->(loop_82_sink)
+(loop_82_verdict)-[:PROCESS]->(loop_82_sink)
+(loop_82_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_82_then_branch)
+(loop_82_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_82_then_branch)
+(loop_82_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_82_then_branch)

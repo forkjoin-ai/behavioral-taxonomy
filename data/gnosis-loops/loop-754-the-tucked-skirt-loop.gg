@@ -1,0 +1,33 @@
+// behavioral-loop-754.gg
+// Executable Gnosis projection for The Tucked Skirt Loop.
+
+// Nodes
+(loop_754_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_754_context_branch: BehaviorEmit { emission: 'context' })
+(loop_754_given_gate: BehaviorAssess { stage: 'given', text: 'Skirt%20caught%20in%20underwear%2Fpantyhose' })
+(loop_754_inactive: BehaviorTerminal { loopId: 754, loopName: 'The%20Tucked%20Skirt%20Loop' })
+(loop_754_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Modify%20or%20remove%20the%20triggering%20element' })
+(loop_754_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_754_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_754_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Exposure%20Operator', mechanism: 'it%20signals%20%22Humiliation%22' })
+(loop_754_result_branch: BehaviorEmit { emission: 'result', text: 'either%20mockery%20or%20a%20%22Sisterhood%22%20moment%20of%20rescue' })
+(loop_754_sink: BehaviorSink)
+(loop_754_start: BehaviorStart { loopId: 754, loopName: 'The%20Tucked%20Skirt%20Loop', given: 'Skirt%20caught%20in%20underwear%2Fpantyhose', when: 'walking%20away', then: 'it%20signals%20%22Humiliation%22%20(The%20Exposure%20Operator)', result: 'either%20mockery%20or%20a%20%22Sisterhood%22%20moment%20of%20rescue', operatorName: 'The%20Exposure%20Operator', operatorMechanism: 'it%20signals%20%22Humiliation%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Modify%20or%20remove%20the%20triggering%20element', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_754_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_754_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Humiliation%22%20(The%20Exposure%20Operator)' })
+(loop_754_verdict: BehaviorVerdict { loopId: 754, loopName: 'The%20Tucked%20Skirt%20Loop', then: 'it%20signals%20%22Humiliation%22%20(The%20Exposure%20Operator)', result: 'either%20mockery%20or%20a%20%22Sisterhood%22%20moment%20of%20rescue', operatorName: 'The%20Exposure%20Operator', operatorMechanism: 'it%20signals%20%22Humiliation%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_754_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20away' })
+
+// Topology
+(loop_754_start)-[:PROCESS]->(loop_754_given_gate)
+(loop_754_given_gate)-[:PROCESS { case: "ok" }]->(loop_754_when_gate)
+(loop_754_given_gate)-[:PROCESS { case: "err" }]->(loop_754_inactive)
+(loop_754_when_gate)-[:PROCESS { case: "ok" }]->(loop_754_context)
+(loop_754_when_gate)-[:PROCESS { case: "err" }]->(loop_754_inactive)
+(loop_754_context)-[:FORK { strategy: "behavior-branches" }]->(loop_754_context_branch | loop_754_then_branch | loop_754_operator_branch | loop_754_result_branch | loop_754_taxonomy_branch | loop_754_intervention_recognize | loop_754_intervention_interdict | loop_754_intervention_minimize)
+(loop_754_context_branch | loop_754_then_branch | loop_754_operator_branch | loop_754_result_branch | loop_754_taxonomy_branch | loop_754_intervention_recognize | loop_754_intervention_interdict | loop_754_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_754_verdict)
+(loop_754_inactive)-[:PROCESS]->(loop_754_sink)
+(loop_754_verdict)-[:PROCESS]->(loop_754_sink)
+(loop_754_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_754_then_branch)
+(loop_754_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_754_then_branch)
+(loop_754_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_754_then_branch)

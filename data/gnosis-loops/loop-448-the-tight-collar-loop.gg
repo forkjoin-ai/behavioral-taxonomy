@@ -1,0 +1,33 @@
+// behavioral-loop-448.gg
+// Executable Gnosis projection for The Tight Collar Loop.
+
+// Nodes
+(loop_448_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_448_context_branch: BehaviorEmit { emission: 'context' })
+(loop_448_given_gate: BehaviorAssess { stage: 'given', text: 'Shirt%20collar%20digging%20into%20neck%20fat' })
+(loop_448_inactive: BehaviorTerminal { loopId: 448, loopName: 'The%20Tight%20Collar%20Loop' })
+(loop_448_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_448_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_448_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_448_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Strangled%20Operator', mechanism: 'the%20face%20bulges%20and%20reddens' })
+(loop_448_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20like%20they%20are%20about%20to%20explode' })
+(loop_448_sink: BehaviorSink)
+(loop_448_start: BehaviorStart { loopId: 448, loopName: 'The%20Tight%20Collar%20Loop', given: 'Shirt%20collar%20digging%20into%20neck%20fat', when: 'speaking', then: 'the%20face%20bulges%20and%20reddens%20(The%20Strangled%20Operator)', result: 'the%20individual%20looking%20like%20they%20are%20about%20to%20explode', operatorName: 'The%20Strangled%20Operator', operatorMechanism: 'the%20face%20bulges%20and%20reddens', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_448_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_448_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20bulges%20and%20reddens%20(The%20Strangled%20Operator)' })
+(loop_448_verdict: BehaviorVerdict { loopId: 448, loopName: 'The%20Tight%20Collar%20Loop', then: 'the%20face%20bulges%20and%20reddens%20(The%20Strangled%20Operator)', result: 'the%20individual%20looking%20like%20they%20are%20about%20to%20explode', operatorName: 'The%20Strangled%20Operator', operatorMechanism: 'the%20face%20bulges%20and%20reddens', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_448_when_gate: BehaviorAssess { stage: 'when', text: 'speaking' })
+
+// Topology
+(loop_448_start)-[:PROCESS]->(loop_448_given_gate)
+(loop_448_given_gate)-[:PROCESS { case: "ok" }]->(loop_448_when_gate)
+(loop_448_given_gate)-[:PROCESS { case: "err" }]->(loop_448_inactive)
+(loop_448_when_gate)-[:PROCESS { case: "ok" }]->(loop_448_context)
+(loop_448_when_gate)-[:PROCESS { case: "err" }]->(loop_448_inactive)
+(loop_448_context)-[:FORK { strategy: "behavior-branches" }]->(loop_448_context_branch | loop_448_then_branch | loop_448_operator_branch | loop_448_result_branch | loop_448_taxonomy_branch | loop_448_intervention_recognize | loop_448_intervention_interdict | loop_448_intervention_minimize)
+(loop_448_context_branch | loop_448_then_branch | loop_448_operator_branch | loop_448_result_branch | loop_448_taxonomy_branch | loop_448_intervention_recognize | loop_448_intervention_interdict | loop_448_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_448_verdict)
+(loop_448_inactive)-[:PROCESS]->(loop_448_sink)
+(loop_448_verdict)-[:PROCESS]->(loop_448_sink)
+(loop_448_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_448_then_branch)
+(loop_448_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_448_then_branch)
+(loop_448_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_448_then_branch)

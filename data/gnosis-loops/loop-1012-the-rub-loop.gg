@@ -1,0 +1,33 @@
+// behavioral-loop-1012.gg
+// Executable Gnosis projection for The Rub Loop.
+
+// Nodes
+(loop_1012_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1012_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1012_given_gate: BehaviorAssess { stage: 'given', text: 'High%20stress' })
+(loop_1012_inactive: BehaviorTerminal { loopId: 1012, loopName: 'The%20Rub%20Loop' })
+(loop_1012_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1012_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1012_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1012_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Friction%20Operator', mechanism: 'hands%20repetitively%20rub%20the%20thighs' })
+(loop_1012_result_branch: BehaviorEmit { emission: 'result', text: 'visible%20wear%20on%20pants%20and%20signaling%20%22I%20am%20barely%20holding%20it%20together.%22' })
+(loop_1012_sink: BehaviorSink)
+(loop_1012_start: BehaviorStart { loopId: 1012, loopName: 'The%20Rub%20Loop', given: 'High%20stress', when: 'sitting', then: 'hands%20repetitively%20rub%20the%20thighs%20(The%20Friction%20Operator)', result: 'visible%20wear%20on%20pants%20and%20signaling%20%22I%20am%20barely%20holding%20it%20together.%22', operatorName: 'The%20Friction%20Operator', operatorMechanism: 'hands%20repetitively%20rub%20the%20thighs', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1012_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1012_then_branch: BehaviorEmit { emission: 'then', text: 'hands%20repetitively%20rub%20the%20thighs%20(The%20Friction%20Operator)' })
+(loop_1012_verdict: BehaviorVerdict { loopId: 1012, loopName: 'The%20Rub%20Loop', then: 'hands%20repetitively%20rub%20the%20thighs%20(The%20Friction%20Operator)', result: 'visible%20wear%20on%20pants%20and%20signaling%20%22I%20am%20barely%20holding%20it%20together.%22', operatorName: 'The%20Friction%20Operator', operatorMechanism: 'hands%20repetitively%20rub%20the%20thighs', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1012_when_gate: BehaviorAssess { stage: 'when', text: 'sitting' })
+
+// Topology
+(loop_1012_start)-[:PROCESS]->(loop_1012_given_gate)
+(loop_1012_given_gate)-[:PROCESS { case: "ok" }]->(loop_1012_when_gate)
+(loop_1012_given_gate)-[:PROCESS { case: "err" }]->(loop_1012_inactive)
+(loop_1012_when_gate)-[:PROCESS { case: "ok" }]->(loop_1012_context)
+(loop_1012_when_gate)-[:PROCESS { case: "err" }]->(loop_1012_inactive)
+(loop_1012_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1012_context_branch | loop_1012_then_branch | loop_1012_operator_branch | loop_1012_result_branch | loop_1012_taxonomy_branch | loop_1012_intervention_recognize | loop_1012_intervention_interdict | loop_1012_intervention_minimize)
+(loop_1012_context_branch | loop_1012_then_branch | loop_1012_operator_branch | loop_1012_result_branch | loop_1012_taxonomy_branch | loop_1012_intervention_recognize | loop_1012_intervention_interdict | loop_1012_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1012_verdict)
+(loop_1012_inactive)-[:PROCESS]->(loop_1012_sink)
+(loop_1012_verdict)-[:PROCESS]->(loop_1012_sink)
+(loop_1012_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1012_then_branch)
+(loop_1012_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1012_then_branch)
+(loop_1012_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1012_then_branch)

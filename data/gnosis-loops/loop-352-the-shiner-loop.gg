@@ -1,0 +1,33 @@
+// behavioral-loop-352.gg
+// Executable Gnosis projection for The Shiner Loop.
+
+// Nodes
+(loop_352_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_352_context_branch: BehaviorEmit { emission: 'context' })
+(loop_352_given_gate: BehaviorAssess { stage: 'given', text: 'Black%20eye' })
+(loop_352_inactive: BehaviorTerminal { loopId: 352, loopName: 'The%20Shiner%20Loop' })
+(loop_352_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_352_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_352_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_352_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Story%20Operator', mechanism: 'everyone%20asks%20%22What%20happened%3F%22' })
+(loop_352_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20needing%20a%20**Cool%20Narrative**%20or%20facing%20pity%2Fdomestic%20violence%20suspicion' })
+(loop_352_sink: BehaviorSink)
+(loop_352_start: BehaviorStart { loopId: 352, loopName: 'The%20Shiner%20Loop', given: 'Black%20eye', when: 'at%20work', then: 'everyone%20asks%20%22What%20happened%3F%22%20(The%20Story%20Operator)', result: 'the%20individual%20needing%20a%20**Cool%20Narrative**%20or%20facing%20pity%2Fdomestic%20violence%20suspicion', operatorName: 'The%20Story%20Operator', operatorMechanism: 'everyone%20asks%20%22What%20happened%3F%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_352_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION' })
+(loop_352_then_branch: BehaviorEmit { emission: 'then', text: 'everyone%20asks%20%22What%20happened%3F%22%20(The%20Story%20Operator)' })
+(loop_352_verdict: BehaviorVerdict { loopId: 352, loopName: 'The%20Shiner%20Loop', then: 'everyone%20asks%20%22What%20happened%3F%22%20(The%20Story%20Operator)', result: 'the%20individual%20needing%20a%20**Cool%20Narrative**%20or%20facing%20pity%2Fdomestic%20violence%20suspicion', operatorName: 'The%20Story%20Operator', operatorMechanism: 'everyone%20asks%20%22What%20happened%3F%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION' })
+(loop_352_when_gate: BehaviorAssess { stage: 'when', text: 'at%20work' })
+
+// Topology
+(loop_352_start)-[:PROCESS]->(loop_352_given_gate)
+(loop_352_given_gate)-[:PROCESS { case: "ok" }]->(loop_352_when_gate)
+(loop_352_given_gate)-[:PROCESS { case: "err" }]->(loop_352_inactive)
+(loop_352_when_gate)-[:PROCESS { case: "ok" }]->(loop_352_context)
+(loop_352_when_gate)-[:PROCESS { case: "err" }]->(loop_352_inactive)
+(loop_352_context)-[:FORK { strategy: "behavior-branches" }]->(loop_352_context_branch | loop_352_then_branch | loop_352_operator_branch | loop_352_result_branch | loop_352_taxonomy_branch | loop_352_intervention_recognize | loop_352_intervention_interdict | loop_352_intervention_minimize)
+(loop_352_context_branch | loop_352_then_branch | loop_352_operator_branch | loop_352_result_branch | loop_352_taxonomy_branch | loop_352_intervention_recognize | loop_352_intervention_interdict | loop_352_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_352_verdict)
+(loop_352_inactive)-[:PROCESS]->(loop_352_sink)
+(loop_352_verdict)-[:PROCESS]->(loop_352_sink)
+(loop_352_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_352_then_branch)
+(loop_352_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_352_then_branch)
+(loop_352_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_352_then_branch)

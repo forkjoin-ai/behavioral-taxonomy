@@ -1,0 +1,33 @@
+// behavioral-loop-840.gg
+// Executable Gnosis projection for The Up-Talker Loop.
+
+// Nodes
+(loop_840_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_840_context_branch: BehaviorEmit { emission: 'context' })
+(loop_840_given_gate: BehaviorAssess { stage: 'given', text: 'Ending%20declarative%20sentences%20with%20a%20pitch%20rise' })
+(loop_840_inactive: BehaviorTerminal { loopId: 840, loopName: 'The%20Up-Talker%20Loop' })
+(loop_840_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_840_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_840_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_840_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Uncertainty%20Operator', mechanism: 'it%20sounds%20like%20a%20%22Question%22' })
+(loop_840_result_branch: BehaviorEmit { emission: 'result', text: 'subordinates%20challenging%20the%20instruction%20because%20it%20sounded%20optional' })
+(loop_840_sink: BehaviorSink)
+(loop_840_start: BehaviorStart { loopId: 840, loopName: 'The%20Up-Talker%20Loop', given: 'Ending%20declarative%20sentences%20with%20a%20pitch%20rise', when: 'stating%20a%20fact', then: 'it%20sounds%20like%20a%20%22Question%22%20(The%20Uncertainty%20Operator)', result: 'subordinates%20challenging%20the%20instruction%20because%20it%20sounded%20optional', operatorName: 'The%20Uncertainty%20Operator', operatorMechanism: 'it%20sounds%20like%20a%20%22Question%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_840_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_840_then_branch: BehaviorEmit { emission: 'then', text: 'it%20sounds%20like%20a%20%22Question%22%20(The%20Uncertainty%20Operator)' })
+(loop_840_verdict: BehaviorVerdict { loopId: 840, loopName: 'The%20Up-Talker%20Loop', then: 'it%20sounds%20like%20a%20%22Question%22%20(The%20Uncertainty%20Operator)', result: 'subordinates%20challenging%20the%20instruction%20because%20it%20sounded%20optional', operatorName: 'The%20Uncertainty%20Operator', operatorMechanism: 'it%20sounds%20like%20a%20%22Question%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_840_when_gate: BehaviorAssess { stage: 'when', text: 'stating%20a%20fact' })
+
+// Topology
+(loop_840_start)-[:PROCESS]->(loop_840_given_gate)
+(loop_840_given_gate)-[:PROCESS { case: "ok" }]->(loop_840_when_gate)
+(loop_840_given_gate)-[:PROCESS { case: "err" }]->(loop_840_inactive)
+(loop_840_when_gate)-[:PROCESS { case: "ok" }]->(loop_840_context)
+(loop_840_when_gate)-[:PROCESS { case: "err" }]->(loop_840_inactive)
+(loop_840_context)-[:FORK { strategy: "behavior-branches" }]->(loop_840_context_branch | loop_840_then_branch | loop_840_operator_branch | loop_840_result_branch | loop_840_taxonomy_branch | loop_840_intervention_recognize | loop_840_intervention_interdict | loop_840_intervention_minimize)
+(loop_840_context_branch | loop_840_then_branch | loop_840_operator_branch | loop_840_result_branch | loop_840_taxonomy_branch | loop_840_intervention_recognize | loop_840_intervention_interdict | loop_840_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_840_verdict)
+(loop_840_inactive)-[:PROCESS]->(loop_840_sink)
+(loop_840_verdict)-[:PROCESS]->(loop_840_sink)
+(loop_840_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_840_then_branch)
+(loop_840_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_840_then_branch)
+(loop_840_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_840_then_branch)

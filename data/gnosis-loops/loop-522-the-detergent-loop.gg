@@ -1,0 +1,31 @@
+// behavioral-loop-522.gg
+// Executable Gnosis projection for The Detergent Loop.
+
+// Nodes
+(loop_522_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_522_context_branch: BehaviorEmit { emission: 'context' })
+(loop_522_given_gate: BehaviorAssess { stage: 'given', text: 'Overpowering%20scent%20of%20fabric%20softener%2FGain' })
+(loop_522_inactive: BehaviorTerminal { loopId: 522, loopName: 'The%20Detergent%20Loop' })
+(loop_522_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_522_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_522_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Man-Child%20Operator', mechanism: 'it%20signals%20%22Mom%20does%20my%20laundry%22' })
+(loop_522_result_branch: BehaviorEmit { emission: 'result', text: 'diminished%20sexual%20authority' })
+(loop_522_sink: BehaviorSink)
+(loop_522_start: BehaviorStart { loopId: 522, loopName: 'The%20Detergent%20Loop', given: 'Overpowering%20scent%20of%20fabric%20softener%2FGain', when: 'on%20a%20grown%20man', then: 'it%20signals%20%22Mom%20does%20my%20laundry%22%20(The%20Man-Child%20Operator)', result: 'diminished%20sexual%20authority', operatorName: 'The%20Man-Child%20Operator', operatorMechanism: 'it%20signals%20%22Mom%20does%20my%20laundry%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_522_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_522_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Mom%20does%20my%20laundry%22%20(The%20Man-Child%20Operator)' })
+(loop_522_verdict: BehaviorVerdict { loopId: 522, loopName: 'The%20Detergent%20Loop', then: 'it%20signals%20%22Mom%20does%20my%20laundry%22%20(The%20Man-Child%20Operator)', result: 'diminished%20sexual%20authority', operatorName: 'The%20Man-Child%20Operator', operatorMechanism: 'it%20signals%20%22Mom%20does%20my%20laundry%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_522_when_gate: BehaviorAssess { stage: 'when', text: 'on%20a%20grown%20man' })
+
+// Topology
+(loop_522_start)-[:PROCESS]->(loop_522_given_gate)
+(loop_522_given_gate)-[:PROCESS { case: "ok" }]->(loop_522_when_gate)
+(loop_522_given_gate)-[:PROCESS { case: "err" }]->(loop_522_inactive)
+(loop_522_when_gate)-[:PROCESS { case: "ok" }]->(loop_522_context)
+(loop_522_when_gate)-[:PROCESS { case: "err" }]->(loop_522_inactive)
+(loop_522_context)-[:FORK { strategy: "behavior-branches" }]->(loop_522_context_branch | loop_522_then_branch | loop_522_operator_branch | loop_522_result_branch | loop_522_taxonomy_branch | loop_522_intervention_recognize | loop_522_intervention_leverage)
+(loop_522_context_branch | loop_522_then_branch | loop_522_operator_branch | loop_522_result_branch | loop_522_taxonomy_branch | loop_522_intervention_recognize | loop_522_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_522_verdict)
+(loop_522_inactive)-[:PROCESS]->(loop_522_sink)
+(loop_522_verdict)-[:PROCESS]->(loop_522_sink)
+(loop_522_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_522_then_branch)
+(loop_522_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_522_result_branch)

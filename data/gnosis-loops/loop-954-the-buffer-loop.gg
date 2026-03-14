@@ -1,0 +1,33 @@
+// behavioral-loop-954.gg
+// Executable Gnosis projection for The Buffer Loop.
+
+// Nodes
+(loop_954_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_954_context_branch: BehaviorEmit { emission: 'context' })
+(loop_954_given_gate: BehaviorAssess { stage: 'given', text: 'Addiction%20to%20%22Um%2C%22%20%22Ah%2C%22%20%22Like%2C%22' })
+(loop_954_inactive: BehaviorTerminal { loopId: 954, loopName: 'The%20Buffer%20Loop' })
+(loop_954_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_954_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_954_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_954_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Static%20Operator', mechanism: 'silence%20is%20filled%20with%20noise' })
+(loop_954_result_branch: BehaviorEmit { emission: 'result', text: 'low%20perceived%20intelligence' })
+(loop_954_sink: BehaviorSink)
+(loop_954_start: BehaviorStart { loopId: 954, loopName: 'The%20Buffer%20Loop', given: 'Addiction%20to%20%22Um%2C%22%20%22Ah%2C%22%20%22Like%2C%22', when: 'thinking', then: 'silence%20is%20filled%20with%20noise%20(The%20Static%20Operator)', result: 'low%20perceived%20intelligence', operatorName: 'The%20Static%20Operator', operatorMechanism: 'silence%20is%20filled%20with%20noise', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_954_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_954_then_branch: BehaviorEmit { emission: 'then', text: 'silence%20is%20filled%20with%20noise%20(The%20Static%20Operator)' })
+(loop_954_verdict: BehaviorVerdict { loopId: 954, loopName: 'The%20Buffer%20Loop', then: 'silence%20is%20filled%20with%20noise%20(The%20Static%20Operator)', result: 'low%20perceived%20intelligence', operatorName: 'The%20Static%20Operator', operatorMechanism: 'silence%20is%20filled%20with%20noise', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_954_when_gate: BehaviorAssess { stage: 'when', text: 'thinking' })
+
+// Topology
+(loop_954_start)-[:PROCESS]->(loop_954_given_gate)
+(loop_954_given_gate)-[:PROCESS { case: "ok" }]->(loop_954_when_gate)
+(loop_954_given_gate)-[:PROCESS { case: "err" }]->(loop_954_inactive)
+(loop_954_when_gate)-[:PROCESS { case: "ok" }]->(loop_954_context)
+(loop_954_when_gate)-[:PROCESS { case: "err" }]->(loop_954_inactive)
+(loop_954_context)-[:FORK { strategy: "behavior-branches" }]->(loop_954_context_branch | loop_954_then_branch | loop_954_operator_branch | loop_954_result_branch | loop_954_taxonomy_branch | loop_954_intervention_recognize | loop_954_intervention_interdict | loop_954_intervention_minimize)
+(loop_954_context_branch | loop_954_then_branch | loop_954_operator_branch | loop_954_result_branch | loop_954_taxonomy_branch | loop_954_intervention_recognize | loop_954_intervention_interdict | loop_954_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_954_verdict)
+(loop_954_inactive)-[:PROCESS]->(loop_954_sink)
+(loop_954_verdict)-[:PROCESS]->(loop_954_sink)
+(loop_954_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_954_then_branch)
+(loop_954_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_954_then_branch)
+(loop_954_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_954_then_branch)

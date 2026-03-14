@@ -1,0 +1,33 @@
+// behavioral-loop-312.gg
+// Executable Gnosis projection for The Radio Voice Loop.
+
+// Nodes
+(loop_312_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_312_context_branch: BehaviorEmit { emission: 'context' })
+(loop_312_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20larynx%2Fchest%20resonance' })
+(loop_312_inactive: BehaviorTerminal { loopId: 312, loopName: 'The%20Radio%20Voice%20Loop' })
+(loop_312_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_312_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_312_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_312_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20God%20Operator', mechanism: 'the%20voice%20commands%20%22Authority%22%20and%20%22Trust%22' })
+(loop_312_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20pushed%20toward%20**Media%2FBroadcast%20Careers**' })
+(loop_312_sink: BehaviorSink)
+(loop_312_start: BehaviorStart { loopId: 312, loopName: 'The%20Radio%20Voice%20Loop', given: 'Large%20larynx%2Fchest%20resonance', when: 'speaking%20over%20a%20microphone%20or%20phone', then: 'the%20voice%20commands%20%22Authority%22%20and%20%22Trust%22%20(The%20God%20Operator)', result: 'the%20individual%20being%20pushed%20toward%20**Media%2FBroadcast%20Careers**', operatorName: 'The%20God%20Operator', operatorMechanism: 'the%20voice%20commands%20%22Authority%22%20and%20%22Trust%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_312_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_312_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20commands%20%22Authority%22%20and%20%22Trust%22%20(The%20God%20Operator)' })
+(loop_312_verdict: BehaviorVerdict { loopId: 312, loopName: 'The%20Radio%20Voice%20Loop', then: 'the%20voice%20commands%20%22Authority%22%20and%20%22Trust%22%20(The%20God%20Operator)', result: 'the%20individual%20being%20pushed%20toward%20**Media%2FBroadcast%20Careers**', operatorName: 'The%20God%20Operator', operatorMechanism: 'the%20voice%20commands%20%22Authority%22%20and%20%22Trust%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_312_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20over%20a%20microphone%20or%20phone' })
+
+// Topology
+(loop_312_start)-[:PROCESS]->(loop_312_given_gate)
+(loop_312_given_gate)-[:PROCESS { case: "ok" }]->(loop_312_when_gate)
+(loop_312_given_gate)-[:PROCESS { case: "err" }]->(loop_312_inactive)
+(loop_312_when_gate)-[:PROCESS { case: "ok" }]->(loop_312_context)
+(loop_312_when_gate)-[:PROCESS { case: "err" }]->(loop_312_inactive)
+(loop_312_context)-[:FORK { strategy: "behavior-branches" }]->(loop_312_context_branch | loop_312_then_branch | loop_312_operator_branch | loop_312_result_branch | loop_312_taxonomy_branch | loop_312_intervention_recognize | loop_312_intervention_interdict | loop_312_intervention_minimize)
+(loop_312_context_branch | loop_312_then_branch | loop_312_operator_branch | loop_312_result_branch | loop_312_taxonomy_branch | loop_312_intervention_recognize | loop_312_intervention_interdict | loop_312_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_312_verdict)
+(loop_312_inactive)-[:PROCESS]->(loop_312_sink)
+(loop_312_verdict)-[:PROCESS]->(loop_312_sink)
+(loop_312_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_312_then_branch)
+(loop_312_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_312_then_branch)
+(loop_312_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_312_then_branch)

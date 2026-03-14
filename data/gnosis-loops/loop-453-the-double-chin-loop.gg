@@ -1,0 +1,33 @@
+// behavioral-loop-453.gg
+// Executable Gnosis projection for The Double Chin Loop.
+
+// Nodes
+(loop_453_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_453_context_branch: BehaviorEmit { emission: 'context' })
+(loop_453_given_gate: BehaviorAssess { stage: 'given', text: 'Genetic%20fat%20storage%20under%20the%20jaw' })
+(loop_453_inactive: BehaviorTerminal { loopId: 453, loopName: 'The%20Double%20Chin%20Loop' })
+(loop_453_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20competence%20in%20areas%20that%20compensate' })
+(loop_453_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_453_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_453_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Definition%20Loss%20Operator', mechanism: 'the%20face%20merges%20with%20the%20neck' })
+(loop_453_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20holding%20their%20head%20unnaturally%20high%20to%20maintain%20a%20jawline' })
+(loop_453_sink: BehaviorSink)
+(loop_453_start: BehaviorStart { loopId: 453, loopName: 'The%20Double%20Chin%20Loop', given: 'Genetic%20fat%20storage%20under%20the%20jaw', when: 'looking%20down%20at%20a%20phone%2Fscreen', then: 'the%20face%20merges%20with%20the%20neck%20(The%20Definition%20Loss%20Operator)', result: 'the%20individual%20holding%20their%20head%20unnaturally%20high%20to%20maintain%20a%20jawline', operatorName: 'The%20Definition%20Loss%20Operator', operatorMechanism: 'the%20face%20merges%20with%20the%20neck', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20competence%20in%20areas%20that%20compensate', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_453_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_453_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20merges%20with%20the%20neck%20(The%20Definition%20Loss%20Operator)' })
+(loop_453_verdict: BehaviorVerdict { loopId: 453, loopName: 'The%20Double%20Chin%20Loop', then: 'the%20face%20merges%20with%20the%20neck%20(The%20Definition%20Loss%20Operator)', result: 'the%20individual%20holding%20their%20head%20unnaturally%20high%20to%20maintain%20a%20jawline', operatorName: 'The%20Definition%20Loss%20Operator', operatorMechanism: 'the%20face%20merges%20with%20the%20neck', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_453_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20down%20at%20a%20phone%2Fscreen' })
+
+// Topology
+(loop_453_start)-[:PROCESS]->(loop_453_given_gate)
+(loop_453_given_gate)-[:PROCESS { case: "ok" }]->(loop_453_when_gate)
+(loop_453_given_gate)-[:PROCESS { case: "err" }]->(loop_453_inactive)
+(loop_453_when_gate)-[:PROCESS { case: "ok" }]->(loop_453_context)
+(loop_453_when_gate)-[:PROCESS { case: "err" }]->(loop_453_inactive)
+(loop_453_context)-[:FORK { strategy: "behavior-branches" }]->(loop_453_context_branch | loop_453_then_branch | loop_453_operator_branch | loop_453_result_branch | loop_453_taxonomy_branch | loop_453_intervention_recognize | loop_453_intervention_interdict | loop_453_intervention_minimize)
+(loop_453_context_branch | loop_453_then_branch | loop_453_operator_branch | loop_453_result_branch | loop_453_taxonomy_branch | loop_453_intervention_recognize | loop_453_intervention_interdict | loop_453_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_453_verdict)
+(loop_453_inactive)-[:PROCESS]->(loop_453_sink)
+(loop_453_verdict)-[:PROCESS]->(loop_453_sink)
+(loop_453_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_453_then_branch)
+(loop_453_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_453_then_branch)
+(loop_453_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_453_then_branch)

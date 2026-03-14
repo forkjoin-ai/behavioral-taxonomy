@@ -1,0 +1,33 @@
+// behavioral-loop-947.gg
+// Executable Gnosis projection for The Ladder Loop.
+
+// Nodes
+(loop_947_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_947_context_branch: BehaviorEmit { emission: 'context' })
+(loop_947_given_gate: BehaviorAssess { stage: 'given', text: 'Tear%20in%20pantyhose%2Ftights' })
+(loop_947_inactive: BehaviorTerminal { loopId: 947, loopName: 'The%20Ladder%20Loop' })
+(loop_947_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_947_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_947_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_947_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Crack%20Operator', mechanism: 'the%20run%20travels%20down%20the%20leg' })
+(loop_947_result_branch: BehaviorEmit { emission: 'result', text: 'looking%20%22Disheveled%22%20despite%20an%20expensive%20outfit' })
+(loop_947_sink: BehaviorSink)
+(loop_947_start: BehaviorStart { loopId: 947, loopName: 'The%20Ladder%20Loop', given: 'Tear%20in%20pantyhose%2Ftights', when: 'moving', then: 'the%20run%20travels%20down%20the%20leg%20(The%20Crack%20Operator)', result: 'looking%20%22Disheveled%22%20despite%20an%20expensive%20outfit', operatorName: 'The%20Crack%20Operator', operatorMechanism: 'the%20run%20travels%20down%20the%20leg', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_947_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_947_then_branch: BehaviorEmit { emission: 'then', text: 'the%20run%20travels%20down%20the%20leg%20(The%20Crack%20Operator)' })
+(loop_947_verdict: BehaviorVerdict { loopId: 947, loopName: 'The%20Ladder%20Loop', then: 'the%20run%20travels%20down%20the%20leg%20(The%20Crack%20Operator)', result: 'looking%20%22Disheveled%22%20despite%20an%20expensive%20outfit', operatorName: 'The%20Crack%20Operator', operatorMechanism: 'the%20run%20travels%20down%20the%20leg', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_947_when_gate: BehaviorAssess { stage: 'when', text: 'moving' })
+
+// Topology
+(loop_947_start)-[:PROCESS]->(loop_947_given_gate)
+(loop_947_given_gate)-[:PROCESS { case: "ok" }]->(loop_947_when_gate)
+(loop_947_given_gate)-[:PROCESS { case: "err" }]->(loop_947_inactive)
+(loop_947_when_gate)-[:PROCESS { case: "ok" }]->(loop_947_context)
+(loop_947_when_gate)-[:PROCESS { case: "err" }]->(loop_947_inactive)
+(loop_947_context)-[:FORK { strategy: "behavior-branches" }]->(loop_947_context_branch | loop_947_then_branch | loop_947_operator_branch | loop_947_result_branch | loop_947_taxonomy_branch | loop_947_intervention_recognize | loop_947_intervention_interdict | loop_947_intervention_minimize)
+(loop_947_context_branch | loop_947_then_branch | loop_947_operator_branch | loop_947_result_branch | loop_947_taxonomy_branch | loop_947_intervention_recognize | loop_947_intervention_interdict | loop_947_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_947_verdict)
+(loop_947_inactive)-[:PROCESS]->(loop_947_sink)
+(loop_947_verdict)-[:PROCESS]->(loop_947_sink)
+(loop_947_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_947_then_branch)
+(loop_947_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_947_then_branch)
+(loop_947_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_947_then_branch)

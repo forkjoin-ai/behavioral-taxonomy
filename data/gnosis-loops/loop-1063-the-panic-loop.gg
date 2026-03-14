@@ -1,0 +1,33 @@
+// behavioral-loop-1063.gg
+// Executable Gnosis projection for The Panic Loop.
+
+// Nodes
+(loop_1063_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1063_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1063_given_gate: BehaviorAssess { stage: 'given', text: 'Ambiguous%20threat%20%2B%20one%20person%20running' })
+(loop_1063_inactive: BehaviorTerminal { loopId: 1063, loopName: 'The%20Panic%20Loop' })
+(loop_1063_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1063_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1063_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1063_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20brain%20bypasses%20logic%20and%20commands%20%22Run%22%20(The%20Herd)' })
+(loop_1063_result_branch: BehaviorEmit { emission: 'result', text: 'mass%20hysteria%20over%20a%20popped%20balloon' })
+(loop_1063_sink: BehaviorSink)
+(loop_1063_start: BehaviorStart { loopId: 1063, loopName: 'The%20Panic%20Loop', given: 'Ambiguous%20threat%20%2B%20one%20person%20running', when: 'looking%20at%20the%20runner', then: 'the%20brain%20bypasses%20logic%20and%20commands%20%22Run%22%20(The%20Herd)', result: 'mass%20hysteria%20over%20a%20popped%20balloon', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20brain%20bypasses%20logic%20and%20commands%20%22Run%22%20(The%20Herd)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1063_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1063_then_branch: BehaviorEmit { emission: 'then', text: 'the%20brain%20bypasses%20logic%20and%20commands%20%22Run%22%20(The%20Herd)' })
+(loop_1063_verdict: BehaviorVerdict { loopId: 1063, loopName: 'The%20Panic%20Loop', then: 'the%20brain%20bypasses%20logic%20and%20commands%20%22Run%22%20(The%20Herd)', result: 'mass%20hysteria%20over%20a%20popped%20balloon', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20brain%20bypasses%20logic%20and%20commands%20%22Run%22%20(The%20Herd)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1063_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20at%20the%20runner' })
+
+// Topology
+(loop_1063_start)-[:PROCESS]->(loop_1063_given_gate)
+(loop_1063_given_gate)-[:PROCESS { case: "ok" }]->(loop_1063_when_gate)
+(loop_1063_given_gate)-[:PROCESS { case: "err" }]->(loop_1063_inactive)
+(loop_1063_when_gate)-[:PROCESS { case: "ok" }]->(loop_1063_context)
+(loop_1063_when_gate)-[:PROCESS { case: "err" }]->(loop_1063_inactive)
+(loop_1063_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1063_context_branch | loop_1063_then_branch | loop_1063_operator_branch | loop_1063_result_branch | loop_1063_taxonomy_branch | loop_1063_intervention_recognize | loop_1063_intervention_interdict | loop_1063_intervention_minimize)
+(loop_1063_context_branch | loop_1063_then_branch | loop_1063_operator_branch | loop_1063_result_branch | loop_1063_taxonomy_branch | loop_1063_intervention_recognize | loop_1063_intervention_interdict | loop_1063_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1063_verdict)
+(loop_1063_inactive)-[:PROCESS]->(loop_1063_sink)
+(loop_1063_verdict)-[:PROCESS]->(loop_1063_sink)
+(loop_1063_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1063_then_branch)
+(loop_1063_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1063_then_branch)
+(loop_1063_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1063_then_branch)

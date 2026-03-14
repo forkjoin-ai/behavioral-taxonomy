@@ -1,0 +1,33 @@
+// behavioral-loop-1003.gg
+// Executable Gnosis projection for The Filler Migration Loop.
+
+// Nodes
+(loop_1003_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1003_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1003_given_gate: BehaviorAssess { stage: 'given', text: 'Hyaluronic%20acid%20spreading%20above%20the%20vermilion%20border' })
+(loop_1003_inactive: BehaviorTerminal { loopId: 1003, loopName: 'The%20Filler%20Migration%20Loop' })
+(loop_1003_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1003_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1003_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1003_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Platypus%20Operator', mechanism: 'the%20lip%20looks%20like%20a%20%22Beak%22%20or%20%22Shelf%22' })
+(loop_1003_result_branch: BehaviorEmit { emission: 'result', text: 'ridicule%20and%20assumptions%20of%20body%20dysmorphia' })
+(loop_1003_sink: BehaviorSink)
+(loop_1003_start: BehaviorStart { loopId: 1003, loopName: 'The%20Filler%20Migration%20Loop', given: 'Hyaluronic%20acid%20spreading%20above%20the%20vermilion%20border', when: 'in%20profile', then: 'the%20lip%20looks%20like%20a%20%22Beak%22%20or%20%22Shelf%22%20(The%20Platypus%20Operator)', result: 'ridicule%20and%20assumptions%20of%20body%20dysmorphia', operatorName: 'The%20Platypus%20Operator', operatorMechanism: 'the%20lip%20looks%20like%20a%20%22Beak%22%20or%20%22Shelf%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1003_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1003_then_branch: BehaviorEmit { emission: 'then', text: 'the%20lip%20looks%20like%20a%20%22Beak%22%20or%20%22Shelf%22%20(The%20Platypus%20Operator)' })
+(loop_1003_verdict: BehaviorVerdict { loopId: 1003, loopName: 'The%20Filler%20Migration%20Loop', then: 'the%20lip%20looks%20like%20a%20%22Beak%22%20or%20%22Shelf%22%20(The%20Platypus%20Operator)', result: 'ridicule%20and%20assumptions%20of%20body%20dysmorphia', operatorName: 'The%20Platypus%20Operator', operatorMechanism: 'the%20lip%20looks%20like%20a%20%22Beak%22%20or%20%22Shelf%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1003_when_gate: BehaviorAssess { stage: 'when', text: 'in%20profile' })
+
+// Topology
+(loop_1003_start)-[:PROCESS]->(loop_1003_given_gate)
+(loop_1003_given_gate)-[:PROCESS { case: "ok" }]->(loop_1003_when_gate)
+(loop_1003_given_gate)-[:PROCESS { case: "err" }]->(loop_1003_inactive)
+(loop_1003_when_gate)-[:PROCESS { case: "ok" }]->(loop_1003_context)
+(loop_1003_when_gate)-[:PROCESS { case: "err" }]->(loop_1003_inactive)
+(loop_1003_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1003_context_branch | loop_1003_then_branch | loop_1003_operator_branch | loop_1003_result_branch | loop_1003_taxonomy_branch | loop_1003_intervention_recognize | loop_1003_intervention_interdict | loop_1003_intervention_minimize)
+(loop_1003_context_branch | loop_1003_then_branch | loop_1003_operator_branch | loop_1003_result_branch | loop_1003_taxonomy_branch | loop_1003_intervention_recognize | loop_1003_intervention_interdict | loop_1003_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1003_verdict)
+(loop_1003_inactive)-[:PROCESS]->(loop_1003_sink)
+(loop_1003_verdict)-[:PROCESS]->(loop_1003_sink)
+(loop_1003_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1003_then_branch)
+(loop_1003_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1003_then_branch)
+(loop_1003_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1003_then_branch)

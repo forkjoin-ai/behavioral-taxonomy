@@ -1,0 +1,33 @@
+// behavioral-loop-2202.gg
+// Executable Gnosis projection for The Door Slam Protocol.
+
+// Nodes
+(loop_2202_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_2202_context_branch: BehaviorEmit { emission: 'context' })
+(loop_2202_given_gate: BehaviorAssess { stage: 'given', text: 'High%20tolerance%20for%20emotional%20labor%20(Fe)%20%2B%20rigid%20internal%20moral%20framework' })
+(loop_2202_inactive: BehaviorTerminal { loopId: 2202, loopName: 'The%20Door%20Slam%20Protocol' })
+(loop_2202_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_2202_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2202_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_2202_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_2202_result_branch: BehaviorEmit { emission: 'result', text: 'The%20other%20party%20is%20rendered%20' })
+(loop_2202_sink: BehaviorSink)
+(loop_2202_start: BehaviorStart { loopId: 2202, loopName: 'The%20Door%20Slam%20Protocol', given: 'High%20tolerance%20for%20emotional%20labor%20(Fe)%20%2B%20rigid%20internal%20moral%20framework', when: 'A%20threshold%20of%20disrespect%20is%20crossed%20or%20emotional%20reciprocity%20consistently%20fails', then: 'Immediate%2C%20total%2C%20and%20often%20permanent%20severance%20of%20the%20emotional%20bond', result: 'The%20other%20party%20is%20rendered%20', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2202_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2202_then_branch: BehaviorEmit { emission: 'then', text: 'Immediate%2C%20total%2C%20and%20often%20permanent%20severance%20of%20the%20emotional%20bond' })
+(loop_2202_verdict: BehaviorVerdict { loopId: 2202, loopName: 'The%20Door%20Slam%20Protocol', then: 'Immediate%2C%20total%2C%20and%20often%20permanent%20severance%20of%20the%20emotional%20bond', result: 'The%20other%20party%20is%20rendered%20', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2202_when_gate: BehaviorAssess { stage: 'when', text: 'A%20threshold%20of%20disrespect%20is%20crossed%20or%20emotional%20reciprocity%20consistently%20fails' })
+
+// Topology
+(loop_2202_start)-[:PROCESS]->(loop_2202_given_gate)
+(loop_2202_given_gate)-[:PROCESS { case: "ok" }]->(loop_2202_when_gate)
+(loop_2202_given_gate)-[:PROCESS { case: "err" }]->(loop_2202_inactive)
+(loop_2202_when_gate)-[:PROCESS { case: "ok" }]->(loop_2202_context)
+(loop_2202_when_gate)-[:PROCESS { case: "err" }]->(loop_2202_inactive)
+(loop_2202_context)-[:FORK { strategy: "behavior-branches" }]->(loop_2202_context_branch | loop_2202_then_branch | loop_2202_operator_branch | loop_2202_result_branch | loop_2202_taxonomy_branch | loop_2202_intervention_recognize | loop_2202_intervention_interdict | loop_2202_intervention_minimize)
+(loop_2202_context_branch | loop_2202_then_branch | loop_2202_operator_branch | loop_2202_result_branch | loop_2202_taxonomy_branch | loop_2202_intervention_recognize | loop_2202_intervention_interdict | loop_2202_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_2202_verdict)
+(loop_2202_inactive)-[:PROCESS]->(loop_2202_sink)
+(loop_2202_verdict)-[:PROCESS]->(loop_2202_sink)
+(loop_2202_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_2202_then_branch)
+(loop_2202_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_2202_then_branch)
+(loop_2202_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_2202_then_branch)

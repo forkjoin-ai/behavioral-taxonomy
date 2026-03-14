@@ -1,0 +1,33 @@
+// behavioral-loop-11002.gg
+// Executable Gnosis projection for The Escalation of Commitment Loop.
+
+// Nodes
+(loop_11002_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_11002_context_branch: BehaviorEmit { emission: 'context' })
+(loop_11002_given_gate: BehaviorAssess { stage: 'given', text: 'Subject%20invests%20significant%20resources%20(time%2C%20money%2C%20effort)%20into%20a%20decision%20path' })
+(loop_11002_inactive: BehaviorTerminal { loopId: 11002, loopName: 'The%20Escalation%20of%20Commitment%20Loop' })
+(loop_11002_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: "Pre-commit%20to%20'kill%20criteria'%20before%20investing" })
+(loop_11002_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: "Ask%3A%20'Would%20I%20start%20this%20project%20today%20knowing%20what%20I%20know%20now%3F'" })
+(loop_11002_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20defensiveness%20when%20presented%20with%20negative%20data' })
+(loop_11002_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sunk%20Cost%20Fallacy%20Engine', mechanism: "Loss%20aversion%20(k%20%E2%89%88%202.25%20in%20Prospect%20Theory)%20makes%20the%20pain%20of%20'waste'%20outweigh%20rational%20future-oriented%20analysis." })
+(loop_11002_result_branch: BehaviorEmit { emission: 'result', text: 'Subject%20doubles%20down%20to%20justify%20previous%20expenditures%3B%20compounding%20losses' })
+(loop_11002_sink: BehaviorSink)
+(loop_11002_start: BehaviorStart { loopId: 11002, loopName: 'The%20Escalation%20of%20Commitment%20Loop', given: 'Subject%20invests%20significant%20resources%20(time%2C%20money%2C%20effort)%20into%20a%20decision%20path', when: 'External%20data%20indicates%20the%20decision%20is%20failing%20or%20yields%20negative%20utility', then: 'Accepting%20failure%20requires%20admitting%20waste%20of%20past%20resources%20(psychological%20pain)', result: 'Subject%20doubles%20down%20to%20justify%20previous%20expenditures%3B%20compounding%20losses', operatorName: 'The%20Sunk%20Cost%20Fallacy%20Engine', operatorMechanism: "Loss%20aversion%20(k%20%E2%89%88%202.25%20in%20Prospect%20Theory)%20makes%20the%20pain%20of%20'waste'%20outweigh%20rational%20future-oriented%20analysis.", origin: 'COGNITIVE', modality: 'EXECUTIVE', mutability: 'STUBBORN', valences: 'POSSESSION|ANXIETY', interventionDifficulty: '7', intervention_recognize: 'Notice%20defensiveness%20when%20presented%20with%20negative%20data', intervention_interdict: "Pre-commit%20to%20'kill%20criteria'%20before%20investing", intervention_minimize: "Ask%3A%20'Would%20I%20start%20this%20project%20today%20knowing%20what%20I%20know%20now%3F'" })
+(loop_11002_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'COGNITIVE', modality: 'EXECUTIVE', mutability: 'STUBBORN', valences: 'POSSESSION|ANXIETY' })
+(loop_11002_then_branch: BehaviorEmit { emission: 'then', text: 'Accepting%20failure%20requires%20admitting%20waste%20of%20past%20resources%20(psychological%20pain)' })
+(loop_11002_verdict: BehaviorVerdict { loopId: 11002, loopName: 'The%20Escalation%20of%20Commitment%20Loop', then: 'Accepting%20failure%20requires%20admitting%20waste%20of%20past%20resources%20(psychological%20pain)', result: 'Subject%20doubles%20down%20to%20justify%20previous%20expenditures%3B%20compounding%20losses', operatorName: 'The%20Sunk%20Cost%20Fallacy%20Engine', operatorMechanism: "Loss%20aversion%20(k%20%E2%89%88%202.25%20in%20Prospect%20Theory)%20makes%20the%20pain%20of%20'waste'%20outweigh%20rational%20future-oriented%20analysis.", origin: 'COGNITIVE', modality: 'EXECUTIVE', mutability: 'STUBBORN', valences: 'POSSESSION|ANXIETY' })
+(loop_11002_when_gate: BehaviorAssess { stage: 'when', text: 'External%20data%20indicates%20the%20decision%20is%20failing%20or%20yields%20negative%20utility' })
+
+// Topology
+(loop_11002_start)-[:PROCESS]->(loop_11002_given_gate)
+(loop_11002_given_gate)-[:PROCESS { case: "ok" }]->(loop_11002_when_gate)
+(loop_11002_given_gate)-[:PROCESS { case: "err" }]->(loop_11002_inactive)
+(loop_11002_when_gate)-[:PROCESS { case: "ok" }]->(loop_11002_context)
+(loop_11002_when_gate)-[:PROCESS { case: "err" }]->(loop_11002_inactive)
+(loop_11002_context)-[:FORK { strategy: "behavior-branches" }]->(loop_11002_context_branch | loop_11002_then_branch | loop_11002_operator_branch | loop_11002_result_branch | loop_11002_taxonomy_branch | loop_11002_intervention_recognize | loop_11002_intervention_interdict | loop_11002_intervention_minimize)
+(loop_11002_context_branch | loop_11002_then_branch | loop_11002_operator_branch | loop_11002_result_branch | loop_11002_taxonomy_branch | loop_11002_intervention_recognize | loop_11002_intervention_interdict | loop_11002_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_11002_verdict)
+(loop_11002_inactive)-[:PROCESS]->(loop_11002_sink)
+(loop_11002_verdict)-[:PROCESS]->(loop_11002_sink)
+(loop_11002_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_11002_then_branch)
+(loop_11002_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_11002_then_branch)
+(loop_11002_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_11002_then_branch)

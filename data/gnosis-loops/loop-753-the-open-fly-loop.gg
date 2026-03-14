@@ -1,0 +1,33 @@
+// behavioral-loop-753.gg
+// Executable Gnosis projection for The Open Fly Loop.
+
+// Nodes
+(loop_753_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_753_context_branch: BehaviorEmit { emission: 'context' })
+(loop_753_given_gate: BehaviorAssess { stage: 'given', text: 'Unzipped%20trousers' })
+(loop_753_inactive: BehaviorTerminal { loopId: 753, loopName: 'The%20Open%20Fly%20Loop' })
+(loop_753_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_753_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_753_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_753_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Breeze%20Operator', mechanism: 'it%20signals%20%22Carelessness%22' })
+(loop_753_result_branch: BehaviorEmit { emission: 'result', text: 'the%20audience%20being%20distracted%20and%20debating%20whether%20to%20tell%20them' })
+(loop_753_sink: BehaviorSink)
+(loop_753_start: BehaviorStart { loopId: 753, loopName: 'The%20Open%20Fly%20Loop', given: 'Unzipped%20trousers', when: 'presenting%20or%20standing', then: 'it%20signals%20%22Carelessness%22%20(The%20Breeze%20Operator)', result: 'the%20audience%20being%20distracted%20and%20debating%20whether%20to%20tell%20them', operatorName: 'The%20Breeze%20Operator', operatorMechanism: 'it%20signals%20%22Carelessness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_753_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_753_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Carelessness%22%20(The%20Breeze%20Operator)' })
+(loop_753_verdict: BehaviorVerdict { loopId: 753, loopName: 'The%20Open%20Fly%20Loop', then: 'it%20signals%20%22Carelessness%22%20(The%20Breeze%20Operator)', result: 'the%20audience%20being%20distracted%20and%20debating%20whether%20to%20tell%20them', operatorName: 'The%20Breeze%20Operator', operatorMechanism: 'it%20signals%20%22Carelessness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_753_when_gate: BehaviorAssess { stage: 'when', text: 'presenting%20or%20standing' })
+
+// Topology
+(loop_753_start)-[:PROCESS]->(loop_753_given_gate)
+(loop_753_given_gate)-[:PROCESS { case: "ok" }]->(loop_753_when_gate)
+(loop_753_given_gate)-[:PROCESS { case: "err" }]->(loop_753_inactive)
+(loop_753_when_gate)-[:PROCESS { case: "ok" }]->(loop_753_context)
+(loop_753_when_gate)-[:PROCESS { case: "err" }]->(loop_753_inactive)
+(loop_753_context)-[:FORK { strategy: "behavior-branches" }]->(loop_753_context_branch | loop_753_then_branch | loop_753_operator_branch | loop_753_result_branch | loop_753_taxonomy_branch | loop_753_intervention_recognize | loop_753_intervention_interdict | loop_753_intervention_minimize)
+(loop_753_context_branch | loop_753_then_branch | loop_753_operator_branch | loop_753_result_branch | loop_753_taxonomy_branch | loop_753_intervention_recognize | loop_753_intervention_interdict | loop_753_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_753_verdict)
+(loop_753_inactive)-[:PROCESS]->(loop_753_sink)
+(loop_753_verdict)-[:PROCESS]->(loop_753_sink)
+(loop_753_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_753_then_branch)
+(loop_753_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_753_then_branch)
+(loop_753_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_753_then_branch)

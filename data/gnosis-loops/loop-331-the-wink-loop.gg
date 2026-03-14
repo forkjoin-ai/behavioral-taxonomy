@@ -1,0 +1,33 @@
+// behavioral-loop-331.gg
+// Executable Gnosis projection for The Wink Loop.
+
+// Nodes
+(loop_331_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_331_context_branch: BehaviorEmit { emission: 'context' })
+(loop_331_given_gate: BehaviorAssess { stage: 'given', text: 'Voluntary%20blink' })
+(loop_331_inactive: BehaviorTerminal { loopId: 331, loopName: 'The%20Wink%20Loop' })
+(loop_331_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_331_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_331_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_331_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Complicity%20Operator', mechanism: 'it%20signals%20%22Conspiracy%2C%22%20%22Secret%2C%22%20or%20%22Sexual%20Intent%22' })
+(loop_331_result_branch: BehaviorEmit { emission: 'result', text: 'the%20recipient%20feeling%20either%20%22Special%22%20(In-Group)%20or%20%22Creeped%20Out%22%20(Out-Group)' })
+(loop_331_sink: BehaviorSink)
+(loop_331_start: BehaviorStart { loopId: 331, loopName: 'The%20Wink%20Loop', given: 'Voluntary%20blink', when: 'sharing%20information', then: 'it%20signals%20%22Conspiracy%2C%22%20%22Secret%2C%22%20or%20%22Sexual%20Intent%22%20(The%20Complicity%20Operator)', result: 'the%20recipient%20feeling%20either%20%22Special%22%20(In-Group)%20or%20%22Creeped%20Out%22%20(Out-Group)', operatorName: 'The%20Complicity%20Operator', operatorMechanism: 'it%20signals%20%22Conspiracy%2C%22%20%22Secret%2C%22%20or%20%22Sexual%20Intent%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_331_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_331_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Conspiracy%2C%22%20%22Secret%2C%22%20or%20%22Sexual%20Intent%22%20(The%20Complicity%20Operator)' })
+(loop_331_verdict: BehaviorVerdict { loopId: 331, loopName: 'The%20Wink%20Loop', then: 'it%20signals%20%22Conspiracy%2C%22%20%22Secret%2C%22%20or%20%22Sexual%20Intent%22%20(The%20Complicity%20Operator)', result: 'the%20recipient%20feeling%20either%20%22Special%22%20(In-Group)%20or%20%22Creeped%20Out%22%20(Out-Group)', operatorName: 'The%20Complicity%20Operator', operatorMechanism: 'it%20signals%20%22Conspiracy%2C%22%20%22Secret%2C%22%20or%20%22Sexual%20Intent%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_331_when_gate: BehaviorAssess { stage: 'when', text: 'sharing%20information' })
+
+// Topology
+(loop_331_start)-[:PROCESS]->(loop_331_given_gate)
+(loop_331_given_gate)-[:PROCESS { case: "ok" }]->(loop_331_when_gate)
+(loop_331_given_gate)-[:PROCESS { case: "err" }]->(loop_331_inactive)
+(loop_331_when_gate)-[:PROCESS { case: "ok" }]->(loop_331_context)
+(loop_331_when_gate)-[:PROCESS { case: "err" }]->(loop_331_inactive)
+(loop_331_context)-[:FORK { strategy: "behavior-branches" }]->(loop_331_context_branch | loop_331_then_branch | loop_331_operator_branch | loop_331_result_branch | loop_331_taxonomy_branch | loop_331_intervention_recognize | loop_331_intervention_interdict | loop_331_intervention_minimize)
+(loop_331_context_branch | loop_331_then_branch | loop_331_operator_branch | loop_331_result_branch | loop_331_taxonomy_branch | loop_331_intervention_recognize | loop_331_intervention_interdict | loop_331_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_331_verdict)
+(loop_331_inactive)-[:PROCESS]->(loop_331_sink)
+(loop_331_verdict)-[:PROCESS]->(loop_331_sink)
+(loop_331_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_331_then_branch)
+(loop_331_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_331_then_branch)
+(loop_331_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_331_then_branch)

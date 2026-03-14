@@ -1,0 +1,33 @@
+// behavioral-loop-314.gg
+// Executable Gnosis projection for The Sun Spot Loop.
+
+// Nodes
+(loop_314_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_314_context_branch: BehaviorEmit { emission: 'context' })
+(loop_314_given_gate: BehaviorAssess { stage: 'given', text: 'Solar%20lentigines%20on%20face%2Fhands' })
+(loop_314_inactive: BehaviorTerminal { loopId: 314, loopName: 'The%20Sun%20Spot%20Loop' })
+(loop_314_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_314_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_314_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_314_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vitality%20Discount%20Operator', mechanism: 'the%20spots%20signal%20%22Outdoor%20Labor%22%20or%20%22Age%22' })
+(loop_314_result_branch: BehaviorEmit { emission: 'result', text: 'invisibility%20in%20tech%2Ffashion%20circles' })
+(loop_314_sink: BehaviorSink)
+(loop_314_start: BehaviorStart { loopId: 314, loopName: 'The%20Sun%20Spot%20Loop', given: 'Solar%20lentigines%20on%20face%2Fhands', when: 'in%20a%20youth-obsessed%20industry', then: 'the%20spots%20signal%20%22Outdoor%20Labor%22%20or%20%22Age%22%20(The%20Vitality%20Discount%20Operator)', result: 'invisibility%20in%20tech%2Ffashion%20circles', operatorName: 'The%20Vitality%20Discount%20Operator', operatorMechanism: 'the%20spots%20signal%20%22Outdoor%20Labor%22%20or%20%22Age%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_314_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_314_then_branch: BehaviorEmit { emission: 'then', text: 'the%20spots%20signal%20%22Outdoor%20Labor%22%20or%20%22Age%22%20(The%20Vitality%20Discount%20Operator)' })
+(loop_314_verdict: BehaviorVerdict { loopId: 314, loopName: 'The%20Sun%20Spot%20Loop', then: 'the%20spots%20signal%20%22Outdoor%20Labor%22%20or%20%22Age%22%20(The%20Vitality%20Discount%20Operator)', result: 'invisibility%20in%20tech%2Ffashion%20circles', operatorName: 'The%20Vitality%20Discount%20Operator', operatorMechanism: 'the%20spots%20signal%20%22Outdoor%20Labor%22%20or%20%22Age%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_314_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20youth-obsessed%20industry' })
+
+// Topology
+(loop_314_start)-[:PROCESS]->(loop_314_given_gate)
+(loop_314_given_gate)-[:PROCESS { case: "ok" }]->(loop_314_when_gate)
+(loop_314_given_gate)-[:PROCESS { case: "err" }]->(loop_314_inactive)
+(loop_314_when_gate)-[:PROCESS { case: "ok" }]->(loop_314_context)
+(loop_314_when_gate)-[:PROCESS { case: "err" }]->(loop_314_inactive)
+(loop_314_context)-[:FORK { strategy: "behavior-branches" }]->(loop_314_context_branch | loop_314_then_branch | loop_314_operator_branch | loop_314_result_branch | loop_314_taxonomy_branch | loop_314_intervention_recognize | loop_314_intervention_interdict | loop_314_intervention_minimize)
+(loop_314_context_branch | loop_314_then_branch | loop_314_operator_branch | loop_314_result_branch | loop_314_taxonomy_branch | loop_314_intervention_recognize | loop_314_intervention_interdict | loop_314_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_314_verdict)
+(loop_314_inactive)-[:PROCESS]->(loop_314_sink)
+(loop_314_verdict)-[:PROCESS]->(loop_314_sink)
+(loop_314_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_314_then_branch)
+(loop_314_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_314_then_branch)
+(loop_314_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_314_then_branch)

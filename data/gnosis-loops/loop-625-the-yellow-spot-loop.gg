@@ -1,0 +1,33 @@
+// behavioral-loop-625.gg
+// Executable Gnosis projection for The Yellow Spot Loop.
+
+// Nodes
+(loop_625_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_625_context_branch: BehaviorEmit { emission: 'context' })
+(loop_625_given_gate: BehaviorAssess { stage: 'given', text: 'Yellow%20deposit%20on%20the%20white%20of%20the%20eye' })
+(loop_625_inactive: BehaviorTerminal { loopId: 625, loopName: 'The%20Yellow%20Spot%20Loop' })
+(loop_625_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_625_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_625_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_625_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sun%20Damage%20Operator', mechanism: 'it%20looks%20like%20%22Jaundice%22%20or%20%22Old%20Age%22' })
+(loop_625_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20the%20%22Youthful%22%20clear-eyed%20signal' })
+(loop_625_sink: BehaviorSink)
+(loop_625_start: BehaviorStart { loopId: 625, loopName: 'The%20Yellow%20Spot%20Loop', given: 'Yellow%20deposit%20on%20the%20white%20of%20the%20eye', when: 'looking%20sideways', then: 'it%20looks%20like%20%22Jaundice%22%20or%20%22Old%20Age%22%20(The%20Sun%20Damage%20Operator)', result: 'loss%20of%20the%20%22Youthful%22%20clear-eyed%20signal', operatorName: 'The%20Sun%20Damage%20Operator', operatorMechanism: 'it%20looks%20like%20%22Jaundice%22%20or%20%22Old%20Age%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_625_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_625_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Jaundice%22%20or%20%22Old%20Age%22%20(The%20Sun%20Damage%20Operator)' })
+(loop_625_verdict: BehaviorVerdict { loopId: 625, loopName: 'The%20Yellow%20Spot%20Loop', then: 'it%20looks%20like%20%22Jaundice%22%20or%20%22Old%20Age%22%20(The%20Sun%20Damage%20Operator)', result: 'loss%20of%20the%20%22Youthful%22%20clear-eyed%20signal', operatorName: 'The%20Sun%20Damage%20Operator', operatorMechanism: 'it%20looks%20like%20%22Jaundice%22%20or%20%22Old%20Age%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_625_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20sideways' })
+
+// Topology
+(loop_625_start)-[:PROCESS]->(loop_625_given_gate)
+(loop_625_given_gate)-[:PROCESS { case: "ok" }]->(loop_625_when_gate)
+(loop_625_given_gate)-[:PROCESS { case: "err" }]->(loop_625_inactive)
+(loop_625_when_gate)-[:PROCESS { case: "ok" }]->(loop_625_context)
+(loop_625_when_gate)-[:PROCESS { case: "err" }]->(loop_625_inactive)
+(loop_625_context)-[:FORK { strategy: "behavior-branches" }]->(loop_625_context_branch | loop_625_then_branch | loop_625_operator_branch | loop_625_result_branch | loop_625_taxonomy_branch | loop_625_intervention_recognize | loop_625_intervention_interdict | loop_625_intervention_minimize)
+(loop_625_context_branch | loop_625_then_branch | loop_625_operator_branch | loop_625_result_branch | loop_625_taxonomy_branch | loop_625_intervention_recognize | loop_625_intervention_interdict | loop_625_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_625_verdict)
+(loop_625_inactive)-[:PROCESS]->(loop_625_sink)
+(loop_625_verdict)-[:PROCESS]->(loop_625_sink)
+(loop_625_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_625_then_branch)
+(loop_625_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_625_then_branch)
+(loop_625_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_625_then_branch)

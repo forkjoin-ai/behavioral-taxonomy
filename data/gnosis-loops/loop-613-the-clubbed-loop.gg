@@ -1,0 +1,33 @@
+// behavioral-loop-613.gg
+// Executable Gnosis projection for The Clubbed Loop.
+
+// Nodes
+(loop_613_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_613_context_branch: BehaviorEmit { emission: 'context' })
+(loop_613_given_gate: BehaviorAssess { stage: 'given', text: 'Bulbous%20enlargement%20of%20fingertips%2Fnails' })
+(loop_613_inactive: BehaviorTerminal { loopId: 613, loopName: 'The%20Clubbed%20Loop' })
+(loop_613_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_613_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_613_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_613_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hypoxia%20Operator', mechanism: 'it%20triggers%20a%20visceral%20%22Sickness%22%20alert%20in%20observers' })
+(loop_613_result_branch: BehaviorEmit { emission: 'result', text: 'subconscious%20avoidance%20due%20to%20fear%20of%20chronic%20illness' })
+(loop_613_sink: BehaviorSink)
+(loop_613_start: BehaviorStart { loopId: 613, loopName: 'The%20Clubbed%20Loop', given: 'Bulbous%20enlargement%20of%20fingertips%2Fnails', when: 'showing%20hands', then: 'it%20triggers%20a%20visceral%20%22Sickness%22%20alert%20in%20observers%20(The%20Hypoxia%20Operator)', result: 'subconscious%20avoidance%20due%20to%20fear%20of%20chronic%20illness', operatorName: 'The%20Hypoxia%20Operator', operatorMechanism: 'it%20triggers%20a%20visceral%20%22Sickness%22%20alert%20in%20observers', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_613_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_613_then_branch: BehaviorEmit { emission: 'then', text: 'it%20triggers%20a%20visceral%20%22Sickness%22%20alert%20in%20observers%20(The%20Hypoxia%20Operator)' })
+(loop_613_verdict: BehaviorVerdict { loopId: 613, loopName: 'The%20Clubbed%20Loop', then: 'it%20triggers%20a%20visceral%20%22Sickness%22%20alert%20in%20observers%20(The%20Hypoxia%20Operator)', result: 'subconscious%20avoidance%20due%20to%20fear%20of%20chronic%20illness', operatorName: 'The%20Hypoxia%20Operator', operatorMechanism: 'it%20triggers%20a%20visceral%20%22Sickness%22%20alert%20in%20observers', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_613_when_gate: BehaviorAssess { stage: 'when', text: 'showing%20hands' })
+
+// Topology
+(loop_613_start)-[:PROCESS]->(loop_613_given_gate)
+(loop_613_given_gate)-[:PROCESS { case: "ok" }]->(loop_613_when_gate)
+(loop_613_given_gate)-[:PROCESS { case: "err" }]->(loop_613_inactive)
+(loop_613_when_gate)-[:PROCESS { case: "ok" }]->(loop_613_context)
+(loop_613_when_gate)-[:PROCESS { case: "err" }]->(loop_613_inactive)
+(loop_613_context)-[:FORK { strategy: "behavior-branches" }]->(loop_613_context_branch | loop_613_then_branch | loop_613_operator_branch | loop_613_result_branch | loop_613_taxonomy_branch | loop_613_intervention_recognize | loop_613_intervention_interdict | loop_613_intervention_minimize)
+(loop_613_context_branch | loop_613_then_branch | loop_613_operator_branch | loop_613_result_branch | loop_613_taxonomy_branch | loop_613_intervention_recognize | loop_613_intervention_interdict | loop_613_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_613_verdict)
+(loop_613_inactive)-[:PROCESS]->(loop_613_sink)
+(loop_613_verdict)-[:PROCESS]->(loop_613_sink)
+(loop_613_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_613_then_branch)
+(loop_613_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_613_then_branch)
+(loop_613_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_613_then_branch)

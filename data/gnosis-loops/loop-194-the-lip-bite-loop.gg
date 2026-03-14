@@ -1,0 +1,33 @@
+// behavioral-loop-194.gg
+// Executable Gnosis projection for The Lip Bite Loop.
+
+// Nodes
+(loop_194_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_194_context_branch: BehaviorEmit { emission: 'context' })
+(loop_194_given_gate: BehaviorAssess { stage: 'given', text: 'Anxiety-induced%20oral%20manipulation' })
+(loop_194_inactive: BehaviorTerminal { loopId: 194, loopName: 'The%20Lip%20Bite%20Loop' })
+(loop_194_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_194_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_194_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_194_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sexual%2FDominance%20Operator', mechanism: 'the%20observer%20interprets%20the%20signal%20ambiguously%20as%20%22Flirtation%22%20or%20%22Submission%22' })
+(loop_194_result_branch: BehaviorEmit { emission: 'result', text: 'unwanted%20sexual%20advances%20or%20being%20underestimated%20in%20professional%20settings' })
+(loop_194_sink: BehaviorSink)
+(loop_194_start: BehaviorStart { loopId: 194, loopName: 'The%20Lip%20Bite%20Loop', given: 'Anxiety-induced%20oral%20manipulation', when: 'making%20eye%20contact', then: 'the%20observer%20interprets%20the%20signal%20ambiguously%20as%20%22Flirtation%22%20or%20%22Submission%22%20(The%20Sexual%2FDominance%20Operator)', result: 'unwanted%20sexual%20advances%20or%20being%20underestimated%20in%20professional%20settings', operatorName: 'The%20Sexual%2FDominance%20Operator', operatorMechanism: 'the%20observer%20interprets%20the%20signal%20ambiguously%20as%20%22Flirtation%22%20or%20%22Submission%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_194_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_194_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20interprets%20the%20signal%20ambiguously%20as%20%22Flirtation%22%20or%20%22Submission%22%20(The%20Sexual%2FDominance%20Operator)' })
+(loop_194_verdict: BehaviorVerdict { loopId: 194, loopName: 'The%20Lip%20Bite%20Loop', then: 'the%20observer%20interprets%20the%20signal%20ambiguously%20as%20%22Flirtation%22%20or%20%22Submission%22%20(The%20Sexual%2FDominance%20Operator)', result: 'unwanted%20sexual%20advances%20or%20being%20underestimated%20in%20professional%20settings', operatorName: 'The%20Sexual%2FDominance%20Operator', operatorMechanism: 'the%20observer%20interprets%20the%20signal%20ambiguously%20as%20%22Flirtation%22%20or%20%22Submission%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_194_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_194_start)-[:PROCESS]->(loop_194_given_gate)
+(loop_194_given_gate)-[:PROCESS { case: "ok" }]->(loop_194_when_gate)
+(loop_194_given_gate)-[:PROCESS { case: "err" }]->(loop_194_inactive)
+(loop_194_when_gate)-[:PROCESS { case: "ok" }]->(loop_194_context)
+(loop_194_when_gate)-[:PROCESS { case: "err" }]->(loop_194_inactive)
+(loop_194_context)-[:FORK { strategy: "behavior-branches" }]->(loop_194_context_branch | loop_194_then_branch | loop_194_operator_branch | loop_194_result_branch | loop_194_taxonomy_branch | loop_194_intervention_recognize | loop_194_intervention_interdict | loop_194_intervention_minimize)
+(loop_194_context_branch | loop_194_then_branch | loop_194_operator_branch | loop_194_result_branch | loop_194_taxonomy_branch | loop_194_intervention_recognize | loop_194_intervention_interdict | loop_194_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_194_verdict)
+(loop_194_inactive)-[:PROCESS]->(loop_194_sink)
+(loop_194_verdict)-[:PROCESS]->(loop_194_sink)
+(loop_194_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_194_then_branch)
+(loop_194_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_194_then_branch)
+(loop_194_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_194_then_branch)

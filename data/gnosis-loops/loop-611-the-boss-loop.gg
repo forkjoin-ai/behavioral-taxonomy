@@ -1,0 +1,33 @@
+// behavioral-loop-611.gg
+// Executable Gnosis projection for The Boss Loop.
+
+// Nodes
+(loop_611_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_611_context_branch: BehaviorEmit { emission: 'context' })
+(loop_611_given_gate: BehaviorAssess { stage: 'given', text: 'Protruding%2Fbulging%20forehead' })
+(loop_611_inactive: BehaviorTerminal { loopId: 611, loopName: 'The%20Boss%20Loop' })
+(loop_611_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_611_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_611_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_611_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Megamind%20Operator', mechanism: 'it%20signals%20%22Big%20Brain%22%20or%20%22Alien%22%20features' })
+(loop_611_result_branch: BehaviorEmit { emission: 'result', text: 'unearned%20expectations%20of%20genius-level%20intellect' })
+(loop_611_sink: BehaviorSink)
+(loop_611_start: BehaviorStart { loopId: 611, loopName: 'The%20Boss%20Loop', given: 'Protruding%2Fbulging%20forehead', when: 'caught%20in%20profile', then: 'it%20signals%20%22Big%20Brain%22%20or%20%22Alien%22%20features%20(The%20Megamind%20Operator)', result: 'unearned%20expectations%20of%20genius-level%20intellect', operatorName: 'The%20Megamind%20Operator', operatorMechanism: 'it%20signals%20%22Big%20Brain%22%20or%20%22Alien%22%20features', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_611_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_611_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Big%20Brain%22%20or%20%22Alien%22%20features%20(The%20Megamind%20Operator)' })
+(loop_611_verdict: BehaviorVerdict { loopId: 611, loopName: 'The%20Boss%20Loop', then: 'it%20signals%20%22Big%20Brain%22%20or%20%22Alien%22%20features%20(The%20Megamind%20Operator)', result: 'unearned%20expectations%20of%20genius-level%20intellect', operatorName: 'The%20Megamind%20Operator', operatorMechanism: 'it%20signals%20%22Big%20Brain%22%20or%20%22Alien%22%20features', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_611_when_gate: BehaviorAssess { stage: 'when', text: 'caught%20in%20profile' })
+
+// Topology
+(loop_611_start)-[:PROCESS]->(loop_611_given_gate)
+(loop_611_given_gate)-[:PROCESS { case: "ok" }]->(loop_611_when_gate)
+(loop_611_given_gate)-[:PROCESS { case: "err" }]->(loop_611_inactive)
+(loop_611_when_gate)-[:PROCESS { case: "ok" }]->(loop_611_context)
+(loop_611_when_gate)-[:PROCESS { case: "err" }]->(loop_611_inactive)
+(loop_611_context)-[:FORK { strategy: "behavior-branches" }]->(loop_611_context_branch | loop_611_then_branch | loop_611_operator_branch | loop_611_result_branch | loop_611_taxonomy_branch | loop_611_intervention_recognize | loop_611_intervention_interdict | loop_611_intervention_minimize)
+(loop_611_context_branch | loop_611_then_branch | loop_611_operator_branch | loop_611_result_branch | loop_611_taxonomy_branch | loop_611_intervention_recognize | loop_611_intervention_interdict | loop_611_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_611_verdict)
+(loop_611_inactive)-[:PROCESS]->(loop_611_sink)
+(loop_611_verdict)-[:PROCESS]->(loop_611_sink)
+(loop_611_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_611_then_branch)
+(loop_611_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_611_then_branch)
+(loop_611_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_611_then_branch)

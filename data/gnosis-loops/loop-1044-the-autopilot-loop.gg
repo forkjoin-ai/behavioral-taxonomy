@@ -1,0 +1,33 @@
+// behavioral-loop-1044.gg
+// Executable Gnosis projection for The Autopilot Loop.
+
+// Nodes
+(loop_1044_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1044_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1044_given_gate: BehaviorAssess { stage: 'given', text: 'Over-familiarity%20with%20a%20route' })
+(loop_1044_inactive: BehaviorTerminal { loopId: 1044, loopName: 'The%20Autopilot%20Loop' })
+(loop_1044_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1044_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1044_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1044_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20driver%20accidentally%20drives%20to%20work%20(The%20Script%20Override)' })
+(loop_1044_result_branch: BehaviorEmit { emission: 'result', text: 'arriving%20at%20the%20wrong%20destination%20with%20no%20memory%20of%20the%20drive' })
+(loop_1044_sink: BehaviorSink)
+(loop_1044_start: BehaviorStart { loopId: 1044, loopName: 'The%20Autopilot%20Loop', given: 'Over-familiarity%20with%20a%20route', when: 'driving%20to%20a%20new%20location%20on%20a%20familiar%20road', then: 'the%20driver%20accidentally%20drives%20to%20work%20(The%20Script%20Override)', result: 'arriving%20at%20the%20wrong%20destination%20with%20no%20memory%20of%20the%20drive', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20driver%20accidentally%20drives%20to%20work%20(The%20Script%20Override)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1044_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1044_then_branch: BehaviorEmit { emission: 'then', text: 'the%20driver%20accidentally%20drives%20to%20work%20(The%20Script%20Override)' })
+(loop_1044_verdict: BehaviorVerdict { loopId: 1044, loopName: 'The%20Autopilot%20Loop', then: 'the%20driver%20accidentally%20drives%20to%20work%20(The%20Script%20Override)', result: 'arriving%20at%20the%20wrong%20destination%20with%20no%20memory%20of%20the%20drive', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20driver%20accidentally%20drives%20to%20work%20(The%20Script%20Override)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1044_when_gate: BehaviorAssess { stage: 'when', text: 'driving%20to%20a%20new%20location%20on%20a%20familiar%20road' })
+
+// Topology
+(loop_1044_start)-[:PROCESS]->(loop_1044_given_gate)
+(loop_1044_given_gate)-[:PROCESS { case: "ok" }]->(loop_1044_when_gate)
+(loop_1044_given_gate)-[:PROCESS { case: "err" }]->(loop_1044_inactive)
+(loop_1044_when_gate)-[:PROCESS { case: "ok" }]->(loop_1044_context)
+(loop_1044_when_gate)-[:PROCESS { case: "err" }]->(loop_1044_inactive)
+(loop_1044_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1044_context_branch | loop_1044_then_branch | loop_1044_operator_branch | loop_1044_result_branch | loop_1044_taxonomy_branch | loop_1044_intervention_recognize | loop_1044_intervention_interdict | loop_1044_intervention_minimize)
+(loop_1044_context_branch | loop_1044_then_branch | loop_1044_operator_branch | loop_1044_result_branch | loop_1044_taxonomy_branch | loop_1044_intervention_recognize | loop_1044_intervention_interdict | loop_1044_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1044_verdict)
+(loop_1044_inactive)-[:PROCESS]->(loop_1044_sink)
+(loop_1044_verdict)-[:PROCESS]->(loop_1044_sink)
+(loop_1044_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1044_then_branch)
+(loop_1044_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1044_then_branch)
+(loop_1044_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1044_then_branch)

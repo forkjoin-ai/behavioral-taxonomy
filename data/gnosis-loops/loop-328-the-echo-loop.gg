@@ -1,0 +1,33 @@
+// behavioral-loop-328.gg
+// Executable Gnosis projection for The Echo Loop.
+
+// Nodes
+(loop_328_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_328_context_branch: BehaviorEmit { emission: 'context' })
+(loop_328_given_gate: BehaviorAssess { stage: 'given', text: 'Processing%20delay' })
+(loop_328_inactive: BehaviorTerminal { loopId: 328, loopName: 'The%20Echo%20Loop' })
+(loop_328_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_328_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_328_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_328_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stall%20Operator', mechanism: 'the%20individual%20repeats%20the%20question%20back%20before%20answering' })
+(loop_328_result_branch: BehaviorEmit { emission: 'result', text: 'the%20listener%20perceiving%20%22Uncertainty%22%20or%20%22Lack%20of%20Preparation.%22' })
+(loop_328_sink: BehaviorSink)
+(loop_328_start: BehaviorStart { loopId: 328, loopName: 'The%20Echo%20Loop', given: 'Processing%20delay', when: 'asked%20a%20question', then: 'the%20individual%20repeats%20the%20question%20back%20before%20answering%20(The%20Stall%20Operator)', result: 'the%20listener%20perceiving%20%22Uncertainty%22%20or%20%22Lack%20of%20Preparation.%22', operatorName: 'The%20Stall%20Operator', operatorMechanism: 'the%20individual%20repeats%20the%20question%20back%20before%20answering', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_328_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_328_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20repeats%20the%20question%20back%20before%20answering%20(The%20Stall%20Operator)' })
+(loop_328_verdict: BehaviorVerdict { loopId: 328, loopName: 'The%20Echo%20Loop', then: 'the%20individual%20repeats%20the%20question%20back%20before%20answering%20(The%20Stall%20Operator)', result: 'the%20listener%20perceiving%20%22Uncertainty%22%20or%20%22Lack%20of%20Preparation.%22', operatorName: 'The%20Stall%20Operator', operatorMechanism: 'the%20individual%20repeats%20the%20question%20back%20before%20answering', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_328_when_gate: BehaviorAssess { stage: 'when', text: 'asked%20a%20question' })
+
+// Topology
+(loop_328_start)-[:PROCESS]->(loop_328_given_gate)
+(loop_328_given_gate)-[:PROCESS { case: "ok" }]->(loop_328_when_gate)
+(loop_328_given_gate)-[:PROCESS { case: "err" }]->(loop_328_inactive)
+(loop_328_when_gate)-[:PROCESS { case: "ok" }]->(loop_328_context)
+(loop_328_when_gate)-[:PROCESS { case: "err" }]->(loop_328_inactive)
+(loop_328_context)-[:FORK { strategy: "behavior-branches" }]->(loop_328_context_branch | loop_328_then_branch | loop_328_operator_branch | loop_328_result_branch | loop_328_taxonomy_branch | loop_328_intervention_recognize | loop_328_intervention_interdict | loop_328_intervention_minimize)
+(loop_328_context_branch | loop_328_then_branch | loop_328_operator_branch | loop_328_result_branch | loop_328_taxonomy_branch | loop_328_intervention_recognize | loop_328_intervention_interdict | loop_328_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_328_verdict)
+(loop_328_inactive)-[:PROCESS]->(loop_328_sink)
+(loop_328_verdict)-[:PROCESS]->(loop_328_sink)
+(loop_328_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_328_then_branch)
+(loop_328_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_328_then_branch)
+(loop_328_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_328_then_branch)

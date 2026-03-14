@@ -1,0 +1,33 @@
+// behavioral-loop-981.gg
+// Executable Gnosis projection for The Stomp Loop.
+
+// Nodes
+(loop_981_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_981_context_branch: BehaviorEmit { emission: 'context' })
+(loop_981_given_gate: BehaviorAssess { stage: 'given', text: 'Heavy%20footfall%20without%20rolling%20through%20the%20toe' })
+(loop_981_inactive: BehaviorTerminal { loopId: 981, loopName: 'The%20Stomp%20Loop' })
+(loop_981_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_981_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_981_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_981_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Giant%20Operator', mechanism: 'the%20sound%20is%20%22Thud-Thud%22' })
+(loop_981_result_branch: BehaviorEmit { emission: 'result', text: 'neighbors%20hating%20the%20individual' })
+(loop_981_sink: BehaviorSink)
+(loop_981_start: BehaviorStart { loopId: 981, loopName: 'The%20Stomp%20Loop', given: 'Heavy%20footfall%20without%20rolling%20through%20the%20toe', when: 'walking%20upstairs', then: 'the%20sound%20is%20%22Thud-Thud%22%20(The%20Giant%20Operator)', result: 'neighbors%20hating%20the%20individual', operatorName: 'The%20Giant%20Operator', operatorMechanism: 'the%20sound%20is%20%22Thud-Thud%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_981_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_981_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20is%20%22Thud-Thud%22%20(The%20Giant%20Operator)' })
+(loop_981_verdict: BehaviorVerdict { loopId: 981, loopName: 'The%20Stomp%20Loop', then: 'the%20sound%20is%20%22Thud-Thud%22%20(The%20Giant%20Operator)', result: 'neighbors%20hating%20the%20individual', operatorName: 'The%20Giant%20Operator', operatorMechanism: 'the%20sound%20is%20%22Thud-Thud%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_981_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20upstairs' })
+
+// Topology
+(loop_981_start)-[:PROCESS]->(loop_981_given_gate)
+(loop_981_given_gate)-[:PROCESS { case: "ok" }]->(loop_981_when_gate)
+(loop_981_given_gate)-[:PROCESS { case: "err" }]->(loop_981_inactive)
+(loop_981_when_gate)-[:PROCESS { case: "ok" }]->(loop_981_context)
+(loop_981_when_gate)-[:PROCESS { case: "err" }]->(loop_981_inactive)
+(loop_981_context)-[:FORK { strategy: "behavior-branches" }]->(loop_981_context_branch | loop_981_then_branch | loop_981_operator_branch | loop_981_result_branch | loop_981_taxonomy_branch | loop_981_intervention_recognize | loop_981_intervention_interdict | loop_981_intervention_minimize)
+(loop_981_context_branch | loop_981_then_branch | loop_981_operator_branch | loop_981_result_branch | loop_981_taxonomy_branch | loop_981_intervention_recognize | loop_981_intervention_interdict | loop_981_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_981_verdict)
+(loop_981_inactive)-[:PROCESS]->(loop_981_sink)
+(loop_981_verdict)-[:PROCESS]->(loop_981_sink)
+(loop_981_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_981_then_branch)
+(loop_981_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_981_then_branch)
+(loop_981_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_981_then_branch)

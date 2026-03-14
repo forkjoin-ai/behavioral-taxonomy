@@ -1,0 +1,33 @@
+// behavioral-loop-136.gg
+// Executable Gnosis projection for The Sweat Stain Loop.
+
+// Nodes
+(loop_136_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_136_context_branch: BehaviorEmit { emission: 'context' })
+(loop_136_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20moisture%20on%20clothing' })
+(loop_136_inactive: BehaviorTerminal { loopId: 136, loopName: 'The%20Sweat%20Stain%20Loop' })
+(loop_136_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Modify%20or%20remove%20the%20triggering%20element' })
+(loop_136_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_136_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_136_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%20Operator', mechanism: 'observers%20perceive%20%22Panic%22%20or%20%22Poor%20Hygiene%22' })
+(loop_136_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20wearing%20heavy%20layers%2Fblack%20only%2C%20leading%20to%20**Thermal%20Discomfort**%20and%20further%20sweating' })
+(loop_136_sink: BehaviorSink)
+(loop_136_start: BehaviorStart { loopId: 136, loopName: 'The%20Sweat%20Stain%20Loop', given: 'Visible%20moisture%20on%20clothing', when: 'presenting%20or%20working', then: 'observers%20perceive%20%22Panic%22%20or%20%22Poor%20Hygiene%22%20(The%20Disgust%20Operator)', result: 'the%20individual%20wearing%20heavy%20layers%2Fblack%20only%2C%20leading%20to%20**Thermal%20Discomfort**%20and%20further%20sweating', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'observers%20perceive%20%22Panic%22%20or%20%22Poor%20Hygiene%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Modify%20or%20remove%20the%20triggering%20element', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_136_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_136_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Panic%22%20or%20%22Poor%20Hygiene%22%20(The%20Disgust%20Operator)' })
+(loop_136_verdict: BehaviorVerdict { loopId: 136, loopName: 'The%20Sweat%20Stain%20Loop', then: 'observers%20perceive%20%22Panic%22%20or%20%22Poor%20Hygiene%22%20(The%20Disgust%20Operator)', result: 'the%20individual%20wearing%20heavy%20layers%2Fblack%20only%2C%20leading%20to%20**Thermal%20Discomfort**%20and%20further%20sweating', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'observers%20perceive%20%22Panic%22%20or%20%22Poor%20Hygiene%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_136_when_gate: BehaviorAssess { stage: 'when', text: 'presenting%20or%20working' })
+
+// Topology
+(loop_136_start)-[:PROCESS]->(loop_136_given_gate)
+(loop_136_given_gate)-[:PROCESS { case: "ok" }]->(loop_136_when_gate)
+(loop_136_given_gate)-[:PROCESS { case: "err" }]->(loop_136_inactive)
+(loop_136_when_gate)-[:PROCESS { case: "ok" }]->(loop_136_context)
+(loop_136_when_gate)-[:PROCESS { case: "err" }]->(loop_136_inactive)
+(loop_136_context)-[:FORK { strategy: "behavior-branches" }]->(loop_136_context_branch | loop_136_then_branch | loop_136_operator_branch | loop_136_result_branch | loop_136_taxonomy_branch | loop_136_intervention_recognize | loop_136_intervention_interdict | loop_136_intervention_minimize)
+(loop_136_context_branch | loop_136_then_branch | loop_136_operator_branch | loop_136_result_branch | loop_136_taxonomy_branch | loop_136_intervention_recognize | loop_136_intervention_interdict | loop_136_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_136_verdict)
+(loop_136_inactive)-[:PROCESS]->(loop_136_sink)
+(loop_136_verdict)-[:PROCESS]->(loop_136_sink)
+(loop_136_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_136_then_branch)
+(loop_136_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_136_then_branch)
+(loop_136_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_136_then_branch)

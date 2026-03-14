@@ -1,0 +1,33 @@
+// behavioral-loop-515.gg
+// Executable Gnosis projection for The Resting Disgust Loop.
+
+// Nodes
+(loop_515_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_515_context_branch: BehaviorEmit { emission: 'context' })
+(loop_515_given_gate: BehaviorAssess { stage: 'given', text: 'Asymmetric%20elevation%20of%20the%20upper%20lip%20(Levator%20labii)' })
+(loop_515_inactive: BehaviorTerminal { loopId: 515, loopName: 'The%20Resting%20Disgust%20Loop' })
+(loop_515_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_515_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_515_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_515_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Snob%20Operator', mechanism: 'the%20face%20looks%20like%20it%20%22Smells%20something%20bad%22' })
+(loop_515_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20feeling%20judged%20and%20avoiding%20the%20individual' })
+(loop_515_sink: BehaviorSink)
+(loop_515_start: BehaviorStart { loopId: 515, loopName: 'The%20Resting%20Disgust%20Loop', given: 'Asymmetric%20elevation%20of%20the%20upper%20lip%20(Levator%20labii)', when: 'neutral', then: 'the%20face%20looks%20like%20it%20%22Smells%20something%20bad%22%20(The%20Snob%20Operator)', result: 'peers%20feeling%20judged%20and%20avoiding%20the%20individual', operatorName: 'The%20Snob%20Operator', operatorMechanism: 'the%20face%20looks%20like%20it%20%22Smells%20something%20bad%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_515_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_515_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20like%20it%20%22Smells%20something%20bad%22%20(The%20Snob%20Operator)' })
+(loop_515_verdict: BehaviorVerdict { loopId: 515, loopName: 'The%20Resting%20Disgust%20Loop', then: 'the%20face%20looks%20like%20it%20%22Smells%20something%20bad%22%20(The%20Snob%20Operator)', result: 'peers%20feeling%20judged%20and%20avoiding%20the%20individual', operatorName: 'The%20Snob%20Operator', operatorMechanism: 'the%20face%20looks%20like%20it%20%22Smells%20something%20bad%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_515_when_gate: BehaviorAssess { stage: 'when', text: 'neutral' })
+
+// Topology
+(loop_515_start)-[:PROCESS]->(loop_515_given_gate)
+(loop_515_given_gate)-[:PROCESS { case: "ok" }]->(loop_515_when_gate)
+(loop_515_given_gate)-[:PROCESS { case: "err" }]->(loop_515_inactive)
+(loop_515_when_gate)-[:PROCESS { case: "ok" }]->(loop_515_context)
+(loop_515_when_gate)-[:PROCESS { case: "err" }]->(loop_515_inactive)
+(loop_515_context)-[:FORK { strategy: "behavior-branches" }]->(loop_515_context_branch | loop_515_then_branch | loop_515_operator_branch | loop_515_result_branch | loop_515_taxonomy_branch | loop_515_intervention_recognize | loop_515_intervention_interdict | loop_515_intervention_minimize)
+(loop_515_context_branch | loop_515_then_branch | loop_515_operator_branch | loop_515_result_branch | loop_515_taxonomy_branch | loop_515_intervention_recognize | loop_515_intervention_interdict | loop_515_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_515_verdict)
+(loop_515_inactive)-[:PROCESS]->(loop_515_sink)
+(loop_515_verdict)-[:PROCESS]->(loop_515_sink)
+(loop_515_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_515_then_branch)
+(loop_515_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_515_then_branch)
+(loop_515_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_515_then_branch)

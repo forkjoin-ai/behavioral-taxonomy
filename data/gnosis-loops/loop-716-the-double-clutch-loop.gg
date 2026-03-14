@@ -1,0 +1,33 @@
+// behavioral-loop-716.gg
+// Executable Gnosis projection for The Double Clutch Loop.
+
+// Nodes
+(loop_716_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_716_context_branch: BehaviorEmit { emission: 'context' })
+(loop_716_given_gate: BehaviorAssess { stage: 'given', text: 'Grabbing%20the%20elbow%20with%20the%20left%20hand%20while%20shaking%20with%20the%20right' })
+(loop_716_inactive: BehaviorTerminal { loopId: 716, loopName: 'The%20Double%20Clutch%20Loop' })
+(loop_716_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_716_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_716_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_716_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Handler%20Operator', mechanism: 'it%20signals%20%22Fake%20Intimacy%22%20or%20%22Control%22' })
+(loop_716_result_branch: BehaviorEmit { emission: 'result', text: 'high%20suspicion%20(%22What%20do%20they%20want%20from%20me%3F%22)' })
+(loop_716_sink: BehaviorSink)
+(loop_716_start: BehaviorStart { loopId: 716, loopName: 'The%20Double%20Clutch%20Loop', given: 'Grabbing%20the%20elbow%20with%20the%20left%20hand%20while%20shaking%20with%20the%20right', when: 'meeting%20a%20stranger', then: 'it%20signals%20%22Fake%20Intimacy%22%20or%20%22Control%22%20(The%20Handler%20Operator)', result: 'high%20suspicion%20(%22What%20do%20they%20want%20from%20me%3F%22)', operatorName: 'The%20Handler%20Operator', operatorMechanism: 'it%20signals%20%22Fake%20Intimacy%22%20or%20%22Control%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'DECEPTION', interventionDifficulty: '7', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_716_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'DECEPTION' })
+(loop_716_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Fake%20Intimacy%22%20or%20%22Control%22%20(The%20Handler%20Operator)' })
+(loop_716_verdict: BehaviorVerdict { loopId: 716, loopName: 'The%20Double%20Clutch%20Loop', then: 'it%20signals%20%22Fake%20Intimacy%22%20or%20%22Control%22%20(The%20Handler%20Operator)', result: 'high%20suspicion%20(%22What%20do%20they%20want%20from%20me%3F%22)', operatorName: 'The%20Handler%20Operator', operatorMechanism: 'it%20signals%20%22Fake%20Intimacy%22%20or%20%22Control%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'DECEPTION' })
+(loop_716_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20a%20stranger' })
+
+// Topology
+(loop_716_start)-[:PROCESS]->(loop_716_given_gate)
+(loop_716_given_gate)-[:PROCESS { case: "ok" }]->(loop_716_when_gate)
+(loop_716_given_gate)-[:PROCESS { case: "err" }]->(loop_716_inactive)
+(loop_716_when_gate)-[:PROCESS { case: "ok" }]->(loop_716_context)
+(loop_716_when_gate)-[:PROCESS { case: "err" }]->(loop_716_inactive)
+(loop_716_context)-[:FORK { strategy: "behavior-branches" }]->(loop_716_context_branch | loop_716_then_branch | loop_716_operator_branch | loop_716_result_branch | loop_716_taxonomy_branch | loop_716_intervention_recognize | loop_716_intervention_interdict | loop_716_intervention_minimize)
+(loop_716_context_branch | loop_716_then_branch | loop_716_operator_branch | loop_716_result_branch | loop_716_taxonomy_branch | loop_716_intervention_recognize | loop_716_intervention_interdict | loop_716_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_716_verdict)
+(loop_716_inactive)-[:PROCESS]->(loop_716_sink)
+(loop_716_verdict)-[:PROCESS]->(loop_716_sink)
+(loop_716_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_716_then_branch)
+(loop_716_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_716_then_branch)
+(loop_716_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_716_then_branch)

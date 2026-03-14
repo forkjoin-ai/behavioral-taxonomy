@@ -1,0 +1,33 @@
+// behavioral-loop-475.gg
+// Executable Gnosis projection for The Knuckle Hair Loop.
+
+// Nodes
+(loop_475_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_475_context_branch: BehaviorEmit { emission: 'context' })
+(loop_475_given_gate: BehaviorAssess { stage: 'given', text: 'Dense%20hair%20on%20fingers%2Ftoes' })
+(loop_475_inactive: BehaviorTerminal { loopId: 475, loopName: 'The%20Knuckle%20Hair%20Loop' })
+(loop_475_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_475_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_475_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_475_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Masculinity%2FRoughness%20Operator', mechanism: 'the%20contrast%20creates%20a%20%22Bestial%22%20visual' })
+(loop_475_result_branch: BehaviorEmit { emission: 'result', text: 'being%20perceived%20as%20%22Earthy%22%20rather%20than%20%22Refined.%22' })
+(loop_475_sink: BehaviorSink)
+(loop_475_start: BehaviorStart { loopId: 475, loopName: 'The%20Knuckle%20Hair%20Loop', given: 'Dense%20hair%20on%20fingers%2Ftoes', when: 'wearing%20delicate%20jewelry%20or%20sandals', then: 'the%20contrast%20creates%20a%20%22Bestial%22%20visual%20(The%20Masculinity%2FRoughness%20Operator)', result: 'being%20perceived%20as%20%22Earthy%22%20rather%20than%20%22Refined.%22', operatorName: 'The%20Masculinity%2FRoughness%20Operator', operatorMechanism: 'the%20contrast%20creates%20a%20%22Bestial%22%20visual', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_475_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_475_then_branch: BehaviorEmit { emission: 'then', text: 'the%20contrast%20creates%20a%20%22Bestial%22%20visual%20(The%20Masculinity%2FRoughness%20Operator)' })
+(loop_475_verdict: BehaviorVerdict { loopId: 475, loopName: 'The%20Knuckle%20Hair%20Loop', then: 'the%20contrast%20creates%20a%20%22Bestial%22%20visual%20(The%20Masculinity%2FRoughness%20Operator)', result: 'being%20perceived%20as%20%22Earthy%22%20rather%20than%20%22Refined.%22', operatorName: 'The%20Masculinity%2FRoughness%20Operator', operatorMechanism: 'the%20contrast%20creates%20a%20%22Bestial%22%20visual', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_475_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20delicate%20jewelry%20or%20sandals' })
+
+// Topology
+(loop_475_start)-[:PROCESS]->(loop_475_given_gate)
+(loop_475_given_gate)-[:PROCESS { case: "ok" }]->(loop_475_when_gate)
+(loop_475_given_gate)-[:PROCESS { case: "err" }]->(loop_475_inactive)
+(loop_475_when_gate)-[:PROCESS { case: "ok" }]->(loop_475_context)
+(loop_475_when_gate)-[:PROCESS { case: "err" }]->(loop_475_inactive)
+(loop_475_context)-[:FORK { strategy: "behavior-branches" }]->(loop_475_context_branch | loop_475_then_branch | loop_475_operator_branch | loop_475_result_branch | loop_475_taxonomy_branch | loop_475_intervention_recognize | loop_475_intervention_interdict | loop_475_intervention_minimize)
+(loop_475_context_branch | loop_475_then_branch | loop_475_operator_branch | loop_475_result_branch | loop_475_taxonomy_branch | loop_475_intervention_recognize | loop_475_intervention_interdict | loop_475_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_475_verdict)
+(loop_475_inactive)-[:PROCESS]->(loop_475_sink)
+(loop_475_verdict)-[:PROCESS]->(loop_475_sink)
+(loop_475_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_475_then_branch)
+(loop_475_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_475_then_branch)
+(loop_475_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_475_then_branch)

@@ -1,0 +1,31 @@
+// behavioral-loop-879.gg
+// Executable Gnosis projection for The High Eye Loop.
+
+// Nodes
+(loop_879_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_879_context_branch: BehaviorEmit { emission: 'context' })
+(loop_879_given_gate: BehaviorAssess { stage: 'given', text: 'Vertical%20misalignment%20(one%20eye%20higher)' })
+(loop_879_inactive: BehaviorTerminal { loopId: 879, loopName: 'The%20High%20Eye%20Loop' })
+(loop_879_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_879_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_879_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Doubt%20Operator', mechanism: 'the%20face%20looks%20%22Twisted%22%20or%20%22Skeptical%22' })
+(loop_879_result_branch: BehaviorEmit { emission: 'result', text: "subconscious%20distrust%20of%20the%20individual's%20motives" })
+(loop_879_sink: BehaviorSink)
+(loop_879_start: BehaviorStart { loopId: 879, loopName: 'The%20High%20Eye%20Loop', given: 'Vertical%20misalignment%20(one%20eye%20higher)', when: 'resting', then: 'the%20face%20looks%20%22Twisted%22%20or%20%22Skeptical%22%20(The%20Doubt%20Operator)', result: "subconscious%20distrust%20of%20the%20individual's%20motives", operatorName: 'The%20Doubt%20Operator', operatorMechanism: 'the%20face%20looks%20%22Twisted%22%20or%20%22Skeptical%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_879_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_879_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Twisted%22%20or%20%22Skeptical%22%20(The%20Doubt%20Operator)' })
+(loop_879_verdict: BehaviorVerdict { loopId: 879, loopName: 'The%20High%20Eye%20Loop', then: 'the%20face%20looks%20%22Twisted%22%20or%20%22Skeptical%22%20(The%20Doubt%20Operator)', result: "subconscious%20distrust%20of%20the%20individual's%20motives", operatorName: 'The%20Doubt%20Operator', operatorMechanism: 'the%20face%20looks%20%22Twisted%22%20or%20%22Skeptical%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_879_when_gate: BehaviorAssess { stage: 'when', text: 'resting' })
+
+// Topology
+(loop_879_start)-[:PROCESS]->(loop_879_given_gate)
+(loop_879_given_gate)-[:PROCESS { case: "ok" }]->(loop_879_when_gate)
+(loop_879_given_gate)-[:PROCESS { case: "err" }]->(loop_879_inactive)
+(loop_879_when_gate)-[:PROCESS { case: "ok" }]->(loop_879_context)
+(loop_879_when_gate)-[:PROCESS { case: "err" }]->(loop_879_inactive)
+(loop_879_context)-[:FORK { strategy: "behavior-branches" }]->(loop_879_context_branch | loop_879_then_branch | loop_879_operator_branch | loop_879_result_branch | loop_879_taxonomy_branch | loop_879_intervention_recognize | loop_879_intervention_leverage)
+(loop_879_context_branch | loop_879_then_branch | loop_879_operator_branch | loop_879_result_branch | loop_879_taxonomy_branch | loop_879_intervention_recognize | loop_879_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_879_verdict)
+(loop_879_inactive)-[:PROCESS]->(loop_879_sink)
+(loop_879_verdict)-[:PROCESS]->(loop_879_sink)
+(loop_879_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_879_then_branch)
+(loop_879_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_879_result_branch)

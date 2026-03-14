@@ -1,0 +1,33 @@
+// behavioral-loop-578.gg
+// Executable Gnosis projection for The Sub-Woofer Loop.
+
+// Nodes
+(loop_578_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_578_context_branch: BehaviorEmit { emission: 'context' })
+(loop_578_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20thoracic%20cavity%20and%20thick%20vocal%20folds' })
+(loop_578_inactive: BehaviorTerminal { loopId: 578, loopName: 'The%20Sub-Woofer%20Loop' })
+(loop_578_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_578_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_578_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_578_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20God%20Operator', mechanism: "the%20sound%20vibrates%20the%20listener's%20chest" })
+(loop_578_result_branch: BehaviorEmit { emission: 'result', text: 'automatic%20assumption%20of%20leadership%20and%20truthfulness' })
+(loop_578_sink: BehaviorSink)
+(loop_578_start: BehaviorStart { loopId: 578, loopName: 'The%20Sub-Woofer%20Loop', given: 'Large%20thoracic%20cavity%20and%20thick%20vocal%20folds', when: 'speaking%20at%20normal%20volume', then: "the%20sound%20vibrates%20the%20listener's%20chest%20(The%20God%20Operator)", result: 'automatic%20assumption%20of%20leadership%20and%20truthfulness', operatorName: 'The%20God%20Operator', operatorMechanism: "the%20sound%20vibrates%20the%20listener's%20chest", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_578_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_578_then_branch: BehaviorEmit { emission: 'then', text: "the%20sound%20vibrates%20the%20listener's%20chest%20(The%20God%20Operator)" })
+(loop_578_verdict: BehaviorVerdict { loopId: 578, loopName: 'The%20Sub-Woofer%20Loop', then: "the%20sound%20vibrates%20the%20listener's%20chest%20(The%20God%20Operator)", result: 'automatic%20assumption%20of%20leadership%20and%20truthfulness', operatorName: 'The%20God%20Operator', operatorMechanism: "the%20sound%20vibrates%20the%20listener's%20chest", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_578_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20at%20normal%20volume' })
+
+// Topology
+(loop_578_start)-[:PROCESS]->(loop_578_given_gate)
+(loop_578_given_gate)-[:PROCESS { case: "ok" }]->(loop_578_when_gate)
+(loop_578_given_gate)-[:PROCESS { case: "err" }]->(loop_578_inactive)
+(loop_578_when_gate)-[:PROCESS { case: "ok" }]->(loop_578_context)
+(loop_578_when_gate)-[:PROCESS { case: "err" }]->(loop_578_inactive)
+(loop_578_context)-[:FORK { strategy: "behavior-branches" }]->(loop_578_context_branch | loop_578_then_branch | loop_578_operator_branch | loop_578_result_branch | loop_578_taxonomy_branch | loop_578_intervention_recognize | loop_578_intervention_interdict | loop_578_intervention_minimize)
+(loop_578_context_branch | loop_578_then_branch | loop_578_operator_branch | loop_578_result_branch | loop_578_taxonomy_branch | loop_578_intervention_recognize | loop_578_intervention_interdict | loop_578_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_578_verdict)
+(loop_578_inactive)-[:PROCESS]->(loop_578_sink)
+(loop_578_verdict)-[:PROCESS]->(loop_578_sink)
+(loop_578_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_578_then_branch)
+(loop_578_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_578_then_branch)
+(loop_578_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_578_then_branch)

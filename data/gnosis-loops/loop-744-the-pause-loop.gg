@@ -1,0 +1,33 @@
+// behavioral-loop-744.gg
+// Executable Gnosis projection for The Pause Loop.
+
+// Nodes
+(loop_744_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_744_context_branch: BehaviorEmit { emission: 'context' })
+(loop_744_given_gate: BehaviorAssess { stage: 'given', text: 'Long%20searching%20for%20words%20(Anomic)' })
+(loop_744_inactive: BehaviorTerminal { loopId: 744, loopName: 'The%20Pause%20Loop' })
+(loop_744_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_744_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_744_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_744_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Glitch%20Operator', mechanism: 'the%20silence%20stretches%20too%20long' })
+(loop_744_result_branch: BehaviorEmit { emission: 'result', text: 'others%20jumping%20in%20to%20finish%20the%20sentence%2C%20stealing%20the%20floor' })
+(loop_744_sink: BehaviorSink)
+(loop_744_start: BehaviorStart { loopId: 744, loopName: 'The%20Pause%20Loop', given: 'Long%20searching%20for%20words%20(Anomic)', when: 'in%20the%20middle%20of%20a%20sentence', then: 'the%20silence%20stretches%20too%20long%20(The%20Glitch%20Operator)', result: 'others%20jumping%20in%20to%20finish%20the%20sentence%2C%20stealing%20the%20floor', operatorName: 'The%20Glitch%20Operator', operatorMechanism: 'the%20silence%20stretches%20too%20long', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_744_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_744_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silence%20stretches%20too%20long%20(The%20Glitch%20Operator)' })
+(loop_744_verdict: BehaviorVerdict { loopId: 744, loopName: 'The%20Pause%20Loop', then: 'the%20silence%20stretches%20too%20long%20(The%20Glitch%20Operator)', result: 'others%20jumping%20in%20to%20finish%20the%20sentence%2C%20stealing%20the%20floor', operatorName: 'The%20Glitch%20Operator', operatorMechanism: 'the%20silence%20stretches%20too%20long', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_744_when_gate: BehaviorAssess { stage: 'when', text: 'in%20the%20middle%20of%20a%20sentence' })
+
+// Topology
+(loop_744_start)-[:PROCESS]->(loop_744_given_gate)
+(loop_744_given_gate)-[:PROCESS { case: "ok" }]->(loop_744_when_gate)
+(loop_744_given_gate)-[:PROCESS { case: "err" }]->(loop_744_inactive)
+(loop_744_when_gate)-[:PROCESS { case: "ok" }]->(loop_744_context)
+(loop_744_when_gate)-[:PROCESS { case: "err" }]->(loop_744_inactive)
+(loop_744_context)-[:FORK { strategy: "behavior-branches" }]->(loop_744_context_branch | loop_744_then_branch | loop_744_operator_branch | loop_744_result_branch | loop_744_taxonomy_branch | loop_744_intervention_recognize | loop_744_intervention_interdict | loop_744_intervention_minimize)
+(loop_744_context_branch | loop_744_then_branch | loop_744_operator_branch | loop_744_result_branch | loop_744_taxonomy_branch | loop_744_intervention_recognize | loop_744_intervention_interdict | loop_744_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_744_verdict)
+(loop_744_inactive)-[:PROCESS]->(loop_744_sink)
+(loop_744_verdict)-[:PROCESS]->(loop_744_sink)
+(loop_744_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_744_then_branch)
+(loop_744_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_744_then_branch)
+(loop_744_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_744_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-701.gg
+// Executable Gnosis projection for The Callus Loop.
+
+// Nodes
+(loop_701_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_701_context_branch: BehaviorEmit { emission: 'context' })
+(loop_701_given_gate: BehaviorAssess { stage: 'given', text: 'Thick%2C%20yellowed%20skin%20on%20palms' })
+(loop_701_inactive: BehaviorTerminal { loopId: 701, loopName: 'The%20Callus%20Loop' })
+(loop_701_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_701_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_701_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_701_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Roughneck%20Operator', mechanism: 'it%20signals%20%22Hard%20Labor%22' })
+(loop_701_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20respect%20from%20blue-collar%20peers%2C%20judgment%20from%20elites' })
+(loop_701_sink: BehaviorSink)
+(loop_701_start: BehaviorStart { loopId: 701, loopName: 'The%20Callus%20Loop', given: 'Thick%2C%20yellowed%20skin%20on%20palms', when: 'shaking%20hands', then: 'it%20signals%20%22Hard%20Labor%22%20(The%20Roughneck%20Operator)', result: 'immediate%20respect%20from%20blue-collar%20peers%2C%20judgment%20from%20elites', operatorName: 'The%20Roughneck%20Operator', operatorMechanism: 'it%20signals%20%22Hard%20Labor%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_701_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_701_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Hard%20Labor%22%20(The%20Roughneck%20Operator)' })
+(loop_701_verdict: BehaviorVerdict { loopId: 701, loopName: 'The%20Callus%20Loop', then: 'it%20signals%20%22Hard%20Labor%22%20(The%20Roughneck%20Operator)', result: 'immediate%20respect%20from%20blue-collar%20peers%2C%20judgment%20from%20elites', operatorName: 'The%20Roughneck%20Operator', operatorMechanism: 'it%20signals%20%22Hard%20Labor%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_701_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_701_start)-[:PROCESS]->(loop_701_given_gate)
+(loop_701_given_gate)-[:PROCESS { case: "ok" }]->(loop_701_when_gate)
+(loop_701_given_gate)-[:PROCESS { case: "err" }]->(loop_701_inactive)
+(loop_701_when_gate)-[:PROCESS { case: "ok" }]->(loop_701_context)
+(loop_701_when_gate)-[:PROCESS { case: "err" }]->(loop_701_inactive)
+(loop_701_context)-[:FORK { strategy: "behavior-branches" }]->(loop_701_context_branch | loop_701_then_branch | loop_701_operator_branch | loop_701_result_branch | loop_701_taxonomy_branch | loop_701_intervention_recognize | loop_701_intervention_interdict | loop_701_intervention_minimize)
+(loop_701_context_branch | loop_701_then_branch | loop_701_operator_branch | loop_701_result_branch | loop_701_taxonomy_branch | loop_701_intervention_recognize | loop_701_intervention_interdict | loop_701_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_701_verdict)
+(loop_701_inactive)-[:PROCESS]->(loop_701_sink)
+(loop_701_verdict)-[:PROCESS]->(loop_701_sink)
+(loop_701_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_701_then_branch)
+(loop_701_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_701_then_branch)
+(loop_701_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_701_then_branch)

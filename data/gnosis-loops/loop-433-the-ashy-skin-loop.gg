@@ -1,0 +1,31 @@
+// behavioral-loop-433.gg
+// Executable Gnosis projection for The Ashy Skin Loop.
+
+// Nodes
+(loop_433_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_433_context_branch: BehaviorEmit { emission: 'context' })
+(loop_433_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20dry%2C%20white%20flakes%20on%20elbows%2Fknees' })
+(loop_433_inactive: BehaviorTerminal { loopId: 433, loopName: 'The%20Ashy%20Skin%20Loop' })
+(loop_433_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_433_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_433_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dusty%20Operator', mechanism: 'observers%20assume%20%22Neglect%22%20of%20self-care' })
+(loop_433_result_branch: BehaviorEmit { emission: 'result', text: 'lower%20physical%20attraction%20scores' })
+(loop_433_sink: BehaviorSink)
+(loop_433_start: BehaviorStart { loopId: 433, loopName: 'The%20Ashy%20Skin%20Loop', given: 'Visible%20dry%2C%20white%20flakes%20on%20elbows%2Fknees', when: 'wearing%20short%20sleeves', then: 'observers%20assume%20%22Neglect%22%20of%20self-care%20(The%20Dusty%20Operator)', result: 'lower%20physical%20attraction%20scores', operatorName: 'The%20Dusty%20Operator', operatorMechanism: 'observers%20assume%20%22Neglect%22%20of%20self-care', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_433_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_433_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Neglect%22%20of%20self-care%20(The%20Dusty%20Operator)' })
+(loop_433_verdict: BehaviorVerdict { loopId: 433, loopName: 'The%20Ashy%20Skin%20Loop', then: 'observers%20assume%20%22Neglect%22%20of%20self-care%20(The%20Dusty%20Operator)', result: 'lower%20physical%20attraction%20scores', operatorName: 'The%20Dusty%20Operator', operatorMechanism: 'observers%20assume%20%22Neglect%22%20of%20self-care', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_433_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20short%20sleeves' })
+
+// Topology
+(loop_433_start)-[:PROCESS]->(loop_433_given_gate)
+(loop_433_given_gate)-[:PROCESS { case: "ok" }]->(loop_433_when_gate)
+(loop_433_given_gate)-[:PROCESS { case: "err" }]->(loop_433_inactive)
+(loop_433_when_gate)-[:PROCESS { case: "ok" }]->(loop_433_context)
+(loop_433_when_gate)-[:PROCESS { case: "err" }]->(loop_433_inactive)
+(loop_433_context)-[:FORK { strategy: "behavior-branches" }]->(loop_433_context_branch | loop_433_then_branch | loop_433_operator_branch | loop_433_result_branch | loop_433_taxonomy_branch | loop_433_intervention_recognize | loop_433_intervention_leverage)
+(loop_433_context_branch | loop_433_then_branch | loop_433_operator_branch | loop_433_result_branch | loop_433_taxonomy_branch | loop_433_intervention_recognize | loop_433_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_433_verdict)
+(loop_433_inactive)-[:PROCESS]->(loop_433_sink)
+(loop_433_verdict)-[:PROCESS]->(loop_433_sink)
+(loop_433_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_433_then_branch)
+(loop_433_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_433_result_branch)

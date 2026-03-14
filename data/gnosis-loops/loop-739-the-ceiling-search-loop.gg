@@ -1,0 +1,33 @@
+// behavioral-loop-739.gg
+// Executable Gnosis projection for The Ceiling-Search Loop.
+
+// Nodes
+(loop_739_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_739_context_branch: BehaviorEmit { emission: 'context' })
+(loop_739_given_gate: BehaviorAssess { stage: 'given', text: 'Looking%20up%20to%20the%20left%2Fright%20to%20recall%20information' })
+(loop_739_inactive: BehaviorTerminal { loopId: 739, loopName: 'The%20Ceiling-Search%20Loop' })
+(loop_739_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_739_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_739_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_739_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Exasperation%20Operator', mechanism: 'it%20looks%20like%20%22Rolling%20Eyes%22%20or%20%22Praying%20for%20Help%22' })
+(loop_739_result_branch: BehaviorEmit { emission: 'result', text: 'the%20questioner%20thinking%20the%20individual%20is%20annoyed' })
+(loop_739_sink: BehaviorSink)
+(loop_739_start: BehaviorStart { loopId: 739, loopName: 'The%20Ceiling-Search%20Loop', given: 'Looking%20up%20to%20the%20left%2Fright%20to%20recall%20information', when: 'asked%20a%20question', then: 'it%20looks%20like%20%22Rolling%20Eyes%22%20or%20%22Praying%20for%20Help%22%20(The%20Exasperation%20Operator)', result: 'the%20questioner%20thinking%20the%20individual%20is%20annoyed', operatorName: 'The%20Exasperation%20Operator', operatorMechanism: 'it%20looks%20like%20%22Rolling%20Eyes%22%20or%20%22Praying%20for%20Help%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_739_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_739_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Rolling%20Eyes%22%20or%20%22Praying%20for%20Help%22%20(The%20Exasperation%20Operator)' })
+(loop_739_verdict: BehaviorVerdict { loopId: 739, loopName: 'The%20Ceiling-Search%20Loop', then: 'it%20looks%20like%20%22Rolling%20Eyes%22%20or%20%22Praying%20for%20Help%22%20(The%20Exasperation%20Operator)', result: 'the%20questioner%20thinking%20the%20individual%20is%20annoyed', operatorName: 'The%20Exasperation%20Operator', operatorMechanism: 'it%20looks%20like%20%22Rolling%20Eyes%22%20or%20%22Praying%20for%20Help%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_739_when_gate: BehaviorAssess { stage: 'when', text: 'asked%20a%20question' })
+
+// Topology
+(loop_739_start)-[:PROCESS]->(loop_739_given_gate)
+(loop_739_given_gate)-[:PROCESS { case: "ok" }]->(loop_739_when_gate)
+(loop_739_given_gate)-[:PROCESS { case: "err" }]->(loop_739_inactive)
+(loop_739_when_gate)-[:PROCESS { case: "ok" }]->(loop_739_context)
+(loop_739_when_gate)-[:PROCESS { case: "err" }]->(loop_739_inactive)
+(loop_739_context)-[:FORK { strategy: "behavior-branches" }]->(loop_739_context_branch | loop_739_then_branch | loop_739_operator_branch | loop_739_result_branch | loop_739_taxonomy_branch | loop_739_intervention_recognize | loop_739_intervention_interdict | loop_739_intervention_minimize)
+(loop_739_context_branch | loop_739_then_branch | loop_739_operator_branch | loop_739_result_branch | loop_739_taxonomy_branch | loop_739_intervention_recognize | loop_739_intervention_interdict | loop_739_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_739_verdict)
+(loop_739_inactive)-[:PROCESS]->(loop_739_sink)
+(loop_739_verdict)-[:PROCESS]->(loop_739_sink)
+(loop_739_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_739_then_branch)
+(loop_739_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_739_then_branch)
+(loop_739_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_739_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-92.gg
+// Executable Gnosis projection for The Dimples Loop.
+
+// Nodes
+(loop_92_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_92_context_branch: BehaviorEmit { emission: 'context' })
+(loop_92_given_gate: BehaviorAssess { stage: 'given', text: 'Zygomaticus%20Major%20bifidity%20(Cheek%20dimples)' })
+(loop_92_inactive: BehaviorTerminal { loopId: 92, loopName: 'The%20Dimples%20Loop' })
+(loop_92_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_92_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_92_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_92_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'the%20expression%20is%20perceived%20as%20%22Mischievous%22%20but%20%22Forgivable%22' })
+(loop_92_result_branch: BehaviorEmit { emission: 'result', text: 'the%20ability%20to%20get%20away%20with%20teasing%2Fpranks%2C%20fostering%20a%20**Playful%20Personality**' })
+(loop_92_sink: BehaviorSink)
+(loop_92_start: BehaviorStart { loopId: 92, loopName: 'The%20Dimples%20Loop', given: 'Zygomaticus%20Major%20bifidity%20(Cheek%20dimples)', when: 'smiling', then: 'the%20expression%20is%20perceived%20as%20%22Mischievous%22%20but%20%22Forgivable%22%20(The%20Novelty%20Operator)', result: 'the%20ability%20to%20get%20away%20with%20teasing%2Fpranks%2C%20fostering%20a%20**Playful%20Personality**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20expression%20is%20perceived%20as%20%22Mischievous%22%20but%20%22Forgivable%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_92_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_92_then_branch: BehaviorEmit { emission: 'then', text: 'the%20expression%20is%20perceived%20as%20%22Mischievous%22%20but%20%22Forgivable%22%20(The%20Novelty%20Operator)' })
+(loop_92_verdict: BehaviorVerdict { loopId: 92, loopName: 'The%20Dimples%20Loop', then: 'the%20expression%20is%20perceived%20as%20%22Mischievous%22%20but%20%22Forgivable%22%20(The%20Novelty%20Operator)', result: 'the%20ability%20to%20get%20away%20with%20teasing%2Fpranks%2C%20fostering%20a%20**Playful%20Personality**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20expression%20is%20perceived%20as%20%22Mischievous%22%20but%20%22Forgivable%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_92_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_92_start)-[:PROCESS]->(loop_92_given_gate)
+(loop_92_given_gate)-[:PROCESS { case: "ok" }]->(loop_92_when_gate)
+(loop_92_given_gate)-[:PROCESS { case: "err" }]->(loop_92_inactive)
+(loop_92_when_gate)-[:PROCESS { case: "ok" }]->(loop_92_context)
+(loop_92_when_gate)-[:PROCESS { case: "err" }]->(loop_92_inactive)
+(loop_92_context)-[:FORK { strategy: "behavior-branches" }]->(loop_92_context_branch | loop_92_then_branch | loop_92_operator_branch | loop_92_result_branch | loop_92_taxonomy_branch | loop_92_intervention_recognize | loop_92_intervention_interdict | loop_92_intervention_minimize)
+(loop_92_context_branch | loop_92_then_branch | loop_92_operator_branch | loop_92_result_branch | loop_92_taxonomy_branch | loop_92_intervention_recognize | loop_92_intervention_interdict | loop_92_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_92_verdict)
+(loop_92_inactive)-[:PROCESS]->(loop_92_sink)
+(loop_92_verdict)-[:PROCESS]->(loop_92_sink)
+(loop_92_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_92_then_branch)
+(loop_92_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_92_then_branch)
+(loop_92_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_92_then_branch)

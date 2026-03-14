@@ -1,0 +1,33 @@
+// behavioral-loop-137.gg
+// Executable Gnosis projection for The Trader's Hand Loop.
+
+// Nodes
+(loop_137_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_137_context_branch: BehaviorEmit { emission: 'context' })
+(loop_137_given_gate: BehaviorAssess { stage: 'given', text: 'Ring%20finger%20significantly%20longer%20than%20Index%20finger%20(High%20Prenatal%20Testosterone)' })
+(loop_137_inactive: BehaviorTerminal { loopId: 137, loopName: "The%20Trader's%20Hand%20Loop" })
+(loop_137_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_137_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_137_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_137_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Promotion%20Operator', mechanism: 'the%20brain%20is%20re-wired%20for%20risk-tolerance%20and%20spatial%20tasks' })
+(loop_137_result_branch: BehaviorEmit { emission: 'result', text: 'higher%20success%20in%20**Finance%2FAthletics**%20but%20potential%20for%20**Impulsivity**' })
+(loop_137_sink: BehaviorSink)
+(loop_137_start: BehaviorStart { loopId: 137, loopName: "The%20Trader's%20Hand%20Loop", given: 'Ring%20finger%20significantly%20longer%20than%20Index%20finger%20(High%20Prenatal%20Testosterone)', when: 'in%20competitive%20environments', then: 'the%20brain%20is%20re-wired%20for%20risk-tolerance%20and%20spatial%20tasks%20(The%20Promotion%20Operator)', result: 'higher%20success%20in%20**Finance%2FAthletics**%20but%20potential%20for%20**Impulsivity**', operatorName: 'The%20Promotion%20Operator', operatorMechanism: 'the%20brain%20is%20re-wired%20for%20risk-tolerance%20and%20spatial%20tasks', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_137_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_137_then_branch: BehaviorEmit { emission: 'then', text: 'the%20brain%20is%20re-wired%20for%20risk-tolerance%20and%20spatial%20tasks%20(The%20Promotion%20Operator)' })
+(loop_137_verdict: BehaviorVerdict { loopId: 137, loopName: "The%20Trader's%20Hand%20Loop", then: 'the%20brain%20is%20re-wired%20for%20risk-tolerance%20and%20spatial%20tasks%20(The%20Promotion%20Operator)', result: 'higher%20success%20in%20**Finance%2FAthletics**%20but%20potential%20for%20**Impulsivity**', operatorName: 'The%20Promotion%20Operator', operatorMechanism: 'the%20brain%20is%20re-wired%20for%20risk-tolerance%20and%20spatial%20tasks', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_137_when_gate: BehaviorAssess { stage: 'when', text: 'in%20competitive%20environments' })
+
+// Topology
+(loop_137_start)-[:PROCESS]->(loop_137_given_gate)
+(loop_137_given_gate)-[:PROCESS { case: "ok" }]->(loop_137_when_gate)
+(loop_137_given_gate)-[:PROCESS { case: "err" }]->(loop_137_inactive)
+(loop_137_when_gate)-[:PROCESS { case: "ok" }]->(loop_137_context)
+(loop_137_when_gate)-[:PROCESS { case: "err" }]->(loop_137_inactive)
+(loop_137_context)-[:FORK { strategy: "behavior-branches" }]->(loop_137_context_branch | loop_137_then_branch | loop_137_operator_branch | loop_137_result_branch | loop_137_taxonomy_branch | loop_137_intervention_recognize | loop_137_intervention_interdict | loop_137_intervention_minimize)
+(loop_137_context_branch | loop_137_then_branch | loop_137_operator_branch | loop_137_result_branch | loop_137_taxonomy_branch | loop_137_intervention_recognize | loop_137_intervention_interdict | loop_137_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_137_verdict)
+(loop_137_inactive)-[:PROCESS]->(loop_137_sink)
+(loop_137_verdict)-[:PROCESS]->(loop_137_sink)
+(loop_137_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_137_then_branch)
+(loop_137_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_137_then_branch)
+(loop_137_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_137_then_branch)

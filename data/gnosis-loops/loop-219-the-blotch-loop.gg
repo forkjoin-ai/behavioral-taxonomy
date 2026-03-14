@@ -1,0 +1,35 @@
+// behavioral-loop-219.gg
+// Executable Gnosis projection for The Blotch Loop.
+
+// Nodes
+(loop_219_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_219_context_branch: BehaviorEmit { emission: 'context' })
+(loop_219_given_gate: BehaviorAssess { stage: 'given', text: 'Hives%20appearing%20on%20chest%2Fneck%20during%20stress' })
+(loop_219_inactive: BehaviorTerminal { loopId: 219, loopName: 'The%20Blotch%20Loop' })
+(loop_219_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_219_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_219_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_219_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_219_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Panic%20Operator', mechanism: 'the%20audience%20sees%20the%20red%20map%20spreading' })
+(loop_219_result_branch: BehaviorEmit { emission: 'result', text: "the%20audience%20doubting%20the%20speaker's%20confidence%2C%20creating%20a%20**Feedback%20Loop%20of%20Shame**" })
+(loop_219_sink: BehaviorSink)
+(loop_219_start: BehaviorStart { loopId: 219, loopName: 'The%20Blotch%20Loop', given: 'Hives%20appearing%20on%20chest%2Fneck%20during%20stress', when: 'public%20speaking', then: 'the%20audience%20sees%20the%20red%20map%20spreading%20(The%20Panic%20Operator)', result: "the%20audience%20doubting%20the%20speaker's%20confidence%2C%20creating%20a%20**Feedback%20Loop%20of%20Shame**", operatorName: 'The%20Panic%20Operator', operatorMechanism: 'the%20audience%20sees%20the%20red%20map%20spreading', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting', intervention_leverage: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_219_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_219_then_branch: BehaviorEmit { emission: 'then', text: 'the%20audience%20sees%20the%20red%20map%20spreading%20(The%20Panic%20Operator)' })
+(loop_219_verdict: BehaviorVerdict { loopId: 219, loopName: 'The%20Blotch%20Loop', then: 'the%20audience%20sees%20the%20red%20map%20spreading%20(The%20Panic%20Operator)', result: "the%20audience%20doubting%20the%20speaker's%20confidence%2C%20creating%20a%20**Feedback%20Loop%20of%20Shame**", operatorName: 'The%20Panic%20Operator', operatorMechanism: 'the%20audience%20sees%20the%20red%20map%20spreading', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_219_when_gate: BehaviorAssess { stage: 'when', text: 'public%20speaking' })
+
+// Topology
+(loop_219_start)-[:PROCESS]->(loop_219_given_gate)
+(loop_219_given_gate)-[:PROCESS { case: "ok" }]->(loop_219_when_gate)
+(loop_219_given_gate)-[:PROCESS { case: "err" }]->(loop_219_inactive)
+(loop_219_when_gate)-[:PROCESS { case: "ok" }]->(loop_219_context)
+(loop_219_when_gate)-[:PROCESS { case: "err" }]->(loop_219_inactive)
+(loop_219_context)-[:FORK { strategy: "behavior-branches" }]->(loop_219_context_branch | loop_219_then_branch | loop_219_operator_branch | loop_219_result_branch | loop_219_taxonomy_branch | loop_219_intervention_recognize | loop_219_intervention_interdict | loop_219_intervention_minimize | loop_219_intervention_leverage)
+(loop_219_context_branch | loop_219_then_branch | loop_219_operator_branch | loop_219_result_branch | loop_219_taxonomy_branch | loop_219_intervention_recognize | loop_219_intervention_interdict | loop_219_intervention_minimize | loop_219_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_219_verdict)
+(loop_219_inactive)-[:PROCESS]->(loop_219_sink)
+(loop_219_verdict)-[:PROCESS]->(loop_219_sink)
+(loop_219_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_219_then_branch)
+(loop_219_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_219_then_branch)
+(loop_219_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_219_then_branch)
+(loop_219_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_219_result_branch)

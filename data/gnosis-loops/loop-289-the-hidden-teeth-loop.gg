@@ -1,0 +1,33 @@
+// behavioral-loop-289.gg
+// Executable Gnosis projection for The Hidden Teeth Loop.
+
+// Nodes
+(loop_289_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_289_context_branch: BehaviorEmit { emission: 'context' })
+(loop_289_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20vertical%20lip%20height%20(teeth%20not%20visible%20when%20speaking)' })
+(loop_289_inactive: BehaviorTerminal { loopId: 289, loopName: 'The%20Hidden%20Teeth%20Loop' })
+(loop_289_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_289_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_289_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_289_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Aging%20Operator', mechanism: 'observers%20perceive%20the%20individual%20as%20%22Older%22%20or%20%22Mumbling%22' })
+(loop_289_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20having%20to%20**Smile%20Exaggeratedly**%20to%20show%20they%20have%20teeth%2Fenergy' })
+(loop_289_sink: BehaviorSink)
+(loop_289_start: BehaviorStart { loopId: 289, loopName: 'The%20Hidden%20Teeth%20Loop', given: 'Low%20vertical%20lip%20height%20(teeth%20not%20visible%20when%20speaking)', when: 'talking%20normally', then: 'observers%20perceive%20the%20individual%20as%20%22Older%22%20or%20%22Mumbling%22%20(The%20Aging%20Operator)', result: 'the%20individual%20having%20to%20**Smile%20Exaggeratedly**%20to%20show%20they%20have%20teeth%2Fenergy', operatorName: 'The%20Aging%20Operator', operatorMechanism: 'observers%20perceive%20the%20individual%20as%20%22Older%22%20or%20%22Mumbling%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_289_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_289_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20the%20individual%20as%20%22Older%22%20or%20%22Mumbling%22%20(The%20Aging%20Operator)' })
+(loop_289_verdict: BehaviorVerdict { loopId: 289, loopName: 'The%20Hidden%20Teeth%20Loop', then: 'observers%20perceive%20the%20individual%20as%20%22Older%22%20or%20%22Mumbling%22%20(The%20Aging%20Operator)', result: 'the%20individual%20having%20to%20**Smile%20Exaggeratedly**%20to%20show%20they%20have%20teeth%2Fenergy', operatorName: 'The%20Aging%20Operator', operatorMechanism: 'observers%20perceive%20the%20individual%20as%20%22Older%22%20or%20%22Mumbling%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_289_when_gate: BehaviorAssess { stage: 'when', text: 'talking%20normally' })
+
+// Topology
+(loop_289_start)-[:PROCESS]->(loop_289_given_gate)
+(loop_289_given_gate)-[:PROCESS { case: "ok" }]->(loop_289_when_gate)
+(loop_289_given_gate)-[:PROCESS { case: "err" }]->(loop_289_inactive)
+(loop_289_when_gate)-[:PROCESS { case: "ok" }]->(loop_289_context)
+(loop_289_when_gate)-[:PROCESS { case: "err" }]->(loop_289_inactive)
+(loop_289_context)-[:FORK { strategy: "behavior-branches" }]->(loop_289_context_branch | loop_289_then_branch | loop_289_operator_branch | loop_289_result_branch | loop_289_taxonomy_branch | loop_289_intervention_recognize | loop_289_intervention_interdict | loop_289_intervention_minimize)
+(loop_289_context_branch | loop_289_then_branch | loop_289_operator_branch | loop_289_result_branch | loop_289_taxonomy_branch | loop_289_intervention_recognize | loop_289_intervention_interdict | loop_289_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_289_verdict)
+(loop_289_inactive)-[:PROCESS]->(loop_289_sink)
+(loop_289_verdict)-[:PROCESS]->(loop_289_sink)
+(loop_289_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_289_then_branch)
+(loop_289_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_289_then_branch)
+(loop_289_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_289_then_branch)

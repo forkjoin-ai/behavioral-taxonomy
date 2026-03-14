@@ -1,0 +1,33 @@
+// behavioral-loop-204.gg
+// Executable Gnosis projection for The Resting Sad Face Loop.
+
+// Nodes
+(loop_204_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_204_context_branch: BehaviorEmit { emission: 'context' })
+(loop_204_given_gate: BehaviorAssess { stage: 'given', text: 'Downward-angled%20eyes%20and%20mouth' })
+(loop_204_inactive: BehaviorTerminal { loopId: 204, loopName: 'The%20Resting%20Sad%20Face%20Loop' })
+(loop_204_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_204_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_204_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_204_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nurture%20Operator', mechanism: 'peers%20offer%20unsolicited%20comfort%20or%20pity' })
+(loop_204_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20feeling%20**Misunderstood**%20and%20patronized' })
+(loop_204_sink: BehaviorSink)
+(loop_204_start: BehaviorStart { loopId: 204, loopName: 'The%20Resting%20Sad%20Face%20Loop', given: 'Downward-angled%20eyes%20and%20mouth', when: 'feeling%20neutral%2Fcontent', then: 'peers%20offer%20unsolicited%20comfort%20or%20pity%20(The%20Nurture%20Operator)', result: 'the%20individual%20feeling%20**Misunderstood**%20and%20patronized', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'peers%20offer%20unsolicited%20comfort%20or%20pity', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_204_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_204_then_branch: BehaviorEmit { emission: 'then', text: 'peers%20offer%20unsolicited%20comfort%20or%20pity%20(The%20Nurture%20Operator)' })
+(loop_204_verdict: BehaviorVerdict { loopId: 204, loopName: 'The%20Resting%20Sad%20Face%20Loop', then: 'peers%20offer%20unsolicited%20comfort%20or%20pity%20(The%20Nurture%20Operator)', result: 'the%20individual%20feeling%20**Misunderstood**%20and%20patronized', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'peers%20offer%20unsolicited%20comfort%20or%20pity', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_204_when_gate: BehaviorAssess { stage: 'when', text: 'feeling%20neutral%2Fcontent' })
+
+// Topology
+(loop_204_start)-[:PROCESS]->(loop_204_given_gate)
+(loop_204_given_gate)-[:PROCESS { case: "ok" }]->(loop_204_when_gate)
+(loop_204_given_gate)-[:PROCESS { case: "err" }]->(loop_204_inactive)
+(loop_204_when_gate)-[:PROCESS { case: "ok" }]->(loop_204_context)
+(loop_204_when_gate)-[:PROCESS { case: "err" }]->(loop_204_inactive)
+(loop_204_context)-[:FORK { strategy: "behavior-branches" }]->(loop_204_context_branch | loop_204_then_branch | loop_204_operator_branch | loop_204_result_branch | loop_204_taxonomy_branch | loop_204_intervention_recognize | loop_204_intervention_interdict | loop_204_intervention_minimize)
+(loop_204_context_branch | loop_204_then_branch | loop_204_operator_branch | loop_204_result_branch | loop_204_taxonomy_branch | loop_204_intervention_recognize | loop_204_intervention_interdict | loop_204_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_204_verdict)
+(loop_204_inactive)-[:PROCESS]->(loop_204_sink)
+(loop_204_verdict)-[:PROCESS]->(loop_204_sink)
+(loop_204_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_204_then_branch)
+(loop_204_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_204_then_branch)
+(loop_204_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_204_then_branch)

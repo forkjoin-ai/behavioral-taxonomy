@@ -1,0 +1,33 @@
+// behavioral-loop-377.gg
+// Executable Gnosis projection for The Too Much Cologne Loop.
+
+// Nodes
+(loop_377_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_377_context_branch: BehaviorEmit { emission: 'context' })
+(loop_377_given_gate: BehaviorAssess { stage: 'given', text: 'Olfactory%20radius%20%3E%205%20feet' })
+(loop_377_inactive: BehaviorTerminal { loopId: 377, loopName: 'The%20Too%20Much%20Cologne%20Loop' })
+(loop_377_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_377_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_377_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_377_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Invasion%20Operator', mechanism: 'the%20scent%20arrives%20before%20the%20person' })
+(loop_377_result_branch: BehaviorEmit { emission: 'result', text: 'headaches%20for%20others%20and%20immediate%20dislike%20of%20the%20%22Desperate%22%20persona' })
+(loop_377_sink: BehaviorSink)
+(loop_377_start: BehaviorStart { loopId: 377, loopName: 'The%20Too%20Much%20Cologne%20Loop', given: 'Olfactory%20radius%20%3E%205%20feet', when: 'entering%20a%20room', then: 'the%20scent%20arrives%20before%20the%20person%20(The%20Invasion%20Operator)', result: 'headaches%20for%20others%20and%20immediate%20dislike%20of%20the%20%22Desperate%22%20persona', operatorName: 'The%20Invasion%20Operator', operatorMechanism: 'the%20scent%20arrives%20before%20the%20person', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_377_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_377_then_branch: BehaviorEmit { emission: 'then', text: 'the%20scent%20arrives%20before%20the%20person%20(The%20Invasion%20Operator)' })
+(loop_377_verdict: BehaviorVerdict { loopId: 377, loopName: 'The%20Too%20Much%20Cologne%20Loop', then: 'the%20scent%20arrives%20before%20the%20person%20(The%20Invasion%20Operator)', result: 'headaches%20for%20others%20and%20immediate%20dislike%20of%20the%20%22Desperate%22%20persona', operatorName: 'The%20Invasion%20Operator', operatorMechanism: 'the%20scent%20arrives%20before%20the%20person', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_377_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20room' })
+
+// Topology
+(loop_377_start)-[:PROCESS]->(loop_377_given_gate)
+(loop_377_given_gate)-[:PROCESS { case: "ok" }]->(loop_377_when_gate)
+(loop_377_given_gate)-[:PROCESS { case: "err" }]->(loop_377_inactive)
+(loop_377_when_gate)-[:PROCESS { case: "ok" }]->(loop_377_context)
+(loop_377_when_gate)-[:PROCESS { case: "err" }]->(loop_377_inactive)
+(loop_377_context)-[:FORK { strategy: "behavior-branches" }]->(loop_377_context_branch | loop_377_then_branch | loop_377_operator_branch | loop_377_result_branch | loop_377_taxonomy_branch | loop_377_intervention_recognize | loop_377_intervention_interdict | loop_377_intervention_minimize)
+(loop_377_context_branch | loop_377_then_branch | loop_377_operator_branch | loop_377_result_branch | loop_377_taxonomy_branch | loop_377_intervention_recognize | loop_377_intervention_interdict | loop_377_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_377_verdict)
+(loop_377_inactive)-[:PROCESS]->(loop_377_sink)
+(loop_377_verdict)-[:PROCESS]->(loop_377_sink)
+(loop_377_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_377_then_branch)
+(loop_377_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_377_then_branch)
+(loop_377_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_377_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-479.gg
+// Executable Gnosis projection for The Veiny Hand Loop.
+
+// Nodes
+(loop_479_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_479_context_branch: BehaviorEmit { emission: 'context' })
+(loop_479_given_gate: BehaviorAssess { stage: 'given', text: 'Prominent%20dorsal%20veins%20(low%20body%20fat)' })
+(loop_479_inactive: BehaviorTerminal { loopId: 479, loopName: 'The%20Veiny%20Hand%20Loop' })
+(loop_479_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_479_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_479_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_479_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Strength%20Operator', mechanism: 'it%20looks%20%22Strong%22%20and%20%22Vital%22' })
+(loop_479_result_branch: BehaviorEmit { emission: 'result', text: 'assumption%20of%20fitness%20and%20competence' })
+(loop_479_sink: BehaviorSink)
+(loop_479_start: BehaviorStart { loopId: 479, loopName: 'The%20Veiny%20Hand%20Loop', given: 'Prominent%20dorsal%20veins%20(low%20body%20fat)', when: 'gripping%20something', then: 'it%20looks%20%22Strong%22%20and%20%22Vital%22%20(The%20Strength%20Operator)', result: 'assumption%20of%20fitness%20and%20competence', operatorName: 'The%20Strength%20Operator', operatorMechanism: 'it%20looks%20%22Strong%22%20and%20%22Vital%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_479_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_479_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20%22Strong%22%20and%20%22Vital%22%20(The%20Strength%20Operator)' })
+(loop_479_verdict: BehaviorVerdict { loopId: 479, loopName: 'The%20Veiny%20Hand%20Loop', then: 'it%20looks%20%22Strong%22%20and%20%22Vital%22%20(The%20Strength%20Operator)', result: 'assumption%20of%20fitness%20and%20competence', operatorName: 'The%20Strength%20Operator', operatorMechanism: 'it%20looks%20%22Strong%22%20and%20%22Vital%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_479_when_gate: BehaviorAssess { stage: 'when', text: 'gripping%20something' })
+
+// Topology
+(loop_479_start)-[:PROCESS]->(loop_479_given_gate)
+(loop_479_given_gate)-[:PROCESS { case: "ok" }]->(loop_479_when_gate)
+(loop_479_given_gate)-[:PROCESS { case: "err" }]->(loop_479_inactive)
+(loop_479_when_gate)-[:PROCESS { case: "ok" }]->(loop_479_context)
+(loop_479_when_gate)-[:PROCESS { case: "err" }]->(loop_479_inactive)
+(loop_479_context)-[:FORK { strategy: "behavior-branches" }]->(loop_479_context_branch | loop_479_then_branch | loop_479_operator_branch | loop_479_result_branch | loop_479_taxonomy_branch | loop_479_intervention_recognize | loop_479_intervention_interdict | loop_479_intervention_minimize)
+(loop_479_context_branch | loop_479_then_branch | loop_479_operator_branch | loop_479_result_branch | loop_479_taxonomy_branch | loop_479_intervention_recognize | loop_479_intervention_interdict | loop_479_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_479_verdict)
+(loop_479_inactive)-[:PROCESS]->(loop_479_sink)
+(loop_479_verdict)-[:PROCESS]->(loop_479_sink)
+(loop_479_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_479_then_branch)
+(loop_479_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_479_then_branch)
+(loop_479_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_479_then_branch)

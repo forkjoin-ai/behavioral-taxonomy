@@ -1,0 +1,33 @@
+// behavioral-loop-5001.gg
+// Executable Gnosis projection for The Promotion Paradox.
+
+// Nodes
+(loop_5001_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_5001_context_branch: BehaviorEmit { emission: 'context' })
+(loop_5001_given_gate: BehaviorAssess { stage: 'given', text: 'Promotions%20are%20based%20on%20performance%20in%20the%20*current*%20role%2C%20not%20aptitude%20for%20the%20*next*%20role.' })
+(loop_5001_inactive: BehaviorTerminal { loopId: 5001, loopName: 'The%20Promotion%20Paradox' })
+(loop_5001_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_5001_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_5001_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_5001_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_5001_result_branch: BehaviorEmit { emission: 'result', text: 'Over%20time%2C%20every%20position%20in%20the%20hierarchy%20tends%20to%20be%20occupied%20by%20an%20employee%20who%20is%20incompetent%20to%20carry%20out%20its%20duties.' })
+(loop_5001_sink: BehaviorSink)
+(loop_5001_start: BehaviorStart { loopId: 5001, loopName: 'The%20Promotion%20Paradox', given: 'Promotions%20are%20based%20on%20performance%20in%20the%20*current*%20role%2C%20not%20aptitude%20for%20the%20*next*%20role.', when: 'Unknown%20trigger', then: 'Unknown%20response', result: 'Over%20time%2C%20every%20position%20in%20the%20hierarchy%20tends%20to%20be%20occupied%20by%20an%20employee%20who%20is%20incompetent%20to%20carry%20out%20its%20duties.', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_5001_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_5001_then_branch: BehaviorEmit { emission: 'then', text: 'Unknown%20response' })
+(loop_5001_verdict: BehaviorVerdict { loopId: 5001, loopName: 'The%20Promotion%20Paradox', then: 'Unknown%20response', result: 'Over%20time%2C%20every%20position%20in%20the%20hierarchy%20tends%20to%20be%20occupied%20by%20an%20employee%20who%20is%20incompetent%20to%20carry%20out%20its%20duties.', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_5001_when_gate: BehaviorAssess { stage: 'when', text: 'Unknown%20trigger' })
+
+// Topology
+(loop_5001_start)-[:PROCESS]->(loop_5001_given_gate)
+(loop_5001_given_gate)-[:PROCESS { case: "ok" }]->(loop_5001_when_gate)
+(loop_5001_given_gate)-[:PROCESS { case: "err" }]->(loop_5001_inactive)
+(loop_5001_when_gate)-[:PROCESS { case: "ok" }]->(loop_5001_context)
+(loop_5001_when_gate)-[:PROCESS { case: "err" }]->(loop_5001_inactive)
+(loop_5001_context)-[:FORK { strategy: "behavior-branches" }]->(loop_5001_context_branch | loop_5001_then_branch | loop_5001_operator_branch | loop_5001_result_branch | loop_5001_taxonomy_branch | loop_5001_intervention_recognize | loop_5001_intervention_interdict | loop_5001_intervention_minimize)
+(loop_5001_context_branch | loop_5001_then_branch | loop_5001_operator_branch | loop_5001_result_branch | loop_5001_taxonomy_branch | loop_5001_intervention_recognize | loop_5001_intervention_interdict | loop_5001_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_5001_verdict)
+(loop_5001_inactive)-[:PROCESS]->(loop_5001_sink)
+(loop_5001_verdict)-[:PROCESS]->(loop_5001_sink)
+(loop_5001_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_5001_then_branch)
+(loop_5001_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_5001_then_branch)
+(loop_5001_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_5001_then_branch)

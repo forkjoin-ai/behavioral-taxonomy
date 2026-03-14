@@ -1,0 +1,33 @@
+// behavioral-loop-634.gg
+// Executable Gnosis projection for The Map Tongue Loop.
+
+// Nodes
+(loop_634_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_634_context_branch: BehaviorEmit { emission: 'context' })
+(loop_634_given_gate: BehaviorAssess { stage: 'given', text: 'Patches%20of%20red%2Fwhite%20on%20tongue%20surface' })
+(loop_634_inactive: BehaviorTerminal { loopId: 634, loopName: 'The%20Map%20Tongue%20Loop' })
+(loop_634_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_634_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_634_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_634_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disease%20Operator', mechanism: 'it%20looks%20%22Infected%22%20or%20%22Strange%22' })
+(loop_634_result_branch: BehaviorEmit { emission: 'result', text: 'fear%20of%20kissing%20or%20oral%20intimacy' })
+(loop_634_sink: BehaviorSink)
+(loop_634_start: BehaviorStart { loopId: 634, loopName: 'The%20Map%20Tongue%20Loop', given: 'Patches%20of%20red%2Fwhite%20on%20tongue%20surface', when: 'sticking%20tongue%20out', then: 'it%20looks%20%22Infected%22%20or%20%22Strange%22%20(The%20Disease%20Operator)', result: 'fear%20of%20kissing%20or%20oral%20intimacy', operatorName: 'The%20Disease%20Operator', operatorMechanism: 'it%20looks%20%22Infected%22%20or%20%22Strange%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_634_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_634_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20%22Infected%22%20or%20%22Strange%22%20(The%20Disease%20Operator)' })
+(loop_634_verdict: BehaviorVerdict { loopId: 634, loopName: 'The%20Map%20Tongue%20Loop', then: 'it%20looks%20%22Infected%22%20or%20%22Strange%22%20(The%20Disease%20Operator)', result: 'fear%20of%20kissing%20or%20oral%20intimacy', operatorName: 'The%20Disease%20Operator', operatorMechanism: 'it%20looks%20%22Infected%22%20or%20%22Strange%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_634_when_gate: BehaviorAssess { stage: 'when', text: 'sticking%20tongue%20out' })
+
+// Topology
+(loop_634_start)-[:PROCESS]->(loop_634_given_gate)
+(loop_634_given_gate)-[:PROCESS { case: "ok" }]->(loop_634_when_gate)
+(loop_634_given_gate)-[:PROCESS { case: "err" }]->(loop_634_inactive)
+(loop_634_when_gate)-[:PROCESS { case: "ok" }]->(loop_634_context)
+(loop_634_when_gate)-[:PROCESS { case: "err" }]->(loop_634_inactive)
+(loop_634_context)-[:FORK { strategy: "behavior-branches" }]->(loop_634_context_branch | loop_634_then_branch | loop_634_operator_branch | loop_634_result_branch | loop_634_taxonomy_branch | loop_634_intervention_recognize | loop_634_intervention_interdict | loop_634_intervention_minimize)
+(loop_634_context_branch | loop_634_then_branch | loop_634_operator_branch | loop_634_result_branch | loop_634_taxonomy_branch | loop_634_intervention_recognize | loop_634_intervention_interdict | loop_634_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_634_verdict)
+(loop_634_inactive)-[:PROCESS]->(loop_634_sink)
+(loop_634_verdict)-[:PROCESS]->(loop_634_sink)
+(loop_634_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_634_then_branch)
+(loop_634_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_634_then_branch)
+(loop_634_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_634_then_branch)

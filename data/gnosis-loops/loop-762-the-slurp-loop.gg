@@ -1,0 +1,33 @@
+// behavioral-loop-762.gg
+// Executable Gnosis projection for The Slurp Loop.
+
+// Nodes
+(loop_762_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_762_context_branch: BehaviorEmit { emission: 'context' })
+(loop_762_given_gate: BehaviorAssess { stage: 'given', text: 'Aerating%20coffee%2Fsoup%20loudly' })
+(loop_762_inactive: BehaviorTerminal { loopId: 762, loopName: 'The%20Slurp%20Loop' })
+(loop_762_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_762_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_762_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_762_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Culture%20Clash%20Operator', mechanism: 'it%20signals%20%22Comfort%22or%20%22Rudeness%22' })
+(loop_762_result_branch: BehaviorEmit { emission: 'result', text: 'binary%20social%20judgment%20depending%20on%20location' })
+(loop_762_sink: BehaviorSink)
+(loop_762_start: BehaviorStart { loopId: 762, loopName: 'The%20Slurp%20Loop', given: 'Aerating%20coffee%2Fsoup%20loudly', when: 'dining', then: 'it%20signals%20%22Comfort%22%20(East)%20or%20%22Rudeness%22%20(West)%20(The%20Culture%20Clash%20Operator)', result: 'binary%20social%20judgment%20depending%20on%20location', operatorName: 'The%20Culture%20Clash%20Operator', operatorMechanism: 'it%20signals%20%22Comfort%22or%20%22Rudeness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_762_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_762_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Comfort%22%20(East)%20or%20%22Rudeness%22%20(West)%20(The%20Culture%20Clash%20Operator)' })
+(loop_762_verdict: BehaviorVerdict { loopId: 762, loopName: 'The%20Slurp%20Loop', then: 'it%20signals%20%22Comfort%22%20(East)%20or%20%22Rudeness%22%20(West)%20(The%20Culture%20Clash%20Operator)', result: 'binary%20social%20judgment%20depending%20on%20location', operatorName: 'The%20Culture%20Clash%20Operator', operatorMechanism: 'it%20signals%20%22Comfort%22or%20%22Rudeness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_762_when_gate: BehaviorAssess { stage: 'when', text: 'dining' })
+
+// Topology
+(loop_762_start)-[:PROCESS]->(loop_762_given_gate)
+(loop_762_given_gate)-[:PROCESS { case: "ok" }]->(loop_762_when_gate)
+(loop_762_given_gate)-[:PROCESS { case: "err" }]->(loop_762_inactive)
+(loop_762_when_gate)-[:PROCESS { case: "ok" }]->(loop_762_context)
+(loop_762_when_gate)-[:PROCESS { case: "err" }]->(loop_762_inactive)
+(loop_762_context)-[:FORK { strategy: "behavior-branches" }]->(loop_762_context_branch | loop_762_then_branch | loop_762_operator_branch | loop_762_result_branch | loop_762_taxonomy_branch | loop_762_intervention_recognize | loop_762_intervention_interdict | loop_762_intervention_minimize)
+(loop_762_context_branch | loop_762_then_branch | loop_762_operator_branch | loop_762_result_branch | loop_762_taxonomy_branch | loop_762_intervention_recognize | loop_762_intervention_interdict | loop_762_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_762_verdict)
+(loop_762_inactive)-[:PROCESS]->(loop_762_sink)
+(loop_762_verdict)-[:PROCESS]->(loop_762_sink)
+(loop_762_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_762_then_branch)
+(loop_762_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_762_then_branch)
+(loop_762_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_762_then_branch)

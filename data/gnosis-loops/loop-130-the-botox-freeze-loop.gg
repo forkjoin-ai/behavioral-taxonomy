@@ -1,0 +1,33 @@
+// behavioral-loop-130.gg
+// Executable Gnosis projection for The Botox Freeze Loop.
+
+// Nodes
+(loop_130_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_130_context_branch: BehaviorEmit { emission: 'context' })
+(loop_130_given_gate: BehaviorAssess { stage: 'given', text: "Chemically%20inhibited%20facial%20muscles%20(No%20crow's%20feet%2Ffrown%20lines)" })
+(loop_130_inactive: BehaviorTerminal { loopId: 130, loopName: 'The%20Botox%20Freeze%20Loop' })
+(loop_130_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_130_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_130_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_130_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Uncanny%20Valley%20Operator', mechanism: 'the%20face%20remains%20smooth%2C%20signaling%20%22Coldness%22%20or%20%22Insincerity%22' })
+(loop_130_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20feeling%20unconnected%2C%20leading%20the%20individual%20to%20rely%20on%20**Verbal%20Over-Explanation**%20of%20their%20feelings' })
+(loop_130_sink: BehaviorSink)
+(loop_130_start: BehaviorStart { loopId: 130, loopName: 'The%20Botox%20Freeze%20Loop', given: "Chemically%20inhibited%20facial%20muscles%20(No%20crow's%20feet%2Ffrown%20lines)", when: 'attempting%20to%20show%20empathy%20or%20concern', then: 'the%20face%20remains%20smooth%2C%20signaling%20%22Coldness%22%20or%20%22Insincerity%22%20(The%20Uncanny%20Valley%20Operator)', result: 'peers%20feeling%20unconnected%2C%20leading%20the%20individual%20to%20rely%20on%20**Verbal%20Over-Explanation**%20of%20their%20feelings', operatorName: 'The%20Uncanny%20Valley%20Operator', operatorMechanism: 'the%20face%20remains%20smooth%2C%20signaling%20%22Coldness%22%20or%20%22Insincerity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_130_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_130_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20remains%20smooth%2C%20signaling%20%22Coldness%22%20or%20%22Insincerity%22%20(The%20Uncanny%20Valley%20Operator)' })
+(loop_130_verdict: BehaviorVerdict { loopId: 130, loopName: 'The%20Botox%20Freeze%20Loop', then: 'the%20face%20remains%20smooth%2C%20signaling%20%22Coldness%22%20or%20%22Insincerity%22%20(The%20Uncanny%20Valley%20Operator)', result: 'peers%20feeling%20unconnected%2C%20leading%20the%20individual%20to%20rely%20on%20**Verbal%20Over-Explanation**%20of%20their%20feelings', operatorName: 'The%20Uncanny%20Valley%20Operator', operatorMechanism: 'the%20face%20remains%20smooth%2C%20signaling%20%22Coldness%22%20or%20%22Insincerity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_130_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20to%20show%20empathy%20or%20concern' })
+
+// Topology
+(loop_130_start)-[:PROCESS]->(loop_130_given_gate)
+(loop_130_given_gate)-[:PROCESS { case: "ok" }]->(loop_130_when_gate)
+(loop_130_given_gate)-[:PROCESS { case: "err" }]->(loop_130_inactive)
+(loop_130_when_gate)-[:PROCESS { case: "ok" }]->(loop_130_context)
+(loop_130_when_gate)-[:PROCESS { case: "err" }]->(loop_130_inactive)
+(loop_130_context)-[:FORK { strategy: "behavior-branches" }]->(loop_130_context_branch | loop_130_then_branch | loop_130_operator_branch | loop_130_result_branch | loop_130_taxonomy_branch | loop_130_intervention_recognize | loop_130_intervention_interdict | loop_130_intervention_minimize)
+(loop_130_context_branch | loop_130_then_branch | loop_130_operator_branch | loop_130_result_branch | loop_130_taxonomy_branch | loop_130_intervention_recognize | loop_130_intervention_interdict | loop_130_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_130_verdict)
+(loop_130_inactive)-[:PROCESS]->(loop_130_sink)
+(loop_130_verdict)-[:PROCESS]->(loop_130_sink)
+(loop_130_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_130_then_branch)
+(loop_130_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_130_then_branch)
+(loop_130_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_130_then_branch)

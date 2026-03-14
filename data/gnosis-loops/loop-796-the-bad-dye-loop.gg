@@ -1,0 +1,31 @@
+// behavioral-loop-796.gg
+// Executable Gnosis projection for The Bad Dye Loop.
+
+// Nodes
+(loop_796_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_796_context_branch: BehaviorEmit { emission: 'context' })
+(loop_796_given_gate: BehaviorAssess { stage: 'given', text: 'Ink-black%20dye%20on%20an%20older%20face' })
+(loop_796_inactive: BehaviorTerminal { loopId: 796, loopName: 'The%20Bad%20Dye%20Loop' })
+(loop_796_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_796_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_796_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Uncanny%20Operator', mechanism: 'the%20harsh%20contrast%20signals%20%22Vanity%22%20and%20%22Denial%22' })
+(loop_796_result_branch: BehaviorEmit { emission: 'result', text: 'distrust%20(%22What%20else%20are%20they%20faking%3F%22)' })
+(loop_796_sink: BehaviorSink)
+(loop_796_start: BehaviorStart { loopId: 796, loopName: 'The%20Bad%20Dye%20Loop', given: 'Ink-black%20dye%20on%20an%20older%20face', when: 'in%20natural%20light', then: 'the%20harsh%20contrast%20signals%20%22Vanity%22%20and%20%22Denial%22%20(The%20Uncanny%20Operator)', result: 'distrust%20(%22What%20else%20are%20they%20faking%3F%22)', operatorName: 'The%20Uncanny%20Operator', operatorMechanism: 'the%20harsh%20contrast%20signals%20%22Vanity%22%20and%20%22Denial%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_796_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_796_then_branch: BehaviorEmit { emission: 'then', text: 'the%20harsh%20contrast%20signals%20%22Vanity%22%20and%20%22Denial%22%20(The%20Uncanny%20Operator)' })
+(loop_796_verdict: BehaviorVerdict { loopId: 796, loopName: 'The%20Bad%20Dye%20Loop', then: 'the%20harsh%20contrast%20signals%20%22Vanity%22%20and%20%22Denial%22%20(The%20Uncanny%20Operator)', result: 'distrust%20(%22What%20else%20are%20they%20faking%3F%22)', operatorName: 'The%20Uncanny%20Operator', operatorMechanism: 'the%20harsh%20contrast%20signals%20%22Vanity%22%20and%20%22Denial%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_796_when_gate: BehaviorAssess { stage: 'when', text: 'in%20natural%20light' })
+
+// Topology
+(loop_796_start)-[:PROCESS]->(loop_796_given_gate)
+(loop_796_given_gate)-[:PROCESS { case: "ok" }]->(loop_796_when_gate)
+(loop_796_given_gate)-[:PROCESS { case: "err" }]->(loop_796_inactive)
+(loop_796_when_gate)-[:PROCESS { case: "ok" }]->(loop_796_context)
+(loop_796_when_gate)-[:PROCESS { case: "err" }]->(loop_796_inactive)
+(loop_796_context)-[:FORK { strategy: "behavior-branches" }]->(loop_796_context_branch | loop_796_then_branch | loop_796_operator_branch | loop_796_result_branch | loop_796_taxonomy_branch | loop_796_intervention_recognize | loop_796_intervention_leverage)
+(loop_796_context_branch | loop_796_then_branch | loop_796_operator_branch | loop_796_result_branch | loop_796_taxonomy_branch | loop_796_intervention_recognize | loop_796_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_796_verdict)
+(loop_796_inactive)-[:PROCESS]->(loop_796_sink)
+(loop_796_verdict)-[:PROCESS]->(loop_796_sink)
+(loop_796_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_796_then_branch)
+(loop_796_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_796_result_branch)

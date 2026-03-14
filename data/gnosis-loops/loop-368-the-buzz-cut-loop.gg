@@ -1,0 +1,33 @@
+// behavioral-loop-368.gg
+// Executable Gnosis projection for The Buzz Cut Loop.
+
+// Nodes
+(loop_368_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_368_context_branch: BehaviorEmit { emission: 'context' })
+(loop_368_given_gate: BehaviorAssess { stage: 'given', text: 'Voluntary%20removal%20of%20hair%20(Female)' })
+(loop_368_inactive: BehaviorTerminal { loopId: 368, loopName: 'The%20Buzz%20Cut%20Loop' })
+(loop_368_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_368_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_368_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_368_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deviance%20Operator', mechanism: 'observers%20assume%20%22Illness%2C%22%20%22Queerness%2C%22%20or%20%22Political%20Radicalism%22' })
+(loop_368_result_branch: BehaviorEmit { emission: 'result', text: 'mostly%20performative%20interactions%20based%20on%20the%20assumed%20identity' })
+(loop_368_sink: BehaviorSink)
+(loop_368_start: BehaviorStart { loopId: 368, loopName: 'The%20Buzz%20Cut%20Loop', given: 'Voluntary%20removal%20of%20hair%20(Female)', when: 'in%20public', then: 'observers%20assume%20%22Illness%2C%22%20%22Queerness%2C%22%20or%20%22Political%20Radicalism%22%20(The%20Deviance%20Operator)', result: 'mostly%20performative%20interactions%20based%20on%20the%20assumed%20identity', operatorName: 'The%20Deviance%20Operator', operatorMechanism: 'observers%20assume%20%22Illness%2C%22%20%22Queerness%2C%22%20or%20%22Political%20Radicalism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_368_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_368_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Illness%2C%22%20%22Queerness%2C%22%20or%20%22Political%20Radicalism%22%20(The%20Deviance%20Operator)' })
+(loop_368_verdict: BehaviorVerdict { loopId: 368, loopName: 'The%20Buzz%20Cut%20Loop', then: 'observers%20assume%20%22Illness%2C%22%20%22Queerness%2C%22%20or%20%22Political%20Radicalism%22%20(The%20Deviance%20Operator)', result: 'mostly%20performative%20interactions%20based%20on%20the%20assumed%20identity', operatorName: 'The%20Deviance%20Operator', operatorMechanism: 'observers%20assume%20%22Illness%2C%22%20%22Queerness%2C%22%20or%20%22Political%20Radicalism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_368_when_gate: BehaviorAssess { stage: 'when', text: 'in%20public' })
+
+// Topology
+(loop_368_start)-[:PROCESS]->(loop_368_given_gate)
+(loop_368_given_gate)-[:PROCESS { case: "ok" }]->(loop_368_when_gate)
+(loop_368_given_gate)-[:PROCESS { case: "err" }]->(loop_368_inactive)
+(loop_368_when_gate)-[:PROCESS { case: "ok" }]->(loop_368_context)
+(loop_368_when_gate)-[:PROCESS { case: "err" }]->(loop_368_inactive)
+(loop_368_context)-[:FORK { strategy: "behavior-branches" }]->(loop_368_context_branch | loop_368_then_branch | loop_368_operator_branch | loop_368_result_branch | loop_368_taxonomy_branch | loop_368_intervention_recognize | loop_368_intervention_interdict | loop_368_intervention_minimize)
+(loop_368_context_branch | loop_368_then_branch | loop_368_operator_branch | loop_368_result_branch | loop_368_taxonomy_branch | loop_368_intervention_recognize | loop_368_intervention_interdict | loop_368_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_368_verdict)
+(loop_368_inactive)-[:PROCESS]->(loop_368_sink)
+(loop_368_verdict)-[:PROCESS]->(loop_368_sink)
+(loop_368_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_368_then_branch)
+(loop_368_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_368_then_branch)
+(loop_368_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_368_then_branch)

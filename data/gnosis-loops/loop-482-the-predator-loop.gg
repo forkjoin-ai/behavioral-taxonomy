@@ -1,0 +1,31 @@
+// behavioral-loop-482.gg
+// Executable Gnosis projection for The Predator Loop.
+
+// Nodes
+(loop_482_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_482_context_branch: BehaviorEmit { emission: 'context' })
+(loop_482_given_gate: BehaviorAssess { stage: 'given', text: 'Close-set%20eyes%20(Narrow%20bridge)' })
+(loop_482_inactive: BehaviorTerminal { loopId: 482, loopName: 'The%20Predator%20Loop' })
+(loop_482_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_482_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_482_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'the%20gaze%20looks%20%22Intense%2C%22%20%22Rat-like%2C%22%20or%20%22Cunning%22' })
+(loop_482_result_branch: BehaviorEmit { emission: 'result', text: 'instinctive%20distrust%20from%20peers%2C%20forcing%20the%20individual%20to%20work%20harder%20to%20prove%20**Benevolence**' })
+(loop_482_sink: BehaviorSink)
+(loop_482_start: BehaviorStart { loopId: 482, loopName: 'The%20Predator%20Loop', given: 'Close-set%20eyes%20(Narrow%20bridge)', when: 'focusing%20on%20someone', then: 'the%20gaze%20looks%20%22Intense%2C%22%20%22Rat-like%2C%22%20or%20%22Cunning%22%20(The%20Threat%20Operator)', result: 'instinctive%20distrust%20from%20peers%2C%20forcing%20the%20individual%20to%20work%20harder%20to%20prove%20**Benevolence**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20gaze%20looks%20%22Intense%2C%22%20%22Rat-like%2C%22%20or%20%22Cunning%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_482_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_482_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gaze%20looks%20%22Intense%2C%22%20%22Rat-like%2C%22%20or%20%22Cunning%22%20(The%20Threat%20Operator)' })
+(loop_482_verdict: BehaviorVerdict { loopId: 482, loopName: 'The%20Predator%20Loop', then: 'the%20gaze%20looks%20%22Intense%2C%22%20%22Rat-like%2C%22%20or%20%22Cunning%22%20(The%20Threat%20Operator)', result: 'instinctive%20distrust%20from%20peers%2C%20forcing%20the%20individual%20to%20work%20harder%20to%20prove%20**Benevolence**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20gaze%20looks%20%22Intense%2C%22%20%22Rat-like%2C%22%20or%20%22Cunning%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_482_when_gate: BehaviorAssess { stage: 'when', text: 'focusing%20on%20someone' })
+
+// Topology
+(loop_482_start)-[:PROCESS]->(loop_482_given_gate)
+(loop_482_given_gate)-[:PROCESS { case: "ok" }]->(loop_482_when_gate)
+(loop_482_given_gate)-[:PROCESS { case: "err" }]->(loop_482_inactive)
+(loop_482_when_gate)-[:PROCESS { case: "ok" }]->(loop_482_context)
+(loop_482_when_gate)-[:PROCESS { case: "err" }]->(loop_482_inactive)
+(loop_482_context)-[:FORK { strategy: "behavior-branches" }]->(loop_482_context_branch | loop_482_then_branch | loop_482_operator_branch | loop_482_result_branch | loop_482_taxonomy_branch | loop_482_intervention_recognize | loop_482_intervention_leverage)
+(loop_482_context_branch | loop_482_then_branch | loop_482_operator_branch | loop_482_result_branch | loop_482_taxonomy_branch | loop_482_intervention_recognize | loop_482_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_482_verdict)
+(loop_482_inactive)-[:PROCESS]->(loop_482_sink)
+(loop_482_verdict)-[:PROCESS]->(loop_482_sink)
+(loop_482_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_482_then_branch)
+(loop_482_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_482_result_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-1002.gg
+// Executable Gnosis projection for The Cat Eye Loop.
+
+// Nodes
+(loop_1002_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1002_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1002_given_gate: BehaviorAssess { stage: 'given', text: 'Skin%20pulled%20too%20tight%20at%20the%20temples' })
+(loop_1002_inactive: BehaviorTerminal { loopId: 1002, loopName: 'The%20Cat%20Eye%20Loop' })
+(loop_1002_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1002_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1002_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1002_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Wind%20Tunnel%20Operator', mechanism: 'the%20eyes%20look%20%22Windblown%22%20permanently' })
+(loop_1002_result_branch: BehaviorEmit { emission: 'result', text: 'the%20face%20losing%20its%20ability%20to%20express%20%22Softness.%22' })
+(loop_1002_sink: BehaviorSink)
+(loop_1002_start: BehaviorStart { loopId: 1002, loopName: 'The%20Cat%20Eye%20Loop', given: 'Skin%20pulled%20too%20tight%20at%20the%20temples', when: 'resting', then: 'the%20eyes%20look%20%22Windblown%22%20permanently%20(The%20Wind%20Tunnel%20Operator)', result: 'the%20face%20losing%20its%20ability%20to%20express%20%22Softness.%22', operatorName: 'The%20Wind%20Tunnel%20Operator', operatorMechanism: 'the%20eyes%20look%20%22Windblown%22%20permanently', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1002_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1002_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20look%20%22Windblown%22%20permanently%20(The%20Wind%20Tunnel%20Operator)' })
+(loop_1002_verdict: BehaviorVerdict { loopId: 1002, loopName: 'The%20Cat%20Eye%20Loop', then: 'the%20eyes%20look%20%22Windblown%22%20permanently%20(The%20Wind%20Tunnel%20Operator)', result: 'the%20face%20losing%20its%20ability%20to%20express%20%22Softness.%22', operatorName: 'The%20Wind%20Tunnel%20Operator', operatorMechanism: 'the%20eyes%20look%20%22Windblown%22%20permanently', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1002_when_gate: BehaviorAssess { stage: 'when', text: 'resting' })
+
+// Topology
+(loop_1002_start)-[:PROCESS]->(loop_1002_given_gate)
+(loop_1002_given_gate)-[:PROCESS { case: "ok" }]->(loop_1002_when_gate)
+(loop_1002_given_gate)-[:PROCESS { case: "err" }]->(loop_1002_inactive)
+(loop_1002_when_gate)-[:PROCESS { case: "ok" }]->(loop_1002_context)
+(loop_1002_when_gate)-[:PROCESS { case: "err" }]->(loop_1002_inactive)
+(loop_1002_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1002_context_branch | loop_1002_then_branch | loop_1002_operator_branch | loop_1002_result_branch | loop_1002_taxonomy_branch | loop_1002_intervention_recognize | loop_1002_intervention_interdict | loop_1002_intervention_minimize)
+(loop_1002_context_branch | loop_1002_then_branch | loop_1002_operator_branch | loop_1002_result_branch | loop_1002_taxonomy_branch | loop_1002_intervention_recognize | loop_1002_intervention_interdict | loop_1002_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1002_verdict)
+(loop_1002_inactive)-[:PROCESS]->(loop_1002_sink)
+(loop_1002_verdict)-[:PROCESS]->(loop_1002_sink)
+(loop_1002_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1002_then_branch)
+(loop_1002_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1002_then_branch)
+(loop_1002_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1002_then_branch)

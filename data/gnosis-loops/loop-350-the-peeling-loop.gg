@@ -1,0 +1,33 @@
+// behavioral-loop-350.gg
+// Executable Gnosis projection for The Peeling Loop.
+
+// Nodes
+(loop_350_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_350_context_branch: BehaviorEmit { emission: 'context' })
+(loop_350_given_gate: BehaviorAssess { stage: 'given', text: 'Desquamation%20of%20skin' })
+(loop_350_inactive: BehaviorTerminal { loopId: 350, loopName: 'The%20Peeling%20Loop' })
+(loop_350_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_350_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_350_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_350_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Messy%20Operator', mechanism: 'it%20signals%20%22Neglect%22%20or%20%22Past%20Leisure%22' })
+(loop_350_result_branch: BehaviorEmit { emission: 'result', text: 'temporary%20loss%20of%20%22Polished%22%20status' })
+(loop_350_sink: BehaviorSink)
+(loop_350_start: BehaviorStart { loopId: 350, loopName: 'The%20Peeling%20Loop', given: 'Desquamation%20of%20skin', when: 'in%20public', then: 'it%20signals%20%22Neglect%22%20or%20%22Past%20Leisure%22%20(The%20Messy%20Operator)', result: 'temporary%20loss%20of%20%22Polished%22%20status', operatorName: 'The%20Messy%20Operator', operatorMechanism: 'it%20signals%20%22Neglect%22%20or%20%22Past%20Leisure%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_350_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_350_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Neglect%22%20or%20%22Past%20Leisure%22%20(The%20Messy%20Operator)' })
+(loop_350_verdict: BehaviorVerdict { loopId: 350, loopName: 'The%20Peeling%20Loop', then: 'it%20signals%20%22Neglect%22%20or%20%22Past%20Leisure%22%20(The%20Messy%20Operator)', result: 'temporary%20loss%20of%20%22Polished%22%20status', operatorName: 'The%20Messy%20Operator', operatorMechanism: 'it%20signals%20%22Neglect%22%20or%20%22Past%20Leisure%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_350_when_gate: BehaviorAssess { stage: 'when', text: 'in%20public' })
+
+// Topology
+(loop_350_start)-[:PROCESS]->(loop_350_given_gate)
+(loop_350_given_gate)-[:PROCESS { case: "ok" }]->(loop_350_when_gate)
+(loop_350_given_gate)-[:PROCESS { case: "err" }]->(loop_350_inactive)
+(loop_350_when_gate)-[:PROCESS { case: "ok" }]->(loop_350_context)
+(loop_350_when_gate)-[:PROCESS { case: "err" }]->(loop_350_inactive)
+(loop_350_context)-[:FORK { strategy: "behavior-branches" }]->(loop_350_context_branch | loop_350_then_branch | loop_350_operator_branch | loop_350_result_branch | loop_350_taxonomy_branch | loop_350_intervention_recognize | loop_350_intervention_interdict | loop_350_intervention_minimize)
+(loop_350_context_branch | loop_350_then_branch | loop_350_operator_branch | loop_350_result_branch | loop_350_taxonomy_branch | loop_350_intervention_recognize | loop_350_intervention_interdict | loop_350_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_350_verdict)
+(loop_350_inactive)-[:PROCESS]->(loop_350_sink)
+(loop_350_verdict)-[:PROCESS]->(loop_350_sink)
+(loop_350_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_350_then_branch)
+(loop_350_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_350_then_branch)
+(loop_350_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_350_then_branch)

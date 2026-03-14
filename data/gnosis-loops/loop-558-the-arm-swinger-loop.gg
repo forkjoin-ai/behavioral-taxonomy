@@ -1,0 +1,33 @@
+// behavioral-loop-558.gg
+// Executable Gnosis projection for The Arm Swinger Loop.
+
+// Nodes
+(loop_558_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_558_context_branch: BehaviorEmit { emission: 'context' })
+(loop_558_given_gate: BehaviorAssess { stage: 'given', text: 'Excessive%20arm%20movement%20while%20walking' })
+(loop_558_inactive: BehaviorTerminal { loopId: 558, loopName: 'The%20Arm%20Swinger%20Loop' })
+(loop_558_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_558_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_558_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_558_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Marching%20Operator', mechanism: 'the%20individual%20physically%20occupies%20a%20wide%20lane' })
+(loop_558_result_branch: BehaviorEmit { emission: 'result', text: 'people%20getting%20out%20of%20the%20way%2C%20assuming%20**Purpose%2FUrgency**' })
+(loop_558_sink: BehaviorSink)
+(loop_558_start: BehaviorStart { loopId: 558, loopName: 'The%20Arm%20Swinger%20Loop', given: 'Excessive%20arm%20movement%20while%20walking', when: 'moving%20through%20a%20crowd', then: 'the%20individual%20physically%20occupies%20a%20wide%20lane%20(The%20Marching%20Operator)', result: 'people%20getting%20out%20of%20the%20way%2C%20assuming%20**Purpose%2FUrgency**', operatorName: 'The%20Marching%20Operator', operatorMechanism: 'the%20individual%20physically%20occupies%20a%20wide%20lane', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_558_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_558_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20physically%20occupies%20a%20wide%20lane%20(The%20Marching%20Operator)' })
+(loop_558_verdict: BehaviorVerdict { loopId: 558, loopName: 'The%20Arm%20Swinger%20Loop', then: 'the%20individual%20physically%20occupies%20a%20wide%20lane%20(The%20Marching%20Operator)', result: 'people%20getting%20out%20of%20the%20way%2C%20assuming%20**Purpose%2FUrgency**', operatorName: 'The%20Marching%20Operator', operatorMechanism: 'the%20individual%20physically%20occupies%20a%20wide%20lane', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_558_when_gate: BehaviorAssess { stage: 'when', text: 'moving%20through%20a%20crowd' })
+
+// Topology
+(loop_558_start)-[:PROCESS]->(loop_558_given_gate)
+(loop_558_given_gate)-[:PROCESS { case: "ok" }]->(loop_558_when_gate)
+(loop_558_given_gate)-[:PROCESS { case: "err" }]->(loop_558_inactive)
+(loop_558_when_gate)-[:PROCESS { case: "ok" }]->(loop_558_context)
+(loop_558_when_gate)-[:PROCESS { case: "err" }]->(loop_558_inactive)
+(loop_558_context)-[:FORK { strategy: "behavior-branches" }]->(loop_558_context_branch | loop_558_then_branch | loop_558_operator_branch | loop_558_result_branch | loop_558_taxonomy_branch | loop_558_intervention_recognize | loop_558_intervention_interdict | loop_558_intervention_minimize)
+(loop_558_context_branch | loop_558_then_branch | loop_558_operator_branch | loop_558_result_branch | loop_558_taxonomy_branch | loop_558_intervention_recognize | loop_558_intervention_interdict | loop_558_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_558_verdict)
+(loop_558_inactive)-[:PROCESS]->(loop_558_sink)
+(loop_558_verdict)-[:PROCESS]->(loop_558_sink)
+(loop_558_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_558_then_branch)
+(loop_558_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_558_then_branch)
+(loop_558_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_558_then_branch)

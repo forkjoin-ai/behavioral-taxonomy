@@ -1,0 +1,31 @@
+// behavioral-loop-547.gg
+// Executable Gnosis projection for The Bulbous Tip Loop.
+
+// Nodes
+(loop_547_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_547_context_branch: BehaviorEmit { emission: 'context' })
+(loop_547_given_gate: BehaviorAssess { stage: 'given', text: 'Large%2C%20round%2C%20or%20fleshy%20nasal%20tip' })
+(loop_547_inactive: BehaviorTerminal { loopId: 547, loopName: 'The%20Bulbous%20Tip%20Loop' })
+(loop_547_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_547_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_547_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Santa%2FDrinker%20Operator', mechanism: 'observers%20subconsciously%20associate%20it%20with%20%22Alcohol%22%20or%20%22Jolliness%22' })
+(loop_547_result_branch: BehaviorEmit { emission: 'result', text: 'being%20offered%20drinks%20constantly%20but%20not%20entrusted%20with%20delicate%20tasks' })
+(loop_547_sink: BehaviorSink)
+(loop_547_start: BehaviorStart { loopId: 547, loopName: 'The%20Bulbous%20Tip%20Loop', given: 'Large%2C%20round%2C%20or%20fleshy%20nasal%20tip', when: 'meeting%20strangers', then: 'observers%20subconsciously%20associate%20it%20with%20%22Alcohol%22%20or%20%22Jolliness%22%20(The%20Santa%2FDrinker%20Operator)', result: 'being%20offered%20drinks%20constantly%20but%20not%20entrusted%20with%20delicate%20tasks', operatorName: 'The%20Santa%2FDrinker%20Operator', operatorMechanism: 'observers%20subconsciously%20associate%20it%20with%20%22Alcohol%22%20or%20%22Jolliness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_547_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_547_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20subconsciously%20associate%20it%20with%20%22Alcohol%22%20or%20%22Jolliness%22%20(The%20Santa%2FDrinker%20Operator)' })
+(loop_547_verdict: BehaviorVerdict { loopId: 547, loopName: 'The%20Bulbous%20Tip%20Loop', then: 'observers%20subconsciously%20associate%20it%20with%20%22Alcohol%22%20or%20%22Jolliness%22%20(The%20Santa%2FDrinker%20Operator)', result: 'being%20offered%20drinks%20constantly%20but%20not%20entrusted%20with%20delicate%20tasks', operatorName: 'The%20Santa%2FDrinker%20Operator', operatorMechanism: 'observers%20subconsciously%20associate%20it%20with%20%22Alcohol%22%20or%20%22Jolliness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_547_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20strangers' })
+
+// Topology
+(loop_547_start)-[:PROCESS]->(loop_547_given_gate)
+(loop_547_given_gate)-[:PROCESS { case: "ok" }]->(loop_547_when_gate)
+(loop_547_given_gate)-[:PROCESS { case: "err" }]->(loop_547_inactive)
+(loop_547_when_gate)-[:PROCESS { case: "ok" }]->(loop_547_context)
+(loop_547_when_gate)-[:PROCESS { case: "err" }]->(loop_547_inactive)
+(loop_547_context)-[:FORK { strategy: "behavior-branches" }]->(loop_547_context_branch | loop_547_then_branch | loop_547_operator_branch | loop_547_result_branch | loop_547_taxonomy_branch | loop_547_intervention_recognize | loop_547_intervention_leverage)
+(loop_547_context_branch | loop_547_then_branch | loop_547_operator_branch | loop_547_result_branch | loop_547_taxonomy_branch | loop_547_intervention_recognize | loop_547_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_547_verdict)
+(loop_547_inactive)-[:PROCESS]->(loop_547_sink)
+(loop_547_verdict)-[:PROCESS]->(loop_547_sink)
+(loop_547_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_547_then_branch)
+(loop_547_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_547_result_branch)

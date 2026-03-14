@@ -1,0 +1,35 @@
+// behavioral-loop-469.gg
+// Executable Gnosis projection for The Shifty Eye Loop.
+
+// Nodes
+(loop_469_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_469_context_branch: BehaviorEmit { emission: 'context' })
+(loop_469_given_gate: BehaviorAssess { stage: 'given', text: 'Eyes%20darting%20side-to-side' })
+(loop_469_inactive: BehaviorTerminal { loopId: 469, loopName: 'The%20Shifty%20Eye%20Loop' })
+(loop_469_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_469_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_469_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_469_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_469_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Guilt%20Operator', mechanism: 'observers%20assume%20%22Looking%20for%20an%20Exit%22%20or%20%22Lying%22' })
+(loop_469_result_branch: BehaviorEmit { emission: 'result', text: 'high%20suspicion%20and%20low%20trust' })
+(loop_469_sink: BehaviorSink)
+(loop_469_start: BehaviorStart { loopId: 469, loopName: 'The%20Shifty%20Eye%20Loop', given: 'Eyes%20darting%20side-to-side', when: 'asked%20a%20direct%20question', then: 'observers%20assume%20%22Looking%20for%20an%20Exit%22%20or%20%22Lying%22%20(The%20Guilt%20Operator)', result: 'high%20suspicion%20and%20low%20trust', operatorName: 'The%20Guilt%20Operator', operatorMechanism: 'observers%20assume%20%22Looking%20for%20an%20Exit%22%20or%20%22Lying%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST|DECEPTION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_469_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST|DECEPTION' })
+(loop_469_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Looking%20for%20an%20Exit%22%20or%20%22Lying%22%20(The%20Guilt%20Operator)' })
+(loop_469_verdict: BehaviorVerdict { loopId: 469, loopName: 'The%20Shifty%20Eye%20Loop', then: 'observers%20assume%20%22Looking%20for%20an%20Exit%22%20or%20%22Lying%22%20(The%20Guilt%20Operator)', result: 'high%20suspicion%20and%20low%20trust', operatorName: 'The%20Guilt%20Operator', operatorMechanism: 'observers%20assume%20%22Looking%20for%20an%20Exit%22%20or%20%22Lying%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST|DECEPTION' })
+(loop_469_when_gate: BehaviorAssess { stage: 'when', text: 'asked%20a%20direct%20question' })
+
+// Topology
+(loop_469_start)-[:PROCESS]->(loop_469_given_gate)
+(loop_469_given_gate)-[:PROCESS { case: "ok" }]->(loop_469_when_gate)
+(loop_469_given_gate)-[:PROCESS { case: "err" }]->(loop_469_inactive)
+(loop_469_when_gate)-[:PROCESS { case: "ok" }]->(loop_469_context)
+(loop_469_when_gate)-[:PROCESS { case: "err" }]->(loop_469_inactive)
+(loop_469_context)-[:FORK { strategy: "behavior-branches" }]->(loop_469_context_branch | loop_469_then_branch | loop_469_operator_branch | loop_469_result_branch | loop_469_taxonomy_branch | loop_469_intervention_recognize | loop_469_intervention_interdict | loop_469_intervention_minimize | loop_469_intervention_leverage)
+(loop_469_context_branch | loop_469_then_branch | loop_469_operator_branch | loop_469_result_branch | loop_469_taxonomy_branch | loop_469_intervention_recognize | loop_469_intervention_interdict | loop_469_intervention_minimize | loop_469_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_469_verdict)
+(loop_469_inactive)-[:PROCESS]->(loop_469_sink)
+(loop_469_verdict)-[:PROCESS]->(loop_469_sink)
+(loop_469_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_469_then_branch)
+(loop_469_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_469_then_branch)
+(loop_469_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_469_then_branch)
+(loop_469_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_469_result_branch)

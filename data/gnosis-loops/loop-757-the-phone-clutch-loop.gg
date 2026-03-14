@@ -1,0 +1,33 @@
+// behavioral-loop-757.gg
+// Executable Gnosis projection for The Phone-Clutch Loop.
+
+// Nodes
+(loop_757_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_757_context_branch: BehaviorEmit { emission: 'context' })
+(loop_757_given_gate: BehaviorAssess { stage: 'given', text: 'Holding%20a%20smartphone%20like%20a%20weapon%2Fshield' })
+(loop_757_inactive: BehaviorTerminal { loopId: 757, loopName: 'The%20Phone-Clutch%20Loop' })
+(loop_757_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Set%20intentional%20friction%20for%20problematic%20tech%20behaviors' })
+(loop_757_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_757_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_757_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Digital%20Wall%20Operator', mechanism: 'it%20signals%20%22Unavailable%22%20or%20%22Bored%22' })
+(loop_757_result_branch: BehaviorEmit { emission: 'result', text: 'no%20one%20approaching%20the%20individual' })
+(loop_757_sink: BehaviorSink)
+(loop_757_start: BehaviorStart { loopId: 757, loopName: 'The%20Phone-Clutch%20Loop', given: 'Holding%20a%20smartphone%20like%20a%20weapon%2Fshield', when: 'in%20a%20social%20setting', then: 'it%20signals%20%22Unavailable%22%20or%20%22Bored%22%20(The%20Digital%20Wall%20Operator)', result: 'no%20one%20approaching%20the%20individual', operatorName: 'The%20Digital%20Wall%20Operator', operatorMechanism: 'it%20signals%20%22Unavailable%22%20or%20%22Bored%22', origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Set%20intentional%20friction%20for%20problematic%20tech%20behaviors', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_757_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_757_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Unavailable%22%20or%20%22Bored%22%20(The%20Digital%20Wall%20Operator)' })
+(loop_757_verdict: BehaviorVerdict { loopId: 757, loopName: 'The%20Phone-Clutch%20Loop', then: 'it%20signals%20%22Unavailable%22%20or%20%22Bored%22%20(The%20Digital%20Wall%20Operator)', result: 'no%20one%20approaching%20the%20individual', operatorName: 'The%20Digital%20Wall%20Operator', operatorMechanism: 'it%20signals%20%22Unavailable%22%20or%20%22Bored%22', origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_757_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20social%20setting' })
+
+// Topology
+(loop_757_start)-[:PROCESS]->(loop_757_given_gate)
+(loop_757_given_gate)-[:PROCESS { case: "ok" }]->(loop_757_when_gate)
+(loop_757_given_gate)-[:PROCESS { case: "err" }]->(loop_757_inactive)
+(loop_757_when_gate)-[:PROCESS { case: "ok" }]->(loop_757_context)
+(loop_757_when_gate)-[:PROCESS { case: "err" }]->(loop_757_inactive)
+(loop_757_context)-[:FORK { strategy: "behavior-branches" }]->(loop_757_context_branch | loop_757_then_branch | loop_757_operator_branch | loop_757_result_branch | loop_757_taxonomy_branch | loop_757_intervention_recognize | loop_757_intervention_interdict | loop_757_intervention_minimize)
+(loop_757_context_branch | loop_757_then_branch | loop_757_operator_branch | loop_757_result_branch | loop_757_taxonomy_branch | loop_757_intervention_recognize | loop_757_intervention_interdict | loop_757_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_757_verdict)
+(loop_757_inactive)-[:PROCESS]->(loop_757_sink)
+(loop_757_verdict)-[:PROCESS]->(loop_757_sink)
+(loop_757_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_757_then_branch)
+(loop_757_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_757_then_branch)
+(loop_757_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_757_then_branch)

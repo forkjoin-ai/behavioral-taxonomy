@@ -1,0 +1,31 @@
+// behavioral-loop-481.gg
+// Executable Gnosis projection for The Alien Loop.
+
+// Nodes
+(loop_481_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_481_context_branch: BehaviorEmit { emission: 'context' })
+(loop_481_given_gate: BehaviorAssess { stage: 'given', text: 'Wide-set%20eyes%20(Inter-pupillary%20distance%20%3E%20average)' })
+(loop_481_inactive: BehaviorTerminal { loopId: 481, loopName: 'The%20Alien%20Loop' })
+(loop_481_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_481_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20spatial%20behaviors%20in%20group%20dynamics' })
+(loop_481_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Trust%2FInnocence%20Operator', mechanism: 'the%20face%20looks%20%22Exotic%2C%22%20%22Fetal%2C%22%20or%20%22Prey-like%22' })
+(loop_481_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20trusted%20easily%2C%20as%20they%20lack%20the%20%22predatory%22%20forward-facing%20gaze' })
+(loop_481_sink: BehaviorSink)
+(loop_481_start: BehaviorStart { loopId: 481, loopName: 'The%20Alien%20Loop', given: 'Wide-set%20eyes%20(Inter-pupillary%20distance%20%3E%20average)', when: 'making%20eye%20contact', then: 'the%20face%20looks%20%22Exotic%2C%22%20%22Fetal%2C%22%20or%20%22Prey-like%22%20(The%20Trust%2FInnocence%20Operator)', result: 'the%20individual%20being%20trusted%20easily%2C%20as%20they%20lack%20the%20%22predatory%22%20forward-facing%20gaze', operatorName: 'The%20Trust%2FInnocence%20Operator', operatorMechanism: 'the%20face%20looks%20%22Exotic%2C%22%20%22Fetal%2C%22%20or%20%22Prey-like%22', origin: 'BEHAVIORAL', modality: 'PROXEMIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20spatial%20behaviors%20in%20group%20dynamics', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_481_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'PROXEMIC', mutability: '1', valences: 'TRUST' })
+(loop_481_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Exotic%2C%22%20%22Fetal%2C%22%20or%20%22Prey-like%22%20(The%20Trust%2FInnocence%20Operator)' })
+(loop_481_verdict: BehaviorVerdict { loopId: 481, loopName: 'The%20Alien%20Loop', then: 'the%20face%20looks%20%22Exotic%2C%22%20%22Fetal%2C%22%20or%20%22Prey-like%22%20(The%20Trust%2FInnocence%20Operator)', result: 'the%20individual%20being%20trusted%20easily%2C%20as%20they%20lack%20the%20%22predatory%22%20forward-facing%20gaze', operatorName: 'The%20Trust%2FInnocence%20Operator', operatorMechanism: 'the%20face%20looks%20%22Exotic%2C%22%20%22Fetal%2C%22%20or%20%22Prey-like%22', origin: 'BEHAVIORAL', modality: 'PROXEMIC', mutability: '1', valences: 'TRUST' })
+(loop_481_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_481_start)-[:PROCESS]->(loop_481_given_gate)
+(loop_481_given_gate)-[:PROCESS { case: "ok" }]->(loop_481_when_gate)
+(loop_481_given_gate)-[:PROCESS { case: "err" }]->(loop_481_inactive)
+(loop_481_when_gate)-[:PROCESS { case: "ok" }]->(loop_481_context)
+(loop_481_when_gate)-[:PROCESS { case: "err" }]->(loop_481_inactive)
+(loop_481_context)-[:FORK { strategy: "behavior-branches" }]->(loop_481_context_branch | loop_481_then_branch | loop_481_operator_branch | loop_481_result_branch | loop_481_taxonomy_branch | loop_481_intervention_recognize | loop_481_intervention_leverage)
+(loop_481_context_branch | loop_481_then_branch | loop_481_operator_branch | loop_481_result_branch | loop_481_taxonomy_branch | loop_481_intervention_recognize | loop_481_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_481_verdict)
+(loop_481_inactive)-[:PROCESS]->(loop_481_sink)
+(loop_481_verdict)-[:PROCESS]->(loop_481_sink)
+(loop_481_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_481_then_branch)
+(loop_481_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_481_result_branch)

@@ -1,0 +1,31 @@
+// behavioral-loop-394.gg
+// Executable Gnosis projection for The Nose Touch Loop.
+
+// Nodes
+(loop_394_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_394_context_branch: BehaviorEmit { emission: 'context' })
+(loop_394_given_gate: BehaviorAssess { stage: 'given', text: 'Increased%20blood%20flow%20to%20nose%20erectile%20tissue%20during%20stress' })
+(loop_394_inactive: BehaviorTerminal { loopId: 394, loopName: 'The%20Nose%20Touch%20Loop' })
+(loop_394_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_394_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_394_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%20Operator', mechanism: 'the%20individual%20scratches%20their%20nose' })
+(loop_394_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20loss%20of%20trust%20by%20body-language%20savvy%20observers' })
+(loop_394_sink: BehaviorSink)
+(loop_394_start: BehaviorStart { loopId: 394, loopName: 'The%20Nose%20Touch%20Loop', given: 'Increased%20blood%20flow%20to%20nose%20erectile%20tissue%20during%20stress', when: 'lying%20or%20exaggerating', then: 'the%20individual%20scratches%20their%20nose%20(The%20Deception%20Operator)', result: 'immediate%20loss%20of%20trust%20by%20body-language%20savvy%20observers', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'the%20individual%20scratches%20their%20nose', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_394_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_394_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20scratches%20their%20nose%20(The%20Deception%20Operator)' })
+(loop_394_verdict: BehaviorVerdict { loopId: 394, loopName: 'The%20Nose%20Touch%20Loop', then: 'the%20individual%20scratches%20their%20nose%20(The%20Deception%20Operator)', result: 'immediate%20loss%20of%20trust%20by%20body-language%20savvy%20observers', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'the%20individual%20scratches%20their%20nose', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_394_when_gate: BehaviorAssess { stage: 'when', text: 'lying%20or%20exaggerating' })
+
+// Topology
+(loop_394_start)-[:PROCESS]->(loop_394_given_gate)
+(loop_394_given_gate)-[:PROCESS { case: "ok" }]->(loop_394_when_gate)
+(loop_394_given_gate)-[:PROCESS { case: "err" }]->(loop_394_inactive)
+(loop_394_when_gate)-[:PROCESS { case: "ok" }]->(loop_394_context)
+(loop_394_when_gate)-[:PROCESS { case: "err" }]->(loop_394_inactive)
+(loop_394_context)-[:FORK { strategy: "behavior-branches" }]->(loop_394_context_branch | loop_394_then_branch | loop_394_operator_branch | loop_394_result_branch | loop_394_taxonomy_branch | loop_394_intervention_recognize | loop_394_intervention_leverage)
+(loop_394_context_branch | loop_394_then_branch | loop_394_operator_branch | loop_394_result_branch | loop_394_taxonomy_branch | loop_394_intervention_recognize | loop_394_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_394_verdict)
+(loop_394_inactive)-[:PROCESS]->(loop_394_sink)
+(loop_394_verdict)-[:PROCESS]->(loop_394_sink)
+(loop_394_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_394_then_branch)
+(loop_394_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_394_result_branch)

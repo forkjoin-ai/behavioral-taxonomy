@@ -1,0 +1,31 @@
+// behavioral-loop-462.gg
+// Executable Gnosis projection for The Whine Loop.
+
+// Nodes
+(loop_462_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_462_context_branch: BehaviorEmit { emission: 'context' })
+(loop_462_given_gate: BehaviorAssess { stage: 'given', text: 'Constricted%20pharynx%20%2B%20high%20placement' })
+(loop_462_inactive: BehaviorTerminal { loopId: 462, loopName: 'The%20Whine%20Loop' })
+(loop_462_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_462_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_462_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Brat%20Operator', mechanism: 'the%20sound%20triggers%20%22Parental%20Annoyance%22' })
+(loop_462_result_branch: BehaviorEmit { emission: 'result', text: 'automatic%20refusal%20of%20requests%20by%20authority%20figures' })
+(loop_462_sink: BehaviorSink)
+(loop_462_start: BehaviorStart { loopId: 462, loopName: 'The%20Whine%20Loop', given: 'Constricted%20pharynx%20%2B%20high%20placement', when: 'complaining%20or%20asking%20for%20something', then: 'the%20sound%20triggers%20%22Parental%20Annoyance%22%20(The%20Brat%20Operator)', result: 'automatic%20refusal%20of%20requests%20by%20authority%20figures', operatorName: 'The%20Brat%20Operator', operatorMechanism: 'the%20sound%20triggers%20%22Parental%20Annoyance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_462_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_462_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20triggers%20%22Parental%20Annoyance%22%20(The%20Brat%20Operator)' })
+(loop_462_verdict: BehaviorVerdict { loopId: 462, loopName: 'The%20Whine%20Loop', then: 'the%20sound%20triggers%20%22Parental%20Annoyance%22%20(The%20Brat%20Operator)', result: 'automatic%20refusal%20of%20requests%20by%20authority%20figures', operatorName: 'The%20Brat%20Operator', operatorMechanism: 'the%20sound%20triggers%20%22Parental%20Annoyance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_462_when_gate: BehaviorAssess { stage: 'when', text: 'complaining%20or%20asking%20for%20something' })
+
+// Topology
+(loop_462_start)-[:PROCESS]->(loop_462_given_gate)
+(loop_462_given_gate)-[:PROCESS { case: "ok" }]->(loop_462_when_gate)
+(loop_462_given_gate)-[:PROCESS { case: "err" }]->(loop_462_inactive)
+(loop_462_when_gate)-[:PROCESS { case: "ok" }]->(loop_462_context)
+(loop_462_when_gate)-[:PROCESS { case: "err" }]->(loop_462_inactive)
+(loop_462_context)-[:FORK { strategy: "behavior-branches" }]->(loop_462_context_branch | loop_462_then_branch | loop_462_operator_branch | loop_462_result_branch | loop_462_taxonomy_branch | loop_462_intervention_recognize | loop_462_intervention_leverage)
+(loop_462_context_branch | loop_462_then_branch | loop_462_operator_branch | loop_462_result_branch | loop_462_taxonomy_branch | loop_462_intervention_recognize | loop_462_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_462_verdict)
+(loop_462_inactive)-[:PROCESS]->(loop_462_sink)
+(loop_462_verdict)-[:PROCESS]->(loop_462_sink)
+(loop_462_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_462_then_branch)
+(loop_462_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_462_result_branch)

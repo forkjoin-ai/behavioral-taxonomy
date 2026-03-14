@@ -1,0 +1,33 @@
+// behavioral-loop-172.gg
+// Executable Gnosis projection for The Alopecia Loop.
+
+// Nodes
+(loop_172_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_172_context_branch: BehaviorEmit { emission: 'context' })
+(loop_172_given_gate: BehaviorAssess { stage: 'given', text: 'Complete%20lack%20of%20eyebrows%2Flashes' })
+(loop_172_inactive: BehaviorTerminal { loopId: 172, loopName: 'The%20Alopecia%20Loop' })
+(loop_172_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_172_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_172_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_172_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Confusion%20Operator', mechanism: 'the%20face%20lacks%20%22Contrast%20Markers%2C%22%20making%20expressions%20hard%20to%20read' })
+(loop_172_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20using%20**Verbal%20Exaggeration**%20to%20ensure%20feelings%20are%20understood' })
+(loop_172_sink: BehaviorSink)
+(loop_172_start: BehaviorStart { loopId: 172, loopName: 'The%20Alopecia%20Loop', given: 'Complete%20lack%20of%20eyebrows%2Flashes', when: 'communicating%20emotion', then: 'the%20face%20lacks%20%22Contrast%20Markers%2C%22%20making%20expressions%20hard%20to%20read%20(The%20Confusion%20Operator)', result: 'the%20individual%20using%20**Verbal%20Exaggeration**%20to%20ensure%20feelings%20are%20understood', operatorName: 'The%20Confusion%20Operator', operatorMechanism: 'the%20face%20lacks%20%22Contrast%20Markers%2C%22%20making%20expressions%20hard%20to%20read', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_172_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_172_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20lacks%20%22Contrast%20Markers%2C%22%20making%20expressions%20hard%20to%20read%20(The%20Confusion%20Operator)' })
+(loop_172_verdict: BehaviorVerdict { loopId: 172, loopName: 'The%20Alopecia%20Loop', then: 'the%20face%20lacks%20%22Contrast%20Markers%2C%22%20making%20expressions%20hard%20to%20read%20(The%20Confusion%20Operator)', result: 'the%20individual%20using%20**Verbal%20Exaggeration**%20to%20ensure%20feelings%20are%20understood', operatorName: 'The%20Confusion%20Operator', operatorMechanism: 'the%20face%20lacks%20%22Contrast%20Markers%2C%22%20making%20expressions%20hard%20to%20read', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_172_when_gate: BehaviorAssess { stage: 'when', text: 'communicating%20emotion' })
+
+// Topology
+(loop_172_start)-[:PROCESS]->(loop_172_given_gate)
+(loop_172_given_gate)-[:PROCESS { case: "ok" }]->(loop_172_when_gate)
+(loop_172_given_gate)-[:PROCESS { case: "err" }]->(loop_172_inactive)
+(loop_172_when_gate)-[:PROCESS { case: "ok" }]->(loop_172_context)
+(loop_172_when_gate)-[:PROCESS { case: "err" }]->(loop_172_inactive)
+(loop_172_context)-[:FORK { strategy: "behavior-branches" }]->(loop_172_context_branch | loop_172_then_branch | loop_172_operator_branch | loop_172_result_branch | loop_172_taxonomy_branch | loop_172_intervention_recognize | loop_172_intervention_interdict | loop_172_intervention_minimize)
+(loop_172_context_branch | loop_172_then_branch | loop_172_operator_branch | loop_172_result_branch | loop_172_taxonomy_branch | loop_172_intervention_recognize | loop_172_intervention_interdict | loop_172_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_172_verdict)
+(loop_172_inactive)-[:PROCESS]->(loop_172_sink)
+(loop_172_verdict)-[:PROCESS]->(loop_172_sink)
+(loop_172_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_172_then_branch)
+(loop_172_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_172_then_branch)
+(loop_172_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_172_then_branch)

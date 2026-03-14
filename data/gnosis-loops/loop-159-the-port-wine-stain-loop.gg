@@ -1,0 +1,33 @@
+// behavioral-loop-159.gg
+// Executable Gnosis projection for The Port Wine Stain Loop.
+
+// Nodes
+(loop_159_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_159_context_branch: BehaviorEmit { emission: 'context' })
+(loop_159_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20vascular%20birthmark%20on%20face' })
+(loop_159_inactive: BehaviorTerminal { loopId: 159, loopName: 'The%20Port%20Wine%20Stain%20Loop' })
+(loop_159_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_159_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_159_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_159_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Distraction%20Operator', mechanism: "the%20observer's%20eyes%20dart%20to%20the%20mark" })
+(loop_159_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20developing%20a%20**Direct%2FConfrontational%20Gaze**%20to%20force%20eye%20contact' })
+(loop_159_sink: BehaviorSink)
+(loop_159_start: BehaviorStart { loopId: 159, loopName: 'The%20Port%20Wine%20Stain%20Loop', given: 'Visible%20vascular%20birthmark%20on%20face', when: 'meeting%20strangers', then: "the%20observer's%20eyes%20dart%20to%20the%20mark%20(The%20Distraction%20Operator)", result: 'the%20individual%20developing%20a%20**Direct%2FConfrontational%20Gaze**%20to%20force%20eye%20contact', operatorName: 'The%20Distraction%20Operator', operatorMechanism: "the%20observer's%20eyes%20dart%20to%20the%20mark", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_159_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_159_then_branch: BehaviorEmit { emission: 'then', text: "the%20observer's%20eyes%20dart%20to%20the%20mark%20(The%20Distraction%20Operator)" })
+(loop_159_verdict: BehaviorVerdict { loopId: 159, loopName: 'The%20Port%20Wine%20Stain%20Loop', then: "the%20observer's%20eyes%20dart%20to%20the%20mark%20(The%20Distraction%20Operator)", result: 'the%20individual%20developing%20a%20**Direct%2FConfrontational%20Gaze**%20to%20force%20eye%20contact', operatorName: 'The%20Distraction%20Operator', operatorMechanism: "the%20observer's%20eyes%20dart%20to%20the%20mark", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_159_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20strangers' })
+
+// Topology
+(loop_159_start)-[:PROCESS]->(loop_159_given_gate)
+(loop_159_given_gate)-[:PROCESS { case: "ok" }]->(loop_159_when_gate)
+(loop_159_given_gate)-[:PROCESS { case: "err" }]->(loop_159_inactive)
+(loop_159_when_gate)-[:PROCESS { case: "ok" }]->(loop_159_context)
+(loop_159_when_gate)-[:PROCESS { case: "err" }]->(loop_159_inactive)
+(loop_159_context)-[:FORK { strategy: "behavior-branches" }]->(loop_159_context_branch | loop_159_then_branch | loop_159_operator_branch | loop_159_result_branch | loop_159_taxonomy_branch | loop_159_intervention_recognize | loop_159_intervention_interdict | loop_159_intervention_minimize)
+(loop_159_context_branch | loop_159_then_branch | loop_159_operator_branch | loop_159_result_branch | loop_159_taxonomy_branch | loop_159_intervention_recognize | loop_159_intervention_interdict | loop_159_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_159_verdict)
+(loop_159_inactive)-[:PROCESS]->(loop_159_sink)
+(loop_159_verdict)-[:PROCESS]->(loop_159_sink)
+(loop_159_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_159_then_branch)
+(loop_159_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_159_then_branch)
+(loop_159_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_159_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-693.gg
+// Executable Gnosis projection for The Steeple Loop.
+
+// Nodes
+(loop_693_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_693_context_branch: BehaviorEmit { emission: 'context' })
+(loop_693_given_gate: BehaviorAssess { stage: 'given', text: 'Fingertips%20touching%20in%20a%20tent%20shape' })
+(loop_693_inactive: BehaviorTerminal { loopId: 693, loopName: 'The%20Steeple%20Loop' })
+(loop_693_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_693_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_693_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_693_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Burns%20Operator', mechanism: 'it%20signals%20%22Calculation%22%20and%20%22Superiority%22' })
+(loop_693_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20feeling%20judged%20or%20analyzed' })
+(loop_693_sink: BehaviorSink)
+(loop_693_start: BehaviorStart { loopId: 693, loopName: 'The%20Steeple%20Loop', given: 'Fingertips%20touching%20in%20a%20tent%20shape', when: 'listening', then: 'it%20signals%20%22Calculation%22%20and%20%22Superiority%22%20(The%20Burns%20Operator)', result: 'the%20speaker%20feeling%20judged%20or%20analyzed', operatorName: 'The%20Burns%20Operator', operatorMechanism: 'it%20signals%20%22Calculation%22%20and%20%22Superiority%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_693_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_693_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Calculation%22%20and%20%22Superiority%22%20(The%20Burns%20Operator)' })
+(loop_693_verdict: BehaviorVerdict { loopId: 693, loopName: 'The%20Steeple%20Loop', then: 'it%20signals%20%22Calculation%22%20and%20%22Superiority%22%20(The%20Burns%20Operator)', result: 'the%20speaker%20feeling%20judged%20or%20analyzed', operatorName: 'The%20Burns%20Operator', operatorMechanism: 'it%20signals%20%22Calculation%22%20and%20%22Superiority%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_693_when_gate: BehaviorAssess { stage: 'when', text: 'listening' })
+
+// Topology
+(loop_693_start)-[:PROCESS]->(loop_693_given_gate)
+(loop_693_given_gate)-[:PROCESS { case: "ok" }]->(loop_693_when_gate)
+(loop_693_given_gate)-[:PROCESS { case: "err" }]->(loop_693_inactive)
+(loop_693_when_gate)-[:PROCESS { case: "ok" }]->(loop_693_context)
+(loop_693_when_gate)-[:PROCESS { case: "err" }]->(loop_693_inactive)
+(loop_693_context)-[:FORK { strategy: "behavior-branches" }]->(loop_693_context_branch | loop_693_then_branch | loop_693_operator_branch | loop_693_result_branch | loop_693_taxonomy_branch | loop_693_intervention_recognize | loop_693_intervention_interdict | loop_693_intervention_minimize)
+(loop_693_context_branch | loop_693_then_branch | loop_693_operator_branch | loop_693_result_branch | loop_693_taxonomy_branch | loop_693_intervention_recognize | loop_693_intervention_interdict | loop_693_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_693_verdict)
+(loop_693_inactive)-[:PROCESS]->(loop_693_sink)
+(loop_693_verdict)-[:PROCESS]->(loop_693_sink)
+(loop_693_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_693_then_branch)
+(loop_693_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_693_then_branch)
+(loop_693_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_693_then_branch)

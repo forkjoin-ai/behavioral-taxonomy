@@ -1,0 +1,31 @@
+// behavioral-loop-650.gg
+// Executable Gnosis projection for The Fumble Loop.
+
+// Nodes
+(loop_650_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_650_context_branch: BehaviorEmit { emission: 'context' })
+(loop_650_given_gate: BehaviorAssess { stage: 'given', text: 'Poor%20fine%20motor%20coordination' })
+(loop_650_inactive: BehaviorTerminal { loopId: 650, loopName: 'The%20Fumble%20Loop' })
+(loop_650_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_650_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_650_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Butterfingers%20Operator', mechanism: 'the%20object%20is%20dropped' })
+(loop_650_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20not%20being%20trusted%20with%20valuable%2Ffragile%20items' })
+(loop_650_sink: BehaviorSink)
+(loop_650_start: BehaviorStart { loopId: 650, loopName: 'The%20Fumble%20Loop', given: 'Poor%20fine%20motor%20coordination', when: 'handing%20over%20a%20credit%20card%20or%20keys', then: 'the%20object%20is%20dropped%20(The%20Butterfingers%20Operator)', result: 'the%20individual%20not%20being%20trusted%20with%20valuable%2Ffragile%20items', operatorName: 'The%20Butterfingers%20Operator', operatorMechanism: 'the%20object%20is%20dropped', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_650_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_650_then_branch: BehaviorEmit { emission: 'then', text: 'the%20object%20is%20dropped%20(The%20Butterfingers%20Operator)' })
+(loop_650_verdict: BehaviorVerdict { loopId: 650, loopName: 'The%20Fumble%20Loop', then: 'the%20object%20is%20dropped%20(The%20Butterfingers%20Operator)', result: 'the%20individual%20not%20being%20trusted%20with%20valuable%2Ffragile%20items', operatorName: 'The%20Butterfingers%20Operator', operatorMechanism: 'the%20object%20is%20dropped', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_650_when_gate: BehaviorAssess { stage: 'when', text: 'handing%20over%20a%20credit%20card%20or%20keys' })
+
+// Topology
+(loop_650_start)-[:PROCESS]->(loop_650_given_gate)
+(loop_650_given_gate)-[:PROCESS { case: "ok" }]->(loop_650_when_gate)
+(loop_650_given_gate)-[:PROCESS { case: "err" }]->(loop_650_inactive)
+(loop_650_when_gate)-[:PROCESS { case: "ok" }]->(loop_650_context)
+(loop_650_when_gate)-[:PROCESS { case: "err" }]->(loop_650_inactive)
+(loop_650_context)-[:FORK { strategy: "behavior-branches" }]->(loop_650_context_branch | loop_650_then_branch | loop_650_operator_branch | loop_650_result_branch | loop_650_taxonomy_branch | loop_650_intervention_recognize | loop_650_intervention_leverage)
+(loop_650_context_branch | loop_650_then_branch | loop_650_operator_branch | loop_650_result_branch | loop_650_taxonomy_branch | loop_650_intervention_recognize | loop_650_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_650_verdict)
+(loop_650_inactive)-[:PROCESS]->(loop_650_sink)
+(loop_650_verdict)-[:PROCESS]->(loop_650_sink)
+(loop_650_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_650_then_branch)
+(loop_650_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_650_result_branch)

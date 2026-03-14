@@ -1,0 +1,33 @@
+// behavioral-loop-781.gg
+// Executable Gnosis projection for The Desk Hunch Loop.
+
+// Nodes
+(loop_781_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_781_context_branch: BehaviorEmit { emission: 'context' })
+(loop_781_given_gate: BehaviorAssess { stage: 'given', text: 'C-shaped%20spine%20curvature%20while%20sitting' })
+(loop_781_inactive: BehaviorTerminal { loopId: 781, loopName: 'The%20Desk%20Hunch%20Loop' })
+(loop_781_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_781_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_781_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_781_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Gamer%20Operator', mechanism: 'the%20silhouette%20signals%20%22Protection%22%20or%20%22Isolation%22' })
+(loop_781_result_branch: BehaviorEmit { emission: 'result', text: 'people%20hesitating%20to%20interrupt%2C%20leading%20to%20social%20isolation' })
+(loop_781_sink: BehaviorSink)
+(loop_781_start: BehaviorStart { loopId: 781, loopName: 'The%20Desk%20Hunch%20Loop', given: 'C-shaped%20spine%20curvature%20while%20sitting', when: 'focused%20on%20a%20screen', then: 'the%20silhouette%20signals%20%22Protection%22%20or%20%22Isolation%22%20(The%20Gamer%20Operator)', result: 'people%20hesitating%20to%20interrupt%2C%20leading%20to%20social%20isolation', operatorName: 'The%20Gamer%20Operator', operatorMechanism: 'the%20silhouette%20signals%20%22Protection%22%20or%20%22Isolation%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_781_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_781_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20signals%20%22Protection%22%20or%20%22Isolation%22%20(The%20Gamer%20Operator)' })
+(loop_781_verdict: BehaviorVerdict { loopId: 781, loopName: 'The%20Desk%20Hunch%20Loop', then: 'the%20silhouette%20signals%20%22Protection%22%20or%20%22Isolation%22%20(The%20Gamer%20Operator)', result: 'people%20hesitating%20to%20interrupt%2C%20leading%20to%20social%20isolation', operatorName: 'The%20Gamer%20Operator', operatorMechanism: 'the%20silhouette%20signals%20%22Protection%22%20or%20%22Isolation%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_781_when_gate: BehaviorAssess { stage: 'when', text: 'focused%20on%20a%20screen' })
+
+// Topology
+(loop_781_start)-[:PROCESS]->(loop_781_given_gate)
+(loop_781_given_gate)-[:PROCESS { case: "ok" }]->(loop_781_when_gate)
+(loop_781_given_gate)-[:PROCESS { case: "err" }]->(loop_781_inactive)
+(loop_781_when_gate)-[:PROCESS { case: "ok" }]->(loop_781_context)
+(loop_781_when_gate)-[:PROCESS { case: "err" }]->(loop_781_inactive)
+(loop_781_context)-[:FORK { strategy: "behavior-branches" }]->(loop_781_context_branch | loop_781_then_branch | loop_781_operator_branch | loop_781_result_branch | loop_781_taxonomy_branch | loop_781_intervention_recognize | loop_781_intervention_interdict | loop_781_intervention_minimize)
+(loop_781_context_branch | loop_781_then_branch | loop_781_operator_branch | loop_781_result_branch | loop_781_taxonomy_branch | loop_781_intervention_recognize | loop_781_intervention_interdict | loop_781_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_781_verdict)
+(loop_781_inactive)-[:PROCESS]->(loop_781_sink)
+(loop_781_verdict)-[:PROCESS]->(loop_781_sink)
+(loop_781_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_781_then_branch)
+(loop_781_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_781_then_branch)
+(loop_781_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_781_then_branch)

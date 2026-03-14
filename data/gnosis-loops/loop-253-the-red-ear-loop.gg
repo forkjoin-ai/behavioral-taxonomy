@@ -1,0 +1,33 @@
+// behavioral-loop-253.gg
+// Executable Gnosis projection for The Red Ear Loop.
+
+// Nodes
+(loop_253_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_253_context_branch: BehaviorEmit { emission: 'context' })
+(loop_253_given_gate: BehaviorAssess { stage: 'given', text: 'Vasodilation%20of%20ears%20during%20mild%20stress' })
+(loop_253_inactive: BehaviorTerminal { loopId: 253, loopName: 'The%20Red%20Ear%20Loop' })
+(loop_253_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_253_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_253_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_253_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tell%20Operator', mechanism: 'the%20ears%20act%20as%20a%20neon%20sign%20of%20%22Guilt%22' })
+(loop_253_result_branch: BehaviorEmit { emission: 'result', text: 'an%20inability%20to%20keep%20secrets%20or%20play%20poker' })
+(loop_253_sink: BehaviorSink)
+(loop_253_start: BehaviorStart { loopId: 253, loopName: 'The%20Red%20Ear%20Loop', given: 'Vasodilation%20of%20ears%20during%20mild%20stress', when: 'lying%20or%20embarrassed', then: 'the%20ears%20act%20as%20a%20neon%20sign%20of%20%22Guilt%22%20(The%20Tell%20Operator)', result: 'an%20inability%20to%20keep%20secrets%20or%20play%20poker', operatorName: 'The%20Tell%20Operator', operatorMechanism: 'the%20ears%20act%20as%20a%20neon%20sign%20of%20%22Guilt%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_253_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_253_then_branch: BehaviorEmit { emission: 'then', text: 'the%20ears%20act%20as%20a%20neon%20sign%20of%20%22Guilt%22%20(The%20Tell%20Operator)' })
+(loop_253_verdict: BehaviorVerdict { loopId: 253, loopName: 'The%20Red%20Ear%20Loop', then: 'the%20ears%20act%20as%20a%20neon%20sign%20of%20%22Guilt%22%20(The%20Tell%20Operator)', result: 'an%20inability%20to%20keep%20secrets%20or%20play%20poker', operatorName: 'The%20Tell%20Operator', operatorMechanism: 'the%20ears%20act%20as%20a%20neon%20sign%20of%20%22Guilt%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_253_when_gate: BehaviorAssess { stage: 'when', text: 'lying%20or%20embarrassed' })
+
+// Topology
+(loop_253_start)-[:PROCESS]->(loop_253_given_gate)
+(loop_253_given_gate)-[:PROCESS { case: "ok" }]->(loop_253_when_gate)
+(loop_253_given_gate)-[:PROCESS { case: "err" }]->(loop_253_inactive)
+(loop_253_when_gate)-[:PROCESS { case: "ok" }]->(loop_253_context)
+(loop_253_when_gate)-[:PROCESS { case: "err" }]->(loop_253_inactive)
+(loop_253_context)-[:FORK { strategy: "behavior-branches" }]->(loop_253_context_branch | loop_253_then_branch | loop_253_operator_branch | loop_253_result_branch | loop_253_taxonomy_branch | loop_253_intervention_recognize | loop_253_intervention_interdict | loop_253_intervention_minimize)
+(loop_253_context_branch | loop_253_then_branch | loop_253_operator_branch | loop_253_result_branch | loop_253_taxonomy_branch | loop_253_intervention_recognize | loop_253_intervention_interdict | loop_253_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_253_verdict)
+(loop_253_inactive)-[:PROCESS]->(loop_253_sink)
+(loop_253_verdict)-[:PROCESS]->(loop_253_sink)
+(loop_253_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_253_then_branch)
+(loop_253_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_253_then_branch)
+(loop_253_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_253_then_branch)

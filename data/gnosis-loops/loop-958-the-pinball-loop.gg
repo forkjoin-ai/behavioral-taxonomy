@@ -1,0 +1,33 @@
+// behavioral-loop-958.gg
+// Executable Gnosis projection for The Pinball Loop.
+
+// Nodes
+(loop_958_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_958_context_branch: BehaviorEmit { emission: 'context' })
+(loop_958_given_gate: BehaviorAssess { stage: 'given', text: 'Rapid%20darting%20of%20eyes%20around%20the%20room' })
+(loop_958_inactive: BehaviorTerminal { loopId: 958, loopName: 'The%20Pinball%20Loop' })
+(loop_958_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Create%20transition%20rituals%20between%20contexts' })
+(loop_958_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_958_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_958_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Prey%20Operator', mechanism: 'it%20signals%20%22Looking%20for%20Exits%22%20or%20%22Threats%22' })
+(loop_958_result_branch: BehaviorEmit { emission: 'result', text: 'making%20everyone%20else%20nervous' })
+(loop_958_sink: BehaviorSink)
+(loop_958_start: BehaviorStart { loopId: 958, loopName: 'The%20Pinball%20Loop', given: 'Rapid%20darting%20of%20eyes%20around%20the%20room', when: 'supposedly%20relaxed', then: 'it%20signals%20%22Looking%20for%20Exits%22%20or%20%22Threats%22%20(The%20Prey%20Operator)', result: 'making%20everyone%20else%20nervous', operatorName: 'The%20Prey%20Operator', operatorMechanism: 'it%20signals%20%22Looking%20for%20Exits%22%20or%20%22Threats%22', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Create%20transition%20rituals%20between%20contexts', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_958_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_958_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Looking%20for%20Exits%22%20or%20%22Threats%22%20(The%20Prey%20Operator)' })
+(loop_958_verdict: BehaviorVerdict { loopId: 958, loopName: 'The%20Pinball%20Loop', then: 'it%20signals%20%22Looking%20for%20Exits%22%20or%20%22Threats%22%20(The%20Prey%20Operator)', result: 'making%20everyone%20else%20nervous', operatorName: 'The%20Prey%20Operator', operatorMechanism: 'it%20signals%20%22Looking%20for%20Exits%22%20or%20%22Threats%22', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_958_when_gate: BehaviorAssess { stage: 'when', text: 'supposedly%20relaxed' })
+
+// Topology
+(loop_958_start)-[:PROCESS]->(loop_958_given_gate)
+(loop_958_given_gate)-[:PROCESS { case: "ok" }]->(loop_958_when_gate)
+(loop_958_given_gate)-[:PROCESS { case: "err" }]->(loop_958_inactive)
+(loop_958_when_gate)-[:PROCESS { case: "ok" }]->(loop_958_context)
+(loop_958_when_gate)-[:PROCESS { case: "err" }]->(loop_958_inactive)
+(loop_958_context)-[:FORK { strategy: "behavior-branches" }]->(loop_958_context_branch | loop_958_then_branch | loop_958_operator_branch | loop_958_result_branch | loop_958_taxonomy_branch | loop_958_intervention_recognize | loop_958_intervention_interdict | loop_958_intervention_minimize)
+(loop_958_context_branch | loop_958_then_branch | loop_958_operator_branch | loop_958_result_branch | loop_958_taxonomy_branch | loop_958_intervention_recognize | loop_958_intervention_interdict | loop_958_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_958_verdict)
+(loop_958_inactive)-[:PROCESS]->(loop_958_sink)
+(loop_958_verdict)-[:PROCESS]->(loop_958_sink)
+(loop_958_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_958_then_branch)
+(loop_958_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_958_then_branch)
+(loop_958_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_958_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-305.gg
+// Executable Gnosis projection for The Ceiling Stare Loop.
+
+// Nodes
+(loop_305_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_305_context_branch: BehaviorEmit { emission: 'context' })
+(loop_305_given_gate: BehaviorAssess { stage: 'given', text: 'NLP%20habit%20of%20looking%20up%20to%20access%20memory' })
+(loop_305_inactive: BehaviorTerminal { loopId: 305, loopName: 'The%20Ceiling%20Stare%20Loop' })
+(loop_305_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_305_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_305_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_305_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Distracted%20Operator', mechanism: 'the%20eyes%20roll%20back%2Fup' })
+(loop_305_result_branch: BehaviorEmit { emission: 'result', text: 'listeners%20thinking%20the%20individual%20is%20%22rolling%20their%20eyes%22%20at%20them' })
+(loop_305_sink: BehaviorSink)
+(loop_305_start: BehaviorStart { loopId: 305, loopName: 'The%20Ceiling%20Stare%20Loop', given: 'NLP%20habit%20of%20looking%20up%20to%20access%20memory', when: 'asked%20a%20question', then: 'the%20eyes%20roll%20back%2Fup%20(The%20Distracted%20Operator)', result: 'listeners%20thinking%20the%20individual%20is%20%22rolling%20their%20eyes%22%20at%20them', operatorName: 'The%20Distracted%20Operator', operatorMechanism: 'the%20eyes%20roll%20back%2Fup', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_305_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_305_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20roll%20back%2Fup%20(The%20Distracted%20Operator)' })
+(loop_305_verdict: BehaviorVerdict { loopId: 305, loopName: 'The%20Ceiling%20Stare%20Loop', then: 'the%20eyes%20roll%20back%2Fup%20(The%20Distracted%20Operator)', result: 'listeners%20thinking%20the%20individual%20is%20%22rolling%20their%20eyes%22%20at%20them', operatorName: 'The%20Distracted%20Operator', operatorMechanism: 'the%20eyes%20roll%20back%2Fup', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_305_when_gate: BehaviorAssess { stage: 'when', text: 'asked%20a%20question' })
+
+// Topology
+(loop_305_start)-[:PROCESS]->(loop_305_given_gate)
+(loop_305_given_gate)-[:PROCESS { case: "ok" }]->(loop_305_when_gate)
+(loop_305_given_gate)-[:PROCESS { case: "err" }]->(loop_305_inactive)
+(loop_305_when_gate)-[:PROCESS { case: "ok" }]->(loop_305_context)
+(loop_305_when_gate)-[:PROCESS { case: "err" }]->(loop_305_inactive)
+(loop_305_context)-[:FORK { strategy: "behavior-branches" }]->(loop_305_context_branch | loop_305_then_branch | loop_305_operator_branch | loop_305_result_branch | loop_305_taxonomy_branch | loop_305_intervention_recognize | loop_305_intervention_interdict | loop_305_intervention_minimize)
+(loop_305_context_branch | loop_305_then_branch | loop_305_operator_branch | loop_305_result_branch | loop_305_taxonomy_branch | loop_305_intervention_recognize | loop_305_intervention_interdict | loop_305_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_305_verdict)
+(loop_305_inactive)-[:PROCESS]->(loop_305_sink)
+(loop_305_verdict)-[:PROCESS]->(loop_305_sink)
+(loop_305_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_305_then_branch)
+(loop_305_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_305_then_branch)
+(loop_305_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_305_then_branch)

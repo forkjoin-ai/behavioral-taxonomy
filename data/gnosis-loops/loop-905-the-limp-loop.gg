@@ -1,0 +1,33 @@
+// behavioral-loop-905.gg
+// Executable Gnosis projection for The Limp Loop.
+
+// Nodes
+(loop_905_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_905_context_branch: BehaviorEmit { emission: 'context' })
+(loop_905_given_gate: BehaviorAssess { stage: 'given', text: 'Shortening%20the%20stance%20phase%20on%20one%20leg%20due%20to%20pain' })
+(loop_905_inactive: BehaviorTerminal { loopId: 905, loopName: 'The%20Limp%20Loop' })
+(loop_905_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_905_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_905_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_905_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Injury%20Operator', mechanism: 'the%20rhythm%20is%20broken' })
+(loop_905_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20viewing%20the%20individual%20as%20%22Vulnerable%22%20or%20%22Damaged.%22' })
+(loop_905_sink: BehaviorSink)
+(loop_905_start: BehaviorStart { loopId: 905, loopName: 'The%20Limp%20Loop', given: 'Shortening%20the%20stance%20phase%20on%20one%20leg%20due%20to%20pain', when: 'walking', then: 'the%20rhythm%20is%20broken%20(The%20Injury%20Operator)', result: 'observers%20viewing%20the%20individual%20as%20%22Vulnerable%22%20or%20%22Damaged.%22', operatorName: 'The%20Injury%20Operator', operatorMechanism: 'the%20rhythm%20is%20broken', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_905_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_905_then_branch: BehaviorEmit { emission: 'then', text: 'the%20rhythm%20is%20broken%20(The%20Injury%20Operator)' })
+(loop_905_verdict: BehaviorVerdict { loopId: 905, loopName: 'The%20Limp%20Loop', then: 'the%20rhythm%20is%20broken%20(The%20Injury%20Operator)', result: 'observers%20viewing%20the%20individual%20as%20%22Vulnerable%22%20or%20%22Damaged.%22', operatorName: 'The%20Injury%20Operator', operatorMechanism: 'the%20rhythm%20is%20broken', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_905_when_gate: BehaviorAssess { stage: 'when', text: 'walking' })
+
+// Topology
+(loop_905_start)-[:PROCESS]->(loop_905_given_gate)
+(loop_905_given_gate)-[:PROCESS { case: "ok" }]->(loop_905_when_gate)
+(loop_905_given_gate)-[:PROCESS { case: "err" }]->(loop_905_inactive)
+(loop_905_when_gate)-[:PROCESS { case: "ok" }]->(loop_905_context)
+(loop_905_when_gate)-[:PROCESS { case: "err" }]->(loop_905_inactive)
+(loop_905_context)-[:FORK { strategy: "behavior-branches" }]->(loop_905_context_branch | loop_905_then_branch | loop_905_operator_branch | loop_905_result_branch | loop_905_taxonomy_branch | loop_905_intervention_recognize | loop_905_intervention_interdict | loop_905_intervention_minimize)
+(loop_905_context_branch | loop_905_then_branch | loop_905_operator_branch | loop_905_result_branch | loop_905_taxonomy_branch | loop_905_intervention_recognize | loop_905_intervention_interdict | loop_905_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_905_verdict)
+(loop_905_inactive)-[:PROCESS]->(loop_905_sink)
+(loop_905_verdict)-[:PROCESS]->(loop_905_sink)
+(loop_905_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_905_then_branch)
+(loop_905_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_905_then_branch)
+(loop_905_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_905_then_branch)

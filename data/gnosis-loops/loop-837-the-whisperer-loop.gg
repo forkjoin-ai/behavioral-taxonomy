@@ -1,0 +1,33 @@
+// behavioral-loop-837.gg
+// Executable Gnosis projection for The Whisperer Loop.
+
+// Nodes
+(loop_837_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_837_context_branch: BehaviorEmit { emission: 'context' })
+(loop_837_given_gate: BehaviorAssess { stage: 'given', text: 'Weak%20diaphragm%20support%20or%20vocal%20cord%20gap' })
+(loop_837_inactive: BehaviorTerminal { loopId: 837, loopName: 'The%20Whisperer%20Loop' })
+(loop_837_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_837_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_837_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_837_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Ghost%20Operator', mechanism: 'the%20individual%20is%20drowned%20out' })
+(loop_837_result_branch: BehaviorEmit { emission: 'result', text: 'social%20withdrawal%3B%20they%20stop%20trying%20to%20contribute' })
+(loop_837_sink: BehaviorSink)
+(loop_837_start: BehaviorStart { loopId: 837, loopName: 'The%20Whisperer%20Loop', given: 'Weak%20diaphragm%20support%20or%20vocal%20cord%20gap', when: 'in%20a%20crowded%20restaurant', then: 'the%20individual%20is%20drowned%20out%20(The%20Ghost%20Operator)', result: 'social%20withdrawal%3B%20they%20stop%20trying%20to%20contribute', operatorName: 'The%20Ghost%20Operator', operatorMechanism: 'the%20individual%20is%20drowned%20out', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_837_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_837_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20is%20drowned%20out%20(The%20Ghost%20Operator)' })
+(loop_837_verdict: BehaviorVerdict { loopId: 837, loopName: 'The%20Whisperer%20Loop', then: 'the%20individual%20is%20drowned%20out%20(The%20Ghost%20Operator)', result: 'social%20withdrawal%3B%20they%20stop%20trying%20to%20contribute', operatorName: 'The%20Ghost%20Operator', operatorMechanism: 'the%20individual%20is%20drowned%20out', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_837_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20crowded%20restaurant' })
+
+// Topology
+(loop_837_start)-[:PROCESS]->(loop_837_given_gate)
+(loop_837_given_gate)-[:PROCESS { case: "ok" }]->(loop_837_when_gate)
+(loop_837_given_gate)-[:PROCESS { case: "err" }]->(loop_837_inactive)
+(loop_837_when_gate)-[:PROCESS { case: "ok" }]->(loop_837_context)
+(loop_837_when_gate)-[:PROCESS { case: "err" }]->(loop_837_inactive)
+(loop_837_context)-[:FORK { strategy: "behavior-branches" }]->(loop_837_context_branch | loop_837_then_branch | loop_837_operator_branch | loop_837_result_branch | loop_837_taxonomy_branch | loop_837_intervention_recognize | loop_837_intervention_interdict | loop_837_intervention_minimize)
+(loop_837_context_branch | loop_837_then_branch | loop_837_operator_branch | loop_837_result_branch | loop_837_taxonomy_branch | loop_837_intervention_recognize | loop_837_intervention_interdict | loop_837_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_837_verdict)
+(loop_837_inactive)-[:PROCESS]->(loop_837_sink)
+(loop_837_verdict)-[:PROCESS]->(loop_837_sink)
+(loop_837_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_837_then_branch)
+(loop_837_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_837_then_branch)
+(loop_837_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_837_then_branch)

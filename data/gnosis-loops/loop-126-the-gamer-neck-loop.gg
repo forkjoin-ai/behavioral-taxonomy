@@ -1,0 +1,33 @@
+// behavioral-loop-126.gg
+// Executable Gnosis projection for The Gamer Neck Loop.
+
+// Nodes
+(loop_126_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_126_context_branch: BehaviorEmit { emission: 'context' })
+(loop_126_given_gate: BehaviorAssess { stage: 'given', text: 'Forward%20Head%20Posture' })
+(loop_126_inactive: BehaviorTerminal { loopId: 126, loopName: 'The%20Gamer%20Neck%20Loop' })
+(loop_126_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_126_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_126_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_126_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intellectual%2FWeakness%20Operator', mechanism: 'observers%20assume%20%22Tech%20Savvy%22%20or%20%22Sedentary%22' })
+(loop_126_result_branch: BehaviorEmit { emission: 'result', text: 'being%20asked%20for%20tech%20support%2C%20reinforcing%20the%20**IT%20Guy%20Persona**' })
+(loop_126_sink: BehaviorSink)
+(loop_126_start: BehaviorStart { loopId: 126, loopName: 'The%20Gamer%20Neck%20Loop', given: 'Forward%20Head%20Posture', when: 'in%20a%20casual%20setting', then: 'observers%20assume%20%22Tech%20Savvy%22%20or%20%22Sedentary%22%20(The%20Intellectual%2FWeakness%20Operator)', result: 'being%20asked%20for%20tech%20support%2C%20reinforcing%20the%20**IT%20Guy%20Persona**', operatorName: 'The%20Intellectual%2FWeakness%20Operator', operatorMechanism: 'observers%20assume%20%22Tech%20Savvy%22%20or%20%22Sedentary%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_126_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_126_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Tech%20Savvy%22%20or%20%22Sedentary%22%20(The%20Intellectual%2FWeakness%20Operator)' })
+(loop_126_verdict: BehaviorVerdict { loopId: 126, loopName: 'The%20Gamer%20Neck%20Loop', then: 'observers%20assume%20%22Tech%20Savvy%22%20or%20%22Sedentary%22%20(The%20Intellectual%2FWeakness%20Operator)', result: 'being%20asked%20for%20tech%20support%2C%20reinforcing%20the%20**IT%20Guy%20Persona**', operatorName: 'The%20Intellectual%2FWeakness%20Operator', operatorMechanism: 'observers%20assume%20%22Tech%20Savvy%22%20or%20%22Sedentary%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_126_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20casual%20setting' })
+
+// Topology
+(loop_126_start)-[:PROCESS]->(loop_126_given_gate)
+(loop_126_given_gate)-[:PROCESS { case: "ok" }]->(loop_126_when_gate)
+(loop_126_given_gate)-[:PROCESS { case: "err" }]->(loop_126_inactive)
+(loop_126_when_gate)-[:PROCESS { case: "ok" }]->(loop_126_context)
+(loop_126_when_gate)-[:PROCESS { case: "err" }]->(loop_126_inactive)
+(loop_126_context)-[:FORK { strategy: "behavior-branches" }]->(loop_126_context_branch | loop_126_then_branch | loop_126_operator_branch | loop_126_result_branch | loop_126_taxonomy_branch | loop_126_intervention_recognize | loop_126_intervention_interdict | loop_126_intervention_minimize)
+(loop_126_context_branch | loop_126_then_branch | loop_126_operator_branch | loop_126_result_branch | loop_126_taxonomy_branch | loop_126_intervention_recognize | loop_126_intervention_interdict | loop_126_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_126_verdict)
+(loop_126_inactive)-[:PROCESS]->(loop_126_sink)
+(loop_126_verdict)-[:PROCESS]->(loop_126_sink)
+(loop_126_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_126_then_branch)
+(loop_126_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_126_then_branch)
+(loop_126_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_126_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-167.gg
+// Executable Gnosis projection for The Sterile Loop.
+
+// Nodes
+(loop_167_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_167_context_branch: BehaviorEmit { emission: 'context' })
+(loop_167_given_gate: BehaviorAssess { stage: 'given', text: 'Genetic%20lack%20of%20axillary%20odor%20(common%20in%20East%20Asian%20populations)' })
+(loop_167_inactive: BehaviorTerminal { loopId: 167, loopName: 'The%20Sterile%20Loop' })
+(loop_167_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20competence%20in%20areas%20that%20compensate' })
+(loop_167_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_167_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20scent-triggered%20emotional%20responses' })
+(loop_167_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Halo%20Operator', mechanism: 'the%20lack%20of%20scent%20signals%20%22Cleanliness%22%20or%20%22Purity%22' })
+(loop_167_result_branch: BehaviorEmit { emission: 'result', text: 'higher%20tolerance%20for%20proximity%2C%20allowing%20**Closer%20Physical%20Bonding**' })
+(loop_167_sink: BehaviorSink)
+(loop_167_start: BehaviorStart { loopId: 167, loopName: 'The%20Sterile%20Loop', given: 'Genetic%20lack%20of%20axillary%20odor%20(common%20in%20East%20Asian%20populations)', when: 'engaging%20in%20physical%20exertion', then: 'the%20lack%20of%20scent%20signals%20%22Cleanliness%22%20or%20%22Purity%22%20(The%20Halo%20Operator)', result: 'higher%20tolerance%20for%20proximity%2C%20allowing%20**Closer%20Physical%20Bonding**', operatorName: 'The%20Halo%20Operator', operatorMechanism: 'the%20lack%20of%20scent%20signals%20%22Cleanliness%22%20or%20%22Purity%22', origin: 'GENETIC', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Be%20aware%20of%20scent-triggered%20emotional%20responses', intervention_interdict: 'Build%20competence%20in%20areas%20that%20compensate', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_167_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_167_then_branch: BehaviorEmit { emission: 'then', text: 'the%20lack%20of%20scent%20signals%20%22Cleanliness%22%20or%20%22Purity%22%20(The%20Halo%20Operator)' })
+(loop_167_verdict: BehaviorVerdict { loopId: 167, loopName: 'The%20Sterile%20Loop', then: 'the%20lack%20of%20scent%20signals%20%22Cleanliness%22%20or%20%22Purity%22%20(The%20Halo%20Operator)', result: 'higher%20tolerance%20for%20proximity%2C%20allowing%20**Closer%20Physical%20Bonding**', operatorName: 'The%20Halo%20Operator', operatorMechanism: 'the%20lack%20of%20scent%20signals%20%22Cleanliness%22%20or%20%22Purity%22', origin: 'GENETIC', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_167_when_gate: BehaviorAssess { stage: 'when', text: 'engaging%20in%20physical%20exertion' })
+
+// Topology
+(loop_167_start)-[:PROCESS]->(loop_167_given_gate)
+(loop_167_given_gate)-[:PROCESS { case: "ok" }]->(loop_167_when_gate)
+(loop_167_given_gate)-[:PROCESS { case: "err" }]->(loop_167_inactive)
+(loop_167_when_gate)-[:PROCESS { case: "ok" }]->(loop_167_context)
+(loop_167_when_gate)-[:PROCESS { case: "err" }]->(loop_167_inactive)
+(loop_167_context)-[:FORK { strategy: "behavior-branches" }]->(loop_167_context_branch | loop_167_then_branch | loop_167_operator_branch | loop_167_result_branch | loop_167_taxonomy_branch | loop_167_intervention_recognize | loop_167_intervention_interdict | loop_167_intervention_minimize)
+(loop_167_context_branch | loop_167_then_branch | loop_167_operator_branch | loop_167_result_branch | loop_167_taxonomy_branch | loop_167_intervention_recognize | loop_167_intervention_interdict | loop_167_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_167_verdict)
+(loop_167_inactive)-[:PROCESS]->(loop_167_sink)
+(loop_167_verdict)-[:PROCESS]->(loop_167_sink)
+(loop_167_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_167_then_branch)
+(loop_167_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_167_then_branch)
+(loop_167_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_167_then_branch)

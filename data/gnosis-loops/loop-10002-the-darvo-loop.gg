@@ -1,0 +1,33 @@
+// behavioral-loop-10002.gg
+// Executable Gnosis projection for The DARVO Loop.
+
+// Nodes
+(loop_10002_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_10002_context_branch: BehaviorEmit { emission: 'context' })
+(loop_10002_given_gate: BehaviorAssess { stage: 'given', text: 'Subject%20is%20confronted%20with%20evidence%20of%20their%20wrongdoing' })
+(loop_10002_inactive: BehaviorTerminal { loopId: 10002, loopName: 'The%20DARVO%20Loop' })
+(loop_10002_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_10002_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_10002_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_10002_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_10002_result_branch: BehaviorEmit { emission: 'result', text: 'The%20original%20victim%20ends%20up%20apologizing%20to%20the%20perpetrator' })
+(loop_10002_sink: BehaviorSink)
+(loop_10002_start: BehaviorStart { loopId: 10002, loopName: 'The%20DARVO%20Loop', given: 'Subject%20is%20confronted%20with%20evidence%20of%20their%20wrongdoing', when: 'The%20confrontation%20occurs', then: 'Subject%20follows%20sequence%3A%20Deny%20behavior%20-%3E%20Attack%20accuser%20-%3E%20Reverse%20Victim%20and%20Offender', result: 'The%20original%20victim%20ends%20up%20apologizing%20to%20the%20perpetrator', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_10002_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_10002_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20follows%20sequence%3A%20Deny%20behavior%20-%3E%20Attack%20accuser%20-%3E%20Reverse%20Victim%20and%20Offender' })
+(loop_10002_verdict: BehaviorVerdict { loopId: 10002, loopName: 'The%20DARVO%20Loop', then: 'Subject%20follows%20sequence%3A%20Deny%20behavior%20-%3E%20Attack%20accuser%20-%3E%20Reverse%20Victim%20and%20Offender', result: 'The%20original%20victim%20ends%20up%20apologizing%20to%20the%20perpetrator', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_10002_when_gate: BehaviorAssess { stage: 'when', text: 'The%20confrontation%20occurs' })
+
+// Topology
+(loop_10002_start)-[:PROCESS]->(loop_10002_given_gate)
+(loop_10002_given_gate)-[:PROCESS { case: "ok" }]->(loop_10002_when_gate)
+(loop_10002_given_gate)-[:PROCESS { case: "err" }]->(loop_10002_inactive)
+(loop_10002_when_gate)-[:PROCESS { case: "ok" }]->(loop_10002_context)
+(loop_10002_when_gate)-[:PROCESS { case: "err" }]->(loop_10002_inactive)
+(loop_10002_context)-[:FORK { strategy: "behavior-branches" }]->(loop_10002_context_branch | loop_10002_then_branch | loop_10002_operator_branch | loop_10002_result_branch | loop_10002_taxonomy_branch | loop_10002_intervention_recognize | loop_10002_intervention_interdict | loop_10002_intervention_minimize)
+(loop_10002_context_branch | loop_10002_then_branch | loop_10002_operator_branch | loop_10002_result_branch | loop_10002_taxonomy_branch | loop_10002_intervention_recognize | loop_10002_intervention_interdict | loop_10002_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_10002_verdict)
+(loop_10002_inactive)-[:PROCESS]->(loop_10002_sink)
+(loop_10002_verdict)-[:PROCESS]->(loop_10002_sink)
+(loop_10002_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_10002_then_branch)
+(loop_10002_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_10002_then_branch)
+(loop_10002_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_10002_then_branch)

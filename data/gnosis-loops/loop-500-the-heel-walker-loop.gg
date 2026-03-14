@@ -1,0 +1,33 @@
+// behavioral-loop-500.gg
+// Executable Gnosis projection for The Heel Walker Loop.
+
+// Nodes
+(loop_500_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_500_context_branch: BehaviorEmit { emission: 'context' })
+(loop_500_given_gate: BehaviorAssess { stage: 'given', text: 'Lack%20of%20shock%20absorption%20in%20gait' })
+(loop_500_inactive: BehaviorTerminal { loopId: 500, loopName: 'The%20Heel%20Walker%20Loop' })
+(loop_500_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_500_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_500_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_500_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Elephant%20Operator', mechanism: 'the%20sound%20is%20%22Thud-Thud%22' })
+(loop_500_result_branch: BehaviorEmit { emission: 'result', text: 'conflicts%20with%20downstairs%20neighbors%2Froommates' })
+(loop_500_sink: BehaviorSink)
+(loop_500_start: BehaviorStart { loopId: 500, loopName: 'The%20Heel%20Walker%20Loop', given: 'Lack%20of%20shock%20absorption%20in%20gait', when: 'walking%20in%20an%20apartment', then: 'the%20sound%20is%20%22Thud-Thud%22%20(The%20Elephant%20Operator)', result: 'conflicts%20with%20downstairs%20neighbors%2Froommates', operatorName: 'The%20Elephant%20Operator', operatorMechanism: 'the%20sound%20is%20%22Thud-Thud%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_500_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_500_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20is%20%22Thud-Thud%22%20(The%20Elephant%20Operator)' })
+(loop_500_verdict: BehaviorVerdict { loopId: 500, loopName: 'The%20Heel%20Walker%20Loop', then: 'the%20sound%20is%20%22Thud-Thud%22%20(The%20Elephant%20Operator)', result: 'conflicts%20with%20downstairs%20neighbors%2Froommates', operatorName: 'The%20Elephant%20Operator', operatorMechanism: 'the%20sound%20is%20%22Thud-Thud%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_500_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20in%20an%20apartment' })
+
+// Topology
+(loop_500_start)-[:PROCESS]->(loop_500_given_gate)
+(loop_500_given_gate)-[:PROCESS { case: "ok" }]->(loop_500_when_gate)
+(loop_500_given_gate)-[:PROCESS { case: "err" }]->(loop_500_inactive)
+(loop_500_when_gate)-[:PROCESS { case: "ok" }]->(loop_500_context)
+(loop_500_when_gate)-[:PROCESS { case: "err" }]->(loop_500_inactive)
+(loop_500_context)-[:FORK { strategy: "behavior-branches" }]->(loop_500_context_branch | loop_500_then_branch | loop_500_operator_branch | loop_500_result_branch | loop_500_taxonomy_branch | loop_500_intervention_recognize | loop_500_intervention_interdict | loop_500_intervention_minimize)
+(loop_500_context_branch | loop_500_then_branch | loop_500_operator_branch | loop_500_result_branch | loop_500_taxonomy_branch | loop_500_intervention_recognize | loop_500_intervention_interdict | loop_500_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_500_verdict)
+(loop_500_inactive)-[:PROCESS]->(loop_500_sink)
+(loop_500_verdict)-[:PROCESS]->(loop_500_sink)
+(loop_500_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_500_then_branch)
+(loop_500_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_500_then_branch)
+(loop_500_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_500_then_branch)

@@ -1,0 +1,31 @@
+// behavioral-loop-705.gg
+// Executable Gnosis projection for The Hunter Loop.
+
+// Nodes
+(loop_705_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_705_context_branch: BehaviorEmit { emission: 'context' })
+(loop_705_given_gate: BehaviorAssess { stage: 'given', text: 'Medial%20canthus%20lower%20than%20lateral%20canthus%20(upward%20slope)' })
+(loop_705_inactive: BehaviorTerminal { loopId: 705, loopName: 'The%20Hunter%20Loop' })
+(loop_705_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_705_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_705_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Predator%20Operator', mechanism: 'observers%20perceive%20%22Dominance%2C%22%20%22Focus%2C%22%20and%20%22Aggression%22' })
+(loop_705_result_branch: BehaviorEmit { emission: 'result', text: 'high%20sexual%20selection%20but%20frequent%20challenges%20from%20other%20dominant%20males' })
+(loop_705_sink: BehaviorSink)
+(loop_705_start: BehaviorStart { loopId: 705, loopName: 'The%20Hunter%20Loop', given: 'Medial%20canthus%20lower%20than%20lateral%20canthus%20(upward%20slope)', when: 'resting%20face%20is%20neutral', then: 'observers%20perceive%20%22Dominance%2C%22%20%22Focus%2C%22%20and%20%22Aggression%22%20(The%20Predator%20Operator)', result: 'high%20sexual%20selection%20but%20frequent%20challenges%20from%20other%20dominant%20males', operatorName: 'The%20Predator%20Operator', operatorMechanism: 'observers%20perceive%20%22Dominance%2C%22%20%22Focus%2C%22%20and%20%22Aggression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_705_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_705_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Dominance%2C%22%20%22Focus%2C%22%20and%20%22Aggression%22%20(The%20Predator%20Operator)' })
+(loop_705_verdict: BehaviorVerdict { loopId: 705, loopName: 'The%20Hunter%20Loop', then: 'observers%20perceive%20%22Dominance%2C%22%20%22Focus%2C%22%20and%20%22Aggression%22%20(The%20Predator%20Operator)', result: 'high%20sexual%20selection%20but%20frequent%20challenges%20from%20other%20dominant%20males', operatorName: 'The%20Predator%20Operator', operatorMechanism: 'observers%20perceive%20%22Dominance%2C%22%20%22Focus%2C%22%20and%20%22Aggression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_705_when_gate: BehaviorAssess { stage: 'when', text: 'resting%20face%20is%20neutral' })
+
+// Topology
+(loop_705_start)-[:PROCESS]->(loop_705_given_gate)
+(loop_705_given_gate)-[:PROCESS { case: "ok" }]->(loop_705_when_gate)
+(loop_705_given_gate)-[:PROCESS { case: "err" }]->(loop_705_inactive)
+(loop_705_when_gate)-[:PROCESS { case: "ok" }]->(loop_705_context)
+(loop_705_when_gate)-[:PROCESS { case: "err" }]->(loop_705_inactive)
+(loop_705_context)-[:FORK { strategy: "behavior-branches" }]->(loop_705_context_branch | loop_705_then_branch | loop_705_operator_branch | loop_705_result_branch | loop_705_taxonomy_branch | loop_705_intervention_recognize | loop_705_intervention_leverage)
+(loop_705_context_branch | loop_705_then_branch | loop_705_operator_branch | loop_705_result_branch | loop_705_taxonomy_branch | loop_705_intervention_recognize | loop_705_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_705_verdict)
+(loop_705_inactive)-[:PROCESS]->(loop_705_sink)
+(loop_705_verdict)-[:PROCESS]->(loop_705_sink)
+(loop_705_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_705_then_branch)
+(loop_705_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_705_result_branch)

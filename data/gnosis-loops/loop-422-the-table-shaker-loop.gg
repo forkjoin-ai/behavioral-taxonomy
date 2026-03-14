@@ -1,0 +1,33 @@
+// behavioral-loop-422.gg
+// Executable Gnosis projection for The Table Shaker Loop.
+
+// Nodes
+(loop_422_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_422_context_branch: BehaviorEmit { emission: 'context' })
+(loop_422_given_gate: BehaviorAssess { stage: 'given', text: 'High%20sympathetic%20arousal%20transmitted%20to%20leg' })
+(loop_422_inactive: BehaviorTerminal { loopId: 422, loopName: 'The%20Table%20Shaker%20Loop' })
+(loop_422_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_422_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_422_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_422_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Earthquake%20Operator', mechanism: 'the%20entire%20surface%20vibrates' })
+(loop_422_result_branch: BehaviorEmit { emission: 'result', text: "drinks%20spilling%20and%20collective%20irritation%20at%20the%20individual's%20**Lack%20of%20Containment**" })
+(loop_422_sink: BehaviorSink)
+(loop_422_start: BehaviorStart { loopId: 422, loopName: 'The%20Table%20Shaker%20Loop', given: 'High%20sympathetic%20arousal%20transmitted%20to%20leg', when: 'sharing%20a%20booth%20or%20table', then: 'the%20entire%20surface%20vibrates%20(The%20Earthquake%20Operator)', result: "drinks%20spilling%20and%20collective%20irritation%20at%20the%20individual's%20**Lack%20of%20Containment**", operatorName: 'The%20Earthquake%20Operator', operatorMechanism: 'the%20entire%20surface%20vibrates', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_422_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_422_then_branch: BehaviorEmit { emission: 'then', text: 'the%20entire%20surface%20vibrates%20(The%20Earthquake%20Operator)' })
+(loop_422_verdict: BehaviorVerdict { loopId: 422, loopName: 'The%20Table%20Shaker%20Loop', then: 'the%20entire%20surface%20vibrates%20(The%20Earthquake%20Operator)', result: "drinks%20spilling%20and%20collective%20irritation%20at%20the%20individual's%20**Lack%20of%20Containment**", operatorName: 'The%20Earthquake%20Operator', operatorMechanism: 'the%20entire%20surface%20vibrates', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_422_when_gate: BehaviorAssess { stage: 'when', text: 'sharing%20a%20booth%20or%20table' })
+
+// Topology
+(loop_422_start)-[:PROCESS]->(loop_422_given_gate)
+(loop_422_given_gate)-[:PROCESS { case: "ok" }]->(loop_422_when_gate)
+(loop_422_given_gate)-[:PROCESS { case: "err" }]->(loop_422_inactive)
+(loop_422_when_gate)-[:PROCESS { case: "ok" }]->(loop_422_context)
+(loop_422_when_gate)-[:PROCESS { case: "err" }]->(loop_422_inactive)
+(loop_422_context)-[:FORK { strategy: "behavior-branches" }]->(loop_422_context_branch | loop_422_then_branch | loop_422_operator_branch | loop_422_result_branch | loop_422_taxonomy_branch | loop_422_intervention_recognize | loop_422_intervention_interdict | loop_422_intervention_minimize)
+(loop_422_context_branch | loop_422_then_branch | loop_422_operator_branch | loop_422_result_branch | loop_422_taxonomy_branch | loop_422_intervention_recognize | loop_422_intervention_interdict | loop_422_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_422_verdict)
+(loop_422_inactive)-[:PROCESS]->(loop_422_sink)
+(loop_422_verdict)-[:PROCESS]->(loop_422_sink)
+(loop_422_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_422_then_branch)
+(loop_422_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_422_then_branch)
+(loop_422_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_422_then_branch)

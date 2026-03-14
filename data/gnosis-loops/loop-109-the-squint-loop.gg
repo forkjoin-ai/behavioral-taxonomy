@@ -1,0 +1,33 @@
+// behavioral-loop-109.gg
+// Executable Gnosis projection for The Squint Loop.
+
+// Nodes
+(loop_109_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_109_context_branch: BehaviorEmit { emission: 'context' })
+(loop_109_given_gate: BehaviorAssess { stage: 'given', text: 'Photophobia%20(Light%20sensitivity)' })
+(loop_109_inactive: BehaviorTerminal { loopId: 109, loopName: 'The%20Squint%20Loop' })
+(loop_109_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_109_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_109_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_109_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Status%2FAnger%20Operator', mechanism: 'the%20individual%20wears%20sunglasses%20indoors%20or%20frowns' })
+(loop_109_result_branch: BehaviorEmit { emission: 'result', text: 'being%20perceived%20as%20%22Cool%2FAloof%22%20or%20%22Hungover%2C%22%20creating%20**Social%20Distance**' })
+(loop_109_sink: BehaviorSink)
+(loop_109_start: BehaviorStart { loopId: 109, loopName: 'The%20Squint%20Loop', given: 'Photophobia%20(Light%20sensitivity)', when: 'outdoors%20or%20in%20fluorescent%20offices', then: 'the%20individual%20wears%20sunglasses%20indoors%20or%20frowns%20(The%20Status%2FAnger%20Operator)', result: 'being%20perceived%20as%20%22Cool%2FAloof%22%20or%20%22Hungover%2C%22%20creating%20**Social%20Distance**', operatorName: 'The%20Status%2FAnger%20Operator', operatorMechanism: 'the%20individual%20wears%20sunglasses%20indoors%20or%20frowns', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_109_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_109_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20wears%20sunglasses%20indoors%20or%20frowns%20(The%20Status%2FAnger%20Operator)' })
+(loop_109_verdict: BehaviorVerdict { loopId: 109, loopName: 'The%20Squint%20Loop', then: 'the%20individual%20wears%20sunglasses%20indoors%20or%20frowns%20(The%20Status%2FAnger%20Operator)', result: 'being%20perceived%20as%20%22Cool%2FAloof%22%20or%20%22Hungover%2C%22%20creating%20**Social%20Distance**', operatorName: 'The%20Status%2FAnger%20Operator', operatorMechanism: 'the%20individual%20wears%20sunglasses%20indoors%20or%20frowns', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_109_when_gate: BehaviorAssess { stage: 'when', text: 'outdoors%20or%20in%20fluorescent%20offices' })
+
+// Topology
+(loop_109_start)-[:PROCESS]->(loop_109_given_gate)
+(loop_109_given_gate)-[:PROCESS { case: "ok" }]->(loop_109_when_gate)
+(loop_109_given_gate)-[:PROCESS { case: "err" }]->(loop_109_inactive)
+(loop_109_when_gate)-[:PROCESS { case: "ok" }]->(loop_109_context)
+(loop_109_when_gate)-[:PROCESS { case: "err" }]->(loop_109_inactive)
+(loop_109_context)-[:FORK { strategy: "behavior-branches" }]->(loop_109_context_branch | loop_109_then_branch | loop_109_operator_branch | loop_109_result_branch | loop_109_taxonomy_branch | loop_109_intervention_recognize | loop_109_intervention_interdict | loop_109_intervention_minimize)
+(loop_109_context_branch | loop_109_then_branch | loop_109_operator_branch | loop_109_result_branch | loop_109_taxonomy_branch | loop_109_intervention_recognize | loop_109_intervention_interdict | loop_109_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_109_verdict)
+(loop_109_inactive)-[:PROCESS]->(loop_109_sink)
+(loop_109_verdict)-[:PROCESS]->(loop_109_sink)
+(loop_109_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_109_then_branch)
+(loop_109_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_109_then_branch)
+(loop_109_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_109_then_branch)

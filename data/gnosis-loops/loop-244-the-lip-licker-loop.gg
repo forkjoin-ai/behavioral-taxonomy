@@ -1,0 +1,33 @@
+// behavioral-loop-244.gg
+// Executable Gnosis projection for The Lip Licker Loop.
+
+// Nodes
+(loop_244_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_244_context_branch: BehaviorEmit { emission: 'context' })
+(loop_244_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20dry%20lips%20requiring%20wetting' })
+(loop_244_inactive: BehaviorTerminal { loopId: 244, loopName: 'The%20Lip%20Licker%20Loop' })
+(loop_244_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_244_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_244_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_244_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sexual%2FAnxiety%20Operator', mechanism: 'the%20gesture%20is%20misread%20as%20%22Predatory%22%20or%20%22Nervous%22' })
+(loop_244_result_branch: BehaviorEmit { emission: 'result', text: 'awkward%20social%20misunderstandings' })
+(loop_244_sink: BehaviorSink)
+(loop_244_start: BehaviorStart { loopId: 244, loopName: 'The%20Lip%20Licker%20Loop', given: 'Chronic%20dry%20lips%20requiring%20wetting', when: 'looking%20at%20someone', then: 'the%20gesture%20is%20misread%20as%20%22Predatory%22%20or%20%22Nervous%22%20(The%20Sexual%2FAnxiety%20Operator)', result: 'awkward%20social%20misunderstandings', operatorName: 'The%20Sexual%2FAnxiety%20Operator', operatorMechanism: 'the%20gesture%20is%20misread%20as%20%22Predatory%22%20or%20%22Nervous%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_244_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_244_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gesture%20is%20misread%20as%20%22Predatory%22%20or%20%22Nervous%22%20(The%20Sexual%2FAnxiety%20Operator)' })
+(loop_244_verdict: BehaviorVerdict { loopId: 244, loopName: 'The%20Lip%20Licker%20Loop', then: 'the%20gesture%20is%20misread%20as%20%22Predatory%22%20or%20%22Nervous%22%20(The%20Sexual%2FAnxiety%20Operator)', result: 'awkward%20social%20misunderstandings', operatorName: 'The%20Sexual%2FAnxiety%20Operator', operatorMechanism: 'the%20gesture%20is%20misread%20as%20%22Predatory%22%20or%20%22Nervous%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_244_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20at%20someone' })
+
+// Topology
+(loop_244_start)-[:PROCESS]->(loop_244_given_gate)
+(loop_244_given_gate)-[:PROCESS { case: "ok" }]->(loop_244_when_gate)
+(loop_244_given_gate)-[:PROCESS { case: "err" }]->(loop_244_inactive)
+(loop_244_when_gate)-[:PROCESS { case: "ok" }]->(loop_244_context)
+(loop_244_when_gate)-[:PROCESS { case: "err" }]->(loop_244_inactive)
+(loop_244_context)-[:FORK { strategy: "behavior-branches" }]->(loop_244_context_branch | loop_244_then_branch | loop_244_operator_branch | loop_244_result_branch | loop_244_taxonomy_branch | loop_244_intervention_recognize | loop_244_intervention_interdict | loop_244_intervention_minimize)
+(loop_244_context_branch | loop_244_then_branch | loop_244_operator_branch | loop_244_result_branch | loop_244_taxonomy_branch | loop_244_intervention_recognize | loop_244_intervention_interdict | loop_244_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_244_verdict)
+(loop_244_inactive)-[:PROCESS]->(loop_244_sink)
+(loop_244_verdict)-[:PROCESS]->(loop_244_sink)
+(loop_244_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_244_then_branch)
+(loop_244_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_244_then_branch)
+(loop_244_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_244_then_branch)

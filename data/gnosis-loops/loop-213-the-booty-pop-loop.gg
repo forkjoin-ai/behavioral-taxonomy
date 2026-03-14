@@ -1,0 +1,33 @@
+// behavioral-loop-213.gg
+// Executable Gnosis projection for The Booty Pop Loop.
+
+// Nodes
+(loop_213_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_213_context_branch: BehaviorEmit { emission: 'context' })
+(loop_213_given_gate: BehaviorAssess { stage: 'given', text: 'Excessive%20inward%20curve%20of%20lumbar%20spine%20(Anterior%20Pelvic%20Tilt)' })
+(loop_213_inactive: BehaviorTerminal { loopId: 213, loopName: 'The%20Booty%20Pop%20Loop' })
+(loop_213_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_213_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_213_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_213_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sexual%2FJudgment%20Operator', mechanism: 'observers%20perceive%20%22Sexual%20Availability%22%20or%20%22Posturing%22' })
+(loop_213_result_branch: BehaviorEmit { emission: 'result', text: 'harassment%20(for%20women)%20or%20mockery%20(for%20men)' })
+(loop_213_sink: BehaviorSink)
+(loop_213_start: BehaviorStart { loopId: 213, loopName: 'The%20Booty%20Pop%20Loop', given: 'Excessive%20inward%20curve%20of%20lumbar%20spine%20(Anterior%20Pelvic%20Tilt)', when: 'standing%20naturally', then: 'observers%20perceive%20%22Sexual%20Availability%22%20or%20%22Posturing%22%20(The%20Sexual%2FJudgment%20Operator)', result: 'harassment%20(for%20women)%20or%20mockery%20(for%20men)', operatorName: 'The%20Sexual%2FJudgment%20Operator', operatorMechanism: 'observers%20perceive%20%22Sexual%20Availability%22%20or%20%22Posturing%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_213_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_213_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Sexual%20Availability%22%20or%20%22Posturing%22%20(The%20Sexual%2FJudgment%20Operator)' })
+(loop_213_verdict: BehaviorVerdict { loopId: 213, loopName: 'The%20Booty%20Pop%20Loop', then: 'observers%20perceive%20%22Sexual%20Availability%22%20or%20%22Posturing%22%20(The%20Sexual%2FJudgment%20Operator)', result: 'harassment%20(for%20women)%20or%20mockery%20(for%20men)', operatorName: 'The%20Sexual%2FJudgment%20Operator', operatorMechanism: 'observers%20perceive%20%22Sexual%20Availability%22%20or%20%22Posturing%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_213_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20naturally' })
+
+// Topology
+(loop_213_start)-[:PROCESS]->(loop_213_given_gate)
+(loop_213_given_gate)-[:PROCESS { case: "ok" }]->(loop_213_when_gate)
+(loop_213_given_gate)-[:PROCESS { case: "err" }]->(loop_213_inactive)
+(loop_213_when_gate)-[:PROCESS { case: "ok" }]->(loop_213_context)
+(loop_213_when_gate)-[:PROCESS { case: "err" }]->(loop_213_inactive)
+(loop_213_context)-[:FORK { strategy: "behavior-branches" }]->(loop_213_context_branch | loop_213_then_branch | loop_213_operator_branch | loop_213_result_branch | loop_213_taxonomy_branch | loop_213_intervention_recognize | loop_213_intervention_interdict | loop_213_intervention_minimize)
+(loop_213_context_branch | loop_213_then_branch | loop_213_operator_branch | loop_213_result_branch | loop_213_taxonomy_branch | loop_213_intervention_recognize | loop_213_intervention_interdict | loop_213_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_213_verdict)
+(loop_213_inactive)-[:PROCESS]->(loop_213_sink)
+(loop_213_verdict)-[:PROCESS]->(loop_213_sink)
+(loop_213_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_213_then_branch)
+(loop_213_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_213_then_branch)
+(loop_213_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_213_then_branch)

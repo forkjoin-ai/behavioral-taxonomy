@@ -1,0 +1,33 @@
+// behavioral-loop-108.gg
+// Executable Gnosis projection for The Deep Set Eyes Loop.
+
+// Nodes
+(loop_108_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_108_context_branch: BehaviorEmit { emission: 'context' })
+(loop_108_given_gate: BehaviorAssess { stage: 'given', text: 'Prominent%20Supraorbital%20Ridge%20(Caveman%20brow)' })
+(loop_108_inactive: BehaviorTerminal { loopId: 108, loopName: 'The%20Deep%20Set%20Eyes%20Loop' })
+(loop_108_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_108_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_108_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_108_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%2FThreat%20Operator', mechanism: 'the%20eyes%20are%20shadowed%2Fhidden' })
+(loop_108_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20feeling%20unease%2C%20forcing%20the%20individual%20to%20**Smile%20Excessively**%20to%20signal%20safety' })
+(loop_108_sink: BehaviorSink)
+(loop_108_start: BehaviorStart { loopId: 108, loopName: 'The%20Deep%20Set%20Eyes%20Loop', given: 'Prominent%20Supraorbital%20Ridge%20(Caveman%20brow)', when: 'looking%20up', then: 'the%20eyes%20are%20shadowed%2Fhidden%20(The%20Deception%2FThreat%20Operator)', result: 'observers%20feeling%20unease%2C%20forcing%20the%20individual%20to%20**Smile%20Excessively**%20to%20signal%20safety', operatorName: 'The%20Deception%2FThreat%20Operator', operatorMechanism: 'the%20eyes%20are%20shadowed%2Fhidden', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_108_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_108_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20are%20shadowed%2Fhidden%20(The%20Deception%2FThreat%20Operator)' })
+(loop_108_verdict: BehaviorVerdict { loopId: 108, loopName: 'The%20Deep%20Set%20Eyes%20Loop', then: 'the%20eyes%20are%20shadowed%2Fhidden%20(The%20Deception%2FThreat%20Operator)', result: 'observers%20feeling%20unease%2C%20forcing%20the%20individual%20to%20**Smile%20Excessively**%20to%20signal%20safety', operatorName: 'The%20Deception%2FThreat%20Operator', operatorMechanism: 'the%20eyes%20are%20shadowed%2Fhidden', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_108_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20up' })
+
+// Topology
+(loop_108_start)-[:PROCESS]->(loop_108_given_gate)
+(loop_108_given_gate)-[:PROCESS { case: "ok" }]->(loop_108_when_gate)
+(loop_108_given_gate)-[:PROCESS { case: "err" }]->(loop_108_inactive)
+(loop_108_when_gate)-[:PROCESS { case: "ok" }]->(loop_108_context)
+(loop_108_when_gate)-[:PROCESS { case: "err" }]->(loop_108_inactive)
+(loop_108_context)-[:FORK { strategy: "behavior-branches" }]->(loop_108_context_branch | loop_108_then_branch | loop_108_operator_branch | loop_108_result_branch | loop_108_taxonomy_branch | loop_108_intervention_recognize | loop_108_intervention_interdict | loop_108_intervention_minimize)
+(loop_108_context_branch | loop_108_then_branch | loop_108_operator_branch | loop_108_result_branch | loop_108_taxonomy_branch | loop_108_intervention_recognize | loop_108_intervention_interdict | loop_108_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_108_verdict)
+(loop_108_inactive)-[:PROCESS]->(loop_108_sink)
+(loop_108_verdict)-[:PROCESS]->(loop_108_sink)
+(loop_108_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_108_then_branch)
+(loop_108_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_108_then_branch)
+(loop_108_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_108_then_branch)

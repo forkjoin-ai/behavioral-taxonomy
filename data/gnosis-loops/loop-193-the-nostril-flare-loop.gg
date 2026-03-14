@@ -1,0 +1,33 @@
+// behavioral-loop-193.gg
+// Executable Gnosis projection for The Nostril Flare Loop.
+
+// Nodes
+(loop_193_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_193_context_branch: BehaviorEmit { emission: 'context' })
+(loop_193_given_gate: BehaviorAssess { stage: 'given', text: 'High%20sympathetic%20arousal%20causing%20dilation%20of%20alar%20muscles' })
+(loop_193_inactive: BehaviorTerminal { loopId: 193, loopName: 'The%20Nostril%20Flare%20Loop' })
+(loop_193_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_193_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_193_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_193_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'the%20observer%20perceives%20%22Suppressed%20Rage%22%20or%20%22Animalistic%20Aggression%22' })
+(loop_193_result_branch: BehaviorEmit { emission: 'result', text: 'the%20opponent%20backing%20down%2C%20rewarding%20the%20individual%20for%20**Intimidation%20Tactics**' })
+(loop_193_sink: BehaviorSink)
+(loop_193_start: BehaviorStart { loopId: 193, loopName: 'The%20Nostril%20Flare%20Loop', given: 'High%20sympathetic%20arousal%20causing%20dilation%20of%20alar%20muscles', when: 'negotiating%20or%20debating', then: 'the%20observer%20perceives%20%22Suppressed%20Rage%22%20or%20%22Animalistic%20Aggression%22%20(The%20Threat%20Operator)', result: 'the%20opponent%20backing%20down%2C%20rewarding%20the%20individual%20for%20**Intimidation%20Tactics**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20observer%20perceives%20%22Suppressed%20Rage%22%20or%20%22Animalistic%20Aggression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_193_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_193_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20perceives%20%22Suppressed%20Rage%22%20or%20%22Animalistic%20Aggression%22%20(The%20Threat%20Operator)' })
+(loop_193_verdict: BehaviorVerdict { loopId: 193, loopName: 'The%20Nostril%20Flare%20Loop', then: 'the%20observer%20perceives%20%22Suppressed%20Rage%22%20or%20%22Animalistic%20Aggression%22%20(The%20Threat%20Operator)', result: 'the%20opponent%20backing%20down%2C%20rewarding%20the%20individual%20for%20**Intimidation%20Tactics**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20observer%20perceives%20%22Suppressed%20Rage%22%20or%20%22Animalistic%20Aggression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_193_when_gate: BehaviorAssess { stage: 'when', text: 'negotiating%20or%20debating' })
+
+// Topology
+(loop_193_start)-[:PROCESS]->(loop_193_given_gate)
+(loop_193_given_gate)-[:PROCESS { case: "ok" }]->(loop_193_when_gate)
+(loop_193_given_gate)-[:PROCESS { case: "err" }]->(loop_193_inactive)
+(loop_193_when_gate)-[:PROCESS { case: "ok" }]->(loop_193_context)
+(loop_193_when_gate)-[:PROCESS { case: "err" }]->(loop_193_inactive)
+(loop_193_context)-[:FORK { strategy: "behavior-branches" }]->(loop_193_context_branch | loop_193_then_branch | loop_193_operator_branch | loop_193_result_branch | loop_193_taxonomy_branch | loop_193_intervention_recognize | loop_193_intervention_interdict | loop_193_intervention_minimize)
+(loop_193_context_branch | loop_193_then_branch | loop_193_operator_branch | loop_193_result_branch | loop_193_taxonomy_branch | loop_193_intervention_recognize | loop_193_intervention_interdict | loop_193_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_193_verdict)
+(loop_193_inactive)-[:PROCESS]->(loop_193_sink)
+(loop_193_verdict)-[:PROCESS]->(loop_193_sink)
+(loop_193_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_193_then_branch)
+(loop_193_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_193_then_branch)
+(loop_193_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_193_then_branch)

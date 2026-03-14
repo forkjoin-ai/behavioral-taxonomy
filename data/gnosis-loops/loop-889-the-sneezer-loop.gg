@@ -1,0 +1,33 @@
+// behavioral-loop-889.gg
+// Executable Gnosis projection for The Sneezer Loop.
+
+// Nodes
+(loop_889_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_889_context_branch: BehaviorEmit { emission: 'context' })
+(loop_889_given_gate: BehaviorAssess { stage: 'given', text: 'Sneezing%20when%20looking%20at%20bright%20light%20(ACHOO%20syndrome)' })
+(loop_889_inactive: BehaviorTerminal { loopId: 889, loopName: 'The%20Sneezer%20Loop' })
+(loop_889_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_889_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_889_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_889_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Burst%20Operator', mechanism: 'a%20fit%20of%203-4%20sneezes%20occurs' })
+(loop_889_result_branch: BehaviorEmit { emission: 'result', text: '%22Bless%20you%22%20chains%20and%20disruption%20of%20conversation' })
+(loop_889_sink: BehaviorSink)
+(loop_889_start: BehaviorStart { loopId: 889, loopName: 'The%20Sneezer%20Loop', given: 'Sneezing%20when%20looking%20at%20bright%20light%20(ACHOO%20syndrome)', when: 'walking%20outside', then: 'a%20fit%20of%203-4%20sneezes%20occurs%20(The%20Burst%20Operator)', result: '%22Bless%20you%22%20chains%20and%20disruption%20of%20conversation', operatorName: 'The%20Burst%20Operator', operatorMechanism: 'a%20fit%20of%203-4%20sneezes%20occurs', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_889_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_889_then_branch: BehaviorEmit { emission: 'then', text: 'a%20fit%20of%203-4%20sneezes%20occurs%20(The%20Burst%20Operator)' })
+(loop_889_verdict: BehaviorVerdict { loopId: 889, loopName: 'The%20Sneezer%20Loop', then: 'a%20fit%20of%203-4%20sneezes%20occurs%20(The%20Burst%20Operator)', result: '%22Bless%20you%22%20chains%20and%20disruption%20of%20conversation', operatorName: 'The%20Burst%20Operator', operatorMechanism: 'a%20fit%20of%203-4%20sneezes%20occurs', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_889_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20outside' })
+
+// Topology
+(loop_889_start)-[:PROCESS]->(loop_889_given_gate)
+(loop_889_given_gate)-[:PROCESS { case: "ok" }]->(loop_889_when_gate)
+(loop_889_given_gate)-[:PROCESS { case: "err" }]->(loop_889_inactive)
+(loop_889_when_gate)-[:PROCESS { case: "ok" }]->(loop_889_context)
+(loop_889_when_gate)-[:PROCESS { case: "err" }]->(loop_889_inactive)
+(loop_889_context)-[:FORK { strategy: "behavior-branches" }]->(loop_889_context_branch | loop_889_then_branch | loop_889_operator_branch | loop_889_result_branch | loop_889_taxonomy_branch | loop_889_intervention_recognize | loop_889_intervention_interdict | loop_889_intervention_minimize)
+(loop_889_context_branch | loop_889_then_branch | loop_889_operator_branch | loop_889_result_branch | loop_889_taxonomy_branch | loop_889_intervention_recognize | loop_889_intervention_interdict | loop_889_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_889_verdict)
+(loop_889_inactive)-[:PROCESS]->(loop_889_sink)
+(loop_889_verdict)-[:PROCESS]->(loop_889_sink)
+(loop_889_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_889_then_branch)
+(loop_889_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_889_then_branch)
+(loop_889_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_889_then_branch)

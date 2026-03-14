@@ -1,0 +1,33 @@
+// behavioral-loop-169.gg
+// Executable Gnosis projection for The Cowlick Loop.
+
+// Nodes
+(loop_169_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_169_context_branch: BehaviorEmit { emission: 'context' })
+(loop_169_given_gate: BehaviorAssess { stage: 'given', text: 'Stubborn%2C%20vertical%20hair%20growth%20pattern' })
+(loop_169_inactive: BehaviorTerminal { loopId: 169, loopName: 'The%20Cowlick%20Loop' })
+(loop_169_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_169_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_169_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_169_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nurture%2FChaos%20Operator', mechanism: 'the%20hair%20resists%2C%20signaling%20%22Boyishness%22%20or%20%22Messiness%22' })
+(loop_169_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20struggling%20to%20be%20seen%20as%20a%20%22Polished%20Professional.%22' })
+(loop_169_sink: BehaviorSink)
+(loop_169_start: BehaviorStart { loopId: 169, loopName: 'The%20Cowlick%20Loop', given: 'Stubborn%2C%20vertical%20hair%20growth%20pattern', when: 'attempting%20to%20groom%20for%20formal%20events', then: 'the%20hair%20resists%2C%20signaling%20%22Boyishness%22%20or%20%22Messiness%22%20(The%20Nurture%2FChaos%20Operator)', result: 'the%20individual%20struggling%20to%20be%20seen%20as%20a%20%22Polished%20Professional.%22', operatorName: 'The%20Nurture%2FChaos%20Operator', operatorMechanism: 'the%20hair%20resists%2C%20signaling%20%22Boyishness%22%20or%20%22Messiness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_169_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_169_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hair%20resists%2C%20signaling%20%22Boyishness%22%20or%20%22Messiness%22%20(The%20Nurture%2FChaos%20Operator)' })
+(loop_169_verdict: BehaviorVerdict { loopId: 169, loopName: 'The%20Cowlick%20Loop', then: 'the%20hair%20resists%2C%20signaling%20%22Boyishness%22%20or%20%22Messiness%22%20(The%20Nurture%2FChaos%20Operator)', result: 'the%20individual%20struggling%20to%20be%20seen%20as%20a%20%22Polished%20Professional.%22', operatorName: 'The%20Nurture%2FChaos%20Operator', operatorMechanism: 'the%20hair%20resists%2C%20signaling%20%22Boyishness%22%20or%20%22Messiness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_169_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20to%20groom%20for%20formal%20events' })
+
+// Topology
+(loop_169_start)-[:PROCESS]->(loop_169_given_gate)
+(loop_169_given_gate)-[:PROCESS { case: "ok" }]->(loop_169_when_gate)
+(loop_169_given_gate)-[:PROCESS { case: "err" }]->(loop_169_inactive)
+(loop_169_when_gate)-[:PROCESS { case: "ok" }]->(loop_169_context)
+(loop_169_when_gate)-[:PROCESS { case: "err" }]->(loop_169_inactive)
+(loop_169_context)-[:FORK { strategy: "behavior-branches" }]->(loop_169_context_branch | loop_169_then_branch | loop_169_operator_branch | loop_169_result_branch | loop_169_taxonomy_branch | loop_169_intervention_recognize | loop_169_intervention_interdict | loop_169_intervention_minimize)
+(loop_169_context_branch | loop_169_then_branch | loop_169_operator_branch | loop_169_result_branch | loop_169_taxonomy_branch | loop_169_intervention_recognize | loop_169_intervention_interdict | loop_169_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_169_verdict)
+(loop_169_inactive)-[:PROCESS]->(loop_169_sink)
+(loop_169_verdict)-[:PROCESS]->(loop_169_sink)
+(loop_169_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_169_then_branch)
+(loop_169_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_169_then_branch)
+(loop_169_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_169_then_branch)

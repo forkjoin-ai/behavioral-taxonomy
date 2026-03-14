@@ -1,0 +1,33 @@
+// behavioral-loop-970.gg
+// Executable Gnosis projection for The Chipped Incisor Loop.
+
+// Nodes
+(loop_970_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_970_context_branch: BehaviorEmit { emission: 'context' })
+(loop_970_given_gate: BehaviorAssess { stage: 'given', text: 'Broken%20corner%20of%20a%20front%20tooth%20(untreated)' })
+(loop_970_inactive: BehaviorTerminal { loopId: 970, loopName: 'The%20Chipped%20Incisor%20Loop' })
+(loop_970_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_970_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_970_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_970_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Broken%20Window%20Operator', mechanism: 'it%20signals%20%22Carelessness%22%20or%20%22Violence%22' })
+(loop_970_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20loss%20of%20%22Premium%22%20status' })
+(loop_970_sink: BehaviorSink)
+(loop_970_start: BehaviorStart { loopId: 970, loopName: 'The%20Chipped%20Incisor%20Loop', given: 'Broken%20corner%20of%20a%20front%20tooth%20(untreated)', when: 'meeting%20a%20client', then: 'it%20signals%20%22Carelessness%22%20or%20%22Violence%22%20(The%20Broken%20Window%20Operator)', result: 'immediate%20loss%20of%20%22Premium%22%20status', operatorName: 'The%20Broken%20Window%20Operator', operatorMechanism: 'it%20signals%20%22Carelessness%22%20or%20%22Violence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_970_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_970_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Carelessness%22%20or%20%22Violence%22%20(The%20Broken%20Window%20Operator)' })
+(loop_970_verdict: BehaviorVerdict { loopId: 970, loopName: 'The%20Chipped%20Incisor%20Loop', then: 'it%20signals%20%22Carelessness%22%20or%20%22Violence%22%20(The%20Broken%20Window%20Operator)', result: 'immediate%20loss%20of%20%22Premium%22%20status', operatorName: 'The%20Broken%20Window%20Operator', operatorMechanism: 'it%20signals%20%22Carelessness%22%20or%20%22Violence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_970_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20a%20client' })
+
+// Topology
+(loop_970_start)-[:PROCESS]->(loop_970_given_gate)
+(loop_970_given_gate)-[:PROCESS { case: "ok" }]->(loop_970_when_gate)
+(loop_970_given_gate)-[:PROCESS { case: "err" }]->(loop_970_inactive)
+(loop_970_when_gate)-[:PROCESS { case: "ok" }]->(loop_970_context)
+(loop_970_when_gate)-[:PROCESS { case: "err" }]->(loop_970_inactive)
+(loop_970_context)-[:FORK { strategy: "behavior-branches" }]->(loop_970_context_branch | loop_970_then_branch | loop_970_operator_branch | loop_970_result_branch | loop_970_taxonomy_branch | loop_970_intervention_recognize | loop_970_intervention_interdict | loop_970_intervention_minimize)
+(loop_970_context_branch | loop_970_then_branch | loop_970_operator_branch | loop_970_result_branch | loop_970_taxonomy_branch | loop_970_intervention_recognize | loop_970_intervention_interdict | loop_970_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_970_verdict)
+(loop_970_inactive)-[:PROCESS]->(loop_970_sink)
+(loop_970_verdict)-[:PROCESS]->(loop_970_sink)
+(loop_970_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_970_then_branch)
+(loop_970_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_970_then_branch)
+(loop_970_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_970_then_branch)

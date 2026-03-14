@@ -1,0 +1,33 @@
+// behavioral-loop-1065.gg
+// Executable Gnosis projection for The Beginner's Luck Loop.
+
+// Nodes
+(loop_1065_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1065_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1065_given_gate: BehaviorAssess { stage: 'given', text: 'Total%20lack%20of%20expectation%20or%20fear%20of%20failure' })
+(loop_1065_inactive: BehaviorTerminal { loopId: 1065, loopName: "The%20Beginner's%20Luck%20Loop" })
+(loop_1065_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1065_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1065_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1065_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'muscle%20tension%20is%20absent%2C%20allowing%20perfect%20fluidity%20(The%20Flow%20State)' })
+(loop_1065_result_branch: BehaviorEmit { emission: 'result', text: 'success%20that%20vanishes%20the%20moment%20the%20individual%20*tries*' })
+(loop_1065_sink: BehaviorSink)
+(loop_1065_start: BehaviorStart { loopId: 1065, loopName: "The%20Beginner's%20Luck%20Loop", given: 'Total%20lack%20of%20expectation%20or%20fear%20of%20failure', when: 'attempting%20a%20complex%20task%20(pool%20shot%2Fgolf)', then: 'muscle%20tension%20is%20absent%2C%20allowing%20perfect%20fluidity%20(The%20Flow%20State)', result: 'success%20that%20vanishes%20the%20moment%20the%20individual%20*tries*', operatorName: 'Unknown%20Operator', operatorMechanism: 'muscle%20tension%20is%20absent%2C%20allowing%20perfect%20fluidity%20(The%20Flow%20State)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1065_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1065_then_branch: BehaviorEmit { emission: 'then', text: 'muscle%20tension%20is%20absent%2C%20allowing%20perfect%20fluidity%20(The%20Flow%20State)' })
+(loop_1065_verdict: BehaviorVerdict { loopId: 1065, loopName: "The%20Beginner's%20Luck%20Loop", then: 'muscle%20tension%20is%20absent%2C%20allowing%20perfect%20fluidity%20(The%20Flow%20State)', result: 'success%20that%20vanishes%20the%20moment%20the%20individual%20*tries*', operatorName: 'Unknown%20Operator', operatorMechanism: 'muscle%20tension%20is%20absent%2C%20allowing%20perfect%20fluidity%20(The%20Flow%20State)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1065_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20a%20complex%20task%20(pool%20shot%2Fgolf)' })
+
+// Topology
+(loop_1065_start)-[:PROCESS]->(loop_1065_given_gate)
+(loop_1065_given_gate)-[:PROCESS { case: "ok" }]->(loop_1065_when_gate)
+(loop_1065_given_gate)-[:PROCESS { case: "err" }]->(loop_1065_inactive)
+(loop_1065_when_gate)-[:PROCESS { case: "ok" }]->(loop_1065_context)
+(loop_1065_when_gate)-[:PROCESS { case: "err" }]->(loop_1065_inactive)
+(loop_1065_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1065_context_branch | loop_1065_then_branch | loop_1065_operator_branch | loop_1065_result_branch | loop_1065_taxonomy_branch | loop_1065_intervention_recognize | loop_1065_intervention_interdict | loop_1065_intervention_minimize)
+(loop_1065_context_branch | loop_1065_then_branch | loop_1065_operator_branch | loop_1065_result_branch | loop_1065_taxonomy_branch | loop_1065_intervention_recognize | loop_1065_intervention_interdict | loop_1065_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1065_verdict)
+(loop_1065_inactive)-[:PROCESS]->(loop_1065_sink)
+(loop_1065_verdict)-[:PROCESS]->(loop_1065_sink)
+(loop_1065_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1065_then_branch)
+(loop_1065_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1065_then_branch)
+(loop_1065_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1065_then_branch)

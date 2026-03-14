@@ -1,0 +1,33 @@
+// behavioral-loop-435.gg
+// Executable Gnosis projection for The Razor Burn Loop.
+
+// Nodes
+(loop_435_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_435_context_branch: BehaviorEmit { emission: 'context' })
+(loop_435_given_gate: BehaviorAssess { stage: 'given', text: 'Red%20bumps%20on%20the%20neck%2Fface%20from%20shaving' })
+(loop_435_inactive: BehaviorTerminal { loopId: 435, loopName: 'The%20Razor%20Burn%20Loop' })
+(loop_435_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_435_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_435_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_435_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Amateur%20Operator', mechanism: 'it%20looks%20like%20%22Rash%22%20or%20%22Incompetence%22%20with%20tools' })
+(loop_435_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20less%20%22Polished%22%20than%20bearded%20peers' })
+(loop_435_sink: BehaviorSink)
+(loop_435_start: BehaviorStart { loopId: 435, loopName: 'The%20Razor%20Burn%20Loop', given: 'Red%20bumps%20on%20the%20neck%2Fface%20from%20shaving', when: 'arriving%20at%20work', then: 'it%20looks%20like%20%22Rash%22%20or%20%22Incompetence%22%20with%20tools%20(The%20Amateur%20Operator)', result: 'the%20individual%20looking%20less%20%22Polished%22%20than%20bearded%20peers', operatorName: 'The%20Amateur%20Operator', operatorMechanism: 'it%20looks%20like%20%22Rash%22%20or%20%22Incompetence%22%20with%20tools', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_435_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_435_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Rash%22%20or%20%22Incompetence%22%20with%20tools%20(The%20Amateur%20Operator)' })
+(loop_435_verdict: BehaviorVerdict { loopId: 435, loopName: 'The%20Razor%20Burn%20Loop', then: 'it%20looks%20like%20%22Rash%22%20or%20%22Incompetence%22%20with%20tools%20(The%20Amateur%20Operator)', result: 'the%20individual%20looking%20less%20%22Polished%22%20than%20bearded%20peers', operatorName: 'The%20Amateur%20Operator', operatorMechanism: 'it%20looks%20like%20%22Rash%22%20or%20%22Incompetence%22%20with%20tools', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_435_when_gate: BehaviorAssess { stage: 'when', text: 'arriving%20at%20work' })
+
+// Topology
+(loop_435_start)-[:PROCESS]->(loop_435_given_gate)
+(loop_435_given_gate)-[:PROCESS { case: "ok" }]->(loop_435_when_gate)
+(loop_435_given_gate)-[:PROCESS { case: "err" }]->(loop_435_inactive)
+(loop_435_when_gate)-[:PROCESS { case: "ok" }]->(loop_435_context)
+(loop_435_when_gate)-[:PROCESS { case: "err" }]->(loop_435_inactive)
+(loop_435_context)-[:FORK { strategy: "behavior-branches" }]->(loop_435_context_branch | loop_435_then_branch | loop_435_operator_branch | loop_435_result_branch | loop_435_taxonomy_branch | loop_435_intervention_recognize | loop_435_intervention_interdict | loop_435_intervention_minimize)
+(loop_435_context_branch | loop_435_then_branch | loop_435_operator_branch | loop_435_result_branch | loop_435_taxonomy_branch | loop_435_intervention_recognize | loop_435_intervention_interdict | loop_435_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_435_verdict)
+(loop_435_inactive)-[:PROCESS]->(loop_435_sink)
+(loop_435_verdict)-[:PROCESS]->(loop_435_sink)
+(loop_435_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_435_then_branch)
+(loop_435_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_435_then_branch)
+(loop_435_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_435_then_branch)

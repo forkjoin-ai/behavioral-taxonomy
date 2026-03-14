@@ -1,0 +1,33 @@
+// behavioral-loop-11009.gg
+// Executable Gnosis projection for The Cheater Detection Loop.
+
+// Nodes
+(loop_11009_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_11009_context_branch: BehaviorEmit { emission: 'context' })
+(loop_11009_given_gate: BehaviorAssess { stage: 'given', text: 'Subject%20A%20provides%20benefit%20to%20Subject%20B%20(Cost%20to%20A%20%3C%20Benefit%20to%20B)' })
+(loop_11009_inactive: BehaviorTerminal { loopId: 11009, loopName: 'The%20Cheater%20Detection%20Loop' })
+(loop_11009_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Verify%20information%20before%20acting%20on%20cheater%20detection%20signals' })
+(loop_11009_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Practice%20Tit-for-Tat%20with%20forgiveness%20-%20one%20act%20of%20restitution%20clears%20debts' })
+(loop_11009_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20moral%20outrage%20disproportionate%20to%20the%20actual%20violation' })
+(loop_11009_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Reciprocity%20Enforcer', mechanism: 'Specialized%20cognitive%20module%20evolved%20for%20detecting%20violations%20of%20social%20contracts%20in%20reciprocal%20altruism.' })
+(loop_11009_result_branch: BehaviorEmit { emission: 'result', text: 'Subject%20A%20enacts%20punishment%20(aggression%2Fexclusion)%20to%20prevent%20freeloaders' })
+(loop_11009_sink: BehaviorSink)
+(loop_11009_start: BehaviorStart { loopId: 11009, loopName: 'The%20Cheater%20Detection%20Loop', given: 'Subject%20A%20provides%20benefit%20to%20Subject%20B%20(Cost%20to%20A%20%3C%20Benefit%20to%20B)', when: 'Subject%20B%20fails%20to%20reciprocate%20(Defection)', then: 'Cheater%20Detection%20Module%20(specialized%20cognitive%20circuit)%20activates', result: 'Subject%20A%20enacts%20punishment%20(aggression%2Fexclusion)%20to%20prevent%20freeloaders', operatorName: 'The%20Reciprocity%20Enforcer', operatorMechanism: 'Specialized%20cognitive%20module%20evolved%20for%20detecting%20violations%20of%20social%20contracts%20in%20reciprocal%20altruism.', origin: 'EVOLUTIONARY', modality: 'COGNITIVE', mutability: 'STUBBORN', valences: 'JUDGMENT|AGGRESSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20moral%20outrage%20disproportionate%20to%20the%20actual%20violation', intervention_interdict: 'Verify%20information%20before%20acting%20on%20cheater%20detection%20signals', intervention_minimize: 'Practice%20Tit-for-Tat%20with%20forgiveness%20-%20one%20act%20of%20restitution%20clears%20debts' })
+(loop_11009_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'EVOLUTIONARY', modality: 'COGNITIVE', mutability: 'STUBBORN', valences: 'JUDGMENT|AGGRESSION' })
+(loop_11009_then_branch: BehaviorEmit { emission: 'then', text: 'Cheater%20Detection%20Module%20(specialized%20cognitive%20circuit)%20activates' })
+(loop_11009_verdict: BehaviorVerdict { loopId: 11009, loopName: 'The%20Cheater%20Detection%20Loop', then: 'Cheater%20Detection%20Module%20(specialized%20cognitive%20circuit)%20activates', result: 'Subject%20A%20enacts%20punishment%20(aggression%2Fexclusion)%20to%20prevent%20freeloaders', operatorName: 'The%20Reciprocity%20Enforcer', operatorMechanism: 'Specialized%20cognitive%20module%20evolved%20for%20detecting%20violations%20of%20social%20contracts%20in%20reciprocal%20altruism.', origin: 'EVOLUTIONARY', modality: 'COGNITIVE', mutability: 'STUBBORN', valences: 'JUDGMENT|AGGRESSION' })
+(loop_11009_when_gate: BehaviorAssess { stage: 'when', text: 'Subject%20B%20fails%20to%20reciprocate%20(Defection)' })
+
+// Topology
+(loop_11009_start)-[:PROCESS]->(loop_11009_given_gate)
+(loop_11009_given_gate)-[:PROCESS { case: "ok" }]->(loop_11009_when_gate)
+(loop_11009_given_gate)-[:PROCESS { case: "err" }]->(loop_11009_inactive)
+(loop_11009_when_gate)-[:PROCESS { case: "ok" }]->(loop_11009_context)
+(loop_11009_when_gate)-[:PROCESS { case: "err" }]->(loop_11009_inactive)
+(loop_11009_context)-[:FORK { strategy: "behavior-branches" }]->(loop_11009_context_branch | loop_11009_then_branch | loop_11009_operator_branch | loop_11009_result_branch | loop_11009_taxonomy_branch | loop_11009_intervention_recognize | loop_11009_intervention_interdict | loop_11009_intervention_minimize)
+(loop_11009_context_branch | loop_11009_then_branch | loop_11009_operator_branch | loop_11009_result_branch | loop_11009_taxonomy_branch | loop_11009_intervention_recognize | loop_11009_intervention_interdict | loop_11009_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_11009_verdict)
+(loop_11009_inactive)-[:PROCESS]->(loop_11009_sink)
+(loop_11009_verdict)-[:PROCESS]->(loop_11009_sink)
+(loop_11009_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_11009_then_branch)
+(loop_11009_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_11009_then_branch)
+(loop_11009_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_11009_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-400.gg
+// Executable Gnosis projection for The Transition Lens Loop.
+
+// Nodes
+(loop_400_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_400_context_branch: BehaviorEmit { emission: 'context' })
+(loop_400_given_gate: BehaviorAssess { stage: 'given', text: 'Photochromic%20lenses%20that%20stay%20dark%20indoors' })
+(loop_400_inactive: BehaviorTerminal { loopId: 400, loopName: 'The%20Transition%20Lens%20Loop' })
+(loop_400_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_400_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_400_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_400_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Barrier%20Operator', mechanism: 'eye%20contact%20is%20blocked' })
+(loop_400_result_branch: BehaviorEmit { emission: 'result', text: 'a%20%22Creepy%22%20or%20%22Out%20of%20Touch%22%20vibe' })
+(loop_400_sink: BehaviorSink)
+(loop_400_start: BehaviorStart { loopId: 400, loopName: 'The%20Transition%20Lens%20Loop', given: 'Photochromic%20lenses%20that%20stay%20dark%20indoors', when: 'entering%20a%20meeting%20from%20outside', then: 'eye%20contact%20is%20blocked%20(The%20Barrier%20Operator)', result: 'a%20%22Creepy%22%20or%20%22Out%20of%20Touch%22%20vibe', operatorName: 'The%20Barrier%20Operator', operatorMechanism: 'eye%20contact%20is%20blocked', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_400_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_400_then_branch: BehaviorEmit { emission: 'then', text: 'eye%20contact%20is%20blocked%20(The%20Barrier%20Operator)' })
+(loop_400_verdict: BehaviorVerdict { loopId: 400, loopName: 'The%20Transition%20Lens%20Loop', then: 'eye%20contact%20is%20blocked%20(The%20Barrier%20Operator)', result: 'a%20%22Creepy%22%20or%20%22Out%20of%20Touch%22%20vibe', operatorName: 'The%20Barrier%20Operator', operatorMechanism: 'eye%20contact%20is%20blocked', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_400_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20meeting%20from%20outside' })
+
+// Topology
+(loop_400_start)-[:PROCESS]->(loop_400_given_gate)
+(loop_400_given_gate)-[:PROCESS { case: "ok" }]->(loop_400_when_gate)
+(loop_400_given_gate)-[:PROCESS { case: "err" }]->(loop_400_inactive)
+(loop_400_when_gate)-[:PROCESS { case: "ok" }]->(loop_400_context)
+(loop_400_when_gate)-[:PROCESS { case: "err" }]->(loop_400_inactive)
+(loop_400_context)-[:FORK { strategy: "behavior-branches" }]->(loop_400_context_branch | loop_400_then_branch | loop_400_operator_branch | loop_400_result_branch | loop_400_taxonomy_branch | loop_400_intervention_recognize | loop_400_intervention_interdict | loop_400_intervention_minimize)
+(loop_400_context_branch | loop_400_then_branch | loop_400_operator_branch | loop_400_result_branch | loop_400_taxonomy_branch | loop_400_intervention_recognize | loop_400_intervention_interdict | loop_400_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_400_verdict)
+(loop_400_inactive)-[:PROCESS]->(loop_400_sink)
+(loop_400_verdict)-[:PROCESS]->(loop_400_sink)
+(loop_400_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_400_then_branch)
+(loop_400_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_400_then_branch)
+(loop_400_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_400_then_branch)

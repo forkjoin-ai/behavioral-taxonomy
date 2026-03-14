@@ -1,0 +1,33 @@
+// behavioral-loop-715.gg
+// Executable Gnosis projection for The Ring Crusher Loop.
+
+// Nodes
+(loop_715_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_715_context_branch: BehaviorEmit { emission: 'context' })
+(loop_715_given_gate: BehaviorAssess { stage: 'given', text: 'Squeezing%20too%20hard%20while%20wearing%20rings' })
+(loop_715_inactive: BehaviorTerminal { loopId: 715, loopName: 'The%20Ring%20Crusher%20Loop' })
+(loop_715_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Modify%20or%20remove%20the%20triggering%20element' })
+(loop_715_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_715_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_715_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Torture%20Operator', mechanism: 'it%20causes%20physical%20pain%20to%20the%20recipient' })
+(loop_715_result_branch: BehaviorEmit { emission: 'result', text: 'the%20recipient%20associating%20the%20individual%20with%20%22Pain%22%20subconsciously' })
+(loop_715_sink: BehaviorSink)
+(loop_715_start: BehaviorStart { loopId: 715, loopName: 'The%20Ring%20Crusher%20Loop', given: 'Squeezing%20too%20hard%20while%20wearing%20rings', when: 'greeting%20someone', then: 'it%20causes%20physical%20pain%20to%20the%20recipient%20(The%20Torture%20Operator)', result: 'the%20recipient%20associating%20the%20individual%20with%20%22Pain%22%20subconsciously', operatorName: 'The%20Torture%20Operator', operatorMechanism: 'it%20causes%20physical%20pain%20to%20the%20recipient', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Modify%20or%20remove%20the%20triggering%20element', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_715_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_715_then_branch: BehaviorEmit { emission: 'then', text: 'it%20causes%20physical%20pain%20to%20the%20recipient%20(The%20Torture%20Operator)' })
+(loop_715_verdict: BehaviorVerdict { loopId: 715, loopName: 'The%20Ring%20Crusher%20Loop', then: 'it%20causes%20physical%20pain%20to%20the%20recipient%20(The%20Torture%20Operator)', result: 'the%20recipient%20associating%20the%20individual%20with%20%22Pain%22%20subconsciously', operatorName: 'The%20Torture%20Operator', operatorMechanism: 'it%20causes%20physical%20pain%20to%20the%20recipient', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_715_when_gate: BehaviorAssess { stage: 'when', text: 'greeting%20someone' })
+
+// Topology
+(loop_715_start)-[:PROCESS]->(loop_715_given_gate)
+(loop_715_given_gate)-[:PROCESS { case: "ok" }]->(loop_715_when_gate)
+(loop_715_given_gate)-[:PROCESS { case: "err" }]->(loop_715_inactive)
+(loop_715_when_gate)-[:PROCESS { case: "ok" }]->(loop_715_context)
+(loop_715_when_gate)-[:PROCESS { case: "err" }]->(loop_715_inactive)
+(loop_715_context)-[:FORK { strategy: "behavior-branches" }]->(loop_715_context_branch | loop_715_then_branch | loop_715_operator_branch | loop_715_result_branch | loop_715_taxonomy_branch | loop_715_intervention_recognize | loop_715_intervention_interdict | loop_715_intervention_minimize)
+(loop_715_context_branch | loop_715_then_branch | loop_715_operator_branch | loop_715_result_branch | loop_715_taxonomy_branch | loop_715_intervention_recognize | loop_715_intervention_interdict | loop_715_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_715_verdict)
+(loop_715_inactive)-[:PROCESS]->(loop_715_sink)
+(loop_715_verdict)-[:PROCESS]->(loop_715_sink)
+(loop_715_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_715_then_branch)
+(loop_715_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_715_then_branch)
+(loop_715_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_715_then_branch)

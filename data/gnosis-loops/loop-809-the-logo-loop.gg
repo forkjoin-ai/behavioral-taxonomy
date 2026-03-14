@@ -1,0 +1,33 @@
+// behavioral-loop-809.gg
+// Executable Gnosis projection for The Logo Loop.
+
+// Nodes
+(loop_809_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_809_context_branch: BehaviorEmit { emission: 'context' })
+(loop_809_given_gate: BehaviorAssess { stage: 'given', text: 'Massive%20branding%20across%20the%20chest' })
+(loop_809_inactive: BehaviorTerminal { loopId: 809, loopName: 'The%20Logo%20Loop' })
+(loop_809_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_809_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_809_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_809_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Billboard%20Operator', mechanism: 'it%20signals%20%22New%20Money%22%20or%20%22Insecurity%22' })
+(loop_809_result_branch: BehaviorEmit { emission: 'result', text: 'exclusion%20from%20old-money%20inner%20circles' })
+(loop_809_sink: BehaviorSink)
+(loop_809_start: BehaviorStart { loopId: 809, loopName: 'The%20Logo%20Loop', given: 'Massive%20branding%20across%20the%20chest', when: 'entering%20a%20%22Silent%20Wealth%22%20room', then: 'it%20signals%20%22New%20Money%22%20or%20%22Insecurity%22%20(The%20Billboard%20Operator)', result: 'exclusion%20from%20old-money%20inner%20circles', operatorName: 'The%20Billboard%20Operator', operatorMechanism: 'it%20signals%20%22New%20Money%22%20or%20%22Insecurity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_809_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_809_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22New%20Money%22%20or%20%22Insecurity%22%20(The%20Billboard%20Operator)' })
+(loop_809_verdict: BehaviorVerdict { loopId: 809, loopName: 'The%20Logo%20Loop', then: 'it%20signals%20%22New%20Money%22%20or%20%22Insecurity%22%20(The%20Billboard%20Operator)', result: 'exclusion%20from%20old-money%20inner%20circles', operatorName: 'The%20Billboard%20Operator', operatorMechanism: 'it%20signals%20%22New%20Money%22%20or%20%22Insecurity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_809_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20%22Silent%20Wealth%22%20room' })
+
+// Topology
+(loop_809_start)-[:PROCESS]->(loop_809_given_gate)
+(loop_809_given_gate)-[:PROCESS { case: "ok" }]->(loop_809_when_gate)
+(loop_809_given_gate)-[:PROCESS { case: "err" }]->(loop_809_inactive)
+(loop_809_when_gate)-[:PROCESS { case: "ok" }]->(loop_809_context)
+(loop_809_when_gate)-[:PROCESS { case: "err" }]->(loop_809_inactive)
+(loop_809_context)-[:FORK { strategy: "behavior-branches" }]->(loop_809_context_branch | loop_809_then_branch | loop_809_operator_branch | loop_809_result_branch | loop_809_taxonomy_branch | loop_809_intervention_recognize | loop_809_intervention_interdict | loop_809_intervention_minimize)
+(loop_809_context_branch | loop_809_then_branch | loop_809_operator_branch | loop_809_result_branch | loop_809_taxonomy_branch | loop_809_intervention_recognize | loop_809_intervention_interdict | loop_809_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_809_verdict)
+(loop_809_inactive)-[:PROCESS]->(loop_809_sink)
+(loop_809_verdict)-[:PROCESS]->(loop_809_sink)
+(loop_809_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_809_then_branch)
+(loop_809_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_809_then_branch)
+(loop_809_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_809_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-929.gg
+// Executable Gnosis projection for The Vinegar Loop.
+
+// Nodes
+(loop_929_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_929_context_branch: BehaviorEmit { emission: 'context' })
+(loop_929_given_gate: BehaviorAssess { stage: 'given', text: 'Acute%20stress%20causing%20apocrine%20glands%20to%20secrete%20fatty%20sweat' })
+(loop_929_inactive: BehaviorTerminal { loopId: 929, loopName: 'The%20Vinegar%20Loop' })
+(loop_929_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_929_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_929_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_929_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fear%20Operator', mechanism: 'the%20scent%20becomes%20%22Acrid%22%20or%20%22Sour%22' })
+(loop_929_result_branch: BehaviorEmit { emission: 'result', text: 'dogs%20barking%20and%20humans%20feeling%20subconscious%20anxiety%20around%20the%20individual' })
+(loop_929_sink: BehaviorSink)
+(loop_929_start: BehaviorStart { loopId: 929, loopName: 'The%20Vinegar%20Loop', given: 'Acute%20stress%20causing%20apocrine%20glands%20to%20secrete%20fatty%20sweat', when: 'a%20bacteria%20breakdown%20occurs%20(20%20mins%20into%20a%20crisis)', then: 'the%20scent%20becomes%20%22Acrid%22%20or%20%22Sour%22%20(The%20Fear%20Operator)', result: 'dogs%20barking%20and%20humans%20feeling%20subconscious%20anxiety%20around%20the%20individual', operatorName: 'The%20Fear%20Operator', operatorMechanism: 'the%20scent%20becomes%20%22Acrid%22%20or%20%22Sour%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_929_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_929_then_branch: BehaviorEmit { emission: 'then', text: 'the%20scent%20becomes%20%22Acrid%22%20or%20%22Sour%22%20(The%20Fear%20Operator)' })
+(loop_929_verdict: BehaviorVerdict { loopId: 929, loopName: 'The%20Vinegar%20Loop', then: 'the%20scent%20becomes%20%22Acrid%22%20or%20%22Sour%22%20(The%20Fear%20Operator)', result: 'dogs%20barking%20and%20humans%20feeling%20subconscious%20anxiety%20around%20the%20individual', operatorName: 'The%20Fear%20Operator', operatorMechanism: 'the%20scent%20becomes%20%22Acrid%22%20or%20%22Sour%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_929_when_gate: BehaviorAssess { stage: 'when', text: 'a%20bacteria%20breakdown%20occurs%20(20%20mins%20into%20a%20crisis)' })
+
+// Topology
+(loop_929_start)-[:PROCESS]->(loop_929_given_gate)
+(loop_929_given_gate)-[:PROCESS { case: "ok" }]->(loop_929_when_gate)
+(loop_929_given_gate)-[:PROCESS { case: "err" }]->(loop_929_inactive)
+(loop_929_when_gate)-[:PROCESS { case: "ok" }]->(loop_929_context)
+(loop_929_when_gate)-[:PROCESS { case: "err" }]->(loop_929_inactive)
+(loop_929_context)-[:FORK { strategy: "behavior-branches" }]->(loop_929_context_branch | loop_929_then_branch | loop_929_operator_branch | loop_929_result_branch | loop_929_taxonomy_branch | loop_929_intervention_recognize | loop_929_intervention_interdict | loop_929_intervention_minimize)
+(loop_929_context_branch | loop_929_then_branch | loop_929_operator_branch | loop_929_result_branch | loop_929_taxonomy_branch | loop_929_intervention_recognize | loop_929_intervention_interdict | loop_929_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_929_verdict)
+(loop_929_inactive)-[:PROCESS]->(loop_929_sink)
+(loop_929_verdict)-[:PROCESS]->(loop_929_sink)
+(loop_929_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_929_then_branch)
+(loop_929_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_929_then_branch)
+(loop_929_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_929_then_branch)

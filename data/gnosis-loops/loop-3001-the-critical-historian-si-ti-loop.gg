@@ -1,0 +1,33 @@
+// behavioral-loop-3001.gg
+// Executable Gnosis projection for The Critical Historian (Si-Ti Loop).
+
+// Nodes
+(loop_3001_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_3001_context_branch: BehaviorEmit { emission: 'context' })
+(loop_3001_given_gate: BehaviorAssess { stage: 'given', text: 'Dominant%20Introverted%20Sensing%20(Si)%20%2B%20Introverted%20Thinking%20(Ti)%20bypassing%20Extroverted%20Feeling%20(Fe)' })
+(loop_3001_inactive: BehaviorTerminal { loopId: 3001, loopName: 'The%20Critical%20Historian%20(Si-Ti%20Loop)' })
+(loop_3001_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_3001_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3001_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_3001_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_3001_result_branch: BehaviorEmit { emission: 'result', text: 'Cynicism%20and%20passive-aggressive%20compliance%3B%20doing%20the%20work%20while%20internally%20categorizing%20everyone%20else%20as%20useless' })
+(loop_3001_sink: BehaviorSink)
+(loop_3001_start: BehaviorStart { loopId: 3001, loopName: 'The%20Critical%20Historian%20(Si-Ti%20Loop)', given: 'Dominant%20Introverted%20Sensing%20(Si)%20%2B%20Introverted%20Thinking%20(Ti)%20bypassing%20Extroverted%20Feeling%20(Fe)', when: 'Feeling%20unappreciated%20or%20overwhelmed%20by%20chaos', then: 'Subject%20dissects%20past%20interactions%20to%20find%20logical%20proof%20of%20others', result: 'Cynicism%20and%20passive-aggressive%20compliance%3B%20doing%20the%20work%20while%20internally%20categorizing%20everyone%20else%20as%20useless', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3001_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3001_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20dissects%20past%20interactions%20to%20find%20logical%20proof%20of%20others' })
+(loop_3001_verdict: BehaviorVerdict { loopId: 3001, loopName: 'The%20Critical%20Historian%20(Si-Ti%20Loop)', then: 'Subject%20dissects%20past%20interactions%20to%20find%20logical%20proof%20of%20others', result: 'Cynicism%20and%20passive-aggressive%20compliance%3B%20doing%20the%20work%20while%20internally%20categorizing%20everyone%20else%20as%20useless', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3001_when_gate: BehaviorAssess { stage: 'when', text: 'Feeling%20unappreciated%20or%20overwhelmed%20by%20chaos' })
+
+// Topology
+(loop_3001_start)-[:PROCESS]->(loop_3001_given_gate)
+(loop_3001_given_gate)-[:PROCESS { case: "ok" }]->(loop_3001_when_gate)
+(loop_3001_given_gate)-[:PROCESS { case: "err" }]->(loop_3001_inactive)
+(loop_3001_when_gate)-[:PROCESS { case: "ok" }]->(loop_3001_context)
+(loop_3001_when_gate)-[:PROCESS { case: "err" }]->(loop_3001_inactive)
+(loop_3001_context)-[:FORK { strategy: "behavior-branches" }]->(loop_3001_context_branch | loop_3001_then_branch | loop_3001_operator_branch | loop_3001_result_branch | loop_3001_taxonomy_branch | loop_3001_intervention_recognize | loop_3001_intervention_interdict | loop_3001_intervention_minimize)
+(loop_3001_context_branch | loop_3001_then_branch | loop_3001_operator_branch | loop_3001_result_branch | loop_3001_taxonomy_branch | loop_3001_intervention_recognize | loop_3001_intervention_interdict | loop_3001_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_3001_verdict)
+(loop_3001_inactive)-[:PROCESS]->(loop_3001_sink)
+(loop_3001_verdict)-[:PROCESS]->(loop_3001_sink)
+(loop_3001_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_3001_then_branch)
+(loop_3001_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_3001_then_branch)
+(loop_3001_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_3001_then_branch)

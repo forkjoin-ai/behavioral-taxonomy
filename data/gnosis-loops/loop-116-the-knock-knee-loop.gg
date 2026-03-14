@@ -1,0 +1,33 @@
+// behavioral-loop-116.gg
+// Executable Gnosis projection for The Knock-Knee Loop.
+
+// Nodes
+(loop_116_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_116_context_branch: BehaviorEmit { emission: 'context' })
+(loop_116_given_gate: BehaviorAssess { stage: 'given', text: 'Inward%20angulation%20of%20knees' })
+(loop_116_inactive: BehaviorTerminal { loopId: 116, loopName: 'The%20Knock-Knee%20Loop' })
+(loop_116_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_116_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_116_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_116_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20stance%20appears%20%22Weak%22%20or%20%22Unstable%22' })
+(loop_116_result_branch: BehaviorEmit { emission: 'result', text: 'being%20picked%20last%20for%20teams%2C%20fostering%20**Intellectual%20Compensation**' })
+(loop_116_sink: BehaviorSink)
+(loop_116_start: BehaviorStart { loopId: 116, loopName: 'The%20Knock-Knee%20Loop', given: 'Inward%20angulation%20of%20knees', when: 'running%20or%20standing', then: 'the%20stance%20appears%20%22Weak%22%20or%20%22Unstable%22%20(The%20Fragility%20Operator)', result: 'being%20picked%20last%20for%20teams%2C%20fostering%20**Intellectual%20Compensation**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20stance%20appears%20%22Weak%22%20or%20%22Unstable%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_116_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_116_then_branch: BehaviorEmit { emission: 'then', text: 'the%20stance%20appears%20%22Weak%22%20or%20%22Unstable%22%20(The%20Fragility%20Operator)' })
+(loop_116_verdict: BehaviorVerdict { loopId: 116, loopName: 'The%20Knock-Knee%20Loop', then: 'the%20stance%20appears%20%22Weak%22%20or%20%22Unstable%22%20(The%20Fragility%20Operator)', result: 'being%20picked%20last%20for%20teams%2C%20fostering%20**Intellectual%20Compensation**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20stance%20appears%20%22Weak%22%20or%20%22Unstable%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_116_when_gate: BehaviorAssess { stage: 'when', text: 'running%20or%20standing' })
+
+// Topology
+(loop_116_start)-[:PROCESS]->(loop_116_given_gate)
+(loop_116_given_gate)-[:PROCESS { case: "ok" }]->(loop_116_when_gate)
+(loop_116_given_gate)-[:PROCESS { case: "err" }]->(loop_116_inactive)
+(loop_116_when_gate)-[:PROCESS { case: "ok" }]->(loop_116_context)
+(loop_116_when_gate)-[:PROCESS { case: "err" }]->(loop_116_inactive)
+(loop_116_context)-[:FORK { strategy: "behavior-branches" }]->(loop_116_context_branch | loop_116_then_branch | loop_116_operator_branch | loop_116_result_branch | loop_116_taxonomy_branch | loop_116_intervention_recognize | loop_116_intervention_interdict | loop_116_intervention_minimize)
+(loop_116_context_branch | loop_116_then_branch | loop_116_operator_branch | loop_116_result_branch | loop_116_taxonomy_branch | loop_116_intervention_recognize | loop_116_intervention_interdict | loop_116_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_116_verdict)
+(loop_116_inactive)-[:PROCESS]->(loop_116_sink)
+(loop_116_verdict)-[:PROCESS]->(loop_116_sink)
+(loop_116_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_116_then_branch)
+(loop_116_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_116_then_branch)
+(loop_116_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_116_then_branch)

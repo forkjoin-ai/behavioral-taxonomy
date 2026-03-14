@@ -1,0 +1,33 @@
+// behavioral-loop-631.gg
+// Executable Gnosis projection for The Bearded Lady Loop.
+
+// Nodes
+(loop_631_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_631_context_branch: BehaviorEmit { emission: 'context' })
+(loop_631_given_gate: BehaviorAssess { stage: 'given', text: 'Coarse%20terminal%20hair%20on%20female%20chin%2Fchest' })
+(loop_631_inactive: BehaviorTerminal { loopId: 631, loopName: 'The%20Bearded%20Lady%20Loop' })
+(loop_631_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_631_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_631_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_631_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Androgen%20Operator', mechanism: 'it%20signals%20%22Hormonal%20Imbalance%22' })
+(loop_631_result_branch: BehaviorEmit { emission: 'result', text: 'obsessive%20grooming%20or%20feeling%20%22Unfeminine.%22' })
+(loop_631_sink: BehaviorSink)
+(loop_631_start: BehaviorStart { loopId: 631, loopName: 'The%20Bearded%20Lady%20Loop', given: 'Coarse%20terminal%20hair%20on%20female%20chin%2Fchest', when: 'in%20bright%20light', then: 'it%20signals%20%22Hormonal%20Imbalance%22%20(The%20Androgen%20Operator)', result: 'obsessive%20grooming%20or%20feeling%20%22Unfeminine.%22', operatorName: 'The%20Androgen%20Operator', operatorMechanism: 'it%20signals%20%22Hormonal%20Imbalance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_631_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_631_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Hormonal%20Imbalance%22%20(The%20Androgen%20Operator)' })
+(loop_631_verdict: BehaviorVerdict { loopId: 631, loopName: 'The%20Bearded%20Lady%20Loop', then: 'it%20signals%20%22Hormonal%20Imbalance%22%20(The%20Androgen%20Operator)', result: 'obsessive%20grooming%20or%20feeling%20%22Unfeminine.%22', operatorName: 'The%20Androgen%20Operator', operatorMechanism: 'it%20signals%20%22Hormonal%20Imbalance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_631_when_gate: BehaviorAssess { stage: 'when', text: 'in%20bright%20light' })
+
+// Topology
+(loop_631_start)-[:PROCESS]->(loop_631_given_gate)
+(loop_631_given_gate)-[:PROCESS { case: "ok" }]->(loop_631_when_gate)
+(loop_631_given_gate)-[:PROCESS { case: "err" }]->(loop_631_inactive)
+(loop_631_when_gate)-[:PROCESS { case: "ok" }]->(loop_631_context)
+(loop_631_when_gate)-[:PROCESS { case: "err" }]->(loop_631_inactive)
+(loop_631_context)-[:FORK { strategy: "behavior-branches" }]->(loop_631_context_branch | loop_631_then_branch | loop_631_operator_branch | loop_631_result_branch | loop_631_taxonomy_branch | loop_631_intervention_recognize | loop_631_intervention_interdict | loop_631_intervention_minimize)
+(loop_631_context_branch | loop_631_then_branch | loop_631_operator_branch | loop_631_result_branch | loop_631_taxonomy_branch | loop_631_intervention_recognize | loop_631_intervention_interdict | loop_631_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_631_verdict)
+(loop_631_inactive)-[:PROCESS]->(loop_631_sink)
+(loop_631_verdict)-[:PROCESS]->(loop_631_sink)
+(loop_631_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_631_then_branch)
+(loop_631_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_631_then_branch)
+(loop_631_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_631_then_branch)

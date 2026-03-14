@@ -1,0 +1,33 @@
+// behavioral-loop-635.gg
+// Executable Gnosis projection for The Cracked Tongue Loop.
+
+// Nodes
+(loop_635_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_635_context_branch: BehaviorEmit { emission: 'context' })
+(loop_635_given_gate: BehaviorAssess { stage: 'given', text: 'Deep%20grooves%20in%20tongue%20surface' })
+(loop_635_inactive: BehaviorTerminal { loopId: 635, loopName: 'The%20Cracked%20Tongue%20Loop' })
+(loop_635_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_635_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_635_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_635_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sensitivity%20Operator', mechanism: 'visible%20pain%20reaction%20occurs' })
+(loop_635_result_branch: BehaviorEmit { emission: 'result', text: 'being%20labeled%20a%20%22Picky%20Eater.%22' })
+(loop_635_sink: BehaviorSink)
+(loop_635_start: BehaviorStart { loopId: 635, loopName: 'The%20Cracked%20Tongue%20Loop', given: 'Deep%20grooves%20in%20tongue%20surface', when: 'eating%20spicy%20food', then: 'visible%20pain%20reaction%20occurs%20(The%20Sensitivity%20Operator)', result: 'being%20labeled%20a%20%22Picky%20Eater.%22', operatorName: 'The%20Sensitivity%20Operator', operatorMechanism: 'visible%20pain%20reaction%20occurs', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_635_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_635_then_branch: BehaviorEmit { emission: 'then', text: 'visible%20pain%20reaction%20occurs%20(The%20Sensitivity%20Operator)' })
+(loop_635_verdict: BehaviorVerdict { loopId: 635, loopName: 'The%20Cracked%20Tongue%20Loop', then: 'visible%20pain%20reaction%20occurs%20(The%20Sensitivity%20Operator)', result: 'being%20labeled%20a%20%22Picky%20Eater.%22', operatorName: 'The%20Sensitivity%20Operator', operatorMechanism: 'visible%20pain%20reaction%20occurs', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_635_when_gate: BehaviorAssess { stage: 'when', text: 'eating%20spicy%20food' })
+
+// Topology
+(loop_635_start)-[:PROCESS]->(loop_635_given_gate)
+(loop_635_given_gate)-[:PROCESS { case: "ok" }]->(loop_635_when_gate)
+(loop_635_given_gate)-[:PROCESS { case: "err" }]->(loop_635_inactive)
+(loop_635_when_gate)-[:PROCESS { case: "ok" }]->(loop_635_context)
+(loop_635_when_gate)-[:PROCESS { case: "err" }]->(loop_635_inactive)
+(loop_635_context)-[:FORK { strategy: "behavior-branches" }]->(loop_635_context_branch | loop_635_then_branch | loop_635_operator_branch | loop_635_result_branch | loop_635_taxonomy_branch | loop_635_intervention_recognize | loop_635_intervention_interdict | loop_635_intervention_minimize)
+(loop_635_context_branch | loop_635_then_branch | loop_635_operator_branch | loop_635_result_branch | loop_635_taxonomy_branch | loop_635_intervention_recognize | loop_635_intervention_interdict | loop_635_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_635_verdict)
+(loop_635_inactive)-[:PROCESS]->(loop_635_sink)
+(loop_635_verdict)-[:PROCESS]->(loop_635_sink)
+(loop_635_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_635_then_branch)
+(loop_635_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_635_then_branch)
+(loop_635_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_635_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-398.gg
+// Executable Gnosis projection for The Chain Reader Loop.
+
+// Nodes
+(loop_398_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_398_context_branch: BehaviorEmit { emission: 'context' })
+(loop_398_given_gate: BehaviorAssess { stage: 'given', text: 'Reading%20glasses%20on%20a%20neck%20chain' })
+(loop_398_inactive: BehaviorTerminal { loopId: 398, loopName: 'The%20Chain%20Reader%20Loop' })
+(loop_398_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Modify%20or%20remove%20the%20triggering%20element' })
+(loop_398_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_398_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_398_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Seniority%20Operator', mechanism: 'the%20gesture%20signals%20%22Age%2C%22%20%22Wisdom%2C%22%20or%20%22Librarian%20Energy%22' })
+(loop_398_result_branch: BehaviorEmit { emission: 'result', text: 'younger%20peers%20moderating%20their%20language%2Fslang' })
+(loop_398_sink: BehaviorSink)
+(loop_398_start: BehaviorStart { loopId: 398, loopName: 'The%20Chain%20Reader%20Loop', given: 'Reading%20glasses%20on%20a%20neck%20chain', when: 'pausing%20to%20read', then: 'the%20gesture%20signals%20%22Age%2C%22%20%22Wisdom%2C%22%20or%20%22Librarian%20Energy%22%20(The%20Seniority%20Operator)', result: 'younger%20peers%20moderating%20their%20language%2Fslang', operatorName: 'The%20Seniority%20Operator', operatorMechanism: 'the%20gesture%20signals%20%22Age%2C%22%20%22Wisdom%2C%22%20or%20%22Librarian%20Energy%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Modify%20or%20remove%20the%20triggering%20element', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_398_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_398_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gesture%20signals%20%22Age%2C%22%20%22Wisdom%2C%22%20or%20%22Librarian%20Energy%22%20(The%20Seniority%20Operator)' })
+(loop_398_verdict: BehaviorVerdict { loopId: 398, loopName: 'The%20Chain%20Reader%20Loop', then: 'the%20gesture%20signals%20%22Age%2C%22%20%22Wisdom%2C%22%20or%20%22Librarian%20Energy%22%20(The%20Seniority%20Operator)', result: 'younger%20peers%20moderating%20their%20language%2Fslang', operatorName: 'The%20Seniority%20Operator', operatorMechanism: 'the%20gesture%20signals%20%22Age%2C%22%20%22Wisdom%2C%22%20or%20%22Librarian%20Energy%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_398_when_gate: BehaviorAssess { stage: 'when', text: 'pausing%20to%20read' })
+
+// Topology
+(loop_398_start)-[:PROCESS]->(loop_398_given_gate)
+(loop_398_given_gate)-[:PROCESS { case: "ok" }]->(loop_398_when_gate)
+(loop_398_given_gate)-[:PROCESS { case: "err" }]->(loop_398_inactive)
+(loop_398_when_gate)-[:PROCESS { case: "ok" }]->(loop_398_context)
+(loop_398_when_gate)-[:PROCESS { case: "err" }]->(loop_398_inactive)
+(loop_398_context)-[:FORK { strategy: "behavior-branches" }]->(loop_398_context_branch | loop_398_then_branch | loop_398_operator_branch | loop_398_result_branch | loop_398_taxonomy_branch | loop_398_intervention_recognize | loop_398_intervention_interdict | loop_398_intervention_minimize)
+(loop_398_context_branch | loop_398_then_branch | loop_398_operator_branch | loop_398_result_branch | loop_398_taxonomy_branch | loop_398_intervention_recognize | loop_398_intervention_interdict | loop_398_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_398_verdict)
+(loop_398_inactive)-[:PROCESS]->(loop_398_sink)
+(loop_398_verdict)-[:PROCESS]->(loop_398_sink)
+(loop_398_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_398_then_branch)
+(loop_398_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_398_then_branch)
+(loop_398_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_398_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-736.gg
+// Executable Gnosis projection for The Gold Loop.
+
+// Nodes
+(loop_736_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_736_context_branch: BehaviorEmit { emission: 'context' })
+(loop_736_given_gate: BehaviorAssess { stage: 'given', text: 'Precious%20metal%20dental%20work' })
+(loop_736_inactive: BehaviorTerminal { loopId: 736, loopName: 'The%20Gold%20Loop' })
+(loop_736_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_736_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_736_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_736_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Pirate%20Operator', mechanism: 'it%20signals%20%22Risk%2C%22%20%22Wealth%2C%22%20or%20%22Counter-Culture%22' })
+(loop_736_result_branch: BehaviorEmit { emission: 'result', text: 'polarization%20(Respect%20or%20Fear)' })
+(loop_736_sink: BehaviorSink)
+(loop_736_start: BehaviorStart { loopId: 736, loopName: 'The%20Gold%20Loop', given: 'Precious%20metal%20dental%20work', when: 'smiling', then: 'it%20signals%20%22Risk%2C%22%20%22Wealth%2C%22%20or%20%22Counter-Culture%22%20(The%20Pirate%20Operator)', result: 'polarization%20(Respect%20or%20Fear)', operatorName: 'The%20Pirate%20Operator', operatorMechanism: 'it%20signals%20%22Risk%2C%22%20%22Wealth%2C%22%20or%20%22Counter-Culture%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_736_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_736_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Risk%2C%22%20%22Wealth%2C%22%20or%20%22Counter-Culture%22%20(The%20Pirate%20Operator)' })
+(loop_736_verdict: BehaviorVerdict { loopId: 736, loopName: 'The%20Gold%20Loop', then: 'it%20signals%20%22Risk%2C%22%20%22Wealth%2C%22%20or%20%22Counter-Culture%22%20(The%20Pirate%20Operator)', result: 'polarization%20(Respect%20or%20Fear)', operatorName: 'The%20Pirate%20Operator', operatorMechanism: 'it%20signals%20%22Risk%2C%22%20%22Wealth%2C%22%20or%20%22Counter-Culture%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_736_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_736_start)-[:PROCESS]->(loop_736_given_gate)
+(loop_736_given_gate)-[:PROCESS { case: "ok" }]->(loop_736_when_gate)
+(loop_736_given_gate)-[:PROCESS { case: "err" }]->(loop_736_inactive)
+(loop_736_when_gate)-[:PROCESS { case: "ok" }]->(loop_736_context)
+(loop_736_when_gate)-[:PROCESS { case: "err" }]->(loop_736_inactive)
+(loop_736_context)-[:FORK { strategy: "behavior-branches" }]->(loop_736_context_branch | loop_736_then_branch | loop_736_operator_branch | loop_736_result_branch | loop_736_taxonomy_branch | loop_736_intervention_recognize | loop_736_intervention_interdict | loop_736_intervention_minimize)
+(loop_736_context_branch | loop_736_then_branch | loop_736_operator_branch | loop_736_result_branch | loop_736_taxonomy_branch | loop_736_intervention_recognize | loop_736_intervention_interdict | loop_736_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_736_verdict)
+(loop_736_inactive)-[:PROCESS]->(loop_736_sink)
+(loop_736_verdict)-[:PROCESS]->(loop_736_sink)
+(loop_736_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_736_then_branch)
+(loop_736_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_736_then_branch)
+(loop_736_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_736_then_branch)

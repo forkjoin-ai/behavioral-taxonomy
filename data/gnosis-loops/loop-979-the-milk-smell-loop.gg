@@ -1,0 +1,33 @@
+// behavioral-loop-979.gg
+// Executable Gnosis projection for The Milk Smell Loop.
+
+// Nodes
+(loop_979_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_979_context_branch: BehaviorEmit { emission: 'context' })
+(loop_979_given_gate: BehaviorAssess { stage: 'given', text: 'Dairy%20regurgitation%20or%20spills%20(New%20Parents)' })
+(loop_979_inactive: BehaviorTerminal { loopId: 979, loopName: 'The%20Milk%20Smell%20Loop' })
+(loop_979_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_979_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_979_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_979_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Baby%20Operator', mechanism: 'a%20faint%20%22Sour%22%20odor%20lingers' })
+(loop_979_result_branch: BehaviorEmit { emission: 'result', text: 'sympathy%20but%20physical%20distance' })
+(loop_979_sink: BehaviorSink)
+(loop_979_start: BehaviorStart { loopId: 979, loopName: 'The%20Milk%20Smell%20Loop', given: 'Dairy%20regurgitation%20or%20spills%20(New%20Parents)', when: 'arriving%20at%20work', then: 'a%20faint%20%22Sour%22%20odor%20lingers%20(The%20Baby%20Operator)', result: 'sympathy%20but%20physical%20distance', operatorName: 'The%20Baby%20Operator', operatorMechanism: 'a%20faint%20%22Sour%22%20odor%20lingers', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_979_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_979_then_branch: BehaviorEmit { emission: 'then', text: 'a%20faint%20%22Sour%22%20odor%20lingers%20(The%20Baby%20Operator)' })
+(loop_979_verdict: BehaviorVerdict { loopId: 979, loopName: 'The%20Milk%20Smell%20Loop', then: 'a%20faint%20%22Sour%22%20odor%20lingers%20(The%20Baby%20Operator)', result: 'sympathy%20but%20physical%20distance', operatorName: 'The%20Baby%20Operator', operatorMechanism: 'a%20faint%20%22Sour%22%20odor%20lingers', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_979_when_gate: BehaviorAssess { stage: 'when', text: 'arriving%20at%20work' })
+
+// Topology
+(loop_979_start)-[:PROCESS]->(loop_979_given_gate)
+(loop_979_given_gate)-[:PROCESS { case: "ok" }]->(loop_979_when_gate)
+(loop_979_given_gate)-[:PROCESS { case: "err" }]->(loop_979_inactive)
+(loop_979_when_gate)-[:PROCESS { case: "ok" }]->(loop_979_context)
+(loop_979_when_gate)-[:PROCESS { case: "err" }]->(loop_979_inactive)
+(loop_979_context)-[:FORK { strategy: "behavior-branches" }]->(loop_979_context_branch | loop_979_then_branch | loop_979_operator_branch | loop_979_result_branch | loop_979_taxonomy_branch | loop_979_intervention_recognize | loop_979_intervention_interdict | loop_979_intervention_minimize)
+(loop_979_context_branch | loop_979_then_branch | loop_979_operator_branch | loop_979_result_branch | loop_979_taxonomy_branch | loop_979_intervention_recognize | loop_979_intervention_interdict | loop_979_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_979_verdict)
+(loop_979_inactive)-[:PROCESS]->(loop_979_sink)
+(loop_979_verdict)-[:PROCESS]->(loop_979_sink)
+(loop_979_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_979_then_branch)
+(loop_979_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_979_then_branch)
+(loop_979_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_979_then_branch)

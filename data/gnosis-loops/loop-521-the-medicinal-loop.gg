@@ -1,0 +1,33 @@
+// behavioral-loop-521.gg
+// Executable Gnosis projection for The Medicinal Loop.
+
+// Nodes
+(loop_521_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_521_context_branch: BehaviorEmit { emission: 'context' })
+(loop_521_given_gate: BehaviorAssess { stage: 'given', text: 'Scent%20of%20menthol%2C%20camphor%2C%20or%20mothballs' })
+(loop_521_inactive: BehaviorTerminal { loopId: 521, loopName: 'The%20Medicinal%20Loop' })
+(loop_521_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_521_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_521_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_521_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Infirmary%20Operator', mechanism: 'it%20signals%20%22Sickness%22%20or%20%22Old%20Age%22' })
+(loop_521_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20subconsciously%20viewing%20the%20individual%20as%20fragile%20or%20contagious' })
+(loop_521_sink: BehaviorSink)
+(loop_521_start: BehaviorStart { loopId: 521, loopName: 'The%20Medicinal%20Loop', given: 'Scent%20of%20menthol%2C%20camphor%2C%20or%20mothballs', when: 'entering%20a%20room', then: 'it%20signals%20%22Sickness%22%20or%20%22Old%20Age%22%20(The%20Infirmary%20Operator)', result: 'peers%20subconsciously%20viewing%20the%20individual%20as%20fragile%20or%20contagious', operatorName: 'The%20Infirmary%20Operator', operatorMechanism: 'it%20signals%20%22Sickness%22%20or%20%22Old%20Age%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_521_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_521_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Sickness%22%20or%20%22Old%20Age%22%20(The%20Infirmary%20Operator)' })
+(loop_521_verdict: BehaviorVerdict { loopId: 521, loopName: 'The%20Medicinal%20Loop', then: 'it%20signals%20%22Sickness%22%20or%20%22Old%20Age%22%20(The%20Infirmary%20Operator)', result: 'peers%20subconsciously%20viewing%20the%20individual%20as%20fragile%20or%20contagious', operatorName: 'The%20Infirmary%20Operator', operatorMechanism: 'it%20signals%20%22Sickness%22%20or%20%22Old%20Age%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_521_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20room' })
+
+// Topology
+(loop_521_start)-[:PROCESS]->(loop_521_given_gate)
+(loop_521_given_gate)-[:PROCESS { case: "ok" }]->(loop_521_when_gate)
+(loop_521_given_gate)-[:PROCESS { case: "err" }]->(loop_521_inactive)
+(loop_521_when_gate)-[:PROCESS { case: "ok" }]->(loop_521_context)
+(loop_521_when_gate)-[:PROCESS { case: "err" }]->(loop_521_inactive)
+(loop_521_context)-[:FORK { strategy: "behavior-branches" }]->(loop_521_context_branch | loop_521_then_branch | loop_521_operator_branch | loop_521_result_branch | loop_521_taxonomy_branch | loop_521_intervention_recognize | loop_521_intervention_interdict | loop_521_intervention_minimize)
+(loop_521_context_branch | loop_521_then_branch | loop_521_operator_branch | loop_521_result_branch | loop_521_taxonomy_branch | loop_521_intervention_recognize | loop_521_intervention_interdict | loop_521_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_521_verdict)
+(loop_521_inactive)-[:PROCESS]->(loop_521_sink)
+(loop_521_verdict)-[:PROCESS]->(loop_521_sink)
+(loop_521_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_521_then_branch)
+(loop_521_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_521_then_branch)
+(loop_521_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_521_then_branch)

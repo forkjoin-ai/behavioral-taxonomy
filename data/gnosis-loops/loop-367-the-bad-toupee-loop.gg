@@ -1,0 +1,33 @@
+// behavioral-loop-367.gg
+// Executable Gnosis projection for The Bad Toupee Loop.
+
+// Nodes
+(loop_367_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_367_context_branch: BehaviorEmit { emission: 'context' })
+(loop_367_given_gate: BehaviorAssess { stage: 'given', text: 'Mismatched%20hairpiece%20density%2Fcolor' })
+(loop_367_inactive: BehaviorTerminal { loopId: 367, loopName: 'The%20Bad%20Toupee%20Loop' })
+(loop_367_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_367_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_367_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_367_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Distraction%2FDishonesty%20Operator', mechanism: 'the%20listener%20focuses%20entirely%20on%20the%20hairline' })
+(loop_367_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20perceived%20as%20someone%20who%20cannot%20accept%20reality' })
+(loop_367_sink: BehaviorSink)
+(loop_367_start: BehaviorStart { loopId: 367, loopName: 'The%20Bad%20Toupee%20Loop', given: 'Mismatched%20hairpiece%20density%2Fcolor', when: 'talking%20to%20someone', then: 'the%20listener%20focuses%20entirely%20on%20the%20hairline%20(The%20Distraction%2FDishonesty%20Operator)', result: 'the%20individual%20being%20perceived%20as%20someone%20who%20cannot%20accept%20reality', operatorName: 'The%20Distraction%2FDishonesty%20Operator', operatorMechanism: 'the%20listener%20focuses%20entirely%20on%20the%20hairline', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_367_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_367_then_branch: BehaviorEmit { emission: 'then', text: 'the%20listener%20focuses%20entirely%20on%20the%20hairline%20(The%20Distraction%2FDishonesty%20Operator)' })
+(loop_367_verdict: BehaviorVerdict { loopId: 367, loopName: 'The%20Bad%20Toupee%20Loop', then: 'the%20listener%20focuses%20entirely%20on%20the%20hairline%20(The%20Distraction%2FDishonesty%20Operator)', result: 'the%20individual%20being%20perceived%20as%20someone%20who%20cannot%20accept%20reality', operatorName: 'The%20Distraction%2FDishonesty%20Operator', operatorMechanism: 'the%20listener%20focuses%20entirely%20on%20the%20hairline', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_367_when_gate: BehaviorAssess { stage: 'when', text: 'talking%20to%20someone' })
+
+// Topology
+(loop_367_start)-[:PROCESS]->(loop_367_given_gate)
+(loop_367_given_gate)-[:PROCESS { case: "ok" }]->(loop_367_when_gate)
+(loop_367_given_gate)-[:PROCESS { case: "err" }]->(loop_367_inactive)
+(loop_367_when_gate)-[:PROCESS { case: "ok" }]->(loop_367_context)
+(loop_367_when_gate)-[:PROCESS { case: "err" }]->(loop_367_inactive)
+(loop_367_context)-[:FORK { strategy: "behavior-branches" }]->(loop_367_context_branch | loop_367_then_branch | loop_367_operator_branch | loop_367_result_branch | loop_367_taxonomy_branch | loop_367_intervention_recognize | loop_367_intervention_interdict | loop_367_intervention_minimize)
+(loop_367_context_branch | loop_367_then_branch | loop_367_operator_branch | loop_367_result_branch | loop_367_taxonomy_branch | loop_367_intervention_recognize | loop_367_intervention_interdict | loop_367_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_367_verdict)
+(loop_367_inactive)-[:PROCESS]->(loop_367_sink)
+(loop_367_verdict)-[:PROCESS]->(loop_367_sink)
+(loop_367_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_367_then_branch)
+(loop_367_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_367_then_branch)
+(loop_367_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_367_then_branch)

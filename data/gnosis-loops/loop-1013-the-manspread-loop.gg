@@ -1,0 +1,35 @@
+// behavioral-loop-1013.gg
+// Executable Gnosis projection for The Manspread Loop.
+
+// Nodes
+(loop_1013_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1013_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1013_given_gate: BehaviorAssess { stage: 'given', text: 'Maximum%20hip%20abduction' })
+(loop_1013_inactive: BehaviorTerminal { loopId: 1013, loopName: 'The%20Manspread%20Loop' })
+(loop_1013_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1013_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_1013_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1013_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1013_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sprawl%20Operator', mechanism: 'knees%20encroach%20on%20neighbors' })
+(loop_1013_result_branch: BehaviorEmit { emission: 'result', text: 'a%20dominance%20display%20that%20invites%20either%20submission%20or%20a%20fight' })
+(loop_1013_sink: BehaviorSink)
+(loop_1013_start: BehaviorStart { loopId: 1013, loopName: 'The%20Manspread%20Loop', given: 'Maximum%20hip%20abduction', when: 'seated', then: 'knees%20encroach%20on%20neighbors%20(The%20Sprawl%20Operator)', result: 'a%20dominance%20display%20that%20invites%20either%20submission%20or%20a%20fight', operatorName: 'The%20Sprawl%20Operator', operatorMechanism: 'knees%20encroach%20on%20neighbors', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE|SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_1013_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE|SUBMISSION' })
+(loop_1013_then_branch: BehaviorEmit { emission: 'then', text: 'knees%20encroach%20on%20neighbors%20(The%20Sprawl%20Operator)' })
+(loop_1013_verdict: BehaviorVerdict { loopId: 1013, loopName: 'The%20Manspread%20Loop', then: 'knees%20encroach%20on%20neighbors%20(The%20Sprawl%20Operator)', result: 'a%20dominance%20display%20that%20invites%20either%20submission%20or%20a%20fight', operatorName: 'The%20Sprawl%20Operator', operatorMechanism: 'knees%20encroach%20on%20neighbors', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE|SUBMISSION' })
+(loop_1013_when_gate: BehaviorAssess { stage: 'when', text: 'seated' })
+
+// Topology
+(loop_1013_start)-[:PROCESS]->(loop_1013_given_gate)
+(loop_1013_given_gate)-[:PROCESS { case: "ok" }]->(loop_1013_when_gate)
+(loop_1013_given_gate)-[:PROCESS { case: "err" }]->(loop_1013_inactive)
+(loop_1013_when_gate)-[:PROCESS { case: "ok" }]->(loop_1013_context)
+(loop_1013_when_gate)-[:PROCESS { case: "err" }]->(loop_1013_inactive)
+(loop_1013_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1013_context_branch | loop_1013_then_branch | loop_1013_operator_branch | loop_1013_result_branch | loop_1013_taxonomy_branch | loop_1013_intervention_recognize | loop_1013_intervention_interdict | loop_1013_intervention_minimize | loop_1013_intervention_leverage)
+(loop_1013_context_branch | loop_1013_then_branch | loop_1013_operator_branch | loop_1013_result_branch | loop_1013_taxonomy_branch | loop_1013_intervention_recognize | loop_1013_intervention_interdict | loop_1013_intervention_minimize | loop_1013_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1013_verdict)
+(loop_1013_inactive)-[:PROCESS]->(loop_1013_sink)
+(loop_1013_verdict)-[:PROCESS]->(loop_1013_sink)
+(loop_1013_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1013_then_branch)
+(loop_1013_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1013_then_branch)
+(loop_1013_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1013_then_branch)
+(loop_1013_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_1013_result_branch)

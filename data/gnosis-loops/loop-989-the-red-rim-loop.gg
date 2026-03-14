@@ -1,0 +1,33 @@
+// behavioral-loop-989.gg
+// Executable Gnosis projection for The Red Rim Loop.
+
+// Nodes
+(loop_989_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_989_context_branch: BehaviorEmit { emission: 'context' })
+(loop_989_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20inflammation%20of%20eyelid%20margins' })
+(loop_989_inactive: BehaviorTerminal { loopId: 989, loopName: 'The%20Red%20Rim%20Loop' })
+(loop_989_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_989_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_989_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_989_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Pink%20Eye%20Operator', mechanism: 'the%20eyes%20look%20%22Sore%22%20or%20%22Infected%22' })
+(loop_989_result_branch: BehaviorEmit { emission: 'result', text: 'fear%20of%20contagion' })
+(loop_989_sink: BehaviorSink)
+(loop_989_start: BehaviorStart { loopId: 989, loopName: 'The%20Red%20Rim%20Loop', given: 'Chronic%20inflammation%20of%20eyelid%20margins', when: 'making%20eye%20contact', then: 'the%20eyes%20look%20%22Sore%22%20or%20%22Infected%22%20(The%20Pink%20Eye%20Operator)', result: 'fear%20of%20contagion', operatorName: 'The%20Pink%20Eye%20Operator', operatorMechanism: 'the%20eyes%20look%20%22Sore%22%20or%20%22Infected%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_989_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_989_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20look%20%22Sore%22%20or%20%22Infected%22%20(The%20Pink%20Eye%20Operator)' })
+(loop_989_verdict: BehaviorVerdict { loopId: 989, loopName: 'The%20Red%20Rim%20Loop', then: 'the%20eyes%20look%20%22Sore%22%20or%20%22Infected%22%20(The%20Pink%20Eye%20Operator)', result: 'fear%20of%20contagion', operatorName: 'The%20Pink%20Eye%20Operator', operatorMechanism: 'the%20eyes%20look%20%22Sore%22%20or%20%22Infected%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_989_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_989_start)-[:PROCESS]->(loop_989_given_gate)
+(loop_989_given_gate)-[:PROCESS { case: "ok" }]->(loop_989_when_gate)
+(loop_989_given_gate)-[:PROCESS { case: "err" }]->(loop_989_inactive)
+(loop_989_when_gate)-[:PROCESS { case: "ok" }]->(loop_989_context)
+(loop_989_when_gate)-[:PROCESS { case: "err" }]->(loop_989_inactive)
+(loop_989_context)-[:FORK { strategy: "behavior-branches" }]->(loop_989_context_branch | loop_989_then_branch | loop_989_operator_branch | loop_989_result_branch | loop_989_taxonomy_branch | loop_989_intervention_recognize | loop_989_intervention_interdict | loop_989_intervention_minimize)
+(loop_989_context_branch | loop_989_then_branch | loop_989_operator_branch | loop_989_result_branch | loop_989_taxonomy_branch | loop_989_intervention_recognize | loop_989_intervention_interdict | loop_989_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_989_verdict)
+(loop_989_inactive)-[:PROCESS]->(loop_989_sink)
+(loop_989_verdict)-[:PROCESS]->(loop_989_sink)
+(loop_989_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_989_then_branch)
+(loop_989_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_989_then_branch)
+(loop_989_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_989_then_branch)

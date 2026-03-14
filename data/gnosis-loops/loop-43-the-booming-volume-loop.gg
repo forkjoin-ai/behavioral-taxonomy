@@ -1,0 +1,33 @@
+// behavioral-loop-43.gg
+// Executable Gnosis projection for The Booming Volume Loop.
+
+// Nodes
+(loop_43_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_43_context_branch: BehaviorEmit { emission: 'context' })
+(loop_43_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20High%20Natural%20Decibel%20Output' })
+(loop_43_inactive: BehaviorTerminal { loopId: 43, loopName: 'The%20Booming%20Volume%20Loop' })
+(loop_43_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20competence%20in%20areas%20that%20compensate' })
+(loop_43_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_43_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_43_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Scrutiny%20Operator', mechanism: 'they%20are%20still%20overheard' })
+(loop_43_result_branch: BehaviorEmit { emission: 'result', text: "a%20lack%20of%20privacy%20that%20fosters%20**Radical%20Transparency**%20(having%20no%20secrets%20because%20you%20can't%20hide%20them)" })
+(loop_43_sink: BehaviorSink)
+(loop_43_start: BehaviorStart { loopId: 43, loopName: 'The%20Booming%20Volume%20Loop', given: 'an%20individual%20possesses%20High%20Natural%20Decibel%20Output', when: 'they%20whisper%20or%20try%20to%20be%20private', then: 'they%20are%20still%20overheard%20(The%20Scrutiny%20Operator)', result: "a%20lack%20of%20privacy%20that%20fosters%20**Radical%20Transparency**%20(having%20no%20secrets%20because%20you%20can't%20hide%20them)", operatorName: 'The%20Scrutiny%20Operator', operatorMechanism: 'they%20are%20still%20overheard', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20competence%20in%20areas%20that%20compensate', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_43_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_43_then_branch: BehaviorEmit { emission: 'then', text: 'they%20are%20still%20overheard%20(The%20Scrutiny%20Operator)' })
+(loop_43_verdict: BehaviorVerdict { loopId: 43, loopName: 'The%20Booming%20Volume%20Loop', then: 'they%20are%20still%20overheard%20(The%20Scrutiny%20Operator)', result: "a%20lack%20of%20privacy%20that%20fosters%20**Radical%20Transparency**%20(having%20no%20secrets%20because%20you%20can't%20hide%20them)", operatorName: 'The%20Scrutiny%20Operator', operatorMechanism: 'they%20are%20still%20overheard', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_43_when_gate: BehaviorAssess { stage: 'when', text: 'they%20whisper%20or%20try%20to%20be%20private' })
+
+// Topology
+(loop_43_start)-[:PROCESS]->(loop_43_given_gate)
+(loop_43_given_gate)-[:PROCESS { case: "ok" }]->(loop_43_when_gate)
+(loop_43_given_gate)-[:PROCESS { case: "err" }]->(loop_43_inactive)
+(loop_43_when_gate)-[:PROCESS { case: "ok" }]->(loop_43_context)
+(loop_43_when_gate)-[:PROCESS { case: "err" }]->(loop_43_inactive)
+(loop_43_context)-[:FORK { strategy: "behavior-branches" }]->(loop_43_context_branch | loop_43_then_branch | loop_43_operator_branch | loop_43_result_branch | loop_43_taxonomy_branch | loop_43_intervention_recognize | loop_43_intervention_interdict | loop_43_intervention_minimize)
+(loop_43_context_branch | loop_43_then_branch | loop_43_operator_branch | loop_43_result_branch | loop_43_taxonomy_branch | loop_43_intervention_recognize | loop_43_intervention_interdict | loop_43_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_43_verdict)
+(loop_43_inactive)-[:PROCESS]->(loop_43_sink)
+(loop_43_verdict)-[:PROCESS]->(loop_43_sink)
+(loop_43_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_43_then_branch)
+(loop_43_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_43_then_branch)
+(loop_43_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_43_then_branch)

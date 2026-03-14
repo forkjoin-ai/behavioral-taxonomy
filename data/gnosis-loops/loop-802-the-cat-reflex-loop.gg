@@ -1,0 +1,33 @@
+// behavioral-loop-802.gg
+// Executable Gnosis projection for The Cat Reflex Loop.
+
+// Nodes
+(loop_802_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_802_context_branch: BehaviorEmit { emission: 'context' })
+(loop_802_given_gate: BehaviorAssess { stage: 'given', text: 'Nearly%20falling%20but%20recovering%20instantly%20without%20spilling%20a%20drink' })
+(loop_802_inactive: BehaviorTerminal { loopId: 802, loopName: 'The%20Cat%20Reflex%20Loop' })
+(loop_802_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_802_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_802_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_802_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Ninja%20Operator', mechanism: 'it%20signals%20%22High%20Dexterity%22%20and%20%22Cool%20Under%20Pressure%22' })
+(loop_802_result_branch: BehaviorEmit { emission: 'result', text: 'a%20spike%20in%20respect%20and%20sexual%20interest' })
+(loop_802_sink: BehaviorSink)
+(loop_802_start: BehaviorStart { loopId: 802, loopName: 'The%20Cat%20Reflex%20Loop', given: 'Nearly%20falling%20but%20recovering%20instantly%20without%20spilling%20a%20drink', when: 'a%20mishap%20occurs', then: 'it%20signals%20%22High%20Dexterity%22%20and%20%22Cool%20Under%20Pressure%22%20(The%20Ninja%20Operator)', result: 'a%20spike%20in%20respect%20and%20sexual%20interest', operatorName: 'The%20Ninja%20Operator', operatorMechanism: 'it%20signals%20%22High%20Dexterity%22%20and%20%22Cool%20Under%20Pressure%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_802_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_802_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22High%20Dexterity%22%20and%20%22Cool%20Under%20Pressure%22%20(The%20Ninja%20Operator)' })
+(loop_802_verdict: BehaviorVerdict { loopId: 802, loopName: 'The%20Cat%20Reflex%20Loop', then: 'it%20signals%20%22High%20Dexterity%22%20and%20%22Cool%20Under%20Pressure%22%20(The%20Ninja%20Operator)', result: 'a%20spike%20in%20respect%20and%20sexual%20interest', operatorName: 'The%20Ninja%20Operator', operatorMechanism: 'it%20signals%20%22High%20Dexterity%22%20and%20%22Cool%20Under%20Pressure%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_802_when_gate: BehaviorAssess { stage: 'when', text: 'a%20mishap%20occurs' })
+
+// Topology
+(loop_802_start)-[:PROCESS]->(loop_802_given_gate)
+(loop_802_given_gate)-[:PROCESS { case: "ok" }]->(loop_802_when_gate)
+(loop_802_given_gate)-[:PROCESS { case: "err" }]->(loop_802_inactive)
+(loop_802_when_gate)-[:PROCESS { case: "ok" }]->(loop_802_context)
+(loop_802_when_gate)-[:PROCESS { case: "err" }]->(loop_802_inactive)
+(loop_802_context)-[:FORK { strategy: "behavior-branches" }]->(loop_802_context_branch | loop_802_then_branch | loop_802_operator_branch | loop_802_result_branch | loop_802_taxonomy_branch | loop_802_intervention_recognize | loop_802_intervention_interdict | loop_802_intervention_minimize)
+(loop_802_context_branch | loop_802_then_branch | loop_802_operator_branch | loop_802_result_branch | loop_802_taxonomy_branch | loop_802_intervention_recognize | loop_802_intervention_interdict | loop_802_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_802_verdict)
+(loop_802_inactive)-[:PROCESS]->(loop_802_sink)
+(loop_802_verdict)-[:PROCESS]->(loop_802_sink)
+(loop_802_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_802_then_branch)
+(loop_802_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_802_then_branch)
+(loop_802_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_802_then_branch)

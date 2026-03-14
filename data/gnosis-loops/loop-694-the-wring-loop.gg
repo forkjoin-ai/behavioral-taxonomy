@@ -1,0 +1,33 @@
+// behavioral-loop-694.gg
+// Executable Gnosis projection for The Wring Loop.
+
+// Nodes
+(loop_694_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_694_context_branch: BehaviorEmit { emission: 'context' })
+(loop_694_given_gate: BehaviorAssess { stage: 'given', text: 'Rubbing%20hands%20together%20constantly' })
+(loop_694_inactive: BehaviorTerminal { loopId: 694, loopName: 'The%20Wring%20Loop' })
+(loop_694_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_694_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_694_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_694_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nervous%20Operator', mechanism: 'it%20signals%20%22Anxiety%22%20or%20%22Lady%20Macbeth%22%20guilt' })
+(loop_694_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20the%20individual%20is%20worried%20about%20the%20outcome' })
+(loop_694_sink: BehaviorSink)
+(loop_694_start: BehaviorStart { loopId: 694, loopName: 'The%20Wring%20Loop', given: 'Rubbing%20hands%20together%20constantly', when: 'waiting', then: 'it%20signals%20%22Anxiety%22%20or%20%22Lady%20Macbeth%22%20guilt%20(The%20Nervous%20Operator)', result: 'observers%20assuming%20the%20individual%20is%20worried%20about%20the%20outcome', operatorName: 'The%20Nervous%20Operator', operatorMechanism: 'it%20signals%20%22Anxiety%22%20or%20%22Lady%20Macbeth%22%20guilt', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_694_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_694_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Anxiety%22%20or%20%22Lady%20Macbeth%22%20guilt%20(The%20Nervous%20Operator)' })
+(loop_694_verdict: BehaviorVerdict { loopId: 694, loopName: 'The%20Wring%20Loop', then: 'it%20signals%20%22Anxiety%22%20or%20%22Lady%20Macbeth%22%20guilt%20(The%20Nervous%20Operator)', result: 'observers%20assuming%20the%20individual%20is%20worried%20about%20the%20outcome', operatorName: 'The%20Nervous%20Operator', operatorMechanism: 'it%20signals%20%22Anxiety%22%20or%20%22Lady%20Macbeth%22%20guilt', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_694_when_gate: BehaviorAssess { stage: 'when', text: 'waiting' })
+
+// Topology
+(loop_694_start)-[:PROCESS]->(loop_694_given_gate)
+(loop_694_given_gate)-[:PROCESS { case: "ok" }]->(loop_694_when_gate)
+(loop_694_given_gate)-[:PROCESS { case: "err" }]->(loop_694_inactive)
+(loop_694_when_gate)-[:PROCESS { case: "ok" }]->(loop_694_context)
+(loop_694_when_gate)-[:PROCESS { case: "err" }]->(loop_694_inactive)
+(loop_694_context)-[:FORK { strategy: "behavior-branches" }]->(loop_694_context_branch | loop_694_then_branch | loop_694_operator_branch | loop_694_result_branch | loop_694_taxonomy_branch | loop_694_intervention_recognize | loop_694_intervention_interdict | loop_694_intervention_minimize)
+(loop_694_context_branch | loop_694_then_branch | loop_694_operator_branch | loop_694_result_branch | loop_694_taxonomy_branch | loop_694_intervention_recognize | loop_694_intervention_interdict | loop_694_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_694_verdict)
+(loop_694_inactive)-[:PROCESS]->(loop_694_sink)
+(loop_694_verdict)-[:PROCESS]->(loop_694_sink)
+(loop_694_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_694_then_branch)
+(loop_694_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_694_then_branch)
+(loop_694_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_694_then_branch)

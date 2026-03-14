@@ -1,0 +1,33 @@
+// behavioral-loop-623.gg
+// Executable Gnosis projection for The Marble Loop.
+
+// Nodes
+(loop_623_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_623_context_branch: BehaviorEmit { emission: 'context' })
+(loop_623_given_gate: BehaviorAssess { stage: 'given', text: 'Net-like%20purple%20pattern%20on%20legs%2Farms' })
+(loop_623_inactive: BehaviorTerminal { loopId: 623, loopName: 'The%20Marble%20Loop' })
+(loop_623_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_623_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_623_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_623_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Corpse%20Operator', mechanism: 'skin%20looks%20%22Dead%22%20or%20%22Frozen%22' })
+(loop_623_result_branch: BehaviorEmit { emission: 'result', text: 'people%20constantly%20asking%20%22Are%20you%20cold%3F%22' })
+(loop_623_sink: BehaviorSink)
+(loop_623_start: BehaviorStart { loopId: 623, loopName: 'The%20Marble%20Loop', given: 'Net-like%20purple%20pattern%20on%20legs%2Farms', when: 'it%20is%20cold', then: 'skin%20looks%20%22Dead%22%20or%20%22Frozen%22%20(The%20Corpse%20Operator)', result: 'people%20constantly%20asking%20%22Are%20you%20cold%3F%22', operatorName: 'The%20Corpse%20Operator', operatorMechanism: 'skin%20looks%20%22Dead%22%20or%20%22Frozen%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_623_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_623_then_branch: BehaviorEmit { emission: 'then', text: 'skin%20looks%20%22Dead%22%20or%20%22Frozen%22%20(The%20Corpse%20Operator)' })
+(loop_623_verdict: BehaviorVerdict { loopId: 623, loopName: 'The%20Marble%20Loop', then: 'skin%20looks%20%22Dead%22%20or%20%22Frozen%22%20(The%20Corpse%20Operator)', result: 'people%20constantly%20asking%20%22Are%20you%20cold%3F%22', operatorName: 'The%20Corpse%20Operator', operatorMechanism: 'skin%20looks%20%22Dead%22%20or%20%22Frozen%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_623_when_gate: BehaviorAssess { stage: 'when', text: 'it%20is%20cold' })
+
+// Topology
+(loop_623_start)-[:PROCESS]->(loop_623_given_gate)
+(loop_623_given_gate)-[:PROCESS { case: "ok" }]->(loop_623_when_gate)
+(loop_623_given_gate)-[:PROCESS { case: "err" }]->(loop_623_inactive)
+(loop_623_when_gate)-[:PROCESS { case: "ok" }]->(loop_623_context)
+(loop_623_when_gate)-[:PROCESS { case: "err" }]->(loop_623_inactive)
+(loop_623_context)-[:FORK { strategy: "behavior-branches" }]->(loop_623_context_branch | loop_623_then_branch | loop_623_operator_branch | loop_623_result_branch | loop_623_taxonomy_branch | loop_623_intervention_recognize | loop_623_intervention_interdict | loop_623_intervention_minimize)
+(loop_623_context_branch | loop_623_then_branch | loop_623_operator_branch | loop_623_result_branch | loop_623_taxonomy_branch | loop_623_intervention_recognize | loop_623_intervention_interdict | loop_623_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_623_verdict)
+(loop_623_inactive)-[:PROCESS]->(loop_623_sink)
+(loop_623_verdict)-[:PROCESS]->(loop_623_sink)
+(loop_623_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_623_then_branch)
+(loop_623_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_623_then_branch)
+(loop_623_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_623_then_branch)

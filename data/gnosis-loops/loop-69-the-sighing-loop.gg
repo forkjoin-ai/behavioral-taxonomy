@@ -1,0 +1,33 @@
+// behavioral-loop-69.gg
+// Executable Gnosis projection for The Sighing Loop.
+
+// Nodes
+(loop_69_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_69_context_branch: BehaviorEmit { emission: 'context' })
+(loop_69_given_gate: BehaviorAssess { stage: 'given', text: 'Dyspnea%20or%20Anxiety-Induced%20Air%20Hunger%20(Frequent%20deep%20sighs)' })
+(loop_69_inactive: BehaviorTerminal { loopId: 69, loopName: 'The%20Sighing%20Loop' })
+(loop_69_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_69_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_69_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_69_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%2FAnnoyance%20Operator', mechanism: 'the%20sigh%20is%20interpreted%20as%20%22Boredom%22%20or%20%22Frustration%22' })
+(loop_69_result_branch: BehaviorEmit { emission: 'result', text: "peers%20asking%20%22What's%20wrong%3F%22%20constantly%2C%20forcing%20the%20individual%20to%20perform%20**Emotional%20Labor**%20(reassuring%20others%20they%20are%20fine)" })
+(loop_69_sink: BehaviorSink)
+(loop_69_start: BehaviorStart { loopId: 69, loopName: 'The%20Sighing%20Loop', given: 'Dyspnea%20or%20Anxiety-Induced%20Air%20Hunger%20(Frequent%20deep%20sighs)', when: 'working%20quietly%20near%20others', then: 'the%20sigh%20is%20interpreted%20as%20%22Boredom%22%20or%20%22Frustration%22%20(The%20Disgust%2FAnnoyance%20Operator)', result: "peers%20asking%20%22What's%20wrong%3F%22%20constantly%2C%20forcing%20the%20individual%20to%20perform%20**Emotional%20Labor**%20(reassuring%20others%20they%20are%20fine)", operatorName: 'The%20Disgust%2FAnnoyance%20Operator', operatorMechanism: 'the%20sigh%20is%20interpreted%20as%20%22Boredom%22%20or%20%22Frustration%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_69_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_69_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sigh%20is%20interpreted%20as%20%22Boredom%22%20or%20%22Frustration%22%20(The%20Disgust%2FAnnoyance%20Operator)' })
+(loop_69_verdict: BehaviorVerdict { loopId: 69, loopName: 'The%20Sighing%20Loop', then: 'the%20sigh%20is%20interpreted%20as%20%22Boredom%22%20or%20%22Frustration%22%20(The%20Disgust%2FAnnoyance%20Operator)', result: "peers%20asking%20%22What's%20wrong%3F%22%20constantly%2C%20forcing%20the%20individual%20to%20perform%20**Emotional%20Labor**%20(reassuring%20others%20they%20are%20fine)", operatorName: 'The%20Disgust%2FAnnoyance%20Operator', operatorMechanism: 'the%20sigh%20is%20interpreted%20as%20%22Boredom%22%20or%20%22Frustration%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_69_when_gate: BehaviorAssess { stage: 'when', text: 'working%20quietly%20near%20others' })
+
+// Topology
+(loop_69_start)-[:PROCESS]->(loop_69_given_gate)
+(loop_69_given_gate)-[:PROCESS { case: "ok" }]->(loop_69_when_gate)
+(loop_69_given_gate)-[:PROCESS { case: "err" }]->(loop_69_inactive)
+(loop_69_when_gate)-[:PROCESS { case: "ok" }]->(loop_69_context)
+(loop_69_when_gate)-[:PROCESS { case: "err" }]->(loop_69_inactive)
+(loop_69_context)-[:FORK { strategy: "behavior-branches" }]->(loop_69_context_branch | loop_69_then_branch | loop_69_operator_branch | loop_69_result_branch | loop_69_taxonomy_branch | loop_69_intervention_recognize | loop_69_intervention_interdict | loop_69_intervention_minimize)
+(loop_69_context_branch | loop_69_then_branch | loop_69_operator_branch | loop_69_result_branch | loop_69_taxonomy_branch | loop_69_intervention_recognize | loop_69_intervention_interdict | loop_69_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_69_verdict)
+(loop_69_inactive)-[:PROCESS]->(loop_69_sink)
+(loop_69_verdict)-[:PROCESS]->(loop_69_sink)
+(loop_69_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_69_then_branch)
+(loop_69_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_69_then_branch)
+(loop_69_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_69_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-851.gg
+// Executable Gnosis projection for The Grey Loop.
+
+// Nodes
+(loop_851_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_851_context_branch: BehaviorEmit { emission: 'context' })
+(loop_851_given_gate: BehaviorAssess { stage: 'given', text: 'Ashen%20skin%20tone%20from%20poor%20circulation' })
+(loop_851_inactive: BehaviorTerminal { loopId: 851, loopName: 'The%20Grey%20Loop' })
+(loop_851_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_851_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_851_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_851_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Corpse%20Operator', mechanism: 'it%20signals%20%22Near%20Death%22%20or%20%22Burnout%22' })
+(loop_851_result_branch: BehaviorEmit { emission: 'result', text: 'being%20sent%20home%20or%20passed%20over%20for%20demanding%20tasks' })
+(loop_851_sink: BehaviorSink)
+(loop_851_start: BehaviorStart { loopId: 851, loopName: 'The%20Grey%20Loop', given: 'Ashen%20skin%20tone%20from%20poor%20circulation', when: 'working%20late', then: 'it%20signals%20%22Near%20Death%22%20or%20%22Burnout%22%20(The%20Corpse%20Operator)', result: 'being%20sent%20home%20or%20passed%20over%20for%20demanding%20tasks', operatorName: 'The%20Corpse%20Operator', operatorMechanism: 'it%20signals%20%22Near%20Death%22%20or%20%22Burnout%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_851_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_851_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Near%20Death%22%20or%20%22Burnout%22%20(The%20Corpse%20Operator)' })
+(loop_851_verdict: BehaviorVerdict { loopId: 851, loopName: 'The%20Grey%20Loop', then: 'it%20signals%20%22Near%20Death%22%20or%20%22Burnout%22%20(The%20Corpse%20Operator)', result: 'being%20sent%20home%20or%20passed%20over%20for%20demanding%20tasks', operatorName: 'The%20Corpse%20Operator', operatorMechanism: 'it%20signals%20%22Near%20Death%22%20or%20%22Burnout%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_851_when_gate: BehaviorAssess { stage: 'when', text: 'working%20late' })
+
+// Topology
+(loop_851_start)-[:PROCESS]->(loop_851_given_gate)
+(loop_851_given_gate)-[:PROCESS { case: "ok" }]->(loop_851_when_gate)
+(loop_851_given_gate)-[:PROCESS { case: "err" }]->(loop_851_inactive)
+(loop_851_when_gate)-[:PROCESS { case: "ok" }]->(loop_851_context)
+(loop_851_when_gate)-[:PROCESS { case: "err" }]->(loop_851_inactive)
+(loop_851_context)-[:FORK { strategy: "behavior-branches" }]->(loop_851_context_branch | loop_851_then_branch | loop_851_operator_branch | loop_851_result_branch | loop_851_taxonomy_branch | loop_851_intervention_recognize | loop_851_intervention_interdict | loop_851_intervention_minimize)
+(loop_851_context_branch | loop_851_then_branch | loop_851_operator_branch | loop_851_result_branch | loop_851_taxonomy_branch | loop_851_intervention_recognize | loop_851_intervention_interdict | loop_851_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_851_verdict)
+(loop_851_inactive)-[:PROCESS]->(loop_851_sink)
+(loop_851_verdict)-[:PROCESS]->(loop_851_sink)
+(loop_851_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_851_then_branch)
+(loop_851_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_851_then_branch)
+(loop_851_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_851_then_branch)

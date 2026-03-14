@@ -1,0 +1,33 @@
+// behavioral-loop-585.gg
+// Executable Gnosis projection for The Ice Hand Loop.
+
+// Nodes
+(loop_585_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_585_context_branch: BehaviorEmit { emission: 'context' })
+(loop_585_given_gate: BehaviorAssess { stage: 'given', text: 'Vasospasm%20in%20fingers%20(turning%20white%2Fblue)' })
+(loop_585_inactive: BehaviorTerminal { loopId: 585, loopName: 'The%20Ice%20Hand%20Loop' })
+(loop_585_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_585_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_585_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_585_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dead%20Operator', mechanism: 'the%20recipient%20feels%20a%20%22Corpse-like%22%20coldness' })
+(loop_585_result_branch: BehaviorEmit { emission: 'result', text: 'visceral%20recoil%20and%20a%20bad%20first%20impression' })
+(loop_585_sink: BehaviorSink)
+(loop_585_start: BehaviorStart { loopId: 585, loopName: 'The%20Ice%20Hand%20Loop', given: 'Vasospasm%20in%20fingers%20(turning%20white%2Fblue)', when: 'shaking%20hands', then: 'the%20recipient%20feels%20a%20%22Corpse-like%22%20coldness%20(The%20Dead%20Operator)', result: 'visceral%20recoil%20and%20a%20bad%20first%20impression', operatorName: 'The%20Dead%20Operator', operatorMechanism: 'the%20recipient%20feels%20a%20%22Corpse-like%22%20coldness', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_585_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_585_then_branch: BehaviorEmit { emission: 'then', text: 'the%20recipient%20feels%20a%20%22Corpse-like%22%20coldness%20(The%20Dead%20Operator)' })
+(loop_585_verdict: BehaviorVerdict { loopId: 585, loopName: 'The%20Ice%20Hand%20Loop', then: 'the%20recipient%20feels%20a%20%22Corpse-like%22%20coldness%20(The%20Dead%20Operator)', result: 'visceral%20recoil%20and%20a%20bad%20first%20impression', operatorName: 'The%20Dead%20Operator', operatorMechanism: 'the%20recipient%20feels%20a%20%22Corpse-like%22%20coldness', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_585_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_585_start)-[:PROCESS]->(loop_585_given_gate)
+(loop_585_given_gate)-[:PROCESS { case: "ok" }]->(loop_585_when_gate)
+(loop_585_given_gate)-[:PROCESS { case: "err" }]->(loop_585_inactive)
+(loop_585_when_gate)-[:PROCESS { case: "ok" }]->(loop_585_context)
+(loop_585_when_gate)-[:PROCESS { case: "err" }]->(loop_585_inactive)
+(loop_585_context)-[:FORK { strategy: "behavior-branches" }]->(loop_585_context_branch | loop_585_then_branch | loop_585_operator_branch | loop_585_result_branch | loop_585_taxonomy_branch | loop_585_intervention_recognize | loop_585_intervention_interdict | loop_585_intervention_minimize)
+(loop_585_context_branch | loop_585_then_branch | loop_585_operator_branch | loop_585_result_branch | loop_585_taxonomy_branch | loop_585_intervention_recognize | loop_585_intervention_interdict | loop_585_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_585_verdict)
+(loop_585_inactive)-[:PROCESS]->(loop_585_sink)
+(loop_585_verdict)-[:PROCESS]->(loop_585_sink)
+(loop_585_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_585_then_branch)
+(loop_585_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_585_then_branch)
+(loop_585_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_585_then_branch)

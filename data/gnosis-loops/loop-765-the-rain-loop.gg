@@ -1,0 +1,33 @@
+// behavioral-loop-765.gg
+// Executable Gnosis projection for The Rain Loop.
+
+// Nodes
+(loop_765_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_765_context_branch: BehaviorEmit { emission: 'context' })
+(loop_765_given_gate: BehaviorAssess { stage: 'given', text: 'Damp%20natural%20fibers' })
+(loop_765_inactive: BehaviorTerminal { loopId: 765, loopName: 'The%20Rain%20Loop' })
+(loop_765_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_765_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_765_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_765_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dog%20Operator', mechanism: 'the%20smell%20is%20%22Animalistic%22%20or%20%22Musty%22' })
+(loop_765_result_branch: BehaviorEmit { emission: 'result', text: 'wrinkled%20noses' })
+(loop_765_sink: BehaviorSink)
+(loop_765_start: BehaviorStart { loopId: 765, loopName: 'The%20Rain%20Loop', given: 'Damp%20natural%20fibers', when: 'entering%20a%20warm%20room', then: 'the%20smell%20is%20%22Animalistic%22%20or%20%22Musty%22%20(The%20Dog%20Operator)', result: 'wrinkled%20noses', operatorName: 'The%20Dog%20Operator', operatorMechanism: 'the%20smell%20is%20%22Animalistic%22%20or%20%22Musty%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_765_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_765_then_branch: BehaviorEmit { emission: 'then', text: 'the%20smell%20is%20%22Animalistic%22%20or%20%22Musty%22%20(The%20Dog%20Operator)' })
+(loop_765_verdict: BehaviorVerdict { loopId: 765, loopName: 'The%20Rain%20Loop', then: 'the%20smell%20is%20%22Animalistic%22%20or%20%22Musty%22%20(The%20Dog%20Operator)', result: 'wrinkled%20noses', operatorName: 'The%20Dog%20Operator', operatorMechanism: 'the%20smell%20is%20%22Animalistic%22%20or%20%22Musty%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_765_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20warm%20room' })
+
+// Topology
+(loop_765_start)-[:PROCESS]->(loop_765_given_gate)
+(loop_765_given_gate)-[:PROCESS { case: "ok" }]->(loop_765_when_gate)
+(loop_765_given_gate)-[:PROCESS { case: "err" }]->(loop_765_inactive)
+(loop_765_when_gate)-[:PROCESS { case: "ok" }]->(loop_765_context)
+(loop_765_when_gate)-[:PROCESS { case: "err" }]->(loop_765_inactive)
+(loop_765_context)-[:FORK { strategy: "behavior-branches" }]->(loop_765_context_branch | loop_765_then_branch | loop_765_operator_branch | loop_765_result_branch | loop_765_taxonomy_branch | loop_765_intervention_recognize | loop_765_intervention_interdict | loop_765_intervention_minimize)
+(loop_765_context_branch | loop_765_then_branch | loop_765_operator_branch | loop_765_result_branch | loop_765_taxonomy_branch | loop_765_intervention_recognize | loop_765_intervention_interdict | loop_765_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_765_verdict)
+(loop_765_inactive)-[:PROCESS]->(loop_765_sink)
+(loop_765_verdict)-[:PROCESS]->(loop_765_sink)
+(loop_765_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_765_then_branch)
+(loop_765_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_765_then_branch)
+(loop_765_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_765_then_branch)

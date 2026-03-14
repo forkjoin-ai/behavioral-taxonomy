@@ -1,0 +1,33 @@
+// behavioral-loop-11007.gg
+// Executable Gnosis projection for The Cortisol Cascade Loop.
+
+// Nodes
+(loop_11007_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_11007_context_branch: BehaviorEmit { emission: 'context' })
+(loop_11007_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20psychological%20or%20physical%20threat%20activates%20the%20HPA%20axis' })
+(loop_11007_inactive: BehaviorTerminal { loopId: 11007, loopName: 'The%20Cortisol%20Cascade%20Loop' })
+(loop_11007_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Remove%20chronic%20stressors%3B%20prioritize%20sleep%20and%20recovery' })
+(loop_11007_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Implement%20daily%20stress-reduction%20practices%20(meditation%2C%20exercise)' })
+(loop_11007_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20flattened%20diurnal%20rhythm%20(tired%20in%20morning%2C%20wired%20at%20night)' })
+(loop_11007_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Feedback%20Failure', mechanism: 'Glucocorticoid%20Cascade%20Hypothesis%3A%20chronic%20cortisol%20causes%20receptor%20downregulation%2C%20breaking%20negative%20feedback.' })
+(loop_11007_result_branch: BehaviorEmit { emission: 'result', text: 'Runaway%20stress%20response%2C%20hippocampal%20atrophy%2C%20and%20metabolic%20syndrome' })
+(loop_11007_sink: BehaviorSink)
+(loop_11007_start: BehaviorStart { loopId: 11007, loopName: 'The%20Cortisol%20Cascade%20Loop', given: 'Chronic%20psychological%20or%20physical%20threat%20activates%20the%20HPA%20axis', when: 'Cortisol%20release%20causes%20downregulation%20of%20Glucocorticoid%20Receptors%20in%20Hippocampus', then: "The%20'brakes'%20are%20cut%20-%20brain%20can%20no%20longer%20sense%20cortisol%20levels", result: 'Runaway%20stress%20response%2C%20hippocampal%20atrophy%2C%20and%20metabolic%20syndrome', operatorName: 'The%20Feedback%20Failure', operatorMechanism: 'Glucocorticoid%20Cascade%20Hypothesis%3A%20chronic%20cortisol%20causes%20receptor%20downregulation%2C%20breaking%20negative%20feedback.', origin: 'NEUROBIOLOGICAL', modality: 'SOMATIC', mutability: 'PATHOLOGICAL', valences: 'ANXIETY|DETERIORATION', interventionDifficulty: '8', intervention_recognize: 'Notice%20flattened%20diurnal%20rhythm%20(tired%20in%20morning%2C%20wired%20at%20night)', intervention_interdict: 'Remove%20chronic%20stressors%3B%20prioritize%20sleep%20and%20recovery', intervention_minimize: 'Implement%20daily%20stress-reduction%20practices%20(meditation%2C%20exercise)' })
+(loop_11007_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'NEUROBIOLOGICAL', modality: 'SOMATIC', mutability: 'PATHOLOGICAL', valences: 'ANXIETY|DETERIORATION' })
+(loop_11007_then_branch: BehaviorEmit { emission: 'then', text: "The%20'brakes'%20are%20cut%20-%20brain%20can%20no%20longer%20sense%20cortisol%20levels" })
+(loop_11007_verdict: BehaviorVerdict { loopId: 11007, loopName: 'The%20Cortisol%20Cascade%20Loop', then: "The%20'brakes'%20are%20cut%20-%20brain%20can%20no%20longer%20sense%20cortisol%20levels", result: 'Runaway%20stress%20response%2C%20hippocampal%20atrophy%2C%20and%20metabolic%20syndrome', operatorName: 'The%20Feedback%20Failure', operatorMechanism: 'Glucocorticoid%20Cascade%20Hypothesis%3A%20chronic%20cortisol%20causes%20receptor%20downregulation%2C%20breaking%20negative%20feedback.', origin: 'NEUROBIOLOGICAL', modality: 'SOMATIC', mutability: 'PATHOLOGICAL', valences: 'ANXIETY|DETERIORATION' })
+(loop_11007_when_gate: BehaviorAssess { stage: 'when', text: 'Cortisol%20release%20causes%20downregulation%20of%20Glucocorticoid%20Receptors%20in%20Hippocampus' })
+
+// Topology
+(loop_11007_start)-[:PROCESS]->(loop_11007_given_gate)
+(loop_11007_given_gate)-[:PROCESS { case: "ok" }]->(loop_11007_when_gate)
+(loop_11007_given_gate)-[:PROCESS { case: "err" }]->(loop_11007_inactive)
+(loop_11007_when_gate)-[:PROCESS { case: "ok" }]->(loop_11007_context)
+(loop_11007_when_gate)-[:PROCESS { case: "err" }]->(loop_11007_inactive)
+(loop_11007_context)-[:FORK { strategy: "behavior-branches" }]->(loop_11007_context_branch | loop_11007_then_branch | loop_11007_operator_branch | loop_11007_result_branch | loop_11007_taxonomy_branch | loop_11007_intervention_recognize | loop_11007_intervention_interdict | loop_11007_intervention_minimize)
+(loop_11007_context_branch | loop_11007_then_branch | loop_11007_operator_branch | loop_11007_result_branch | loop_11007_taxonomy_branch | loop_11007_intervention_recognize | loop_11007_intervention_interdict | loop_11007_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_11007_verdict)
+(loop_11007_inactive)-[:PROCESS]->(loop_11007_sink)
+(loop_11007_verdict)-[:PROCESS]->(loop_11007_sink)
+(loop_11007_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_11007_then_branch)
+(loop_11007_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_11007_then_branch)
+(loop_11007_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_11007_then_branch)

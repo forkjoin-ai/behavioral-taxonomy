@@ -1,0 +1,33 @@
+// behavioral-loop-370.gg
+// Executable Gnosis projection for The Flat Philtrum Loop.
+
+// Nodes
+(loop_370_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_370_context_branch: BehaviorEmit { emission: 'context' })
+(loop_370_given_gate: BehaviorAssess { stage: 'given', text: 'Lack%20of%20definition%20between%20nose%20and%20lip' })
+(loop_370_inactive: BehaviorTerminal { loopId: 370, loopName: 'The%20Flat%20Philtrum%20Loop' })
+(loop_370_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_370_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_370_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_370_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Developmental%20Operator', mechanism: 'it%20triggers%20%22Fetal%20Alcohol%22%20association' })
+(loop_370_result_branch: BehaviorEmit { emission: 'result', text: 'unfair%20assumptions%20about%20cognitive%20ceiling' })
+(loop_370_sink: BehaviorSink)
+(loop_370_start: BehaviorStart { loopId: 370, loopName: 'The%20Flat%20Philtrum%20Loop', given: 'Lack%20of%20definition%20between%20nose%20and%20lip', when: 'viewed%20by%20medical%2Feducated%20peers', then: 'it%20triggers%20%22Fetal%20Alcohol%22%20association%20(The%20Developmental%20Operator)', result: 'unfair%20assumptions%20about%20cognitive%20ceiling', operatorName: 'The%20Developmental%20Operator', operatorMechanism: 'it%20triggers%20%22Fetal%20Alcohol%22%20association', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_370_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_370_then_branch: BehaviorEmit { emission: 'then', text: 'it%20triggers%20%22Fetal%20Alcohol%22%20association%20(The%20Developmental%20Operator)' })
+(loop_370_verdict: BehaviorVerdict { loopId: 370, loopName: 'The%20Flat%20Philtrum%20Loop', then: 'it%20triggers%20%22Fetal%20Alcohol%22%20association%20(The%20Developmental%20Operator)', result: 'unfair%20assumptions%20about%20cognitive%20ceiling', operatorName: 'The%20Developmental%20Operator', operatorMechanism: 'it%20triggers%20%22Fetal%20Alcohol%22%20association', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_370_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20by%20medical%2Feducated%20peers' })
+
+// Topology
+(loop_370_start)-[:PROCESS]->(loop_370_given_gate)
+(loop_370_given_gate)-[:PROCESS { case: "ok" }]->(loop_370_when_gate)
+(loop_370_given_gate)-[:PROCESS { case: "err" }]->(loop_370_inactive)
+(loop_370_when_gate)-[:PROCESS { case: "ok" }]->(loop_370_context)
+(loop_370_when_gate)-[:PROCESS { case: "err" }]->(loop_370_inactive)
+(loop_370_context)-[:FORK { strategy: "behavior-branches" }]->(loop_370_context_branch | loop_370_then_branch | loop_370_operator_branch | loop_370_result_branch | loop_370_taxonomy_branch | loop_370_intervention_recognize | loop_370_intervention_interdict | loop_370_intervention_minimize)
+(loop_370_context_branch | loop_370_then_branch | loop_370_operator_branch | loop_370_result_branch | loop_370_taxonomy_branch | loop_370_intervention_recognize | loop_370_intervention_interdict | loop_370_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_370_verdict)
+(loop_370_inactive)-[:PROCESS]->(loop_370_sink)
+(loop_370_verdict)-[:PROCESS]->(loop_370_sink)
+(loop_370_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_370_then_branch)
+(loop_370_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_370_then_branch)
+(loop_370_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_370_then_branch)

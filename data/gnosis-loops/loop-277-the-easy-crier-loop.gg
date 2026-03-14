@@ -1,0 +1,31 @@
+// behavioral-loop-277.gg
+// Executable Gnosis projection for The Easy Crier Loop.
+
+// Nodes
+(loop_277_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_277_context_branch: BehaviorEmit { emission: 'context' })
+(loop_277_given_gate: BehaviorAssess { stage: 'given', text: 'High%20parasympathetic%20rebound%20(cries%20when%20angry%2Fhappy)' })
+(loop_277_inactive: BehaviorTerminal { loopId: 277, loopName: 'The%20Easy%20Crier%20Loop' })
+(loop_277_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_277_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_277_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%2FHysteria%20Operator', mechanism: 'tears%20flow%20involuntarily' })
+(loop_277_result_branch: BehaviorEmit { emission: 'result', text: 'total%20loss%20of%20credibility%20and%20the%20argument%20ending%20in%20**Pity**' })
+(loop_277_sink: BehaviorSink)
+(loop_277_start: BehaviorStart { loopId: 277, loopName: 'The%20Easy%20Crier%20Loop', given: 'High%20parasympathetic%20rebound%20(cries%20when%20angry%2Fhappy)', when: 'in%20a%20heated%20professional%20debate', then: 'tears%20flow%20involuntarily%20(The%20Fragility%2FHysteria%20Operator)', result: 'total%20loss%20of%20credibility%20and%20the%20argument%20ending%20in%20**Pity**', operatorName: 'The%20Fragility%2FHysteria%20Operator', operatorMechanism: 'tears%20flow%20involuntarily', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_277_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_277_then_branch: BehaviorEmit { emission: 'then', text: 'tears%20flow%20involuntarily%20(The%20Fragility%2FHysteria%20Operator)' })
+(loop_277_verdict: BehaviorVerdict { loopId: 277, loopName: 'The%20Easy%20Crier%20Loop', then: 'tears%20flow%20involuntarily%20(The%20Fragility%2FHysteria%20Operator)', result: 'total%20loss%20of%20credibility%20and%20the%20argument%20ending%20in%20**Pity**', operatorName: 'The%20Fragility%2FHysteria%20Operator', operatorMechanism: 'tears%20flow%20involuntarily', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_277_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20heated%20professional%20debate' })
+
+// Topology
+(loop_277_start)-[:PROCESS]->(loop_277_given_gate)
+(loop_277_given_gate)-[:PROCESS { case: "ok" }]->(loop_277_when_gate)
+(loop_277_given_gate)-[:PROCESS { case: "err" }]->(loop_277_inactive)
+(loop_277_when_gate)-[:PROCESS { case: "ok" }]->(loop_277_context)
+(loop_277_when_gate)-[:PROCESS { case: "err" }]->(loop_277_inactive)
+(loop_277_context)-[:FORK { strategy: "behavior-branches" }]->(loop_277_context_branch | loop_277_then_branch | loop_277_operator_branch | loop_277_result_branch | loop_277_taxonomy_branch | loop_277_intervention_recognize | loop_277_intervention_leverage)
+(loop_277_context_branch | loop_277_then_branch | loop_277_operator_branch | loop_277_result_branch | loop_277_taxonomy_branch | loop_277_intervention_recognize | loop_277_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_277_verdict)
+(loop_277_inactive)-[:PROCESS]->(loop_277_sink)
+(loop_277_verdict)-[:PROCESS]->(loop_277_sink)
+(loop_277_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_277_then_branch)
+(loop_277_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_277_result_branch)

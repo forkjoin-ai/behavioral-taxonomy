@@ -1,0 +1,33 @@
+// behavioral-loop-991.gg
+// Executable Gnosis projection for The Puffy Bag Loop.
+
+// Nodes
+(loop_991_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_991_context_branch: BehaviorEmit { emission: 'context' })
+(loop_991_given_gate: BehaviorAssess { stage: 'given', text: 'Edema%20under%20the%20eyes%20(Salt%2FAlcohol)' })
+(loop_991_inactive: BehaviorTerminal { loopId: 991, loopName: 'The%20Puffy%20Bag%20Loop' })
+(loop_991_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_991_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_991_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_991_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hangover%20Operator', mechanism: 'the%20face%20looks%20%22Swollen%22' })
+(loop_991_result_branch: BehaviorEmit { emission: 'result', text: 'being%20asked%20%22Rough%20night%3F%22' })
+(loop_991_sink: BehaviorSink)
+(loop_991_start: BehaviorStart { loopId: 991, loopName: 'The%20Puffy%20Bag%20Loop', given: 'Edema%20under%20the%20eyes%20(Salt%2FAlcohol)', when: 'arriving%20at%20work', then: 'the%20face%20looks%20%22Swollen%22%20(The%20Hangover%20Operator)', result: 'being%20asked%20%22Rough%20night%3F%22', operatorName: 'The%20Hangover%20Operator', operatorMechanism: 'the%20face%20looks%20%22Swollen%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_991_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_991_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Swollen%22%20(The%20Hangover%20Operator)' })
+(loop_991_verdict: BehaviorVerdict { loopId: 991, loopName: 'The%20Puffy%20Bag%20Loop', then: 'the%20face%20looks%20%22Swollen%22%20(The%20Hangover%20Operator)', result: 'being%20asked%20%22Rough%20night%3F%22', operatorName: 'The%20Hangover%20Operator', operatorMechanism: 'the%20face%20looks%20%22Swollen%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_991_when_gate: BehaviorAssess { stage: 'when', text: 'arriving%20at%20work' })
+
+// Topology
+(loop_991_start)-[:PROCESS]->(loop_991_given_gate)
+(loop_991_given_gate)-[:PROCESS { case: "ok" }]->(loop_991_when_gate)
+(loop_991_given_gate)-[:PROCESS { case: "err" }]->(loop_991_inactive)
+(loop_991_when_gate)-[:PROCESS { case: "ok" }]->(loop_991_context)
+(loop_991_when_gate)-[:PROCESS { case: "err" }]->(loop_991_inactive)
+(loop_991_context)-[:FORK { strategy: "behavior-branches" }]->(loop_991_context_branch | loop_991_then_branch | loop_991_operator_branch | loop_991_result_branch | loop_991_taxonomy_branch | loop_991_intervention_recognize | loop_991_intervention_interdict | loop_991_intervention_minimize)
+(loop_991_context_branch | loop_991_then_branch | loop_991_operator_branch | loop_991_result_branch | loop_991_taxonomy_branch | loop_991_intervention_recognize | loop_991_intervention_interdict | loop_991_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_991_verdict)
+(loop_991_inactive)-[:PROCESS]->(loop_991_sink)
+(loop_991_verdict)-[:PROCESS]->(loop_991_sink)
+(loop_991_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_991_then_branch)
+(loop_991_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_991_then_branch)
+(loop_991_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_991_then_branch)

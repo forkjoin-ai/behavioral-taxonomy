@@ -1,0 +1,33 @@
+// behavioral-loop-691.gg
+// Executable Gnosis projection for The Squint Loop.
+
+// Nodes
+(loop_691_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_691_context_branch: BehaviorEmit { emission: 'context' })
+(loop_691_given_gate: BehaviorAssess { stage: 'given', text: 'Narrowing%20eyes%20to%20focus%20(or%20habit)' })
+(loop_691_inactive: BehaviorTerminal { loopId: 691, loopName: 'The%20Squint%20Loop' })
+(loop_691_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_691_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_691_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_691_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Badass%20Operator', mechanism: 'it%20looks%20like%20%22Suspicion%22%20or%20%22Anger%22' })
+(loop_691_result_branch: BehaviorEmit { emission: 'result', text: 'people%20hesitating%20to%20approach%20or%20joke' })
+(loop_691_sink: BehaviorSink)
+(loop_691_start: BehaviorStart { loopId: 691, loopName: 'The%20Squint%20Loop', given: 'Narrowing%20eyes%20to%20focus%20(or%20habit)', when: 'looking%20at%20someone', then: 'it%20looks%20like%20%22Suspicion%22%20or%20%22Anger%22%20(The%20Badass%20Operator)', result: 'people%20hesitating%20to%20approach%20or%20joke', operatorName: 'The%20Badass%20Operator', operatorMechanism: 'it%20looks%20like%20%22Suspicion%22%20or%20%22Anger%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_691_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_691_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Suspicion%22%20or%20%22Anger%22%20(The%20Badass%20Operator)' })
+(loop_691_verdict: BehaviorVerdict { loopId: 691, loopName: 'The%20Squint%20Loop', then: 'it%20looks%20like%20%22Suspicion%22%20or%20%22Anger%22%20(The%20Badass%20Operator)', result: 'people%20hesitating%20to%20approach%20or%20joke', operatorName: 'The%20Badass%20Operator', operatorMechanism: 'it%20looks%20like%20%22Suspicion%22%20or%20%22Anger%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_691_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20at%20someone' })
+
+// Topology
+(loop_691_start)-[:PROCESS]->(loop_691_given_gate)
+(loop_691_given_gate)-[:PROCESS { case: "ok" }]->(loop_691_when_gate)
+(loop_691_given_gate)-[:PROCESS { case: "err" }]->(loop_691_inactive)
+(loop_691_when_gate)-[:PROCESS { case: "ok" }]->(loop_691_context)
+(loop_691_when_gate)-[:PROCESS { case: "err" }]->(loop_691_inactive)
+(loop_691_context)-[:FORK { strategy: "behavior-branches" }]->(loop_691_context_branch | loop_691_then_branch | loop_691_operator_branch | loop_691_result_branch | loop_691_taxonomy_branch | loop_691_intervention_recognize | loop_691_intervention_interdict | loop_691_intervention_minimize)
+(loop_691_context_branch | loop_691_then_branch | loop_691_operator_branch | loop_691_result_branch | loop_691_taxonomy_branch | loop_691_intervention_recognize | loop_691_intervention_interdict | loop_691_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_691_verdict)
+(loop_691_inactive)-[:PROCESS]->(loop_691_sink)
+(loop_691_verdict)-[:PROCESS]->(loop_691_sink)
+(loop_691_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_691_then_branch)
+(loop_691_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_691_then_branch)
+(loop_691_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_691_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-425.gg
+// Executable Gnosis projection for The Scuffed Shoe Loop.
+
+// Nodes
+(loop_425_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_425_context_branch: BehaviorEmit { emission: 'context' })
+(loop_425_given_gate: BehaviorAssess { stage: 'given', text: 'Expensive%20shoes%20with%20damaged%20toes%2Fheels' })
+(loop_425_inactive: BehaviorTerminal { loopId: 425, loopName: 'The%20Scuffed%20Shoe%20Loop' })
+(loop_425_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_425_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_425_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_425_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sloppy%20Operator', mechanism: 'the%20interviewer%20spots%20the%20neglect' })
+(loop_425_result_branch: BehaviorEmit { emission: 'result', text: 'rejection%20based%20on%20the%20assumption%20that%20%22how%20you%20do%20one%20thing%20is%20how%20you%20do%20everything.%22' })
+(loop_425_sink: BehaviorSink)
+(loop_425_start: BehaviorStart { loopId: 425, loopName: 'The%20Scuffed%20Shoe%20Loop', given: 'Expensive%20shoes%20with%20damaged%20toes%2Fheels', when: 'interviewed%20for%20a%20detail-oriented%20job%20(Law%2FAccounting)', then: 'the%20interviewer%20spots%20the%20neglect%20(The%20Sloppy%20Operator)', result: 'rejection%20based%20on%20the%20assumption%20that%20%22how%20you%20do%20one%20thing%20is%20how%20you%20do%20everything.%22', operatorName: 'The%20Sloppy%20Operator', operatorMechanism: 'the%20interviewer%20spots%20the%20neglect', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_425_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_425_then_branch: BehaviorEmit { emission: 'then', text: 'the%20interviewer%20spots%20the%20neglect%20(The%20Sloppy%20Operator)' })
+(loop_425_verdict: BehaviorVerdict { loopId: 425, loopName: 'The%20Scuffed%20Shoe%20Loop', then: 'the%20interviewer%20spots%20the%20neglect%20(The%20Sloppy%20Operator)', result: 'rejection%20based%20on%20the%20assumption%20that%20%22how%20you%20do%20one%20thing%20is%20how%20you%20do%20everything.%22', operatorName: 'The%20Sloppy%20Operator', operatorMechanism: 'the%20interviewer%20spots%20the%20neglect', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_425_when_gate: BehaviorAssess { stage: 'when', text: 'interviewed%20for%20a%20detail-oriented%20job%20(Law%2FAccounting)' })
+
+// Topology
+(loop_425_start)-[:PROCESS]->(loop_425_given_gate)
+(loop_425_given_gate)-[:PROCESS { case: "ok" }]->(loop_425_when_gate)
+(loop_425_given_gate)-[:PROCESS { case: "err" }]->(loop_425_inactive)
+(loop_425_when_gate)-[:PROCESS { case: "ok" }]->(loop_425_context)
+(loop_425_when_gate)-[:PROCESS { case: "err" }]->(loop_425_inactive)
+(loop_425_context)-[:FORK { strategy: "behavior-branches" }]->(loop_425_context_branch | loop_425_then_branch | loop_425_operator_branch | loop_425_result_branch | loop_425_taxonomy_branch | loop_425_intervention_recognize | loop_425_intervention_interdict | loop_425_intervention_minimize)
+(loop_425_context_branch | loop_425_then_branch | loop_425_operator_branch | loop_425_result_branch | loop_425_taxonomy_branch | loop_425_intervention_recognize | loop_425_intervention_interdict | loop_425_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_425_verdict)
+(loop_425_inactive)-[:PROCESS]->(loop_425_sink)
+(loop_425_verdict)-[:PROCESS]->(loop_425_sink)
+(loop_425_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_425_then_branch)
+(loop_425_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_425_then_branch)
+(loop_425_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_425_then_branch)

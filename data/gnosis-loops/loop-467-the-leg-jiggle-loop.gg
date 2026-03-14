@@ -1,0 +1,33 @@
+// behavioral-loop-467.gg
+// Executable Gnosis projection for The Leg Jiggle Loop.
+
+// Nodes
+(loop_467_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_467_context_branch: BehaviorEmit { emission: 'context' })
+(loop_467_given_gate: BehaviorAssess { stage: 'given', text: 'Uncontrollable%20bouncing%20of%20the%20knee' })
+(loop_467_inactive: BehaviorTerminal { loopId: 467, loopName: 'The%20Leg%20Jiggle%20Loop' })
+(loop_467_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_467_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_467_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_467_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Earthquake%20Operator', mechanism: 'the%20vibration%20travels%20to%20others' })
+(loop_467_result_branch: BehaviorEmit { emission: 'result', text: 'colleagues%20becoming%20irritable%20and%20hostile%20without%20knowing%20why' })
+(loop_467_sink: BehaviorSink)
+(loop_467_start: BehaviorStart { loopId: 467, loopName: 'The%20Leg%20Jiggle%20Loop', given: 'Uncontrollable%20bouncing%20of%20the%20knee', when: 'seated%20at%20a%20shared%20desk', then: 'the%20vibration%20travels%20to%20others%20(The%20Earthquake%20Operator)', result: 'colleagues%20becoming%20irritable%20and%20hostile%20without%20knowing%20why', operatorName: 'The%20Earthquake%20Operator', operatorMechanism: 'the%20vibration%20travels%20to%20others', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_467_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_467_then_branch: BehaviorEmit { emission: 'then', text: 'the%20vibration%20travels%20to%20others%20(The%20Earthquake%20Operator)' })
+(loop_467_verdict: BehaviorVerdict { loopId: 467, loopName: 'The%20Leg%20Jiggle%20Loop', then: 'the%20vibration%20travels%20to%20others%20(The%20Earthquake%20Operator)', result: 'colleagues%20becoming%20irritable%20and%20hostile%20without%20knowing%20why', operatorName: 'The%20Earthquake%20Operator', operatorMechanism: 'the%20vibration%20travels%20to%20others', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_467_when_gate: BehaviorAssess { stage: 'when', text: 'seated%20at%20a%20shared%20desk' })
+
+// Topology
+(loop_467_start)-[:PROCESS]->(loop_467_given_gate)
+(loop_467_given_gate)-[:PROCESS { case: "ok" }]->(loop_467_when_gate)
+(loop_467_given_gate)-[:PROCESS { case: "err" }]->(loop_467_inactive)
+(loop_467_when_gate)-[:PROCESS { case: "ok" }]->(loop_467_context)
+(loop_467_when_gate)-[:PROCESS { case: "err" }]->(loop_467_inactive)
+(loop_467_context)-[:FORK { strategy: "behavior-branches" }]->(loop_467_context_branch | loop_467_then_branch | loop_467_operator_branch | loop_467_result_branch | loop_467_taxonomy_branch | loop_467_intervention_recognize | loop_467_intervention_interdict | loop_467_intervention_minimize)
+(loop_467_context_branch | loop_467_then_branch | loop_467_operator_branch | loop_467_result_branch | loop_467_taxonomy_branch | loop_467_intervention_recognize | loop_467_intervention_interdict | loop_467_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_467_verdict)
+(loop_467_inactive)-[:PROCESS]->(loop_467_sink)
+(loop_467_verdict)-[:PROCESS]->(loop_467_sink)
+(loop_467_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_467_then_branch)
+(loop_467_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_467_then_branch)
+(loop_467_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_467_then_branch)

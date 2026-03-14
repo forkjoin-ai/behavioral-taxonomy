@@ -1,0 +1,33 @@
+// behavioral-loop-683.gg
+// Executable Gnosis projection for The Yellow Pit Loop.
+
+// Nodes
+(loop_683_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_683_context_branch: BehaviorEmit { emission: 'context' })
+(loop_683_given_gate: BehaviorAssess { stage: 'given', text: 'Old%20sweat%20stains%20on%20white%20shirts' })
+(loop_683_inactive: BehaviorTerminal { loopId: 683, loopName: 'The%20Yellow%20Pit%20Loop' })
+(loop_683_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_683_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_683_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_683_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stain%20Operator', mechanism: 'it%20signals%20%22Neglect%22%20or%20%22Bachelorhood%22' })
+(loop_683_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20%22Polished%22%20status' })
+(loop_683_sink: BehaviorSink)
+(loop_683_start: BehaviorStart { loopId: 683, loopName: 'The%20Yellow%20Pit%20Loop', given: 'Old%20sweat%20stains%20on%20white%20shirts', when: 'raising%20arms', then: 'it%20signals%20%22Neglect%22%20or%20%22Bachelorhood%22%20(The%20Stain%20Operator)', result: 'loss%20of%20%22Polished%22%20status', operatorName: 'The%20Stain%20Operator', operatorMechanism: 'it%20signals%20%22Neglect%22%20or%20%22Bachelorhood%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_683_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_683_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Neglect%22%20or%20%22Bachelorhood%22%20(The%20Stain%20Operator)' })
+(loop_683_verdict: BehaviorVerdict { loopId: 683, loopName: 'The%20Yellow%20Pit%20Loop', then: 'it%20signals%20%22Neglect%22%20or%20%22Bachelorhood%22%20(The%20Stain%20Operator)', result: 'loss%20of%20%22Polished%22%20status', operatorName: 'The%20Stain%20Operator', operatorMechanism: 'it%20signals%20%22Neglect%22%20or%20%22Bachelorhood%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_683_when_gate: BehaviorAssess { stage: 'when', text: 'raising%20arms' })
+
+// Topology
+(loop_683_start)-[:PROCESS]->(loop_683_given_gate)
+(loop_683_given_gate)-[:PROCESS { case: "ok" }]->(loop_683_when_gate)
+(loop_683_given_gate)-[:PROCESS { case: "err" }]->(loop_683_inactive)
+(loop_683_when_gate)-[:PROCESS { case: "ok" }]->(loop_683_context)
+(loop_683_when_gate)-[:PROCESS { case: "err" }]->(loop_683_inactive)
+(loop_683_context)-[:FORK { strategy: "behavior-branches" }]->(loop_683_context_branch | loop_683_then_branch | loop_683_operator_branch | loop_683_result_branch | loop_683_taxonomy_branch | loop_683_intervention_recognize | loop_683_intervention_interdict | loop_683_intervention_minimize)
+(loop_683_context_branch | loop_683_then_branch | loop_683_operator_branch | loop_683_result_branch | loop_683_taxonomy_branch | loop_683_intervention_recognize | loop_683_intervention_interdict | loop_683_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_683_verdict)
+(loop_683_inactive)-[:PROCESS]->(loop_683_sink)
+(loop_683_verdict)-[:PROCESS]->(loop_683_sink)
+(loop_683_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_683_then_branch)
+(loop_683_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_683_then_branch)
+(loop_683_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_683_then_branch)

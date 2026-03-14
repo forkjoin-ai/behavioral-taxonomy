@@ -1,0 +1,33 @@
+// behavioral-loop-758.gg
+// Executable Gnosis projection for The Glass-Rim Loop.
+
+// Nodes
+(loop_758_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_758_context_branch: BehaviorEmit { emission: 'context' })
+(loop_758_given_gate: BehaviorAssess { stage: 'given', text: 'Running%20a%20finger%20around%20the%20rim%20of%20a%20glass' })
+(loop_758_inactive: BehaviorTerminal { loopId: 758, loopName: 'The%20Glass-Rim%20Loop' })
+(loop_758_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_758_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_758_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_758_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Siren%20Operator', mechanism: 'it%20signals%20%22Deep%20Thought%22%20or%20%22Seduction%22' })
+(loop_758_result_branch: BehaviorEmit { emission: 'result', text: 'drawing%20the%20eye%20of%20potential%20partners' })
+(loop_758_sink: BehaviorSink)
+(loop_758_start: BehaviorStart { loopId: 758, loopName: 'The%20Glass-Rim%20Loop', given: 'Running%20a%20finger%20around%20the%20rim%20of%20a%20glass', when: 'sitting%20at%20a%20bar', then: 'it%20signals%20%22Deep%20Thought%22%20or%20%22Seduction%22%20(The%20Siren%20Operator)', result: 'drawing%20the%20eye%20of%20potential%20partners', operatorName: 'The%20Siren%20Operator', operatorMechanism: 'it%20signals%20%22Deep%20Thought%22%20or%20%22Seduction%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_758_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_758_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Deep%20Thought%22%20or%20%22Seduction%22%20(The%20Siren%20Operator)' })
+(loop_758_verdict: BehaviorVerdict { loopId: 758, loopName: 'The%20Glass-Rim%20Loop', then: 'it%20signals%20%22Deep%20Thought%22%20or%20%22Seduction%22%20(The%20Siren%20Operator)', result: 'drawing%20the%20eye%20of%20potential%20partners', operatorName: 'The%20Siren%20Operator', operatorMechanism: 'it%20signals%20%22Deep%20Thought%22%20or%20%22Seduction%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_758_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20at%20a%20bar' })
+
+// Topology
+(loop_758_start)-[:PROCESS]->(loop_758_given_gate)
+(loop_758_given_gate)-[:PROCESS { case: "ok" }]->(loop_758_when_gate)
+(loop_758_given_gate)-[:PROCESS { case: "err" }]->(loop_758_inactive)
+(loop_758_when_gate)-[:PROCESS { case: "ok" }]->(loop_758_context)
+(loop_758_when_gate)-[:PROCESS { case: "err" }]->(loop_758_inactive)
+(loop_758_context)-[:FORK { strategy: "behavior-branches" }]->(loop_758_context_branch | loop_758_then_branch | loop_758_operator_branch | loop_758_result_branch | loop_758_taxonomy_branch | loop_758_intervention_recognize | loop_758_intervention_interdict | loop_758_intervention_minimize)
+(loop_758_context_branch | loop_758_then_branch | loop_758_operator_branch | loop_758_result_branch | loop_758_taxonomy_branch | loop_758_intervention_recognize | loop_758_intervention_interdict | loop_758_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_758_verdict)
+(loop_758_inactive)-[:PROCESS]->(loop_758_sink)
+(loop_758_verdict)-[:PROCESS]->(loop_758_sink)
+(loop_758_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_758_then_branch)
+(loop_758_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_758_then_branch)
+(loop_758_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_758_then_branch)

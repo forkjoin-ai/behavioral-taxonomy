@@ -1,0 +1,33 @@
+// behavioral-loop-37.gg
+// Executable Gnosis projection for The Wild Hair Loop.
+
+// Nodes
+(loop_37_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_37_context_branch: BehaviorEmit { emission: 'context' })
+(loop_37_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20Unmanageable%2FHigh-Volume%20Hair' })
+(loop_37_inactive: BehaviorTerminal { loopId: 37, loopName: 'The%20Wild%20Hair%20Loop' })
+(loop_37_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20competence%20in%20areas%20that%20compensate' })
+(loop_37_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_37_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_37_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'the%20observer%20grants%20them%20%22Eccentric%20License%22' })
+(loop_37_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20feeling%20free%20to%20express%20**Unconventional%20Ideas**%20without%20social%20penalty' })
+(loop_37_sink: BehaviorSink)
+(loop_37_start: BehaviorStart { loopId: 37, loopName: 'The%20Wild%20Hair%20Loop', given: 'an%20individual%20possesses%20Unmanageable%2FHigh-Volume%20Hair', when: 'they%20speak%20on%20creative%20or%20abstract%20topics', then: 'the%20observer%20grants%20them%20%22Eccentric%20License%22%20(The%20Novelty%20Operator)', result: 'the%20individual%20feeling%20free%20to%20express%20**Unconventional%20Ideas**%20without%20social%20penalty', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20observer%20grants%20them%20%22Eccentric%20License%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20competence%20in%20areas%20that%20compensate', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_37_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_37_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20grants%20them%20%22Eccentric%20License%22%20(The%20Novelty%20Operator)' })
+(loop_37_verdict: BehaviorVerdict { loopId: 37, loopName: 'The%20Wild%20Hair%20Loop', then: 'the%20observer%20grants%20them%20%22Eccentric%20License%22%20(The%20Novelty%20Operator)', result: 'the%20individual%20feeling%20free%20to%20express%20**Unconventional%20Ideas**%20without%20social%20penalty', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20observer%20grants%20them%20%22Eccentric%20License%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_37_when_gate: BehaviorAssess { stage: 'when', text: 'they%20speak%20on%20creative%20or%20abstract%20topics' })
+
+// Topology
+(loop_37_start)-[:PROCESS]->(loop_37_given_gate)
+(loop_37_given_gate)-[:PROCESS { case: "ok" }]->(loop_37_when_gate)
+(loop_37_given_gate)-[:PROCESS { case: "err" }]->(loop_37_inactive)
+(loop_37_when_gate)-[:PROCESS { case: "ok" }]->(loop_37_context)
+(loop_37_when_gate)-[:PROCESS { case: "err" }]->(loop_37_inactive)
+(loop_37_context)-[:FORK { strategy: "behavior-branches" }]->(loop_37_context_branch | loop_37_then_branch | loop_37_operator_branch | loop_37_result_branch | loop_37_taxonomy_branch | loop_37_intervention_recognize | loop_37_intervention_interdict | loop_37_intervention_minimize)
+(loop_37_context_branch | loop_37_then_branch | loop_37_operator_branch | loop_37_result_branch | loop_37_taxonomy_branch | loop_37_intervention_recognize | loop_37_intervention_interdict | loop_37_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_37_verdict)
+(loop_37_inactive)-[:PROCESS]->(loop_37_sink)
+(loop_37_verdict)-[:PROCESS]->(loop_37_sink)
+(loop_37_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_37_then_branch)
+(loop_37_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_37_then_branch)
+(loop_37_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_37_then_branch)

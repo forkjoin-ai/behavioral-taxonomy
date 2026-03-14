@@ -1,0 +1,35 @@
+// behavioral-loop-934.gg
+// Executable Gnosis projection for The Nose Wrinkle Loop.
+
+// Nodes
+(loop_934_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_934_context_branch: BehaviorEmit { emission: 'context' })
+(loop_934_given_gate: BehaviorAssess { stage: 'given', text: 'Brief%20activation%20of%20the%20Procerus%20muscle' })
+(loop_934_inactive: BehaviorTerminal { loopId: 934, loopName: 'The%20Nose%20Wrinkle%20Loop' })
+(loop_934_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_934_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_934_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_934_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_934_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Skunk%20Operator', mechanism: 'the%20nose%20crinkles%20slightly' })
+(loop_934_result_branch: BehaviorEmit { emission: 'result', text: 'the%20presenter%20feeling%20judged%20and%20losing%20confidence' })
+(loop_934_sink: BehaviorSink)
+(loop_934_start: BehaviorStart { loopId: 934, loopName: 'The%20Nose%20Wrinkle%20Loop', given: 'Brief%20activation%20of%20the%20Procerus%20muscle', when: 'presented%20with%20a%20%22bad%22%20idea', then: 'the%20nose%20crinkles%20slightly%20(The%20Skunk%20Operator)', result: 'the%20presenter%20feeling%20judged%20and%20losing%20confidence', operatorName: 'The%20Skunk%20Operator', operatorMechanism: 'the%20nose%20crinkles%20slightly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations', intervention_leverage: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_934_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_934_then_branch: BehaviorEmit { emission: 'then', text: 'the%20nose%20crinkles%20slightly%20(The%20Skunk%20Operator)' })
+(loop_934_verdict: BehaviorVerdict { loopId: 934, loopName: 'The%20Nose%20Wrinkle%20Loop', then: 'the%20nose%20crinkles%20slightly%20(The%20Skunk%20Operator)', result: 'the%20presenter%20feeling%20judged%20and%20losing%20confidence', operatorName: 'The%20Skunk%20Operator', operatorMechanism: 'the%20nose%20crinkles%20slightly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_934_when_gate: BehaviorAssess { stage: 'when', text: 'presented%20with%20a%20%22bad%22%20idea' })
+
+// Topology
+(loop_934_start)-[:PROCESS]->(loop_934_given_gate)
+(loop_934_given_gate)-[:PROCESS { case: "ok" }]->(loop_934_when_gate)
+(loop_934_given_gate)-[:PROCESS { case: "err" }]->(loop_934_inactive)
+(loop_934_when_gate)-[:PROCESS { case: "ok" }]->(loop_934_context)
+(loop_934_when_gate)-[:PROCESS { case: "err" }]->(loop_934_inactive)
+(loop_934_context)-[:FORK { strategy: "behavior-branches" }]->(loop_934_context_branch | loop_934_then_branch | loop_934_operator_branch | loop_934_result_branch | loop_934_taxonomy_branch | loop_934_intervention_recognize | loop_934_intervention_interdict | loop_934_intervention_minimize | loop_934_intervention_leverage)
+(loop_934_context_branch | loop_934_then_branch | loop_934_operator_branch | loop_934_result_branch | loop_934_taxonomy_branch | loop_934_intervention_recognize | loop_934_intervention_interdict | loop_934_intervention_minimize | loop_934_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_934_verdict)
+(loop_934_inactive)-[:PROCESS]->(loop_934_sink)
+(loop_934_verdict)-[:PROCESS]->(loop_934_sink)
+(loop_934_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_934_then_branch)
+(loop_934_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_934_then_branch)
+(loop_934_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_934_then_branch)
+(loop_934_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_934_result_branch)

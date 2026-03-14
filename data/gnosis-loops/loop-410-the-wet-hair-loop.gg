@@ -1,0 +1,33 @@
+// behavioral-loop-410.gg
+// Executable Gnosis projection for The Wet Hair Loop.
+
+// Nodes
+(loop_410_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_410_context_branch: BehaviorEmit { emission: 'context' })
+(loop_410_given_gate: BehaviorAssess { stage: 'given', text: 'Arriving%20with%20soaking%20wet%20hair' })
+(loop_410_inactive: BehaviorTerminal { loopId: 410, loopName: 'The%20Wet%20Hair%20Loop' })
+(loop_410_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_410_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_410_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_410_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rush%20Operator', mechanism: 'it%20signals%20%22Overslept%22%20or%20%22Disorganized%22' })
+(loop_410_result_branch: BehaviorEmit { emission: 'result', text: "questioning%20of%20the%20individual's%20preparedness" })
+(loop_410_sink: BehaviorSink)
+(loop_410_start: BehaviorStart { loopId: 410, loopName: 'The%20Wet%20Hair%20Loop', given: 'Arriving%20with%20soaking%20wet%20hair', when: 'at%20a%209%20AM%20meeting', then: 'it%20signals%20%22Overslept%22%20or%20%22Disorganized%22%20(The%20Rush%20Operator)', result: "questioning%20of%20the%20individual's%20preparedness", operatorName: 'The%20Rush%20Operator', operatorMechanism: 'it%20signals%20%22Overslept%22%20or%20%22Disorganized%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_410_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_410_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Overslept%22%20or%20%22Disorganized%22%20(The%20Rush%20Operator)' })
+(loop_410_verdict: BehaviorVerdict { loopId: 410, loopName: 'The%20Wet%20Hair%20Loop', then: 'it%20signals%20%22Overslept%22%20or%20%22Disorganized%22%20(The%20Rush%20Operator)', result: "questioning%20of%20the%20individual's%20preparedness", operatorName: 'The%20Rush%20Operator', operatorMechanism: 'it%20signals%20%22Overslept%22%20or%20%22Disorganized%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_410_when_gate: BehaviorAssess { stage: 'when', text: 'at%20a%209%20AM%20meeting' })
+
+// Topology
+(loop_410_start)-[:PROCESS]->(loop_410_given_gate)
+(loop_410_given_gate)-[:PROCESS { case: "ok" }]->(loop_410_when_gate)
+(loop_410_given_gate)-[:PROCESS { case: "err" }]->(loop_410_inactive)
+(loop_410_when_gate)-[:PROCESS { case: "ok" }]->(loop_410_context)
+(loop_410_when_gate)-[:PROCESS { case: "err" }]->(loop_410_inactive)
+(loop_410_context)-[:FORK { strategy: "behavior-branches" }]->(loop_410_context_branch | loop_410_then_branch | loop_410_operator_branch | loop_410_result_branch | loop_410_taxonomy_branch | loop_410_intervention_recognize | loop_410_intervention_interdict | loop_410_intervention_minimize)
+(loop_410_context_branch | loop_410_then_branch | loop_410_operator_branch | loop_410_result_branch | loop_410_taxonomy_branch | loop_410_intervention_recognize | loop_410_intervention_interdict | loop_410_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_410_verdict)
+(loop_410_inactive)-[:PROCESS]->(loop_410_sink)
+(loop_410_verdict)-[:PROCESS]->(loop_410_sink)
+(loop_410_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_410_then_branch)
+(loop_410_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_410_then_branch)
+(loop_410_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_410_then_branch)

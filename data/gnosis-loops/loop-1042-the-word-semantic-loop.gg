@@ -1,0 +1,33 @@
+// behavioral-loop-1042.gg
+// Executable Gnosis projection for The Word Semantic Loop.
+
+// Nodes
+(loop_1042_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1042_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1042_given_gate: BehaviorAssess { stage: 'given', text: 'Repeating%20a%20word%20too%20many%20times' })
+(loop_1042_inactive: BehaviorTerminal { loopId: 1042, loopName: 'The%20Word%20Semantic%20Loop' })
+(loop_1042_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1042_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1042_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1042_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20word%20loses%20all%20meaning%20and%20becomes%20just%20sound%20(The%20Sound%20Salad)' })
+(loop_1042_result_branch: BehaviorEmit { emission: 'result', text: 'a%20momentary%20existential%20crisis%20about%20language' })
+(loop_1042_sink: BehaviorSink)
+(loop_1042_start: BehaviorStart { loopId: 1042, loopName: 'The%20Word%20Semantic%20Loop', given: 'Repeating%20a%20word%20too%20many%20times', when: 'speaking', then: 'the%20word%20loses%20all%20meaning%20and%20becomes%20just%20sound%20(The%20Sound%20Salad)', result: 'a%20momentary%20existential%20crisis%20about%20language', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20word%20loses%20all%20meaning%20and%20becomes%20just%20sound%20(The%20Sound%20Salad)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1042_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1042_then_branch: BehaviorEmit { emission: 'then', text: 'the%20word%20loses%20all%20meaning%20and%20becomes%20just%20sound%20(The%20Sound%20Salad)' })
+(loop_1042_verdict: BehaviorVerdict { loopId: 1042, loopName: 'The%20Word%20Semantic%20Loop', then: 'the%20word%20loses%20all%20meaning%20and%20becomes%20just%20sound%20(The%20Sound%20Salad)', result: 'a%20momentary%20existential%20crisis%20about%20language', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20word%20loses%20all%20meaning%20and%20becomes%20just%20sound%20(The%20Sound%20Salad)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1042_when_gate: BehaviorAssess { stage: 'when', text: 'speaking' })
+
+// Topology
+(loop_1042_start)-[:PROCESS]->(loop_1042_given_gate)
+(loop_1042_given_gate)-[:PROCESS { case: "ok" }]->(loop_1042_when_gate)
+(loop_1042_given_gate)-[:PROCESS { case: "err" }]->(loop_1042_inactive)
+(loop_1042_when_gate)-[:PROCESS { case: "ok" }]->(loop_1042_context)
+(loop_1042_when_gate)-[:PROCESS { case: "err" }]->(loop_1042_inactive)
+(loop_1042_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1042_context_branch | loop_1042_then_branch | loop_1042_operator_branch | loop_1042_result_branch | loop_1042_taxonomy_branch | loop_1042_intervention_recognize | loop_1042_intervention_interdict | loop_1042_intervention_minimize)
+(loop_1042_context_branch | loop_1042_then_branch | loop_1042_operator_branch | loop_1042_result_branch | loop_1042_taxonomy_branch | loop_1042_intervention_recognize | loop_1042_intervention_interdict | loop_1042_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1042_verdict)
+(loop_1042_inactive)-[:PROCESS]->(loop_1042_sink)
+(loop_1042_verdict)-[:PROCESS]->(loop_1042_sink)
+(loop_1042_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1042_then_branch)
+(loop_1042_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1042_then_branch)
+(loop_1042_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1042_then_branch)

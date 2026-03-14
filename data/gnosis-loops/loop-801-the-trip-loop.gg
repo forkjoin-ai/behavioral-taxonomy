@@ -1,0 +1,33 @@
+// behavioral-loop-801.gg
+// Executable Gnosis projection for The Trip Loop.
+
+// Nodes
+(loop_801_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_801_context_branch: BehaviorEmit { emission: 'context' })
+(loop_801_given_gate: BehaviorAssess { stage: 'given', text: 'Catching%20a%20toe%20on%20a%20rug%20or%20curb' })
+(loop_801_inactive: BehaviorTerminal { loopId: 801, loopName: 'The%20Trip%20Loop' })
+(loop_801_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_801_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_801_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_801_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Clumsy%20Operator', mechanism: 'the%20stumble%20breaks%20the%20rhythm%20of%20the%20pack' })
+(loop_801_result_branch: BehaviorEmit { emission: 'result', text: 'the%20group%20subconsciously%20viewing%20the%20individual%20as%20a%20%22Liability%22%20in%20a%20crisis' })
+(loop_801_sink: BehaviorSink)
+(loop_801_start: BehaviorStart { loopId: 801, loopName: 'The%20Trip%20Loop', given: 'Catching%20a%20toe%20on%20a%20rug%20or%20curb', when: 'walking%20with%20a%20group', then: 'the%20stumble%20breaks%20the%20rhythm%20of%20the%20pack%20(The%20Clumsy%20Operator)', result: 'the%20group%20subconsciously%20viewing%20the%20individual%20as%20a%20%22Liability%22%20in%20a%20crisis', operatorName: 'The%20Clumsy%20Operator', operatorMechanism: 'the%20stumble%20breaks%20the%20rhythm%20of%20the%20pack', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_801_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_801_then_branch: BehaviorEmit { emission: 'then', text: 'the%20stumble%20breaks%20the%20rhythm%20of%20the%20pack%20(The%20Clumsy%20Operator)' })
+(loop_801_verdict: BehaviorVerdict { loopId: 801, loopName: 'The%20Trip%20Loop', then: 'the%20stumble%20breaks%20the%20rhythm%20of%20the%20pack%20(The%20Clumsy%20Operator)', result: 'the%20group%20subconsciously%20viewing%20the%20individual%20as%20a%20%22Liability%22%20in%20a%20crisis', operatorName: 'The%20Clumsy%20Operator', operatorMechanism: 'the%20stumble%20breaks%20the%20rhythm%20of%20the%20pack', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_801_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20with%20a%20group' })
+
+// Topology
+(loop_801_start)-[:PROCESS]->(loop_801_given_gate)
+(loop_801_given_gate)-[:PROCESS { case: "ok" }]->(loop_801_when_gate)
+(loop_801_given_gate)-[:PROCESS { case: "err" }]->(loop_801_inactive)
+(loop_801_when_gate)-[:PROCESS { case: "ok" }]->(loop_801_context)
+(loop_801_when_gate)-[:PROCESS { case: "err" }]->(loop_801_inactive)
+(loop_801_context)-[:FORK { strategy: "behavior-branches" }]->(loop_801_context_branch | loop_801_then_branch | loop_801_operator_branch | loop_801_result_branch | loop_801_taxonomy_branch | loop_801_intervention_recognize | loop_801_intervention_interdict | loop_801_intervention_minimize)
+(loop_801_context_branch | loop_801_then_branch | loop_801_operator_branch | loop_801_result_branch | loop_801_taxonomy_branch | loop_801_intervention_recognize | loop_801_intervention_interdict | loop_801_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_801_verdict)
+(loop_801_inactive)-[:PROCESS]->(loop_801_sink)
+(loop_801_verdict)-[:PROCESS]->(loop_801_sink)
+(loop_801_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_801_then_branch)
+(loop_801_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_801_then_branch)
+(loop_801_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_801_then_branch)

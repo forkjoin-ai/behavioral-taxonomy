@@ -1,0 +1,33 @@
+// behavioral-loop-857.gg
+// Executable Gnosis projection for The Closed Lip Loop.
+
+// Nodes
+(loop_857_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_857_context_branch: BehaviorEmit { emission: 'context' })
+(loop_857_given_gate: BehaviorAssess { stage: 'given', text: 'Refusal%20to%20show%20teeth%20when%20smiling' })
+(loop_857_inactive: BehaviorTerminal { loopId: 857, loopName: 'The%20Closed%20Lip%20Loop' })
+(loop_857_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_857_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_857_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_857_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mona%20Lisa%20Operator', mechanism: 'the%20expression%20looks%20%22Smug%22%20or%20%22Secretive%22' })
+(loop_857_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20wondering%20what%20is%20wrong%20with%20the%20teeth' })
+(loop_857_sink: BehaviorSink)
+(loop_857_start: BehaviorStart { loopId: 857, loopName: 'The%20Closed%20Lip%20Loop', given: 'Refusal%20to%20show%20teeth%20when%20smiling', when: 'expressing%20joy', then: 'the%20expression%20looks%20%22Smug%22%20or%20%22Secretive%22%20(The%20Mona%20Lisa%20Operator)', result: 'observers%20wondering%20what%20is%20wrong%20with%20the%20teeth', operatorName: 'The%20Mona%20Lisa%20Operator', operatorMechanism: 'the%20expression%20looks%20%22Smug%22%20or%20%22Secretive%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_857_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_857_then_branch: BehaviorEmit { emission: 'then', text: 'the%20expression%20looks%20%22Smug%22%20or%20%22Secretive%22%20(The%20Mona%20Lisa%20Operator)' })
+(loop_857_verdict: BehaviorVerdict { loopId: 857, loopName: 'The%20Closed%20Lip%20Loop', then: 'the%20expression%20looks%20%22Smug%22%20or%20%22Secretive%22%20(The%20Mona%20Lisa%20Operator)', result: 'observers%20wondering%20what%20is%20wrong%20with%20the%20teeth', operatorName: 'The%20Mona%20Lisa%20Operator', operatorMechanism: 'the%20expression%20looks%20%22Smug%22%20or%20%22Secretive%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_857_when_gate: BehaviorAssess { stage: 'when', text: 'expressing%20joy' })
+
+// Topology
+(loop_857_start)-[:PROCESS]->(loop_857_given_gate)
+(loop_857_given_gate)-[:PROCESS { case: "ok" }]->(loop_857_when_gate)
+(loop_857_given_gate)-[:PROCESS { case: "err" }]->(loop_857_inactive)
+(loop_857_when_gate)-[:PROCESS { case: "ok" }]->(loop_857_context)
+(loop_857_when_gate)-[:PROCESS { case: "err" }]->(loop_857_inactive)
+(loop_857_context)-[:FORK { strategy: "behavior-branches" }]->(loop_857_context_branch | loop_857_then_branch | loop_857_operator_branch | loop_857_result_branch | loop_857_taxonomy_branch | loop_857_intervention_recognize | loop_857_intervention_interdict | loop_857_intervention_minimize)
+(loop_857_context_branch | loop_857_then_branch | loop_857_operator_branch | loop_857_result_branch | loop_857_taxonomy_branch | loop_857_intervention_recognize | loop_857_intervention_interdict | loop_857_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_857_verdict)
+(loop_857_inactive)-[:PROCESS]->(loop_857_sink)
+(loop_857_verdict)-[:PROCESS]->(loop_857_sink)
+(loop_857_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_857_then_branch)
+(loop_857_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_857_then_branch)
+(loop_857_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_857_then_branch)

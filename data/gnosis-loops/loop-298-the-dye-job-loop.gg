@@ -1,0 +1,31 @@
+// behavioral-loop-298.gg
+// Executable Gnosis projection for The Dye Job Loop.
+
+// Nodes
+(loop_298_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_298_context_branch: BehaviorEmit { emission: 'context' })
+(loop_298_given_gate: BehaviorAssess { stage: 'given', text: 'Shoe-polish%20black%20or%20intense%20red%20dye%20(to%20hide%20grey)' })
+(loop_298_inactive: BehaviorTerminal { loopId: 298, loopName: 'The%20Dye%20Job%20Loop' })
+(loop_298_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_298_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_298_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%2FVanity%20Operator', mechanism: 'the%20color%20looks%20%22Flat%22%20and%20%22Artificial%22' })
+(loop_298_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20trusting%20the%20individual%20less%20(uncanny%20valley%20effect)' })
+(loop_298_sink: BehaviorSink)
+(loop_298_start: BehaviorStart { loopId: 298, loopName: 'The%20Dye%20Job%20Loop', given: 'Shoe-polish%20black%20or%20intense%20red%20dye%20(to%20hide%20grey)', when: 'under%20natural%20light', then: 'the%20color%20looks%20%22Flat%22%20and%20%22Artificial%22%20(The%20Deception%2FVanity%20Operator)', result: 'observers%20trusting%20the%20individual%20less%20(uncanny%20valley%20effect)', operatorName: 'The%20Deception%2FVanity%20Operator', operatorMechanism: 'the%20color%20looks%20%22Flat%22%20and%20%22Artificial%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_298_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_298_then_branch: BehaviorEmit { emission: 'then', text: 'the%20color%20looks%20%22Flat%22%20and%20%22Artificial%22%20(The%20Deception%2FVanity%20Operator)' })
+(loop_298_verdict: BehaviorVerdict { loopId: 298, loopName: 'The%20Dye%20Job%20Loop', then: 'the%20color%20looks%20%22Flat%22%20and%20%22Artificial%22%20(The%20Deception%2FVanity%20Operator)', result: 'observers%20trusting%20the%20individual%20less%20(uncanny%20valley%20effect)', operatorName: 'The%20Deception%2FVanity%20Operator', operatorMechanism: 'the%20color%20looks%20%22Flat%22%20and%20%22Artificial%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_298_when_gate: BehaviorAssess { stage: 'when', text: 'under%20natural%20light' })
+
+// Topology
+(loop_298_start)-[:PROCESS]->(loop_298_given_gate)
+(loop_298_given_gate)-[:PROCESS { case: "ok" }]->(loop_298_when_gate)
+(loop_298_given_gate)-[:PROCESS { case: "err" }]->(loop_298_inactive)
+(loop_298_when_gate)-[:PROCESS { case: "ok" }]->(loop_298_context)
+(loop_298_when_gate)-[:PROCESS { case: "err" }]->(loop_298_inactive)
+(loop_298_context)-[:FORK { strategy: "behavior-branches" }]->(loop_298_context_branch | loop_298_then_branch | loop_298_operator_branch | loop_298_result_branch | loop_298_taxonomy_branch | loop_298_intervention_recognize | loop_298_intervention_leverage)
+(loop_298_context_branch | loop_298_then_branch | loop_298_operator_branch | loop_298_result_branch | loop_298_taxonomy_branch | loop_298_intervention_recognize | loop_298_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_298_verdict)
+(loop_298_inactive)-[:PROCESS]->(loop_298_sink)
+(loop_298_verdict)-[:PROCESS]->(loop_298_sink)
+(loop_298_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_298_then_branch)
+(loop_298_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_298_result_branch)

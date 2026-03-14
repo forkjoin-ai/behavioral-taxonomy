@@ -1,0 +1,33 @@
+// behavioral-loop-707.gg
+// Executable Gnosis projection for The Bug Eye Loop.
+
+// Nodes
+(loop_707_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_707_context_branch: BehaviorEmit { emission: 'context' })
+(loop_707_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20white%20space%20all%20around%20the%20iris' })
+(loop_707_inactive: BehaviorTerminal { loopId: 707, loopName: 'The%20Bug%20Eye%20Loop' })
+(loop_707_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Change%20or%20modify%20the%20triggering%20environment' })
+(loop_707_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_707_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20spatial%20behaviors%20in%20group%20dynamics' })
+(loop_707_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Panic%20Operator', mechanism: 'it%20signals%20%22Mania%2C%22%20%22Drug%20Use%2C%22%20or%20%22Terror%22' })
+(loop_707_result_branch: BehaviorEmit { emission: 'result', text: 'the%20audience%20feeling%20visceral%20anxiety%20and%20backing%20away' })
+(loop_707_sink: BehaviorSink)
+(loop_707_start: BehaviorStart { loopId: 707, loopName: 'The%20Bug%20Eye%20Loop', given: 'Visible%20white%20space%20all%20around%20the%20iris', when: 'speaking%20excitedly', then: 'it%20signals%20%22Mania%2C%22%20%22Drug%20Use%2C%22%20or%20%22Terror%22%20(The%20Panic%20Operator)', result: 'the%20audience%20feeling%20visceral%20anxiety%20and%20backing%20away', operatorName: 'The%20Panic%20Operator', operatorMechanism: 'it%20signals%20%22Mania%2C%22%20%22Drug%20Use%2C%22%20or%20%22Terror%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20spatial%20behaviors%20in%20group%20dynamics', intervention_interdict: 'Change%20or%20modify%20the%20triggering%20environment', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_707_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_707_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Mania%2C%22%20%22Drug%20Use%2C%22%20or%20%22Terror%22%20(The%20Panic%20Operator)' })
+(loop_707_verdict: BehaviorVerdict { loopId: 707, loopName: 'The%20Bug%20Eye%20Loop', then: 'it%20signals%20%22Mania%2C%22%20%22Drug%20Use%2C%22%20or%20%22Terror%22%20(The%20Panic%20Operator)', result: 'the%20audience%20feeling%20visceral%20anxiety%20and%20backing%20away', operatorName: 'The%20Panic%20Operator', operatorMechanism: 'it%20signals%20%22Mania%2C%22%20%22Drug%20Use%2C%22%20or%20%22Terror%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_707_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20excitedly' })
+
+// Topology
+(loop_707_start)-[:PROCESS]->(loop_707_given_gate)
+(loop_707_given_gate)-[:PROCESS { case: "ok" }]->(loop_707_when_gate)
+(loop_707_given_gate)-[:PROCESS { case: "err" }]->(loop_707_inactive)
+(loop_707_when_gate)-[:PROCESS { case: "ok" }]->(loop_707_context)
+(loop_707_when_gate)-[:PROCESS { case: "err" }]->(loop_707_inactive)
+(loop_707_context)-[:FORK { strategy: "behavior-branches" }]->(loop_707_context_branch | loop_707_then_branch | loop_707_operator_branch | loop_707_result_branch | loop_707_taxonomy_branch | loop_707_intervention_recognize | loop_707_intervention_interdict | loop_707_intervention_minimize)
+(loop_707_context_branch | loop_707_then_branch | loop_707_operator_branch | loop_707_result_branch | loop_707_taxonomy_branch | loop_707_intervention_recognize | loop_707_intervention_interdict | loop_707_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_707_verdict)
+(loop_707_inactive)-[:PROCESS]->(loop_707_sink)
+(loop_707_verdict)-[:PROCESS]->(loop_707_sink)
+(loop_707_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_707_then_branch)
+(loop_707_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_707_then_branch)
+(loop_707_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_707_then_branch)

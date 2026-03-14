@@ -1,0 +1,33 @@
+// behavioral-loop-308.gg
+// Executable Gnosis projection for The Unblinking Loop.
+
+// Nodes
+(loop_308_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_308_context_branch: BehaviorEmit { emission: 'context' })
+(loop_308_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20blink%20rate%20(Psychopathy%20or%20focus)' })
+(loop_308_inactive: BehaviorTerminal { loopId: 308, loopName: 'The%20Unblinking%20Loop' })
+(loop_308_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_308_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_308_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_308_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'the%20stare%20feels%20%22Predatory%22' })
+(loop_308_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20stammering%20and%20revealing%20too%20much%20information%20(**Pressure%20Leak**)' })
+(loop_308_sink: BehaviorSink)
+(loop_308_start: BehaviorStart { loopId: 308, loopName: 'The%20Unblinking%20Loop', given: 'Low%20blink%20rate%20(Psychopathy%20or%20focus)', when: 'listening', then: 'the%20stare%20feels%20%22Predatory%22%20(The%20Threat%20Operator)', result: 'the%20speaker%20stammering%20and%20revealing%20too%20much%20information%20(**Pressure%20Leak**)', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20stare%20feels%20%22Predatory%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_308_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_308_then_branch: BehaviorEmit { emission: 'then', text: 'the%20stare%20feels%20%22Predatory%22%20(The%20Threat%20Operator)' })
+(loop_308_verdict: BehaviorVerdict { loopId: 308, loopName: 'The%20Unblinking%20Loop', then: 'the%20stare%20feels%20%22Predatory%22%20(The%20Threat%20Operator)', result: 'the%20speaker%20stammering%20and%20revealing%20too%20much%20information%20(**Pressure%20Leak**)', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20stare%20feels%20%22Predatory%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_308_when_gate: BehaviorAssess { stage: 'when', text: 'listening' })
+
+// Topology
+(loop_308_start)-[:PROCESS]->(loop_308_given_gate)
+(loop_308_given_gate)-[:PROCESS { case: "ok" }]->(loop_308_when_gate)
+(loop_308_given_gate)-[:PROCESS { case: "err" }]->(loop_308_inactive)
+(loop_308_when_gate)-[:PROCESS { case: "ok" }]->(loop_308_context)
+(loop_308_when_gate)-[:PROCESS { case: "err" }]->(loop_308_inactive)
+(loop_308_context)-[:FORK { strategy: "behavior-branches" }]->(loop_308_context_branch | loop_308_then_branch | loop_308_operator_branch | loop_308_result_branch | loop_308_taxonomy_branch | loop_308_intervention_recognize | loop_308_intervention_interdict | loop_308_intervention_minimize)
+(loop_308_context_branch | loop_308_then_branch | loop_308_operator_branch | loop_308_result_branch | loop_308_taxonomy_branch | loop_308_intervention_recognize | loop_308_intervention_interdict | loop_308_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_308_verdict)
+(loop_308_inactive)-[:PROCESS]->(loop_308_sink)
+(loop_308_verdict)-[:PROCESS]->(loop_308_sink)
+(loop_308_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_308_then_branch)
+(loop_308_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_308_then_branch)
+(loop_308_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_308_then_branch)

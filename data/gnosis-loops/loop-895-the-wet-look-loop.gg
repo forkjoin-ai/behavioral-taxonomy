@@ -1,0 +1,33 @@
+// behavioral-loop-895.gg
+// Executable Gnosis projection for The Wet Look Loop.
+
+// Nodes
+(loop_895_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_895_context_branch: BehaviorEmit { emission: 'context' })
+(loop_895_given_gate: BehaviorAssess { stage: 'given', text: 'Excessive%20product%20usage' })
+(loop_895_inactive: BehaviorTerminal { loopId: 895, loopName: 'The%20Wet%20Look%20Loop' })
+(loop_895_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_895_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_895_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_895_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Plastic%20Operator', mechanism: 'hair%20looks%20%22Crispy%22%20or%20%22Greasy%22' })
+(loop_895_result_branch: BehaviorEmit { emission: 'result', text: 'assumptions%20of%20%22guido%22%20or%20%22sleazy%22%20subculture' })
+(loop_895_sink: BehaviorSink)
+(loop_895_start: BehaviorStart { loopId: 895, loopName: 'The%20Wet%20Look%20Loop', given: 'Excessive%20product%20usage', when: 'dry', then: 'hair%20looks%20%22Crispy%22%20or%20%22Greasy%22%20(The%20Plastic%20Operator)', result: 'assumptions%20of%20%22guido%22%20or%20%22sleazy%22%20subculture', operatorName: 'The%20Plastic%20Operator', operatorMechanism: 'hair%20looks%20%22Crispy%22%20or%20%22Greasy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_895_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_895_then_branch: BehaviorEmit { emission: 'then', text: 'hair%20looks%20%22Crispy%22%20or%20%22Greasy%22%20(The%20Plastic%20Operator)' })
+(loop_895_verdict: BehaviorVerdict { loopId: 895, loopName: 'The%20Wet%20Look%20Loop', then: 'hair%20looks%20%22Crispy%22%20or%20%22Greasy%22%20(The%20Plastic%20Operator)', result: 'assumptions%20of%20%22guido%22%20or%20%22sleazy%22%20subculture', operatorName: 'The%20Plastic%20Operator', operatorMechanism: 'hair%20looks%20%22Crispy%22%20or%20%22Greasy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_895_when_gate: BehaviorAssess { stage: 'when', text: 'dry' })
+
+// Topology
+(loop_895_start)-[:PROCESS]->(loop_895_given_gate)
+(loop_895_given_gate)-[:PROCESS { case: "ok" }]->(loop_895_when_gate)
+(loop_895_given_gate)-[:PROCESS { case: "err" }]->(loop_895_inactive)
+(loop_895_when_gate)-[:PROCESS { case: "ok" }]->(loop_895_context)
+(loop_895_when_gate)-[:PROCESS { case: "err" }]->(loop_895_inactive)
+(loop_895_context)-[:FORK { strategy: "behavior-branches" }]->(loop_895_context_branch | loop_895_then_branch | loop_895_operator_branch | loop_895_result_branch | loop_895_taxonomy_branch | loop_895_intervention_recognize | loop_895_intervention_interdict | loop_895_intervention_minimize)
+(loop_895_context_branch | loop_895_then_branch | loop_895_operator_branch | loop_895_result_branch | loop_895_taxonomy_branch | loop_895_intervention_recognize | loop_895_intervention_interdict | loop_895_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_895_verdict)
+(loop_895_inactive)-[:PROCESS]->(loop_895_sink)
+(loop_895_verdict)-[:PROCESS]->(loop_895_sink)
+(loop_895_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_895_then_branch)
+(loop_895_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_895_then_branch)
+(loop_895_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_895_then_branch)

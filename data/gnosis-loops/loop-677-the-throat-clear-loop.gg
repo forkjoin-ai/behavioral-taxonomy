@@ -1,0 +1,33 @@
+// behavioral-loop-677.gg
+// Executable Gnosis projection for The Throat Clear Loop.
+
+// Nodes
+(loop_677_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_677_context_branch: BehaviorEmit { emission: 'context' })
+(loop_677_given_gate: BehaviorAssess { stage: 'given', text: 'Habitual%20%22Ahem%22%20sound%20(Nervous%20or%20Post-Nasal)' })
+(loop_677_inactive: BehaviorTerminal { loopId: 677, loopName: 'The%20Throat%20Clear%20Loop' })
+(loop_677_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_677_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_677_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_677_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Interrupter%20Operator', mechanism: 'the%20sound%20breaks%20the%20tension%20awkwardly' })
+(loop_677_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20appearing%20%22Ready%20to%20speak%22%20but%20never%20actually%20speaking' })
+(loop_677_sink: BehaviorSink)
+(loop_677_start: BehaviorStart { loopId: 677, loopName: 'The%20Throat%20Clear%20Loop', given: 'Habitual%20%22Ahem%22%20sound%20(Nervous%20or%20Post-Nasal)', when: 'silence%20falls', then: 'the%20sound%20breaks%20the%20tension%20awkwardly%20(The%20Interrupter%20Operator)', result: 'the%20individual%20appearing%20%22Ready%20to%20speak%22%20but%20never%20actually%20speaking', operatorName: 'The%20Interrupter%20Operator', operatorMechanism: 'the%20sound%20breaks%20the%20tension%20awkwardly', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_677_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_677_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20breaks%20the%20tension%20awkwardly%20(The%20Interrupter%20Operator)' })
+(loop_677_verdict: BehaviorVerdict { loopId: 677, loopName: 'The%20Throat%20Clear%20Loop', then: 'the%20sound%20breaks%20the%20tension%20awkwardly%20(The%20Interrupter%20Operator)', result: 'the%20individual%20appearing%20%22Ready%20to%20speak%22%20but%20never%20actually%20speaking', operatorName: 'The%20Interrupter%20Operator', operatorMechanism: 'the%20sound%20breaks%20the%20tension%20awkwardly', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_677_when_gate: BehaviorAssess { stage: 'when', text: 'silence%20falls' })
+
+// Topology
+(loop_677_start)-[:PROCESS]->(loop_677_given_gate)
+(loop_677_given_gate)-[:PROCESS { case: "ok" }]->(loop_677_when_gate)
+(loop_677_given_gate)-[:PROCESS { case: "err" }]->(loop_677_inactive)
+(loop_677_when_gate)-[:PROCESS { case: "ok" }]->(loop_677_context)
+(loop_677_when_gate)-[:PROCESS { case: "err" }]->(loop_677_inactive)
+(loop_677_context)-[:FORK { strategy: "behavior-branches" }]->(loop_677_context_branch | loop_677_then_branch | loop_677_operator_branch | loop_677_result_branch | loop_677_taxonomy_branch | loop_677_intervention_recognize | loop_677_intervention_interdict | loop_677_intervention_minimize)
+(loop_677_context_branch | loop_677_then_branch | loop_677_operator_branch | loop_677_result_branch | loop_677_taxonomy_branch | loop_677_intervention_recognize | loop_677_intervention_interdict | loop_677_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_677_verdict)
+(loop_677_inactive)-[:PROCESS]->(loop_677_sink)
+(loop_677_verdict)-[:PROCESS]->(loop_677_sink)
+(loop_677_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_677_then_branch)
+(loop_677_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_677_then_branch)
+(loop_677_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_677_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-568.gg
+// Executable Gnosis projection for The Translucent Loop.
+
+// Nodes
+(loop_568_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_568_context_branch: BehaviorEmit { emission: 'context' })
+(loop_568_given_gate: BehaviorAssess { stage: 'given', text: 'Diffuse%20thinning%20where%20scalp%20shows%20through' })
+(loop_568_inactive: BehaviorTerminal { loopId: 568, loopName: 'The%20Translucent%20Loop' })
+(loop_568_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_568_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_568_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_568_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mortality%20Operator', mechanism: 'observers%20focus%20on%20the%20scalp' })
+(loop_568_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20avoiding%20bright%20spots%20in%20rooms' })
+(loop_568_sink: BehaviorSink)
+(loop_568_start: BehaviorStart { loopId: 568, loopName: 'The%20Translucent%20Loop', given: 'Diffuse%20thinning%20where%20scalp%20shows%20through', when: 'under%20harsh%20downlighting', then: 'observers%20focus%20on%20the%20scalp%20(The%20Mortality%20Operator)', result: 'the%20individual%20avoiding%20bright%20spots%20in%20rooms', operatorName: 'The%20Mortality%20Operator', operatorMechanism: 'observers%20focus%20on%20the%20scalp', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_568_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_568_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20focus%20on%20the%20scalp%20(The%20Mortality%20Operator)' })
+(loop_568_verdict: BehaviorVerdict { loopId: 568, loopName: 'The%20Translucent%20Loop', then: 'observers%20focus%20on%20the%20scalp%20(The%20Mortality%20Operator)', result: 'the%20individual%20avoiding%20bright%20spots%20in%20rooms', operatorName: 'The%20Mortality%20Operator', operatorMechanism: 'observers%20focus%20on%20the%20scalp', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_568_when_gate: BehaviorAssess { stage: 'when', text: 'under%20harsh%20downlighting' })
+
+// Topology
+(loop_568_start)-[:PROCESS]->(loop_568_given_gate)
+(loop_568_given_gate)-[:PROCESS { case: "ok" }]->(loop_568_when_gate)
+(loop_568_given_gate)-[:PROCESS { case: "err" }]->(loop_568_inactive)
+(loop_568_when_gate)-[:PROCESS { case: "ok" }]->(loop_568_context)
+(loop_568_when_gate)-[:PROCESS { case: "err" }]->(loop_568_inactive)
+(loop_568_context)-[:FORK { strategy: "behavior-branches" }]->(loop_568_context_branch | loop_568_then_branch | loop_568_operator_branch | loop_568_result_branch | loop_568_taxonomy_branch | loop_568_intervention_recognize | loop_568_intervention_interdict | loop_568_intervention_minimize)
+(loop_568_context_branch | loop_568_then_branch | loop_568_operator_branch | loop_568_result_branch | loop_568_taxonomy_branch | loop_568_intervention_recognize | loop_568_intervention_interdict | loop_568_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_568_verdict)
+(loop_568_inactive)-[:PROCESS]->(loop_568_sink)
+(loop_568_verdict)-[:PROCESS]->(loop_568_sink)
+(loop_568_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_568_then_branch)
+(loop_568_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_568_then_branch)
+(loop_568_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_568_then_branch)

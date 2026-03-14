@@ -1,0 +1,31 @@
+// behavioral-loop-853.gg
+// Executable Gnosis projection for The Power Bald Loop.
+
+// Nodes
+(loop_853_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_853_context_branch: BehaviorEmit { emission: 'context' })
+(loop_853_given_gate: BehaviorAssess { stage: 'given', text: 'Razor-shaved%20head%20%2B%20muscular%20build' })
+(loop_853_inactive: BehaviorTerminal { loopId: 853, loopName: 'The%20Power%20Bald%20Loop' })
+(loop_853_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_853_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_853_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Bezos%2FRock%20Operator', mechanism: 'it%20signals%20%22Discipline%22%20and%20%22Aggression%22' })
+(loop_853_result_branch: BehaviorEmit { emission: 'result', text: 'perceived%20dominance%20over%20men%20with%20thinning%20hair' })
+(loop_853_sink: BehaviorSink)
+(loop_853_start: BehaviorStart { loopId: 853, loopName: 'The%20Power%20Bald%20Loop', given: 'Razor-shaved%20head%20%2B%20muscular%20build', when: 'entering%20a%20boardroom', then: 'it%20signals%20%22Discipline%22%20and%20%22Aggression%22%20(The%20Bezos%2FRock%20Operator)', result: 'perceived%20dominance%20over%20men%20with%20thinning%20hair', operatorName: 'The%20Bezos%2FRock%20Operator', operatorMechanism: 'it%20signals%20%22Discipline%22%20and%20%22Aggression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_853_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_853_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Discipline%22%20and%20%22Aggression%22%20(The%20Bezos%2FRock%20Operator)' })
+(loop_853_verdict: BehaviorVerdict { loopId: 853, loopName: 'The%20Power%20Bald%20Loop', then: 'it%20signals%20%22Discipline%22%20and%20%22Aggression%22%20(The%20Bezos%2FRock%20Operator)', result: 'perceived%20dominance%20over%20men%20with%20thinning%20hair', operatorName: 'The%20Bezos%2FRock%20Operator', operatorMechanism: 'it%20signals%20%22Discipline%22%20and%20%22Aggression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_853_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20boardroom' })
+
+// Topology
+(loop_853_start)-[:PROCESS]->(loop_853_given_gate)
+(loop_853_given_gate)-[:PROCESS { case: "ok" }]->(loop_853_when_gate)
+(loop_853_given_gate)-[:PROCESS { case: "err" }]->(loop_853_inactive)
+(loop_853_when_gate)-[:PROCESS { case: "ok" }]->(loop_853_context)
+(loop_853_when_gate)-[:PROCESS { case: "err" }]->(loop_853_inactive)
+(loop_853_context)-[:FORK { strategy: "behavior-branches" }]->(loop_853_context_branch | loop_853_then_branch | loop_853_operator_branch | loop_853_result_branch | loop_853_taxonomy_branch | loop_853_intervention_recognize | loop_853_intervention_leverage)
+(loop_853_context_branch | loop_853_then_branch | loop_853_operator_branch | loop_853_result_branch | loop_853_taxonomy_branch | loop_853_intervention_recognize | loop_853_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_853_verdict)
+(loop_853_inactive)-[:PROCESS]->(loop_853_sink)
+(loop_853_verdict)-[:PROCESS]->(loop_853_sink)
+(loop_853_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_853_then_branch)
+(loop_853_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_853_result_branch)

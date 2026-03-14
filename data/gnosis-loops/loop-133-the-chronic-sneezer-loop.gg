@@ -1,0 +1,33 @@
+// behavioral-loop-133.gg
+// Executable Gnosis projection for The Chronic Sneezer Loop.
+
+// Nodes
+(loop_133_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_133_context_branch: BehaviorEmit { emission: 'context' })
+(loop_133_given_gate: BehaviorAssess { stage: 'given', text: 'High%20Histamine%20Response%20(Constant%20allergies)' })
+(loop_133_inactive: BehaviorTerminal { loopId: 133, loopName: 'The%20Chronic%20Sneezer%20Loop' })
+(loop_133_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_133_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_133_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_133_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Exclusion%20Operator', mechanism: 'the%20disruption%20causes%20%22Annoyance%22%20or%20%22Contagion%20Fear%22' })
+(loop_133_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20becoming%20**Apologetic%2FSubmissive**%20by%20default' })
+(loop_133_sink: BehaviorSink)
+(loop_133_start: BehaviorStart { loopId: 133, loopName: 'The%20Chronic%20Sneezer%20Loop', given: 'High%20Histamine%20Response%20(Constant%20allergies)', when: 'in%20a%20quiet%20meeting%20or%20theater', then: 'the%20disruption%20causes%20%22Annoyance%22%20or%20%22Contagion%20Fear%22%20(The%20Exclusion%20Operator)', result: 'the%20individual%20becoming%20**Apologetic%2FSubmissive**%20by%20default', operatorName: 'The%20Exclusion%20Operator', operatorMechanism: 'the%20disruption%20causes%20%22Annoyance%22%20or%20%22Contagion%20Fear%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_133_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_133_then_branch: BehaviorEmit { emission: 'then', text: 'the%20disruption%20causes%20%22Annoyance%22%20or%20%22Contagion%20Fear%22%20(The%20Exclusion%20Operator)' })
+(loop_133_verdict: BehaviorVerdict { loopId: 133, loopName: 'The%20Chronic%20Sneezer%20Loop', then: 'the%20disruption%20causes%20%22Annoyance%22%20or%20%22Contagion%20Fear%22%20(The%20Exclusion%20Operator)', result: 'the%20individual%20becoming%20**Apologetic%2FSubmissive**%20by%20default', operatorName: 'The%20Exclusion%20Operator', operatorMechanism: 'the%20disruption%20causes%20%22Annoyance%22%20or%20%22Contagion%20Fear%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_133_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20quiet%20meeting%20or%20theater' })
+
+// Topology
+(loop_133_start)-[:PROCESS]->(loop_133_given_gate)
+(loop_133_given_gate)-[:PROCESS { case: "ok" }]->(loop_133_when_gate)
+(loop_133_given_gate)-[:PROCESS { case: "err" }]->(loop_133_inactive)
+(loop_133_when_gate)-[:PROCESS { case: "ok" }]->(loop_133_context)
+(loop_133_when_gate)-[:PROCESS { case: "err" }]->(loop_133_inactive)
+(loop_133_context)-[:FORK { strategy: "behavior-branches" }]->(loop_133_context_branch | loop_133_then_branch | loop_133_operator_branch | loop_133_result_branch | loop_133_taxonomy_branch | loop_133_intervention_recognize | loop_133_intervention_interdict | loop_133_intervention_minimize)
+(loop_133_context_branch | loop_133_then_branch | loop_133_operator_branch | loop_133_result_branch | loop_133_taxonomy_branch | loop_133_intervention_recognize | loop_133_intervention_interdict | loop_133_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_133_verdict)
+(loop_133_inactive)-[:PROCESS]->(loop_133_sink)
+(loop_133_verdict)-[:PROCESS]->(loop_133_sink)
+(loop_133_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_133_then_branch)
+(loop_133_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_133_then_branch)
+(loop_133_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_133_then_branch)

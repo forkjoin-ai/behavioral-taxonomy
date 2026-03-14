@@ -1,0 +1,33 @@
+// behavioral-loop-301.gg
+// Executable Gnosis projection for The Crusher Loop.
+
+// Nodes
+(loop_301_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_301_context_branch: BehaviorEmit { emission: 'context' })
+(loop_301_given_gate: BehaviorAssess { stage: 'given', text: 'High%20flexor%20dominance' })
+(loop_301_inactive: BehaviorTerminal { loopId: 301, loopName: 'The%20Crusher%20Loop' })
+(loop_301_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_301_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_301_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_301_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dominance%2FAsshole%20Operator', mechanism: 'the%20grip%20causes%20pain' })
+(loop_301_result_branch: BehaviorEmit { emission: 'result', text: 'the%20recipient%20feeling%20%22bullied%22%20instantly' })
+(loop_301_sink: BehaviorSink)
+(loop_301_start: BehaviorStart { loopId: 301, loopName: 'The%20Crusher%20Loop', given: 'High%20flexor%20dominance', when: 'shaking%20hands', then: 'the%20grip%20causes%20pain%20(The%20Dominance%2FAsshole%20Operator)', result: 'the%20recipient%20feeling%20%22bullied%22%20instantly', operatorName: 'The%20Dominance%2FAsshole%20Operator', operatorMechanism: 'the%20grip%20causes%20pain', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_301_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_301_then_branch: BehaviorEmit { emission: 'then', text: 'the%20grip%20causes%20pain%20(The%20Dominance%2FAsshole%20Operator)' })
+(loop_301_verdict: BehaviorVerdict { loopId: 301, loopName: 'The%20Crusher%20Loop', then: 'the%20grip%20causes%20pain%20(The%20Dominance%2FAsshole%20Operator)', result: 'the%20recipient%20feeling%20%22bullied%22%20instantly', operatorName: 'The%20Dominance%2FAsshole%20Operator', operatorMechanism: 'the%20grip%20causes%20pain', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_301_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_301_start)-[:PROCESS]->(loop_301_given_gate)
+(loop_301_given_gate)-[:PROCESS { case: "ok" }]->(loop_301_when_gate)
+(loop_301_given_gate)-[:PROCESS { case: "err" }]->(loop_301_inactive)
+(loop_301_when_gate)-[:PROCESS { case: "ok" }]->(loop_301_context)
+(loop_301_when_gate)-[:PROCESS { case: "err" }]->(loop_301_inactive)
+(loop_301_context)-[:FORK { strategy: "behavior-branches" }]->(loop_301_context_branch | loop_301_then_branch | loop_301_operator_branch | loop_301_result_branch | loop_301_taxonomy_branch | loop_301_intervention_recognize | loop_301_intervention_interdict | loop_301_intervention_minimize)
+(loop_301_context_branch | loop_301_then_branch | loop_301_operator_branch | loop_301_result_branch | loop_301_taxonomy_branch | loop_301_intervention_recognize | loop_301_intervention_interdict | loop_301_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_301_verdict)
+(loop_301_inactive)-[:PROCESS]->(loop_301_sink)
+(loop_301_verdict)-[:PROCESS]->(loop_301_sink)
+(loop_301_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_301_then_branch)
+(loop_301_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_301_then_branch)
+(loop_301_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_301_then_branch)

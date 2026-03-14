@@ -1,0 +1,33 @@
+// behavioral-loop-11008.gg
+// Executable Gnosis projection for The Epigenetic Silencing Loop.
+
+// Nodes
+(loop_11008_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_11008_context_branch: BehaviorEmit { emission: 'context' })
+(loop_11008_given_gate: BehaviorAssess { stage: 'given', text: 'Environmental%20signal%20(e.g.%2C%20low%20maternal%20care%2C%20high%20stress%20in%20early%20life)' })
+(loop_11008_inactive: BehaviorTerminal { loopId: 11008, loopName: 'The%20Epigenetic%20Silencing%20Loop' })
+(loop_11008_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Requires%20Histone%20Deacetylase%20Inhibitors%20or%20intense%20behavioral%20intervention' })
+(loop_11008_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Focus%20on%20environmental%20enrichment%20and%20secure%20attachment%20relationships' })
+(loop_11008_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20family%20patterns%20of%20anxiety%2Fstress%20reactivity%20across%20generations' })
+(loop_11008_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Methylation%20Lock', mechanism: 'Promoter%20methylation%20(CpG%20islands)%20causes%20steric%20hindrance%2C%20silencing%20NR3C1%20gene%20and%20creating%20high-anxiety%20phenotype.' })
+(loop_11008_result_branch: BehaviorEmit { emission: 'result', text: 'Gene%20is%20silenced%3B%20subject%20produces%20fewer%20stress%20receptors%20permanently' })
+(loop_11008_sink: BehaviorSink)
+(loop_11008_start: BehaviorStart { loopId: 11008, loopName: 'The%20Epigenetic%20Silencing%20Loop', given: 'Environmental%20signal%20(e.g.%2C%20low%20maternal%20care%2C%20high%20stress%20in%20early%20life)', when: 'DNA%20Methyltransferase%20enzymes%20attach%20methyl%20groups%20to%20gene%20promoter%20regions', then: 'Transcription%20factors%20are%20physically%20blocked%20from%20reading%20stress%20receptor%20genes', result: 'Gene%20is%20silenced%3B%20subject%20produces%20fewer%20stress%20receptors%20permanently', operatorName: 'The%20Methylation%20Lock', operatorMechanism: 'Promoter%20methylation%20(CpG%20islands)%20causes%20steric%20hindrance%2C%20silencing%20NR3C1%20gene%20and%20creating%20high-anxiety%20phenotype.', origin: 'GENETIC', modality: 'DEVELOPMENTAL', mutability: 'TERMINAL', valences: 'VULNERABILITY', interventionDifficulty: '10', intervention_recognize: 'Notice%20family%20patterns%20of%20anxiety%2Fstress%20reactivity%20across%20generations', intervention_interdict: 'Requires%20Histone%20Deacetylase%20Inhibitors%20or%20intense%20behavioral%20intervention', intervention_minimize: 'Focus%20on%20environmental%20enrichment%20and%20secure%20attachment%20relationships' })
+(loop_11008_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'DEVELOPMENTAL', mutability: 'TERMINAL', valences: 'VULNERABILITY' })
+(loop_11008_then_branch: BehaviorEmit { emission: 'then', text: 'Transcription%20factors%20are%20physically%20blocked%20from%20reading%20stress%20receptor%20genes' })
+(loop_11008_verdict: BehaviorVerdict { loopId: 11008, loopName: 'The%20Epigenetic%20Silencing%20Loop', then: 'Transcription%20factors%20are%20physically%20blocked%20from%20reading%20stress%20receptor%20genes', result: 'Gene%20is%20silenced%3B%20subject%20produces%20fewer%20stress%20receptors%20permanently', operatorName: 'The%20Methylation%20Lock', operatorMechanism: 'Promoter%20methylation%20(CpG%20islands)%20causes%20steric%20hindrance%2C%20silencing%20NR3C1%20gene%20and%20creating%20high-anxiety%20phenotype.', origin: 'GENETIC', modality: 'DEVELOPMENTAL', mutability: 'TERMINAL', valences: 'VULNERABILITY' })
+(loop_11008_when_gate: BehaviorAssess { stage: 'when', text: 'DNA%20Methyltransferase%20enzymes%20attach%20methyl%20groups%20to%20gene%20promoter%20regions' })
+
+// Topology
+(loop_11008_start)-[:PROCESS]->(loop_11008_given_gate)
+(loop_11008_given_gate)-[:PROCESS { case: "ok" }]->(loop_11008_when_gate)
+(loop_11008_given_gate)-[:PROCESS { case: "err" }]->(loop_11008_inactive)
+(loop_11008_when_gate)-[:PROCESS { case: "ok" }]->(loop_11008_context)
+(loop_11008_when_gate)-[:PROCESS { case: "err" }]->(loop_11008_inactive)
+(loop_11008_context)-[:FORK { strategy: "behavior-branches" }]->(loop_11008_context_branch | loop_11008_then_branch | loop_11008_operator_branch | loop_11008_result_branch | loop_11008_taxonomy_branch | loop_11008_intervention_recognize | loop_11008_intervention_interdict | loop_11008_intervention_minimize)
+(loop_11008_context_branch | loop_11008_then_branch | loop_11008_operator_branch | loop_11008_result_branch | loop_11008_taxonomy_branch | loop_11008_intervention_recognize | loop_11008_intervention_interdict | loop_11008_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_11008_verdict)
+(loop_11008_inactive)-[:PROCESS]->(loop_11008_sink)
+(loop_11008_verdict)-[:PROCESS]->(loop_11008_sink)
+(loop_11008_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_11008_then_branch)
+(loop_11008_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_11008_then_branch)
+(loop_11008_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_11008_then_branch)

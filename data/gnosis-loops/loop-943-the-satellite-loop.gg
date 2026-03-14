@@ -1,0 +1,33 @@
+// behavioral-loop-943.gg
+// Executable Gnosis projection for The Satellite Loop.
+
+// Nodes
+(loop_943_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_943_context_branch: BehaviorEmit { emission: 'context' })
+(loop_943_given_gate: BehaviorAssess { stage: 'given', text: 'Standing%20just%20outside%20the%20circle%20of%20conversation' })
+(loop_943_inactive: BehaviorTerminal { loopId: 943, loopName: 'The%20Satellite%20Loop' })
+(loop_943_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_943_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_943_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_943_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Moon%20Operator', mechanism: 'it%20signals%20%22Eavesdropping%22%20or%20%22Social%20Awkwardness%22' })
+(loop_943_result_branch: BehaviorEmit { emission: 'result', text: 'the%20circle%20closing%20tighter%20to%20exclude%20the%20drifter' })
+(loop_943_sink: BehaviorSink)
+(loop_943_start: BehaviorStart { loopId: 943, loopName: 'The%20Satellite%20Loop', given: 'Standing%20just%20outside%20the%20circle%20of%20conversation', when: 'trying%20to%20listen', then: 'it%20signals%20%22Eavesdropping%22%20or%20%22Social%20Awkwardness%22%20(The%20Moon%20Operator)', result: 'the%20circle%20closing%20tighter%20to%20exclude%20the%20drifter', operatorName: 'The%20Moon%20Operator', operatorMechanism: 'it%20signals%20%22Eavesdropping%22%20or%20%22Social%20Awkwardness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_943_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_943_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Eavesdropping%22%20or%20%22Social%20Awkwardness%22%20(The%20Moon%20Operator)' })
+(loop_943_verdict: BehaviorVerdict { loopId: 943, loopName: 'The%20Satellite%20Loop', then: 'it%20signals%20%22Eavesdropping%22%20or%20%22Social%20Awkwardness%22%20(The%20Moon%20Operator)', result: 'the%20circle%20closing%20tighter%20to%20exclude%20the%20drifter', operatorName: 'The%20Moon%20Operator', operatorMechanism: 'it%20signals%20%22Eavesdropping%22%20or%20%22Social%20Awkwardness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_943_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20to%20listen' })
+
+// Topology
+(loop_943_start)-[:PROCESS]->(loop_943_given_gate)
+(loop_943_given_gate)-[:PROCESS { case: "ok" }]->(loop_943_when_gate)
+(loop_943_given_gate)-[:PROCESS { case: "err" }]->(loop_943_inactive)
+(loop_943_when_gate)-[:PROCESS { case: "ok" }]->(loop_943_context)
+(loop_943_when_gate)-[:PROCESS { case: "err" }]->(loop_943_inactive)
+(loop_943_context)-[:FORK { strategy: "behavior-branches" }]->(loop_943_context_branch | loop_943_then_branch | loop_943_operator_branch | loop_943_result_branch | loop_943_taxonomy_branch | loop_943_intervention_recognize | loop_943_intervention_interdict | loop_943_intervention_minimize)
+(loop_943_context_branch | loop_943_then_branch | loop_943_operator_branch | loop_943_result_branch | loop_943_taxonomy_branch | loop_943_intervention_recognize | loop_943_intervention_interdict | loop_943_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_943_verdict)
+(loop_943_inactive)-[:PROCESS]->(loop_943_sink)
+(loop_943_verdict)-[:PROCESS]->(loop_943_sink)
+(loop_943_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_943_then_branch)
+(loop_943_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_943_then_branch)
+(loop_943_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_943_then_branch)

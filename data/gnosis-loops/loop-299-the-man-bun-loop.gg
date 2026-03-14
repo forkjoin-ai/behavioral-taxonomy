@@ -1,0 +1,33 @@
+// behavioral-loop-299.gg
+// Executable Gnosis projection for The Man Bun Loop.
+
+// Nodes
+(loop_299_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_299_context_branch: BehaviorEmit { emission: 'context' })
+(loop_299_given_gate: BehaviorAssess { stage: 'given', text: 'Long%20hair%20tied%20back%20tight' })
+(loop_299_inactive: BehaviorTerminal { loopId: 299, loopName: 'The%20Man%20Bun%20Loop' })
+(loop_299_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_299_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_299_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_299_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stereotype%20Operator', mechanism: 'observers%20perceive%20%22Hipster%22%20or%20%22Gentrifier%22%20status' })
+(loop_299_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20inclusion%20in%20artsy%20circles%20but%20exclusion%20from%20traditional%20blue-collar%20groups' })
+(loop_299_sink: BehaviorSink)
+(loop_299_start: BehaviorStart { loopId: 299, loopName: 'The%20Man%20Bun%20Loop', given: 'Long%20hair%20tied%20back%20tight', when: 'in%20a%20casual%20setting', then: 'observers%20perceive%20%22Hipster%22%20or%20%22Gentrifier%22%20status%20(The%20Stereotype%20Operator)', result: 'immediate%20inclusion%20in%20artsy%20circles%20but%20exclusion%20from%20traditional%20blue-collar%20groups', operatorName: 'The%20Stereotype%20Operator', operatorMechanism: 'observers%20perceive%20%22Hipster%22%20or%20%22Gentrifier%22%20status', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_299_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_299_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Hipster%22%20or%20%22Gentrifier%22%20status%20(The%20Stereotype%20Operator)' })
+(loop_299_verdict: BehaviorVerdict { loopId: 299, loopName: 'The%20Man%20Bun%20Loop', then: 'observers%20perceive%20%22Hipster%22%20or%20%22Gentrifier%22%20status%20(The%20Stereotype%20Operator)', result: 'immediate%20inclusion%20in%20artsy%20circles%20but%20exclusion%20from%20traditional%20blue-collar%20groups', operatorName: 'The%20Stereotype%20Operator', operatorMechanism: 'observers%20perceive%20%22Hipster%22%20or%20%22Gentrifier%22%20status', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_299_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20casual%20setting' })
+
+// Topology
+(loop_299_start)-[:PROCESS]->(loop_299_given_gate)
+(loop_299_given_gate)-[:PROCESS { case: "ok" }]->(loop_299_when_gate)
+(loop_299_given_gate)-[:PROCESS { case: "err" }]->(loop_299_inactive)
+(loop_299_when_gate)-[:PROCESS { case: "ok" }]->(loop_299_context)
+(loop_299_when_gate)-[:PROCESS { case: "err" }]->(loop_299_inactive)
+(loop_299_context)-[:FORK { strategy: "behavior-branches" }]->(loop_299_context_branch | loop_299_then_branch | loop_299_operator_branch | loop_299_result_branch | loop_299_taxonomy_branch | loop_299_intervention_recognize | loop_299_intervention_interdict | loop_299_intervention_minimize)
+(loop_299_context_branch | loop_299_then_branch | loop_299_operator_branch | loop_299_result_branch | loop_299_taxonomy_branch | loop_299_intervention_recognize | loop_299_intervention_interdict | loop_299_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_299_verdict)
+(loop_299_inactive)-[:PROCESS]->(loop_299_sink)
+(loop_299_verdict)-[:PROCESS]->(loop_299_sink)
+(loop_299_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_299_then_branch)
+(loop_299_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_299_then_branch)
+(loop_299_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_299_then_branch)

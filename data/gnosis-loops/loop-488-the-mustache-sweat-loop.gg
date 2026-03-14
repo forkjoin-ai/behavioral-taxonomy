@@ -1,0 +1,33 @@
+// behavioral-loop-488.gg
+// Executable Gnosis projection for The Mustache Sweat Loop.
+
+// Nodes
+(loop_488_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_488_context_branch: BehaviorEmit { emission: 'context' })
+(loop_488_given_gate: BehaviorAssess { stage: 'given', text: 'Perspiration%20on%20the%20upper%20lip%20(Menopause%2FNerves)' })
+(loop_488_inactive: BehaviorTerminal { loopId: 488, loopName: 'The%20Mustache%20Sweat%20Loop' })
+(loop_488_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_488_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_488_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_488_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Interrogation%20Operator', mechanism: 'it%20signals%20%22Internal%20Distress%22%20or%20%22Lying%22' })
+(loop_488_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20the%20individual%20is%20**Guilty%2FAnxious**' })
+(loop_488_sink: BehaviorSink)
+(loop_488_start: BehaviorStart { loopId: 488, loopName: 'The%20Mustache%20Sweat%20Loop', given: 'Perspiration%20on%20the%20upper%20lip%20(Menopause%2FNerves)', when: 'in%20a%20cool%20room', then: 'it%20signals%20%22Internal%20Distress%22%20or%20%22Lying%22%20(The%20Interrogation%20Operator)', result: 'observers%20assuming%20the%20individual%20is%20**Guilty%2FAnxious**', operatorName: 'The%20Interrogation%20Operator', operatorMechanism: 'it%20signals%20%22Internal%20Distress%22%20or%20%22Lying%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_488_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_488_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Internal%20Distress%22%20or%20%22Lying%22%20(The%20Interrogation%20Operator)' })
+(loop_488_verdict: BehaviorVerdict { loopId: 488, loopName: 'The%20Mustache%20Sweat%20Loop', then: 'it%20signals%20%22Internal%20Distress%22%20or%20%22Lying%22%20(The%20Interrogation%20Operator)', result: 'observers%20assuming%20the%20individual%20is%20**Guilty%2FAnxious**', operatorName: 'The%20Interrogation%20Operator', operatorMechanism: 'it%20signals%20%22Internal%20Distress%22%20or%20%22Lying%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_488_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20cool%20room' })
+
+// Topology
+(loop_488_start)-[:PROCESS]->(loop_488_given_gate)
+(loop_488_given_gate)-[:PROCESS { case: "ok" }]->(loop_488_when_gate)
+(loop_488_given_gate)-[:PROCESS { case: "err" }]->(loop_488_inactive)
+(loop_488_when_gate)-[:PROCESS { case: "ok" }]->(loop_488_context)
+(loop_488_when_gate)-[:PROCESS { case: "err" }]->(loop_488_inactive)
+(loop_488_context)-[:FORK { strategy: "behavior-branches" }]->(loop_488_context_branch | loop_488_then_branch | loop_488_operator_branch | loop_488_result_branch | loop_488_taxonomy_branch | loop_488_intervention_recognize | loop_488_intervention_interdict | loop_488_intervention_minimize)
+(loop_488_context_branch | loop_488_then_branch | loop_488_operator_branch | loop_488_result_branch | loop_488_taxonomy_branch | loop_488_intervention_recognize | loop_488_intervention_interdict | loop_488_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_488_verdict)
+(loop_488_inactive)-[:PROCESS]->(loop_488_sink)
+(loop_488_verdict)-[:PROCESS]->(loop_488_sink)
+(loop_488_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_488_then_branch)
+(loop_488_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_488_then_branch)
+(loop_488_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_488_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-509.gg
+// Executable Gnosis projection for The Baggy Butt Loop.
+
+// Nodes
+(loop_509_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_509_context_branch: BehaviorEmit { emission: 'context' })
+(loop_509_given_gate: BehaviorAssess { stage: 'given', text: 'Pants%20with%20too%20much%20rise%2Fseat%20fabric' })
+(loop_509_inactive: BehaviorTerminal { loopId: 509, loopName: 'The%20Baggy%20Butt%20Loop' })
+(loop_509_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_509_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_509_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_509_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Asexual%20Operator', mechanism: 'the%20rear%20silhouette%20is%20%22Sagging%22' })
+(loop_509_result_branch: BehaviorEmit { emission: 'result', text: 'zero%20sexual%20signaling%20from%20behind' })
+(loop_509_sink: BehaviorSink)
+(loop_509_start: BehaviorStart { loopId: 509, loopName: 'The%20Baggy%20Butt%20Loop', given: 'Pants%20with%20too%20much%20rise%2Fseat%20fabric', when: 'standing', then: 'the%20rear%20silhouette%20is%20%22Sagging%22%20(The%20Asexual%20Operator)', result: 'zero%20sexual%20signaling%20from%20behind', operatorName: 'The%20Asexual%20Operator', operatorMechanism: 'the%20rear%20silhouette%20is%20%22Sagging%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_509_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_509_then_branch: BehaviorEmit { emission: 'then', text: 'the%20rear%20silhouette%20is%20%22Sagging%22%20(The%20Asexual%20Operator)' })
+(loop_509_verdict: BehaviorVerdict { loopId: 509, loopName: 'The%20Baggy%20Butt%20Loop', then: 'the%20rear%20silhouette%20is%20%22Sagging%22%20(The%20Asexual%20Operator)', result: 'zero%20sexual%20signaling%20from%20behind', operatorName: 'The%20Asexual%20Operator', operatorMechanism: 'the%20rear%20silhouette%20is%20%22Sagging%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_509_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_509_start)-[:PROCESS]->(loop_509_given_gate)
+(loop_509_given_gate)-[:PROCESS { case: "ok" }]->(loop_509_when_gate)
+(loop_509_given_gate)-[:PROCESS { case: "err" }]->(loop_509_inactive)
+(loop_509_when_gate)-[:PROCESS { case: "ok" }]->(loop_509_context)
+(loop_509_when_gate)-[:PROCESS { case: "err" }]->(loop_509_inactive)
+(loop_509_context)-[:FORK { strategy: "behavior-branches" }]->(loop_509_context_branch | loop_509_then_branch | loop_509_operator_branch | loop_509_result_branch | loop_509_taxonomy_branch | loop_509_intervention_recognize | loop_509_intervention_interdict | loop_509_intervention_minimize)
+(loop_509_context_branch | loop_509_then_branch | loop_509_operator_branch | loop_509_result_branch | loop_509_taxonomy_branch | loop_509_intervention_recognize | loop_509_intervention_interdict | loop_509_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_509_verdict)
+(loop_509_inactive)-[:PROCESS]->(loop_509_sink)
+(loop_509_verdict)-[:PROCESS]->(loop_509_sink)
+(loop_509_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_509_then_branch)
+(loop_509_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_509_then_branch)
+(loop_509_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_509_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-678.gg
+// Executable Gnosis projection for The Sniffle Loop.
+
+// Nodes
+(loop_678_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_678_context_branch: BehaviorEmit { emission: 'context' })
+(loop_678_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20rhinitis%20or%20allergies' })
+(loop_678_inactive: BehaviorTerminal { loopId: 678, loopName: 'The%20Sniffle%20Loop' })
+(loop_678_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_678_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_678_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_678_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vice%20Operator', mechanism: 'frequent%20sniffing%20signals%20%22Cocaine%20Use%22' })
+(loop_678_result_branch: BehaviorEmit { emission: 'result', text: 'suspicion%20from%20HR%20but%20potential%20bonding%20with%20%22party%22%20crowds' })
+(loop_678_sink: BehaviorSink)
+(loop_678_start: BehaviorStart { loopId: 678, loopName: 'The%20Sniffle%20Loop', given: 'Chronic%20rhinitis%20or%20allergies', when: 'in%20a%20high-stakes%20environment%20(Finance%2FLaw)', then: 'frequent%20sniffing%20signals%20%22Cocaine%20Use%22%20(The%20Vice%20Operator)', result: 'suspicion%20from%20HR%20but%20potential%20bonding%20with%20%22party%22%20crowds', operatorName: 'The%20Vice%20Operator', operatorMechanism: 'frequent%20sniffing%20signals%20%22Cocaine%20Use%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_678_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION' })
+(loop_678_then_branch: BehaviorEmit { emission: 'then', text: 'frequent%20sniffing%20signals%20%22Cocaine%20Use%22%20(The%20Vice%20Operator)' })
+(loop_678_verdict: BehaviorVerdict { loopId: 678, loopName: 'The%20Sniffle%20Loop', then: 'frequent%20sniffing%20signals%20%22Cocaine%20Use%22%20(The%20Vice%20Operator)', result: 'suspicion%20from%20HR%20but%20potential%20bonding%20with%20%22party%22%20crowds', operatorName: 'The%20Vice%20Operator', operatorMechanism: 'frequent%20sniffing%20signals%20%22Cocaine%20Use%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION' })
+(loop_678_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20high-stakes%20environment%20(Finance%2FLaw)' })
+
+// Topology
+(loop_678_start)-[:PROCESS]->(loop_678_given_gate)
+(loop_678_given_gate)-[:PROCESS { case: "ok" }]->(loop_678_when_gate)
+(loop_678_given_gate)-[:PROCESS { case: "err" }]->(loop_678_inactive)
+(loop_678_when_gate)-[:PROCESS { case: "ok" }]->(loop_678_context)
+(loop_678_when_gate)-[:PROCESS { case: "err" }]->(loop_678_inactive)
+(loop_678_context)-[:FORK { strategy: "behavior-branches" }]->(loop_678_context_branch | loop_678_then_branch | loop_678_operator_branch | loop_678_result_branch | loop_678_taxonomy_branch | loop_678_intervention_recognize | loop_678_intervention_interdict | loop_678_intervention_minimize)
+(loop_678_context_branch | loop_678_then_branch | loop_678_operator_branch | loop_678_result_branch | loop_678_taxonomy_branch | loop_678_intervention_recognize | loop_678_intervention_interdict | loop_678_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_678_verdict)
+(loop_678_inactive)-[:PROCESS]->(loop_678_sink)
+(loop_678_verdict)-[:PROCESS]->(loop_678_sink)
+(loop_678_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_678_then_branch)
+(loop_678_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_678_then_branch)
+(loop_678_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_678_then_branch)

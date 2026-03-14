@@ -1,0 +1,33 @@
+// behavioral-loop-1037.gg
+// Executable Gnosis projection for The Airport Loop.
+
+// Nodes
+(loop_1037_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1037_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1037_given_gate: BehaviorAssess { stage: 'given', text: 'The%20liminal%20space%20of%20travel' })
+(loop_1037_inactive: BehaviorTerminal { loopId: 1037, loopName: 'The%20Airport%20Loop' })
+(loop_1037_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Create%20transition%20rituals%20between%20contexts' })
+(loop_1037_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1037_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20who%20moves%20toward%2Faway%20from%20whom' })
+(loop_1037_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'social%20norms%20regarding%20alcohol%20(7%20AM%20beer)%20and%20sleep%20(floor%20napping)%20vanish%20(The%20Lawless%20Zone)' })
+(loop_1037_result_branch: BehaviorEmit { emission: 'result', text: '%22Feral%22%20behavior%20that%20would%20be%20unacceptable%20anywhere%20else' })
+(loop_1037_sink: BehaviorSink)
+(loop_1037_start: BehaviorStart { loopId: 1037, loopName: 'The%20Airport%20Loop', given: 'The%20liminal%20space%20of%20travel', when: 'in%20an%20airport%20terminal', then: 'social%20norms%20regarding%20alcohol%20(7%20AM%20beer)%20and%20sleep%20(floor%20napping)%20vanish%20(The%20Lawless%20Zone)', result: '%22Feral%22%20behavior%20that%20would%20be%20unacceptable%20anywhere%20else', operatorName: 'Unknown%20Operator', operatorMechanism: 'social%20norms%20regarding%20alcohol%20(7%20AM%20beer)%20and%20sleep%20(floor%20napping)%20vanish%20(The%20Lawless%20Zone)', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Pay%20attention%20to%20who%20moves%20toward%2Faway%20from%20whom', intervention_interdict: 'Create%20transition%20rituals%20between%20contexts', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1037_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1037_then_branch: BehaviorEmit { emission: 'then', text: 'social%20norms%20regarding%20alcohol%20(7%20AM%20beer)%20and%20sleep%20(floor%20napping)%20vanish%20(The%20Lawless%20Zone)' })
+(loop_1037_verdict: BehaviorVerdict { loopId: 1037, loopName: 'The%20Airport%20Loop', then: 'social%20norms%20regarding%20alcohol%20(7%20AM%20beer)%20and%20sleep%20(floor%20napping)%20vanish%20(The%20Lawless%20Zone)', result: '%22Feral%22%20behavior%20that%20would%20be%20unacceptable%20anywhere%20else', operatorName: 'Unknown%20Operator', operatorMechanism: 'social%20norms%20regarding%20alcohol%20(7%20AM%20beer)%20and%20sleep%20(floor%20napping)%20vanish%20(The%20Lawless%20Zone)', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1037_when_gate: BehaviorAssess { stage: 'when', text: 'in%20an%20airport%20terminal' })
+
+// Topology
+(loop_1037_start)-[:PROCESS]->(loop_1037_given_gate)
+(loop_1037_given_gate)-[:PROCESS { case: "ok" }]->(loop_1037_when_gate)
+(loop_1037_given_gate)-[:PROCESS { case: "err" }]->(loop_1037_inactive)
+(loop_1037_when_gate)-[:PROCESS { case: "ok" }]->(loop_1037_context)
+(loop_1037_when_gate)-[:PROCESS { case: "err" }]->(loop_1037_inactive)
+(loop_1037_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1037_context_branch | loop_1037_then_branch | loop_1037_operator_branch | loop_1037_result_branch | loop_1037_taxonomy_branch | loop_1037_intervention_recognize | loop_1037_intervention_interdict | loop_1037_intervention_minimize)
+(loop_1037_context_branch | loop_1037_then_branch | loop_1037_operator_branch | loop_1037_result_branch | loop_1037_taxonomy_branch | loop_1037_intervention_recognize | loop_1037_intervention_interdict | loop_1037_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1037_verdict)
+(loop_1037_inactive)-[:PROCESS]->(loop_1037_sink)
+(loop_1037_verdict)-[:PROCESS]->(loop_1037_sink)
+(loop_1037_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1037_then_branch)
+(loop_1037_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1037_then_branch)
+(loop_1037_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1037_then_branch)

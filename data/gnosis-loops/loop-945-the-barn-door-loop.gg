@@ -1,0 +1,33 @@
+// behavioral-loop-945.gg
+// Executable Gnosis projection for The Barn Door Loop.
+
+// Nodes
+(loop_945_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_945_context_branch: BehaviorEmit { emission: 'context' })
+(loop_945_given_gate: BehaviorAssess { stage: 'given', text: 'Zipper%20failure%20or%20forgetting%20to%20zip' })
+(loop_945_inactive: BehaviorTerminal { loopId: 945, loopName: 'The%20Barn%20Door%20Loop' })
+(loop_945_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_945_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_945_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_945_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Gap%20Operator', mechanism: 'a%20white%20triangle%20of%20shirt%2Funderwear%20shows' })
+(loop_945_result_branch: BehaviorEmit { emission: 'result', text: 'the%20audience%20staring%20at%20the%20crotch%2C%20ignoring%20the%20data' })
+(loop_945_sink: BehaviorSink)
+(loop_945_start: BehaviorStart { loopId: 945, loopName: 'The%20Barn%20Door%20Loop', given: 'Zipper%20failure%20or%20forgetting%20to%20zip', when: 'giving%20a%20presentation', then: 'a%20white%20triangle%20of%20shirt%2Funderwear%20shows%20(The%20Gap%20Operator)', result: 'the%20audience%20staring%20at%20the%20crotch%2C%20ignoring%20the%20data', operatorName: 'The%20Gap%20Operator', operatorMechanism: 'a%20white%20triangle%20of%20shirt%2Funderwear%20shows', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_945_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_945_then_branch: BehaviorEmit { emission: 'then', text: 'a%20white%20triangle%20of%20shirt%2Funderwear%20shows%20(The%20Gap%20Operator)' })
+(loop_945_verdict: BehaviorVerdict { loopId: 945, loopName: 'The%20Barn%20Door%20Loop', then: 'a%20white%20triangle%20of%20shirt%2Funderwear%20shows%20(The%20Gap%20Operator)', result: 'the%20audience%20staring%20at%20the%20crotch%2C%20ignoring%20the%20data', operatorName: 'The%20Gap%20Operator', operatorMechanism: 'a%20white%20triangle%20of%20shirt%2Funderwear%20shows', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_945_when_gate: BehaviorAssess { stage: 'when', text: 'giving%20a%20presentation' })
+
+// Topology
+(loop_945_start)-[:PROCESS]->(loop_945_given_gate)
+(loop_945_given_gate)-[:PROCESS { case: "ok" }]->(loop_945_when_gate)
+(loop_945_given_gate)-[:PROCESS { case: "err" }]->(loop_945_inactive)
+(loop_945_when_gate)-[:PROCESS { case: "ok" }]->(loop_945_context)
+(loop_945_when_gate)-[:PROCESS { case: "err" }]->(loop_945_inactive)
+(loop_945_context)-[:FORK { strategy: "behavior-branches" }]->(loop_945_context_branch | loop_945_then_branch | loop_945_operator_branch | loop_945_result_branch | loop_945_taxonomy_branch | loop_945_intervention_recognize | loop_945_intervention_interdict | loop_945_intervention_minimize)
+(loop_945_context_branch | loop_945_then_branch | loop_945_operator_branch | loop_945_result_branch | loop_945_taxonomy_branch | loop_945_intervention_recognize | loop_945_intervention_interdict | loop_945_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_945_verdict)
+(loop_945_inactive)-[:PROCESS]->(loop_945_sink)
+(loop_945_verdict)-[:PROCESS]->(loop_945_sink)
+(loop_945_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_945_then_branch)
+(loop_945_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_945_then_branch)
+(loop_945_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_945_then_branch)

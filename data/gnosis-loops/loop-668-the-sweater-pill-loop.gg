@@ -1,0 +1,33 @@
+// behavioral-loop-668.gg
+// Executable Gnosis projection for The Sweater Pill Loop.
+
+// Nodes
+(loop_668_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_668_context_branch: BehaviorEmit { emission: 'context' })
+(loop_668_given_gate: BehaviorAssess { stage: 'given', text: 'Old%20fabric%20balling%20up%20under%20arms' })
+(loop_668_inactive: BehaviorTerminal { loopId: 668, loopName: 'The%20Sweater%20Pill%20Loop' })
+(loop_668_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_668_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_668_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_668_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threadbare%20Operator', mechanism: 'it%20signals%20%22Poverty%22%20or%20%22Neglect%22' })
+(loop_668_result_branch: BehaviorEmit { emission: 'result', text: 'subtle%20class%20discrimination' })
+(loop_668_sink: BehaviorSink)
+(loop_668_start: BehaviorStart { loopId: 668, loopName: 'The%20Sweater%20Pill%20Loop', given: 'Old%20fabric%20balling%20up%20under%20arms', when: 'lifting%20arms', then: 'it%20signals%20%22Poverty%22%20or%20%22Neglect%22%20(The%20Threadbare%20Operator)', result: 'subtle%20class%20discrimination', operatorName: 'The%20Threadbare%20Operator', operatorMechanism: 'it%20signals%20%22Poverty%22%20or%20%22Neglect%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_668_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_668_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Poverty%22%20or%20%22Neglect%22%20(The%20Threadbare%20Operator)' })
+(loop_668_verdict: BehaviorVerdict { loopId: 668, loopName: 'The%20Sweater%20Pill%20Loop', then: 'it%20signals%20%22Poverty%22%20or%20%22Neglect%22%20(The%20Threadbare%20Operator)', result: 'subtle%20class%20discrimination', operatorName: 'The%20Threadbare%20Operator', operatorMechanism: 'it%20signals%20%22Poverty%22%20or%20%22Neglect%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_668_when_gate: BehaviorAssess { stage: 'when', text: 'lifting%20arms' })
+
+// Topology
+(loop_668_start)-[:PROCESS]->(loop_668_given_gate)
+(loop_668_given_gate)-[:PROCESS { case: "ok" }]->(loop_668_when_gate)
+(loop_668_given_gate)-[:PROCESS { case: "err" }]->(loop_668_inactive)
+(loop_668_when_gate)-[:PROCESS { case: "ok" }]->(loop_668_context)
+(loop_668_when_gate)-[:PROCESS { case: "err" }]->(loop_668_inactive)
+(loop_668_context)-[:FORK { strategy: "behavior-branches" }]->(loop_668_context_branch | loop_668_then_branch | loop_668_operator_branch | loop_668_result_branch | loop_668_taxonomy_branch | loop_668_intervention_recognize | loop_668_intervention_interdict | loop_668_intervention_minimize)
+(loop_668_context_branch | loop_668_then_branch | loop_668_operator_branch | loop_668_result_branch | loop_668_taxonomy_branch | loop_668_intervention_recognize | loop_668_intervention_interdict | loop_668_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_668_verdict)
+(loop_668_inactive)-[:PROCESS]->(loop_668_sink)
+(loop_668_verdict)-[:PROCESS]->(loop_668_sink)
+(loop_668_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_668_then_branch)
+(loop_668_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_668_then_branch)
+(loop_668_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_668_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-292.gg
+// Executable Gnosis projection for The Dry Mouth Loop.
+
+// Nodes
+(loop_292_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_292_context_branch: BehaviorEmit { emission: 'context' })
+(loop_292_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20salivary%20flow%20(medication%20or%20anxiety)' })
+(loop_292_inactive: BehaviorTerminal { loopId: 292, loopName: 'The%20Dry%20Mouth%20Loop' })
+(loop_292_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_292_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_292_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_292_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%2FNerves%20Operator', mechanism: 'audible%20clicking%2Fsmacking%20noises%20occur' })
+(loop_292_result_branch: BehaviorEmit { emission: 'result', text: 'the%20audience%20focusing%20on%20the%20*sound*%20rather%20than%20the%20*content*' })
+(loop_292_sink: BehaviorSink)
+(loop_292_start: BehaviorStart { loopId: 292, loopName: 'The%20Dry%20Mouth%20Loop', given: 'Low%20salivary%20flow%20(medication%20or%20anxiety)', when: 'public%20speaking', then: 'audible%20clicking%2Fsmacking%20noises%20occur%20(The%20Disgust%2FNerves%20Operator)', result: 'the%20audience%20focusing%20on%20the%20*sound*%20rather%20than%20the%20*content*', operatorName: 'The%20Disgust%2FNerves%20Operator', operatorMechanism: 'audible%20clicking%2Fsmacking%20noises%20occur', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_292_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_292_then_branch: BehaviorEmit { emission: 'then', text: 'audible%20clicking%2Fsmacking%20noises%20occur%20(The%20Disgust%2FNerves%20Operator)' })
+(loop_292_verdict: BehaviorVerdict { loopId: 292, loopName: 'The%20Dry%20Mouth%20Loop', then: 'audible%20clicking%2Fsmacking%20noises%20occur%20(The%20Disgust%2FNerves%20Operator)', result: 'the%20audience%20focusing%20on%20the%20*sound*%20rather%20than%20the%20*content*', operatorName: 'The%20Disgust%2FNerves%20Operator', operatorMechanism: 'audible%20clicking%2Fsmacking%20noises%20occur', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_292_when_gate: BehaviorAssess { stage: 'when', text: 'public%20speaking' })
+
+// Topology
+(loop_292_start)-[:PROCESS]->(loop_292_given_gate)
+(loop_292_given_gate)-[:PROCESS { case: "ok" }]->(loop_292_when_gate)
+(loop_292_given_gate)-[:PROCESS { case: "err" }]->(loop_292_inactive)
+(loop_292_when_gate)-[:PROCESS { case: "ok" }]->(loop_292_context)
+(loop_292_when_gate)-[:PROCESS { case: "err" }]->(loop_292_inactive)
+(loop_292_context)-[:FORK { strategy: "behavior-branches" }]->(loop_292_context_branch | loop_292_then_branch | loop_292_operator_branch | loop_292_result_branch | loop_292_taxonomy_branch | loop_292_intervention_recognize | loop_292_intervention_interdict | loop_292_intervention_minimize)
+(loop_292_context_branch | loop_292_then_branch | loop_292_operator_branch | loop_292_result_branch | loop_292_taxonomy_branch | loop_292_intervention_recognize | loop_292_intervention_interdict | loop_292_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_292_verdict)
+(loop_292_inactive)-[:PROCESS]->(loop_292_sink)
+(loop_292_verdict)-[:PROCESS]->(loop_292_sink)
+(loop_292_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_292_then_branch)
+(loop_292_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_292_then_branch)
+(loop_292_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_292_then_branch)

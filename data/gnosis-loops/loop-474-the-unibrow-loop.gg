@@ -1,0 +1,33 @@
+// behavioral-loop-474.gg
+// Executable Gnosis projection for The Unibrow Loop.
+
+// Nodes
+(loop_474_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_474_context_branch: BehaviorEmit { emission: 'context' })
+(loop_474_given_gate: BehaviorAssess { stage: 'given', text: 'Confluent%20eyebrows' })
+(loop_474_inactive: BehaviorTerminal { loopId: 474, loopName: 'The%20Unibrow%20Loop' })
+(loop_474_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_474_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_474_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_474_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Bert%20Operator', mechanism: 'it%20acts%20as%20a%20focal%20point%20of%20%22Otherness%22' })
+(loop_474_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20viewed%20as%20%22Foreign%22%20or%20%22Unkempt.%22' })
+(loop_474_sink: BehaviorSink)
+(loop_474_start: BehaviorStart { loopId: 474, loopName: 'The%20Unibrow%20Loop', given: 'Confluent%20eyebrows', when: 'face-to-face', then: 'it%20acts%20as%20a%20focal%20point%20of%20%22Otherness%22%20(The%20Bert%20Operator)', result: 'the%20individual%20being%20viewed%20as%20%22Foreign%22%20or%20%22Unkempt.%22', operatorName: 'The%20Bert%20Operator', operatorMechanism: 'it%20acts%20as%20a%20focal%20point%20of%20%22Otherness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_474_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_474_then_branch: BehaviorEmit { emission: 'then', text: 'it%20acts%20as%20a%20focal%20point%20of%20%22Otherness%22%20(The%20Bert%20Operator)' })
+(loop_474_verdict: BehaviorVerdict { loopId: 474, loopName: 'The%20Unibrow%20Loop', then: 'it%20acts%20as%20a%20focal%20point%20of%20%22Otherness%22%20(The%20Bert%20Operator)', result: 'the%20individual%20being%20viewed%20as%20%22Foreign%22%20or%20%22Unkempt.%22', operatorName: 'The%20Bert%20Operator', operatorMechanism: 'it%20acts%20as%20a%20focal%20point%20of%20%22Otherness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_474_when_gate: BehaviorAssess { stage: 'when', text: 'face-to-face' })
+
+// Topology
+(loop_474_start)-[:PROCESS]->(loop_474_given_gate)
+(loop_474_given_gate)-[:PROCESS { case: "ok" }]->(loop_474_when_gate)
+(loop_474_given_gate)-[:PROCESS { case: "err" }]->(loop_474_inactive)
+(loop_474_when_gate)-[:PROCESS { case: "ok" }]->(loop_474_context)
+(loop_474_when_gate)-[:PROCESS { case: "err" }]->(loop_474_inactive)
+(loop_474_context)-[:FORK { strategy: "behavior-branches" }]->(loop_474_context_branch | loop_474_then_branch | loop_474_operator_branch | loop_474_result_branch | loop_474_taxonomy_branch | loop_474_intervention_recognize | loop_474_intervention_interdict | loop_474_intervention_minimize)
+(loop_474_context_branch | loop_474_then_branch | loop_474_operator_branch | loop_474_result_branch | loop_474_taxonomy_branch | loop_474_intervention_recognize | loop_474_intervention_interdict | loop_474_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_474_verdict)
+(loop_474_inactive)-[:PROCESS]->(loop_474_sink)
+(loop_474_verdict)-[:PROCESS]->(loop_474_sink)
+(loop_474_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_474_then_branch)
+(loop_474_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_474_then_branch)
+(loop_474_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_474_then_branch)

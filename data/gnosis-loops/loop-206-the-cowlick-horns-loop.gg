@@ -1,0 +1,31 @@
+// behavioral-loop-206.gg
+// Executable Gnosis projection for The Cowlick Horns Loop.
+
+// Nodes
+(loop_206_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_206_context_branch: BehaviorEmit { emission: 'context' })
+(loop_206_given_gate: BehaviorAssess { stage: 'given', text: 'Sharp%20V-shaped%20hairline' })
+(loop_206_inactive: BehaviorTerminal { loopId: 206, loopName: 'The%20Cowlick%20Horns%20Loop' })
+(loop_206_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_206_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_206_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stereotype%20Operator', mechanism: 'observers%20subconsciously%20Typecast%20as%20%22Untrustworthy%22%20or%20%22Machiavellian%22' })
+(loop_206_result_branch: BehaviorEmit { emission: 'result', text: 'people%20keeping%20their%20guard%20up%2C%20making%20**Trust%20Building**%20harder' })
+(loop_206_sink: BehaviorSink)
+(loop_206_start: BehaviorStart { loopId: 206, loopName: 'The%20Cowlick%20Horns%20Loop', given: 'Sharp%20V-shaped%20hairline', when: 'combined%20with%20thin%20features', then: 'observers%20subconsciously%20Typecast%20as%20%22Untrustworthy%22%20or%20%22Machiavellian%22%20(The%20Stereotype%20Operator)', result: 'people%20keeping%20their%20guard%20up%2C%20making%20**Trust%20Building**%20harder', operatorName: 'The%20Stereotype%20Operator', operatorMechanism: 'observers%20subconsciously%20Typecast%20as%20%22Untrustworthy%22%20or%20%22Machiavellian%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_206_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_206_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20subconsciously%20Typecast%20as%20%22Untrustworthy%22%20or%20%22Machiavellian%22%20(The%20Stereotype%20Operator)' })
+(loop_206_verdict: BehaviorVerdict { loopId: 206, loopName: 'The%20Cowlick%20Horns%20Loop', then: 'observers%20subconsciously%20Typecast%20as%20%22Untrustworthy%22%20or%20%22Machiavellian%22%20(The%20Stereotype%20Operator)', result: 'people%20keeping%20their%20guard%20up%2C%20making%20**Trust%20Building**%20harder', operatorName: 'The%20Stereotype%20Operator', operatorMechanism: 'observers%20subconsciously%20Typecast%20as%20%22Untrustworthy%22%20or%20%22Machiavellian%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_206_when_gate: BehaviorAssess { stage: 'when', text: 'combined%20with%20thin%20features' })
+
+// Topology
+(loop_206_start)-[:PROCESS]->(loop_206_given_gate)
+(loop_206_given_gate)-[:PROCESS { case: "ok" }]->(loop_206_when_gate)
+(loop_206_given_gate)-[:PROCESS { case: "err" }]->(loop_206_inactive)
+(loop_206_when_gate)-[:PROCESS { case: "ok" }]->(loop_206_context)
+(loop_206_when_gate)-[:PROCESS { case: "err" }]->(loop_206_inactive)
+(loop_206_context)-[:FORK { strategy: "behavior-branches" }]->(loop_206_context_branch | loop_206_then_branch | loop_206_operator_branch | loop_206_result_branch | loop_206_taxonomy_branch | loop_206_intervention_recognize | loop_206_intervention_leverage)
+(loop_206_context_branch | loop_206_then_branch | loop_206_operator_branch | loop_206_result_branch | loop_206_taxonomy_branch | loop_206_intervention_recognize | loop_206_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_206_verdict)
+(loop_206_inactive)-[:PROCESS]->(loop_206_sink)
+(loop_206_verdict)-[:PROCESS]->(loop_206_sink)
+(loop_206_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_206_then_branch)
+(loop_206_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_206_result_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-723.gg
+// Executable Gnosis projection for The Sunburn Loop.
+
+// Nodes
+(loop_723_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_723_context_branch: BehaviorEmit { emission: 'context' })
+(loop_723_given_gate: BehaviorAssess { stage: 'given', text: 'Bright%20red%20skin%20tone%20(acute)' })
+(loop_723_inactive: BehaviorTerminal { loopId: 723, loopName: 'The%20Sunburn%20Loop' })
+(loop_723_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_723_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_723_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_723_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Burn%20Operator', mechanism: 'it%20signals%20%22Vacation%20Mode%22%20or%20%22Carelessness%22' })
+(loop_723_result_branch: BehaviorEmit { emission: 'result', text: 'temporary%20loss%20of%20%22Serious%22%20status' })
+(loop_723_sink: BehaviorSink)
+(loop_723_start: BehaviorStart { loopId: 723, loopName: 'The%20Sunburn%20Loop', given: 'Bright%20red%20skin%20tone%20(acute)', when: 'in%20a%20professional%20meeting', then: 'it%20signals%20%22Vacation%20Mode%22%20or%20%22Carelessness%22%20(The%20Burn%20Operator)', result: 'temporary%20loss%20of%20%22Serious%22%20status', operatorName: 'The%20Burn%20Operator', operatorMechanism: 'it%20signals%20%22Vacation%20Mode%22%20or%20%22Carelessness%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_723_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_723_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Vacation%20Mode%22%20or%20%22Carelessness%22%20(The%20Burn%20Operator)' })
+(loop_723_verdict: BehaviorVerdict { loopId: 723, loopName: 'The%20Sunburn%20Loop', then: 'it%20signals%20%22Vacation%20Mode%22%20or%20%22Carelessness%22%20(The%20Burn%20Operator)', result: 'temporary%20loss%20of%20%22Serious%22%20status', operatorName: 'The%20Burn%20Operator', operatorMechanism: 'it%20signals%20%22Vacation%20Mode%22%20or%20%22Carelessness%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_723_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20professional%20meeting' })
+
+// Topology
+(loop_723_start)-[:PROCESS]->(loop_723_given_gate)
+(loop_723_given_gate)-[:PROCESS { case: "ok" }]->(loop_723_when_gate)
+(loop_723_given_gate)-[:PROCESS { case: "err" }]->(loop_723_inactive)
+(loop_723_when_gate)-[:PROCESS { case: "ok" }]->(loop_723_context)
+(loop_723_when_gate)-[:PROCESS { case: "err" }]->(loop_723_inactive)
+(loop_723_context)-[:FORK { strategy: "behavior-branches" }]->(loop_723_context_branch | loop_723_then_branch | loop_723_operator_branch | loop_723_result_branch | loop_723_taxonomy_branch | loop_723_intervention_recognize | loop_723_intervention_interdict | loop_723_intervention_minimize)
+(loop_723_context_branch | loop_723_then_branch | loop_723_operator_branch | loop_723_result_branch | loop_723_taxonomy_branch | loop_723_intervention_recognize | loop_723_intervention_interdict | loop_723_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_723_verdict)
+(loop_723_inactive)-[:PROCESS]->(loop_723_sink)
+(loop_723_verdict)-[:PROCESS]->(loop_723_sink)
+(loop_723_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_723_then_branch)
+(loop_723_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_723_then_branch)
+(loop_723_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_723_then_branch)

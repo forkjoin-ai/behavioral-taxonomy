@@ -1,0 +1,33 @@
+// behavioral-loop-927.gg
+// Executable Gnosis projection for The Alfalfa Loop.
+
+// Nodes
+(loop_927_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_927_context_branch: BehaviorEmit { emission: 'context' })
+(loop_927_given_gate: BehaviorAssess { stage: 'given', text: 'Stubborn%20tuft%20of%20hair%20standing%20vertical' })
+(loop_927_inactive: BehaviorTerminal { loopId: 927, loopName: 'The%20Alfalfa%20Loop' })
+(loop_927_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_927_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_927_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_927_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rascal%20Operator', mechanism: 'the%20tuft%20adds%20a%20%22Comical%22%20element' })
+(loop_927_result_branch: BehaviorEmit { emission: 'result', text: 'difficulty%20maintaining%20a%20severe%20persona' })
+(loop_927_sink: BehaviorSink)
+(loop_927_start: BehaviorStart { loopId: 927, loopName: 'The%20Alfalfa%20Loop', given: 'Stubborn%20tuft%20of%20hair%20standing%20vertical', when: 'trying%20to%20look%20serious', then: 'the%20tuft%20adds%20a%20%22Comical%22%20element%20(The%20Rascal%20Operator)', result: 'difficulty%20maintaining%20a%20severe%20persona', operatorName: 'The%20Rascal%20Operator', operatorMechanism: 'the%20tuft%20adds%20a%20%22Comical%22%20element', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_927_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_927_then_branch: BehaviorEmit { emission: 'then', text: 'the%20tuft%20adds%20a%20%22Comical%22%20element%20(The%20Rascal%20Operator)' })
+(loop_927_verdict: BehaviorVerdict { loopId: 927, loopName: 'The%20Alfalfa%20Loop', then: 'the%20tuft%20adds%20a%20%22Comical%22%20element%20(The%20Rascal%20Operator)', result: 'difficulty%20maintaining%20a%20severe%20persona', operatorName: 'The%20Rascal%20Operator', operatorMechanism: 'the%20tuft%20adds%20a%20%22Comical%22%20element', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_927_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20to%20look%20serious' })
+
+// Topology
+(loop_927_start)-[:PROCESS]->(loop_927_given_gate)
+(loop_927_given_gate)-[:PROCESS { case: "ok" }]->(loop_927_when_gate)
+(loop_927_given_gate)-[:PROCESS { case: "err" }]->(loop_927_inactive)
+(loop_927_when_gate)-[:PROCESS { case: "ok" }]->(loop_927_context)
+(loop_927_when_gate)-[:PROCESS { case: "err" }]->(loop_927_inactive)
+(loop_927_context)-[:FORK { strategy: "behavior-branches" }]->(loop_927_context_branch | loop_927_then_branch | loop_927_operator_branch | loop_927_result_branch | loop_927_taxonomy_branch | loop_927_intervention_recognize | loop_927_intervention_interdict | loop_927_intervention_minimize)
+(loop_927_context_branch | loop_927_then_branch | loop_927_operator_branch | loop_927_result_branch | loop_927_taxonomy_branch | loop_927_intervention_recognize | loop_927_intervention_interdict | loop_927_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_927_verdict)
+(loop_927_inactive)-[:PROCESS]->(loop_927_sink)
+(loop_927_verdict)-[:PROCESS]->(loop_927_sink)
+(loop_927_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_927_then_branch)
+(loop_927_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_927_then_branch)
+(loop_927_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_927_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-680.gg
+// Executable Gnosis projection for The Mouth Click Loop.
+
+// Nodes
+(loop_680_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_680_context_branch: BehaviorEmit { emission: 'context' })
+(loop_680_given_gate: BehaviorAssess { stage: 'given', text: 'Sticky%20saliva%20(Xerostomia)' })
+(loop_680_inactive: BehaviorTerminal { loopId: 680, loopName: 'The%20Mouth%20Click%20Loop' })
+(loop_680_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_680_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_680_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_680_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sticky%20Operator', mechanism: 'an%20audible%20*smack*%20is%20heard' })
+(loop_680_result_branch: BehaviorEmit { emission: 'result', text: 'listener%20irritation%20(Misophonia)' })
+(loop_680_sink: BehaviorSink)
+(loop_680_start: BehaviorStart { loopId: 680, loopName: 'The%20Mouth%20Click%20Loop', given: 'Sticky%20saliva%20(Xerostomia)', when: 'opening%20the%20mouth', then: 'an%20audible%20*smack*%20is%20heard%20(The%20Sticky%20Operator)', result: 'listener%20irritation%20(Misophonia)', operatorName: 'The%20Sticky%20Operator', operatorMechanism: 'an%20audible%20*smack*%20is%20heard', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_680_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_680_then_branch: BehaviorEmit { emission: 'then', text: 'an%20audible%20*smack*%20is%20heard%20(The%20Sticky%20Operator)' })
+(loop_680_verdict: BehaviorVerdict { loopId: 680, loopName: 'The%20Mouth%20Click%20Loop', then: 'an%20audible%20*smack*%20is%20heard%20(The%20Sticky%20Operator)', result: 'listener%20irritation%20(Misophonia)', operatorName: 'The%20Sticky%20Operator', operatorMechanism: 'an%20audible%20*smack*%20is%20heard', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_680_when_gate: BehaviorAssess { stage: 'when', text: 'opening%20the%20mouth' })
+
+// Topology
+(loop_680_start)-[:PROCESS]->(loop_680_given_gate)
+(loop_680_given_gate)-[:PROCESS { case: "ok" }]->(loop_680_when_gate)
+(loop_680_given_gate)-[:PROCESS { case: "err" }]->(loop_680_inactive)
+(loop_680_when_gate)-[:PROCESS { case: "ok" }]->(loop_680_context)
+(loop_680_when_gate)-[:PROCESS { case: "err" }]->(loop_680_inactive)
+(loop_680_context)-[:FORK { strategy: "behavior-branches" }]->(loop_680_context_branch | loop_680_then_branch | loop_680_operator_branch | loop_680_result_branch | loop_680_taxonomy_branch | loop_680_intervention_recognize | loop_680_intervention_interdict | loop_680_intervention_minimize)
+(loop_680_context_branch | loop_680_then_branch | loop_680_operator_branch | loop_680_result_branch | loop_680_taxonomy_branch | loop_680_intervention_recognize | loop_680_intervention_interdict | loop_680_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_680_verdict)
+(loop_680_inactive)-[:PROCESS]->(loop_680_sink)
+(loop_680_verdict)-[:PROCESS]->(loop_680_sink)
+(loop_680_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_680_then_branch)
+(loop_680_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_680_then_branch)
+(loop_680_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_680_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-396.gg
+// Executable Gnosis projection for The Eye Rub Loop.
+
+// Nodes
+(loop_396_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_396_context_branch: BehaviorEmit { emission: 'context' })
+(loop_396_given_gate: BehaviorAssess { stage: 'given', text: 'Vigorously%20rubbing%20eyes' })
+(loop_396_inactive: BehaviorTerminal { loopId: 396, loopName: 'The%20Eye%20Rub%20Loop' })
+(loop_396_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_396_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_396_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_396_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dismissal%20Operator', mechanism: 'it%20signals%20%22Fatigue%22%20or%20%22Refusal%20to%20see%22' })
+(loop_396_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20feeling%20insulted%20and%20disengaging' })
+(loop_396_sink: BehaviorSink)
+(loop_396_start: BehaviorStart { loopId: 396, loopName: 'The%20Eye%20Rub%20Loop', given: 'Vigorously%20rubbing%20eyes', when: 'listening%20to%20a%20pitch', then: 'it%20signals%20%22Fatigue%22%20or%20%22Refusal%20to%20see%22%20(The%20Dismissal%20Operator)', result: 'the%20speaker%20feeling%20insulted%20and%20disengaging', operatorName: 'The%20Dismissal%20Operator', operatorMechanism: 'it%20signals%20%22Fatigue%22%20or%20%22Refusal%20to%20see%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_396_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_396_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Fatigue%22%20or%20%22Refusal%20to%20see%22%20(The%20Dismissal%20Operator)' })
+(loop_396_verdict: BehaviorVerdict { loopId: 396, loopName: 'The%20Eye%20Rub%20Loop', then: 'it%20signals%20%22Fatigue%22%20or%20%22Refusal%20to%20see%22%20(The%20Dismissal%20Operator)', result: 'the%20speaker%20feeling%20insulted%20and%20disengaging', operatorName: 'The%20Dismissal%20Operator', operatorMechanism: 'it%20signals%20%22Fatigue%22%20or%20%22Refusal%20to%20see%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_396_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20to%20a%20pitch' })
+
+// Topology
+(loop_396_start)-[:PROCESS]->(loop_396_given_gate)
+(loop_396_given_gate)-[:PROCESS { case: "ok" }]->(loop_396_when_gate)
+(loop_396_given_gate)-[:PROCESS { case: "err" }]->(loop_396_inactive)
+(loop_396_when_gate)-[:PROCESS { case: "ok" }]->(loop_396_context)
+(loop_396_when_gate)-[:PROCESS { case: "err" }]->(loop_396_inactive)
+(loop_396_context)-[:FORK { strategy: "behavior-branches" }]->(loop_396_context_branch | loop_396_then_branch | loop_396_operator_branch | loop_396_result_branch | loop_396_taxonomy_branch | loop_396_intervention_recognize | loop_396_intervention_interdict | loop_396_intervention_minimize)
+(loop_396_context_branch | loop_396_then_branch | loop_396_operator_branch | loop_396_result_branch | loop_396_taxonomy_branch | loop_396_intervention_recognize | loop_396_intervention_interdict | loop_396_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_396_verdict)
+(loop_396_inactive)-[:PROCESS]->(loop_396_sink)
+(loop_396_verdict)-[:PROCESS]->(loop_396_sink)
+(loop_396_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_396_then_branch)
+(loop_396_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_396_then_branch)
+(loop_396_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_396_then_branch)

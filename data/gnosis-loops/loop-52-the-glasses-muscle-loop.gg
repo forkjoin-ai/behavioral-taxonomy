@@ -1,0 +1,33 @@
+// behavioral-loop-52.gg
+// Executable Gnosis projection for The Glasses-Muscle Loop.
+
+// Nodes
+(loop_52_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_52_context_branch: BehaviorEmit { emission: 'context' })
+(loop_52_given_gate: BehaviorAssess { stage: 'given', text: 'Mesomorphy%20%2B%20Corrective%20Lenses' })
+(loop_52_inactive: BehaviorTerminal { loopId: 52, loopName: 'The%20Glasses-Muscle%20Loop' })
+(loop_52_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_52_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_52_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_52_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Alliance%20Operator', mechanism: 'the%20physical%20threat%20is%20neutralized%20by%20the%20glasses%2C%20creating%20a%20%22Safe%20Protector%22%20vibe' })
+(loop_52_result_branch: BehaviorEmit { emission: 'result', text: 'high%20selection%20for%20**Team%20Leadership**%20roles' })
+(loop_52_sink: BehaviorSink)
+(loop_52_start: BehaviorStart { loopId: 52, loopName: 'The%20Glasses-Muscle%20Loop', given: 'Mesomorphy%20%2B%20Corrective%20Lenses', when: 'in%20an%20intellectual%20setting', then: 'the%20physical%20threat%20is%20neutralized%20by%20the%20glasses%2C%20creating%20a%20%22Safe%20Protector%22%20vibe%20(The%20Alliance%20Operator)', result: 'high%20selection%20for%20**Team%20Leadership**%20roles', operatorName: 'The%20Alliance%20Operator', operatorMechanism: 'the%20physical%20threat%20is%20neutralized%20by%20the%20glasses%2C%20creating%20a%20%22Safe%20Protector%22%20vibe', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_52_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_52_then_branch: BehaviorEmit { emission: 'then', text: 'the%20physical%20threat%20is%20neutralized%20by%20the%20glasses%2C%20creating%20a%20%22Safe%20Protector%22%20vibe%20(The%20Alliance%20Operator)' })
+(loop_52_verdict: BehaviorVerdict { loopId: 52, loopName: 'The%20Glasses-Muscle%20Loop', then: 'the%20physical%20threat%20is%20neutralized%20by%20the%20glasses%2C%20creating%20a%20%22Safe%20Protector%22%20vibe%20(The%20Alliance%20Operator)', result: 'high%20selection%20for%20**Team%20Leadership**%20roles', operatorName: 'The%20Alliance%20Operator', operatorMechanism: 'the%20physical%20threat%20is%20neutralized%20by%20the%20glasses%2C%20creating%20a%20%22Safe%20Protector%22%20vibe', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_52_when_gate: BehaviorAssess { stage: 'when', text: 'in%20an%20intellectual%20setting' })
+
+// Topology
+(loop_52_start)-[:PROCESS]->(loop_52_given_gate)
+(loop_52_given_gate)-[:PROCESS { case: "ok" }]->(loop_52_when_gate)
+(loop_52_given_gate)-[:PROCESS { case: "err" }]->(loop_52_inactive)
+(loop_52_when_gate)-[:PROCESS { case: "ok" }]->(loop_52_context)
+(loop_52_when_gate)-[:PROCESS { case: "err" }]->(loop_52_inactive)
+(loop_52_context)-[:FORK { strategy: "behavior-branches" }]->(loop_52_context_branch | loop_52_then_branch | loop_52_operator_branch | loop_52_result_branch | loop_52_taxonomy_branch | loop_52_intervention_recognize | loop_52_intervention_interdict | loop_52_intervention_minimize)
+(loop_52_context_branch | loop_52_then_branch | loop_52_operator_branch | loop_52_result_branch | loop_52_taxonomy_branch | loop_52_intervention_recognize | loop_52_intervention_interdict | loop_52_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_52_verdict)
+(loop_52_inactive)-[:PROCESS]->(loop_52_sink)
+(loop_52_verdict)-[:PROCESS]->(loop_52_sink)
+(loop_52_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_52_then_branch)
+(loop_52_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_52_then_branch)
+(loop_52_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_52_then_branch)

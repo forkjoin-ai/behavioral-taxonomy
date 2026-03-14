@@ -1,0 +1,33 @@
+// behavioral-loop-10005.gg
+// Executable Gnosis projection for The Negative Attention Loop.
+
+// Nodes
+(loop_10005_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_10005_context_branch: BehaviorEmit { emission: 'context' })
+(loop_10005_given_gate: BehaviorAssess { stage: 'given', text: 'Subject%20feels%20invisible%20or%20powerless' })
+(loop_10005_inactive: BehaviorTerminal { loopId: 10005, loopName: 'The%20Negative%20Attention%20Loop' })
+(loop_10005_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_10005_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_10005_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_10005_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_10005_result_branch: BehaviorEmit { emission: 'result', text: 'Subject%20feels%20' })
+(loop_10005_sink: BehaviorSink)
+(loop_10005_start: BehaviorStart { loopId: 10005, loopName: 'The%20Negative%20Attention%20Loop', given: 'Subject%20feels%20invisible%20or%20powerless', when: 'Subject%20posts%20inflammatory%2Ftoxic%20content', then: 'Community%20reacts%20with%20outrage%20(Comments%2C%20Downvotes)', result: 'Subject%20feels%20', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_10005_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_10005_then_branch: BehaviorEmit { emission: 'then', text: 'Community%20reacts%20with%20outrage%20(Comments%2C%20Downvotes)' })
+(loop_10005_verdict: BehaviorVerdict { loopId: 10005, loopName: 'The%20Negative%20Attention%20Loop', then: 'Community%20reacts%20with%20outrage%20(Comments%2C%20Downvotes)', result: 'Subject%20feels%20', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_10005_when_gate: BehaviorAssess { stage: 'when', text: 'Subject%20posts%20inflammatory%2Ftoxic%20content' })
+
+// Topology
+(loop_10005_start)-[:PROCESS]->(loop_10005_given_gate)
+(loop_10005_given_gate)-[:PROCESS { case: "ok" }]->(loop_10005_when_gate)
+(loop_10005_given_gate)-[:PROCESS { case: "err" }]->(loop_10005_inactive)
+(loop_10005_when_gate)-[:PROCESS { case: "ok" }]->(loop_10005_context)
+(loop_10005_when_gate)-[:PROCESS { case: "err" }]->(loop_10005_inactive)
+(loop_10005_context)-[:FORK { strategy: "behavior-branches" }]->(loop_10005_context_branch | loop_10005_then_branch | loop_10005_operator_branch | loop_10005_result_branch | loop_10005_taxonomy_branch | loop_10005_intervention_recognize | loop_10005_intervention_interdict | loop_10005_intervention_minimize)
+(loop_10005_context_branch | loop_10005_then_branch | loop_10005_operator_branch | loop_10005_result_branch | loop_10005_taxonomy_branch | loop_10005_intervention_recognize | loop_10005_intervention_interdict | loop_10005_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_10005_verdict)
+(loop_10005_inactive)-[:PROCESS]->(loop_10005_sink)
+(loop_10005_verdict)-[:PROCESS]->(loop_10005_sink)
+(loop_10005_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_10005_then_branch)
+(loop_10005_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_10005_then_branch)
+(loop_10005_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_10005_then_branch)

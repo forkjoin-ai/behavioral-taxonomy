@@ -1,0 +1,33 @@
+// behavioral-loop-156.gg
+// Executable Gnosis projection for The Wide Stance Loop.
+
+// Nodes
+(loop_156_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_156_context_branch: BehaviorEmit { emission: 'context' })
+(loop_156_given_gate: BehaviorAssess { stage: 'given', text: 'Broad%20base%20of%20gait' })
+(loop_156_inactive: BehaviorTerminal { loopId: 156, loopName: 'The%20Wide%20Stance%20Loop' })
+(loop_156_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_156_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_156_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_156_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Authority%20Operator', mechanism: 'the%20individual%20occupies%20more%20territory' })
+(loop_156_result_branch: BehaviorEmit { emission: 'result', text: 'feeling%20%22Grounded%22%20and%20harder%20to%20physically%2Fsocially%20push%20around' })
+(loop_156_sink: BehaviorSink)
+(loop_156_start: BehaviorStart { loopId: 156, loopName: 'The%20Wide%20Stance%20Loop', given: 'Broad%20base%20of%20gait', when: 'standing%20still', then: 'the%20individual%20occupies%20more%20territory%20(The%20Authority%20Operator)', result: 'feeling%20%22Grounded%22%20and%20harder%20to%20physically%2Fsocially%20push%20around', operatorName: 'The%20Authority%20Operator', operatorMechanism: 'the%20individual%20occupies%20more%20territory', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_156_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_156_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20occupies%20more%20territory%20(The%20Authority%20Operator)' })
+(loop_156_verdict: BehaviorVerdict { loopId: 156, loopName: 'The%20Wide%20Stance%20Loop', then: 'the%20individual%20occupies%20more%20territory%20(The%20Authority%20Operator)', result: 'feeling%20%22Grounded%22%20and%20harder%20to%20physically%2Fsocially%20push%20around', operatorName: 'The%20Authority%20Operator', operatorMechanism: 'the%20individual%20occupies%20more%20territory', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_156_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20still' })
+
+// Topology
+(loop_156_start)-[:PROCESS]->(loop_156_given_gate)
+(loop_156_given_gate)-[:PROCESS { case: "ok" }]->(loop_156_when_gate)
+(loop_156_given_gate)-[:PROCESS { case: "err" }]->(loop_156_inactive)
+(loop_156_when_gate)-[:PROCESS { case: "ok" }]->(loop_156_context)
+(loop_156_when_gate)-[:PROCESS { case: "err" }]->(loop_156_inactive)
+(loop_156_context)-[:FORK { strategy: "behavior-branches" }]->(loop_156_context_branch | loop_156_then_branch | loop_156_operator_branch | loop_156_result_branch | loop_156_taxonomy_branch | loop_156_intervention_recognize | loop_156_intervention_interdict | loop_156_intervention_minimize)
+(loop_156_context_branch | loop_156_then_branch | loop_156_operator_branch | loop_156_result_branch | loop_156_taxonomy_branch | loop_156_intervention_recognize | loop_156_intervention_interdict | loop_156_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_156_verdict)
+(loop_156_inactive)-[:PROCESS]->(loop_156_sink)
+(loop_156_verdict)-[:PROCESS]->(loop_156_sink)
+(loop_156_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_156_then_branch)
+(loop_156_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_156_then_branch)
+(loop_156_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_156_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-252.gg
+// Executable Gnosis projection for The No Neck Loop.
+
+// Nodes
+(loop_252_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_252_context_branch: BehaviorEmit { emission: 'context' })
+(loop_252_given_gate: BehaviorAssess { stage: 'given', text: 'High%20trapezius%20insertion%2FShort%20neck' })
+(loop_252_inactive: BehaviorTerminal { loopId: 252, loopName: 'The%20No%20Neck%20Loop' })
+(loop_252_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_252_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_252_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_252_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intimidation%20Operator', mechanism: 'the%20look%20is%20%22Thug-like%22%20or%20%22Bouncer-esque%22' })
+(loop_252_result_branch: BehaviorEmit { emission: 'result', text: 'people%20avoiding%20physical%20confrontation%20at%20all%20costs' })
+(loop_252_sink: BehaviorSink)
+(loop_252_start: BehaviorStart { loopId: 252, loopName: 'The%20No%20Neck%20Loop', given: 'High%20trapezius%20insertion%2FShort%20neck', when: 'wearing%20a%20suit', then: 'the%20look%20is%20%22Thug-like%22%20or%20%22Bouncer-esque%22%20(The%20Intimidation%20Operator)', result: 'people%20avoiding%20physical%20confrontation%20at%20all%20costs', operatorName: 'The%20Intimidation%20Operator', operatorMechanism: 'the%20look%20is%20%22Thug-like%22%20or%20%22Bouncer-esque%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_252_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_252_then_branch: BehaviorEmit { emission: 'then', text: 'the%20look%20is%20%22Thug-like%22%20or%20%22Bouncer-esque%22%20(The%20Intimidation%20Operator)' })
+(loop_252_verdict: BehaviorVerdict { loopId: 252, loopName: 'The%20No%20Neck%20Loop', then: 'the%20look%20is%20%22Thug-like%22%20or%20%22Bouncer-esque%22%20(The%20Intimidation%20Operator)', result: 'people%20avoiding%20physical%20confrontation%20at%20all%20costs', operatorName: 'The%20Intimidation%20Operator', operatorMechanism: 'the%20look%20is%20%22Thug-like%22%20or%20%22Bouncer-esque%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_252_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20a%20suit' })
+
+// Topology
+(loop_252_start)-[:PROCESS]->(loop_252_given_gate)
+(loop_252_given_gate)-[:PROCESS { case: "ok" }]->(loop_252_when_gate)
+(loop_252_given_gate)-[:PROCESS { case: "err" }]->(loop_252_inactive)
+(loop_252_when_gate)-[:PROCESS { case: "ok" }]->(loop_252_context)
+(loop_252_when_gate)-[:PROCESS { case: "err" }]->(loop_252_inactive)
+(loop_252_context)-[:FORK { strategy: "behavior-branches" }]->(loop_252_context_branch | loop_252_then_branch | loop_252_operator_branch | loop_252_result_branch | loop_252_taxonomy_branch | loop_252_intervention_recognize | loop_252_intervention_interdict | loop_252_intervention_minimize)
+(loop_252_context_branch | loop_252_then_branch | loop_252_operator_branch | loop_252_result_branch | loop_252_taxonomy_branch | loop_252_intervention_recognize | loop_252_intervention_interdict | loop_252_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_252_verdict)
+(loop_252_inactive)-[:PROCESS]->(loop_252_sink)
+(loop_252_verdict)-[:PROCESS]->(loop_252_sink)
+(loop_252_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_252_then_branch)
+(loop_252_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_252_then_branch)
+(loop_252_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_252_then_branch)

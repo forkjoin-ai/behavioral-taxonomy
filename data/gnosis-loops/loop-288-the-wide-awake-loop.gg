@@ -1,0 +1,33 @@
+// behavioral-loop-288.gg
+// Executable Gnosis projection for The Wide Awake Loop.
+
+// Nodes
+(loop_288_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_288_context_branch: BehaviorEmit { emission: 'context' })
+(loop_288_given_gate: BehaviorAssess { stage: 'given', text: 'Large%2C%20protruding%20eyes' })
+(loop_288_inactive: BehaviorTerminal { loopId: 288, loopName: 'The%20Wide%20Awake%20Loop' })
+(loop_288_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_288_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_288_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_288_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'the%20expression%20looks%20%22Intense%22%20or%20%22Shocked%22' })
+(loop_288_result_branch: BehaviorEmit { emission: 'result', text: "speakers%20feeling%20like%20the%20individual%20is%20**Highly%20Engaged**%20(even%20if%20they%20aren't)" })
+(loop_288_sink: BehaviorSink)
+(loop_288_start: BehaviorStart { loopId: 288, loopName: 'The%20Wide%20Awake%20Loop', given: 'Large%2C%20protruding%20eyes', when: 'listening', then: 'the%20expression%20looks%20%22Intense%22%20or%20%22Shocked%22%20(The%20Novelty%20Operator)', result: "speakers%20feeling%20like%20the%20individual%20is%20**Highly%20Engaged**%20(even%20if%20they%20aren't)", operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20expression%20looks%20%22Intense%22%20or%20%22Shocked%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_288_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_288_then_branch: BehaviorEmit { emission: 'then', text: 'the%20expression%20looks%20%22Intense%22%20or%20%22Shocked%22%20(The%20Novelty%20Operator)' })
+(loop_288_verdict: BehaviorVerdict { loopId: 288, loopName: 'The%20Wide%20Awake%20Loop', then: 'the%20expression%20looks%20%22Intense%22%20or%20%22Shocked%22%20(The%20Novelty%20Operator)', result: "speakers%20feeling%20like%20the%20individual%20is%20**Highly%20Engaged**%20(even%20if%20they%20aren't)", operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20expression%20looks%20%22Intense%22%20or%20%22Shocked%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_288_when_gate: BehaviorAssess { stage: 'when', text: 'listening' })
+
+// Topology
+(loop_288_start)-[:PROCESS]->(loop_288_given_gate)
+(loop_288_given_gate)-[:PROCESS { case: "ok" }]->(loop_288_when_gate)
+(loop_288_given_gate)-[:PROCESS { case: "err" }]->(loop_288_inactive)
+(loop_288_when_gate)-[:PROCESS { case: "ok" }]->(loop_288_context)
+(loop_288_when_gate)-[:PROCESS { case: "err" }]->(loop_288_inactive)
+(loop_288_context)-[:FORK { strategy: "behavior-branches" }]->(loop_288_context_branch | loop_288_then_branch | loop_288_operator_branch | loop_288_result_branch | loop_288_taxonomy_branch | loop_288_intervention_recognize | loop_288_intervention_interdict | loop_288_intervention_minimize)
+(loop_288_context_branch | loop_288_then_branch | loop_288_operator_branch | loop_288_result_branch | loop_288_taxonomy_branch | loop_288_intervention_recognize | loop_288_intervention_interdict | loop_288_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_288_verdict)
+(loop_288_inactive)-[:PROCESS]->(loop_288_sink)
+(loop_288_verdict)-[:PROCESS]->(loop_288_sink)
+(loop_288_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_288_then_branch)
+(loop_288_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_288_then_branch)
+(loop_288_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_288_then_branch)

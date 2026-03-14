@@ -1,0 +1,33 @@
+// behavioral-loop-761.gg
+// Executable Gnosis projection for The Chomp Loop.
+
+// Nodes
+(loop_761_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_761_context_branch: BehaviorEmit { emission: 'context' })
+(loop_761_given_gate: BehaviorAssess { stage: 'given', text: 'Crunching%20on%20ice%20(Pagophagia)' })
+(loop_761_inactive: BehaviorTerminal { loopId: 761, loopName: 'The%20Chomp%20Loop' })
+(loop_761_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_761_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_761_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_761_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Iron%20Deficiency%20Operator', mechanism: 'the%20sound%20is%20%22Violent%22%20and%20%22Jarring%22' })
+(loop_761_result_branch: BehaviorEmit { emission: 'result', text: 'extreme%20irritation%20from%20coworkers' })
+(loop_761_sink: BehaviorSink)
+(loop_761_start: BehaviorStart { loopId: 761, loopName: 'The%20Chomp%20Loop', given: 'Crunching%20on%20ice%20(Pagophagia)', when: 'in%20a%20quiet%20office', then: 'the%20sound%20is%20%22Violent%22%20and%20%22Jarring%22%20(The%20Iron%20Deficiency%20Operator)', result: 'extreme%20irritation%20from%20coworkers', operatorName: 'The%20Iron%20Deficiency%20Operator', operatorMechanism: 'the%20sound%20is%20%22Violent%22%20and%20%22Jarring%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_761_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_761_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20is%20%22Violent%22%20and%20%22Jarring%22%20(The%20Iron%20Deficiency%20Operator)' })
+(loop_761_verdict: BehaviorVerdict { loopId: 761, loopName: 'The%20Chomp%20Loop', then: 'the%20sound%20is%20%22Violent%22%20and%20%22Jarring%22%20(The%20Iron%20Deficiency%20Operator)', result: 'extreme%20irritation%20from%20coworkers', operatorName: 'The%20Iron%20Deficiency%20Operator', operatorMechanism: 'the%20sound%20is%20%22Violent%22%20and%20%22Jarring%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_761_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20quiet%20office' })
+
+// Topology
+(loop_761_start)-[:PROCESS]->(loop_761_given_gate)
+(loop_761_given_gate)-[:PROCESS { case: "ok" }]->(loop_761_when_gate)
+(loop_761_given_gate)-[:PROCESS { case: "err" }]->(loop_761_inactive)
+(loop_761_when_gate)-[:PROCESS { case: "ok" }]->(loop_761_context)
+(loop_761_when_gate)-[:PROCESS { case: "err" }]->(loop_761_inactive)
+(loop_761_context)-[:FORK { strategy: "behavior-branches" }]->(loop_761_context_branch | loop_761_then_branch | loop_761_operator_branch | loop_761_result_branch | loop_761_taxonomy_branch | loop_761_intervention_recognize | loop_761_intervention_interdict | loop_761_intervention_minimize)
+(loop_761_context_branch | loop_761_then_branch | loop_761_operator_branch | loop_761_result_branch | loop_761_taxonomy_branch | loop_761_intervention_recognize | loop_761_intervention_interdict | loop_761_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_761_verdict)
+(loop_761_inactive)-[:PROCESS]->(loop_761_sink)
+(loop_761_verdict)-[:PROCESS]->(loop_761_sink)
+(loop_761_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_761_then_branch)
+(loop_761_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_761_then_branch)
+(loop_761_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_761_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-231.gg
+// Executable Gnosis projection for The Squeaker Loop.
+
+// Nodes
+(loop_231_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_231_context_branch: BehaviorEmit { emission: 'context' })
+(loop_231_given_gate: BehaviorAssess { stage: 'given', text: 'Laryngeal%20tension%20under%20stress' })
+(loop_231_inactive: BehaviorTerminal { loopId: 231, loopName: 'The%20Squeaker%20Loop' })
+(loop_231_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_231_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_231_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_231_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Humor%2FImmaturity%20Operator', mechanism: 'the%20voice%20jumps%20an%20octave%2C%20triggering%20mockery' })
+(loop_231_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20avoiding%20conflict%20entirely%20to%20protect%20dignity%20(**Conflict%20Avoidance**)' })
+(loop_231_sink: BehaviorSink)
+(loop_231_start: BehaviorStart { loopId: 231, loopName: 'The%20Squeaker%20Loop', given: 'Laryngeal%20tension%20under%20stress', when: 'challenged%20in%20an%20argument', then: 'the%20voice%20jumps%20an%20octave%2C%20triggering%20mockery%20(The%20Humor%2FImmaturity%20Operator)', result: 'the%20individual%20avoiding%20conflict%20entirely%20to%20protect%20dignity%20(**Conflict%20Avoidance**)', operatorName: 'The%20Humor%2FImmaturity%20Operator', operatorMechanism: 'the%20voice%20jumps%20an%20octave%2C%20triggering%20mockery', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_231_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_231_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20jumps%20an%20octave%2C%20triggering%20mockery%20(The%20Humor%2FImmaturity%20Operator)' })
+(loop_231_verdict: BehaviorVerdict { loopId: 231, loopName: 'The%20Squeaker%20Loop', then: 'the%20voice%20jumps%20an%20octave%2C%20triggering%20mockery%20(The%20Humor%2FImmaturity%20Operator)', result: 'the%20individual%20avoiding%20conflict%20entirely%20to%20protect%20dignity%20(**Conflict%20Avoidance**)', operatorName: 'The%20Humor%2FImmaturity%20Operator', operatorMechanism: 'the%20voice%20jumps%20an%20octave%2C%20triggering%20mockery', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_231_when_gate: BehaviorAssess { stage: 'when', text: 'challenged%20in%20an%20argument' })
+
+// Topology
+(loop_231_start)-[:PROCESS]->(loop_231_given_gate)
+(loop_231_given_gate)-[:PROCESS { case: "ok" }]->(loop_231_when_gate)
+(loop_231_given_gate)-[:PROCESS { case: "err" }]->(loop_231_inactive)
+(loop_231_when_gate)-[:PROCESS { case: "ok" }]->(loop_231_context)
+(loop_231_when_gate)-[:PROCESS { case: "err" }]->(loop_231_inactive)
+(loop_231_context)-[:FORK { strategy: "behavior-branches" }]->(loop_231_context_branch | loop_231_then_branch | loop_231_operator_branch | loop_231_result_branch | loop_231_taxonomy_branch | loop_231_intervention_recognize | loop_231_intervention_interdict | loop_231_intervention_minimize)
+(loop_231_context_branch | loop_231_then_branch | loop_231_operator_branch | loop_231_result_branch | loop_231_taxonomy_branch | loop_231_intervention_recognize | loop_231_intervention_interdict | loop_231_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_231_verdict)
+(loop_231_inactive)-[:PROCESS]->(loop_231_sink)
+(loop_231_verdict)-[:PROCESS]->(loop_231_sink)
+(loop_231_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_231_then_branch)
+(loop_231_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_231_then_branch)
+(loop_231_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_231_then_branch)

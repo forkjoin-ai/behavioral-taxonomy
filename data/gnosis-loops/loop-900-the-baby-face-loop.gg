@@ -1,0 +1,31 @@
+// behavioral-loop-900.gg
+// Executable Gnosis projection for The Baby Face Loop.
+
+// Nodes
+(loop_900_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_900_context_branch: BehaviorEmit { emission: 'context' })
+(loop_900_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20eyes%2C%20round%20face%2C%20small%20chin' })
+(loop_900_inactive: BehaviorTerminal { loopId: 900, loopName: 'The%20Baby%20Face%20Loop' })
+(loop_900_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_900_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_900_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cherub%20Operator', mechanism: 'it%20signals%20%22Innocence%22%20or%20%22Incompetence%22' })
+(loop_900_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20having%20to%20work%20twice%20as%20hard%20to%20prove%20authority' })
+(loop_900_sink: BehaviorSink)
+(loop_900_start: BehaviorStart { loopId: 900, loopName: 'The%20Baby%20Face%20Loop', given: 'Large%20eyes%2C%20round%20face%2C%20small%20chin', when: 'in%20a%20leadership%20position', then: 'it%20signals%20%22Innocence%22%20or%20%22Incompetence%22%20(The%20Cherub%20Operator)', result: 'the%20individual%20having%20to%20work%20twice%20as%20hard%20to%20prove%20authority', operatorName: 'The%20Cherub%20Operator', operatorMechanism: 'it%20signals%20%22Innocence%22%20or%20%22Incompetence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_900_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_900_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Innocence%22%20or%20%22Incompetence%22%20(The%20Cherub%20Operator)' })
+(loop_900_verdict: BehaviorVerdict { loopId: 900, loopName: 'The%20Baby%20Face%20Loop', then: 'it%20signals%20%22Innocence%22%20or%20%22Incompetence%22%20(The%20Cherub%20Operator)', result: 'the%20individual%20having%20to%20work%20twice%20as%20hard%20to%20prove%20authority', operatorName: 'The%20Cherub%20Operator', operatorMechanism: 'it%20signals%20%22Innocence%22%20or%20%22Incompetence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_900_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20leadership%20position' })
+
+// Topology
+(loop_900_start)-[:PROCESS]->(loop_900_given_gate)
+(loop_900_given_gate)-[:PROCESS { case: "ok" }]->(loop_900_when_gate)
+(loop_900_given_gate)-[:PROCESS { case: "err" }]->(loop_900_inactive)
+(loop_900_when_gate)-[:PROCESS { case: "ok" }]->(loop_900_context)
+(loop_900_when_gate)-[:PROCESS { case: "err" }]->(loop_900_inactive)
+(loop_900_context)-[:FORK { strategy: "behavior-branches" }]->(loop_900_context_branch | loop_900_then_branch | loop_900_operator_branch | loop_900_result_branch | loop_900_taxonomy_branch | loop_900_intervention_recognize | loop_900_intervention_leverage)
+(loop_900_context_branch | loop_900_then_branch | loop_900_operator_branch | loop_900_result_branch | loop_900_taxonomy_branch | loop_900_intervention_recognize | loop_900_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_900_verdict)
+(loop_900_inactive)-[:PROCESS]->(loop_900_sink)
+(loop_900_verdict)-[:PROCESS]->(loop_900_sink)
+(loop_900_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_900_then_branch)
+(loop_900_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_900_result_branch)

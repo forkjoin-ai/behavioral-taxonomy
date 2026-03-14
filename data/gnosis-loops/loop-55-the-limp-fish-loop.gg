@@ -1,0 +1,33 @@
+// behavioral-loop-55.gg
+// Executable Gnosis projection for The Limp Fish Loop.
+
+// Nodes
+(loop_55_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_55_context_branch: BehaviorEmit { emission: 'context' })
+(loop_55_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20Muscle%20Tone%20in%20hands' })
+(loop_55_inactive: BehaviorTerminal { loopId: 55, loopName: 'The%20Limp%20Fish%20Loop' })
+(loop_55_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_55_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_55_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_55_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%20Operator', mechanism: 'the%20recipient%20assumes%20%22Lack%20of%20Character%22%20or%20%22Disinterest%22' })
+(loop_55_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20loss%20of%20respect%20in%20traditional%20hierarchies' })
+(loop_55_sink: BehaviorSink)
+(loop_55_start: BehaviorStart { loopId: 55, loopName: 'The%20Limp%20Fish%20Loop', given: 'Low%20Muscle%20Tone%20in%20hands', when: 'greeting', then: 'the%20recipient%20assumes%20%22Lack%20of%20Character%22%20or%20%22Disinterest%22%20(The%20Disgust%20Operator%20-%20mild)', result: 'immediate%20loss%20of%20respect%20in%20traditional%20hierarchies', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'the%20recipient%20assumes%20%22Lack%20of%20Character%22%20or%20%22Disinterest%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_55_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_55_then_branch: BehaviorEmit { emission: 'then', text: 'the%20recipient%20assumes%20%22Lack%20of%20Character%22%20or%20%22Disinterest%22%20(The%20Disgust%20Operator%20-%20mild)' })
+(loop_55_verdict: BehaviorVerdict { loopId: 55, loopName: 'The%20Limp%20Fish%20Loop', then: 'the%20recipient%20assumes%20%22Lack%20of%20Character%22%20or%20%22Disinterest%22%20(The%20Disgust%20Operator%20-%20mild)', result: 'immediate%20loss%20of%20respect%20in%20traditional%20hierarchies', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'the%20recipient%20assumes%20%22Lack%20of%20Character%22%20or%20%22Disinterest%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_55_when_gate: BehaviorAssess { stage: 'when', text: 'greeting' })
+
+// Topology
+(loop_55_start)-[:PROCESS]->(loop_55_given_gate)
+(loop_55_given_gate)-[:PROCESS { case: "ok" }]->(loop_55_when_gate)
+(loop_55_given_gate)-[:PROCESS { case: "err" }]->(loop_55_inactive)
+(loop_55_when_gate)-[:PROCESS { case: "ok" }]->(loop_55_context)
+(loop_55_when_gate)-[:PROCESS { case: "err" }]->(loop_55_inactive)
+(loop_55_context)-[:FORK { strategy: "behavior-branches" }]->(loop_55_context_branch | loop_55_then_branch | loop_55_operator_branch | loop_55_result_branch | loop_55_taxonomy_branch | loop_55_intervention_recognize | loop_55_intervention_interdict | loop_55_intervention_minimize)
+(loop_55_context_branch | loop_55_then_branch | loop_55_operator_branch | loop_55_result_branch | loop_55_taxonomy_branch | loop_55_intervention_recognize | loop_55_intervention_interdict | loop_55_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_55_verdict)
+(loop_55_inactive)-[:PROCESS]->(loop_55_sink)
+(loop_55_verdict)-[:PROCESS]->(loop_55_sink)
+(loop_55_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_55_then_branch)
+(loop_55_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_55_then_branch)
+(loop_55_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_55_then_branch)

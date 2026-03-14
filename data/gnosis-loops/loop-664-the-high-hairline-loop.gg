@@ -1,0 +1,33 @@
+// behavioral-loop-664.gg
+// Executable Gnosis projection for The High Hairline Loop.
+
+// Nodes
+(loop_664_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_664_context_branch: BehaviorEmit { emission: 'context' })
+(loop_664_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20forehead%20(Five-head)' })
+(loop_664_inactive: BehaviorTerminal { loopId: 664, loopName: 'The%20High%20Hairline%20Loop' })
+(loop_664_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_664_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_664_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_664_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Megamind%20Operator', mechanism: 'it%20signals%20%22Brain%20Power%22' })
+(loop_664_result_branch: BehaviorEmit { emission: 'result', text: 'higher%20academic%20expectations' })
+(loop_664_sink: BehaviorSink)
+(loop_664_start: BehaviorStart { loopId: 664, loopName: 'The%20High%20Hairline%20Loop', given: 'Large%20forehead%20(Five-head)', when: 'thinking', then: 'it%20signals%20%22Brain%20Power%22%20(The%20Megamind%20Operator)', result: 'higher%20academic%20expectations', operatorName: 'The%20Megamind%20Operator', operatorMechanism: 'it%20signals%20%22Brain%20Power%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_664_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_664_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Brain%20Power%22%20(The%20Megamind%20Operator)' })
+(loop_664_verdict: BehaviorVerdict { loopId: 664, loopName: 'The%20High%20Hairline%20Loop', then: 'it%20signals%20%22Brain%20Power%22%20(The%20Megamind%20Operator)', result: 'higher%20academic%20expectations', operatorName: 'The%20Megamind%20Operator', operatorMechanism: 'it%20signals%20%22Brain%20Power%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_664_when_gate: BehaviorAssess { stage: 'when', text: 'thinking' })
+
+// Topology
+(loop_664_start)-[:PROCESS]->(loop_664_given_gate)
+(loop_664_given_gate)-[:PROCESS { case: "ok" }]->(loop_664_when_gate)
+(loop_664_given_gate)-[:PROCESS { case: "err" }]->(loop_664_inactive)
+(loop_664_when_gate)-[:PROCESS { case: "ok" }]->(loop_664_context)
+(loop_664_when_gate)-[:PROCESS { case: "err" }]->(loop_664_inactive)
+(loop_664_context)-[:FORK { strategy: "behavior-branches" }]->(loop_664_context_branch | loop_664_then_branch | loop_664_operator_branch | loop_664_result_branch | loop_664_taxonomy_branch | loop_664_intervention_recognize | loop_664_intervention_interdict | loop_664_intervention_minimize)
+(loop_664_context_branch | loop_664_then_branch | loop_664_operator_branch | loop_664_result_branch | loop_664_taxonomy_branch | loop_664_intervention_recognize | loop_664_intervention_interdict | loop_664_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_664_verdict)
+(loop_664_inactive)-[:PROCESS]->(loop_664_sink)
+(loop_664_verdict)-[:PROCESS]->(loop_664_sink)
+(loop_664_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_664_then_branch)
+(loop_664_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_664_then_branch)
+(loop_664_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_664_then_branch)

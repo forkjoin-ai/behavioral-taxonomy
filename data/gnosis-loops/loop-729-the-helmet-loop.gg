@@ -1,0 +1,33 @@
+// behavioral-loop-729.gg
+// Executable Gnosis projection for The Helmet Loop.
+
+// Nodes
+(loop_729_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_729_context_branch: BehaviorEmit { emission: 'context' })
+(loop_729_given_gate: BehaviorAssess { stage: 'given', text: 'Hair%20frozen%20by%20gel%2Fhairspray' })
+(loop_729_inactive: BehaviorTerminal { loopId: 729, loopName: 'The%20Helmet%20Loop' })
+(loop_729_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_729_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_729_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_729_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Lego%20Hair%20Operator', mechanism: 'the%20hair%20moves%20as%20a%20solid%20unit' })
+(loop_729_result_branch: BehaviorEmit { emission: 'result', text: 'being%20perceived%20as%20%22Rigid%22%20or%20%22Artificial.%22' })
+(loop_729_sink: BehaviorSink)
+(loop_729_start: BehaviorStart { loopId: 729, loopName: 'The%20Helmet%20Loop', given: 'Hair%20frozen%20by%20gel%2Fhairspray', when: 'moving', then: 'the%20hair%20moves%20as%20a%20solid%20unit%20(The%20Lego%20Hair%20Operator)', result: 'being%20perceived%20as%20%22Rigid%22%20or%20%22Artificial.%22', operatorName: 'The%20Lego%20Hair%20Operator', operatorMechanism: 'the%20hair%20moves%20as%20a%20solid%20unit', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_729_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_729_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hair%20moves%20as%20a%20solid%20unit%20(The%20Lego%20Hair%20Operator)' })
+(loop_729_verdict: BehaviorVerdict { loopId: 729, loopName: 'The%20Helmet%20Loop', then: 'the%20hair%20moves%20as%20a%20solid%20unit%20(The%20Lego%20Hair%20Operator)', result: 'being%20perceived%20as%20%22Rigid%22%20or%20%22Artificial.%22', operatorName: 'The%20Lego%20Hair%20Operator', operatorMechanism: 'the%20hair%20moves%20as%20a%20solid%20unit', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_729_when_gate: BehaviorAssess { stage: 'when', text: 'moving' })
+
+// Topology
+(loop_729_start)-[:PROCESS]->(loop_729_given_gate)
+(loop_729_given_gate)-[:PROCESS { case: "ok" }]->(loop_729_when_gate)
+(loop_729_given_gate)-[:PROCESS { case: "err" }]->(loop_729_inactive)
+(loop_729_when_gate)-[:PROCESS { case: "ok" }]->(loop_729_context)
+(loop_729_when_gate)-[:PROCESS { case: "err" }]->(loop_729_inactive)
+(loop_729_context)-[:FORK { strategy: "behavior-branches" }]->(loop_729_context_branch | loop_729_then_branch | loop_729_operator_branch | loop_729_result_branch | loop_729_taxonomy_branch | loop_729_intervention_recognize | loop_729_intervention_interdict | loop_729_intervention_minimize)
+(loop_729_context_branch | loop_729_then_branch | loop_729_operator_branch | loop_729_result_branch | loop_729_taxonomy_branch | loop_729_intervention_recognize | loop_729_intervention_interdict | loop_729_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_729_verdict)
+(loop_729_inactive)-[:PROCESS]->(loop_729_sink)
+(loop_729_verdict)-[:PROCESS]->(loop_729_sink)
+(loop_729_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_729_then_branch)
+(loop_729_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_729_then_branch)
+(loop_729_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_729_then_branch)

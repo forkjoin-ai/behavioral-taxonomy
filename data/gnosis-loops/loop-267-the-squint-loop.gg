@@ -1,0 +1,33 @@
+// behavioral-loop-267.gg
+// Executable Gnosis projection for The Squint Loop.
+
+// Nodes
+(loop_267_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_267_context_branch: BehaviorEmit { emission: 'context' })
+(loop_267_given_gate: BehaviorAssess { stage: 'given', text: 'Blue%20eyes%2Flow%20pigment%20(Light%20sensitivity)' })
+(loop_267_inactive: BehaviorTerminal { loopId: 267, loopName: 'The%20Squint%20Loop' })
+(loop_267_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_267_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_267_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_267_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Anger%20Operator', mechanism: 'the%20individual%20frowns%2Fsquints%20while%20others%20smile' })
+(loop_267_result_branch: BehaviorEmit { emission: 'result', text: 'looking%20%22Unhappy%22%20in%20all%20family%2Fcompany%20albums%2C%20affecting%20**Social%20Memory**' })
+(loop_267_sink: BehaviorSink)
+(loop_267_start: BehaviorStart { loopId: 267, loopName: 'The%20Squint%20Loop', given: 'Blue%20eyes%2Flow%20pigment%20(Light%20sensitivity)', when: 'taking%20photos%20outdoors', then: 'the%20individual%20frowns%2Fsquints%20while%20others%20smile%20(The%20Anger%20Operator)', result: 'looking%20%22Unhappy%22%20in%20all%20family%2Fcompany%20albums%2C%20affecting%20**Social%20Memory**', operatorName: 'The%20Anger%20Operator', operatorMechanism: 'the%20individual%20frowns%2Fsquints%20while%20others%20smile', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_267_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_267_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20frowns%2Fsquints%20while%20others%20smile%20(The%20Anger%20Operator)' })
+(loop_267_verdict: BehaviorVerdict { loopId: 267, loopName: 'The%20Squint%20Loop', then: 'the%20individual%20frowns%2Fsquints%20while%20others%20smile%20(The%20Anger%20Operator)', result: 'looking%20%22Unhappy%22%20in%20all%20family%2Fcompany%20albums%2C%20affecting%20**Social%20Memory**', operatorName: 'The%20Anger%20Operator', operatorMechanism: 'the%20individual%20frowns%2Fsquints%20while%20others%20smile', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_267_when_gate: BehaviorAssess { stage: 'when', text: 'taking%20photos%20outdoors' })
+
+// Topology
+(loop_267_start)-[:PROCESS]->(loop_267_given_gate)
+(loop_267_given_gate)-[:PROCESS { case: "ok" }]->(loop_267_when_gate)
+(loop_267_given_gate)-[:PROCESS { case: "err" }]->(loop_267_inactive)
+(loop_267_when_gate)-[:PROCESS { case: "ok" }]->(loop_267_context)
+(loop_267_when_gate)-[:PROCESS { case: "err" }]->(loop_267_inactive)
+(loop_267_context)-[:FORK { strategy: "behavior-branches" }]->(loop_267_context_branch | loop_267_then_branch | loop_267_operator_branch | loop_267_result_branch | loop_267_taxonomy_branch | loop_267_intervention_recognize | loop_267_intervention_interdict | loop_267_intervention_minimize)
+(loop_267_context_branch | loop_267_then_branch | loop_267_operator_branch | loop_267_result_branch | loop_267_taxonomy_branch | loop_267_intervention_recognize | loop_267_intervention_interdict | loop_267_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_267_verdict)
+(loop_267_inactive)-[:PROCESS]->(loop_267_sink)
+(loop_267_verdict)-[:PROCESS]->(loop_267_sink)
+(loop_267_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_267_then_branch)
+(loop_267_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_267_then_branch)
+(loop_267_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_267_then_branch)

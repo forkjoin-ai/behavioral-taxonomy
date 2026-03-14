@@ -1,0 +1,33 @@
+// behavioral-loop-795.gg
+// Executable Gnosis projection for The Grey Temple Loop.
+
+// Nodes
+(loop_795_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_795_context_branch: BehaviorEmit { emission: 'context' })
+(loop_795_given_gate: BehaviorAssess { stage: 'given', text: 'Silver%20streaks%20on%20the%20sides' })
+(loop_795_inactive: BehaviorTerminal { loopId: 795, loopName: 'The%20Grey%20Temple%20Loop' })
+(loop_795_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_795_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_795_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_795_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Reed%20Richards%20Operator', mechanism: 'it%20signals%20%22Wisdom%22%20and%20%22Tenure%22' })
+(loop_795_result_branch: BehaviorEmit { emission: 'result', text: 'faster%20promotion%20than%20fully%20dyed%20peers' })
+(loop_795_sink: BehaviorSink)
+(loop_795_start: BehaviorStart { loopId: 795, loopName: 'The%20Grey%20Temple%20Loop', given: 'Silver%20streaks%20on%20the%20sides', when: 'in%20a%20leadership%20role', then: 'it%20signals%20%22Wisdom%22%20and%20%22Tenure%22%20(The%20Reed%20Richards%20Operator)', result: 'faster%20promotion%20than%20fully%20dyed%20peers', operatorName: 'The%20Reed%20Richards%20Operator', operatorMechanism: 'it%20signals%20%22Wisdom%22%20and%20%22Tenure%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_795_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_795_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Wisdom%22%20and%20%22Tenure%22%20(The%20Reed%20Richards%20Operator)' })
+(loop_795_verdict: BehaviorVerdict { loopId: 795, loopName: 'The%20Grey%20Temple%20Loop', then: 'it%20signals%20%22Wisdom%22%20and%20%22Tenure%22%20(The%20Reed%20Richards%20Operator)', result: 'faster%20promotion%20than%20fully%20dyed%20peers', operatorName: 'The%20Reed%20Richards%20Operator', operatorMechanism: 'it%20signals%20%22Wisdom%22%20and%20%22Tenure%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_795_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20leadership%20role' })
+
+// Topology
+(loop_795_start)-[:PROCESS]->(loop_795_given_gate)
+(loop_795_given_gate)-[:PROCESS { case: "ok" }]->(loop_795_when_gate)
+(loop_795_given_gate)-[:PROCESS { case: "err" }]->(loop_795_inactive)
+(loop_795_when_gate)-[:PROCESS { case: "ok" }]->(loop_795_context)
+(loop_795_when_gate)-[:PROCESS { case: "err" }]->(loop_795_inactive)
+(loop_795_context)-[:FORK { strategy: "behavior-branches" }]->(loop_795_context_branch | loop_795_then_branch | loop_795_operator_branch | loop_795_result_branch | loop_795_taxonomy_branch | loop_795_intervention_recognize | loop_795_intervention_interdict | loop_795_intervention_minimize)
+(loop_795_context_branch | loop_795_then_branch | loop_795_operator_branch | loop_795_result_branch | loop_795_taxonomy_branch | loop_795_intervention_recognize | loop_795_intervention_interdict | loop_795_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_795_verdict)
+(loop_795_inactive)-[:PROCESS]->(loop_795_sink)
+(loop_795_verdict)-[:PROCESS]->(loop_795_sink)
+(loop_795_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_795_then_branch)
+(loop_795_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_795_then_branch)
+(loop_795_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_795_then_branch)

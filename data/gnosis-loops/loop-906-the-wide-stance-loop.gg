@@ -1,0 +1,33 @@
+// behavioral-loop-906.gg
+// Executable Gnosis projection for The Wide Stance Loop.
+
+// Nodes
+(loop_906_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_906_context_branch: BehaviorEmit { emission: 'context' })
+(loop_906_given_gate: BehaviorAssess { stage: 'given', text: 'Feet%20placed%20far%20apart%20to%20maintain%20balance' })
+(loop_906_inactive: BehaviorTerminal { loopId: 906, loopName: 'The%20Wide%20Stance%20Loop' })
+(loop_906_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_906_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_906_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_906_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sailor%20Operator', mechanism: 'it%20looks%20%22Drunken%22%20or%20%22Unsteady%22' })
+(loop_906_result_branch: BehaviorEmit { emission: 'result', text: 'assumptions%20of%20intoxication%20or%20neurological%20decline' })
+(loop_906_sink: BehaviorSink)
+(loop_906_start: BehaviorStart { loopId: 906, loopName: 'The%20Wide%20Stance%20Loop', given: 'Feet%20placed%20far%20apart%20to%20maintain%20balance', when: 'walking', then: 'it%20looks%20%22Drunken%22%20or%20%22Unsteady%22%20(The%20Sailor%20Operator)', result: 'assumptions%20of%20intoxication%20or%20neurological%20decline', operatorName: 'The%20Sailor%20Operator', operatorMechanism: 'it%20looks%20%22Drunken%22%20or%20%22Unsteady%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_906_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_906_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20%22Drunken%22%20or%20%22Unsteady%22%20(The%20Sailor%20Operator)' })
+(loop_906_verdict: BehaviorVerdict { loopId: 906, loopName: 'The%20Wide%20Stance%20Loop', then: 'it%20looks%20%22Drunken%22%20or%20%22Unsteady%22%20(The%20Sailor%20Operator)', result: 'assumptions%20of%20intoxication%20or%20neurological%20decline', operatorName: 'The%20Sailor%20Operator', operatorMechanism: 'it%20looks%20%22Drunken%22%20or%20%22Unsteady%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_906_when_gate: BehaviorAssess { stage: 'when', text: 'walking' })
+
+// Topology
+(loop_906_start)-[:PROCESS]->(loop_906_given_gate)
+(loop_906_given_gate)-[:PROCESS { case: "ok" }]->(loop_906_when_gate)
+(loop_906_given_gate)-[:PROCESS { case: "err" }]->(loop_906_inactive)
+(loop_906_when_gate)-[:PROCESS { case: "ok" }]->(loop_906_context)
+(loop_906_when_gate)-[:PROCESS { case: "err" }]->(loop_906_inactive)
+(loop_906_context)-[:FORK { strategy: "behavior-branches" }]->(loop_906_context_branch | loop_906_then_branch | loop_906_operator_branch | loop_906_result_branch | loop_906_taxonomy_branch | loop_906_intervention_recognize | loop_906_intervention_interdict | loop_906_intervention_minimize)
+(loop_906_context_branch | loop_906_then_branch | loop_906_operator_branch | loop_906_result_branch | loop_906_taxonomy_branch | loop_906_intervention_recognize | loop_906_intervention_interdict | loop_906_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_906_verdict)
+(loop_906_inactive)-[:PROCESS]->(loop_906_sink)
+(loop_906_verdict)-[:PROCESS]->(loop_906_sink)
+(loop_906_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_906_then_branch)
+(loop_906_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_906_then_branch)
+(loop_906_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_906_then_branch)

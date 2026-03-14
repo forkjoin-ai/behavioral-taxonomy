@@ -1,0 +1,33 @@
+// behavioral-loop-1010.gg
+// Executable Gnosis projection for The Dead Still Loop.
+
+// Nodes
+(loop_1010_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1010_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1010_given_gate: BehaviorAssess { stage: 'given', text: 'Complete%20lack%20of%20fidgeting%20or%20swaying' })
+(loop_1010_inactive: BehaviorTerminal { loopId: 1010, loopName: 'The%20Dead%20Still%20Loop' })
+(loop_1010_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1010_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1010_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1010_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sniper%20Operator', mechanism: 'the%20individual%20remains%20a%20statue' })
+(loop_1010_result_branch: BehaviorEmit { emission: 'result', text: "becoming%20the%20anchor%20point%20for%20the%20room's%20panic" })
+(loop_1010_sink: BehaviorSink)
+(loop_1010_start: BehaviorStart { loopId: 1010, loopName: 'The%20Dead%20Still%20Loop', given: 'Complete%20lack%20of%20fidgeting%20or%20swaying', when: 'chaos%20erupts', then: 'the%20individual%20remains%20a%20statue%20(The%20Sniper%20Operator)', result: "becoming%20the%20anchor%20point%20for%20the%20room's%20panic", operatorName: 'The%20Sniper%20Operator', operatorMechanism: 'the%20individual%20remains%20a%20statue', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1010_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1010_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20remains%20a%20statue%20(The%20Sniper%20Operator)' })
+(loop_1010_verdict: BehaviorVerdict { loopId: 1010, loopName: 'The%20Dead%20Still%20Loop', then: 'the%20individual%20remains%20a%20statue%20(The%20Sniper%20Operator)', result: "becoming%20the%20anchor%20point%20for%20the%20room's%20panic", operatorName: 'The%20Sniper%20Operator', operatorMechanism: 'the%20individual%20remains%20a%20statue', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1010_when_gate: BehaviorAssess { stage: 'when', text: 'chaos%20erupts' })
+
+// Topology
+(loop_1010_start)-[:PROCESS]->(loop_1010_given_gate)
+(loop_1010_given_gate)-[:PROCESS { case: "ok" }]->(loop_1010_when_gate)
+(loop_1010_given_gate)-[:PROCESS { case: "err" }]->(loop_1010_inactive)
+(loop_1010_when_gate)-[:PROCESS { case: "ok" }]->(loop_1010_context)
+(loop_1010_when_gate)-[:PROCESS { case: "err" }]->(loop_1010_inactive)
+(loop_1010_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1010_context_branch | loop_1010_then_branch | loop_1010_operator_branch | loop_1010_result_branch | loop_1010_taxonomy_branch | loop_1010_intervention_recognize | loop_1010_intervention_interdict | loop_1010_intervention_minimize)
+(loop_1010_context_branch | loop_1010_then_branch | loop_1010_operator_branch | loop_1010_result_branch | loop_1010_taxonomy_branch | loop_1010_intervention_recognize | loop_1010_intervention_interdict | loop_1010_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1010_verdict)
+(loop_1010_inactive)-[:PROCESS]->(loop_1010_sink)
+(loop_1010_verdict)-[:PROCESS]->(loop_1010_sink)
+(loop_1010_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1010_then_branch)
+(loop_1010_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1010_then_branch)
+(loop_1010_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1010_then_branch)

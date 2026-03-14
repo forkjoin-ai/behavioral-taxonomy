@@ -1,0 +1,31 @@
+// behavioral-loop-798.gg
+// Executable Gnosis projection for The Mirror Shine Loop.
+
+// Nodes
+(loop_798_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_798_context_branch: BehaviorEmit { emission: 'context' })
+(loop_798_given_gate: BehaviorAssess { stage: 'given', text: 'High-gloss%20polish%20on%20shoes' })
+(loop_798_inactive: BehaviorTerminal { loopId: 798, loopName: 'The%20Mirror%20Shine%20Loop' })
+(loop_798_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_798_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_798_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Military%20Operator', mechanism: 'it%20signals%20%22Discipline%22%20and%20%22Attention%20to%20Detail%22' })
+(loop_798_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20trust%20with%20money%2Fcontracts' })
+(loop_798_sink: BehaviorSink)
+(loop_798_start: BehaviorStart { loopId: 798, loopName: 'The%20Mirror%20Shine%20Loop', given: 'High-gloss%20polish%20on%20shoes', when: 'meeting%20a%20client', then: 'it%20signals%20%22Discipline%22%20and%20%22Attention%20to%20Detail%22%20(The%20Military%20Operator)', result: 'immediate%20trust%20with%20money%2Fcontracts', operatorName: 'The%20Military%20Operator', operatorMechanism: 'it%20signals%20%22Discipline%22%20and%20%22Attention%20to%20Detail%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_798_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_798_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Discipline%22%20and%20%22Attention%20to%20Detail%22%20(The%20Military%20Operator)' })
+(loop_798_verdict: BehaviorVerdict { loopId: 798, loopName: 'The%20Mirror%20Shine%20Loop', then: 'it%20signals%20%22Discipline%22%20and%20%22Attention%20to%20Detail%22%20(The%20Military%20Operator)', result: 'immediate%20trust%20with%20money%2Fcontracts', operatorName: 'The%20Military%20Operator', operatorMechanism: 'it%20signals%20%22Discipline%22%20and%20%22Attention%20to%20Detail%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_798_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20a%20client' })
+
+// Topology
+(loop_798_start)-[:PROCESS]->(loop_798_given_gate)
+(loop_798_given_gate)-[:PROCESS { case: "ok" }]->(loop_798_when_gate)
+(loop_798_given_gate)-[:PROCESS { case: "err" }]->(loop_798_inactive)
+(loop_798_when_gate)-[:PROCESS { case: "ok" }]->(loop_798_context)
+(loop_798_when_gate)-[:PROCESS { case: "err" }]->(loop_798_inactive)
+(loop_798_context)-[:FORK { strategy: "behavior-branches" }]->(loop_798_context_branch | loop_798_then_branch | loop_798_operator_branch | loop_798_result_branch | loop_798_taxonomy_branch | loop_798_intervention_recognize | loop_798_intervention_leverage)
+(loop_798_context_branch | loop_798_then_branch | loop_798_operator_branch | loop_798_result_branch | loop_798_taxonomy_branch | loop_798_intervention_recognize | loop_798_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_798_verdict)
+(loop_798_inactive)-[:PROCESS]->(loop_798_sink)
+(loop_798_verdict)-[:PROCESS]->(loop_798_sink)
+(loop_798_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_798_then_branch)
+(loop_798_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_798_result_branch)

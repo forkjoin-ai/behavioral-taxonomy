@@ -1,0 +1,33 @@
+// behavioral-loop-189.gg
+// Executable Gnosis projection for The Whistle Loop.
+
+// Nodes
+(loop_189_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_189_context_branch: BehaviorEmit { emission: 'context' })
+(loop_189_given_gate: BehaviorAssess { stage: 'given', text: "Dental%20gap%20causing%20high-frequency%20whistle%20on%20'S'" })
+(loop_189_inactive: BehaviorTerminal { loopId: 189, loopName: 'The%20Whistle%20Loop' })
+(loop_189_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_189_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_189_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_189_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%2FHumor%20Operator', mechanism: 'the%20sound%20distracts%20listeners' })
+(loop_189_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20speaking%20less%20or%20seeking%20**Speech%20Therapy**' })
+(loop_189_sink: BehaviorSink)
+(loop_189_start: BehaviorStart { loopId: 189, loopName: 'The%20Whistle%20Loop', given: "Dental%20gap%20causing%20high-frequency%20whistle%20on%20'S'", when: 'speaking%20seriously', then: 'the%20sound%20distracts%20listeners%20(The%20Novelty%2FHumor%20Operator)', result: 'the%20individual%20speaking%20less%20or%20seeking%20**Speech%20Therapy**', operatorName: 'The%20Novelty%2FHumor%20Operator', operatorMechanism: 'the%20sound%20distracts%20listeners', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_189_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_189_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20distracts%20listeners%20(The%20Novelty%2FHumor%20Operator)' })
+(loop_189_verdict: BehaviorVerdict { loopId: 189, loopName: 'The%20Whistle%20Loop', then: 'the%20sound%20distracts%20listeners%20(The%20Novelty%2FHumor%20Operator)', result: 'the%20individual%20speaking%20less%20or%20seeking%20**Speech%20Therapy**', operatorName: 'The%20Novelty%2FHumor%20Operator', operatorMechanism: 'the%20sound%20distracts%20listeners', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_189_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20seriously' })
+
+// Topology
+(loop_189_start)-[:PROCESS]->(loop_189_given_gate)
+(loop_189_given_gate)-[:PROCESS { case: "ok" }]->(loop_189_when_gate)
+(loop_189_given_gate)-[:PROCESS { case: "err" }]->(loop_189_inactive)
+(loop_189_when_gate)-[:PROCESS { case: "ok" }]->(loop_189_context)
+(loop_189_when_gate)-[:PROCESS { case: "err" }]->(loop_189_inactive)
+(loop_189_context)-[:FORK { strategy: "behavior-branches" }]->(loop_189_context_branch | loop_189_then_branch | loop_189_operator_branch | loop_189_result_branch | loop_189_taxonomy_branch | loop_189_intervention_recognize | loop_189_intervention_interdict | loop_189_intervention_minimize)
+(loop_189_context_branch | loop_189_then_branch | loop_189_operator_branch | loop_189_result_branch | loop_189_taxonomy_branch | loop_189_intervention_recognize | loop_189_intervention_interdict | loop_189_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_189_verdict)
+(loop_189_inactive)-[:PROCESS]->(loop_189_sink)
+(loop_189_verdict)-[:PROCESS]->(loop_189_sink)
+(loop_189_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_189_then_branch)
+(loop_189_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_189_then_branch)
+(loop_189_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_189_then_branch)

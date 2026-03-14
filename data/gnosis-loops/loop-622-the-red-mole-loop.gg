@@ -1,0 +1,33 @@
+// behavioral-loop-622.gg
+// Executable Gnosis projection for The Red Mole Loop.
+
+// Nodes
+(loop_622_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_622_context_branch: BehaviorEmit { emission: 'context' })
+(loop_622_given_gate: BehaviorAssess { stage: 'given', text: 'Bright%20red%20cherry%20angiomas%20on%20skin' })
+(loop_622_inactive: BehaviorTerminal { loopId: 622, loopName: 'The%20Red%20Mole%20Loop' })
+(loop_622_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_622_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_622_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_622_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dot%20Operator', mechanism: 'the%20contrast%20attracts%20the%20eye' })
+(loop_622_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20trying%20to%20%22brush%20them%20off%22%20thinking%20they%20are%20bugs%2Fdirt' })
+(loop_622_sink: BehaviorSink)
+(loop_622_start: BehaviorStart { loopId: 622, loopName: 'The%20Red%20Mole%20Loop', given: 'Bright%20red%20cherry%20angiomas%20on%20skin', when: 'wearing%20swimwear', then: 'the%20contrast%20attracts%20the%20eye%20(The%20Dot%20Operator)', result: 'observers%20trying%20to%20%22brush%20them%20off%22%20thinking%20they%20are%20bugs%2Fdirt', operatorName: 'The%20Dot%20Operator', operatorMechanism: 'the%20contrast%20attracts%20the%20eye', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_622_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_622_then_branch: BehaviorEmit { emission: 'then', text: 'the%20contrast%20attracts%20the%20eye%20(The%20Dot%20Operator)' })
+(loop_622_verdict: BehaviorVerdict { loopId: 622, loopName: 'The%20Red%20Mole%20Loop', then: 'the%20contrast%20attracts%20the%20eye%20(The%20Dot%20Operator)', result: 'observers%20trying%20to%20%22brush%20them%20off%22%20thinking%20they%20are%20bugs%2Fdirt', operatorName: 'The%20Dot%20Operator', operatorMechanism: 'the%20contrast%20attracts%20the%20eye', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_622_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20swimwear' })
+
+// Topology
+(loop_622_start)-[:PROCESS]->(loop_622_given_gate)
+(loop_622_given_gate)-[:PROCESS { case: "ok" }]->(loop_622_when_gate)
+(loop_622_given_gate)-[:PROCESS { case: "err" }]->(loop_622_inactive)
+(loop_622_when_gate)-[:PROCESS { case: "ok" }]->(loop_622_context)
+(loop_622_when_gate)-[:PROCESS { case: "err" }]->(loop_622_inactive)
+(loop_622_context)-[:FORK { strategy: "behavior-branches" }]->(loop_622_context_branch | loop_622_then_branch | loop_622_operator_branch | loop_622_result_branch | loop_622_taxonomy_branch | loop_622_intervention_recognize | loop_622_intervention_interdict | loop_622_intervention_minimize)
+(loop_622_context_branch | loop_622_then_branch | loop_622_operator_branch | loop_622_result_branch | loop_622_taxonomy_branch | loop_622_intervention_recognize | loop_622_intervention_interdict | loop_622_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_622_verdict)
+(loop_622_inactive)-[:PROCESS]->(loop_622_sink)
+(loop_622_verdict)-[:PROCESS]->(loop_622_sink)
+(loop_622_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_622_then_branch)
+(loop_622_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_622_then_branch)
+(loop_622_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_622_then_branch)

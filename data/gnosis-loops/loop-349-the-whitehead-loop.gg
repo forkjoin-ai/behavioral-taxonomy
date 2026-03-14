@@ -1,0 +1,35 @@
+// behavioral-loop-349.gg
+// Executable Gnosis projection for The Whitehead Loop.
+
+// Nodes
+(loop_349_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_349_context_branch: BehaviorEmit { emission: 'context' })
+(loop_349_given_gate: BehaviorAssess { stage: 'given', text: 'Pustule%20on%20the%20nose%20tip' })
+(loop_349_inactive: BehaviorTerminal { loopId: 349, loopName: 'The%20Whitehead%20Loop' })
+(loop_349_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_349_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_349_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_349_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_349_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Distraction%20Operator', mechanism: "the%20listener's%20eyes%20are%20magnetically%20drawn%20to%20the%20spot" })
+(loop_349_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20losing%20confidence%20and%20looking%20down' })
+(loop_349_sink: BehaviorSink)
+(loop_349_start: BehaviorStart { loopId: 349, loopName: 'The%20Whitehead%20Loop', given: 'Pustule%20on%20the%20nose%20tip', when: 'talking%20to%20someone', then: "the%20listener's%20eyes%20are%20magnetically%20drawn%20to%20the%20spot%20(The%20Distraction%20Operator)", result: 'the%20individual%20losing%20confidence%20and%20looking%20down', operatorName: 'The%20Distraction%20Operator', operatorMechanism: "the%20listener's%20eyes%20are%20magnetically%20drawn%20to%20the%20spot", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps', intervention_leverage: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_349_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_349_then_branch: BehaviorEmit { emission: 'then', text: "the%20listener's%20eyes%20are%20magnetically%20drawn%20to%20the%20spot%20(The%20Distraction%20Operator)" })
+(loop_349_verdict: BehaviorVerdict { loopId: 349, loopName: 'The%20Whitehead%20Loop', then: "the%20listener's%20eyes%20are%20magnetically%20drawn%20to%20the%20spot%20(The%20Distraction%20Operator)", result: 'the%20individual%20losing%20confidence%20and%20looking%20down', operatorName: 'The%20Distraction%20Operator', operatorMechanism: "the%20listener's%20eyes%20are%20magnetically%20drawn%20to%20the%20spot", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_349_when_gate: BehaviorAssess { stage: 'when', text: 'talking%20to%20someone' })
+
+// Topology
+(loop_349_start)-[:PROCESS]->(loop_349_given_gate)
+(loop_349_given_gate)-[:PROCESS { case: "ok" }]->(loop_349_when_gate)
+(loop_349_given_gate)-[:PROCESS { case: "err" }]->(loop_349_inactive)
+(loop_349_when_gate)-[:PROCESS { case: "ok" }]->(loop_349_context)
+(loop_349_when_gate)-[:PROCESS { case: "err" }]->(loop_349_inactive)
+(loop_349_context)-[:FORK { strategy: "behavior-branches" }]->(loop_349_context_branch | loop_349_then_branch | loop_349_operator_branch | loop_349_result_branch | loop_349_taxonomy_branch | loop_349_intervention_recognize | loop_349_intervention_interdict | loop_349_intervention_minimize | loop_349_intervention_leverage)
+(loop_349_context_branch | loop_349_then_branch | loop_349_operator_branch | loop_349_result_branch | loop_349_taxonomy_branch | loop_349_intervention_recognize | loop_349_intervention_interdict | loop_349_intervention_minimize | loop_349_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_349_verdict)
+(loop_349_inactive)-[:PROCESS]->(loop_349_sink)
+(loop_349_verdict)-[:PROCESS]->(loop_349_sink)
+(loop_349_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_349_then_branch)
+(loop_349_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_349_then_branch)
+(loop_349_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_349_then_branch)
+(loop_349_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_349_result_branch)

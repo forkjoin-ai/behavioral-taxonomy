@@ -1,0 +1,33 @@
+// behavioral-loop-217.gg
+// Executable Gnosis projection for The Chicken Skin Loop.
+
+// Nodes
+(loop_217_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_217_context_branch: BehaviorEmit { emission: 'context' })
+(loop_217_given_gate: BehaviorAssess { stage: 'given', text: 'Red%20bumps%20on%20upper%20arms' })
+(loop_217_inactive: BehaviorTerminal { loopId: 217, loopName: 'The%20Chicken%20Skin%20Loop' })
+(loop_217_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_217_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_217_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_217_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hygiene%20Operator', mechanism: 'observers%20assume%20%22Rash%22%20or%20%22Infection%22' })
+(loop_217_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20wearing%20long%20sleeves%20in%20summer%2C%20leading%20to%20**Thermal%20Stress**' })
+(loop_217_sink: BehaviorSink)
+(loop_217_start: BehaviorStart { loopId: 217, loopName: 'The%20Chicken%20Skin%20Loop', given: 'Red%20bumps%20on%20upper%20arms', when: 'wearing%20sleeveless%20tops', then: 'observers%20assume%20%22Rash%22%20or%20%22Infection%22%20(The%20Hygiene%20Operator)', result: 'the%20individual%20wearing%20long%20sleeves%20in%20summer%2C%20leading%20to%20**Thermal%20Stress**', operatorName: 'The%20Hygiene%20Operator', operatorMechanism: 'observers%20assume%20%22Rash%22%20or%20%22Infection%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_217_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_217_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Rash%22%20or%20%22Infection%22%20(The%20Hygiene%20Operator)' })
+(loop_217_verdict: BehaviorVerdict { loopId: 217, loopName: 'The%20Chicken%20Skin%20Loop', then: 'observers%20assume%20%22Rash%22%20or%20%22Infection%22%20(The%20Hygiene%20Operator)', result: 'the%20individual%20wearing%20long%20sleeves%20in%20summer%2C%20leading%20to%20**Thermal%20Stress**', operatorName: 'The%20Hygiene%20Operator', operatorMechanism: 'observers%20assume%20%22Rash%22%20or%20%22Infection%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_217_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20sleeveless%20tops' })
+
+// Topology
+(loop_217_start)-[:PROCESS]->(loop_217_given_gate)
+(loop_217_given_gate)-[:PROCESS { case: "ok" }]->(loop_217_when_gate)
+(loop_217_given_gate)-[:PROCESS { case: "err" }]->(loop_217_inactive)
+(loop_217_when_gate)-[:PROCESS { case: "ok" }]->(loop_217_context)
+(loop_217_when_gate)-[:PROCESS { case: "err" }]->(loop_217_inactive)
+(loop_217_context)-[:FORK { strategy: "behavior-branches" }]->(loop_217_context_branch | loop_217_then_branch | loop_217_operator_branch | loop_217_result_branch | loop_217_taxonomy_branch | loop_217_intervention_recognize | loop_217_intervention_interdict | loop_217_intervention_minimize)
+(loop_217_context_branch | loop_217_then_branch | loop_217_operator_branch | loop_217_result_branch | loop_217_taxonomy_branch | loop_217_intervention_recognize | loop_217_intervention_interdict | loop_217_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_217_verdict)
+(loop_217_inactive)-[:PROCESS]->(loop_217_sink)
+(loop_217_verdict)-[:PROCESS]->(loop_217_sink)
+(loop_217_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_217_then_branch)
+(loop_217_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_217_then_branch)
+(loop_217_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_217_then_branch)

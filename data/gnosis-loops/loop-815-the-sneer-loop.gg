@@ -1,0 +1,33 @@
+// behavioral-loop-815.gg
+// Executable Gnosis projection for The Sneer Loop.
+
+// Nodes
+(loop_815_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_815_context_branch: BehaviorEmit { emission: 'context' })
+(loop_815_given_gate: BehaviorAssess { stage: 'given', text: 'Slight%20unilateral%20lip%20raise%20(0.5s)' })
+(loop_815_inactive: BehaviorTerminal { loopId: 815, loopName: 'The%20Sneer%20Loop' })
+(loop_815_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_815_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_815_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_815_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%20Operator', mechanism: 'it%20signals%20%22Contempt%22' })
+(loop_815_result_branch: BehaviorEmit { emission: 'result', text: 'lasting%20resentment%20from%20the%20speaker' })
+(loop_815_sink: BehaviorSink)
+(loop_815_start: BehaviorStart { loopId: 815, loopName: 'The%20Sneer%20Loop', given: 'Slight%20unilateral%20lip%20raise%20(0.5s)', when: 'hearing%20an%20idea', then: 'it%20signals%20%22Contempt%22%20(The%20Disgust%20Operator)', result: 'lasting%20resentment%20from%20the%20speaker', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'it%20signals%20%22Contempt%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_815_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_815_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Contempt%22%20(The%20Disgust%20Operator)' })
+(loop_815_verdict: BehaviorVerdict { loopId: 815, loopName: 'The%20Sneer%20Loop', then: 'it%20signals%20%22Contempt%22%20(The%20Disgust%20Operator)', result: 'lasting%20resentment%20from%20the%20speaker', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'it%20signals%20%22Contempt%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_815_when_gate: BehaviorAssess { stage: 'when', text: 'hearing%20an%20idea' })
+
+// Topology
+(loop_815_start)-[:PROCESS]->(loop_815_given_gate)
+(loop_815_given_gate)-[:PROCESS { case: "ok" }]->(loop_815_when_gate)
+(loop_815_given_gate)-[:PROCESS { case: "err" }]->(loop_815_inactive)
+(loop_815_when_gate)-[:PROCESS { case: "ok" }]->(loop_815_context)
+(loop_815_when_gate)-[:PROCESS { case: "err" }]->(loop_815_inactive)
+(loop_815_context)-[:FORK { strategy: "behavior-branches" }]->(loop_815_context_branch | loop_815_then_branch | loop_815_operator_branch | loop_815_result_branch | loop_815_taxonomy_branch | loop_815_intervention_recognize | loop_815_intervention_interdict | loop_815_intervention_minimize)
+(loop_815_context_branch | loop_815_then_branch | loop_815_operator_branch | loop_815_result_branch | loop_815_taxonomy_branch | loop_815_intervention_recognize | loop_815_intervention_interdict | loop_815_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_815_verdict)
+(loop_815_inactive)-[:PROCESS]->(loop_815_sink)
+(loop_815_verdict)-[:PROCESS]->(loop_815_sink)
+(loop_815_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_815_then_branch)
+(loop_815_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_815_then_branch)
+(loop_815_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_815_then_branch)

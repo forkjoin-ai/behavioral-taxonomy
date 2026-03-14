@@ -1,0 +1,33 @@
+// behavioral-loop-282.gg
+// Executable Gnosis projection for The Birthmark Loop.
+
+// Nodes
+(loop_282_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_282_context_branch: BehaviorEmit { emission: 'context' })
+(loop_282_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20vascular%20mark%20on%20face%2Fneck' })
+(loop_282_inactive: BehaviorTerminal { loopId: 282, loopName: 'The%20Birthmark%20Loop' })
+(loop_282_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_282_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_282_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_282_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Distraction%20Operator', mechanism: "the%20stranger's%20eyes%20flick%20to%20the%20mark%20and%20back" })
+(loop_282_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20developing%20an%20aggressive%20**%22Look%20me%20in%20the%20eyes%22**%20stare' })
+(loop_282_sink: BehaviorSink)
+(loop_282_start: BehaviorStart { loopId: 282, loopName: 'The%20Birthmark%20Loop', given: 'Large%20vascular%20mark%20on%20face%2Fneck', when: 'meeting%20strangers', then: "the%20stranger's%20eyes%20flick%20to%20the%20mark%20and%20back%20(The%20Distraction%20Operator)", result: 'the%20individual%20developing%20an%20aggressive%20**%22Look%20me%20in%20the%20eyes%22**%20stare', operatorName: 'The%20Distraction%20Operator', operatorMechanism: "the%20stranger's%20eyes%20flick%20to%20the%20mark%20and%20back", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_282_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_282_then_branch: BehaviorEmit { emission: 'then', text: "the%20stranger's%20eyes%20flick%20to%20the%20mark%20and%20back%20(The%20Distraction%20Operator)" })
+(loop_282_verdict: BehaviorVerdict { loopId: 282, loopName: 'The%20Birthmark%20Loop', then: "the%20stranger's%20eyes%20flick%20to%20the%20mark%20and%20back%20(The%20Distraction%20Operator)", result: 'the%20individual%20developing%20an%20aggressive%20**%22Look%20me%20in%20the%20eyes%22**%20stare', operatorName: 'The%20Distraction%20Operator', operatorMechanism: "the%20stranger's%20eyes%20flick%20to%20the%20mark%20and%20back", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_282_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20strangers' })
+
+// Topology
+(loop_282_start)-[:PROCESS]->(loop_282_given_gate)
+(loop_282_given_gate)-[:PROCESS { case: "ok" }]->(loop_282_when_gate)
+(loop_282_given_gate)-[:PROCESS { case: "err" }]->(loop_282_inactive)
+(loop_282_when_gate)-[:PROCESS { case: "ok" }]->(loop_282_context)
+(loop_282_when_gate)-[:PROCESS { case: "err" }]->(loop_282_inactive)
+(loop_282_context)-[:FORK { strategy: "behavior-branches" }]->(loop_282_context_branch | loop_282_then_branch | loop_282_operator_branch | loop_282_result_branch | loop_282_taxonomy_branch | loop_282_intervention_recognize | loop_282_intervention_interdict | loop_282_intervention_minimize)
+(loop_282_context_branch | loop_282_then_branch | loop_282_operator_branch | loop_282_result_branch | loop_282_taxonomy_branch | loop_282_intervention_recognize | loop_282_intervention_interdict | loop_282_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_282_verdict)
+(loop_282_inactive)-[:PROCESS]->(loop_282_sink)
+(loop_282_verdict)-[:PROCESS]->(loop_282_sink)
+(loop_282_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_282_then_branch)
+(loop_282_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_282_then_branch)
+(loop_282_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_282_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-84.gg
+// Executable Gnosis projection for The Asian Squat Loop.
+
+// Nodes
+(loop_84_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_84_context_branch: BehaviorEmit { emission: 'context' })
+(loop_84_given_gate: BehaviorAssess { stage: 'given', text: 'High%20Ankle%20Mobility%20(Can%20squat%20flat-footed)' })
+(loop_84_inactive: BehaviorTerminal { loopId: 84, loopName: 'The%20Asian%20Squat%20Loop' })
+(loop_84_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_84_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_84_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_84_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Adaptability%20Operator', mechanism: 'the%20individual%20can%20rest%20comfortably%20anywhere' })
+(loop_84_result_branch: BehaviorEmit { emission: 'result', text: 'higher%20**Patience**%20and%20comfort%20in%20low-resource%20environments' })
+(loop_84_sink: BehaviorSink)
+(loop_84_start: BehaviorStart { loopId: 84, loopName: 'The%20Asian%20Squat%20Loop', given: 'High%20Ankle%20Mobility%20(Can%20squat%20flat-footed)', when: 'waiting%20or%20resting', then: 'the%20individual%20can%20rest%20comfortably%20anywhere%20(The%20Adaptability%20Operator)', result: 'higher%20**Patience**%20and%20comfort%20in%20low-resource%20environments', operatorName: 'The%20Adaptability%20Operator', operatorMechanism: 'the%20individual%20can%20rest%20comfortably%20anywhere', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_84_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_84_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20can%20rest%20comfortably%20anywhere%20(The%20Adaptability%20Operator)' })
+(loop_84_verdict: BehaviorVerdict { loopId: 84, loopName: 'The%20Asian%20Squat%20Loop', then: 'the%20individual%20can%20rest%20comfortably%20anywhere%20(The%20Adaptability%20Operator)', result: 'higher%20**Patience**%20and%20comfort%20in%20low-resource%20environments', operatorName: 'The%20Adaptability%20Operator', operatorMechanism: 'the%20individual%20can%20rest%20comfortably%20anywhere', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_84_when_gate: BehaviorAssess { stage: 'when', text: 'waiting%20or%20resting' })
+
+// Topology
+(loop_84_start)-[:PROCESS]->(loop_84_given_gate)
+(loop_84_given_gate)-[:PROCESS { case: "ok" }]->(loop_84_when_gate)
+(loop_84_given_gate)-[:PROCESS { case: "err" }]->(loop_84_inactive)
+(loop_84_when_gate)-[:PROCESS { case: "ok" }]->(loop_84_context)
+(loop_84_when_gate)-[:PROCESS { case: "err" }]->(loop_84_inactive)
+(loop_84_context)-[:FORK { strategy: "behavior-branches" }]->(loop_84_context_branch | loop_84_then_branch | loop_84_operator_branch | loop_84_result_branch | loop_84_taxonomy_branch | loop_84_intervention_recognize | loop_84_intervention_interdict | loop_84_intervention_minimize)
+(loop_84_context_branch | loop_84_then_branch | loop_84_operator_branch | loop_84_result_branch | loop_84_taxonomy_branch | loop_84_intervention_recognize | loop_84_intervention_interdict | loop_84_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_84_verdict)
+(loop_84_inactive)-[:PROCESS]->(loop_84_sink)
+(loop_84_verdict)-[:PROCESS]->(loop_84_sink)
+(loop_84_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_84_then_branch)
+(loop_84_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_84_then_branch)
+(loop_84_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_84_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-504.gg
+// Executable Gnosis projection for The Lip Line Loop.
+
+// Nodes
+(loop_504_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_504_context_branch: BehaviorEmit { emission: 'context' })
+(loop_504_given_gate: BehaviorAssess { stage: 'given', text: 'Pale%20lips%20blending%20into%20skin' })
+(loop_504_inactive: BehaviorTerminal { loopId: 504, loopName: 'The%20Lip%20Line%20Loop' })
+(loop_504_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_504_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_504_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_504_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Blank%20Operator', mechanism: 'the%20mouth%20lacks%20definition' })
+(loop_504_result_branch: BehaviorEmit { emission: 'result', text: 'lower%20lip-reading%20accuracy%20and%20lower%20**Sexual%20Signaling**' })
+(loop_504_sink: BehaviorSink)
+(loop_504_start: BehaviorStart { loopId: 504, loopName: 'The%20Lip%20Line%20Loop', given: 'Pale%20lips%20blending%20into%20skin', when: 'talking', then: 'the%20mouth%20lacks%20definition%20(The%20Blank%20Operator)', result: 'lower%20lip-reading%20accuracy%20and%20lower%20**Sexual%20Signaling**', operatorName: 'The%20Blank%20Operator', operatorMechanism: 'the%20mouth%20lacks%20definition', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_504_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_504_then_branch: BehaviorEmit { emission: 'then', text: 'the%20mouth%20lacks%20definition%20(The%20Blank%20Operator)' })
+(loop_504_verdict: BehaviorVerdict { loopId: 504, loopName: 'The%20Lip%20Line%20Loop', then: 'the%20mouth%20lacks%20definition%20(The%20Blank%20Operator)', result: 'lower%20lip-reading%20accuracy%20and%20lower%20**Sexual%20Signaling**', operatorName: 'The%20Blank%20Operator', operatorMechanism: 'the%20mouth%20lacks%20definition', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_504_when_gate: BehaviorAssess { stage: 'when', text: 'talking' })
+
+// Topology
+(loop_504_start)-[:PROCESS]->(loop_504_given_gate)
+(loop_504_given_gate)-[:PROCESS { case: "ok" }]->(loop_504_when_gate)
+(loop_504_given_gate)-[:PROCESS { case: "err" }]->(loop_504_inactive)
+(loop_504_when_gate)-[:PROCESS { case: "ok" }]->(loop_504_context)
+(loop_504_when_gate)-[:PROCESS { case: "err" }]->(loop_504_inactive)
+(loop_504_context)-[:FORK { strategy: "behavior-branches" }]->(loop_504_context_branch | loop_504_then_branch | loop_504_operator_branch | loop_504_result_branch | loop_504_taxonomy_branch | loop_504_intervention_recognize | loop_504_intervention_interdict | loop_504_intervention_minimize)
+(loop_504_context_branch | loop_504_then_branch | loop_504_operator_branch | loop_504_result_branch | loop_504_taxonomy_branch | loop_504_intervention_recognize | loop_504_intervention_interdict | loop_504_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_504_verdict)
+(loop_504_inactive)-[:PROCESS]->(loop_504_sink)
+(loop_504_verdict)-[:PROCESS]->(loop_504_sink)
+(loop_504_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_504_then_branch)
+(loop_504_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_504_then_branch)
+(loop_504_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_504_then_branch)

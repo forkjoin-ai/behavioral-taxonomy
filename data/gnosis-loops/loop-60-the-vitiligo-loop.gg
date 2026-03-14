@@ -1,0 +1,35 @@
+// behavioral-loop-60.gg
+// Executable Gnosis projection for The Vitiligo Loop.
+
+// Nodes
+(loop_60_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_60_context_branch: BehaviorEmit { emission: 'context' })
+(loop_60_given_gate: BehaviorAssess { stage: 'given', text: 'Depigmented%20patches%20of%20skin' })
+(loop_60_inactive: BehaviorTerminal { loopId: 60, loopName: 'The%20Vitiligo%20Loop' })
+(loop_60_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_60_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_60_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_60_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_60_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%2FScrutiny%20Operator', mechanism: 'observers%20track%20the%20patterns' })
+(loop_60_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20either%20**Covering%20Up**%20(Shame)%20or%20**Flaunting**%20(Radical%20Confidence)' })
+(loop_60_sink: BehaviorSink)
+(loop_60_start: BehaviorStart { loopId: 60, loopName: 'The%20Vitiligo%20Loop', given: 'Depigmented%20patches%20of%20skin', when: 'exposed', then: 'observers%20track%20the%20patterns%20(The%20Novelty%2FScrutiny%20Operator)', result: 'the%20individual%20either%20**Covering%20Up**%20(Shame)%20or%20**Flaunting**%20(Radical%20Confidence)', operatorName: 'The%20Novelty%2FScrutiny%20Operator', operatorMechanism: 'observers%20track%20the%20patterns', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations', intervention_leverage: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_60_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_60_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20track%20the%20patterns%20(The%20Novelty%2FScrutiny%20Operator)' })
+(loop_60_verdict: BehaviorVerdict { loopId: 60, loopName: 'The%20Vitiligo%20Loop', then: 'observers%20track%20the%20patterns%20(The%20Novelty%2FScrutiny%20Operator)', result: 'the%20individual%20either%20**Covering%20Up**%20(Shame)%20or%20**Flaunting**%20(Radical%20Confidence)', operatorName: 'The%20Novelty%2FScrutiny%20Operator', operatorMechanism: 'observers%20track%20the%20patterns', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_60_when_gate: BehaviorAssess { stage: 'when', text: 'exposed' })
+
+// Topology
+(loop_60_start)-[:PROCESS]->(loop_60_given_gate)
+(loop_60_given_gate)-[:PROCESS { case: "ok" }]->(loop_60_when_gate)
+(loop_60_given_gate)-[:PROCESS { case: "err" }]->(loop_60_inactive)
+(loop_60_when_gate)-[:PROCESS { case: "ok" }]->(loop_60_context)
+(loop_60_when_gate)-[:PROCESS { case: "err" }]->(loop_60_inactive)
+(loop_60_context)-[:FORK { strategy: "behavior-branches" }]->(loop_60_context_branch | loop_60_then_branch | loop_60_operator_branch | loop_60_result_branch | loop_60_taxonomy_branch | loop_60_intervention_recognize | loop_60_intervention_interdict | loop_60_intervention_minimize | loop_60_intervention_leverage)
+(loop_60_context_branch | loop_60_then_branch | loop_60_operator_branch | loop_60_result_branch | loop_60_taxonomy_branch | loop_60_intervention_recognize | loop_60_intervention_interdict | loop_60_intervention_minimize | loop_60_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_60_verdict)
+(loop_60_inactive)-[:PROCESS]->(loop_60_sink)
+(loop_60_verdict)-[:PROCESS]->(loop_60_sink)
+(loop_60_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_60_then_branch)
+(loop_60_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_60_then_branch)
+(loop_60_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_60_then_branch)
+(loop_60_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_60_result_branch)

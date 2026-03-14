@@ -1,0 +1,33 @@
+// behavioral-loop-26.gg
+// Executable Gnosis projection for The Olfactory Exclusion Loop.
+
+// Nodes
+(loop_26_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_26_context_branch: BehaviorEmit { emission: 'context' })
+(loop_26_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20Bromhidrosis%20(Body%20odor)%20or%20Halitosis' })
+(loop_26_inactive: BehaviorTerminal { loopId: 26, loopName: 'The%20Olfactory%20Exclusion%20Loop' })
+(loop_26_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Reframe%20the%20narrative%20around%20this%20characteristic' })
+(loop_26_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_26_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20smell%20affects%20your%20judgment%20of%20someone' })
+(loop_26_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Exclusion%20Operator', mechanism: 'the%20circle%20physically%20widens%20to%20increase%20airflow%2Fdistance' })
+(loop_26_result_branch: BehaviorEmit { emission: 'result', text: 'deep%20**Social%20Shame**%20and%20hyper-vigilant%20hygiene%20behaviors%20(OCD%20tendencies)' })
+(loop_26_sink: BehaviorSink)
+(loop_26_start: BehaviorStart { loopId: 26, loopName: 'The%20Olfactory%20Exclusion%20Loop', given: 'an%20individual%20possesses%20Bromhidrosis%20(Body%20odor)%20or%20Halitosis', when: 'they%20enter%20a%20group%20circle', then: 'the%20circle%20physically%20widens%20to%20increase%20airflow%2Fdistance%20(The%20Exclusion%20Operator)', result: 'deep%20**Social%20Shame**%20and%20hyper-vigilant%20hygiene%20behaviors%20(OCD%20tendencies)', operatorName: 'The%20Exclusion%20Operator', operatorMechanism: 'the%20circle%20physically%20widens%20to%20increase%20airflow%2Fdistance', origin: 'GENETIC', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20smell%20affects%20your%20judgment%20of%20someone', intervention_interdict: 'Reframe%20the%20narrative%20around%20this%20characteristic', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_26_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_26_then_branch: BehaviorEmit { emission: 'then', text: 'the%20circle%20physically%20widens%20to%20increase%20airflow%2Fdistance%20(The%20Exclusion%20Operator)' })
+(loop_26_verdict: BehaviorVerdict { loopId: 26, loopName: 'The%20Olfactory%20Exclusion%20Loop', then: 'the%20circle%20physically%20widens%20to%20increase%20airflow%2Fdistance%20(The%20Exclusion%20Operator)', result: 'deep%20**Social%20Shame**%20and%20hyper-vigilant%20hygiene%20behaviors%20(OCD%20tendencies)', operatorName: 'The%20Exclusion%20Operator', operatorMechanism: 'the%20circle%20physically%20widens%20to%20increase%20airflow%2Fdistance', origin: 'GENETIC', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_26_when_gate: BehaviorAssess { stage: 'when', text: 'they%20enter%20a%20group%20circle' })
+
+// Topology
+(loop_26_start)-[:PROCESS]->(loop_26_given_gate)
+(loop_26_given_gate)-[:PROCESS { case: "ok" }]->(loop_26_when_gate)
+(loop_26_given_gate)-[:PROCESS { case: "err" }]->(loop_26_inactive)
+(loop_26_when_gate)-[:PROCESS { case: "ok" }]->(loop_26_context)
+(loop_26_when_gate)-[:PROCESS { case: "err" }]->(loop_26_inactive)
+(loop_26_context)-[:FORK { strategy: "behavior-branches" }]->(loop_26_context_branch | loop_26_then_branch | loop_26_operator_branch | loop_26_result_branch | loop_26_taxonomy_branch | loop_26_intervention_recognize | loop_26_intervention_interdict | loop_26_intervention_minimize)
+(loop_26_context_branch | loop_26_then_branch | loop_26_operator_branch | loop_26_result_branch | loop_26_taxonomy_branch | loop_26_intervention_recognize | loop_26_intervention_interdict | loop_26_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_26_verdict)
+(loop_26_inactive)-[:PROCESS]->(loop_26_sink)
+(loop_26_verdict)-[:PROCESS]->(loop_26_sink)
+(loop_26_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_26_then_branch)
+(loop_26_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_26_then_branch)
+(loop_26_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_26_then_branch)

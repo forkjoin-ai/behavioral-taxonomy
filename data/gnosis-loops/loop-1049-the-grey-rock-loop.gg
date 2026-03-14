@@ -1,0 +1,33 @@
+// behavioral-loop-1049.gg
+// Executable Gnosis projection for The Grey Rock Loop.
+
+// Nodes
+(loop_1049_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1049_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1049_given_gate: BehaviorAssess { stage: 'given', text: 'Presence%20of%20a%20narcissist%20or%20predator' })
+(loop_1049_inactive: BehaviorTerminal { loopId: 1049, loopName: 'The%20Grey%20Rock%20Loop' })
+(loop_1049_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1049_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1049_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1049_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20individual%20becomes%20intentionally%20boring%2Funresponsive%20(The%20Stone)' })
+(loop_1049_result_branch: BehaviorEmit { emission: 'result', text: 'the%20predator%20losing%20interest%20and%20moving%20on' })
+(loop_1049_sink: BehaviorSink)
+(loop_1049_start: BehaviorStart { loopId: 1049, loopName: 'The%20Grey%20Rock%20Loop', given: 'Presence%20of%20a%20narcissist%20or%20predator', when: 'engaged', then: 'the%20individual%20becomes%20intentionally%20boring%2Funresponsive%20(The%20Stone)', result: 'the%20predator%20losing%20interest%20and%20moving%20on', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20becomes%20intentionally%20boring%2Funresponsive%20(The%20Stone)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1049_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1049_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20becomes%20intentionally%20boring%2Funresponsive%20(The%20Stone)' })
+(loop_1049_verdict: BehaviorVerdict { loopId: 1049, loopName: 'The%20Grey%20Rock%20Loop', then: 'the%20individual%20becomes%20intentionally%20boring%2Funresponsive%20(The%20Stone)', result: 'the%20predator%20losing%20interest%20and%20moving%20on', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20becomes%20intentionally%20boring%2Funresponsive%20(The%20Stone)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1049_when_gate: BehaviorAssess { stage: 'when', text: 'engaged' })
+
+// Topology
+(loop_1049_start)-[:PROCESS]->(loop_1049_given_gate)
+(loop_1049_given_gate)-[:PROCESS { case: "ok" }]->(loop_1049_when_gate)
+(loop_1049_given_gate)-[:PROCESS { case: "err" }]->(loop_1049_inactive)
+(loop_1049_when_gate)-[:PROCESS { case: "ok" }]->(loop_1049_context)
+(loop_1049_when_gate)-[:PROCESS { case: "err" }]->(loop_1049_inactive)
+(loop_1049_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1049_context_branch | loop_1049_then_branch | loop_1049_operator_branch | loop_1049_result_branch | loop_1049_taxonomy_branch | loop_1049_intervention_recognize | loop_1049_intervention_interdict | loop_1049_intervention_minimize)
+(loop_1049_context_branch | loop_1049_then_branch | loop_1049_operator_branch | loop_1049_result_branch | loop_1049_taxonomy_branch | loop_1049_intervention_recognize | loop_1049_intervention_interdict | loop_1049_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1049_verdict)
+(loop_1049_inactive)-[:PROCESS]->(loop_1049_sink)
+(loop_1049_verdict)-[:PROCESS]->(loop_1049_sink)
+(loop_1049_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1049_then_branch)
+(loop_1049_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1049_then_branch)
+(loop_1049_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1049_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-994.gg
+// Executable Gnosis projection for The Toilet Paper Loop.
+
+// Nodes
+(loop_994_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_994_context_branch: BehaviorEmit { emission: 'context' })
+(loop_994_given_gate: BehaviorAssess { stage: 'given', text: 'A%20styptic%20pencil%20failure%20leads%20to%20using%20tissue%20on%20a%20cut' })
+(loop_994_inactive: BehaviorTerminal { loopId: 994, loopName: 'The%20Toilet%20Paper%20Loop' })
+(loop_994_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_994_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_994_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_994_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Band-Aid%20Operator', mechanism: 'the%20white%20dot%20signals%20%22Bleeder%22' })
+(loop_994_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20%22Fragile%22%20and%20%22Distracted.%22' })
+(loop_994_sink: BehaviorSink)
+(loop_994_start: BehaviorStart { loopId: 994, loopName: 'The%20Toilet%20Paper%20Loop', given: 'A%20styptic%20pencil%20failure%20leads%20to%20using%20tissue%20on%20a%20cut', when: 'forgetting%20to%20remove%20it%20before%20leaving', then: 'the%20white%20dot%20signals%20%22Bleeder%22%20(The%20Band-Aid%20Operator)', result: 'the%20individual%20looking%20%22Fragile%22%20and%20%22Distracted.%22', operatorName: 'The%20Band-Aid%20Operator', operatorMechanism: 'the%20white%20dot%20signals%20%22Bleeder%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_994_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_994_then_branch: BehaviorEmit { emission: 'then', text: 'the%20white%20dot%20signals%20%22Bleeder%22%20(The%20Band-Aid%20Operator)' })
+(loop_994_verdict: BehaviorVerdict { loopId: 994, loopName: 'The%20Toilet%20Paper%20Loop', then: 'the%20white%20dot%20signals%20%22Bleeder%22%20(The%20Band-Aid%20Operator)', result: 'the%20individual%20looking%20%22Fragile%22%20and%20%22Distracted.%22', operatorName: 'The%20Band-Aid%20Operator', operatorMechanism: 'the%20white%20dot%20signals%20%22Bleeder%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_994_when_gate: BehaviorAssess { stage: 'when', text: 'forgetting%20to%20remove%20it%20before%20leaving' })
+
+// Topology
+(loop_994_start)-[:PROCESS]->(loop_994_given_gate)
+(loop_994_given_gate)-[:PROCESS { case: "ok" }]->(loop_994_when_gate)
+(loop_994_given_gate)-[:PROCESS { case: "err" }]->(loop_994_inactive)
+(loop_994_when_gate)-[:PROCESS { case: "ok" }]->(loop_994_context)
+(loop_994_when_gate)-[:PROCESS { case: "err" }]->(loop_994_inactive)
+(loop_994_context)-[:FORK { strategy: "behavior-branches" }]->(loop_994_context_branch | loop_994_then_branch | loop_994_operator_branch | loop_994_result_branch | loop_994_taxonomy_branch | loop_994_intervention_recognize | loop_994_intervention_interdict | loop_994_intervention_minimize)
+(loop_994_context_branch | loop_994_then_branch | loop_994_operator_branch | loop_994_result_branch | loop_994_taxonomy_branch | loop_994_intervention_recognize | loop_994_intervention_interdict | loop_994_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_994_verdict)
+(loop_994_inactive)-[:PROCESS]->(loop_994_sink)
+(loop_994_verdict)-[:PROCESS]->(loop_994_sink)
+(loop_994_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_994_then_branch)
+(loop_994_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_994_then_branch)
+(loop_994_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_994_then_branch)

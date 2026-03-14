@@ -1,0 +1,31 @@
+// behavioral-loop-399.gg
+// Executable Gnosis projection for The Dirty Lens Loop.
+
+// Nodes
+(loop_399_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_399_context_branch: BehaviorEmit { emission: 'context' })
+(loop_399_given_gate: BehaviorAssess { stage: 'given', text: 'Smudged%2Ffingerprinted%20glasses' })
+(loop_399_inactive: BehaviorTerminal { loopId: 399, loopName: 'The%20Dirty%20Lens%20Loop' })
+(loop_399_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_399_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_399_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Clarity%20Operator', mechanism: 'it%20signals%20%22%20oblivious%20to%20detail%22%20or%20%22Sloppy%22' })
+(loop_399_result_branch: BehaviorEmit { emission: 'result', text: "distrust%20of%20the%20individual's%20quality%20control%20in%20work" })
+(loop_399_sink: BehaviorSink)
+(loop_399_start: BehaviorStart { loopId: 399, loopName: 'The%20Dirty%20Lens%20Loop', given: 'Smudged%2Ffingerprinted%20glasses', when: 'viewed%20by%20others', then: 'it%20signals%20%22%20oblivious%20to%20detail%22%20or%20%22Sloppy%22%20(The%20Clarity%20Operator)', result: "distrust%20of%20the%20individual's%20quality%20control%20in%20work", operatorName: 'The%20Clarity%20Operator', operatorMechanism: 'it%20signals%20%22%20oblivious%20to%20detail%22%20or%20%22Sloppy%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_399_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_399_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22%20oblivious%20to%20detail%22%20or%20%22Sloppy%22%20(The%20Clarity%20Operator)' })
+(loop_399_verdict: BehaviorVerdict { loopId: 399, loopName: 'The%20Dirty%20Lens%20Loop', then: 'it%20signals%20%22%20oblivious%20to%20detail%22%20or%20%22Sloppy%22%20(The%20Clarity%20Operator)', result: "distrust%20of%20the%20individual's%20quality%20control%20in%20work", operatorName: 'The%20Clarity%20Operator', operatorMechanism: 'it%20signals%20%22%20oblivious%20to%20detail%22%20or%20%22Sloppy%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_399_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20by%20others' })
+
+// Topology
+(loop_399_start)-[:PROCESS]->(loop_399_given_gate)
+(loop_399_given_gate)-[:PROCESS { case: "ok" }]->(loop_399_when_gate)
+(loop_399_given_gate)-[:PROCESS { case: "err" }]->(loop_399_inactive)
+(loop_399_when_gate)-[:PROCESS { case: "ok" }]->(loop_399_context)
+(loop_399_when_gate)-[:PROCESS { case: "err" }]->(loop_399_inactive)
+(loop_399_context)-[:FORK { strategy: "behavior-branches" }]->(loop_399_context_branch | loop_399_then_branch | loop_399_operator_branch | loop_399_result_branch | loop_399_taxonomy_branch | loop_399_intervention_recognize | loop_399_intervention_leverage)
+(loop_399_context_branch | loop_399_then_branch | loop_399_operator_branch | loop_399_result_branch | loop_399_taxonomy_branch | loop_399_intervention_recognize | loop_399_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_399_verdict)
+(loop_399_inactive)-[:PROCESS]->(loop_399_sink)
+(loop_399_verdict)-[:PROCESS]->(loop_399_sink)
+(loop_399_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_399_then_branch)
+(loop_399_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_399_result_branch)

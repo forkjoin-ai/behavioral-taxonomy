@@ -1,0 +1,33 @@
+// behavioral-loop-3601.gg
+// Executable Gnosis projection for The Attention Bulldozer (Se-Te Loop).
+
+// Nodes
+(loop_3601_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_3601_context_branch: BehaviorEmit { emission: 'context' })
+(loop_3601_given_gate: BehaviorAssess { stage: 'given', text: 'Dominant%20Extroverted%20Sensing%20(Se)%20%2B%20Extroverted%20Thinking%20(Te)%20bypassing%20Introverted%20Feeling%20(Fi)' })
+(loop_3601_inactive: BehaviorTerminal { loopId: 3601, loopName: 'The%20Attention%20Bulldozer%20(Se-Te%20Loop)' })
+(loop_3601_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_3601_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3601_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_3601_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_3601_result_branch: BehaviorEmit { emission: 'result', text: 'Melodramatic%20bossiness%3B%20forcing%20engagement%20from%20others%20even%20if%20it' })
+(loop_3601_sink: BehaviorSink)
+(loop_3601_start: BehaviorStart { loopId: 3601, loopName: 'The%20Attention%20Bulldozer%20(Se-Te%20Loop)', given: 'Dominant%20Extroverted%20Sensing%20(Se)%20%2B%20Extroverted%20Thinking%20(Te)%20bypassing%20Introverted%20Feeling%20(Fi)', when: 'Feeling%20ignored%20or%20when%20the%20environment%20is%20too%20slow', then: 'Subject%20forcefully%20takes%20control%20of%20the%20physical%20space%2Fconversation%20to%20make%20things%20', result: 'Melodramatic%20bossiness%3B%20forcing%20engagement%20from%20others%20even%20if%20it', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3601_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3601_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20forcefully%20takes%20control%20of%20the%20physical%20space%2Fconversation%20to%20make%20things%20' })
+(loop_3601_verdict: BehaviorVerdict { loopId: 3601, loopName: 'The%20Attention%20Bulldozer%20(Se-Te%20Loop)', then: 'Subject%20forcefully%20takes%20control%20of%20the%20physical%20space%2Fconversation%20to%20make%20things%20', result: 'Melodramatic%20bossiness%3B%20forcing%20engagement%20from%20others%20even%20if%20it', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3601_when_gate: BehaviorAssess { stage: 'when', text: 'Feeling%20ignored%20or%20when%20the%20environment%20is%20too%20slow' })
+
+// Topology
+(loop_3601_start)-[:PROCESS]->(loop_3601_given_gate)
+(loop_3601_given_gate)-[:PROCESS { case: "ok" }]->(loop_3601_when_gate)
+(loop_3601_given_gate)-[:PROCESS { case: "err" }]->(loop_3601_inactive)
+(loop_3601_when_gate)-[:PROCESS { case: "ok" }]->(loop_3601_context)
+(loop_3601_when_gate)-[:PROCESS { case: "err" }]->(loop_3601_inactive)
+(loop_3601_context)-[:FORK { strategy: "behavior-branches" }]->(loop_3601_context_branch | loop_3601_then_branch | loop_3601_operator_branch | loop_3601_result_branch | loop_3601_taxonomy_branch | loop_3601_intervention_recognize | loop_3601_intervention_interdict | loop_3601_intervention_minimize)
+(loop_3601_context_branch | loop_3601_then_branch | loop_3601_operator_branch | loop_3601_result_branch | loop_3601_taxonomy_branch | loop_3601_intervention_recognize | loop_3601_intervention_interdict | loop_3601_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_3601_verdict)
+(loop_3601_inactive)-[:PROCESS]->(loop_3601_sink)
+(loop_3601_verdict)-[:PROCESS]->(loop_3601_sink)
+(loop_3601_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_3601_then_branch)
+(loop_3601_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_3601_then_branch)
+(loop_3601_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_3601_then_branch)

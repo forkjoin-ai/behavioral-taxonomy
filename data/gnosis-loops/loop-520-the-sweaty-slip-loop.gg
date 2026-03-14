@@ -1,0 +1,33 @@
+// behavioral-loop-520.gg
+// Executable Gnosis projection for The Sweaty Slip Loop.
+
+// Nodes
+(loop_520_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_520_context_branch: BehaviorEmit { emission: 'context' })
+(loop_520_given_gate: BehaviorAssess { stage: 'given', text: 'Moisture%20layer%20preventing%20friction' })
+(loop_520_inactive: BehaviorTerminal { loopId: 520, loopName: 'The%20Sweaty%20Slip%20Loop' })
+(loop_520_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_520_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_520_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_520_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Eellike%20Operator', mechanism: 'the%20hand%20slides%20out' })
+(loop_520_result_branch: BehaviorEmit { emission: 'result', text: 'a%20%22failed%22%20greeting%20that%20sets%20an%20awkward%20tone%20for%20the%20meeting' })
+(loop_520_sink: BehaviorSink)
+(loop_520_start: BehaviorStart { loopId: 520, loopName: 'The%20Sweaty%20Slip%20Loop', given: 'Moisture%20layer%20preventing%20friction', when: 'attempting%20a%20firm%20grip', then: 'the%20hand%20slides%20out%20(The%20Eellike%20Operator)', result: 'a%20%22failed%22%20greeting%20that%20sets%20an%20awkward%20tone%20for%20the%20meeting', operatorName: 'The%20Eellike%20Operator', operatorMechanism: 'the%20hand%20slides%20out', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_520_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_520_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hand%20slides%20out%20(The%20Eellike%20Operator)' })
+(loop_520_verdict: BehaviorVerdict { loopId: 520, loopName: 'The%20Sweaty%20Slip%20Loop', then: 'the%20hand%20slides%20out%20(The%20Eellike%20Operator)', result: 'a%20%22failed%22%20greeting%20that%20sets%20an%20awkward%20tone%20for%20the%20meeting', operatorName: 'The%20Eellike%20Operator', operatorMechanism: 'the%20hand%20slides%20out', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_520_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20a%20firm%20grip' })
+
+// Topology
+(loop_520_start)-[:PROCESS]->(loop_520_given_gate)
+(loop_520_given_gate)-[:PROCESS { case: "ok" }]->(loop_520_when_gate)
+(loop_520_given_gate)-[:PROCESS { case: "err" }]->(loop_520_inactive)
+(loop_520_when_gate)-[:PROCESS { case: "ok" }]->(loop_520_context)
+(loop_520_when_gate)-[:PROCESS { case: "err" }]->(loop_520_inactive)
+(loop_520_context)-[:FORK { strategy: "behavior-branches" }]->(loop_520_context_branch | loop_520_then_branch | loop_520_operator_branch | loop_520_result_branch | loop_520_taxonomy_branch | loop_520_intervention_recognize | loop_520_intervention_interdict | loop_520_intervention_minimize)
+(loop_520_context_branch | loop_520_then_branch | loop_520_operator_branch | loop_520_result_branch | loop_520_taxonomy_branch | loop_520_intervention_recognize | loop_520_intervention_interdict | loop_520_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_520_verdict)
+(loop_520_inactive)-[:PROCESS]->(loop_520_sink)
+(loop_520_verdict)-[:PROCESS]->(loop_520_sink)
+(loop_520_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_520_then_branch)
+(loop_520_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_520_then_branch)
+(loop_520_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_520_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-58.gg
+// Executable Gnosis projection for The Gap Tooth Loop.
+
+// Nodes
+(loop_58_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_58_context_branch: BehaviorEmit { emission: 'context' })
+(loop_58_given_gate: BehaviorAssess { stage: 'given', text: 'Frontal%20tooth%20gap' })
+(loop_58_inactive: BehaviorTerminal { loopId: 58, loopName: 'The%20Gap%20Tooth%20Loop' })
+(loop_58_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_58_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_58_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_58_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Halo%20Operator', mechanism: 'the%20observer%20perceives%20%22Whimsy%22%20or%20%22Authenticity%22' })
+(loop_58_result_branch: BehaviorEmit { emission: 'result', text: 'a%20**Quirky%2FIndie%20Identity**' })
+(loop_58_sink: BehaviorSink)
+(loop_58_start: BehaviorStart { loopId: 58, loopName: 'The%20Gap%20Tooth%20Loop', given: 'Frontal%20tooth%20gap', when: 'smiling', then: 'the%20observer%20perceives%20%22Whimsy%22%20or%20%22Authenticity%22%20(The%20Halo%20Operator%20-%20Fashion)', result: 'a%20**Quirky%2FIndie%20Identity**', operatorName: 'The%20Halo%20Operator', operatorMechanism: 'the%20observer%20perceives%20%22Whimsy%22%20or%20%22Authenticity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_58_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_58_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20perceives%20%22Whimsy%22%20or%20%22Authenticity%22%20(The%20Halo%20Operator%20-%20Fashion)' })
+(loop_58_verdict: BehaviorVerdict { loopId: 58, loopName: 'The%20Gap%20Tooth%20Loop', then: 'the%20observer%20perceives%20%22Whimsy%22%20or%20%22Authenticity%22%20(The%20Halo%20Operator%20-%20Fashion)', result: 'a%20**Quirky%2FIndie%20Identity**', operatorName: 'The%20Halo%20Operator', operatorMechanism: 'the%20observer%20perceives%20%22Whimsy%22%20or%20%22Authenticity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_58_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_58_start)-[:PROCESS]->(loop_58_given_gate)
+(loop_58_given_gate)-[:PROCESS { case: "ok" }]->(loop_58_when_gate)
+(loop_58_given_gate)-[:PROCESS { case: "err" }]->(loop_58_inactive)
+(loop_58_when_gate)-[:PROCESS { case: "ok" }]->(loop_58_context)
+(loop_58_when_gate)-[:PROCESS { case: "err" }]->(loop_58_inactive)
+(loop_58_context)-[:FORK { strategy: "behavior-branches" }]->(loop_58_context_branch | loop_58_then_branch | loop_58_operator_branch | loop_58_result_branch | loop_58_taxonomy_branch | loop_58_intervention_recognize | loop_58_intervention_interdict | loop_58_intervention_minimize)
+(loop_58_context_branch | loop_58_then_branch | loop_58_operator_branch | loop_58_result_branch | loop_58_taxonomy_branch | loop_58_intervention_recognize | loop_58_intervention_interdict | loop_58_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_58_verdict)
+(loop_58_inactive)-[:PROCESS]->(loop_58_sink)
+(loop_58_verdict)-[:PROCESS]->(loop_58_sink)
+(loop_58_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_58_then_branch)
+(loop_58_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_58_then_branch)
+(loop_58_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_58_then_branch)

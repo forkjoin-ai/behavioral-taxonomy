@@ -1,0 +1,33 @@
+// behavioral-loop-966.gg
+// Executable Gnosis projection for The Knock Knee Loop.
+
+// Nodes
+(loop_966_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_966_context_branch: BehaviorEmit { emission: 'context' })
+(loop_966_given_gate: BehaviorAssess { stage: 'given', text: 'Knees%20touching%20while%20ankles%20remain%20apart' })
+(loop_966_inactive: BehaviorTerminal { loopId: 966, loopName: 'The%20Knock%20Knee%20Loop' })
+(loop_966_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_966_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_966_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_966_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Eggbeater%20Operator', mechanism: 'the%20legs%20swing%20outward%20inefficiently' })
+(loop_966_result_branch: BehaviorEmit { emission: 'result', text: 'being%20picked%20last%20for%20sports%20due%20to%20perceived%20%22Fragility.%22' })
+(loop_966_sink: BehaviorSink)
+(loop_966_start: BehaviorStart { loopId: 966, loopName: 'The%20Knock%20Knee%20Loop', given: 'Knees%20touching%20while%20ankles%20remain%20apart', when: 'running', then: 'the%20legs%20swing%20outward%20inefficiently%20(The%20Eggbeater%20Operator)', result: 'being%20picked%20last%20for%20sports%20due%20to%20perceived%20%22Fragility.%22', operatorName: 'The%20Eggbeater%20Operator', operatorMechanism: 'the%20legs%20swing%20outward%20inefficiently', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_966_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_966_then_branch: BehaviorEmit { emission: 'then', text: 'the%20legs%20swing%20outward%20inefficiently%20(The%20Eggbeater%20Operator)' })
+(loop_966_verdict: BehaviorVerdict { loopId: 966, loopName: 'The%20Knock%20Knee%20Loop', then: 'the%20legs%20swing%20outward%20inefficiently%20(The%20Eggbeater%20Operator)', result: 'being%20picked%20last%20for%20sports%20due%20to%20perceived%20%22Fragility.%22', operatorName: 'The%20Eggbeater%20Operator', operatorMechanism: 'the%20legs%20swing%20outward%20inefficiently', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_966_when_gate: BehaviorAssess { stage: 'when', text: 'running' })
+
+// Topology
+(loop_966_start)-[:PROCESS]->(loop_966_given_gate)
+(loop_966_given_gate)-[:PROCESS { case: "ok" }]->(loop_966_when_gate)
+(loop_966_given_gate)-[:PROCESS { case: "err" }]->(loop_966_inactive)
+(loop_966_when_gate)-[:PROCESS { case: "ok" }]->(loop_966_context)
+(loop_966_when_gate)-[:PROCESS { case: "err" }]->(loop_966_inactive)
+(loop_966_context)-[:FORK { strategy: "behavior-branches" }]->(loop_966_context_branch | loop_966_then_branch | loop_966_operator_branch | loop_966_result_branch | loop_966_taxonomy_branch | loop_966_intervention_recognize | loop_966_intervention_interdict | loop_966_intervention_minimize)
+(loop_966_context_branch | loop_966_then_branch | loop_966_operator_branch | loop_966_result_branch | loop_966_taxonomy_branch | loop_966_intervention_recognize | loop_966_intervention_interdict | loop_966_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_966_verdict)
+(loop_966_inactive)-[:PROCESS]->(loop_966_sink)
+(loop_966_verdict)-[:PROCESS]->(loop_966_sink)
+(loop_966_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_966_then_branch)
+(loop_966_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_966_then_branch)
+(loop_966_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_966_then_branch)

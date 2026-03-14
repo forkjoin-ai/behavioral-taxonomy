@@ -1,0 +1,33 @@
+// behavioral-loop-191.gg
+// Executable Gnosis projection for The Glottal Attack Loop.
+
+// Nodes
+(loop_191_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_191_context_branch: BehaviorEmit { emission: 'context' })
+(loop_191_given_gate: BehaviorAssess { stage: 'given', text: 'Hard%20onset%20of%20vowel%20sounds%20(Percussive%20speech)' })
+(loop_191_inactive: BehaviorTerminal { loopId: 191, loopName: 'The%20Glottal%20Attack%20Loop' })
+(loop_191_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_191_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_191_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_191_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Authority%2FThreat%20Operator', mechanism: 'the%20voice%20sounds%20%22Aggressive%22%20or%20%22Military%22' })
+(loop_191_result_branch: BehaviorEmit { emission: 'result', text: 'high%20compliance%20but%20low%20morale%20among%20subordinates' })
+(loop_191_sink: BehaviorSink)
+(loop_191_start: BehaviorStart { loopId: 191, loopName: 'The%20Glottal%20Attack%20Loop', given: 'Hard%20onset%20of%20vowel%20sounds%20(Percussive%20speech)', when: 'giving%20instructions', then: 'the%20voice%20sounds%20%22Aggressive%22%20or%20%22Military%22%20(The%20Authority%2FThreat%20Operator)', result: 'high%20compliance%20but%20low%20morale%20among%20subordinates', operatorName: 'The%20Authority%2FThreat%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Aggressive%22%20or%20%22Military%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_191_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_191_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20sounds%20%22Aggressive%22%20or%20%22Military%22%20(The%20Authority%2FThreat%20Operator)' })
+(loop_191_verdict: BehaviorVerdict { loopId: 191, loopName: 'The%20Glottal%20Attack%20Loop', then: 'the%20voice%20sounds%20%22Aggressive%22%20or%20%22Military%22%20(The%20Authority%2FThreat%20Operator)', result: 'high%20compliance%20but%20low%20morale%20among%20subordinates', operatorName: 'The%20Authority%2FThreat%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Aggressive%22%20or%20%22Military%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_191_when_gate: BehaviorAssess { stage: 'when', text: 'giving%20instructions' })
+
+// Topology
+(loop_191_start)-[:PROCESS]->(loop_191_given_gate)
+(loop_191_given_gate)-[:PROCESS { case: "ok" }]->(loop_191_when_gate)
+(loop_191_given_gate)-[:PROCESS { case: "err" }]->(loop_191_inactive)
+(loop_191_when_gate)-[:PROCESS { case: "ok" }]->(loop_191_context)
+(loop_191_when_gate)-[:PROCESS { case: "err" }]->(loop_191_inactive)
+(loop_191_context)-[:FORK { strategy: "behavior-branches" }]->(loop_191_context_branch | loop_191_then_branch | loop_191_operator_branch | loop_191_result_branch | loop_191_taxonomy_branch | loop_191_intervention_recognize | loop_191_intervention_interdict | loop_191_intervention_minimize)
+(loop_191_context_branch | loop_191_then_branch | loop_191_operator_branch | loop_191_result_branch | loop_191_taxonomy_branch | loop_191_intervention_recognize | loop_191_intervention_interdict | loop_191_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_191_verdict)
+(loop_191_inactive)-[:PROCESS]->(loop_191_sink)
+(loop_191_verdict)-[:PROCESS]->(loop_191_sink)
+(loop_191_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_191_then_branch)
+(loop_191_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_191_then_branch)
+(loop_191_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_191_then_branch)

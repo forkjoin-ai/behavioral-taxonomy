@@ -1,0 +1,33 @@
+// behavioral-loop-264.gg
+// Executable Gnosis projection for The Tight Collar Loop.
+
+// Nodes
+(loop_264_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_264_context_branch: BehaviorEmit { emission: 'context' })
+(loop_264_given_gate: BehaviorAssess { stage: 'given', text: 'Neck%20circumference%20%3E%2017%20inches' })
+(loop_264_inactive: BehaviorTerminal { loopId: 264, loopName: 'The%20Tight%20Collar%20Loop' })
+(loop_264_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_264_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_264_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_264_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Strangled%20Operator', mechanism: 'the%20face%20flushes%20red%20due%20to%20restriction' })
+(loop_264_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20%22Stressed%22%20or%20%22Angry%22%20even%20when%20calm' })
+(loop_264_sink: BehaviorSink)
+(loop_264_start: BehaviorStart { loopId: 264, loopName: 'The%20Tight%20Collar%20Loop', given: 'Neck%20circumference%20%3E%2017%20inches', when: 'wearing%20a%20tie', then: 'the%20face%20flushes%20red%20due%20to%20restriction%20(The%20Strangled%20Operator)', result: 'the%20individual%20looking%20%22Stressed%22%20or%20%22Angry%22%20even%20when%20calm', operatorName: 'The%20Strangled%20Operator', operatorMechanism: 'the%20face%20flushes%20red%20due%20to%20restriction', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_264_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_264_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20flushes%20red%20due%20to%20restriction%20(The%20Strangled%20Operator)' })
+(loop_264_verdict: BehaviorVerdict { loopId: 264, loopName: 'The%20Tight%20Collar%20Loop', then: 'the%20face%20flushes%20red%20due%20to%20restriction%20(The%20Strangled%20Operator)', result: 'the%20individual%20looking%20%22Stressed%22%20or%20%22Angry%22%20even%20when%20calm', operatorName: 'The%20Strangled%20Operator', operatorMechanism: 'the%20face%20flushes%20red%20due%20to%20restriction', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_264_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20a%20tie' })
+
+// Topology
+(loop_264_start)-[:PROCESS]->(loop_264_given_gate)
+(loop_264_given_gate)-[:PROCESS { case: "ok" }]->(loop_264_when_gate)
+(loop_264_given_gate)-[:PROCESS { case: "err" }]->(loop_264_inactive)
+(loop_264_when_gate)-[:PROCESS { case: "ok" }]->(loop_264_context)
+(loop_264_when_gate)-[:PROCESS { case: "err" }]->(loop_264_inactive)
+(loop_264_context)-[:FORK { strategy: "behavior-branches" }]->(loop_264_context_branch | loop_264_then_branch | loop_264_operator_branch | loop_264_result_branch | loop_264_taxonomy_branch | loop_264_intervention_recognize | loop_264_intervention_interdict | loop_264_intervention_minimize)
+(loop_264_context_branch | loop_264_then_branch | loop_264_operator_branch | loop_264_result_branch | loop_264_taxonomy_branch | loop_264_intervention_recognize | loop_264_intervention_interdict | loop_264_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_264_verdict)
+(loop_264_inactive)-[:PROCESS]->(loop_264_sink)
+(loop_264_verdict)-[:PROCESS]->(loop_264_sink)
+(loop_264_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_264_then_branch)
+(loop_264_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_264_then_branch)
+(loop_264_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_264_then_branch)

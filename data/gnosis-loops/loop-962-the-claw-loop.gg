@@ -1,0 +1,33 @@
+// behavioral-loop-962.gg
+// Executable Gnosis projection for The Claw Loop.
+
+// Nodes
+(loop_962_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_962_context_branch: BehaviorEmit { emission: 'context' })
+(loop_962_given_gate: BehaviorAssess { stage: 'given', text: "Fingers%20curled%20permanently%20inward%20(Dupuytren's%20or%20Tension)" })
+(loop_962_inactive: BehaviorTerminal { loopId: 962, loopName: 'The%20Claw%20Loop' })
+(loop_962_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_962_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_962_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_962_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Witch%20Operator', mechanism: 'the%20hand%20looks%20like%20a%20%22Spider%22' })
+(loop_962_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20%22Old%20Age%22%20or%20%22Wickedness%22%20(Disney%20villain%20bias)' })
+(loop_962_sink: BehaviorSink)
+(loop_962_start: BehaviorStart { loopId: 962, loopName: 'The%20Claw%20Loop', given: "Fingers%20curled%20permanently%20inward%20(Dupuytren's%20or%20Tension)", when: 'resting%20on%20a%20table', then: 'the%20hand%20looks%20like%20a%20%22Spider%22%20(The%20Witch%20Operator)', result: 'observers%20assuming%20%22Old%20Age%22%20or%20%22Wickedness%22%20(Disney%20villain%20bias)', operatorName: 'The%20Witch%20Operator', operatorMechanism: 'the%20hand%20looks%20like%20a%20%22Spider%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_962_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_962_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hand%20looks%20like%20a%20%22Spider%22%20(The%20Witch%20Operator)' })
+(loop_962_verdict: BehaviorVerdict { loopId: 962, loopName: 'The%20Claw%20Loop', then: 'the%20hand%20looks%20like%20a%20%22Spider%22%20(The%20Witch%20Operator)', result: 'observers%20assuming%20%22Old%20Age%22%20or%20%22Wickedness%22%20(Disney%20villain%20bias)', operatorName: 'The%20Witch%20Operator', operatorMechanism: 'the%20hand%20looks%20like%20a%20%22Spider%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_962_when_gate: BehaviorAssess { stage: 'when', text: 'resting%20on%20a%20table' })
+
+// Topology
+(loop_962_start)-[:PROCESS]->(loop_962_given_gate)
+(loop_962_given_gate)-[:PROCESS { case: "ok" }]->(loop_962_when_gate)
+(loop_962_given_gate)-[:PROCESS { case: "err" }]->(loop_962_inactive)
+(loop_962_when_gate)-[:PROCESS { case: "ok" }]->(loop_962_context)
+(loop_962_when_gate)-[:PROCESS { case: "err" }]->(loop_962_inactive)
+(loop_962_context)-[:FORK { strategy: "behavior-branches" }]->(loop_962_context_branch | loop_962_then_branch | loop_962_operator_branch | loop_962_result_branch | loop_962_taxonomy_branch | loop_962_intervention_recognize | loop_962_intervention_interdict | loop_962_intervention_minimize)
+(loop_962_context_branch | loop_962_then_branch | loop_962_operator_branch | loop_962_result_branch | loop_962_taxonomy_branch | loop_962_intervention_recognize | loop_962_intervention_interdict | loop_962_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_962_verdict)
+(loop_962_inactive)-[:PROCESS]->(loop_962_sink)
+(loop_962_verdict)-[:PROCESS]->(loop_962_sink)
+(loop_962_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_962_then_branch)
+(loop_962_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_962_then_branch)
+(loop_962_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_962_then_branch)

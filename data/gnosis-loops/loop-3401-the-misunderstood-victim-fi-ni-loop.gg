@@ -1,0 +1,33 @@
+// behavioral-loop-3401.gg
+// Executable Gnosis projection for The Misunderstood Victim (Fi-Ni Loop).
+
+// Nodes
+(loop_3401_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_3401_context_branch: BehaviorEmit { emission: 'context' })
+(loop_3401_given_gate: BehaviorAssess { stage: 'given', text: 'Dominant%20Introverted%20Feeling%20(Fi)%20%2B%20Introverted%20Intuition%20(Ni)%20bypassing%20Extroverted%20Sensing%20(Se)' })
+(loop_3401_inactive: BehaviorTerminal { loopId: 3401, loopName: 'The%20Misunderstood%20Victim%20(Fi-Ni%20Loop)' })
+(loop_3401_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_3401_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3401_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_3401_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_3401_result_branch: BehaviorEmit { emission: 'result', text: 'Paranoia%20about%20others' })
+(loop_3401_sink: BehaviorSink)
+(loop_3401_start: BehaviorStart { loopId: 3401, loopName: 'The%20Misunderstood%20Victim%20(Fi-Ni%20Loop)', given: 'Dominant%20Introverted%20Feeling%20(Fi)%20%2B%20Introverted%20Intuition%20(Ni)%20bypassing%20Extroverted%20Sensing%20(Se)', when: 'Personal%20values%20are%20challenged%20or%20rejected', then: 'Subject%20retreats%20into%20a%20singular%2C%20dark%20interpretation%20of%20events%20where%20they%20are%20the%20sole%20martyr', result: 'Paranoia%20about%20others', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3401_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3401_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20retreats%20into%20a%20singular%2C%20dark%20interpretation%20of%20events%20where%20they%20are%20the%20sole%20martyr' })
+(loop_3401_verdict: BehaviorVerdict { loopId: 3401, loopName: 'The%20Misunderstood%20Victim%20(Fi-Ni%20Loop)', then: 'Subject%20retreats%20into%20a%20singular%2C%20dark%20interpretation%20of%20events%20where%20they%20are%20the%20sole%20martyr', result: 'Paranoia%20about%20others', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3401_when_gate: BehaviorAssess { stage: 'when', text: 'Personal%20values%20are%20challenged%20or%20rejected' })
+
+// Topology
+(loop_3401_start)-[:PROCESS]->(loop_3401_given_gate)
+(loop_3401_given_gate)-[:PROCESS { case: "ok" }]->(loop_3401_when_gate)
+(loop_3401_given_gate)-[:PROCESS { case: "err" }]->(loop_3401_inactive)
+(loop_3401_when_gate)-[:PROCESS { case: "ok" }]->(loop_3401_context)
+(loop_3401_when_gate)-[:PROCESS { case: "err" }]->(loop_3401_inactive)
+(loop_3401_context)-[:FORK { strategy: "behavior-branches" }]->(loop_3401_context_branch | loop_3401_then_branch | loop_3401_operator_branch | loop_3401_result_branch | loop_3401_taxonomy_branch | loop_3401_intervention_recognize | loop_3401_intervention_interdict | loop_3401_intervention_minimize)
+(loop_3401_context_branch | loop_3401_then_branch | loop_3401_operator_branch | loop_3401_result_branch | loop_3401_taxonomy_branch | loop_3401_intervention_recognize | loop_3401_intervention_interdict | loop_3401_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_3401_verdict)
+(loop_3401_inactive)-[:PROCESS]->(loop_3401_sink)
+(loop_3401_verdict)-[:PROCESS]->(loop_3401_sink)
+(loop_3401_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_3401_then_branch)
+(loop_3401_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_3401_then_branch)
+(loop_3401_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_3401_then_branch)

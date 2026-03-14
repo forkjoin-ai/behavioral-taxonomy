@@ -1,0 +1,33 @@
+// behavioral-loop-343.gg
+// Executable Gnosis projection for The Cheek Chew Loop.
+
+// Nodes
+(loop_343_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_343_context_branch: BehaviorEmit { emission: 'context' })
+(loop_343_given_gate: BehaviorAssess { stage: 'given', text: 'Suction%20of%20buccal%20mucosa' })
+(loop_343_inactive: BehaviorTerminal { loopId: 343, loopName: 'The%20Cheek%20Chew%20Loop' })
+(loop_343_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_343_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_343_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_343_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Anxiety%20Operator', mechanism: 'the%20face%20looks%20%22Sucked%20In%22%20or%20%22Fish-like%22' })
+(loop_343_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20sensing%20**Hidden%20Stress**' })
+(loop_343_sink: BehaviorSink)
+(loop_343_start: BehaviorStart { loopId: 343, loopName: 'The%20Cheek%20Chew%20Loop', given: 'Suction%20of%20buccal%20mucosa', when: 'thinking', then: 'the%20face%20looks%20%22Sucked%20In%22%20or%20%22Fish-like%22%20(The%20Anxiety%20Operator)', result: 'observers%20sensing%20**Hidden%20Stress**', operatorName: 'The%20Anxiety%20Operator', operatorMechanism: 'the%20face%20looks%20%22Sucked%20In%22%20or%20%22Fish-like%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_343_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_343_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Sucked%20In%22%20or%20%22Fish-like%22%20(The%20Anxiety%20Operator)' })
+(loop_343_verdict: BehaviorVerdict { loopId: 343, loopName: 'The%20Cheek%20Chew%20Loop', then: 'the%20face%20looks%20%22Sucked%20In%22%20or%20%22Fish-like%22%20(The%20Anxiety%20Operator)', result: 'observers%20sensing%20**Hidden%20Stress**', operatorName: 'The%20Anxiety%20Operator', operatorMechanism: 'the%20face%20looks%20%22Sucked%20In%22%20or%20%22Fish-like%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_343_when_gate: BehaviorAssess { stage: 'when', text: 'thinking' })
+
+// Topology
+(loop_343_start)-[:PROCESS]->(loop_343_given_gate)
+(loop_343_given_gate)-[:PROCESS { case: "ok" }]->(loop_343_when_gate)
+(loop_343_given_gate)-[:PROCESS { case: "err" }]->(loop_343_inactive)
+(loop_343_when_gate)-[:PROCESS { case: "ok" }]->(loop_343_context)
+(loop_343_when_gate)-[:PROCESS { case: "err" }]->(loop_343_inactive)
+(loop_343_context)-[:FORK { strategy: "behavior-branches" }]->(loop_343_context_branch | loop_343_then_branch | loop_343_operator_branch | loop_343_result_branch | loop_343_taxonomy_branch | loop_343_intervention_recognize | loop_343_intervention_interdict | loop_343_intervention_minimize)
+(loop_343_context_branch | loop_343_then_branch | loop_343_operator_branch | loop_343_result_branch | loop_343_taxonomy_branch | loop_343_intervention_recognize | loop_343_intervention_interdict | loop_343_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_343_verdict)
+(loop_343_inactive)-[:PROCESS]->(loop_343_sink)
+(loop_343_verdict)-[:PROCESS]->(loop_343_sink)
+(loop_343_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_343_then_branch)
+(loop_343_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_343_then_branch)
+(loop_343_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_343_then_branch)

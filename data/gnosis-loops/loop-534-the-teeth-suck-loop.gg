@@ -1,0 +1,33 @@
+// behavioral-loop-534.gg
+// Executable Gnosis projection for The Teeth Suck Loop.
+
+// Nodes
+(loop_534_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_534_context_branch: BehaviorEmit { emission: 'context' })
+(loop_534_given_gate: BehaviorAssess { stage: 'given', text: 'Drawing%20air%20through%20teeth%20(Tsk%20tsk%20noise)' })
+(loop_534_inactive: BehaviorTerminal { loopId: 534, loopName: 'The%20Teeth%20Suck%20Loop' })
+(loop_534_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_534_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_534_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_534_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Scold%20Operator', mechanism: 'it%20sounds%20like%20%22Judgement%22%20or%20%22Annoyance%22' })
+(loop_534_result_branch: BehaviorEmit { emission: 'result', text: 'the%20listener%20asking%20%22What%20did%20I%20do%20wrong%3F%22' })
+(loop_534_sink: BehaviorSink)
+(loop_534_start: BehaviorStart { loopId: 534, loopName: 'The%20Teeth%20Suck%20Loop', given: 'Drawing%20air%20through%20teeth%20(Tsk%20tsk%20noise)', when: 'thinking', then: 'it%20sounds%20like%20%22Judgement%22%20or%20%22Annoyance%22%20(The%20Scold%20Operator)', result: 'the%20listener%20asking%20%22What%20did%20I%20do%20wrong%3F%22', operatorName: 'The%20Scold%20Operator', operatorMechanism: 'it%20sounds%20like%20%22Judgement%22%20or%20%22Annoyance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_534_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_534_then_branch: BehaviorEmit { emission: 'then', text: 'it%20sounds%20like%20%22Judgement%22%20or%20%22Annoyance%22%20(The%20Scold%20Operator)' })
+(loop_534_verdict: BehaviorVerdict { loopId: 534, loopName: 'The%20Teeth%20Suck%20Loop', then: 'it%20sounds%20like%20%22Judgement%22%20or%20%22Annoyance%22%20(The%20Scold%20Operator)', result: 'the%20listener%20asking%20%22What%20did%20I%20do%20wrong%3F%22', operatorName: 'The%20Scold%20Operator', operatorMechanism: 'it%20sounds%20like%20%22Judgement%22%20or%20%22Annoyance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_534_when_gate: BehaviorAssess { stage: 'when', text: 'thinking' })
+
+// Topology
+(loop_534_start)-[:PROCESS]->(loop_534_given_gate)
+(loop_534_given_gate)-[:PROCESS { case: "ok" }]->(loop_534_when_gate)
+(loop_534_given_gate)-[:PROCESS { case: "err" }]->(loop_534_inactive)
+(loop_534_when_gate)-[:PROCESS { case: "ok" }]->(loop_534_context)
+(loop_534_when_gate)-[:PROCESS { case: "err" }]->(loop_534_inactive)
+(loop_534_context)-[:FORK { strategy: "behavior-branches" }]->(loop_534_context_branch | loop_534_then_branch | loop_534_operator_branch | loop_534_result_branch | loop_534_taxonomy_branch | loop_534_intervention_recognize | loop_534_intervention_interdict | loop_534_intervention_minimize)
+(loop_534_context_branch | loop_534_then_branch | loop_534_operator_branch | loop_534_result_branch | loop_534_taxonomy_branch | loop_534_intervention_recognize | loop_534_intervention_interdict | loop_534_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_534_verdict)
+(loop_534_inactive)-[:PROCESS]->(loop_534_sink)
+(loop_534_verdict)-[:PROCESS]->(loop_534_sink)
+(loop_534_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_534_then_branch)
+(loop_534_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_534_then_branch)
+(loop_534_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_534_then_branch)

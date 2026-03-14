@@ -1,0 +1,33 @@
+// behavioral-loop-78.gg
+// Executable Gnosis projection for The Princess and the Pea Loop.
+
+// Nodes
+(loop_78_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_78_context_branch: BehaviorEmit { emission: 'context' })
+(loop_78_given_gate: BehaviorAssess { stage: 'given', text: 'Hypersensitivity%20to%20touch%2Fpain' })
+(loop_78_inactive: BehaviorTerminal { loopId: 78, loopName: 'The%20Princess%20and%20the%20Pea%20Loop' })
+(loop_78_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_78_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_78_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_78_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20reaction%20is%20visible%20and%20vocal' })
+(loop_78_result_branch: BehaviorEmit { emission: 'result', text: 'being%20labeled%20%22High%20Maintenance%2C%22%20leading%20to%20**Social%20Exclusion**%20from%20rugged%2Fadventurous%20activities' })
+(loop_78_sink: BehaviorSink)
+(loop_78_start: BehaviorStart { loopId: 78, loopName: 'The%20Princess%20and%20the%20Pea%20Loop', given: 'Hypersensitivity%20to%20touch%2Fpain', when: 'encountering%20minor%20discomforts%20(tags%2C%20bumps)', then: 'the%20reaction%20is%20visible%20and%20vocal%20(The%20Fragility%20Operator)', result: 'being%20labeled%20%22High%20Maintenance%2C%22%20leading%20to%20**Social%20Exclusion**%20from%20rugged%2Fadventurous%20activities', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20reaction%20is%20visible%20and%20vocal', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_78_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_78_then_branch: BehaviorEmit { emission: 'then', text: 'the%20reaction%20is%20visible%20and%20vocal%20(The%20Fragility%20Operator)' })
+(loop_78_verdict: BehaviorVerdict { loopId: 78, loopName: 'The%20Princess%20and%20the%20Pea%20Loop', then: 'the%20reaction%20is%20visible%20and%20vocal%20(The%20Fragility%20Operator)', result: 'being%20labeled%20%22High%20Maintenance%2C%22%20leading%20to%20**Social%20Exclusion**%20from%20rugged%2Fadventurous%20activities', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20reaction%20is%20visible%20and%20vocal', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_78_when_gate: BehaviorAssess { stage: 'when', text: 'encountering%20minor%20discomforts%20(tags%2C%20bumps)' })
+
+// Topology
+(loop_78_start)-[:PROCESS]->(loop_78_given_gate)
+(loop_78_given_gate)-[:PROCESS { case: "ok" }]->(loop_78_when_gate)
+(loop_78_given_gate)-[:PROCESS { case: "err" }]->(loop_78_inactive)
+(loop_78_when_gate)-[:PROCESS { case: "ok" }]->(loop_78_context)
+(loop_78_when_gate)-[:PROCESS { case: "err" }]->(loop_78_inactive)
+(loop_78_context)-[:FORK { strategy: "behavior-branches" }]->(loop_78_context_branch | loop_78_then_branch | loop_78_operator_branch | loop_78_result_branch | loop_78_taxonomy_branch | loop_78_intervention_recognize | loop_78_intervention_interdict | loop_78_intervention_minimize)
+(loop_78_context_branch | loop_78_then_branch | loop_78_operator_branch | loop_78_result_branch | loop_78_taxonomy_branch | loop_78_intervention_recognize | loop_78_intervention_interdict | loop_78_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_78_verdict)
+(loop_78_inactive)-[:PROCESS]->(loop_78_sink)
+(loop_78_verdict)-[:PROCESS]->(loop_78_sink)
+(loop_78_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_78_then_branch)
+(loop_78_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_78_then_branch)
+(loop_78_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_78_then_branch)

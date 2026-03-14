@@ -1,0 +1,33 @@
+// behavioral-loop-254.gg
+// Executable Gnosis projection for The Mouth Breather Loop.
+
+// Nodes
+(loop_254_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_254_context_branch: BehaviorEmit { emission: 'context' })
+(loop_254_given_gate: BehaviorAssess { stage: 'given', text: 'Nasal%20obstruction%20requiring%20oral%20respiration' })
+(loop_254_inactive: BehaviorTerminal { loopId: 254, loopName: 'The%20Mouth%20Breather%20Loop' })
+(loop_254_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_254_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_254_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_254_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%20Operator', mechanism: 'the%20sound%20is%20%22Creepy%22%20or%20%22Laborious%22' })
+(loop_254_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20moving%20away%2C%20causing%20**Rejection%20Sensitivity**' })
+(loop_254_sink: BehaviorSink)
+(loop_254_start: BehaviorStart { loopId: 254, loopName: 'The%20Mouth%20Breather%20Loop', given: 'Nasal%20obstruction%20requiring%20oral%20respiration', when: 'breathing%20at%20rest', then: 'the%20sound%20is%20%22Creepy%22%20or%20%22Laborious%22%20(The%20Disgust%20Operator)', result: 'peers%20moving%20away%2C%20causing%20**Rejection%20Sensitivity**', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'the%20sound%20is%20%22Creepy%22%20or%20%22Laborious%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_254_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_254_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20is%20%22Creepy%22%20or%20%22Laborious%22%20(The%20Disgust%20Operator)' })
+(loop_254_verdict: BehaviorVerdict { loopId: 254, loopName: 'The%20Mouth%20Breather%20Loop', then: 'the%20sound%20is%20%22Creepy%22%20or%20%22Laborious%22%20(The%20Disgust%20Operator)', result: 'peers%20moving%20away%2C%20causing%20**Rejection%20Sensitivity**', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'the%20sound%20is%20%22Creepy%22%20or%20%22Laborious%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_254_when_gate: BehaviorAssess { stage: 'when', text: 'breathing%20at%20rest' })
+
+// Topology
+(loop_254_start)-[:PROCESS]->(loop_254_given_gate)
+(loop_254_given_gate)-[:PROCESS { case: "ok" }]->(loop_254_when_gate)
+(loop_254_given_gate)-[:PROCESS { case: "err" }]->(loop_254_inactive)
+(loop_254_when_gate)-[:PROCESS { case: "ok" }]->(loop_254_context)
+(loop_254_when_gate)-[:PROCESS { case: "err" }]->(loop_254_inactive)
+(loop_254_context)-[:FORK { strategy: "behavior-branches" }]->(loop_254_context_branch | loop_254_then_branch | loop_254_operator_branch | loop_254_result_branch | loop_254_taxonomy_branch | loop_254_intervention_recognize | loop_254_intervention_interdict | loop_254_intervention_minimize)
+(loop_254_context_branch | loop_254_then_branch | loop_254_operator_branch | loop_254_result_branch | loop_254_taxonomy_branch | loop_254_intervention_recognize | loop_254_intervention_interdict | loop_254_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_254_verdict)
+(loop_254_inactive)-[:PROCESS]->(loop_254_sink)
+(loop_254_verdict)-[:PROCESS]->(loop_254_sink)
+(loop_254_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_254_then_branch)
+(loop_254_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_254_then_branch)
+(loop_254_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_254_then_branch)

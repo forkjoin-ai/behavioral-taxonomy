@@ -1,0 +1,33 @@
+// behavioral-loop-294.gg
+// Executable Gnosis projection for The Shrinking Violet Loop.
+
+// Nodes
+(loop_294_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_294_context_branch: BehaviorEmit { emission: 'context' })
+(loop_294_given_gate: BehaviorAssess { stage: 'given', text: 'Anxiety%20or%20physical%20coldness' })
+(loop_294_inactive: BehaviorTerminal { loopId: 294, loopName: 'The%20Shrinking%20Violet%20Loop' })
+(loop_294_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_294_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_294_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_294_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Defense%20Operator', mechanism: 'the%20individual%20crosses%20arms%20and%20legs%2C%20minimizing%20footprint' })
+(loop_294_result_branch: BehaviorEmit { emission: 'result', text: 'being%20ignored%20or%20bypassed%20in%20group%20discussions' })
+(loop_294_sink: BehaviorSink)
+(loop_294_start: BehaviorStart { loopId: 294, loopName: 'The%20Shrinking%20Violet%20Loop', given: 'Anxiety%20or%20physical%20coldness', when: 'sitting', then: 'the%20individual%20crosses%20arms%20and%20legs%2C%20minimizing%20footprint%20(The%20Defense%20Operator)', result: 'being%20ignored%20or%20bypassed%20in%20group%20discussions', operatorName: 'The%20Defense%20Operator', operatorMechanism: 'the%20individual%20crosses%20arms%20and%20legs%2C%20minimizing%20footprint', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_294_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_294_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20crosses%20arms%20and%20legs%2C%20minimizing%20footprint%20(The%20Defense%20Operator)' })
+(loop_294_verdict: BehaviorVerdict { loopId: 294, loopName: 'The%20Shrinking%20Violet%20Loop', then: 'the%20individual%20crosses%20arms%20and%20legs%2C%20minimizing%20footprint%20(The%20Defense%20Operator)', result: 'being%20ignored%20or%20bypassed%20in%20group%20discussions', operatorName: 'The%20Defense%20Operator', operatorMechanism: 'the%20individual%20crosses%20arms%20and%20legs%2C%20minimizing%20footprint', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_294_when_gate: BehaviorAssess { stage: 'when', text: 'sitting' })
+
+// Topology
+(loop_294_start)-[:PROCESS]->(loop_294_given_gate)
+(loop_294_given_gate)-[:PROCESS { case: "ok" }]->(loop_294_when_gate)
+(loop_294_given_gate)-[:PROCESS { case: "err" }]->(loop_294_inactive)
+(loop_294_when_gate)-[:PROCESS { case: "ok" }]->(loop_294_context)
+(loop_294_when_gate)-[:PROCESS { case: "err" }]->(loop_294_inactive)
+(loop_294_context)-[:FORK { strategy: "behavior-branches" }]->(loop_294_context_branch | loop_294_then_branch | loop_294_operator_branch | loop_294_result_branch | loop_294_taxonomy_branch | loop_294_intervention_recognize | loop_294_intervention_interdict | loop_294_intervention_minimize)
+(loop_294_context_branch | loop_294_then_branch | loop_294_operator_branch | loop_294_result_branch | loop_294_taxonomy_branch | loop_294_intervention_recognize | loop_294_intervention_interdict | loop_294_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_294_verdict)
+(loop_294_inactive)-[:PROCESS]->(loop_294_sink)
+(loop_294_verdict)-[:PROCESS]->(loop_294_sink)
+(loop_294_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_294_then_branch)
+(loop_294_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_294_then_branch)
+(loop_294_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_294_then_branch)

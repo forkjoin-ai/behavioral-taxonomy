@@ -1,0 +1,33 @@
+// behavioral-loop-232.gg
+// Executable Gnosis projection for The Drawl Loop.
+
+// Nodes
+(loop_232_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_232_context_branch: BehaviorEmit { emission: 'context' })
+(loop_232_given_gate: BehaviorAssess { stage: 'given', text: 'Slow%20speech%20cadence%20(Regional%20or%20Neurological)' })
+(loop_232_inactive: BehaviorTerminal { loopId: 232, loopName: 'The%20Drawl%20Loop' })
+(loop_232_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_232_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_232_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_232_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intellectual%20Discount%20Operator', mechanism: 'listeners%20assume%20%22Low%20Intelligence%22%20or%20%22Rural%20Origin%22' })
+(loop_232_result_branch: BehaviorEmit { emission: 'result', text: 'habitual%20interruption%20by%20others%2C%20forcing%20the%20individual%20to%20become%20a%20**Passive%20Listener**' })
+(loop_232_sink: BehaviorSink)
+(loop_232_start: BehaviorStart { loopId: 232, loopName: 'The%20Drawl%20Loop', given: 'Slow%20speech%20cadence%20(Regional%20or%20Neurological)', when: 'speaking%20to%20fast-paced%20urbanites', then: 'listeners%20assume%20%22Low%20Intelligence%22%20or%20%22Rural%20Origin%22%20(The%20Intellectual%20Discount%20Operator)', result: 'habitual%20interruption%20by%20others%2C%20forcing%20the%20individual%20to%20become%20a%20**Passive%20Listener**', operatorName: 'The%20Intellectual%20Discount%20Operator', operatorMechanism: 'listeners%20assume%20%22Low%20Intelligence%22%20or%20%22Rural%20Origin%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_232_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_232_then_branch: BehaviorEmit { emission: 'then', text: 'listeners%20assume%20%22Low%20Intelligence%22%20or%20%22Rural%20Origin%22%20(The%20Intellectual%20Discount%20Operator)' })
+(loop_232_verdict: BehaviorVerdict { loopId: 232, loopName: 'The%20Drawl%20Loop', then: 'listeners%20assume%20%22Low%20Intelligence%22%20or%20%22Rural%20Origin%22%20(The%20Intellectual%20Discount%20Operator)', result: 'habitual%20interruption%20by%20others%2C%20forcing%20the%20individual%20to%20become%20a%20**Passive%20Listener**', operatorName: 'The%20Intellectual%20Discount%20Operator', operatorMechanism: 'listeners%20assume%20%22Low%20Intelligence%22%20or%20%22Rural%20Origin%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_232_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20to%20fast-paced%20urbanites' })
+
+// Topology
+(loop_232_start)-[:PROCESS]->(loop_232_given_gate)
+(loop_232_given_gate)-[:PROCESS { case: "ok" }]->(loop_232_when_gate)
+(loop_232_given_gate)-[:PROCESS { case: "err" }]->(loop_232_inactive)
+(loop_232_when_gate)-[:PROCESS { case: "ok" }]->(loop_232_context)
+(loop_232_when_gate)-[:PROCESS { case: "err" }]->(loop_232_inactive)
+(loop_232_context)-[:FORK { strategy: "behavior-branches" }]->(loop_232_context_branch | loop_232_then_branch | loop_232_operator_branch | loop_232_result_branch | loop_232_taxonomy_branch | loop_232_intervention_recognize | loop_232_intervention_interdict | loop_232_intervention_minimize)
+(loop_232_context_branch | loop_232_then_branch | loop_232_operator_branch | loop_232_result_branch | loop_232_taxonomy_branch | loop_232_intervention_recognize | loop_232_intervention_interdict | loop_232_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_232_verdict)
+(loop_232_inactive)-[:PROCESS]->(loop_232_sink)
+(loop_232_verdict)-[:PROCESS]->(loop_232_sink)
+(loop_232_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_232_then_branch)
+(loop_232_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_232_then_branch)
+(loop_232_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_232_then_branch)

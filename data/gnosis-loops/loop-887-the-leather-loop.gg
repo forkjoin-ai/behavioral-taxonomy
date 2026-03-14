@@ -1,0 +1,33 @@
+// behavioral-loop-887.gg
+// Executable Gnosis projection for The Leather Loop.
+
+// Nodes
+(loop_887_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_887_context_branch: BehaviorEmit { emission: 'context' })
+(loop_887_given_gate: BehaviorAssess { stage: 'given', text: 'Deeply%20tanned%2C%20thickened%20skin' })
+(loop_887_inactive: BehaviorTerminal { loopId: 887, loopName: 'The%20Leather%20Loop' })
+(loop_887_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_887_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_887_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_887_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hide%20Operator', mechanism: 'it%20signals%20%22Outdoor%20Labor%22%20or%20%22Tanning%20Addiction%22' })
+(loop_887_result_branch: BehaviorEmit { emission: 'result', text: 'age%20estimation%20%2B10%20years' })
+(loop_887_sink: BehaviorSink)
+(loop_887_start: BehaviorStart { loopId: 887, loopName: 'The%20Leather%20Loop', given: 'Deeply%20tanned%2C%20thickened%20skin', when: 'seen%20close%20up', then: 'it%20signals%20%22Outdoor%20Labor%22%20or%20%22Tanning%20Addiction%22%20(The%20Hide%20Operator)', result: 'age%20estimation%20%2B10%20years', operatorName: 'The%20Hide%20Operator', operatorMechanism: 'it%20signals%20%22Outdoor%20Labor%22%20or%20%22Tanning%20Addiction%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_887_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_887_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Outdoor%20Labor%22%20or%20%22Tanning%20Addiction%22%20(The%20Hide%20Operator)' })
+(loop_887_verdict: BehaviorVerdict { loopId: 887, loopName: 'The%20Leather%20Loop', then: 'it%20signals%20%22Outdoor%20Labor%22%20or%20%22Tanning%20Addiction%22%20(The%20Hide%20Operator)', result: 'age%20estimation%20%2B10%20years', operatorName: 'The%20Hide%20Operator', operatorMechanism: 'it%20signals%20%22Outdoor%20Labor%22%20or%20%22Tanning%20Addiction%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_887_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20close%20up' })
+
+// Topology
+(loop_887_start)-[:PROCESS]->(loop_887_given_gate)
+(loop_887_given_gate)-[:PROCESS { case: "ok" }]->(loop_887_when_gate)
+(loop_887_given_gate)-[:PROCESS { case: "err" }]->(loop_887_inactive)
+(loop_887_when_gate)-[:PROCESS { case: "ok" }]->(loop_887_context)
+(loop_887_when_gate)-[:PROCESS { case: "err" }]->(loop_887_inactive)
+(loop_887_context)-[:FORK { strategy: "behavior-branches" }]->(loop_887_context_branch | loop_887_then_branch | loop_887_operator_branch | loop_887_result_branch | loop_887_taxonomy_branch | loop_887_intervention_recognize | loop_887_intervention_interdict | loop_887_intervention_minimize)
+(loop_887_context_branch | loop_887_then_branch | loop_887_operator_branch | loop_887_result_branch | loop_887_taxonomy_branch | loop_887_intervention_recognize | loop_887_intervention_interdict | loop_887_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_887_verdict)
+(loop_887_inactive)-[:PROCESS]->(loop_887_sink)
+(loop_887_verdict)-[:PROCESS]->(loop_887_sink)
+(loop_887_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_887_then_branch)
+(loop_887_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_887_then_branch)
+(loop_887_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_887_then_branch)

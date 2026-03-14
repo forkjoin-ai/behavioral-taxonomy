@@ -1,0 +1,31 @@
+// behavioral-loop-645.gg
+// Executable Gnosis projection for The Robot Loop.
+
+// Nodes
+(loop_645_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_645_context_branch: BehaviorEmit { emission: 'context' })
+(loop_645_given_gate: BehaviorAssess { stage: 'given', text: 'clipped%2C%20rhythmic%20delivery%20without%20flow' })
+(loop_645_inactive: BehaviorTerminal { loopId: 645, loopName: 'The%20Robot%20Loop' })
+(loop_645_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_645_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_645_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Machine%20Operator', mechanism: 'it%20sounds%20%22Clinical%22%20or%20%22Autistic%22' })
+(loop_645_result_branch: BehaviorEmit { emission: 'result', text: 'high%20trust%20for%20technical%20data%20but%20low%20trust%20for%20empathy' })
+(loop_645_sink: BehaviorSink)
+(loop_645_start: BehaviorStart { loopId: 645, loopName: 'The%20Robot%20Loop', given: 'clipped%2C%20rhythmic%20delivery%20without%20flow', when: 'explaining%20emotion', then: 'it%20sounds%20%22Clinical%22%20or%20%22Autistic%22%20(The%20Machine%20Operator)', result: 'high%20trust%20for%20technical%20data%20but%20low%20trust%20for%20empathy', operatorName: 'The%20Machine%20Operator', operatorMechanism: 'it%20sounds%20%22Clinical%22%20or%20%22Autistic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_645_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_645_then_branch: BehaviorEmit { emission: 'then', text: 'it%20sounds%20%22Clinical%22%20or%20%22Autistic%22%20(The%20Machine%20Operator)' })
+(loop_645_verdict: BehaviorVerdict { loopId: 645, loopName: 'The%20Robot%20Loop', then: 'it%20sounds%20%22Clinical%22%20or%20%22Autistic%22%20(The%20Machine%20Operator)', result: 'high%20trust%20for%20technical%20data%20but%20low%20trust%20for%20empathy', operatorName: 'The%20Machine%20Operator', operatorMechanism: 'it%20sounds%20%22Clinical%22%20or%20%22Autistic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_645_when_gate: BehaviorAssess { stage: 'when', text: 'explaining%20emotion' })
+
+// Topology
+(loop_645_start)-[:PROCESS]->(loop_645_given_gate)
+(loop_645_given_gate)-[:PROCESS { case: "ok" }]->(loop_645_when_gate)
+(loop_645_given_gate)-[:PROCESS { case: "err" }]->(loop_645_inactive)
+(loop_645_when_gate)-[:PROCESS { case: "ok" }]->(loop_645_context)
+(loop_645_when_gate)-[:PROCESS { case: "err" }]->(loop_645_inactive)
+(loop_645_context)-[:FORK { strategy: "behavior-branches" }]->(loop_645_context_branch | loop_645_then_branch | loop_645_operator_branch | loop_645_result_branch | loop_645_taxonomy_branch | loop_645_intervention_recognize | loop_645_intervention_leverage)
+(loop_645_context_branch | loop_645_then_branch | loop_645_operator_branch | loop_645_result_branch | loop_645_taxonomy_branch | loop_645_intervention_recognize | loop_645_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_645_verdict)
+(loop_645_inactive)-[:PROCESS]->(loop_645_sink)
+(loop_645_verdict)-[:PROCESS]->(loop_645_sink)
+(loop_645_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_645_then_branch)
+(loop_645_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_645_result_branch)

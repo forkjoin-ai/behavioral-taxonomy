@@ -1,0 +1,33 @@
+// behavioral-loop-95.gg
+// Executable Gnosis projection for The Big Head Loop.
+
+// Nodes
+(loop_95_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_95_context_branch: BehaviorEmit { emission: 'context' })
+(loop_95_given_gate: BehaviorAssess { stage: 'given', text: 'Macrocephaly%20(Large%20cranium)' })
+(loop_95_inactive: BehaviorTerminal { loopId: 95, loopName: 'The%20Big%20Head%20Loop' })
+(loop_95_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_95_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_95_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_95_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intellectual%20Operator', mechanism: 'observers%20subconsciously%20assume%20higher%20brain%20volume%2Fintelligence' })
+(loop_95_result_branch: BehaviorEmit { emission: 'result', text: 'higher%20academic%20expectations%20placed%20on%20the%20child%2Fadult' })
+(loop_95_sink: BehaviorSink)
+(loop_95_start: BehaviorStart { loopId: 95, loopName: 'The%20Big%20Head%20Loop', given: 'Macrocephaly%20(Large%20cranium)', when: 'in%20an%20intellectual%20setting', then: 'observers%20subconsciously%20assume%20higher%20brain%20volume%2Fintelligence%20(The%20Intellectual%20Operator)', result: 'higher%20academic%20expectations%20placed%20on%20the%20child%2Fadult', operatorName: 'The%20Intellectual%20Operator', operatorMechanism: 'observers%20subconsciously%20assume%20higher%20brain%20volume%2Fintelligence', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_95_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_95_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20subconsciously%20assume%20higher%20brain%20volume%2Fintelligence%20(The%20Intellectual%20Operator)' })
+(loop_95_verdict: BehaviorVerdict { loopId: 95, loopName: 'The%20Big%20Head%20Loop', then: 'observers%20subconsciously%20assume%20higher%20brain%20volume%2Fintelligence%20(The%20Intellectual%20Operator)', result: 'higher%20academic%20expectations%20placed%20on%20the%20child%2Fadult', operatorName: 'The%20Intellectual%20Operator', operatorMechanism: 'observers%20subconsciously%20assume%20higher%20brain%20volume%2Fintelligence', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_95_when_gate: BehaviorAssess { stage: 'when', text: 'in%20an%20intellectual%20setting' })
+
+// Topology
+(loop_95_start)-[:PROCESS]->(loop_95_given_gate)
+(loop_95_given_gate)-[:PROCESS { case: "ok" }]->(loop_95_when_gate)
+(loop_95_given_gate)-[:PROCESS { case: "err" }]->(loop_95_inactive)
+(loop_95_when_gate)-[:PROCESS { case: "ok" }]->(loop_95_context)
+(loop_95_when_gate)-[:PROCESS { case: "err" }]->(loop_95_inactive)
+(loop_95_context)-[:FORK { strategy: "behavior-branches" }]->(loop_95_context_branch | loop_95_then_branch | loop_95_operator_branch | loop_95_result_branch | loop_95_taxonomy_branch | loop_95_intervention_recognize | loop_95_intervention_interdict | loop_95_intervention_minimize)
+(loop_95_context_branch | loop_95_then_branch | loop_95_operator_branch | loop_95_result_branch | loop_95_taxonomy_branch | loop_95_intervention_recognize | loop_95_intervention_interdict | loop_95_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_95_verdict)
+(loop_95_inactive)-[:PROCESS]->(loop_95_sink)
+(loop_95_verdict)-[:PROCESS]->(loop_95_sink)
+(loop_95_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_95_then_branch)
+(loop_95_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_95_then_branch)
+(loop_95_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_95_then_branch)

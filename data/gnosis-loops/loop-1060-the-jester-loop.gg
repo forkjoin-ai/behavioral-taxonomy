@@ -1,0 +1,33 @@
+// behavioral-loop-1060.gg
+// Executable Gnosis projection for The Jester Loop.
+
+// Nodes
+(loop_1060_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1060_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1060_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20status%20but%20high%20wit' })
+(loop_1060_inactive: BehaviorTerminal { loopId: 1060, loopName: 'The%20Jester%20Loop' })
+(loop_1060_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1060_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1060_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1060_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: "it%20must%20be%20wrapped%20in%20a%20joke%20(The%20King's%20Fool)" })
+(loop_1060_result_branch: BehaviorEmit { emission: 'result', text: "being%20the%20only%20one%20allowed%20to%20criticize%20the%20boss%2C%20provided%20they%20don't%20ask%20to%20be%20taken%20seriously" })
+(loop_1060_sink: BehaviorSink)
+(loop_1060_start: BehaviorStart { loopId: 1060, loopName: 'The%20Jester%20Loop', given: 'Low%20status%20but%20high%20wit', when: 'speaking%20truth%20to%20power', then: "it%20must%20be%20wrapped%20in%20a%20joke%20(The%20King's%20Fool)", result: "being%20the%20only%20one%20allowed%20to%20criticize%20the%20boss%2C%20provided%20they%20don't%20ask%20to%20be%20taken%20seriously", operatorName: 'Unknown%20Operator', operatorMechanism: "it%20must%20be%20wrapped%20in%20a%20joke%20(The%20King's%20Fool)", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1060_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1060_then_branch: BehaviorEmit { emission: 'then', text: "it%20must%20be%20wrapped%20in%20a%20joke%20(The%20King's%20Fool)" })
+(loop_1060_verdict: BehaviorVerdict { loopId: 1060, loopName: 'The%20Jester%20Loop', then: "it%20must%20be%20wrapped%20in%20a%20joke%20(The%20King's%20Fool)", result: "being%20the%20only%20one%20allowed%20to%20criticize%20the%20boss%2C%20provided%20they%20don't%20ask%20to%20be%20taken%20seriously", operatorName: 'Unknown%20Operator', operatorMechanism: "it%20must%20be%20wrapped%20in%20a%20joke%20(The%20King's%20Fool)", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1060_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20truth%20to%20power' })
+
+// Topology
+(loop_1060_start)-[:PROCESS]->(loop_1060_given_gate)
+(loop_1060_given_gate)-[:PROCESS { case: "ok" }]->(loop_1060_when_gate)
+(loop_1060_given_gate)-[:PROCESS { case: "err" }]->(loop_1060_inactive)
+(loop_1060_when_gate)-[:PROCESS { case: "ok" }]->(loop_1060_context)
+(loop_1060_when_gate)-[:PROCESS { case: "err" }]->(loop_1060_inactive)
+(loop_1060_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1060_context_branch | loop_1060_then_branch | loop_1060_operator_branch | loop_1060_result_branch | loop_1060_taxonomy_branch | loop_1060_intervention_recognize | loop_1060_intervention_interdict | loop_1060_intervention_minimize)
+(loop_1060_context_branch | loop_1060_then_branch | loop_1060_operator_branch | loop_1060_result_branch | loop_1060_taxonomy_branch | loop_1060_intervention_recognize | loop_1060_intervention_interdict | loop_1060_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1060_verdict)
+(loop_1060_inactive)-[:PROCESS]->(loop_1060_sink)
+(loop_1060_verdict)-[:PROCESS]->(loop_1060_sink)
+(loop_1060_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1060_then_branch)
+(loop_1060_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1060_then_branch)
+(loop_1060_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1060_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-220.gg
+// Executable Gnosis projection for The Acne Scab Loop.
+
+// Nodes
+(loop_220_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_220_context_branch: BehaviorEmit { emission: 'context' })
+(loop_220_given_gate: BehaviorAssess { stage: 'given', text: 'Picked%2Fbleeding%20spots%20on%20face' })
+(loop_220_inactive: BehaviorTerminal { loopId: 220, loopName: 'The%20Acne%20Scab%20Loop' })
+(loop_220_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_220_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_220_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_220_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stigma%20Operator', mechanism: 'observers%20assume%20%22Meth%20Use%22%20or%20%22Severe%20Anxiety%22' })
+(loop_220_result_branch: BehaviorEmit { emission: 'result', text: 'extreme%20**Social%20Isolation**%20and%20job%20discrimination' })
+(loop_220_sink: BehaviorSink)
+(loop_220_start: BehaviorStart { loopId: 220, loopName: 'The%20Acne%20Scab%20Loop', given: 'Picked%2Fbleeding%20spots%20on%20face', when: 'interacting', then: 'observers%20assume%20%22Meth%20Use%22%20or%20%22Severe%20Anxiety%22%20(The%20Stigma%20Operator)', result: 'extreme%20**Social%20Isolation**%20and%20job%20discrimination', operatorName: 'The%20Stigma%20Operator', operatorMechanism: 'observers%20assume%20%22Meth%20Use%22%20or%20%22Severe%20Anxiety%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_220_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_220_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Meth%20Use%22%20or%20%22Severe%20Anxiety%22%20(The%20Stigma%20Operator)' })
+(loop_220_verdict: BehaviorVerdict { loopId: 220, loopName: 'The%20Acne%20Scab%20Loop', then: 'observers%20assume%20%22Meth%20Use%22%20or%20%22Severe%20Anxiety%22%20(The%20Stigma%20Operator)', result: 'extreme%20**Social%20Isolation**%20and%20job%20discrimination', operatorName: 'The%20Stigma%20Operator', operatorMechanism: 'observers%20assume%20%22Meth%20Use%22%20or%20%22Severe%20Anxiety%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_220_when_gate: BehaviorAssess { stage: 'when', text: 'interacting' })
+
+// Topology
+(loop_220_start)-[:PROCESS]->(loop_220_given_gate)
+(loop_220_given_gate)-[:PROCESS { case: "ok" }]->(loop_220_when_gate)
+(loop_220_given_gate)-[:PROCESS { case: "err" }]->(loop_220_inactive)
+(loop_220_when_gate)-[:PROCESS { case: "ok" }]->(loop_220_context)
+(loop_220_when_gate)-[:PROCESS { case: "err" }]->(loop_220_inactive)
+(loop_220_context)-[:FORK { strategy: "behavior-branches" }]->(loop_220_context_branch | loop_220_then_branch | loop_220_operator_branch | loop_220_result_branch | loop_220_taxonomy_branch | loop_220_intervention_recognize | loop_220_intervention_interdict | loop_220_intervention_minimize)
+(loop_220_context_branch | loop_220_then_branch | loop_220_operator_branch | loop_220_result_branch | loop_220_taxonomy_branch | loop_220_intervention_recognize | loop_220_intervention_interdict | loop_220_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_220_verdict)
+(loop_220_inactive)-[:PROCESS]->(loop_220_sink)
+(loop_220_verdict)-[:PROCESS]->(loop_220_sink)
+(loop_220_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_220_then_branch)
+(loop_220_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_220_then_branch)
+(loop_220_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_220_then_branch)

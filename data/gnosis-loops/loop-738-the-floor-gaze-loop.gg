@@ -1,0 +1,33 @@
+// behavioral-loop-738.gg
+// Executable Gnosis projection for The Floor-Gaze Loop.
+
+// Nodes
+(loop_738_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_738_context_branch: BehaviorEmit { emission: 'context' })
+(loop_738_given_gate: BehaviorAssess { stage: 'given', text: 'Eyes%20fixed%20on%20the%20ground%20at%20a%2045-degree%20angle' })
+(loop_738_inactive: BehaviorTerminal { loopId: 738, loopName: 'The%20Floor-Gaze%20Loop' })
+(loop_738_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_738_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_738_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_738_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Beta%20Operator', mechanism: 'it%20signals%20%22Shame%2C%22%20%22Deep%20Thought%2C%22%20or%20%22Avoidance%22' })
+(loop_738_result_branch: BehaviorEmit { emission: 'result', text: 'people%20physically%20bumping%20into%20the%20individual%20or%20ignoring%20their%20presence' })
+(loop_738_sink: BehaviorSink)
+(loop_738_start: BehaviorStart { loopId: 738, loopName: 'The%20Floor-Gaze%20Loop', given: 'Eyes%20fixed%20on%20the%20ground%20at%20a%2045-degree%20angle', when: 'walking%20or%20listening', then: 'it%20signals%20%22Shame%2C%22%20%22Deep%20Thought%2C%22%20or%20%22Avoidance%22%20(The%20Beta%20Operator)', result: 'people%20physically%20bumping%20into%20the%20individual%20or%20ignoring%20their%20presence', operatorName: 'The%20Beta%20Operator', operatorMechanism: 'it%20signals%20%22Shame%2C%22%20%22Deep%20Thought%2C%22%20or%20%22Avoidance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_738_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_738_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Shame%2C%22%20%22Deep%20Thought%2C%22%20or%20%22Avoidance%22%20(The%20Beta%20Operator)' })
+(loop_738_verdict: BehaviorVerdict { loopId: 738, loopName: 'The%20Floor-Gaze%20Loop', then: 'it%20signals%20%22Shame%2C%22%20%22Deep%20Thought%2C%22%20or%20%22Avoidance%22%20(The%20Beta%20Operator)', result: 'people%20physically%20bumping%20into%20the%20individual%20or%20ignoring%20their%20presence', operatorName: 'The%20Beta%20Operator', operatorMechanism: 'it%20signals%20%22Shame%2C%22%20%22Deep%20Thought%2C%22%20or%20%22Avoidance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_738_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20or%20listening' })
+
+// Topology
+(loop_738_start)-[:PROCESS]->(loop_738_given_gate)
+(loop_738_given_gate)-[:PROCESS { case: "ok" }]->(loop_738_when_gate)
+(loop_738_given_gate)-[:PROCESS { case: "err" }]->(loop_738_inactive)
+(loop_738_when_gate)-[:PROCESS { case: "ok" }]->(loop_738_context)
+(loop_738_when_gate)-[:PROCESS { case: "err" }]->(loop_738_inactive)
+(loop_738_context)-[:FORK { strategy: "behavior-branches" }]->(loop_738_context_branch | loop_738_then_branch | loop_738_operator_branch | loop_738_result_branch | loop_738_taxonomy_branch | loop_738_intervention_recognize | loop_738_intervention_interdict | loop_738_intervention_minimize)
+(loop_738_context_branch | loop_738_then_branch | loop_738_operator_branch | loop_738_result_branch | loop_738_taxonomy_branch | loop_738_intervention_recognize | loop_738_intervention_interdict | loop_738_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_738_verdict)
+(loop_738_inactive)-[:PROCESS]->(loop_738_sink)
+(loop_738_verdict)-[:PROCESS]->(loop_738_sink)
+(loop_738_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_738_then_branch)
+(loop_738_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_738_then_branch)
+(loop_738_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_738_then_branch)

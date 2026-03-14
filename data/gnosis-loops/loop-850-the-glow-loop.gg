@@ -1,0 +1,31 @@
+// behavioral-loop-850.gg
+// Executable Gnosis projection for The Glow Loop.
+
+// Nodes
+(loop_850_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_850_context_branch: BehaviorEmit { emission: 'context' })
+(loop_850_given_gate: BehaviorAssess { stage: 'given', text: 'Radiant%2C%20hydrated%20skin%20tone' })
+(loop_850_inactive: BehaviorTerminal { loopId: 850, loopName: 'The%20Glow%20Loop' })
+(loop_850_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20strategically%20without%20overexposure' })
+(loop_850_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_850_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Health%20Halo%20Operator', mechanism: 'it%20signals%20%22High%20Vitality%22%20and%20%22Fertility%22' })
+(loop_850_result_branch: BehaviorEmit { emission: 'result', text: 'preferential%20treatment%20and%20attraction' })
+(loop_850_sink: BehaviorSink)
+(loop_850_start: BehaviorStart { loopId: 850, loopName: 'The%20Glow%20Loop', given: 'Radiant%2C%20hydrated%20skin%20tone', when: 'arriving%20at%20an%20event', then: 'it%20signals%20%22High%20Vitality%22%20and%20%22Fertility%22%20(The%20Health%20Halo%20Operator)', result: 'preferential%20treatment%20and%20attraction', operatorName: 'The%20Health%20Halo%20Operator', operatorMechanism: 'it%20signals%20%22High%20Vitality%22%20and%20%22Fertility%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '6', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_leverage: 'Use%20strategically%20without%20overexposure' })
+(loop_850_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'ATTRACTION' })
+(loop_850_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22High%20Vitality%22%20and%20%22Fertility%22%20(The%20Health%20Halo%20Operator)' })
+(loop_850_verdict: BehaviorVerdict { loopId: 850, loopName: 'The%20Glow%20Loop', then: 'it%20signals%20%22High%20Vitality%22%20and%20%22Fertility%22%20(The%20Health%20Halo%20Operator)', result: 'preferential%20treatment%20and%20attraction', operatorName: 'The%20Health%20Halo%20Operator', operatorMechanism: 'it%20signals%20%22High%20Vitality%22%20and%20%22Fertility%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'ATTRACTION' })
+(loop_850_when_gate: BehaviorAssess { stage: 'when', text: 'arriving%20at%20an%20event' })
+
+// Topology
+(loop_850_start)-[:PROCESS]->(loop_850_given_gate)
+(loop_850_given_gate)-[:PROCESS { case: "ok" }]->(loop_850_when_gate)
+(loop_850_given_gate)-[:PROCESS { case: "err" }]->(loop_850_inactive)
+(loop_850_when_gate)-[:PROCESS { case: "ok" }]->(loop_850_context)
+(loop_850_when_gate)-[:PROCESS { case: "err" }]->(loop_850_inactive)
+(loop_850_context)-[:FORK { strategy: "behavior-branches" }]->(loop_850_context_branch | loop_850_then_branch | loop_850_operator_branch | loop_850_result_branch | loop_850_taxonomy_branch | loop_850_intervention_recognize | loop_850_intervention_leverage)
+(loop_850_context_branch | loop_850_then_branch | loop_850_operator_branch | loop_850_result_branch | loop_850_taxonomy_branch | loop_850_intervention_recognize | loop_850_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_850_verdict)
+(loop_850_inactive)-[:PROCESS]->(loop_850_sink)
+(loop_850_verdict)-[:PROCESS]->(loop_850_sink)
+(loop_850_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_850_then_branch)
+(loop_850_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_850_result_branch)

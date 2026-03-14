@@ -1,0 +1,31 @@
+// behavioral-loop-242.gg
+// Executable Gnosis projection for The Veneer Loop.
+
+// Nodes
+(loop_242_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_242_context_branch: BehaviorEmit { emission: 'context' })
+(loop_242_given_gate: BehaviorAssess { stage: 'given', text: 'Artificially%20perfect%2Fwhite%20teeth' })
+(loop_242_inactive: BehaviorTerminal { loopId: 242, loopName: 'The%20Veneer%20Loop' })
+(loop_242_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_242_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_242_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%20Operator', mechanism: 'observers%20perceive%20%22Salesmanship%2C%22%20%22Fakeness%2C%22%20or%20%22Narcissism%22' })
+(loop_242_result_branch: BehaviorEmit { emission: 'result', text: 'distrust%20of%20the%20individual%E2%80%99s%20true%20motives' })
+(loop_242_sink: BehaviorSink)
+(loop_242_start: BehaviorStart { loopId: 242, loopName: 'The%20Veneer%20Loop', given: 'Artificially%20perfect%2Fwhite%20teeth', when: 'smiling%20warmth', then: 'observers%20perceive%20%22Salesmanship%2C%22%20%22Fakeness%2C%22%20or%20%22Narcissism%22%20(The%20Deception%20Operator)', result: 'distrust%20of%20the%20individual%E2%80%99s%20true%20motives', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'observers%20perceive%20%22Salesmanship%2C%22%20%22Fakeness%2C%22%20or%20%22Narcissism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_242_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_242_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Salesmanship%2C%22%20%22Fakeness%2C%22%20or%20%22Narcissism%22%20(The%20Deception%20Operator)' })
+(loop_242_verdict: BehaviorVerdict { loopId: 242, loopName: 'The%20Veneer%20Loop', then: 'observers%20perceive%20%22Salesmanship%2C%22%20%22Fakeness%2C%22%20or%20%22Narcissism%22%20(The%20Deception%20Operator)', result: 'distrust%20of%20the%20individual%E2%80%99s%20true%20motives', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'observers%20perceive%20%22Salesmanship%2C%22%20%22Fakeness%2C%22%20or%20%22Narcissism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_242_when_gate: BehaviorAssess { stage: 'when', text: 'smiling%20warmth' })
+
+// Topology
+(loop_242_start)-[:PROCESS]->(loop_242_given_gate)
+(loop_242_given_gate)-[:PROCESS { case: "ok" }]->(loop_242_when_gate)
+(loop_242_given_gate)-[:PROCESS { case: "err" }]->(loop_242_inactive)
+(loop_242_when_gate)-[:PROCESS { case: "ok" }]->(loop_242_context)
+(loop_242_when_gate)-[:PROCESS { case: "err" }]->(loop_242_inactive)
+(loop_242_context)-[:FORK { strategy: "behavior-branches" }]->(loop_242_context_branch | loop_242_then_branch | loop_242_operator_branch | loop_242_result_branch | loop_242_taxonomy_branch | loop_242_intervention_recognize | loop_242_intervention_leverage)
+(loop_242_context_branch | loop_242_then_branch | loop_242_operator_branch | loop_242_result_branch | loop_242_taxonomy_branch | loop_242_intervention_recognize | loop_242_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_242_verdict)
+(loop_242_inactive)-[:PROCESS]->(loop_242_sink)
+(loop_242_verdict)-[:PROCESS]->(loop_242_sink)
+(loop_242_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_242_then_branch)
+(loop_242_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_242_result_branch)

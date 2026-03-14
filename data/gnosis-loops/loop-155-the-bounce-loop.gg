@@ -1,0 +1,33 @@
+// behavioral-loop-155.gg
+// Executable Gnosis projection for The Bounce Loop.
+
+// Nodes
+(loop_155_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_155_context_branch: BehaviorEmit { emission: 'context' })
+(loop_155_given_gate: BehaviorAssess { stage: 'given', text: 'Springy%20step%20(Gastroc%20dominance)' })
+(loop_155_inactive: BehaviorTerminal { loopId: 155, loopName: 'The%20Bounce%20Loop' })
+(loop_155_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_155_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_155_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_155_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'observers%20perceive%20%22Optimism%22%20and%20%22Energy%22' })
+(loop_155_result_branch: BehaviorEmit { emission: 'result', text: 'being%20invited%20to%20energetic%20events%2C%20reinforcing%20an%20**Active%20Lifestyle**' })
+(loop_155_sink: BehaviorSink)
+(loop_155_start: BehaviorStart { loopId: 155, loopName: 'The%20Bounce%20Loop', given: 'Springy%20step%20(Gastroc%20dominance)', when: 'moving', then: 'observers%20perceive%20%22Optimism%22%20and%20%22Energy%22%20(The%20Novelty%20Operator)', result: 'being%20invited%20to%20energetic%20events%2C%20reinforcing%20an%20**Active%20Lifestyle**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'observers%20perceive%20%22Optimism%22%20and%20%22Energy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_155_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_155_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Optimism%22%20and%20%22Energy%22%20(The%20Novelty%20Operator)' })
+(loop_155_verdict: BehaviorVerdict { loopId: 155, loopName: 'The%20Bounce%20Loop', then: 'observers%20perceive%20%22Optimism%22%20and%20%22Energy%22%20(The%20Novelty%20Operator)', result: 'being%20invited%20to%20energetic%20events%2C%20reinforcing%20an%20**Active%20Lifestyle**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'observers%20perceive%20%22Optimism%22%20and%20%22Energy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_155_when_gate: BehaviorAssess { stage: 'when', text: 'moving' })
+
+// Topology
+(loop_155_start)-[:PROCESS]->(loop_155_given_gate)
+(loop_155_given_gate)-[:PROCESS { case: "ok" }]->(loop_155_when_gate)
+(loop_155_given_gate)-[:PROCESS { case: "err" }]->(loop_155_inactive)
+(loop_155_when_gate)-[:PROCESS { case: "ok" }]->(loop_155_context)
+(loop_155_when_gate)-[:PROCESS { case: "err" }]->(loop_155_inactive)
+(loop_155_context)-[:FORK { strategy: "behavior-branches" }]->(loop_155_context_branch | loop_155_then_branch | loop_155_operator_branch | loop_155_result_branch | loop_155_taxonomy_branch | loop_155_intervention_recognize | loop_155_intervention_interdict | loop_155_intervention_minimize)
+(loop_155_context_branch | loop_155_then_branch | loop_155_operator_branch | loop_155_result_branch | loop_155_taxonomy_branch | loop_155_intervention_recognize | loop_155_intervention_interdict | loop_155_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_155_verdict)
+(loop_155_inactive)-[:PROCESS]->(loop_155_sink)
+(loop_155_verdict)-[:PROCESS]->(loop_155_sink)
+(loop_155_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_155_then_branch)
+(loop_155_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_155_then_branch)
+(loop_155_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_155_then_branch)

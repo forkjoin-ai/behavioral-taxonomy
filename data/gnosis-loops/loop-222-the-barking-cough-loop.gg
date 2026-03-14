@@ -1,0 +1,33 @@
+// behavioral-loop-222.gg
+// Executable Gnosis projection for The Barking Cough Loop.
+
+// Nodes
+(loop_222_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_222_context_branch: BehaviorEmit { emission: 'context' })
+(loop_222_given_gate: BehaviorAssess { stage: 'given', text: "Asthmatic%20or%20Smoker's%20cough" })
+(loop_222_inactive: BehaviorTerminal { loopId: 222, loopName: 'The%20Barking%20Cough%20Loop' })
+(loop_222_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_222_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_222_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_222_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mortality%20Operator', mechanism: 'the%20sound%20is%20%22Visceral%22%20and%20%22Unhealthy%22' })
+(loop_222_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20subconsciously%20viewing%20the%20individual%20as%20%22Dying%22%20or%20%22Unfit.%22' })
+(loop_222_sink: BehaviorSink)
+(loop_222_start: BehaviorStart { loopId: 222, loopName: 'The%20Barking%20Cough%20Loop', given: "Asthmatic%20or%20Smoker's%20cough", when: 'laughing%20or%20exerting', then: 'the%20sound%20is%20%22Visceral%22%20and%20%22Unhealthy%22%20(The%20Mortality%20Operator)', result: 'peers%20subconsciously%20viewing%20the%20individual%20as%20%22Dying%22%20or%20%22Unfit.%22', operatorName: 'The%20Mortality%20Operator', operatorMechanism: 'the%20sound%20is%20%22Visceral%22%20and%20%22Unhealthy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_222_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_222_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20is%20%22Visceral%22%20and%20%22Unhealthy%22%20(The%20Mortality%20Operator)' })
+(loop_222_verdict: BehaviorVerdict { loopId: 222, loopName: 'The%20Barking%20Cough%20Loop', then: 'the%20sound%20is%20%22Visceral%22%20and%20%22Unhealthy%22%20(The%20Mortality%20Operator)', result: 'peers%20subconsciously%20viewing%20the%20individual%20as%20%22Dying%22%20or%20%22Unfit.%22', operatorName: 'The%20Mortality%20Operator', operatorMechanism: 'the%20sound%20is%20%22Visceral%22%20and%20%22Unhealthy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_222_when_gate: BehaviorAssess { stage: 'when', text: 'laughing%20or%20exerting' })
+
+// Topology
+(loop_222_start)-[:PROCESS]->(loop_222_given_gate)
+(loop_222_given_gate)-[:PROCESS { case: "ok" }]->(loop_222_when_gate)
+(loop_222_given_gate)-[:PROCESS { case: "err" }]->(loop_222_inactive)
+(loop_222_when_gate)-[:PROCESS { case: "ok" }]->(loop_222_context)
+(loop_222_when_gate)-[:PROCESS { case: "err" }]->(loop_222_inactive)
+(loop_222_context)-[:FORK { strategy: "behavior-branches" }]->(loop_222_context_branch | loop_222_then_branch | loop_222_operator_branch | loop_222_result_branch | loop_222_taxonomy_branch | loop_222_intervention_recognize | loop_222_intervention_interdict | loop_222_intervention_minimize)
+(loop_222_context_branch | loop_222_then_branch | loop_222_operator_branch | loop_222_result_branch | loop_222_taxonomy_branch | loop_222_intervention_recognize | loop_222_intervention_interdict | loop_222_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_222_verdict)
+(loop_222_inactive)-[:PROCESS]->(loop_222_sink)
+(loop_222_verdict)-[:PROCESS]->(loop_222_sink)
+(loop_222_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_222_then_branch)
+(loop_222_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_222_then_branch)
+(loop_222_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_222_then_branch)

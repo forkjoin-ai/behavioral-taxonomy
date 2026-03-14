@@ -1,0 +1,33 @@
+// behavioral-loop-866.gg
+// Executable Gnosis projection for The Backpack Loop.
+
+// Nodes
+(loop_866_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_866_context_branch: BehaviorEmit { emission: 'context' })
+(loop_866_given_gate: BehaviorAssess { stage: 'given', text: 'Wearing%20a%20double-strap%20bag%20over%20a%20suit' })
+(loop_866_inactive: BehaviorTerminal { loopId: 866, loopName: 'The%20Backpack%20Loop' })
+(loop_866_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Introduce%20counterbalancing%20signals' })
+(loop_866_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_866_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_866_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Student%20Operator', mechanism: 'it%20signals%20%22Intern%22%20or%20%22IT%20Support%22' })
+(loop_866_result_branch: BehaviorEmit { emission: 'result', text: 'being%20ignored%20by%20executives' })
+(loop_866_sink: BehaviorSink)
+(loop_866_start: BehaviorStart { loopId: 866, loopName: 'The%20Backpack%20Loop', given: 'Wearing%20a%20double-strap%20bag%20over%20a%20suit', when: 'entering%20a%20corporate%20elevator', then: 'it%20signals%20%22Intern%22%20or%20%22IT%20Support%22%20(The%20Student%20Operator)', result: 'being%20ignored%20by%20executives', operatorName: 'The%20Student%20Operator', operatorMechanism: 'it%20signals%20%22Intern%22%20or%20%22IT%20Support%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Introduce%20counterbalancing%20signals', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_866_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_866_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Intern%22%20or%20%22IT%20Support%22%20(The%20Student%20Operator)' })
+(loop_866_verdict: BehaviorVerdict { loopId: 866, loopName: 'The%20Backpack%20Loop', then: 'it%20signals%20%22Intern%22%20or%20%22IT%20Support%22%20(The%20Student%20Operator)', result: 'being%20ignored%20by%20executives', operatorName: 'The%20Student%20Operator', operatorMechanism: 'it%20signals%20%22Intern%22%20or%20%22IT%20Support%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_866_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20corporate%20elevator' })
+
+// Topology
+(loop_866_start)-[:PROCESS]->(loop_866_given_gate)
+(loop_866_given_gate)-[:PROCESS { case: "ok" }]->(loop_866_when_gate)
+(loop_866_given_gate)-[:PROCESS { case: "err" }]->(loop_866_inactive)
+(loop_866_when_gate)-[:PROCESS { case: "ok" }]->(loop_866_context)
+(loop_866_when_gate)-[:PROCESS { case: "err" }]->(loop_866_inactive)
+(loop_866_context)-[:FORK { strategy: "behavior-branches" }]->(loop_866_context_branch | loop_866_then_branch | loop_866_operator_branch | loop_866_result_branch | loop_866_taxonomy_branch | loop_866_intervention_recognize | loop_866_intervention_interdict | loop_866_intervention_minimize)
+(loop_866_context_branch | loop_866_then_branch | loop_866_operator_branch | loop_866_result_branch | loop_866_taxonomy_branch | loop_866_intervention_recognize | loop_866_intervention_interdict | loop_866_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_866_verdict)
+(loop_866_inactive)-[:PROCESS]->(loop_866_sink)
+(loop_866_verdict)-[:PROCESS]->(loop_866_sink)
+(loop_866_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_866_then_branch)
+(loop_866_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_866_then_branch)
+(loop_866_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_866_then_branch)

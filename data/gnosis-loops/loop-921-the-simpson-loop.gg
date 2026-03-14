@@ -1,0 +1,33 @@
+// behavioral-loop-921.gg
+// Executable Gnosis projection for The Simpson Loop.
+
+// Nodes
+(loop_921_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_921_context_branch: BehaviorEmit { emission: 'context' })
+(loop_921_given_gate: BehaviorAssess { stage: 'given', text: 'Yellowing%20of%20skin%2Fsclera' })
+(loop_921_inactive: BehaviorTerminal { loopId: 921, loopName: 'The%20Simpson%20Loop' })
+(loop_921_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_921_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_921_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_921_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sickness%20Operator', mechanism: 'it%20signals%20%22Liver%20Failure%22%20or%20%22Toxicity%22' })
+(loop_921_result_branch: BehaviorEmit { emission: 'result', text: 'fear%20of%20contagion%20or%20pity' })
+(loop_921_sink: BehaviorSink)
+(loop_921_start: BehaviorStart { loopId: 921, loopName: 'The%20Simpson%20Loop', given: 'Yellowing%20of%20skin%2Fsclera', when: 'in%20daylight', then: 'it%20signals%20%22Liver%20Failure%22%20or%20%22Toxicity%22%20(The%20Sickness%20Operator)', result: 'fear%20of%20contagion%20or%20pity', operatorName: 'The%20Sickness%20Operator', operatorMechanism: 'it%20signals%20%22Liver%20Failure%22%20or%20%22Toxicity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_921_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_921_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Liver%20Failure%22%20or%20%22Toxicity%22%20(The%20Sickness%20Operator)' })
+(loop_921_verdict: BehaviorVerdict { loopId: 921, loopName: 'The%20Simpson%20Loop', then: 'it%20signals%20%22Liver%20Failure%22%20or%20%22Toxicity%22%20(The%20Sickness%20Operator)', result: 'fear%20of%20contagion%20or%20pity', operatorName: 'The%20Sickness%20Operator', operatorMechanism: 'it%20signals%20%22Liver%20Failure%22%20or%20%22Toxicity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_921_when_gate: BehaviorAssess { stage: 'when', text: 'in%20daylight' })
+
+// Topology
+(loop_921_start)-[:PROCESS]->(loop_921_given_gate)
+(loop_921_given_gate)-[:PROCESS { case: "ok" }]->(loop_921_when_gate)
+(loop_921_given_gate)-[:PROCESS { case: "err" }]->(loop_921_inactive)
+(loop_921_when_gate)-[:PROCESS { case: "ok" }]->(loop_921_context)
+(loop_921_when_gate)-[:PROCESS { case: "err" }]->(loop_921_inactive)
+(loop_921_context)-[:FORK { strategy: "behavior-branches" }]->(loop_921_context_branch | loop_921_then_branch | loop_921_operator_branch | loop_921_result_branch | loop_921_taxonomy_branch | loop_921_intervention_recognize | loop_921_intervention_interdict | loop_921_intervention_minimize)
+(loop_921_context_branch | loop_921_then_branch | loop_921_operator_branch | loop_921_result_branch | loop_921_taxonomy_branch | loop_921_intervention_recognize | loop_921_intervention_interdict | loop_921_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_921_verdict)
+(loop_921_inactive)-[:PROCESS]->(loop_921_sink)
+(loop_921_verdict)-[:PROCESS]->(loop_921_sink)
+(loop_921_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_921_then_branch)
+(loop_921_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_921_then_branch)
+(loop_921_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_921_then_branch)

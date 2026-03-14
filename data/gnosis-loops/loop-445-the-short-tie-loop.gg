@@ -1,0 +1,33 @@
+// behavioral-loop-445.gg
+// Executable Gnosis projection for The Short Tie Loop.
+
+// Nodes
+(loop_445_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_445_context_branch: BehaviorEmit { emission: 'context' })
+(loop_445_given_gate: BehaviorAssess { stage: 'given', text: 'Necktie%20ending%20above%20the%20belt%20buckle' })
+(loop_445_inactive: BehaviorTerminal { loopId: 445, loopName: 'The%20Short%20Tie%20Loop' })
+(loop_445_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_445_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_445_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_445_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Amateur%20Operator', mechanism: 'it%20looks%20%22Comical%22%20or%20%22Childish%22' })
+(loop_445_result_branch: BehaviorEmit { emission: 'result', text: 'total%20loss%20of%20gravitas%20in%20a%20boardroom' })
+(loop_445_sink: BehaviorSink)
+(loop_445_start: BehaviorStart { loopId: 445, loopName: 'The%20Short%20Tie%20Loop', given: 'Necktie%20ending%20above%20the%20belt%20buckle', when: 'wearing%20a%20suit', then: 'it%20looks%20%22Comical%22%20or%20%22Childish%22%20(The%20Amateur%20Operator)', result: 'total%20loss%20of%20gravitas%20in%20a%20boardroom', operatorName: 'The%20Amateur%20Operator', operatorMechanism: 'it%20looks%20%22Comical%22%20or%20%22Childish%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_445_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_445_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20%22Comical%22%20or%20%22Childish%22%20(The%20Amateur%20Operator)' })
+(loop_445_verdict: BehaviorVerdict { loopId: 445, loopName: 'The%20Short%20Tie%20Loop', then: 'it%20looks%20%22Comical%22%20or%20%22Childish%22%20(The%20Amateur%20Operator)', result: 'total%20loss%20of%20gravitas%20in%20a%20boardroom', operatorName: 'The%20Amateur%20Operator', operatorMechanism: 'it%20looks%20%22Comical%22%20or%20%22Childish%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_445_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20a%20suit' })
+
+// Topology
+(loop_445_start)-[:PROCESS]->(loop_445_given_gate)
+(loop_445_given_gate)-[:PROCESS { case: "ok" }]->(loop_445_when_gate)
+(loop_445_given_gate)-[:PROCESS { case: "err" }]->(loop_445_inactive)
+(loop_445_when_gate)-[:PROCESS { case: "ok" }]->(loop_445_context)
+(loop_445_when_gate)-[:PROCESS { case: "err" }]->(loop_445_inactive)
+(loop_445_context)-[:FORK { strategy: "behavior-branches" }]->(loop_445_context_branch | loop_445_then_branch | loop_445_operator_branch | loop_445_result_branch | loop_445_taxonomy_branch | loop_445_intervention_recognize | loop_445_intervention_interdict | loop_445_intervention_minimize)
+(loop_445_context_branch | loop_445_then_branch | loop_445_operator_branch | loop_445_result_branch | loop_445_taxonomy_branch | loop_445_intervention_recognize | loop_445_intervention_interdict | loop_445_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_445_verdict)
+(loop_445_inactive)-[:PROCESS]->(loop_445_sink)
+(loop_445_verdict)-[:PROCESS]->(loop_445_sink)
+(loop_445_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_445_then_branch)
+(loop_445_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_445_then_branch)
+(loop_445_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_445_then_branch)

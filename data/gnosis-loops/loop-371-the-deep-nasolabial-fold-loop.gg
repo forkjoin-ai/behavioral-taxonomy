@@ -1,0 +1,33 @@
+// behavioral-loop-371.gg
+// Executable Gnosis projection for The Deep Nasolabial Fold Loop.
+
+// Nodes
+(loop_371_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_371_context_branch: BehaviorEmit { emission: 'context' })
+(loop_371_given_gate: BehaviorAssess { stage: 'given', text: 'Pronounced%20lines%20from%20nose%20to%20mouth' })
+(loop_371_inactive: BehaviorTerminal { loopId: 371, loopName: 'The%20Deep%20Nasolabial%20Fold%20Loop' })
+(loop_371_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_371_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_371_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_371_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Curmudgeon%20Operator', mechanism: 'the%20face%20looks%20%22Disapproving%22%20or%20%22Bitter%22' })
+(loop_371_result_branch: BehaviorEmit { emission: 'result', text: 'young%20people%20avoiding%20the%20individual' })
+(loop_371_sink: BehaviorSink)
+(loop_371_start: BehaviorStart { loopId: 371, loopName: 'The%20Deep%20Nasolabial%20Fold%20Loop', given: 'Pronounced%20lines%20from%20nose%20to%20mouth', when: 'resting%20face%20is%20neutral', then: 'the%20face%20looks%20%22Disapproving%22%20or%20%22Bitter%22%20(The%20Curmudgeon%20Operator)', result: 'young%20people%20avoiding%20the%20individual', operatorName: 'The%20Curmudgeon%20Operator', operatorMechanism: 'the%20face%20looks%20%22Disapproving%22%20or%20%22Bitter%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_371_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_371_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Disapproving%22%20or%20%22Bitter%22%20(The%20Curmudgeon%20Operator)' })
+(loop_371_verdict: BehaviorVerdict { loopId: 371, loopName: 'The%20Deep%20Nasolabial%20Fold%20Loop', then: 'the%20face%20looks%20%22Disapproving%22%20or%20%22Bitter%22%20(The%20Curmudgeon%20Operator)', result: 'young%20people%20avoiding%20the%20individual', operatorName: 'The%20Curmudgeon%20Operator', operatorMechanism: 'the%20face%20looks%20%22Disapproving%22%20or%20%22Bitter%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_371_when_gate: BehaviorAssess { stage: 'when', text: 'resting%20face%20is%20neutral' })
+
+// Topology
+(loop_371_start)-[:PROCESS]->(loop_371_given_gate)
+(loop_371_given_gate)-[:PROCESS { case: "ok" }]->(loop_371_when_gate)
+(loop_371_given_gate)-[:PROCESS { case: "err" }]->(loop_371_inactive)
+(loop_371_when_gate)-[:PROCESS { case: "ok" }]->(loop_371_context)
+(loop_371_when_gate)-[:PROCESS { case: "err" }]->(loop_371_inactive)
+(loop_371_context)-[:FORK { strategy: "behavior-branches" }]->(loop_371_context_branch | loop_371_then_branch | loop_371_operator_branch | loop_371_result_branch | loop_371_taxonomy_branch | loop_371_intervention_recognize | loop_371_intervention_interdict | loop_371_intervention_minimize)
+(loop_371_context_branch | loop_371_then_branch | loop_371_operator_branch | loop_371_result_branch | loop_371_taxonomy_branch | loop_371_intervention_recognize | loop_371_intervention_interdict | loop_371_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_371_verdict)
+(loop_371_inactive)-[:PROCESS]->(loop_371_sink)
+(loop_371_verdict)-[:PROCESS]->(loop_371_sink)
+(loop_371_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_371_then_branch)
+(loop_371_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_371_then_branch)
+(loop_371_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_371_then_branch)

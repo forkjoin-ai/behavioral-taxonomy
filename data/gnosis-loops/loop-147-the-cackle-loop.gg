@@ -1,0 +1,33 @@
+// behavioral-loop-147.gg
+// Executable Gnosis projection for The Cackle Loop.
+
+// Nodes
+(loop_147_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_147_context_branch: BehaviorEmit { emission: 'context' })
+(loop_147_given_gate: BehaviorAssess { stage: 'given', text: 'Piercing%20laugh%20sound' })
+(loop_147_inactive: BehaviorTerminal { loopId: 147, loopName: 'The%20Cackle%20Loop' })
+(loop_147_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_147_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_147_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_147_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Obstruction%20Operator', mechanism: 'it%20draws%20stares%20and%20annoyance' })
+(loop_147_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20suppressing%20joy%2C%20leading%20to%20a%20**Stifled%2FReserved%20Persona**' })
+(loop_147_sink: BehaviorSink)
+(loop_147_start: BehaviorStart { loopId: 147, loopName: 'The%20Cackle%20Loop', given: 'Piercing%20laugh%20sound', when: 'in%20a%20public%20space', then: 'it%20draws%20stares%20and%20annoyance%20(The%20Obstruction%20Operator)', result: 'the%20individual%20suppressing%20joy%2C%20leading%20to%20a%20**Stifled%2FReserved%20Persona**', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'it%20draws%20stares%20and%20annoyance', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_147_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_147_then_branch: BehaviorEmit { emission: 'then', text: 'it%20draws%20stares%20and%20annoyance%20(The%20Obstruction%20Operator)' })
+(loop_147_verdict: BehaviorVerdict { loopId: 147, loopName: 'The%20Cackle%20Loop', then: 'it%20draws%20stares%20and%20annoyance%20(The%20Obstruction%20Operator)', result: 'the%20individual%20suppressing%20joy%2C%20leading%20to%20a%20**Stifled%2FReserved%20Persona**', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'it%20draws%20stares%20and%20annoyance', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_147_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20public%20space' })
+
+// Topology
+(loop_147_start)-[:PROCESS]->(loop_147_given_gate)
+(loop_147_given_gate)-[:PROCESS { case: "ok" }]->(loop_147_when_gate)
+(loop_147_given_gate)-[:PROCESS { case: "err" }]->(loop_147_inactive)
+(loop_147_when_gate)-[:PROCESS { case: "ok" }]->(loop_147_context)
+(loop_147_when_gate)-[:PROCESS { case: "err" }]->(loop_147_inactive)
+(loop_147_context)-[:FORK { strategy: "behavior-branches" }]->(loop_147_context_branch | loop_147_then_branch | loop_147_operator_branch | loop_147_result_branch | loop_147_taxonomy_branch | loop_147_intervention_recognize | loop_147_intervention_interdict | loop_147_intervention_minimize)
+(loop_147_context_branch | loop_147_then_branch | loop_147_operator_branch | loop_147_result_branch | loop_147_taxonomy_branch | loop_147_intervention_recognize | loop_147_intervention_interdict | loop_147_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_147_verdict)
+(loop_147_inactive)-[:PROCESS]->(loop_147_sink)
+(loop_147_verdict)-[:PROCESS]->(loop_147_sink)
+(loop_147_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_147_then_branch)
+(loop_147_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_147_then_branch)
+(loop_147_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_147_then_branch)

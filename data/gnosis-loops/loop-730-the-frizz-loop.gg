@@ -1,0 +1,33 @@
+// behavioral-loop-730.gg
+// Executable Gnosis projection for The Frizz Loop.
+
+// Nodes
+(loop_730_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_730_context_branch: BehaviorEmit { emission: 'context' })
+(loop_730_given_gate: BehaviorAssess { stage: 'given', text: 'Halo%20of%20undefined%20texture' })
+(loop_730_inactive: BehaviorTerminal { loopId: 730, loopName: 'The%20Frizz%20Loop' })
+(loop_730_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_730_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_730_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_730_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Static%20Operator', mechanism: 'the%20silhouette%20looks%20%22Chaotic%22' })
+(loop_730_result_branch: BehaviorEmit { emission: 'result', text: 'judgment%20of%20%22Low%20Maintenance.%22' })
+(loop_730_sink: BehaviorSink)
+(loop_730_start: BehaviorStart { loopId: 730, loopName: 'The%20Frizz%20Loop', given: 'Halo%20of%20undefined%20texture', when: 'in%20damp%20weather', then: 'the%20silhouette%20looks%20%22Chaotic%22%20(The%20Static%20Operator)', result: 'judgment%20of%20%22Low%20Maintenance.%22', operatorName: 'The%20Static%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Chaotic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_730_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_730_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20looks%20%22Chaotic%22%20(The%20Static%20Operator)' })
+(loop_730_verdict: BehaviorVerdict { loopId: 730, loopName: 'The%20Frizz%20Loop', then: 'the%20silhouette%20looks%20%22Chaotic%22%20(The%20Static%20Operator)', result: 'judgment%20of%20%22Low%20Maintenance.%22', operatorName: 'The%20Static%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Chaotic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_730_when_gate: BehaviorAssess { stage: 'when', text: 'in%20damp%20weather' })
+
+// Topology
+(loop_730_start)-[:PROCESS]->(loop_730_given_gate)
+(loop_730_given_gate)-[:PROCESS { case: "ok" }]->(loop_730_when_gate)
+(loop_730_given_gate)-[:PROCESS { case: "err" }]->(loop_730_inactive)
+(loop_730_when_gate)-[:PROCESS { case: "ok" }]->(loop_730_context)
+(loop_730_when_gate)-[:PROCESS { case: "err" }]->(loop_730_inactive)
+(loop_730_context)-[:FORK { strategy: "behavior-branches" }]->(loop_730_context_branch | loop_730_then_branch | loop_730_operator_branch | loop_730_result_branch | loop_730_taxonomy_branch | loop_730_intervention_recognize | loop_730_intervention_interdict | loop_730_intervention_minimize)
+(loop_730_context_branch | loop_730_then_branch | loop_730_operator_branch | loop_730_result_branch | loop_730_taxonomy_branch | loop_730_intervention_recognize | loop_730_intervention_interdict | loop_730_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_730_verdict)
+(loop_730_inactive)-[:PROCESS]->(loop_730_sink)
+(loop_730_verdict)-[:PROCESS]->(loop_730_sink)
+(loop_730_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_730_then_branch)
+(loop_730_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_730_then_branch)
+(loop_730_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_730_then_branch)

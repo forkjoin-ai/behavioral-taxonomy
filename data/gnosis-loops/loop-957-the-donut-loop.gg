@@ -1,0 +1,33 @@
+// behavioral-loop-957.gg
+// Executable Gnosis projection for The Donut Loop.
+
+// Nodes
+(loop_957_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_957_context_branch: BehaviorEmit { emission: 'context' })
+(loop_957_given_gate: BehaviorAssess { stage: 'given', text: 'Eyes%20out%20of%20focus%20%2B%20slight%20lid%20droop' })
+(loop_957_inactive: BehaviorTerminal { loopId: 957, loopName: 'The%20Donut%20Loop' })
+(loop_957_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_957_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_957_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_957_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Zombie%20Operator', mechanism: 'it%20signals%20%22Check%20Out%22%20or%20%22Intoxication%22' })
+(loop_957_result_branch: BehaviorEmit { emission: 'result', text: 'being%20called%20on%20by%20the%20teacher%2Fboss%20to%20%22Wake%20up.%22' })
+(loop_957_sink: BehaviorSink)
+(loop_957_start: BehaviorStart { loopId: 957, loopName: 'The%20Donut%20Loop', given: 'Eyes%20out%20of%20focus%20%2B%20slight%20lid%20droop', when: 'listening%20to%20a%20lecture', then: 'it%20signals%20%22Check%20Out%22%20or%20%22Intoxication%22%20(The%20Zombie%20Operator)', result: 'being%20called%20on%20by%20the%20teacher%2Fboss%20to%20%22Wake%20up.%22', operatorName: 'The%20Zombie%20Operator', operatorMechanism: 'it%20signals%20%22Check%20Out%22%20or%20%22Intoxication%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_957_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_957_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Check%20Out%22%20or%20%22Intoxication%22%20(The%20Zombie%20Operator)' })
+(loop_957_verdict: BehaviorVerdict { loopId: 957, loopName: 'The%20Donut%20Loop', then: 'it%20signals%20%22Check%20Out%22%20or%20%22Intoxication%22%20(The%20Zombie%20Operator)', result: 'being%20called%20on%20by%20the%20teacher%2Fboss%20to%20%22Wake%20up.%22', operatorName: 'The%20Zombie%20Operator', operatorMechanism: 'it%20signals%20%22Check%20Out%22%20or%20%22Intoxication%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_957_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20to%20a%20lecture' })
+
+// Topology
+(loop_957_start)-[:PROCESS]->(loop_957_given_gate)
+(loop_957_given_gate)-[:PROCESS { case: "ok" }]->(loop_957_when_gate)
+(loop_957_given_gate)-[:PROCESS { case: "err" }]->(loop_957_inactive)
+(loop_957_when_gate)-[:PROCESS { case: "ok" }]->(loop_957_context)
+(loop_957_when_gate)-[:PROCESS { case: "err" }]->(loop_957_inactive)
+(loop_957_context)-[:FORK { strategy: "behavior-branches" }]->(loop_957_context_branch | loop_957_then_branch | loop_957_operator_branch | loop_957_result_branch | loop_957_taxonomy_branch | loop_957_intervention_recognize | loop_957_intervention_interdict | loop_957_intervention_minimize)
+(loop_957_context_branch | loop_957_then_branch | loop_957_operator_branch | loop_957_result_branch | loop_957_taxonomy_branch | loop_957_intervention_recognize | loop_957_intervention_interdict | loop_957_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_957_verdict)
+(loop_957_inactive)-[:PROCESS]->(loop_957_sink)
+(loop_957_verdict)-[:PROCESS]->(loop_957_sink)
+(loop_957_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_957_then_branch)
+(loop_957_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_957_then_branch)
+(loop_957_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_957_then_branch)

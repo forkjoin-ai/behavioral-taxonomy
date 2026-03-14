@@ -1,0 +1,33 @@
+// behavioral-loop-756.gg
+// Executable Gnosis projection for The Tag Loop.
+
+// Nodes
+(loop_756_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_756_context_branch: BehaviorEmit { emission: 'context' })
+(loop_756_given_gate: BehaviorAssess { stage: 'given', text: 'Price%20tag%20or%20size%20sticker%20left%20on' })
+(loop_756_inactive: BehaviorTerminal { loopId: 756, loopName: 'The%20Tag%20Loop' })
+(loop_756_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_756_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_756_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_756_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Return%20Policy%20Operator', mechanism: 'it%20signals%20%22Obliviousness%22' })
+(loop_756_result_branch: BehaviorEmit { emission: 'result', text: "the%20individual%20looking%20like%20they%20don't%20own%20the%20clothes" })
+(loop_756_sink: BehaviorSink)
+(loop_756_start: BehaviorStart { loopId: 756, loopName: 'The%20Tag%20Loop', given: 'Price%20tag%20or%20size%20sticker%20left%20on', when: 'wearing%20new%20clothes', then: 'it%20signals%20%22Obliviousness%22%20(The%20Return%20Policy%20Operator)', result: "the%20individual%20looking%20like%20they%20don't%20own%20the%20clothes", operatorName: 'The%20Return%20Policy%20Operator', operatorMechanism: 'it%20signals%20%22Obliviousness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_756_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_756_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Obliviousness%22%20(The%20Return%20Policy%20Operator)' })
+(loop_756_verdict: BehaviorVerdict { loopId: 756, loopName: 'The%20Tag%20Loop', then: 'it%20signals%20%22Obliviousness%22%20(The%20Return%20Policy%20Operator)', result: "the%20individual%20looking%20like%20they%20don't%20own%20the%20clothes", operatorName: 'The%20Return%20Policy%20Operator', operatorMechanism: 'it%20signals%20%22Obliviousness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_756_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20new%20clothes' })
+
+// Topology
+(loop_756_start)-[:PROCESS]->(loop_756_given_gate)
+(loop_756_given_gate)-[:PROCESS { case: "ok" }]->(loop_756_when_gate)
+(loop_756_given_gate)-[:PROCESS { case: "err" }]->(loop_756_inactive)
+(loop_756_when_gate)-[:PROCESS { case: "ok" }]->(loop_756_context)
+(loop_756_when_gate)-[:PROCESS { case: "err" }]->(loop_756_inactive)
+(loop_756_context)-[:FORK { strategy: "behavior-branches" }]->(loop_756_context_branch | loop_756_then_branch | loop_756_operator_branch | loop_756_result_branch | loop_756_taxonomy_branch | loop_756_intervention_recognize | loop_756_intervention_interdict | loop_756_intervention_minimize)
+(loop_756_context_branch | loop_756_then_branch | loop_756_operator_branch | loop_756_result_branch | loop_756_taxonomy_branch | loop_756_intervention_recognize | loop_756_intervention_interdict | loop_756_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_756_verdict)
+(loop_756_inactive)-[:PROCESS]->(loop_756_sink)
+(loop_756_verdict)-[:PROCESS]->(loop_756_sink)
+(loop_756_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_756_then_branch)
+(loop_756_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_756_then_branch)
+(loop_756_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_756_then_branch)

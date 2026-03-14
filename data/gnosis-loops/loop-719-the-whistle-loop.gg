@@ -1,0 +1,33 @@
+// behavioral-loop-719.gg
+// Executable Gnosis projection for The Whistle Loop.
+
+// Nodes
+(loop_719_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_719_context_branch: BehaviorEmit { emission: 'context' })
+(loop_719_given_gate: BehaviorAssess { stage: 'given', text: "Sharp%20'S'%20sounds%20(piercing%20frequency)" })
+(loop_719_inactive: BehaviorTerminal { loopId: 719, loopName: 'The%20Whistle%20Loop' })
+(loop_719_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_719_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_719_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_719_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Feedback%20Operator', mechanism: "the%20sound%20hurts%20the%20listener's%20ears" })
+(loop_719_result_branch: BehaviorEmit { emission: 'result', text: 'the%20audience%20tuning%20out%20to%20protect%20their%20hearing' })
+(loop_719_sink: BehaviorSink)
+(loop_719_start: BehaviorStart { loopId: 719, loopName: 'The%20Whistle%20Loop', given: "Sharp%20'S'%20sounds%20(piercing%20frequency)", when: 'speaking%20over%20a%20microphone', then: "the%20sound%20hurts%20the%20listener's%20ears%20(The%20Feedback%20Operator)", result: 'the%20audience%20tuning%20out%20to%20protect%20their%20hearing', operatorName: 'The%20Feedback%20Operator', operatorMechanism: "the%20sound%20hurts%20the%20listener's%20ears", origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_719_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_719_then_branch: BehaviorEmit { emission: 'then', text: "the%20sound%20hurts%20the%20listener's%20ears%20(The%20Feedback%20Operator)" })
+(loop_719_verdict: BehaviorVerdict { loopId: 719, loopName: 'The%20Whistle%20Loop', then: "the%20sound%20hurts%20the%20listener's%20ears%20(The%20Feedback%20Operator)", result: 'the%20audience%20tuning%20out%20to%20protect%20their%20hearing', operatorName: 'The%20Feedback%20Operator', operatorMechanism: "the%20sound%20hurts%20the%20listener's%20ears", origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_719_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20over%20a%20microphone' })
+
+// Topology
+(loop_719_start)-[:PROCESS]->(loop_719_given_gate)
+(loop_719_given_gate)-[:PROCESS { case: "ok" }]->(loop_719_when_gate)
+(loop_719_given_gate)-[:PROCESS { case: "err" }]->(loop_719_inactive)
+(loop_719_when_gate)-[:PROCESS { case: "ok" }]->(loop_719_context)
+(loop_719_when_gate)-[:PROCESS { case: "err" }]->(loop_719_inactive)
+(loop_719_context)-[:FORK { strategy: "behavior-branches" }]->(loop_719_context_branch | loop_719_then_branch | loop_719_operator_branch | loop_719_result_branch | loop_719_taxonomy_branch | loop_719_intervention_recognize | loop_719_intervention_interdict | loop_719_intervention_minimize)
+(loop_719_context_branch | loop_719_then_branch | loop_719_operator_branch | loop_719_result_branch | loop_719_taxonomy_branch | loop_719_intervention_recognize | loop_719_intervention_interdict | loop_719_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_719_verdict)
+(loop_719_inactive)-[:PROCESS]->(loop_719_sink)
+(loop_719_verdict)-[:PROCESS]->(loop_719_sink)
+(loop_719_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_719_then_branch)
+(loop_719_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_719_then_branch)
+(loop_719_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_719_then_branch)

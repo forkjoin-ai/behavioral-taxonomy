@@ -1,0 +1,33 @@
+// behavioral-loop-871.gg
+// Executable Gnosis projection for The Grimace Loop.
+
+// Nodes
+(loop_871_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_871_context_branch: BehaviorEmit { emission: 'context' })
+(loop_871_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20pain%20causing%20momentary%20wincing' })
+(loop_871_inactive: BehaviorTerminal { loopId: 871, loopName: 'The%20Grimace%20Loop' })
+(loop_871_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_871_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_871_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_871_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Agony%20Operator', mechanism: 'the%20face%20contorts%20briefly' })
+(loop_871_result_branch: BehaviorEmit { emission: 'result', text: "observers%20asking%20%22What's%20wrong%3F%22%20disrupting%20the%20flow" })
+(loop_871_sink: BehaviorSink)
+(loop_871_start: BehaviorStart { loopId: 871, loopName: 'The%20Grimace%20Loop', given: 'Chronic%20pain%20causing%20momentary%20wincing', when: 'moving%20or%20sitting', then: 'the%20face%20contorts%20briefly%20(The%20Agony%20Operator)', result: "observers%20asking%20%22What's%20wrong%3F%22%20disrupting%20the%20flow", operatorName: 'The%20Agony%20Operator', operatorMechanism: 'the%20face%20contorts%20briefly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_871_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_871_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20contorts%20briefly%20(The%20Agony%20Operator)' })
+(loop_871_verdict: BehaviorVerdict { loopId: 871, loopName: 'The%20Grimace%20Loop', then: 'the%20face%20contorts%20briefly%20(The%20Agony%20Operator)', result: "observers%20asking%20%22What's%20wrong%3F%22%20disrupting%20the%20flow", operatorName: 'The%20Agony%20Operator', operatorMechanism: 'the%20face%20contorts%20briefly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_871_when_gate: BehaviorAssess { stage: 'when', text: 'moving%20or%20sitting' })
+
+// Topology
+(loop_871_start)-[:PROCESS]->(loop_871_given_gate)
+(loop_871_given_gate)-[:PROCESS { case: "ok" }]->(loop_871_when_gate)
+(loop_871_given_gate)-[:PROCESS { case: "err" }]->(loop_871_inactive)
+(loop_871_when_gate)-[:PROCESS { case: "ok" }]->(loop_871_context)
+(loop_871_when_gate)-[:PROCESS { case: "err" }]->(loop_871_inactive)
+(loop_871_context)-[:FORK { strategy: "behavior-branches" }]->(loop_871_context_branch | loop_871_then_branch | loop_871_operator_branch | loop_871_result_branch | loop_871_taxonomy_branch | loop_871_intervention_recognize | loop_871_intervention_interdict | loop_871_intervention_minimize)
+(loop_871_context_branch | loop_871_then_branch | loop_871_operator_branch | loop_871_result_branch | loop_871_taxonomy_branch | loop_871_intervention_recognize | loop_871_intervention_interdict | loop_871_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_871_verdict)
+(loop_871_inactive)-[:PROCESS]->(loop_871_sink)
+(loop_871_verdict)-[:PROCESS]->(loop_871_sink)
+(loop_871_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_871_then_branch)
+(loop_871_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_871_then_branch)
+(loop_871_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_871_then_branch)

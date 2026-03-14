@@ -1,0 +1,33 @@
+// behavioral-loop-6005.gg
+// Executable Gnosis projection for The Courage Ladder.
+
+// Nodes
+(loop_6005_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_6005_context_branch: BehaviorEmit { emission: 'context' })
+(loop_6005_given_gate: BehaviorAssess { stage: 'given', text: 'Unknown%20condition' })
+(loop_6005_inactive: BehaviorTerminal { loopId: 6005, loopName: 'The%20Courage%20Ladder' })
+(loop_6005_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_6005_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_6005_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_6005_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_6005_result_branch: BehaviorEmit { emission: 'result', text: 'Unknown%20outcome' })
+(loop_6005_sink: BehaviorSink)
+(loop_6005_start: BehaviorStart { loopId: 6005, loopName: 'The%20Courage%20Ladder', given: 'Unknown%20condition', when: 'Unknown%20trigger', then: 'Unknown%20response', result: 'Unknown%20outcome', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_6005_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_6005_then_branch: BehaviorEmit { emission: 'then', text: 'Unknown%20response' })
+(loop_6005_verdict: BehaviorVerdict { loopId: 6005, loopName: 'The%20Courage%20Ladder', then: 'Unknown%20response', result: 'Unknown%20outcome', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_6005_when_gate: BehaviorAssess { stage: 'when', text: 'Unknown%20trigger' })
+
+// Topology
+(loop_6005_start)-[:PROCESS]->(loop_6005_given_gate)
+(loop_6005_given_gate)-[:PROCESS { case: "ok" }]->(loop_6005_when_gate)
+(loop_6005_given_gate)-[:PROCESS { case: "err" }]->(loop_6005_inactive)
+(loop_6005_when_gate)-[:PROCESS { case: "ok" }]->(loop_6005_context)
+(loop_6005_when_gate)-[:PROCESS { case: "err" }]->(loop_6005_inactive)
+(loop_6005_context)-[:FORK { strategy: "behavior-branches" }]->(loop_6005_context_branch | loop_6005_then_branch | loop_6005_operator_branch | loop_6005_result_branch | loop_6005_taxonomy_branch | loop_6005_intervention_recognize | loop_6005_intervention_interdict | loop_6005_intervention_minimize)
+(loop_6005_context_branch | loop_6005_then_branch | loop_6005_operator_branch | loop_6005_result_branch | loop_6005_taxonomy_branch | loop_6005_intervention_recognize | loop_6005_intervention_interdict | loop_6005_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_6005_verdict)
+(loop_6005_inactive)-[:PROCESS]->(loop_6005_sink)
+(loop_6005_verdict)-[:PROCESS]->(loop_6005_sink)
+(loop_6005_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_6005_then_branch)
+(loop_6005_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_6005_then_branch)
+(loop_6005_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_6005_then_branch)

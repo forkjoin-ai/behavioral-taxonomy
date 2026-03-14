@@ -1,0 +1,33 @@
+// behavioral-loop-384.gg
+// Executable Gnosis projection for The Burp Loop.
+
+// Nodes
+(loop_384_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_384_context_branch: BehaviorEmit { emission: 'context' })
+(loop_384_given_gate: BehaviorAssess { stage: 'given', text: 'Inability%20to%20suppress%20eructation' })
+(loop_384_inactive: BehaviorTerminal { loopId: 384, loopName: 'The%20Burp%20Loop' })
+(loop_384_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_384_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_384_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_384_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cultural%20Friction%20Operator', mechanism: 'it%20signals%20%22Rude%22or%20%22Complimentary%22' })
+(loop_384_result_branch: BehaviorEmit { emission: 'result', text: 'confusion%20or%20disgust%20depending%20on%20the%20cultural%20context' })
+(loop_384_sink: BehaviorSink)
+(loop_384_start: BehaviorStart { loopId: 384, loopName: 'The%20Burp%20Loop', given: 'Inability%20to%20suppress%20eructation', when: 'dining', then: 'it%20signals%20%22Rude%22%20(West)%20or%20%22Complimentary%22%20(East)%20(The%20Cultural%20Friction%20Operator)', result: 'confusion%20or%20disgust%20depending%20on%20the%20cultural%20context', operatorName: 'The%20Cultural%20Friction%20Operator', operatorMechanism: 'it%20signals%20%22Rude%22or%20%22Complimentary%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION|DISRUPTION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_384_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION|DISRUPTION' })
+(loop_384_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Rude%22%20(West)%20or%20%22Complimentary%22%20(East)%20(The%20Cultural%20Friction%20Operator)' })
+(loop_384_verdict: BehaviorVerdict { loopId: 384, loopName: 'The%20Burp%20Loop', then: 'it%20signals%20%22Rude%22%20(West)%20or%20%22Complimentary%22%20(East)%20(The%20Cultural%20Friction%20Operator)', result: 'confusion%20or%20disgust%20depending%20on%20the%20cultural%20context', operatorName: 'The%20Cultural%20Friction%20Operator', operatorMechanism: 'it%20signals%20%22Rude%22or%20%22Complimentary%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION|DISRUPTION' })
+(loop_384_when_gate: BehaviorAssess { stage: 'when', text: 'dining' })
+
+// Topology
+(loop_384_start)-[:PROCESS]->(loop_384_given_gate)
+(loop_384_given_gate)-[:PROCESS { case: "ok" }]->(loop_384_when_gate)
+(loop_384_given_gate)-[:PROCESS { case: "err" }]->(loop_384_inactive)
+(loop_384_when_gate)-[:PROCESS { case: "ok" }]->(loop_384_context)
+(loop_384_when_gate)-[:PROCESS { case: "err" }]->(loop_384_inactive)
+(loop_384_context)-[:FORK { strategy: "behavior-branches" }]->(loop_384_context_branch | loop_384_then_branch | loop_384_operator_branch | loop_384_result_branch | loop_384_taxonomy_branch | loop_384_intervention_recognize | loop_384_intervention_interdict | loop_384_intervention_minimize)
+(loop_384_context_branch | loop_384_then_branch | loop_384_operator_branch | loop_384_result_branch | loop_384_taxonomy_branch | loop_384_intervention_recognize | loop_384_intervention_interdict | loop_384_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_384_verdict)
+(loop_384_inactive)-[:PROCESS]->(loop_384_sink)
+(loop_384_verdict)-[:PROCESS]->(loop_384_sink)
+(loop_384_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_384_then_branch)
+(loop_384_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_384_then_branch)
+(loop_384_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_384_then_branch)

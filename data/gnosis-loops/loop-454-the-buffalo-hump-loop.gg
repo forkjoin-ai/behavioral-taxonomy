@@ -1,0 +1,33 @@
+// behavioral-loop-454.gg
+// Executable Gnosis projection for The Buffalo Hump Loop.
+
+// Nodes
+(loop_454_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_454_context_branch: BehaviorEmit { emission: 'context' })
+(loop_454_given_gate: BehaviorAssess { stage: 'given', text: 'Fat%20deposit%20at%20the%20base%20of%20the%20neck%20(High%20Cortisol)' })
+(loop_454_inactive: BehaviorTerminal { loopId: 454, loopName: 'The%20Buffalo%20Hump%20Loop' })
+(loop_454_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_454_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_454_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_454_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Metabolic%20Operator', mechanism: 'the%20silhouette%20looks%20%22Hunched%22%20or%20%22Stressed%22' })
+(loop_454_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20the%20individual%20is%20%22Unhealthy%22%20or%20%22Older%22%20than%20they%20are' })
+(loop_454_sink: BehaviorSink)
+(loop_454_start: BehaviorStart { loopId: 454, loopName: 'The%20Buffalo%20Hump%20Loop', given: 'Fat%20deposit%20at%20the%20base%20of%20the%20neck%20(High%20Cortisol)', when: 'wearing%20t-shirts', then: 'the%20silhouette%20looks%20%22Hunched%22%20or%20%22Stressed%22%20(The%20Metabolic%20Operator)', result: 'observers%20assuming%20the%20individual%20is%20%22Unhealthy%22%20or%20%22Older%22%20than%20they%20are', operatorName: 'The%20Metabolic%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Hunched%22%20or%20%22Stressed%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_454_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_454_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20looks%20%22Hunched%22%20or%20%22Stressed%22%20(The%20Metabolic%20Operator)' })
+(loop_454_verdict: BehaviorVerdict { loopId: 454, loopName: 'The%20Buffalo%20Hump%20Loop', then: 'the%20silhouette%20looks%20%22Hunched%22%20or%20%22Stressed%22%20(The%20Metabolic%20Operator)', result: 'observers%20assuming%20the%20individual%20is%20%22Unhealthy%22%20or%20%22Older%22%20than%20they%20are', operatorName: 'The%20Metabolic%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Hunched%22%20or%20%22Stressed%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_454_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20t-shirts' })
+
+// Topology
+(loop_454_start)-[:PROCESS]->(loop_454_given_gate)
+(loop_454_given_gate)-[:PROCESS { case: "ok" }]->(loop_454_when_gate)
+(loop_454_given_gate)-[:PROCESS { case: "err" }]->(loop_454_inactive)
+(loop_454_when_gate)-[:PROCESS { case: "ok" }]->(loop_454_context)
+(loop_454_when_gate)-[:PROCESS { case: "err" }]->(loop_454_inactive)
+(loop_454_context)-[:FORK { strategy: "behavior-branches" }]->(loop_454_context_branch | loop_454_then_branch | loop_454_operator_branch | loop_454_result_branch | loop_454_taxonomy_branch | loop_454_intervention_recognize | loop_454_intervention_interdict | loop_454_intervention_minimize)
+(loop_454_context_branch | loop_454_then_branch | loop_454_operator_branch | loop_454_result_branch | loop_454_taxonomy_branch | loop_454_intervention_recognize | loop_454_intervention_interdict | loop_454_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_454_verdict)
+(loop_454_inactive)-[:PROCESS]->(loop_454_sink)
+(loop_454_verdict)-[:PROCESS]->(loop_454_sink)
+(loop_454_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_454_then_branch)
+(loop_454_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_454_then_branch)
+(loop_454_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_454_then_branch)

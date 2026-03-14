@@ -1,0 +1,33 @@
+// behavioral-loop-51.gg
+// Executable Gnosis projection for The Small-Angry Loop.
+
+// Nodes
+(loop_51_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_51_context_branch: BehaviorEmit { emission: 'context' })
+(loop_51_given_gate: BehaviorAssess { stage: 'given', text: 'Hypo-Stature%20%2B%20High%20Vocal%20Pitch' })
+(loop_51_inactive: BehaviorTerminal { loopId: 51, loopName: 'The%20Small-Angry%20Loop' })
+(loop_51_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_51_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_51_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_51_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nurture%20Operator', mechanism: 'the%20observer%20categorizes%20it%20as%20a%20%22Tantrum%22%20rather%20than%20a%20complaint' })
+(loop_51_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20escalating%20to%20**Extreme%20Measures**%20to%20be%20taken%20seriously' })
+(loop_51_sink: BehaviorSink)
+(loop_51_start: BehaviorStart { loopId: 51, loopName: 'The%20Small-Angry%20Loop', given: 'Hypo-Stature%20%2B%20High%20Vocal%20Pitch', when: 'expressing%20legitimate%20grievance', then: 'the%20observer%20categorizes%20it%20as%20a%20%22Tantrum%22%20rather%20than%20a%20complaint%20(The%20Nurture%20Operator%20-%20Infantilizing)', result: 'the%20individual%20escalating%20to%20**Extreme%20Measures**%20to%20be%20taken%20seriously', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'the%20observer%20categorizes%20it%20as%20a%20%22Tantrum%22%20rather%20than%20a%20complaint', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_51_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_51_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20categorizes%20it%20as%20a%20%22Tantrum%22%20rather%20than%20a%20complaint%20(The%20Nurture%20Operator%20-%20Infantilizing)' })
+(loop_51_verdict: BehaviorVerdict { loopId: 51, loopName: 'The%20Small-Angry%20Loop', then: 'the%20observer%20categorizes%20it%20as%20a%20%22Tantrum%22%20rather%20than%20a%20complaint%20(The%20Nurture%20Operator%20-%20Infantilizing)', result: 'the%20individual%20escalating%20to%20**Extreme%20Measures**%20to%20be%20taken%20seriously', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'the%20observer%20categorizes%20it%20as%20a%20%22Tantrum%22%20rather%20than%20a%20complaint', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_51_when_gate: BehaviorAssess { stage: 'when', text: 'expressing%20legitimate%20grievance' })
+
+// Topology
+(loop_51_start)-[:PROCESS]->(loop_51_given_gate)
+(loop_51_given_gate)-[:PROCESS { case: "ok" }]->(loop_51_when_gate)
+(loop_51_given_gate)-[:PROCESS { case: "err" }]->(loop_51_inactive)
+(loop_51_when_gate)-[:PROCESS { case: "ok" }]->(loop_51_context)
+(loop_51_when_gate)-[:PROCESS { case: "err" }]->(loop_51_inactive)
+(loop_51_context)-[:FORK { strategy: "behavior-branches" }]->(loop_51_context_branch | loop_51_then_branch | loop_51_operator_branch | loop_51_result_branch | loop_51_taxonomy_branch | loop_51_intervention_recognize | loop_51_intervention_interdict | loop_51_intervention_minimize)
+(loop_51_context_branch | loop_51_then_branch | loop_51_operator_branch | loop_51_result_branch | loop_51_taxonomy_branch | loop_51_intervention_recognize | loop_51_intervention_interdict | loop_51_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_51_verdict)
+(loop_51_inactive)-[:PROCESS]->(loop_51_sink)
+(loop_51_verdict)-[:PROCESS]->(loop_51_sink)
+(loop_51_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_51_then_branch)
+(loop_51_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_51_then_branch)
+(loop_51_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_51_then_branch)

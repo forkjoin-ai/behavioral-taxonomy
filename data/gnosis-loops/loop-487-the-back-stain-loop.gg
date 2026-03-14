@@ -1,0 +1,33 @@
+// behavioral-loop-487.gg
+// Executable Gnosis projection for The Back Stain Loop.
+
+// Nodes
+(loop_487_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_487_context_branch: BehaviorEmit { emission: 'context' })
+(loop_487_given_gate: BehaviorAssess { stage: 'given', text: 'Hyperhidrosis%20on%20the%20dorsal%20trunk' })
+(loop_487_inactive: BehaviorTerminal { loopId: 487, loopName: 'The%20Back%20Stain%20Loop' })
+(loop_487_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_487_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_487_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_487_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Snail%20Operator', mechanism: 'a%20wet%20print%20is%20left%20behind' })
+(loop_487_result_branch: BehaviorEmit { emission: 'result', text: 'extreme%20self-consciousness%20and%20**Hovering**%20(refusal%20to%20sit%20fully)' })
+(loop_487_sink: BehaviorSink)
+(loop_487_start: BehaviorStart { loopId: 487, loopName: 'The%20Back%20Stain%20Loop', given: 'Hyperhidrosis%20on%20the%20dorsal%20trunk', when: 'standing%20up%20from%20a%20chair', then: 'a%20wet%20print%20is%20left%20behind%20(The%20Snail%20Operator)', result: 'extreme%20self-consciousness%20and%20**Hovering**%20(refusal%20to%20sit%20fully)', operatorName: 'The%20Snail%20Operator', operatorMechanism: 'a%20wet%20print%20is%20left%20behind', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_487_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_487_then_branch: BehaviorEmit { emission: 'then', text: 'a%20wet%20print%20is%20left%20behind%20(The%20Snail%20Operator)' })
+(loop_487_verdict: BehaviorVerdict { loopId: 487, loopName: 'The%20Back%20Stain%20Loop', then: 'a%20wet%20print%20is%20left%20behind%20(The%20Snail%20Operator)', result: 'extreme%20self-consciousness%20and%20**Hovering**%20(refusal%20to%20sit%20fully)', operatorName: 'The%20Snail%20Operator', operatorMechanism: 'a%20wet%20print%20is%20left%20behind', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_487_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20up%20from%20a%20chair' })
+
+// Topology
+(loop_487_start)-[:PROCESS]->(loop_487_given_gate)
+(loop_487_given_gate)-[:PROCESS { case: "ok" }]->(loop_487_when_gate)
+(loop_487_given_gate)-[:PROCESS { case: "err" }]->(loop_487_inactive)
+(loop_487_when_gate)-[:PROCESS { case: "ok" }]->(loop_487_context)
+(loop_487_when_gate)-[:PROCESS { case: "err" }]->(loop_487_inactive)
+(loop_487_context)-[:FORK { strategy: "behavior-branches" }]->(loop_487_context_branch | loop_487_then_branch | loop_487_operator_branch | loop_487_result_branch | loop_487_taxonomy_branch | loop_487_intervention_recognize | loop_487_intervention_interdict | loop_487_intervention_minimize)
+(loop_487_context_branch | loop_487_then_branch | loop_487_operator_branch | loop_487_result_branch | loop_487_taxonomy_branch | loop_487_intervention_recognize | loop_487_intervention_interdict | loop_487_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_487_verdict)
+(loop_487_inactive)-[:PROCESS]->(loop_487_sink)
+(loop_487_verdict)-[:PROCESS]->(loop_487_sink)
+(loop_487_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_487_then_branch)
+(loop_487_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_487_then_branch)
+(loop_487_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_487_then_branch)

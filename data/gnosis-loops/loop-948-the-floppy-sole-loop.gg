@@ -1,0 +1,33 @@
+// behavioral-loop-948.gg
+// Executable Gnosis projection for The Floppy Sole Loop.
+
+// Nodes
+(loop_948_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_948_context_branch: BehaviorEmit { emission: 'context' })
+(loop_948_given_gate: BehaviorAssess { stage: 'given', text: 'Delamination%20of%20the%20shoe%20sole' })
+(loop_948_inactive: BehaviorTerminal { loopId: 948, loopName: 'The%20Floppy%20Sole%20Loop' })
+(loop_948_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_948_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_948_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_948_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Talking%20Shoe%20Operator', mechanism: 'the%20sole%20flaps%20like%20a%20mouth' })
+(loop_948_result_branch: BehaviorEmit { emission: 'result', text: 'audible%20*flap-flap*%20sound%20and%20total%20loss%20of%20dignity' })
+(loop_948_sink: BehaviorSink)
+(loop_948_start: BehaviorStart { loopId: 948, loopName: 'The%20Floppy%20Sole%20Loop', given: 'Delamination%20of%20the%20shoe%20sole', when: 'walking', then: 'the%20sole%20flaps%20like%20a%20mouth%20(The%20Talking%20Shoe%20Operator)', result: 'audible%20*flap-flap*%20sound%20and%20total%20loss%20of%20dignity', operatorName: 'The%20Talking%20Shoe%20Operator', operatorMechanism: 'the%20sole%20flaps%20like%20a%20mouth', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_948_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_948_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sole%20flaps%20like%20a%20mouth%20(The%20Talking%20Shoe%20Operator)' })
+(loop_948_verdict: BehaviorVerdict { loopId: 948, loopName: 'The%20Floppy%20Sole%20Loop', then: 'the%20sole%20flaps%20like%20a%20mouth%20(The%20Talking%20Shoe%20Operator)', result: 'audible%20*flap-flap*%20sound%20and%20total%20loss%20of%20dignity', operatorName: 'The%20Talking%20Shoe%20Operator', operatorMechanism: 'the%20sole%20flaps%20like%20a%20mouth', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_948_when_gate: BehaviorAssess { stage: 'when', text: 'walking' })
+
+// Topology
+(loop_948_start)-[:PROCESS]->(loop_948_given_gate)
+(loop_948_given_gate)-[:PROCESS { case: "ok" }]->(loop_948_when_gate)
+(loop_948_given_gate)-[:PROCESS { case: "err" }]->(loop_948_inactive)
+(loop_948_when_gate)-[:PROCESS { case: "ok" }]->(loop_948_context)
+(loop_948_when_gate)-[:PROCESS { case: "err" }]->(loop_948_inactive)
+(loop_948_context)-[:FORK { strategy: "behavior-branches" }]->(loop_948_context_branch | loop_948_then_branch | loop_948_operator_branch | loop_948_result_branch | loop_948_taxonomy_branch | loop_948_intervention_recognize | loop_948_intervention_interdict | loop_948_intervention_minimize)
+(loop_948_context_branch | loop_948_then_branch | loop_948_operator_branch | loop_948_result_branch | loop_948_taxonomy_branch | loop_948_intervention_recognize | loop_948_intervention_interdict | loop_948_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_948_verdict)
+(loop_948_inactive)-[:PROCESS]->(loop_948_sink)
+(loop_948_verdict)-[:PROCESS]->(loop_948_sink)
+(loop_948_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_948_then_branch)
+(loop_948_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_948_then_branch)
+(loop_948_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_948_then_branch)

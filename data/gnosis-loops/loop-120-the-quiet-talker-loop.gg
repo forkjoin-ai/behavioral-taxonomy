@@ -1,0 +1,33 @@
+// behavioral-loop-120.gg
+// Executable Gnosis projection for The Quiet Talker Loop.
+
+// Nodes
+(loop_120_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_120_context_branch: BehaviorEmit { emission: 'context' })
+(loop_120_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20subglottic%20pressure' })
+(loop_120_inactive: BehaviorTerminal { loopId: 120, loopName: 'The%20Quiet%20Talker%20Loop' })
+(loop_120_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_120_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_120_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_120_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Obstruction%20Operator', mechanism: 'they%20are%20constantly%20asked%20to%20%22Speak%20up%22' })
+(loop_120_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20choosing%20to%20**Listen**%20rather%20than%20expend%20the%20energy%20to%20shout' })
+(loop_120_sink: BehaviorSink)
+(loop_120_start: BehaviorStart { loopId: 120, loopName: 'The%20Quiet%20Talker%20Loop', given: 'Low%20subglottic%20pressure', when: 'in%20a%20loud%20group', then: 'they%20are%20constantly%20asked%20to%20%22Speak%20up%22%20(The%20Obstruction%20Operator)', result: 'the%20individual%20choosing%20to%20**Listen**%20rather%20than%20expend%20the%20energy%20to%20shout', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'they%20are%20constantly%20asked%20to%20%22Speak%20up%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_120_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_120_then_branch: BehaviorEmit { emission: 'then', text: 'they%20are%20constantly%20asked%20to%20%22Speak%20up%22%20(The%20Obstruction%20Operator)' })
+(loop_120_verdict: BehaviorVerdict { loopId: 120, loopName: 'The%20Quiet%20Talker%20Loop', then: 'they%20are%20constantly%20asked%20to%20%22Speak%20up%22%20(The%20Obstruction%20Operator)', result: 'the%20individual%20choosing%20to%20**Listen**%20rather%20than%20expend%20the%20energy%20to%20shout', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'they%20are%20constantly%20asked%20to%20%22Speak%20up%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_120_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20loud%20group' })
+
+// Topology
+(loop_120_start)-[:PROCESS]->(loop_120_given_gate)
+(loop_120_given_gate)-[:PROCESS { case: "ok" }]->(loop_120_when_gate)
+(loop_120_given_gate)-[:PROCESS { case: "err" }]->(loop_120_inactive)
+(loop_120_when_gate)-[:PROCESS { case: "ok" }]->(loop_120_context)
+(loop_120_when_gate)-[:PROCESS { case: "err" }]->(loop_120_inactive)
+(loop_120_context)-[:FORK { strategy: "behavior-branches" }]->(loop_120_context_branch | loop_120_then_branch | loop_120_operator_branch | loop_120_result_branch | loop_120_taxonomy_branch | loop_120_intervention_recognize | loop_120_intervention_interdict | loop_120_intervention_minimize)
+(loop_120_context_branch | loop_120_then_branch | loop_120_operator_branch | loop_120_result_branch | loop_120_taxonomy_branch | loop_120_intervention_recognize | loop_120_intervention_interdict | loop_120_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_120_verdict)
+(loop_120_inactive)-[:PROCESS]->(loop_120_sink)
+(loop_120_verdict)-[:PROCESS]->(loop_120_sink)
+(loop_120_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_120_then_branch)
+(loop_120_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_120_then_branch)
+(loop_120_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_120_then_branch)

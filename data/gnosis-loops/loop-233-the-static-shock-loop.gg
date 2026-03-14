@@ -1,0 +1,33 @@
+// behavioral-loop-233.gg
+// Executable Gnosis projection for The Static Shock Loop.
+
+// Nodes
+(loop_233_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_233_context_branch: BehaviorEmit { emission: 'context' })
+(loop_233_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20skin%20moisture%20content' })
+(loop_233_inactive: BehaviorTerminal { loopId: 233, loopName: 'The%20Static%20Shock%20Loop' })
+(loop_233_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_233_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_233_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_233_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Pain%20Operator', mechanism: 'a%20painful%20electrostatic%20discharge%20occurs' })
+(loop_233_result_branch: BehaviorEmit { emission: 'result', text: 'a%20subconscious%20**Touch%20Aversion**%20(people%20flinch%20when%20you%20reach%20for%20them)' })
+(loop_233_sink: BehaviorSink)
+(loop_233_start: BehaviorStart { loopId: 233, loopName: 'The%20Static%20Shock%20Loop', given: 'Low%20skin%20moisture%20content', when: 'touching%20others%20or%20objects', then: 'a%20painful%20electrostatic%20discharge%20occurs%20(The%20Pain%20Operator)', result: 'a%20subconscious%20**Touch%20Aversion**%20(people%20flinch%20when%20you%20reach%20for%20them)', operatorName: 'The%20Pain%20Operator', operatorMechanism: 'a%20painful%20electrostatic%20discharge%20occurs', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_233_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_233_then_branch: BehaviorEmit { emission: 'then', text: 'a%20painful%20electrostatic%20discharge%20occurs%20(The%20Pain%20Operator)' })
+(loop_233_verdict: BehaviorVerdict { loopId: 233, loopName: 'The%20Static%20Shock%20Loop', then: 'a%20painful%20electrostatic%20discharge%20occurs%20(The%20Pain%20Operator)', result: 'a%20subconscious%20**Touch%20Aversion**%20(people%20flinch%20when%20you%20reach%20for%20them)', operatorName: 'The%20Pain%20Operator', operatorMechanism: 'a%20painful%20electrostatic%20discharge%20occurs', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_233_when_gate: BehaviorAssess { stage: 'when', text: 'touching%20others%20or%20objects' })
+
+// Topology
+(loop_233_start)-[:PROCESS]->(loop_233_given_gate)
+(loop_233_given_gate)-[:PROCESS { case: "ok" }]->(loop_233_when_gate)
+(loop_233_given_gate)-[:PROCESS { case: "err" }]->(loop_233_inactive)
+(loop_233_when_gate)-[:PROCESS { case: "ok" }]->(loop_233_context)
+(loop_233_when_gate)-[:PROCESS { case: "err" }]->(loop_233_inactive)
+(loop_233_context)-[:FORK { strategy: "behavior-branches" }]->(loop_233_context_branch | loop_233_then_branch | loop_233_operator_branch | loop_233_result_branch | loop_233_taxonomy_branch | loop_233_intervention_recognize | loop_233_intervention_interdict | loop_233_intervention_minimize)
+(loop_233_context_branch | loop_233_then_branch | loop_233_operator_branch | loop_233_result_branch | loop_233_taxonomy_branch | loop_233_intervention_recognize | loop_233_intervention_interdict | loop_233_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_233_verdict)
+(loop_233_inactive)-[:PROCESS]->(loop_233_sink)
+(loop_233_verdict)-[:PROCESS]->(loop_233_sink)
+(loop_233_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_233_then_branch)
+(loop_233_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_233_then_branch)
+(loop_233_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_233_then_branch)

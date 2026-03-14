@@ -1,0 +1,33 @@
+// behavioral-loop-608.gg
+// Executable Gnosis projection for The Menu Loop.
+
+// Nodes
+(loop_608_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_608_context_branch: BehaviorEmit { emission: 'context' })
+(loop_608_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20oil%20spot%20on%20silk%20tie' })
+(loop_608_inactive: BehaviorTerminal { loopId: 608, loopName: 'The%20Menu%20Loop' })
+(loop_608_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_608_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_608_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_608_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stain%20Operator', mechanism: 'it%20becomes%20a%20focal%20point' })
+(loop_608_result_branch: BehaviorEmit { emission: 'result', text: 'distraction%20and%20assumption%20of%20messiness' })
+(loop_608_sink: BehaviorSink)
+(loop_608_start: BehaviorStart { loopId: 608, loopName: 'The%20Menu%20Loop', given: 'Visible%20oil%20spot%20on%20silk%20tie', when: 'wearing%20it%20to%20a%20meeting', then: 'it%20becomes%20a%20focal%20point%20(The%20Stain%20Operator)', result: 'distraction%20and%20assumption%20of%20messiness', operatorName: 'The%20Stain%20Operator', operatorMechanism: 'it%20becomes%20a%20focal%20point', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_608_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_608_then_branch: BehaviorEmit { emission: 'then', text: 'it%20becomes%20a%20focal%20point%20(The%20Stain%20Operator)' })
+(loop_608_verdict: BehaviorVerdict { loopId: 608, loopName: 'The%20Menu%20Loop', then: 'it%20becomes%20a%20focal%20point%20(The%20Stain%20Operator)', result: 'distraction%20and%20assumption%20of%20messiness', operatorName: 'The%20Stain%20Operator', operatorMechanism: 'it%20becomes%20a%20focal%20point', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_608_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20it%20to%20a%20meeting' })
+
+// Topology
+(loop_608_start)-[:PROCESS]->(loop_608_given_gate)
+(loop_608_given_gate)-[:PROCESS { case: "ok" }]->(loop_608_when_gate)
+(loop_608_given_gate)-[:PROCESS { case: "err" }]->(loop_608_inactive)
+(loop_608_when_gate)-[:PROCESS { case: "ok" }]->(loop_608_context)
+(loop_608_when_gate)-[:PROCESS { case: "err" }]->(loop_608_inactive)
+(loop_608_context)-[:FORK { strategy: "behavior-branches" }]->(loop_608_context_branch | loop_608_then_branch | loop_608_operator_branch | loop_608_result_branch | loop_608_taxonomy_branch | loop_608_intervention_recognize | loop_608_intervention_interdict | loop_608_intervention_minimize)
+(loop_608_context_branch | loop_608_then_branch | loop_608_operator_branch | loop_608_result_branch | loop_608_taxonomy_branch | loop_608_intervention_recognize | loop_608_intervention_interdict | loop_608_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_608_verdict)
+(loop_608_inactive)-[:PROCESS]->(loop_608_sink)
+(loop_608_verdict)-[:PROCESS]->(loop_608_sink)
+(loop_608_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_608_then_branch)
+(loop_608_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_608_then_branch)
+(loop_608_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_608_then_branch)

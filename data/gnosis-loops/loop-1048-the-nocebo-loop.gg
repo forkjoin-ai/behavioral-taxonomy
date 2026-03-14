@@ -1,0 +1,33 @@
+// behavioral-loop-1048.gg
+// Executable Gnosis projection for The Nocebo Loop.
+
+// Nodes
+(loop_1048_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1048_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1048_given_gate: BehaviorAssess { stage: 'given', text: 'Reading%20side%20effects%20on%20a%20bottle' })
+(loop_1048_inactive: BehaviorTerminal { loopId: 1048, loopName: 'The%20Nocebo%20Loop' })
+(loop_1048_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1048_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1048_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1048_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20individual%20manifests%20the%20exact%20side%20effect%20feared%20(The%20Self-Hex)' })
+(loop_1048_result_branch: BehaviorEmit { emission: 'result', text: 'psychosomatic%20illness' })
+(loop_1048_sink: BehaviorSink)
+(loop_1048_start: BehaviorStart { loopId: 1048, loopName: 'The%20Nocebo%20Loop', given: 'Reading%20side%20effects%20on%20a%20bottle', when: 'taking%20a%20pill', then: 'the%20individual%20manifests%20the%20exact%20side%20effect%20feared%20(The%20Self-Hex)', result: 'psychosomatic%20illness', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20manifests%20the%20exact%20side%20effect%20feared%20(The%20Self-Hex)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1048_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1048_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20manifests%20the%20exact%20side%20effect%20feared%20(The%20Self-Hex)' })
+(loop_1048_verdict: BehaviorVerdict { loopId: 1048, loopName: 'The%20Nocebo%20Loop', then: 'the%20individual%20manifests%20the%20exact%20side%20effect%20feared%20(The%20Self-Hex)', result: 'psychosomatic%20illness', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20manifests%20the%20exact%20side%20effect%20feared%20(The%20Self-Hex)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1048_when_gate: BehaviorAssess { stage: 'when', text: 'taking%20a%20pill' })
+
+// Topology
+(loop_1048_start)-[:PROCESS]->(loop_1048_given_gate)
+(loop_1048_given_gate)-[:PROCESS { case: "ok" }]->(loop_1048_when_gate)
+(loop_1048_given_gate)-[:PROCESS { case: "err" }]->(loop_1048_inactive)
+(loop_1048_when_gate)-[:PROCESS { case: "ok" }]->(loop_1048_context)
+(loop_1048_when_gate)-[:PROCESS { case: "err" }]->(loop_1048_inactive)
+(loop_1048_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1048_context_branch | loop_1048_then_branch | loop_1048_operator_branch | loop_1048_result_branch | loop_1048_taxonomy_branch | loop_1048_intervention_recognize | loop_1048_intervention_interdict | loop_1048_intervention_minimize)
+(loop_1048_context_branch | loop_1048_then_branch | loop_1048_operator_branch | loop_1048_result_branch | loop_1048_taxonomy_branch | loop_1048_intervention_recognize | loop_1048_intervention_interdict | loop_1048_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1048_verdict)
+(loop_1048_inactive)-[:PROCESS]->(loop_1048_sink)
+(loop_1048_verdict)-[:PROCESS]->(loop_1048_sink)
+(loop_1048_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1048_then_branch)
+(loop_1048_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1048_then_branch)
+(loop_1048_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1048_then_branch)

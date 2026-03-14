@@ -1,0 +1,33 @@
+// behavioral-loop-527.gg
+// Executable Gnosis projection for The Narrow Hips Loop.
+
+// Nodes
+(loop_527_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_527_context_branch: BehaviorEmit { emission: 'context' })
+(loop_527_given_gate: BehaviorAssess { stage: 'given', text: 'Pelvis%20width%20%3D%20Waist%20width%20(No%20taper)' })
+(loop_527_inactive: BehaviorTerminal { loopId: 527, loopName: 'The%20Narrow%20Hips%20Loop' })
+(loop_527_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_527_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_527_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_527_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Androgynous%20Operator', mechanism: 'the%20silhouette%20is%20%22Tubular%22%20or%20%22Boyish%22' })
+(loop_527_result_branch: BehaviorEmit { emission: 'result', text: 'being%20treated%20as%20%22One%20of%20the%20Guys%22%20regardless%20of%20gender' })
+(loop_527_sink: BehaviorSink)
+(loop_527_start: BehaviorStart { loopId: 527, loopName: 'The%20Narrow%20Hips%20Loop', given: 'Pelvis%20width%20%3D%20Waist%20width%20(No%20taper)', when: 'wearing%20straight-cut%20clothes', then: 'the%20silhouette%20is%20%22Tubular%22%20or%20%22Boyish%22%20(The%20Androgynous%20Operator)', result: 'being%20treated%20as%20%22One%20of%20the%20Guys%22%20regardless%20of%20gender', operatorName: 'The%20Androgynous%20Operator', operatorMechanism: 'the%20silhouette%20is%20%22Tubular%22%20or%20%22Boyish%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_527_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_527_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20is%20%22Tubular%22%20or%20%22Boyish%22%20(The%20Androgynous%20Operator)' })
+(loop_527_verdict: BehaviorVerdict { loopId: 527, loopName: 'The%20Narrow%20Hips%20Loop', then: 'the%20silhouette%20is%20%22Tubular%22%20or%20%22Boyish%22%20(The%20Androgynous%20Operator)', result: 'being%20treated%20as%20%22One%20of%20the%20Guys%22%20regardless%20of%20gender', operatorName: 'The%20Androgynous%20Operator', operatorMechanism: 'the%20silhouette%20is%20%22Tubular%22%20or%20%22Boyish%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_527_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20straight-cut%20clothes' })
+
+// Topology
+(loop_527_start)-[:PROCESS]->(loop_527_given_gate)
+(loop_527_given_gate)-[:PROCESS { case: "ok" }]->(loop_527_when_gate)
+(loop_527_given_gate)-[:PROCESS { case: "err" }]->(loop_527_inactive)
+(loop_527_when_gate)-[:PROCESS { case: "ok" }]->(loop_527_context)
+(loop_527_when_gate)-[:PROCESS { case: "err" }]->(loop_527_inactive)
+(loop_527_context)-[:FORK { strategy: "behavior-branches" }]->(loop_527_context_branch | loop_527_then_branch | loop_527_operator_branch | loop_527_result_branch | loop_527_taxonomy_branch | loop_527_intervention_recognize | loop_527_intervention_interdict | loop_527_intervention_minimize)
+(loop_527_context_branch | loop_527_then_branch | loop_527_operator_branch | loop_527_result_branch | loop_527_taxonomy_branch | loop_527_intervention_recognize | loop_527_intervention_interdict | loop_527_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_527_verdict)
+(loop_527_inactive)-[:PROCESS]->(loop_527_sink)
+(loop_527_verdict)-[:PROCESS]->(loop_527_sink)
+(loop_527_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_527_then_branch)
+(loop_527_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_527_then_branch)
+(loop_527_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_527_then_branch)

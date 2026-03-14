@@ -1,0 +1,33 @@
+// behavioral-loop-820.gg
+// Executable Gnosis projection for The Kangaroo Pouch Loop.
+
+// Nodes
+(loop_820_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_820_context_branch: BehaviorEmit { emission: 'context' })
+(loop_820_given_gate: BehaviorAssess { stage: 'given', text: 'Lower%20abdominal%20softness' })
+(loop_820_inactive: BehaviorTerminal { loopId: 820, loopName: 'The%20Kangaroo%20Pouch%20Loop' })
+(loop_820_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_820_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_820_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_820_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Matriarch%20Operator', mechanism: 'it%20signals%20%22Motherhood%22' })
+(loop_820_result_branch: BehaviorEmit { emission: 'result', text: 'a%20shift%20from%20%22Sexual%20Object%22%20to%20%22Nurturer%22%20in%20the%20male%20gaze' })
+(loop_820_sink: BehaviorSink)
+(loop_820_start: BehaviorStart { loopId: 820, loopName: 'The%20Kangaroo%20Pouch%20Loop', given: 'Lower%20abdominal%20softness', when: 'wearing%20tight%20dresses', then: 'it%20signals%20%22Motherhood%22%20(The%20Matriarch%20Operator)', result: 'a%20shift%20from%20%22Sexual%20Object%22%20to%20%22Nurturer%22%20in%20the%20male%20gaze', operatorName: 'The%20Matriarch%20Operator', operatorMechanism: 'it%20signals%20%22Motherhood%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_820_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_820_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Motherhood%22%20(The%20Matriarch%20Operator)' })
+(loop_820_verdict: BehaviorVerdict { loopId: 820, loopName: 'The%20Kangaroo%20Pouch%20Loop', then: 'it%20signals%20%22Motherhood%22%20(The%20Matriarch%20Operator)', result: 'a%20shift%20from%20%22Sexual%20Object%22%20to%20%22Nurturer%22%20in%20the%20male%20gaze', operatorName: 'The%20Matriarch%20Operator', operatorMechanism: 'it%20signals%20%22Motherhood%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_820_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20tight%20dresses' })
+
+// Topology
+(loop_820_start)-[:PROCESS]->(loop_820_given_gate)
+(loop_820_given_gate)-[:PROCESS { case: "ok" }]->(loop_820_when_gate)
+(loop_820_given_gate)-[:PROCESS { case: "err" }]->(loop_820_inactive)
+(loop_820_when_gate)-[:PROCESS { case: "ok" }]->(loop_820_context)
+(loop_820_when_gate)-[:PROCESS { case: "err" }]->(loop_820_inactive)
+(loop_820_context)-[:FORK { strategy: "behavior-branches" }]->(loop_820_context_branch | loop_820_then_branch | loop_820_operator_branch | loop_820_result_branch | loop_820_taxonomy_branch | loop_820_intervention_recognize | loop_820_intervention_interdict | loop_820_intervention_minimize)
+(loop_820_context_branch | loop_820_then_branch | loop_820_operator_branch | loop_820_result_branch | loop_820_taxonomy_branch | loop_820_intervention_recognize | loop_820_intervention_interdict | loop_820_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_820_verdict)
+(loop_820_inactive)-[:PROCESS]->(loop_820_sink)
+(loop_820_verdict)-[:PROCESS]->(loop_820_sink)
+(loop_820_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_820_then_branch)
+(loop_820_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_820_then_branch)
+(loop_820_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_820_then_branch)

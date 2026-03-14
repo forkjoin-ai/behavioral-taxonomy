@@ -1,0 +1,33 @@
+// behavioral-loop-309.gg
+// Executable Gnosis projection for The Throat Clearer Loop.
+
+// Nodes
+(loop_309_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_309_context_branch: BehaviorEmit { emission: 'context' })
+(loop_309_given_gate: BehaviorAssess { stage: 'given', text: 'Post-nasal%20drip%20or%20nervous%20tic%20(Ahem)' })
+(loop_309_inactive: BehaviorTerminal { loopId: 309, loopName: 'The%20Throat%20Clearer%20Loop' })
+(loop_309_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_309_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_309_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_309_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Interruption%20Operator', mechanism: 'the%20sound%20breaks%20the%20flow' })
+(loop_309_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20appearing%20%22Ready%20to%20speak%22%20but%20never%20speaking' })
+(loop_309_sink: BehaviorSink)
+(loop_309_start: BehaviorStart { loopId: 309, loopName: 'The%20Throat%20Clearer%20Loop', given: 'Post-nasal%20drip%20or%20nervous%20tic%20(Ahem)', when: 'in%20silence', then: 'the%20sound%20breaks%20the%20flow%20(The%20Interruption%20Operator)', result: 'the%20individual%20appearing%20%22Ready%20to%20speak%22%20but%20never%20speaking', operatorName: 'The%20Interruption%20Operator', operatorMechanism: 'the%20sound%20breaks%20the%20flow', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_309_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_309_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20breaks%20the%20flow%20(The%20Interruption%20Operator)' })
+(loop_309_verdict: BehaviorVerdict { loopId: 309, loopName: 'The%20Throat%20Clearer%20Loop', then: 'the%20sound%20breaks%20the%20flow%20(The%20Interruption%20Operator)', result: 'the%20individual%20appearing%20%22Ready%20to%20speak%22%20but%20never%20speaking', operatorName: 'The%20Interruption%20Operator', operatorMechanism: 'the%20sound%20breaks%20the%20flow', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_309_when_gate: BehaviorAssess { stage: 'when', text: 'in%20silence' })
+
+// Topology
+(loop_309_start)-[:PROCESS]->(loop_309_given_gate)
+(loop_309_given_gate)-[:PROCESS { case: "ok" }]->(loop_309_when_gate)
+(loop_309_given_gate)-[:PROCESS { case: "err" }]->(loop_309_inactive)
+(loop_309_when_gate)-[:PROCESS { case: "ok" }]->(loop_309_context)
+(loop_309_when_gate)-[:PROCESS { case: "err" }]->(loop_309_inactive)
+(loop_309_context)-[:FORK { strategy: "behavior-branches" }]->(loop_309_context_branch | loop_309_then_branch | loop_309_operator_branch | loop_309_result_branch | loop_309_taxonomy_branch | loop_309_intervention_recognize | loop_309_intervention_interdict | loop_309_intervention_minimize)
+(loop_309_context_branch | loop_309_then_branch | loop_309_operator_branch | loop_309_result_branch | loop_309_taxonomy_branch | loop_309_intervention_recognize | loop_309_intervention_interdict | loop_309_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_309_verdict)
+(loop_309_inactive)-[:PROCESS]->(loop_309_sink)
+(loop_309_verdict)-[:PROCESS]->(loop_309_sink)
+(loop_309_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_309_then_branch)
+(loop_309_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_309_then_branch)
+(loop_309_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_309_then_branch)

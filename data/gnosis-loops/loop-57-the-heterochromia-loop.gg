@@ -1,0 +1,33 @@
+// behavioral-loop-57.gg
+// Executable Gnosis projection for The Heterochromia Loop.
+
+// Nodes
+(loop_57_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_57_context_branch: BehaviorEmit { emission: 'context' })
+(loop_57_given_gate: BehaviorAssess { stage: 'given', text: 'Different%20colored%20eyes' })
+(loop_57_inactive: BehaviorTerminal { loopId: 57, loopName: 'The%20Heterochromia%20Loop' })
+(loop_57_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_57_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_57_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_57_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'the%20observer%20is%20entranced%2Fdistracted' })
+(loop_57_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20getting%20used%20to%20being%20%22stared%20at%2C%22%20developing%20**High%20Poise**%20under%20scrutiny' })
+(loop_57_sink: BehaviorSink)
+(loop_57_start: BehaviorStart { loopId: 57, loopName: 'The%20Heterochromia%20Loop', given: 'Different%20colored%20eyes', when: 'making%20eye%20contact', then: 'the%20observer%20is%20entranced%2Fdistracted%20(The%20Novelty%20Operator)', result: 'the%20individual%20getting%20used%20to%20being%20%22stared%20at%2C%22%20developing%20**High%20Poise**%20under%20scrutiny', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20observer%20is%20entranced%2Fdistracted', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_57_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_57_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20is%20entranced%2Fdistracted%20(The%20Novelty%20Operator)' })
+(loop_57_verdict: BehaviorVerdict { loopId: 57, loopName: 'The%20Heterochromia%20Loop', then: 'the%20observer%20is%20entranced%2Fdistracted%20(The%20Novelty%20Operator)', result: 'the%20individual%20getting%20used%20to%20being%20%22stared%20at%2C%22%20developing%20**High%20Poise**%20under%20scrutiny', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20observer%20is%20entranced%2Fdistracted', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_57_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_57_start)-[:PROCESS]->(loop_57_given_gate)
+(loop_57_given_gate)-[:PROCESS { case: "ok" }]->(loop_57_when_gate)
+(loop_57_given_gate)-[:PROCESS { case: "err" }]->(loop_57_inactive)
+(loop_57_when_gate)-[:PROCESS { case: "ok" }]->(loop_57_context)
+(loop_57_when_gate)-[:PROCESS { case: "err" }]->(loop_57_inactive)
+(loop_57_context)-[:FORK { strategy: "behavior-branches" }]->(loop_57_context_branch | loop_57_then_branch | loop_57_operator_branch | loop_57_result_branch | loop_57_taxonomy_branch | loop_57_intervention_recognize | loop_57_intervention_interdict | loop_57_intervention_minimize)
+(loop_57_context_branch | loop_57_then_branch | loop_57_operator_branch | loop_57_result_branch | loop_57_taxonomy_branch | loop_57_intervention_recognize | loop_57_intervention_interdict | loop_57_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_57_verdict)
+(loop_57_inactive)-[:PROCESS]->(loop_57_sink)
+(loop_57_verdict)-[:PROCESS]->(loop_57_sink)
+(loop_57_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_57_then_branch)
+(loop_57_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_57_then_branch)
+(loop_57_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_57_then_branch)

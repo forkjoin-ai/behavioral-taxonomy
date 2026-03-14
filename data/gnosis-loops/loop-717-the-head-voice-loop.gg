@@ -1,0 +1,33 @@
+// behavioral-loop-717.gg
+// Executable Gnosis projection for The Head Voice Loop.
+
+// Nodes
+(loop_717_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_717_context_branch: BehaviorEmit { emission: 'context' })
+(loop_717_given_gate: BehaviorAssess { stage: 'given', text: 'Resonance%20primarily%20in%20the%20nasal%2Fcranial%20cavity' })
+(loop_717_inactive: BehaviorTerminal { loopId: 717, loopName: 'The%20Head%20Voice%20Loop' })
+(loop_717_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_717_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_717_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_717_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cartoon%20Operator', mechanism: 'the%20voice%20lacks%20%22Weight%22' })
+(loop_717_result_branch: BehaviorEmit { emission: 'result', text: 'low%20compliance%20from%20subordinates' })
+(loop_717_sink: BehaviorSink)
+(loop_717_start: BehaviorStart { loopId: 717, loopName: 'The%20Head%20Voice%20Loop', given: 'Resonance%20primarily%20in%20the%20nasal%2Fcranial%20cavity', when: 'giving%20orders', then: 'the%20voice%20lacks%20%22Weight%22%20(The%20Cartoon%20Operator)', result: 'low%20compliance%20from%20subordinates', operatorName: 'The%20Cartoon%20Operator', operatorMechanism: 'the%20voice%20lacks%20%22Weight%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_717_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_717_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20lacks%20%22Weight%22%20(The%20Cartoon%20Operator)' })
+(loop_717_verdict: BehaviorVerdict { loopId: 717, loopName: 'The%20Head%20Voice%20Loop', then: 'the%20voice%20lacks%20%22Weight%22%20(The%20Cartoon%20Operator)', result: 'low%20compliance%20from%20subordinates', operatorName: 'The%20Cartoon%20Operator', operatorMechanism: 'the%20voice%20lacks%20%22Weight%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_717_when_gate: BehaviorAssess { stage: 'when', text: 'giving%20orders' })
+
+// Topology
+(loop_717_start)-[:PROCESS]->(loop_717_given_gate)
+(loop_717_given_gate)-[:PROCESS { case: "ok" }]->(loop_717_when_gate)
+(loop_717_given_gate)-[:PROCESS { case: "err" }]->(loop_717_inactive)
+(loop_717_when_gate)-[:PROCESS { case: "ok" }]->(loop_717_context)
+(loop_717_when_gate)-[:PROCESS { case: "err" }]->(loop_717_inactive)
+(loop_717_context)-[:FORK { strategy: "behavior-branches" }]->(loop_717_context_branch | loop_717_then_branch | loop_717_operator_branch | loop_717_result_branch | loop_717_taxonomy_branch | loop_717_intervention_recognize | loop_717_intervention_interdict | loop_717_intervention_minimize)
+(loop_717_context_branch | loop_717_then_branch | loop_717_operator_branch | loop_717_result_branch | loop_717_taxonomy_branch | loop_717_intervention_recognize | loop_717_intervention_interdict | loop_717_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_717_verdict)
+(loop_717_inactive)-[:PROCESS]->(loop_717_sink)
+(loop_717_verdict)-[:PROCESS]->(loop_717_sink)
+(loop_717_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_717_then_branch)
+(loop_717_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_717_then_branch)
+(loop_717_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_717_then_branch)

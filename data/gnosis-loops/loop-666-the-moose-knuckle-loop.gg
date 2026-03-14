@@ -1,0 +1,33 @@
+// behavioral-loop-666.gg
+// Executable Gnosis projection for The Moose Knuckle Loop.
+
+// Nodes
+(loop_666_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_666_context_branch: BehaviorEmit { emission: 'context' })
+(loop_666_given_gate: BehaviorAssess { stage: 'given', text: 'Pants%20too%20tight%20in%20the%20crotch%20(Male)' })
+(loop_666_inactive: BehaviorTerminal { loopId: 666, loopName: 'The%20Moose%20Knuckle%20Loop' })
+(loop_666_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_666_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_666_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_666_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vulgar%20Operator', mechanism: 'it%20draws%20eyes%20to%20the%20groin' })
+(loop_666_result_branch: BehaviorEmit { emission: 'result', text: 'discomfort%20for%20observers%20and%20%22Trashy%22%20labeling' })
+(loop_666_sink: BehaviorSink)
+(loop_666_start: BehaviorStart { loopId: 666, loopName: 'The%20Moose%20Knuckle%20Loop', given: 'Pants%20too%20tight%20in%20the%20crotch%20(Male)', when: 'standing', then: 'it%20draws%20eyes%20to%20the%20groin%20(The%20Vulgar%20Operator)', result: 'discomfort%20for%20observers%20and%20%22Trashy%22%20labeling', operatorName: 'The%20Vulgar%20Operator', operatorMechanism: 'it%20draws%20eyes%20to%20the%20groin', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_666_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_666_then_branch: BehaviorEmit { emission: 'then', text: 'it%20draws%20eyes%20to%20the%20groin%20(The%20Vulgar%20Operator)' })
+(loop_666_verdict: BehaviorVerdict { loopId: 666, loopName: 'The%20Moose%20Knuckle%20Loop', then: 'it%20draws%20eyes%20to%20the%20groin%20(The%20Vulgar%20Operator)', result: 'discomfort%20for%20observers%20and%20%22Trashy%22%20labeling', operatorName: 'The%20Vulgar%20Operator', operatorMechanism: 'it%20draws%20eyes%20to%20the%20groin', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_666_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_666_start)-[:PROCESS]->(loop_666_given_gate)
+(loop_666_given_gate)-[:PROCESS { case: "ok" }]->(loop_666_when_gate)
+(loop_666_given_gate)-[:PROCESS { case: "err" }]->(loop_666_inactive)
+(loop_666_when_gate)-[:PROCESS { case: "ok" }]->(loop_666_context)
+(loop_666_when_gate)-[:PROCESS { case: "err" }]->(loop_666_inactive)
+(loop_666_context)-[:FORK { strategy: "behavior-branches" }]->(loop_666_context_branch | loop_666_then_branch | loop_666_operator_branch | loop_666_result_branch | loop_666_taxonomy_branch | loop_666_intervention_recognize | loop_666_intervention_interdict | loop_666_intervention_minimize)
+(loop_666_context_branch | loop_666_then_branch | loop_666_operator_branch | loop_666_result_branch | loop_666_taxonomy_branch | loop_666_intervention_recognize | loop_666_intervention_interdict | loop_666_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_666_verdict)
+(loop_666_inactive)-[:PROCESS]->(loop_666_sink)
+(loop_666_verdict)-[:PROCESS]->(loop_666_sink)
+(loop_666_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_666_then_branch)
+(loop_666_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_666_then_branch)
+(loop_666_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_666_then_branch)

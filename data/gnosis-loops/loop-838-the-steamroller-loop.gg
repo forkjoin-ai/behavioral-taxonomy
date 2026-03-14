@@ -1,0 +1,31 @@
+// behavioral-loop-838.gg
+// Executable Gnosis projection for The Steamroller Loop.
+
+// Nodes
+(loop_838_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_838_context_branch: BehaviorEmit { emission: 'context' })
+(loop_838_given_gate: BehaviorAssess { stage: 'given', text: 'High%20volume%20%2B%20lack%20of%20pause%20detection' })
+(loop_838_inactive: BehaviorTerminal { loopId: 838, loopName: 'The%20Steamroller%20Loop' })
+(loop_838_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_838_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_838_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Bulldozer%20Operator', mechanism: 'the%20individual%20fills%20it%20loudly' })
+(loop_838_result_branch: BehaviorEmit { emission: 'result', text: 'dominance%20of%20the%20floor%20but%20resentment%20from%20the%20group' })
+(loop_838_sink: BehaviorSink)
+(loop_838_start: BehaviorStart { loopId: 838, loopName: 'The%20Steamroller%20Loop', given: 'High%20volume%20%2B%20lack%20of%20pause%20detection', when: 'a%20gap%20in%20conversation%20appears', then: 'the%20individual%20fills%20it%20loudly%20(The%20Bulldozer%20Operator)', result: 'dominance%20of%20the%20floor%20but%20resentment%20from%20the%20group', operatorName: 'The%20Bulldozer%20Operator', operatorMechanism: 'the%20individual%20fills%20it%20loudly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_838_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_838_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20fills%20it%20loudly%20(The%20Bulldozer%20Operator)' })
+(loop_838_verdict: BehaviorVerdict { loopId: 838, loopName: 'The%20Steamroller%20Loop', then: 'the%20individual%20fills%20it%20loudly%20(The%20Bulldozer%20Operator)', result: 'dominance%20of%20the%20floor%20but%20resentment%20from%20the%20group', operatorName: 'The%20Bulldozer%20Operator', operatorMechanism: 'the%20individual%20fills%20it%20loudly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_838_when_gate: BehaviorAssess { stage: 'when', text: 'a%20gap%20in%20conversation%20appears' })
+
+// Topology
+(loop_838_start)-[:PROCESS]->(loop_838_given_gate)
+(loop_838_given_gate)-[:PROCESS { case: "ok" }]->(loop_838_when_gate)
+(loop_838_given_gate)-[:PROCESS { case: "err" }]->(loop_838_inactive)
+(loop_838_when_gate)-[:PROCESS { case: "ok" }]->(loop_838_context)
+(loop_838_when_gate)-[:PROCESS { case: "err" }]->(loop_838_inactive)
+(loop_838_context)-[:FORK { strategy: "behavior-branches" }]->(loop_838_context_branch | loop_838_then_branch | loop_838_operator_branch | loop_838_result_branch | loop_838_taxonomy_branch | loop_838_intervention_recognize | loop_838_intervention_leverage)
+(loop_838_context_branch | loop_838_then_branch | loop_838_operator_branch | loop_838_result_branch | loop_838_taxonomy_branch | loop_838_intervention_recognize | loop_838_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_838_verdict)
+(loop_838_inactive)-[:PROCESS]->(loop_838_sink)
+(loop_838_verdict)-[:PROCESS]->(loop_838_sink)
+(loop_838_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_838_then_branch)
+(loop_838_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_838_result_branch)

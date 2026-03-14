@@ -1,0 +1,33 @@
+// behavioral-loop-877.gg
+// Executable Gnosis projection for The Crossed Loop.
+
+// Nodes
+(loop_877_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_877_context_branch: BehaviorEmit { emission: 'context' })
+(loop_877_given_gate: BehaviorAssess { stage: 'given', text: 'One%20or%20both%20eyes%20turning%20inward' })
+(loop_877_inactive: BehaviorTerminal { loopId: 877, loopName: 'The%20Crossed%20Loop' })
+(loop_877_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_877_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_877_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_877_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Confusion%20Operator', mechanism: 'the%20gaze%20looks%20%22Focused%20on%20Nose%22' })
+(loop_877_result_branch: BehaviorEmit { emission: 'result', text: 'the%20listener%20not%20knowing%20where%20to%20look%2C%20breaking%20rapport' })
+(loop_877_sink: BehaviorSink)
+(loop_877_start: BehaviorStart { loopId: 877, loopName: 'The%20Crossed%20Loop', given: 'One%20or%20both%20eyes%20turning%20inward', when: 'making%20eye%20contact', then: 'the%20gaze%20looks%20%22Focused%20on%20Nose%22%20(The%20Confusion%20Operator)', result: 'the%20listener%20not%20knowing%20where%20to%20look%2C%20breaking%20rapport', operatorName: 'The%20Confusion%20Operator', operatorMechanism: 'the%20gaze%20looks%20%22Focused%20on%20Nose%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_877_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_877_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gaze%20looks%20%22Focused%20on%20Nose%22%20(The%20Confusion%20Operator)' })
+(loop_877_verdict: BehaviorVerdict { loopId: 877, loopName: 'The%20Crossed%20Loop', then: 'the%20gaze%20looks%20%22Focused%20on%20Nose%22%20(The%20Confusion%20Operator)', result: 'the%20listener%20not%20knowing%20where%20to%20look%2C%20breaking%20rapport', operatorName: 'The%20Confusion%20Operator', operatorMechanism: 'the%20gaze%20looks%20%22Focused%20on%20Nose%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_877_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_877_start)-[:PROCESS]->(loop_877_given_gate)
+(loop_877_given_gate)-[:PROCESS { case: "ok" }]->(loop_877_when_gate)
+(loop_877_given_gate)-[:PROCESS { case: "err" }]->(loop_877_inactive)
+(loop_877_when_gate)-[:PROCESS { case: "ok" }]->(loop_877_context)
+(loop_877_when_gate)-[:PROCESS { case: "err" }]->(loop_877_inactive)
+(loop_877_context)-[:FORK { strategy: "behavior-branches" }]->(loop_877_context_branch | loop_877_then_branch | loop_877_operator_branch | loop_877_result_branch | loop_877_taxonomy_branch | loop_877_intervention_recognize | loop_877_intervention_interdict | loop_877_intervention_minimize)
+(loop_877_context_branch | loop_877_then_branch | loop_877_operator_branch | loop_877_result_branch | loop_877_taxonomy_branch | loop_877_intervention_recognize | loop_877_intervention_interdict | loop_877_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_877_verdict)
+(loop_877_inactive)-[:PROCESS]->(loop_877_sink)
+(loop_877_verdict)-[:PROCESS]->(loop_877_sink)
+(loop_877_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_877_then_branch)
+(loop_877_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_877_then_branch)
+(loop_877_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_877_then_branch)

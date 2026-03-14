@@ -1,0 +1,33 @@
+// behavioral-loop-874.gg
+// Executable Gnosis projection for The Sunken Chest Loop.
+
+// Nodes
+(loop_874_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_874_context_branch: BehaviorEmit { emission: 'context' })
+(loop_874_given_gate: BehaviorAssess { stage: 'given', text: 'Deep%20indentation%20in%20the%20sternum' })
+(loop_874_inactive: BehaviorTerminal { loopId: 874, loopName: 'The%20Sunken%20Chest%20Loop' })
+(loop_874_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_874_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_874_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_874_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Void%20Operator', mechanism: 'it%20looks%20like%20a%20%22Hole%22%20in%20the%20torso' })
+(loop_874_result_branch: BehaviorEmit { emission: 'result', text: 'avoidance%20of%20swimming%2Flocker%20rooms%20and%20%22Fragile%22%20labeling' })
+(loop_874_sink: BehaviorSink)
+(loop_874_start: BehaviorStart { loopId: 874, loopName: 'The%20Sunken%20Chest%20Loop', given: 'Deep%20indentation%20in%20the%20sternum', when: 'shirtless', then: 'it%20looks%20like%20a%20%22Hole%22%20in%20the%20torso%20(The%20Void%20Operator)', result: 'avoidance%20of%20swimming%2Flocker%20rooms%20and%20%22Fragile%22%20labeling', operatorName: 'The%20Void%20Operator', operatorMechanism: 'it%20looks%20like%20a%20%22Hole%22%20in%20the%20torso', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_874_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_874_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20a%20%22Hole%22%20in%20the%20torso%20(The%20Void%20Operator)' })
+(loop_874_verdict: BehaviorVerdict { loopId: 874, loopName: 'The%20Sunken%20Chest%20Loop', then: 'it%20looks%20like%20a%20%22Hole%22%20in%20the%20torso%20(The%20Void%20Operator)', result: 'avoidance%20of%20swimming%2Flocker%20rooms%20and%20%22Fragile%22%20labeling', operatorName: 'The%20Void%20Operator', operatorMechanism: 'it%20looks%20like%20a%20%22Hole%22%20in%20the%20torso', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_874_when_gate: BehaviorAssess { stage: 'when', text: 'shirtless' })
+
+// Topology
+(loop_874_start)-[:PROCESS]->(loop_874_given_gate)
+(loop_874_given_gate)-[:PROCESS { case: "ok" }]->(loop_874_when_gate)
+(loop_874_given_gate)-[:PROCESS { case: "err" }]->(loop_874_inactive)
+(loop_874_when_gate)-[:PROCESS { case: "ok" }]->(loop_874_context)
+(loop_874_when_gate)-[:PROCESS { case: "err" }]->(loop_874_inactive)
+(loop_874_context)-[:FORK { strategy: "behavior-branches" }]->(loop_874_context_branch | loop_874_then_branch | loop_874_operator_branch | loop_874_result_branch | loop_874_taxonomy_branch | loop_874_intervention_recognize | loop_874_intervention_interdict | loop_874_intervention_minimize)
+(loop_874_context_branch | loop_874_then_branch | loop_874_operator_branch | loop_874_result_branch | loop_874_taxonomy_branch | loop_874_intervention_recognize | loop_874_intervention_interdict | loop_874_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_874_verdict)
+(loop_874_inactive)-[:PROCESS]->(loop_874_sink)
+(loop_874_verdict)-[:PROCESS]->(loop_874_sink)
+(loop_874_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_874_then_branch)
+(loop_874_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_874_then_branch)
+(loop_874_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_874_then_branch)

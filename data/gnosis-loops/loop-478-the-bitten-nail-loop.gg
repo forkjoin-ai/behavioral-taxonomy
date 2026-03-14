@@ -1,0 +1,33 @@
+// behavioral-loop-478.gg
+// Executable Gnosis projection for The Bitten Nail Loop.
+
+// Nodes
+(loop_478_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_478_context_branch: BehaviorEmit { emission: 'context' })
+(loop_478_given_gate: BehaviorAssess { stage: 'given', text: 'Nails%20eaten%20down%20to%20the%20quick%20(bleeding)' })
+(loop_478_inactive: BehaviorTerminal { loopId: 478, loopName: 'The%20Bitten%20Nail%20Loop' })
+(loop_478_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_478_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_478_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_478_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Anxiety%20Operator', mechanism: 'it%20signals%20%22Severe%20Neurosis%22%20or%20%22Self-Cannibalism%22' })
+(loop_478_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20feeling%20uncomfortable%2Fdisgusted' })
+(loop_478_sink: BehaviorSink)
+(loop_478_start: BehaviorStart { loopId: 478, loopName: 'The%20Bitten%20Nail%20Loop', given: 'Nails%20eaten%20down%20to%20the%20quick%20(bleeding)', when: 'gesturing', then: 'it%20signals%20%22Severe%20Neurosis%22%20or%20%22Self-Cannibalism%22%20(The%20Anxiety%20Operator)', result: 'observers%20feeling%20uncomfortable%2Fdisgusted', operatorName: 'The%20Anxiety%20Operator', operatorMechanism: 'it%20signals%20%22Severe%20Neurosis%22%20or%20%22Self-Cannibalism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_478_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_478_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Severe%20Neurosis%22%20or%20%22Self-Cannibalism%22%20(The%20Anxiety%20Operator)' })
+(loop_478_verdict: BehaviorVerdict { loopId: 478, loopName: 'The%20Bitten%20Nail%20Loop', then: 'it%20signals%20%22Severe%20Neurosis%22%20or%20%22Self-Cannibalism%22%20(The%20Anxiety%20Operator)', result: 'observers%20feeling%20uncomfortable%2Fdisgusted', operatorName: 'The%20Anxiety%20Operator', operatorMechanism: 'it%20signals%20%22Severe%20Neurosis%22%20or%20%22Self-Cannibalism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_478_when_gate: BehaviorAssess { stage: 'when', text: 'gesturing' })
+
+// Topology
+(loop_478_start)-[:PROCESS]->(loop_478_given_gate)
+(loop_478_given_gate)-[:PROCESS { case: "ok" }]->(loop_478_when_gate)
+(loop_478_given_gate)-[:PROCESS { case: "err" }]->(loop_478_inactive)
+(loop_478_when_gate)-[:PROCESS { case: "ok" }]->(loop_478_context)
+(loop_478_when_gate)-[:PROCESS { case: "err" }]->(loop_478_inactive)
+(loop_478_context)-[:FORK { strategy: "behavior-branches" }]->(loop_478_context_branch | loop_478_then_branch | loop_478_operator_branch | loop_478_result_branch | loop_478_taxonomy_branch | loop_478_intervention_recognize | loop_478_intervention_interdict | loop_478_intervention_minimize)
+(loop_478_context_branch | loop_478_then_branch | loop_478_operator_branch | loop_478_result_branch | loop_478_taxonomy_branch | loop_478_intervention_recognize | loop_478_intervention_interdict | loop_478_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_478_verdict)
+(loop_478_inactive)-[:PROCESS]->(loop_478_sink)
+(loop_478_verdict)-[:PROCESS]->(loop_478_sink)
+(loop_478_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_478_then_branch)
+(loop_478_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_478_then_branch)
+(loop_478_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_478_then_branch)

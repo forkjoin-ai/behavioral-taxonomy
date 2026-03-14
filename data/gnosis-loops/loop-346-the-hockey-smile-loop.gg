@@ -1,0 +1,31 @@
+// behavioral-loop-346.gg
+// Executable Gnosis projection for The Hockey Smile Loop.
+
+// Nodes
+(loop_346_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_346_context_branch: BehaviorEmit { emission: 'context' })
+(loop_346_given_gate: BehaviorAssess { stage: 'given', text: 'Missing%20anterior%20tooth' })
+(loop_346_inactive: BehaviorTerminal { loopId: 346, loopName: 'The%20Hockey%20Smile%20Loop' })
+(loop_346_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_346_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_346_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Roughness%20Operator', mechanism: 'observers%20assume%20%22Violence%2C%22%20%22Poverty%2C%22%20or%20%22Sport%22' })
+(loop_346_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20**Street%20Credibility**%20or%20class%20discrimination' })
+(loop_346_sink: BehaviorSink)
+(loop_346_start: BehaviorStart { loopId: 346, loopName: 'The%20Hockey%20Smile%20Loop', given: 'Missing%20anterior%20tooth', when: 'smiling', then: 'observers%20assume%20%22Violence%2C%22%20%22Poverty%2C%22%20or%20%22Sport%22%20(The%20Roughness%20Operator)', result: 'immediate%20**Street%20Credibility**%20or%20class%20discrimination', operatorName: 'The%20Roughness%20Operator', operatorMechanism: 'observers%20assume%20%22Violence%2C%22%20%22Poverty%2C%22%20or%20%22Sport%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_346_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_346_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Violence%2C%22%20%22Poverty%2C%22%20or%20%22Sport%22%20(The%20Roughness%20Operator)' })
+(loop_346_verdict: BehaviorVerdict { loopId: 346, loopName: 'The%20Hockey%20Smile%20Loop', then: 'observers%20assume%20%22Violence%2C%22%20%22Poverty%2C%22%20or%20%22Sport%22%20(The%20Roughness%20Operator)', result: 'immediate%20**Street%20Credibility**%20or%20class%20discrimination', operatorName: 'The%20Roughness%20Operator', operatorMechanism: 'observers%20assume%20%22Violence%2C%22%20%22Poverty%2C%22%20or%20%22Sport%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_346_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_346_start)-[:PROCESS]->(loop_346_given_gate)
+(loop_346_given_gate)-[:PROCESS { case: "ok" }]->(loop_346_when_gate)
+(loop_346_given_gate)-[:PROCESS { case: "err" }]->(loop_346_inactive)
+(loop_346_when_gate)-[:PROCESS { case: "ok" }]->(loop_346_context)
+(loop_346_when_gate)-[:PROCESS { case: "err" }]->(loop_346_inactive)
+(loop_346_context)-[:FORK { strategy: "behavior-branches" }]->(loop_346_context_branch | loop_346_then_branch | loop_346_operator_branch | loop_346_result_branch | loop_346_taxonomy_branch | loop_346_intervention_recognize | loop_346_intervention_leverage)
+(loop_346_context_branch | loop_346_then_branch | loop_346_operator_branch | loop_346_result_branch | loop_346_taxonomy_branch | loop_346_intervention_recognize | loop_346_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_346_verdict)
+(loop_346_inactive)-[:PROCESS]->(loop_346_sink)
+(loop_346_verdict)-[:PROCESS]->(loop_346_sink)
+(loop_346_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_346_then_branch)
+(loop_346_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_346_result_branch)

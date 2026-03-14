@@ -1,0 +1,33 @@
+// behavioral-loop-576.gg
+// Executable Gnosis projection for The Collar Gap Loop.
+
+// Nodes
+(loop_576_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_576_context_branch: BehaviorEmit { emission: 'context' })
+(loop_576_given_gate: BehaviorAssess { stage: 'given', text: 'Suit%20jacket%20collar%20standing%20off%20the%20neck' })
+(loop_576_inactive: BehaviorTerminal { loopId: 576, loopName: 'The%20Collar%20Gap%20Loop' })
+(loop_576_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_576_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_576_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_576_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Ill-Fitting%20Operator', mechanism: 'it%20signals%20%22Cheap%20Suit%22' })
+(loop_576_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20like%20they%20are%20%22Playing%20Dress%20Up.%22' })
+(loop_576_sink: BehaviorSink)
+(loop_576_start: BehaviorStart { loopId: 576, loopName: 'The%20Collar%20Gap%20Loop', given: 'Suit%20jacket%20collar%20standing%20off%20the%20neck', when: 'standing', then: 'it%20signals%20%22Cheap%20Suit%22%20(The%20Ill-Fitting%20Operator)', result: 'the%20individual%20looking%20like%20they%20are%20%22Playing%20Dress%20Up.%22', operatorName: 'The%20Ill-Fitting%20Operator', operatorMechanism: 'it%20signals%20%22Cheap%20Suit%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_576_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_576_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Cheap%20Suit%22%20(The%20Ill-Fitting%20Operator)' })
+(loop_576_verdict: BehaviorVerdict { loopId: 576, loopName: 'The%20Collar%20Gap%20Loop', then: 'it%20signals%20%22Cheap%20Suit%22%20(The%20Ill-Fitting%20Operator)', result: 'the%20individual%20looking%20like%20they%20are%20%22Playing%20Dress%20Up.%22', operatorName: 'The%20Ill-Fitting%20Operator', operatorMechanism: 'it%20signals%20%22Cheap%20Suit%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_576_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_576_start)-[:PROCESS]->(loop_576_given_gate)
+(loop_576_given_gate)-[:PROCESS { case: "ok" }]->(loop_576_when_gate)
+(loop_576_given_gate)-[:PROCESS { case: "err" }]->(loop_576_inactive)
+(loop_576_when_gate)-[:PROCESS { case: "ok" }]->(loop_576_context)
+(loop_576_when_gate)-[:PROCESS { case: "err" }]->(loop_576_inactive)
+(loop_576_context)-[:FORK { strategy: "behavior-branches" }]->(loop_576_context_branch | loop_576_then_branch | loop_576_operator_branch | loop_576_result_branch | loop_576_taxonomy_branch | loop_576_intervention_recognize | loop_576_intervention_interdict | loop_576_intervention_minimize)
+(loop_576_context_branch | loop_576_then_branch | loop_576_operator_branch | loop_576_result_branch | loop_576_taxonomy_branch | loop_576_intervention_recognize | loop_576_intervention_interdict | loop_576_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_576_verdict)
+(loop_576_inactive)-[:PROCESS]->(loop_576_sink)
+(loop_576_verdict)-[:PROCESS]->(loop_576_sink)
+(loop_576_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_576_then_branch)
+(loop_576_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_576_then_branch)
+(loop_576_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_576_then_branch)

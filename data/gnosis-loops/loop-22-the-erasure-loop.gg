@@ -1,0 +1,33 @@
+// behavioral-loop-22.gg
+// Executable Gnosis projection for The Erasure Loop.
+
+// Nodes
+(loop_22_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_22_context_branch: BehaviorEmit { emission: 'context' })
+(loop_22_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20(Female)%20possesses%20visible%20wrinkles%20and%20gray%20hair' })
+(loop_22_inactive: BehaviorTerminal { loopId: 22, loopName: 'The%20Erasure%20Loop' })
+(loop_22_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Reframe%20the%20narrative%20around%20this%20characteristic' })
+(loop_22_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_22_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_22_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Invisible%20Operator', mechanism: 'they%20experience%20a%20sudden%20drop%20in%20male%20gaze%2Fattention' })
+(loop_22_result_branch: BehaviorEmit { emission: 'result', text: 'either%20a%20loss%20of%20self-worth%20OR%20a%20liberation%20from%20performativity%2C%20leading%20to%20**Radical%20Authenticity**' })
+(loop_22_sink: BehaviorSink)
+(loop_22_start: BehaviorStart { loopId: 22, loopName: 'The%20Erasure%20Loop', given: 'an%20individual%20(Female)%20possesses%20visible%20wrinkles%20and%20gray%20hair', when: 'they%20enter%20a%20%22mating%20market%22%20social%20venue%20(bar%2Fclub)', then: 'they%20experience%20a%20sudden%20drop%20in%20male%20gaze%2Fattention%20(The%20Invisible%20Operator)', result: 'either%20a%20loss%20of%20self-worth%20OR%20a%20liberation%20from%20performativity%2C%20leading%20to%20**Radical%20Authenticity**', operatorName: 'The%20Invisible%20Operator', operatorMechanism: 'they%20experience%20a%20sudden%20drop%20in%20male%20gaze%2Fattention', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Reframe%20the%20narrative%20around%20this%20characteristic', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_22_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_22_then_branch: BehaviorEmit { emission: 'then', text: 'they%20experience%20a%20sudden%20drop%20in%20male%20gaze%2Fattention%20(The%20Invisible%20Operator)' })
+(loop_22_verdict: BehaviorVerdict { loopId: 22, loopName: 'The%20Erasure%20Loop', then: 'they%20experience%20a%20sudden%20drop%20in%20male%20gaze%2Fattention%20(The%20Invisible%20Operator)', result: 'either%20a%20loss%20of%20self-worth%20OR%20a%20liberation%20from%20performativity%2C%20leading%20to%20**Radical%20Authenticity**', operatorName: 'The%20Invisible%20Operator', operatorMechanism: 'they%20experience%20a%20sudden%20drop%20in%20male%20gaze%2Fattention', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_22_when_gate: BehaviorAssess { stage: 'when', text: 'they%20enter%20a%20%22mating%20market%22%20social%20venue%20(bar%2Fclub)' })
+
+// Topology
+(loop_22_start)-[:PROCESS]->(loop_22_given_gate)
+(loop_22_given_gate)-[:PROCESS { case: "ok" }]->(loop_22_when_gate)
+(loop_22_given_gate)-[:PROCESS { case: "err" }]->(loop_22_inactive)
+(loop_22_when_gate)-[:PROCESS { case: "ok" }]->(loop_22_context)
+(loop_22_when_gate)-[:PROCESS { case: "err" }]->(loop_22_inactive)
+(loop_22_context)-[:FORK { strategy: "behavior-branches" }]->(loop_22_context_branch | loop_22_then_branch | loop_22_operator_branch | loop_22_result_branch | loop_22_taxonomy_branch | loop_22_intervention_recognize | loop_22_intervention_interdict | loop_22_intervention_minimize)
+(loop_22_context_branch | loop_22_then_branch | loop_22_operator_branch | loop_22_result_branch | loop_22_taxonomy_branch | loop_22_intervention_recognize | loop_22_intervention_interdict | loop_22_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_22_verdict)
+(loop_22_inactive)-[:PROCESS]->(loop_22_sink)
+(loop_22_verdict)-[:PROCESS]->(loop_22_sink)
+(loop_22_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_22_then_branch)
+(loop_22_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_22_then_branch)
+(loop_22_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_22_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-17.gg
+// Executable Gnosis projection for The Orthodontic Class Loop.
+
+// Nodes
+(loop_17_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_17_context_branch: BehaviorEmit { emission: 'context' })
+(loop_17_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20Class%20I%20Occlusion%20(Perfectly%20straight%2Fwhite%20teeth)' })
+(loop_17_inactive: BehaviorTerminal { loopId: 17, loopName: 'The%20Orthodontic%20Class%20Loop' })
+(loop_17_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Reframe%20the%20narrative%20around%20this%20characteristic' })
+(loop_17_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_17_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_17_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Halo%20Operator', mechanism: 'the%20observer%20unconsciously%20registers%20%22High%20Socioeconomic%20Status%22%20and%20%22Self-Discipline%22' })
+(loop_17_result_branch: BehaviorEmit { emission: 'result', text: 'higher%20rates%20of%20hiring%20and%20the%20development%20of%20**Social%20Ease**%20(expectation%20of%20acceptance)' })
+(loop_17_sink: BehaviorSink)
+(loop_17_start: BehaviorStart { loopId: 17, loopName: 'The%20Orthodontic%20Class%20Loop', given: 'an%20individual%20possesses%20Class%20I%20Occlusion%20(Perfectly%20straight%2Fwhite%20teeth)', when: 'they%20smile%20during%20a%20first%20impression%20or%20job%20interview', then: 'the%20observer%20unconsciously%20registers%20%22High%20Socioeconomic%20Status%22%20and%20%22Self-Discipline%22%20(The%20Halo%20Operator)', result: 'higher%20rates%20of%20hiring%20and%20the%20development%20of%20**Social%20Ease**%20(expectation%20of%20acceptance)', operatorName: 'The%20Halo%20Operator', operatorMechanism: 'the%20observer%20unconsciously%20registers%20%22High%20Socioeconomic%20Status%22%20and%20%22Self-Discipline%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Reframe%20the%20narrative%20around%20this%20characteristic', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_17_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_17_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20unconsciously%20registers%20%22High%20Socioeconomic%20Status%22%20and%20%22Self-Discipline%22%20(The%20Halo%20Operator)' })
+(loop_17_verdict: BehaviorVerdict { loopId: 17, loopName: 'The%20Orthodontic%20Class%20Loop', then: 'the%20observer%20unconsciously%20registers%20%22High%20Socioeconomic%20Status%22%20and%20%22Self-Discipline%22%20(The%20Halo%20Operator)', result: 'higher%20rates%20of%20hiring%20and%20the%20development%20of%20**Social%20Ease**%20(expectation%20of%20acceptance)', operatorName: 'The%20Halo%20Operator', operatorMechanism: 'the%20observer%20unconsciously%20registers%20%22High%20Socioeconomic%20Status%22%20and%20%22Self-Discipline%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_17_when_gate: BehaviorAssess { stage: 'when', text: 'they%20smile%20during%20a%20first%20impression%20or%20job%20interview' })
+
+// Topology
+(loop_17_start)-[:PROCESS]->(loop_17_given_gate)
+(loop_17_given_gate)-[:PROCESS { case: "ok" }]->(loop_17_when_gate)
+(loop_17_given_gate)-[:PROCESS { case: "err" }]->(loop_17_inactive)
+(loop_17_when_gate)-[:PROCESS { case: "ok" }]->(loop_17_context)
+(loop_17_when_gate)-[:PROCESS { case: "err" }]->(loop_17_inactive)
+(loop_17_context)-[:FORK { strategy: "behavior-branches" }]->(loop_17_context_branch | loop_17_then_branch | loop_17_operator_branch | loop_17_result_branch | loop_17_taxonomy_branch | loop_17_intervention_recognize | loop_17_intervention_interdict | loop_17_intervention_minimize)
+(loop_17_context_branch | loop_17_then_branch | loop_17_operator_branch | loop_17_result_branch | loop_17_taxonomy_branch | loop_17_intervention_recognize | loop_17_intervention_interdict | loop_17_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_17_verdict)
+(loop_17_inactive)-[:PROCESS]->(loop_17_sink)
+(loop_17_verdict)-[:PROCESS]->(loop_17_sink)
+(loop_17_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_17_then_branch)
+(loop_17_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_17_then_branch)
+(loop_17_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_17_then_branch)

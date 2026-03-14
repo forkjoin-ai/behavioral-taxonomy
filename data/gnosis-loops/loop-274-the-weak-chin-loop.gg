@@ -1,0 +1,31 @@
+// behavioral-loop-274.gg
+// Executable Gnosis projection for The Weak Chin Loop.
+
+// Nodes
+(loop_274_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_274_context_branch: BehaviorEmit { emission: 'context' })
+(loop_274_given_gate: BehaviorAssess { stage: 'given', text: 'Recessed%20mandible' })
+(loop_274_inactive: BehaviorTerminal { loopId: 274, loopName: 'The%20Weak%20Chin%20Loop' })
+(loop_274_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_274_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_274_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20(The%20Physiognomy%20Bias)' })
+(loop_274_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20growing%20a%20beard%20(if%20male)%20or%20using%20makeup%20contouring%20(if%20female)%20to%20**Fabricate%20Authority**' })
+(loop_274_sink: BehaviorSink)
+(loop_274_start: BehaviorStart { loopId: 274, loopName: 'The%20Weak%20Chin%20Loop', given: 'Recessed%20mandible', when: 'looking%20in%20profile', then: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20(The%20Physiognomy%20Bias)', result: 'the%20individual%20growing%20a%20beard%20(if%20male)%20or%20using%20makeup%20contouring%20(if%20female)%20to%20**Fabricate%20Authority**', operatorName: 'Unknown%20Operator', operatorMechanism: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20(The%20Physiognomy%20Bias)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_274_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_274_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20(The%20Physiognomy%20Bias)' })
+(loop_274_verdict: BehaviorVerdict { loopId: 274, loopName: 'The%20Weak%20Chin%20Loop', then: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20(The%20Physiognomy%20Bias)', result: 'the%20individual%20growing%20a%20beard%20(if%20male)%20or%20using%20makeup%20contouring%20(if%20female)%20to%20**Fabricate%20Authority**', operatorName: 'Unknown%20Operator', operatorMechanism: 'observers%20subconsciously%20perceive%20%22Weak%20Will%22%20(The%20Physiognomy%20Bias)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_274_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20in%20profile' })
+
+// Topology
+(loop_274_start)-[:PROCESS]->(loop_274_given_gate)
+(loop_274_given_gate)-[:PROCESS { case: "ok" }]->(loop_274_when_gate)
+(loop_274_given_gate)-[:PROCESS { case: "err" }]->(loop_274_inactive)
+(loop_274_when_gate)-[:PROCESS { case: "ok" }]->(loop_274_context)
+(loop_274_when_gate)-[:PROCESS { case: "err" }]->(loop_274_inactive)
+(loop_274_context)-[:FORK { strategy: "behavior-branches" }]->(loop_274_context_branch | loop_274_then_branch | loop_274_operator_branch | loop_274_result_branch | loop_274_taxonomy_branch | loop_274_intervention_recognize | loop_274_intervention_leverage)
+(loop_274_context_branch | loop_274_then_branch | loop_274_operator_branch | loop_274_result_branch | loop_274_taxonomy_branch | loop_274_intervention_recognize | loop_274_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_274_verdict)
+(loop_274_inactive)-[:PROCESS]->(loop_274_sink)
+(loop_274_verdict)-[:PROCESS]->(loop_274_sink)
+(loop_274_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_274_then_branch)
+(loop_274_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_274_result_branch)

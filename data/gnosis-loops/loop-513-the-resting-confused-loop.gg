@@ -1,0 +1,33 @@
+// behavioral-loop-513.gg
+// Executable Gnosis projection for The Resting Confused Loop.
+
+// Nodes
+(loop_513_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_513_context_branch: BehaviorEmit { emission: 'context' })
+(loop_513_given_gate: BehaviorAssess { stage: 'given', text: 'Permanent%20vertical%20glabella%20lines%20(frown%20lines)%20from%20squinting%2Fthinking' })
+(loop_513_inactive: BehaviorTerminal { loopId: 513, loopName: 'The%20Resting%20Confused%20Loop' })
+(loop_513_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_513_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_513_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_513_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Confusion%20Operator', mechanism: 'the%20face%20looks%20%22Puzzled%22%20or%20%22Stupid%22' })
+(loop_513_result_branch: BehaviorEmit { emission: 'result', text: 'people%20constantly%20over-explaining%20simple%20concepts%20to%20the%20individual' })
+(loop_513_sink: BehaviorSink)
+(loop_513_start: BehaviorStart { loopId: 513, loopName: 'The%20Resting%20Confused%20Loop', given: 'Permanent%20vertical%20glabella%20lines%20(frown%20lines)%20from%20squinting%2Fthinking', when: 'listening%20passively', then: 'the%20face%20looks%20%22Puzzled%22%20or%20%22Stupid%22%20(The%20Confusion%20Operator)', result: 'people%20constantly%20over-explaining%20simple%20concepts%20to%20the%20individual', operatorName: 'The%20Confusion%20Operator', operatorMechanism: 'the%20face%20looks%20%22Puzzled%22%20or%20%22Stupid%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_513_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_513_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Puzzled%22%20or%20%22Stupid%22%20(The%20Confusion%20Operator)' })
+(loop_513_verdict: BehaviorVerdict { loopId: 513, loopName: 'The%20Resting%20Confused%20Loop', then: 'the%20face%20looks%20%22Puzzled%22%20or%20%22Stupid%22%20(The%20Confusion%20Operator)', result: 'people%20constantly%20over-explaining%20simple%20concepts%20to%20the%20individual', operatorName: 'The%20Confusion%20Operator', operatorMechanism: 'the%20face%20looks%20%22Puzzled%22%20or%20%22Stupid%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_513_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20passively' })
+
+// Topology
+(loop_513_start)-[:PROCESS]->(loop_513_given_gate)
+(loop_513_given_gate)-[:PROCESS { case: "ok" }]->(loop_513_when_gate)
+(loop_513_given_gate)-[:PROCESS { case: "err" }]->(loop_513_inactive)
+(loop_513_when_gate)-[:PROCESS { case: "ok" }]->(loop_513_context)
+(loop_513_when_gate)-[:PROCESS { case: "err" }]->(loop_513_inactive)
+(loop_513_context)-[:FORK { strategy: "behavior-branches" }]->(loop_513_context_branch | loop_513_then_branch | loop_513_operator_branch | loop_513_result_branch | loop_513_taxonomy_branch | loop_513_intervention_recognize | loop_513_intervention_interdict | loop_513_intervention_minimize)
+(loop_513_context_branch | loop_513_then_branch | loop_513_operator_branch | loop_513_result_branch | loop_513_taxonomy_branch | loop_513_intervention_recognize | loop_513_intervention_interdict | loop_513_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_513_verdict)
+(loop_513_inactive)-[:PROCESS]->(loop_513_sink)
+(loop_513_verdict)-[:PROCESS]->(loop_513_sink)
+(loop_513_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_513_then_branch)
+(loop_513_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_513_then_branch)
+(loop_513_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_513_then_branch)

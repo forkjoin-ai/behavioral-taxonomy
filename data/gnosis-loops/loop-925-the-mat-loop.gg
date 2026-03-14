@@ -1,0 +1,33 @@
+// behavioral-loop-925.gg
+// Executable Gnosis projection for The Mat Loop.
+
+// Nodes
+(loop_925_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_925_context_branch: BehaviorEmit { emission: 'context' })
+(loop_925_given_gate: BehaviorAssess { stage: 'given', text: 'Tangled%20clump%20of%20hair%20at%20the%20nape%20(Depression%20knot)' })
+(loop_925_inactive: BehaviorTerminal { loopId: 925, loopName: 'The%20Mat%20Loop' })
+(loop_925_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_925_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_925_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_925_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Neglect%20Operator', mechanism: 'the%20mass%20moves%20as%20one%20unit' })
+(loop_925_result_branch: BehaviorEmit { emission: 'result', text: 'signaling%20%22Mental%20Health%20Crisis%22%20or%20%22Hygiene%20Failure.%22' })
+(loop_925_sink: BehaviorSink)
+(loop_925_start: BehaviorStart { loopId: 925, loopName: 'The%20Mat%20Loop', given: 'Tangled%20clump%20of%20hair%20at%20the%20nape%20(Depression%20knot)', when: 'turning%20the%20head', then: 'the%20mass%20moves%20as%20one%20unit%20(The%20Neglect%20Operator)', result: 'signaling%20%22Mental%20Health%20Crisis%22%20or%20%22Hygiene%20Failure.%22', operatorName: 'The%20Neglect%20Operator', operatorMechanism: 'the%20mass%20moves%20as%20one%20unit', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_925_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_925_then_branch: BehaviorEmit { emission: 'then', text: 'the%20mass%20moves%20as%20one%20unit%20(The%20Neglect%20Operator)' })
+(loop_925_verdict: BehaviorVerdict { loopId: 925, loopName: 'The%20Mat%20Loop', then: 'the%20mass%20moves%20as%20one%20unit%20(The%20Neglect%20Operator)', result: 'signaling%20%22Mental%20Health%20Crisis%22%20or%20%22Hygiene%20Failure.%22', operatorName: 'The%20Neglect%20Operator', operatorMechanism: 'the%20mass%20moves%20as%20one%20unit', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_925_when_gate: BehaviorAssess { stage: 'when', text: 'turning%20the%20head' })
+
+// Topology
+(loop_925_start)-[:PROCESS]->(loop_925_given_gate)
+(loop_925_given_gate)-[:PROCESS { case: "ok" }]->(loop_925_when_gate)
+(loop_925_given_gate)-[:PROCESS { case: "err" }]->(loop_925_inactive)
+(loop_925_when_gate)-[:PROCESS { case: "ok" }]->(loop_925_context)
+(loop_925_when_gate)-[:PROCESS { case: "err" }]->(loop_925_inactive)
+(loop_925_context)-[:FORK { strategy: "behavior-branches" }]->(loop_925_context_branch | loop_925_then_branch | loop_925_operator_branch | loop_925_result_branch | loop_925_taxonomy_branch | loop_925_intervention_recognize | loop_925_intervention_interdict | loop_925_intervention_minimize)
+(loop_925_context_branch | loop_925_then_branch | loop_925_operator_branch | loop_925_result_branch | loop_925_taxonomy_branch | loop_925_intervention_recognize | loop_925_intervention_interdict | loop_925_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_925_verdict)
+(loop_925_inactive)-[:PROCESS]->(loop_925_sink)
+(loop_925_verdict)-[:PROCESS]->(loop_925_sink)
+(loop_925_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_925_then_branch)
+(loop_925_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_925_then_branch)
+(loop_925_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_925_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-218.gg
+// Executable Gnosis projection for The Transparent Skin Loop.
+
+// Nodes
+(loop_218_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_218_context_branch: BehaviorEmit { emission: 'context' })
+(loop_218_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20melanin%20%2B%20thin%20epidermis%20(Visible%20blue%20veins)' })
+(loop_218_inactive: BehaviorTerminal { loopId: 218, loopName: 'The%20Transparent%20Skin%20Loop' })
+(loop_218_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_218_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_218_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_218_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mythological%2FWeakness%20Operator', mechanism: 'observers%20perceive%20%22Fragility%22%20or%20%22Etherealness%22' })
+(loop_218_result_branch: BehaviorEmit { emission: 'result', text: 'being%20protected%20physically%20but%20excluded%20from%20**Rough%20Play**' })
+(loop_218_sink: BehaviorSink)
+(loop_218_start: BehaviorStart { loopId: 218, loopName: 'The%20Transparent%20Skin%20Loop', given: 'Low%20melanin%20%2B%20thin%20epidermis%20(Visible%20blue%20veins)', when: 'in%20sunlight', then: 'observers%20perceive%20%22Fragility%22%20or%20%22Etherealness%22%20(The%20Mythological%2FWeakness%20Operator)', result: 'being%20protected%20physically%20but%20excluded%20from%20**Rough%20Play**', operatorName: 'The%20Mythological%2FWeakness%20Operator', operatorMechanism: 'observers%20perceive%20%22Fragility%22%20or%20%22Etherealness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_218_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_218_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Fragility%22%20or%20%22Etherealness%22%20(The%20Mythological%2FWeakness%20Operator)' })
+(loop_218_verdict: BehaviorVerdict { loopId: 218, loopName: 'The%20Transparent%20Skin%20Loop', then: 'observers%20perceive%20%22Fragility%22%20or%20%22Etherealness%22%20(The%20Mythological%2FWeakness%20Operator)', result: 'being%20protected%20physically%20but%20excluded%20from%20**Rough%20Play**', operatorName: 'The%20Mythological%2FWeakness%20Operator', operatorMechanism: 'observers%20perceive%20%22Fragility%22%20or%20%22Etherealness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_218_when_gate: BehaviorAssess { stage: 'when', text: 'in%20sunlight' })
+
+// Topology
+(loop_218_start)-[:PROCESS]->(loop_218_given_gate)
+(loop_218_given_gate)-[:PROCESS { case: "ok" }]->(loop_218_when_gate)
+(loop_218_given_gate)-[:PROCESS { case: "err" }]->(loop_218_inactive)
+(loop_218_when_gate)-[:PROCESS { case: "ok" }]->(loop_218_context)
+(loop_218_when_gate)-[:PROCESS { case: "err" }]->(loop_218_inactive)
+(loop_218_context)-[:FORK { strategy: "behavior-branches" }]->(loop_218_context_branch | loop_218_then_branch | loop_218_operator_branch | loop_218_result_branch | loop_218_taxonomy_branch | loop_218_intervention_recognize | loop_218_intervention_interdict | loop_218_intervention_minimize)
+(loop_218_context_branch | loop_218_then_branch | loop_218_operator_branch | loop_218_result_branch | loop_218_taxonomy_branch | loop_218_intervention_recognize | loop_218_intervention_interdict | loop_218_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_218_verdict)
+(loop_218_inactive)-[:PROCESS]->(loop_218_sink)
+(loop_218_verdict)-[:PROCESS]->(loop_218_sink)
+(loop_218_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_218_then_branch)
+(loop_218_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_218_then_branch)
+(loop_218_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_218_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-296.gg
+// Executable Gnosis projection for The Pacer Loop.
+
+// Nodes
+(loop_296_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_296_context_branch: BehaviorEmit { emission: 'context' })
+(loop_296_given_gate: BehaviorAssess { stage: 'given', text: 'High%20motor%20drive%20requiring%20movement%20to%20think' })
+(loop_296_inactive: BehaviorTerminal { loopId: 296, loopName: 'The%20Pacer%20Loop' })
+(loop_296_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_296_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_296_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_296_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nervous%20Energy%20Operator', mechanism: 'the%20constant%20motion%20distracts%2Fanxieties%20others' })
+(loop_296_result_branch: BehaviorEmit { emission: 'result', text: 'being%20told%20to%20%22Sit%20down%2C%22%20breaking%20the%20cognitive%20flow' })
+(loop_296_sink: BehaviorSink)
+(loop_296_start: BehaviorStart { loopId: 296, loopName: 'The%20Pacer%20Loop', given: 'High%20motor%20drive%20requiring%20movement%20to%20think', when: 'on%20a%20phone%20call%20or%20thinking', then: 'the%20constant%20motion%20distracts%2Fanxieties%20others%20(The%20Nervous%20Energy%20Operator)', result: 'being%20told%20to%20%22Sit%20down%2C%22%20breaking%20the%20cognitive%20flow', operatorName: 'The%20Nervous%20Energy%20Operator', operatorMechanism: 'the%20constant%20motion%20distracts%2Fanxieties%20others', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_296_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_296_then_branch: BehaviorEmit { emission: 'then', text: 'the%20constant%20motion%20distracts%2Fanxieties%20others%20(The%20Nervous%20Energy%20Operator)' })
+(loop_296_verdict: BehaviorVerdict { loopId: 296, loopName: 'The%20Pacer%20Loop', then: 'the%20constant%20motion%20distracts%2Fanxieties%20others%20(The%20Nervous%20Energy%20Operator)', result: 'being%20told%20to%20%22Sit%20down%2C%22%20breaking%20the%20cognitive%20flow', operatorName: 'The%20Nervous%20Energy%20Operator', operatorMechanism: 'the%20constant%20motion%20distracts%2Fanxieties%20others', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_296_when_gate: BehaviorAssess { stage: 'when', text: 'on%20a%20phone%20call%20or%20thinking' })
+
+// Topology
+(loop_296_start)-[:PROCESS]->(loop_296_given_gate)
+(loop_296_given_gate)-[:PROCESS { case: "ok" }]->(loop_296_when_gate)
+(loop_296_given_gate)-[:PROCESS { case: "err" }]->(loop_296_inactive)
+(loop_296_when_gate)-[:PROCESS { case: "ok" }]->(loop_296_context)
+(loop_296_when_gate)-[:PROCESS { case: "err" }]->(loop_296_inactive)
+(loop_296_context)-[:FORK { strategy: "behavior-branches" }]->(loop_296_context_branch | loop_296_then_branch | loop_296_operator_branch | loop_296_result_branch | loop_296_taxonomy_branch | loop_296_intervention_recognize | loop_296_intervention_interdict | loop_296_intervention_minimize)
+(loop_296_context_branch | loop_296_then_branch | loop_296_operator_branch | loop_296_result_branch | loop_296_taxonomy_branch | loop_296_intervention_recognize | loop_296_intervention_interdict | loop_296_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_296_verdict)
+(loop_296_inactive)-[:PROCESS]->(loop_296_sink)
+(loop_296_verdict)-[:PROCESS]->(loop_296_sink)
+(loop_296_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_296_then_branch)
+(loop_296_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_296_then_branch)
+(loop_296_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_296_then_branch)

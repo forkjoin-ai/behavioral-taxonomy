@@ -1,0 +1,33 @@
+// behavioral-loop-327.gg
+// Executable Gnosis projection for The Baby Voice Loop.
+
+// Nodes
+(loop_327_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_327_context_branch: BehaviorEmit { emission: 'context' })
+(loop_327_given_gate: BehaviorAssess { stage: 'given', text: 'High%20pitch%20%2B%20soft%20timbre%20(Female)' })
+(loop_327_inactive: BehaviorTerminal { loopId: 327, loopName: 'The%20Baby%20Voice%20Loop' })
+(loop_327_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_327_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_327_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_327_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nurture%2FRivalry%20Operator', mechanism: 'it%20triggers%20the%20%22Protective%22%20instinct%20in%20males%20but%20%22Disgust%22%20in%20females' })
+(loop_327_result_branch: BehaviorEmit { emission: 'result', text: 'polarized%20social%20treatment%20(pampered%20by%20some%2C%20hated%20by%20others)' })
+(loop_327_sink: BehaviorSink)
+(loop_327_start: BehaviorStart { loopId: 327, loopName: 'The%20Baby%20Voice%20Loop', given: 'High%20pitch%20%2B%20soft%20timbre%20(Female)', when: 'asking%20for%20a%20favor', then: 'it%20triggers%20the%20%22Protective%22%20instinct%20in%20males%20but%20%22Disgust%22%20in%20females%20(The%20Nurture%2FRivalry%20Operator)', result: 'polarized%20social%20treatment%20(pampered%20by%20some%2C%20hated%20by%20others)', operatorName: 'The%20Nurture%2FRivalry%20Operator', operatorMechanism: 'it%20triggers%20the%20%22Protective%22%20instinct%20in%20males%20but%20%22Disgust%22%20in%20females', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_327_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_327_then_branch: BehaviorEmit { emission: 'then', text: 'it%20triggers%20the%20%22Protective%22%20instinct%20in%20males%20but%20%22Disgust%22%20in%20females%20(The%20Nurture%2FRivalry%20Operator)' })
+(loop_327_verdict: BehaviorVerdict { loopId: 327, loopName: 'The%20Baby%20Voice%20Loop', then: 'it%20triggers%20the%20%22Protective%22%20instinct%20in%20males%20but%20%22Disgust%22%20in%20females%20(The%20Nurture%2FRivalry%20Operator)', result: 'polarized%20social%20treatment%20(pampered%20by%20some%2C%20hated%20by%20others)', operatorName: 'The%20Nurture%2FRivalry%20Operator', operatorMechanism: 'it%20triggers%20the%20%22Protective%22%20instinct%20in%20males%20but%20%22Disgust%22%20in%20females', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_327_when_gate: BehaviorAssess { stage: 'when', text: 'asking%20for%20a%20favor' })
+
+// Topology
+(loop_327_start)-[:PROCESS]->(loop_327_given_gate)
+(loop_327_given_gate)-[:PROCESS { case: "ok" }]->(loop_327_when_gate)
+(loop_327_given_gate)-[:PROCESS { case: "err" }]->(loop_327_inactive)
+(loop_327_when_gate)-[:PROCESS { case: "ok" }]->(loop_327_context)
+(loop_327_when_gate)-[:PROCESS { case: "err" }]->(loop_327_inactive)
+(loop_327_context)-[:FORK { strategy: "behavior-branches" }]->(loop_327_context_branch | loop_327_then_branch | loop_327_operator_branch | loop_327_result_branch | loop_327_taxonomy_branch | loop_327_intervention_recognize | loop_327_intervention_interdict | loop_327_intervention_minimize)
+(loop_327_context_branch | loop_327_then_branch | loop_327_operator_branch | loop_327_result_branch | loop_327_taxonomy_branch | loop_327_intervention_recognize | loop_327_intervention_interdict | loop_327_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_327_verdict)
+(loop_327_inactive)-[:PROCESS]->(loop_327_sink)
+(loop_327_verdict)-[:PROCESS]->(loop_327_sink)
+(loop_327_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_327_then_branch)
+(loop_327_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_327_then_branch)
+(loop_327_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_327_then_branch)

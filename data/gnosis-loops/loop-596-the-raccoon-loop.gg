@@ -1,0 +1,33 @@
+// behavioral-loop-596.gg
+// Executable Gnosis projection for The Raccoon Loop.
+
+// Nodes
+(loop_596_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_596_context_branch: BehaviorEmit { emission: 'context' })
+(loop_596_given_gate: BehaviorAssess { stage: 'given', text: 'Genetic%20dark%20circles' })
+(loop_596_inactive: BehaviorTerminal { loopId: 596, loopName: 'The%20Raccoon%20Loop' })
+(loop_596_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Reframe%20the%20narrative%20around%20this%20characteristic' })
+(loop_596_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_596_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_596_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Zombie%20Operator', mechanism: 'still%20looks%20%22Exhausted%22' })
+(loop_596_result_branch: BehaviorEmit { emission: 'result', text: 'being%20bypassed%20for%20high-energy%20tasks' })
+(loop_596_sink: BehaviorSink)
+(loop_596_start: BehaviorStart { loopId: 596, loopName: 'The%20Raccoon%20Loop', given: 'Genetic%20dark%20circles', when: 'fully%20rested', then: 'still%20looks%20%22Exhausted%22%20(The%20Zombie%20Operator)', result: 'being%20bypassed%20for%20high-energy%20tasks', operatorName: 'The%20Zombie%20Operator', operatorMechanism: 'still%20looks%20%22Exhausted%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Reframe%20the%20narrative%20around%20this%20characteristic', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_596_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_596_then_branch: BehaviorEmit { emission: 'then', text: 'still%20looks%20%22Exhausted%22%20(The%20Zombie%20Operator)' })
+(loop_596_verdict: BehaviorVerdict { loopId: 596, loopName: 'The%20Raccoon%20Loop', then: 'still%20looks%20%22Exhausted%22%20(The%20Zombie%20Operator)', result: 'being%20bypassed%20for%20high-energy%20tasks', operatorName: 'The%20Zombie%20Operator', operatorMechanism: 'still%20looks%20%22Exhausted%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_596_when_gate: BehaviorAssess { stage: 'when', text: 'fully%20rested' })
+
+// Topology
+(loop_596_start)-[:PROCESS]->(loop_596_given_gate)
+(loop_596_given_gate)-[:PROCESS { case: "ok" }]->(loop_596_when_gate)
+(loop_596_given_gate)-[:PROCESS { case: "err" }]->(loop_596_inactive)
+(loop_596_when_gate)-[:PROCESS { case: "ok" }]->(loop_596_context)
+(loop_596_when_gate)-[:PROCESS { case: "err" }]->(loop_596_inactive)
+(loop_596_context)-[:FORK { strategy: "behavior-branches" }]->(loop_596_context_branch | loop_596_then_branch | loop_596_operator_branch | loop_596_result_branch | loop_596_taxonomy_branch | loop_596_intervention_recognize | loop_596_intervention_interdict | loop_596_intervention_minimize)
+(loop_596_context_branch | loop_596_then_branch | loop_596_operator_branch | loop_596_result_branch | loop_596_taxonomy_branch | loop_596_intervention_recognize | loop_596_intervention_interdict | loop_596_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_596_verdict)
+(loop_596_inactive)-[:PROCESS]->(loop_596_sink)
+(loop_596_verdict)-[:PROCESS]->(loop_596_sink)
+(loop_596_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_596_then_branch)
+(loop_596_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_596_then_branch)
+(loop_596_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_596_then_branch)

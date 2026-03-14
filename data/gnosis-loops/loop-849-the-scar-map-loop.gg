@@ -1,0 +1,33 @@
+// behavioral-loop-849.gg
+// Executable Gnosis projection for The Scar Map Loop.
+
+// Nodes
+(loop_849_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_849_context_branch: BehaviorEmit { emission: 'context' })
+(loop_849_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20traumatic%20scarring%20on%20face%2Farms' })
+(loop_849_inactive: BehaviorTerminal { loopId: 849, loopName: 'The%20Scar%20Map%20Loop' })
+(loop_849_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_849_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_849_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_849_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Veteran%20Operator', mechanism: 'it%20signals%20%22Survival%22%20or%20%22Violence%22' })
+(loop_849_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20respect%20or%20fear%2C%20depending%20on%20the%20scar%20type' })
+(loop_849_sink: BehaviorSink)
+(loop_849_start: BehaviorStart { loopId: 849, loopName: 'The%20Scar%20Map%20Loop', given: 'Visible%20traumatic%20scarring%20on%20face%2Farms', when: 'meeting%20new%20people', then: 'it%20signals%20%22Survival%22%20or%20%22Violence%22%20(The%20Veteran%20Operator)', result: 'immediate%20respect%20or%20fear%2C%20depending%20on%20the%20scar%20type', operatorName: 'The%20Veteran%20Operator', operatorMechanism: 'it%20signals%20%22Survival%22%20or%20%22Violence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_849_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_849_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Survival%22%20or%20%22Violence%22%20(The%20Veteran%20Operator)' })
+(loop_849_verdict: BehaviorVerdict { loopId: 849, loopName: 'The%20Scar%20Map%20Loop', then: 'it%20signals%20%22Survival%22%20or%20%22Violence%22%20(The%20Veteran%20Operator)', result: 'immediate%20respect%20or%20fear%2C%20depending%20on%20the%20scar%20type', operatorName: 'The%20Veteran%20Operator', operatorMechanism: 'it%20signals%20%22Survival%22%20or%20%22Violence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_849_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20new%20people' })
+
+// Topology
+(loop_849_start)-[:PROCESS]->(loop_849_given_gate)
+(loop_849_given_gate)-[:PROCESS { case: "ok" }]->(loop_849_when_gate)
+(loop_849_given_gate)-[:PROCESS { case: "err" }]->(loop_849_inactive)
+(loop_849_when_gate)-[:PROCESS { case: "ok" }]->(loop_849_context)
+(loop_849_when_gate)-[:PROCESS { case: "err" }]->(loop_849_inactive)
+(loop_849_context)-[:FORK { strategy: "behavior-branches" }]->(loop_849_context_branch | loop_849_then_branch | loop_849_operator_branch | loop_849_result_branch | loop_849_taxonomy_branch | loop_849_intervention_recognize | loop_849_intervention_interdict | loop_849_intervention_minimize)
+(loop_849_context_branch | loop_849_then_branch | loop_849_operator_branch | loop_849_result_branch | loop_849_taxonomy_branch | loop_849_intervention_recognize | loop_849_intervention_interdict | loop_849_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_849_verdict)
+(loop_849_inactive)-[:PROCESS]->(loop_849_sink)
+(loop_849_verdict)-[:PROCESS]->(loop_849_sink)
+(loop_849_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_849_then_branch)
+(loop_849_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_849_then_branch)
+(loop_849_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_849_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-681.gg
+// Executable Gnosis projection for The Pet Hair Loop.
+
+// Nodes
+(loop_681_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_681_context_branch: BehaviorEmit { emission: 'context' })
+(loop_681_given_gate: BehaviorAssess { stage: 'given', text: 'Cat%2FDog%20hair%20clinging%20to%20dark%20clothing' })
+(loop_681_inactive: BehaviorTerminal { loopId: 681, loopName: 'The%20Pet%20Hair%20Loop' })
+(loop_681_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Modify%20or%20remove%20the%20triggering%20element' })
+(loop_681_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_681_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_681_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cat%20Lady%20Operator', mechanism: 'it%20signals%20%22Messy%20Home%22%20or%20%22Loneliness%22' })
+(loop_681_result_branch: BehaviorEmit { emission: 'result', text: 'subtle%20professional%20judgment%20on%20attention%20to%20detail' })
+(loop_681_sink: BehaviorSink)
+(loop_681_start: BehaviorStart { loopId: 681, loopName: 'The%20Pet%20Hair%20Loop', given: 'Cat%2FDog%20hair%20clinging%20to%20dark%20clothing', when: 'in%20a%20sterile%20office', then: 'it%20signals%20%22Messy%20Home%22%20or%20%22Loneliness%22%20(The%20Cat%20Lady%20Operator)', result: 'subtle%20professional%20judgment%20on%20attention%20to%20detail', operatorName: 'The%20Cat%20Lady%20Operator', operatorMechanism: 'it%20signals%20%22Messy%20Home%22%20or%20%22Loneliness%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Modify%20or%20remove%20the%20triggering%20element', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_681_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_681_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Messy%20Home%22%20or%20%22Loneliness%22%20(The%20Cat%20Lady%20Operator)' })
+(loop_681_verdict: BehaviorVerdict { loopId: 681, loopName: 'The%20Pet%20Hair%20Loop', then: 'it%20signals%20%22Messy%20Home%22%20or%20%22Loneliness%22%20(The%20Cat%20Lady%20Operator)', result: 'subtle%20professional%20judgment%20on%20attention%20to%20detail', operatorName: 'The%20Cat%20Lady%20Operator', operatorMechanism: 'it%20signals%20%22Messy%20Home%22%20or%20%22Loneliness%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_681_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20sterile%20office' })
+
+// Topology
+(loop_681_start)-[:PROCESS]->(loop_681_given_gate)
+(loop_681_given_gate)-[:PROCESS { case: "ok" }]->(loop_681_when_gate)
+(loop_681_given_gate)-[:PROCESS { case: "err" }]->(loop_681_inactive)
+(loop_681_when_gate)-[:PROCESS { case: "ok" }]->(loop_681_context)
+(loop_681_when_gate)-[:PROCESS { case: "err" }]->(loop_681_inactive)
+(loop_681_context)-[:FORK { strategy: "behavior-branches" }]->(loop_681_context_branch | loop_681_then_branch | loop_681_operator_branch | loop_681_result_branch | loop_681_taxonomy_branch | loop_681_intervention_recognize | loop_681_intervention_interdict | loop_681_intervention_minimize)
+(loop_681_context_branch | loop_681_then_branch | loop_681_operator_branch | loop_681_result_branch | loop_681_taxonomy_branch | loop_681_intervention_recognize | loop_681_intervention_interdict | loop_681_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_681_verdict)
+(loop_681_inactive)-[:PROCESS]->(loop_681_sink)
+(loop_681_verdict)-[:PROCESS]->(loop_681_sink)
+(loop_681_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_681_then_branch)
+(loop_681_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_681_then_branch)
+(loop_681_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_681_then_branch)

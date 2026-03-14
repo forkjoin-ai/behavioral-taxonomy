@@ -1,0 +1,33 @@
+// behavioral-loop-708.gg
+// Executable Gnosis projection for The Hooded Loop.
+
+// Nodes
+(loop_708_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_708_context_branch: BehaviorEmit { emission: 'context' })
+(loop_708_given_gate: BehaviorAssess { stage: 'given', text: 'Excess%20upper%20eyelid%20skin%20obscuring%20the%20lid' })
+(loop_708_inactive: BehaviorTerminal { loopId: 708, loopName: 'The%20Hooded%20Loop' })
+(loop_708_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_708_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_708_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_708_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Clint%20Eastwood%20Operator', mechanism: 'the%20gaze%20looks%20%22Analytical%22%20or%20%22Threatening%22' })
+(loop_708_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20the%20individual%20is%20%22sizing%20them%20up.%22' })
+(loop_708_sink: BehaviorSink)
+(loop_708_start: BehaviorStart { loopId: 708, loopName: 'The%20Hooded%20Loop', given: 'Excess%20upper%20eyelid%20skin%20obscuring%20the%20lid', when: 'listening', then: 'the%20gaze%20looks%20%22Analytical%22%20or%20%22Threatening%22%20(The%20Clint%20Eastwood%20Operator)', result: 'observers%20assuming%20the%20individual%20is%20%22sizing%20them%20up.%22', operatorName: 'The%20Clint%20Eastwood%20Operator', operatorMechanism: 'the%20gaze%20looks%20%22Analytical%22%20or%20%22Threatening%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_708_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_708_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gaze%20looks%20%22Analytical%22%20or%20%22Threatening%22%20(The%20Clint%20Eastwood%20Operator)' })
+(loop_708_verdict: BehaviorVerdict { loopId: 708, loopName: 'The%20Hooded%20Loop', then: 'the%20gaze%20looks%20%22Analytical%22%20or%20%22Threatening%22%20(The%20Clint%20Eastwood%20Operator)', result: 'observers%20assuming%20the%20individual%20is%20%22sizing%20them%20up.%22', operatorName: 'The%20Clint%20Eastwood%20Operator', operatorMechanism: 'the%20gaze%20looks%20%22Analytical%22%20or%20%22Threatening%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_708_when_gate: BehaviorAssess { stage: 'when', text: 'listening' })
+
+// Topology
+(loop_708_start)-[:PROCESS]->(loop_708_given_gate)
+(loop_708_given_gate)-[:PROCESS { case: "ok" }]->(loop_708_when_gate)
+(loop_708_given_gate)-[:PROCESS { case: "err" }]->(loop_708_inactive)
+(loop_708_when_gate)-[:PROCESS { case: "ok" }]->(loop_708_context)
+(loop_708_when_gate)-[:PROCESS { case: "err" }]->(loop_708_inactive)
+(loop_708_context)-[:FORK { strategy: "behavior-branches" }]->(loop_708_context_branch | loop_708_then_branch | loop_708_operator_branch | loop_708_result_branch | loop_708_taxonomy_branch | loop_708_intervention_recognize | loop_708_intervention_interdict | loop_708_intervention_minimize)
+(loop_708_context_branch | loop_708_then_branch | loop_708_operator_branch | loop_708_result_branch | loop_708_taxonomy_branch | loop_708_intervention_recognize | loop_708_intervention_interdict | loop_708_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_708_verdict)
+(loop_708_inactive)-[:PROCESS]->(loop_708_sink)
+(loop_708_verdict)-[:PROCESS]->(loop_708_sink)
+(loop_708_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_708_then_branch)
+(loop_708_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_708_then_branch)
+(loop_708_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_708_then_branch)

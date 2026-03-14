@@ -1,0 +1,33 @@
+// behavioral-loop-524.gg
+// Executable Gnosis projection for The Wet Dog Loop.
+
+// Nodes
+(loop_524_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_524_context_branch: BehaviorEmit { emission: 'context' })
+(loop_524_given_gate: BehaviorAssess { stage: 'given', text: 'Mildew%20scent%20from%20clothes%20left%20in%20washer' })
+(loop_524_inactive: BehaviorTerminal { loopId: 524, loopName: 'The%20Wet%20Dog%20Loop' })
+(loop_524_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_524_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_524_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_524_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Neglect%20Operator', mechanism: 'the%20scent%20activates' })
+(loop_524_result_branch: BehaviorEmit { emission: 'result', text: 'people%20standing%20slightly%20further%20away%20than%20normal' })
+(loop_524_sink: BehaviorSink)
+(loop_524_start: BehaviorStart { loopId: 524, loopName: 'The%20Wet%20Dog%20Loop', given: 'Mildew%20scent%20from%20clothes%20left%20in%20washer', when: 'body%20heat%20rises', then: 'the%20scent%20activates%20(The%20Neglect%20Operator)', result: 'people%20standing%20slightly%20further%20away%20than%20normal', operatorName: 'The%20Neglect%20Operator', operatorMechanism: 'the%20scent%20activates', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_524_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_524_then_branch: BehaviorEmit { emission: 'then', text: 'the%20scent%20activates%20(The%20Neglect%20Operator)' })
+(loop_524_verdict: BehaviorVerdict { loopId: 524, loopName: 'The%20Wet%20Dog%20Loop', then: 'the%20scent%20activates%20(The%20Neglect%20Operator)', result: 'people%20standing%20slightly%20further%20away%20than%20normal', operatorName: 'The%20Neglect%20Operator', operatorMechanism: 'the%20scent%20activates', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_524_when_gate: BehaviorAssess { stage: 'when', text: 'body%20heat%20rises' })
+
+// Topology
+(loop_524_start)-[:PROCESS]->(loop_524_given_gate)
+(loop_524_given_gate)-[:PROCESS { case: "ok" }]->(loop_524_when_gate)
+(loop_524_given_gate)-[:PROCESS { case: "err" }]->(loop_524_inactive)
+(loop_524_when_gate)-[:PROCESS { case: "ok" }]->(loop_524_context)
+(loop_524_when_gate)-[:PROCESS { case: "err" }]->(loop_524_inactive)
+(loop_524_context)-[:FORK { strategy: "behavior-branches" }]->(loop_524_context_branch | loop_524_then_branch | loop_524_operator_branch | loop_524_result_branch | loop_524_taxonomy_branch | loop_524_intervention_recognize | loop_524_intervention_interdict | loop_524_intervention_minimize)
+(loop_524_context_branch | loop_524_then_branch | loop_524_operator_branch | loop_524_result_branch | loop_524_taxonomy_branch | loop_524_intervention_recognize | loop_524_intervention_interdict | loop_524_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_524_verdict)
+(loop_524_inactive)-[:PROCESS]->(loop_524_sink)
+(loop_524_verdict)-[:PROCESS]->(loop_524_sink)
+(loop_524_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_524_then_branch)
+(loop_524_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_524_then_branch)
+(loop_524_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_524_then_branch)

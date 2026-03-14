@@ -1,0 +1,33 @@
+// behavioral-loop-911.gg
+// Executable Gnosis projection for The Choke Chain Loop.
+
+// Nodes
+(loop_911_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_911_context_branch: BehaviorEmit { emission: 'context' })
+(loop_911_given_gate: BehaviorAssess { stage: 'given', text: 'Necklace%20or%20watch%20band%20digging%20into%20skin' })
+(loop_911_inactive: BehaviorTerminal { loopId: 911, loopName: 'The%20Choke%20Chain%20Loop' })
+(loop_911_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_911_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_911_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_911_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Constriction%20Operator', mechanism: 'flesh%20bulges%20around%20the%20metal' })
+(loop_911_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20%22Swollen%22%20or%20larger%20than%20they%20are' })
+(loop_911_sink: BehaviorSink)
+(loop_911_start: BehaviorStart { loopId: 911, loopName: 'The%20Choke%20Chain%20Loop', given: 'Necklace%20or%20watch%20band%20digging%20into%20skin', when: 'moving', then: 'flesh%20bulges%20around%20the%20metal%20(The%20Constriction%20Operator)', result: 'the%20individual%20looking%20%22Swollen%22%20or%20larger%20than%20they%20are', operatorName: 'The%20Constriction%20Operator', operatorMechanism: 'flesh%20bulges%20around%20the%20metal', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_911_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_911_then_branch: BehaviorEmit { emission: 'then', text: 'flesh%20bulges%20around%20the%20metal%20(The%20Constriction%20Operator)' })
+(loop_911_verdict: BehaviorVerdict { loopId: 911, loopName: 'The%20Choke%20Chain%20Loop', then: 'flesh%20bulges%20around%20the%20metal%20(The%20Constriction%20Operator)', result: 'the%20individual%20looking%20%22Swollen%22%20or%20larger%20than%20they%20are', operatorName: 'The%20Constriction%20Operator', operatorMechanism: 'flesh%20bulges%20around%20the%20metal', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_911_when_gate: BehaviorAssess { stage: 'when', text: 'moving' })
+
+// Topology
+(loop_911_start)-[:PROCESS]->(loop_911_given_gate)
+(loop_911_given_gate)-[:PROCESS { case: "ok" }]->(loop_911_when_gate)
+(loop_911_given_gate)-[:PROCESS { case: "err" }]->(loop_911_inactive)
+(loop_911_when_gate)-[:PROCESS { case: "ok" }]->(loop_911_context)
+(loop_911_when_gate)-[:PROCESS { case: "err" }]->(loop_911_inactive)
+(loop_911_context)-[:FORK { strategy: "behavior-branches" }]->(loop_911_context_branch | loop_911_then_branch | loop_911_operator_branch | loop_911_result_branch | loop_911_taxonomy_branch | loop_911_intervention_recognize | loop_911_intervention_interdict | loop_911_intervention_minimize)
+(loop_911_context_branch | loop_911_then_branch | loop_911_operator_branch | loop_911_result_branch | loop_911_taxonomy_branch | loop_911_intervention_recognize | loop_911_intervention_interdict | loop_911_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_911_verdict)
+(loop_911_inactive)-[:PROCESS]->(loop_911_sink)
+(loop_911_verdict)-[:PROCESS]->(loop_911_sink)
+(loop_911_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_911_then_branch)
+(loop_911_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_911_then_branch)
+(loop_911_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_911_then_branch)

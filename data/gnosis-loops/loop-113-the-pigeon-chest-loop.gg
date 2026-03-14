@@ -1,0 +1,33 @@
+// behavioral-loop-113.gg
+// Executable Gnosis projection for The Pigeon Chest Loop.
+
+// Nodes
+(loop_113_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_113_context_branch: BehaviorEmit { emission: 'context' })
+(loop_113_given_gate: BehaviorAssess { stage: 'given', text: 'Sunken%20Sternum' })
+(loop_113_inactive: BehaviorTerminal { loopId: 113, loopName: 'The%20Pigeon%20Chest%20Loop' })
+(loop_113_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_113_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_113_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_113_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Shame%20Operator', mechanism: 'the%20individual%20hides%20their%20torso' })
+(loop_113_result_branch: BehaviorEmit { emission: 'result', text: 'avoidance%20of%20swimming%2Fbeach%20culture%20and%20**Body%20Dysmorphia**' })
+(loop_113_sink: BehaviorSink)
+(loop_113_start: BehaviorStart { loopId: 113, loopName: 'The%20Pigeon%20Chest%20Loop', given: 'Sunken%20Sternum', when: 'changing%20for%20sports%20or%20swimming', then: 'the%20individual%20hides%20their%20torso%20(The%20Shame%20Operator)', result: 'avoidance%20of%20swimming%2Fbeach%20culture%20and%20**Body%20Dysmorphia**', operatorName: 'The%20Shame%20Operator', operatorMechanism: 'the%20individual%20hides%20their%20torso', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_113_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_113_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20hides%20their%20torso%20(The%20Shame%20Operator)' })
+(loop_113_verdict: BehaviorVerdict { loopId: 113, loopName: 'The%20Pigeon%20Chest%20Loop', then: 'the%20individual%20hides%20their%20torso%20(The%20Shame%20Operator)', result: 'avoidance%20of%20swimming%2Fbeach%20culture%20and%20**Body%20Dysmorphia**', operatorName: 'The%20Shame%20Operator', operatorMechanism: 'the%20individual%20hides%20their%20torso', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_113_when_gate: BehaviorAssess { stage: 'when', text: 'changing%20for%20sports%20or%20swimming' })
+
+// Topology
+(loop_113_start)-[:PROCESS]->(loop_113_given_gate)
+(loop_113_given_gate)-[:PROCESS { case: "ok" }]->(loop_113_when_gate)
+(loop_113_given_gate)-[:PROCESS { case: "err" }]->(loop_113_inactive)
+(loop_113_when_gate)-[:PROCESS { case: "ok" }]->(loop_113_context)
+(loop_113_when_gate)-[:PROCESS { case: "err" }]->(loop_113_inactive)
+(loop_113_context)-[:FORK { strategy: "behavior-branches" }]->(loop_113_context_branch | loop_113_then_branch | loop_113_operator_branch | loop_113_result_branch | loop_113_taxonomy_branch | loop_113_intervention_recognize | loop_113_intervention_interdict | loop_113_intervention_minimize)
+(loop_113_context_branch | loop_113_then_branch | loop_113_operator_branch | loop_113_result_branch | loop_113_taxonomy_branch | loop_113_intervention_recognize | loop_113_intervention_interdict | loop_113_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_113_verdict)
+(loop_113_inactive)-[:PROCESS]->(loop_113_sink)
+(loop_113_verdict)-[:PROCESS]->(loop_113_sink)
+(loop_113_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_113_then_branch)
+(loop_113_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_113_then_branch)
+(loop_113_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_113_then_branch)

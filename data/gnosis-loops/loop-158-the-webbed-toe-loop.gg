@@ -1,0 +1,33 @@
+// behavioral-loop-158.gg
+// Executable Gnosis projection for The Webbed Toe Loop.
+
+// Nodes
+(loop_158_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_158_context_branch: BehaviorEmit { emission: 'context' })
+(loop_158_given_gate: BehaviorAssess { stage: 'given', text: 'Conjoined%20digits' })
+(loop_158_inactive: BehaviorTerminal { loopId: 158, loopName: 'The%20Webbed%20Toe%20Loop' })
+(loop_158_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_158_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_158_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_158_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Shame%2FMutation%20Operator', mechanism: 'the%20individual%20hides%20their%20feet' })
+(loop_158_result_branch: BehaviorEmit { emission: 'result', text: 'avoidance%20of%20aquatic%20social%20events%2C%20leading%20to%20**Self-Consciousness**' })
+(loop_158_sink: BehaviorSink)
+(loop_158_start: BehaviorStart { loopId: 158, loopName: 'The%20Webbed%20Toe%20Loop', given: 'Conjoined%20digits', when: 'barefoot%20(pool%2Fbeach)', then: 'the%20individual%20hides%20their%20feet%20(The%20Shame%2FMutation%20Operator)', result: 'avoidance%20of%20aquatic%20social%20events%2C%20leading%20to%20**Self-Consciousness**', operatorName: 'The%20Shame%2FMutation%20Operator', operatorMechanism: 'the%20individual%20hides%20their%20feet', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_158_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_158_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20hides%20their%20feet%20(The%20Shame%2FMutation%20Operator)' })
+(loop_158_verdict: BehaviorVerdict { loopId: 158, loopName: 'The%20Webbed%20Toe%20Loop', then: 'the%20individual%20hides%20their%20feet%20(The%20Shame%2FMutation%20Operator)', result: 'avoidance%20of%20aquatic%20social%20events%2C%20leading%20to%20**Self-Consciousness**', operatorName: 'The%20Shame%2FMutation%20Operator', operatorMechanism: 'the%20individual%20hides%20their%20feet', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_158_when_gate: BehaviorAssess { stage: 'when', text: 'barefoot%20(pool%2Fbeach)' })
+
+// Topology
+(loop_158_start)-[:PROCESS]->(loop_158_given_gate)
+(loop_158_given_gate)-[:PROCESS { case: "ok" }]->(loop_158_when_gate)
+(loop_158_given_gate)-[:PROCESS { case: "err" }]->(loop_158_inactive)
+(loop_158_when_gate)-[:PROCESS { case: "ok" }]->(loop_158_context)
+(loop_158_when_gate)-[:PROCESS { case: "err" }]->(loop_158_inactive)
+(loop_158_context)-[:FORK { strategy: "behavior-branches" }]->(loop_158_context_branch | loop_158_then_branch | loop_158_operator_branch | loop_158_result_branch | loop_158_taxonomy_branch | loop_158_intervention_recognize | loop_158_intervention_interdict | loop_158_intervention_minimize)
+(loop_158_context_branch | loop_158_then_branch | loop_158_operator_branch | loop_158_result_branch | loop_158_taxonomy_branch | loop_158_intervention_recognize | loop_158_intervention_interdict | loop_158_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_158_verdict)
+(loop_158_inactive)-[:PROCESS]->(loop_158_sink)
+(loop_158_verdict)-[:PROCESS]->(loop_158_sink)
+(loop_158_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_158_then_branch)
+(loop_158_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_158_then_branch)
+(loop_158_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_158_then_branch)

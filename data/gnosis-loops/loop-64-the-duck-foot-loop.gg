@@ -1,0 +1,33 @@
+// behavioral-loop-64.gg
+// Executable Gnosis projection for The Duck Foot Loop.
+
+// Nodes
+(loop_64_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_64_context_branch: BehaviorEmit { emission: 'context' })
+(loop_64_given_gate: BehaviorAssess { stage: 'given', text: 'External%20rotation%20of%20feet' })
+(loop_64_inactive: BehaviorTerminal { loopId: 64, loopName: 'The%20Duck%20Foot%20Loop' })
+(loop_64_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_64_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_64_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_64_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Humor%20Operator', mechanism: 'the%20gait%20appears%20%22Waddling%22%20or%20un-athletic' })
+(loop_64_result_branch: BehaviorEmit { emission: 'result', text: 'being%20picked%20last%20for%20sports%2C%20leading%20to%20**Intellectual%20Compensation**' })
+(loop_64_sink: BehaviorSink)
+(loop_64_start: BehaviorStart { loopId: 64, loopName: 'The%20Duck%20Foot%20Loop', given: 'External%20rotation%20of%20feet', when: 'walking', then: 'the%20gait%20appears%20%22Waddling%22%20or%20un-athletic%20(The%20Humor%20Operator)', result: 'being%20picked%20last%20for%20sports%2C%20leading%20to%20**Intellectual%20Compensation**', operatorName: 'The%20Humor%20Operator', operatorMechanism: 'the%20gait%20appears%20%22Waddling%22%20or%20un-athletic', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_64_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_64_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gait%20appears%20%22Waddling%22%20or%20un-athletic%20(The%20Humor%20Operator)' })
+(loop_64_verdict: BehaviorVerdict { loopId: 64, loopName: 'The%20Duck%20Foot%20Loop', then: 'the%20gait%20appears%20%22Waddling%22%20or%20un-athletic%20(The%20Humor%20Operator)', result: 'being%20picked%20last%20for%20sports%2C%20leading%20to%20**Intellectual%20Compensation**', operatorName: 'The%20Humor%20Operator', operatorMechanism: 'the%20gait%20appears%20%22Waddling%22%20or%20un-athletic', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_64_when_gate: BehaviorAssess { stage: 'when', text: 'walking' })
+
+// Topology
+(loop_64_start)-[:PROCESS]->(loop_64_given_gate)
+(loop_64_given_gate)-[:PROCESS { case: "ok" }]->(loop_64_when_gate)
+(loop_64_given_gate)-[:PROCESS { case: "err" }]->(loop_64_inactive)
+(loop_64_when_gate)-[:PROCESS { case: "ok" }]->(loop_64_context)
+(loop_64_when_gate)-[:PROCESS { case: "err" }]->(loop_64_inactive)
+(loop_64_context)-[:FORK { strategy: "behavior-branches" }]->(loop_64_context_branch | loop_64_then_branch | loop_64_operator_branch | loop_64_result_branch | loop_64_taxonomy_branch | loop_64_intervention_recognize | loop_64_intervention_interdict | loop_64_intervention_minimize)
+(loop_64_context_branch | loop_64_then_branch | loop_64_operator_branch | loop_64_result_branch | loop_64_taxonomy_branch | loop_64_intervention_recognize | loop_64_intervention_interdict | loop_64_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_64_verdict)
+(loop_64_inactive)-[:PROCESS]->(loop_64_sink)
+(loop_64_verdict)-[:PROCESS]->(loop_64_sink)
+(loop_64_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_64_then_branch)
+(loop_64_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_64_then_branch)
+(loop_64_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_64_then_branch)

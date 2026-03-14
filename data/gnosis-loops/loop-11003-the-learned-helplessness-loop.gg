@@ -1,0 +1,33 @@
+// behavioral-loop-11003.gg
+// Executable Gnosis projection for The Learned Helplessness Loop.
+
+// Nodes
+(loop_11003_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_11003_context_branch: BehaviorEmit { emission: 'context' })
+(loop_11003_given_gate: BehaviorAssess { stage: 'given', text: 'Subject%20is%20exposed%20to%20aversive%20stimuli%20(pain%2C%20failure%2C%20rejection)' })
+(loop_11003_inactive: BehaviorTerminal { loopId: 11003, loopName: 'The%20Learned%20Helplessness%20Loop' })
+(loop_11003_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Create%20forced%20success%20experiences%20to%20reactivate%20vmPFC%20control%20circuits' })
+(loop_11003_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Start%20with%20extremely%20small%2C%20achievable%20actions%20to%20rebuild%20agency' })
+(loop_11003_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20thoughts%20like%20'nothing%20I%20do%20matters'%20or%20'why%20bother'" })
+(loop_11003_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Controllability%20Switch', mechanism: 'Dorsal%20Raphe%20Nucleus%20(5-HT)%20becomes%20uninhibited%20when%20vmPFC%20detects%20non-contingency%20between%20action%20and%20outcome.' })
+(loop_11003_result_branch: BehaviorEmit { emission: 'result', text: 'Passivity%20and%20cessation%20of%20all%20attempts%20to%20change%2C%20even%20when%20escape%20becomes%20possible' })
+(loop_11003_sink: BehaviorSink)
+(loop_11003_start: BehaviorStart { loopId: 11003, loopName: 'The%20Learned%20Helplessness%20Loop', given: 'Subject%20is%20exposed%20to%20aversive%20stimuli%20(pain%2C%20failure%2C%20rejection)', when: 'Feedback%20indicates%20that%20Outcome%20is%20independent%20of%20Behavior%20(non-contingency)', then: "vmPFC%20determines%20'No%20Control'%20and%20stops%20inhibiting%20the%20Brainstem%20(DRN)", result: 'Passivity%20and%20cessation%20of%20all%20attempts%20to%20change%2C%20even%20when%20escape%20becomes%20possible', operatorName: 'The%20Controllability%20Switch', operatorMechanism: 'Dorsal%20Raphe%20Nucleus%20(5-HT)%20becomes%20uninhibited%20when%20vmPFC%20detects%20non-contingency%20between%20action%20and%20outcome.', origin: 'CONDITIONED', modality: 'BEHAVIORAL', mutability: 'PATHOLOGICAL', valences: 'SUBMISSION|WITHDRAWAL', interventionDifficulty: '9', intervention_recognize: "Notice%20thoughts%20like%20'nothing%20I%20do%20matters'%20or%20'why%20bother'", intervention_interdict: 'Create%20forced%20success%20experiences%20to%20reactivate%20vmPFC%20control%20circuits', intervention_minimize: 'Start%20with%20extremely%20small%2C%20achievable%20actions%20to%20rebuild%20agency' })
+(loop_11003_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'CONDITIONED', modality: 'BEHAVIORAL', mutability: 'PATHOLOGICAL', valences: 'SUBMISSION|WITHDRAWAL' })
+(loop_11003_then_branch: BehaviorEmit { emission: 'then', text: "vmPFC%20determines%20'No%20Control'%20and%20stops%20inhibiting%20the%20Brainstem%20(DRN)" })
+(loop_11003_verdict: BehaviorVerdict { loopId: 11003, loopName: 'The%20Learned%20Helplessness%20Loop', then: "vmPFC%20determines%20'No%20Control'%20and%20stops%20inhibiting%20the%20Brainstem%20(DRN)", result: 'Passivity%20and%20cessation%20of%20all%20attempts%20to%20change%2C%20even%20when%20escape%20becomes%20possible', operatorName: 'The%20Controllability%20Switch', operatorMechanism: 'Dorsal%20Raphe%20Nucleus%20(5-HT)%20becomes%20uninhibited%20when%20vmPFC%20detects%20non-contingency%20between%20action%20and%20outcome.', origin: 'CONDITIONED', modality: 'BEHAVIORAL', mutability: 'PATHOLOGICAL', valences: 'SUBMISSION|WITHDRAWAL' })
+(loop_11003_when_gate: BehaviorAssess { stage: 'when', text: 'Feedback%20indicates%20that%20Outcome%20is%20independent%20of%20Behavior%20(non-contingency)' })
+
+// Topology
+(loop_11003_start)-[:PROCESS]->(loop_11003_given_gate)
+(loop_11003_given_gate)-[:PROCESS { case: "ok" }]->(loop_11003_when_gate)
+(loop_11003_given_gate)-[:PROCESS { case: "err" }]->(loop_11003_inactive)
+(loop_11003_when_gate)-[:PROCESS { case: "ok" }]->(loop_11003_context)
+(loop_11003_when_gate)-[:PROCESS { case: "err" }]->(loop_11003_inactive)
+(loop_11003_context)-[:FORK { strategy: "behavior-branches" }]->(loop_11003_context_branch | loop_11003_then_branch | loop_11003_operator_branch | loop_11003_result_branch | loop_11003_taxonomy_branch | loop_11003_intervention_recognize | loop_11003_intervention_interdict | loop_11003_intervention_minimize)
+(loop_11003_context_branch | loop_11003_then_branch | loop_11003_operator_branch | loop_11003_result_branch | loop_11003_taxonomy_branch | loop_11003_intervention_recognize | loop_11003_intervention_interdict | loop_11003_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_11003_verdict)
+(loop_11003_inactive)-[:PROCESS]->(loop_11003_sink)
+(loop_11003_verdict)-[:PROCESS]->(loop_11003_sink)
+(loop_11003_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_11003_then_branch)
+(loop_11003_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_11003_then_branch)
+(loop_11003_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_11003_then_branch)

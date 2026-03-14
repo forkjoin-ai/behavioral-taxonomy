@@ -1,0 +1,33 @@
+// behavioral-loop-215.gg
+// Executable Gnosis projection for The Tech Neck Loop.
+
+// Nodes
+(loop_215_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_215_context_branch: BehaviorEmit { emission: 'context' })
+(loop_215_given_gate: BehaviorAssess { stage: 'given', text: 'Kyphosis%20at%20C7%20vertebrae%20(fat%20pad)' })
+(loop_215_inactive: BehaviorTerminal { loopId: 215, loopName: 'The%20Tech%20Neck%20Loop' })
+(loop_215_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_215_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_215_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_215_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vitality%20Discount%20Operator', mechanism: 'observers%20perceive%20%22Aging%22%20or%20%22Sedentary%20Addiction%22' })
+(loop_215_result_branch: BehaviorEmit { emission: 'result', text: 'being%20dismissed%20as%20%22Low%20Energy.%22' })
+(loop_215_sink: BehaviorSink)
+(loop_215_start: BehaviorStart { loopId: 215, loopName: 'The%20Tech%20Neck%20Loop', given: 'Kyphosis%20at%20C7%20vertebrae%20(fat%20pad)', when: 'viewed%20in%20profile', then: 'observers%20perceive%20%22Aging%22%20or%20%22Sedentary%20Addiction%22%20(The%20Vitality%20Discount%20Operator)', result: 'being%20dismissed%20as%20%22Low%20Energy.%22', operatorName: 'The%20Vitality%20Discount%20Operator', operatorMechanism: 'observers%20perceive%20%22Aging%22%20or%20%22Sedentary%20Addiction%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_215_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_215_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Aging%22%20or%20%22Sedentary%20Addiction%22%20(The%20Vitality%20Discount%20Operator)' })
+(loop_215_verdict: BehaviorVerdict { loopId: 215, loopName: 'The%20Tech%20Neck%20Loop', then: 'observers%20perceive%20%22Aging%22%20or%20%22Sedentary%20Addiction%22%20(The%20Vitality%20Discount%20Operator)', result: 'being%20dismissed%20as%20%22Low%20Energy.%22', operatorName: 'The%20Vitality%20Discount%20Operator', operatorMechanism: 'observers%20perceive%20%22Aging%22%20or%20%22Sedentary%20Addiction%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_215_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20in%20profile' })
+
+// Topology
+(loop_215_start)-[:PROCESS]->(loop_215_given_gate)
+(loop_215_given_gate)-[:PROCESS { case: "ok" }]->(loop_215_when_gate)
+(loop_215_given_gate)-[:PROCESS { case: "err" }]->(loop_215_inactive)
+(loop_215_when_gate)-[:PROCESS { case: "ok" }]->(loop_215_context)
+(loop_215_when_gate)-[:PROCESS { case: "err" }]->(loop_215_inactive)
+(loop_215_context)-[:FORK { strategy: "behavior-branches" }]->(loop_215_context_branch | loop_215_then_branch | loop_215_operator_branch | loop_215_result_branch | loop_215_taxonomy_branch | loop_215_intervention_recognize | loop_215_intervention_interdict | loop_215_intervention_minimize)
+(loop_215_context_branch | loop_215_then_branch | loop_215_operator_branch | loop_215_result_branch | loop_215_taxonomy_branch | loop_215_intervention_recognize | loop_215_intervention_interdict | loop_215_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_215_verdict)
+(loop_215_inactive)-[:PROCESS]->(loop_215_sink)
+(loop_215_verdict)-[:PROCESS]->(loop_215_sink)
+(loop_215_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_215_then_branch)
+(loop_215_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_215_then_branch)
+(loop_215_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_215_then_branch)

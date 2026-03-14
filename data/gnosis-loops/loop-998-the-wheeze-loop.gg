@@ -1,0 +1,33 @@
+// behavioral-loop-998.gg
+// Executable Gnosis projection for The Wheeze Loop.
+
+// Nodes
+(loop_998_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_998_context_branch: BehaviorEmit { emission: 'context' })
+(loop_998_given_gate: BehaviorAssess { stage: 'given', text: "Asthmatic%20or%20smoker's%20lungs" })
+(loop_998_inactive: BehaviorTerminal { loopId: 998, loopName: 'The%20Wheeze%20Loop' })
+(loop_998_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_998_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_998_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_998_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Muttley%20Operator', mechanism: 'sound%20vanishes%20into%20a%20silent%2C%20gasping%20rattle' })
+(loop_998_result_branch: BehaviorEmit { emission: 'result', text: 'the%20group%20worrying%20the%20individual%20is%20choking' })
+(loop_998_sink: BehaviorSink)
+(loop_998_start: BehaviorStart { loopId: 998, loopName: 'The%20Wheeze%20Loop', given: "Asthmatic%20or%20smoker's%20lungs", when: 'laughing%20hard', then: 'sound%20vanishes%20into%20a%20silent%2C%20gasping%20rattle%20(The%20Muttley%20Operator)', result: 'the%20group%20worrying%20the%20individual%20is%20choking', operatorName: 'The%20Muttley%20Operator', operatorMechanism: 'sound%20vanishes%20into%20a%20silent%2C%20gasping%20rattle', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_998_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_998_then_branch: BehaviorEmit { emission: 'then', text: 'sound%20vanishes%20into%20a%20silent%2C%20gasping%20rattle%20(The%20Muttley%20Operator)' })
+(loop_998_verdict: BehaviorVerdict { loopId: 998, loopName: 'The%20Wheeze%20Loop', then: 'sound%20vanishes%20into%20a%20silent%2C%20gasping%20rattle%20(The%20Muttley%20Operator)', result: 'the%20group%20worrying%20the%20individual%20is%20choking', operatorName: 'The%20Muttley%20Operator', operatorMechanism: 'sound%20vanishes%20into%20a%20silent%2C%20gasping%20rattle', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_998_when_gate: BehaviorAssess { stage: 'when', text: 'laughing%20hard' })
+
+// Topology
+(loop_998_start)-[:PROCESS]->(loop_998_given_gate)
+(loop_998_given_gate)-[:PROCESS { case: "ok" }]->(loop_998_when_gate)
+(loop_998_given_gate)-[:PROCESS { case: "err" }]->(loop_998_inactive)
+(loop_998_when_gate)-[:PROCESS { case: "ok" }]->(loop_998_context)
+(loop_998_when_gate)-[:PROCESS { case: "err" }]->(loop_998_inactive)
+(loop_998_context)-[:FORK { strategy: "behavior-branches" }]->(loop_998_context_branch | loop_998_then_branch | loop_998_operator_branch | loop_998_result_branch | loop_998_taxonomy_branch | loop_998_intervention_recognize | loop_998_intervention_interdict | loop_998_intervention_minimize)
+(loop_998_context_branch | loop_998_then_branch | loop_998_operator_branch | loop_998_result_branch | loop_998_taxonomy_branch | loop_998_intervention_recognize | loop_998_intervention_interdict | loop_998_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_998_verdict)
+(loop_998_inactive)-[:PROCESS]->(loop_998_sink)
+(loop_998_verdict)-[:PROCESS]->(loop_998_sink)
+(loop_998_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_998_then_branch)
+(loop_998_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_998_then_branch)
+(loop_998_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_998_then_branch)

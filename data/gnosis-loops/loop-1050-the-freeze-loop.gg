@@ -1,0 +1,33 @@
+// behavioral-loop-1050.gg
+// Executable Gnosis projection for The Freeze Loop.
+
+// Nodes
+(loop_1050_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1050_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1050_given_gate: BehaviorAssess { stage: 'given', text: 'Overwhelming%20threat%20where%20fight%2Fflight%20are%20impossible' })
+(loop_1050_inactive: BehaviorTerminal { loopId: 1050, loopName: 'The%20Freeze%20Loop' })
+(loop_1050_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1050_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1050_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1050_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20body%20goes%20limp%20and%20metabolism%20drops%20(The%20Possum)' })
+(loop_1050_result_branch: BehaviorEmit { emission: 'result', text: 'appearing%20calm%2Fcompliant%20while%20internally%20screaming' })
+(loop_1050_sink: BehaviorSink)
+(loop_1050_start: BehaviorStart { loopId: 1050, loopName: 'The%20Freeze%20Loop', given: 'Overwhelming%20threat%20where%20fight%2Fflight%20are%20impossible', when: 'triggered', then: 'the%20body%20goes%20limp%20and%20metabolism%20drops%20(The%20Possum)', result: 'appearing%20calm%2Fcompliant%20while%20internally%20screaming', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20body%20goes%20limp%20and%20metabolism%20drops%20(The%20Possum)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1050_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1050_then_branch: BehaviorEmit { emission: 'then', text: 'the%20body%20goes%20limp%20and%20metabolism%20drops%20(The%20Possum)' })
+(loop_1050_verdict: BehaviorVerdict { loopId: 1050, loopName: 'The%20Freeze%20Loop', then: 'the%20body%20goes%20limp%20and%20metabolism%20drops%20(The%20Possum)', result: 'appearing%20calm%2Fcompliant%20while%20internally%20screaming', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20body%20goes%20limp%20and%20metabolism%20drops%20(The%20Possum)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1050_when_gate: BehaviorAssess { stage: 'when', text: 'triggered' })
+
+// Topology
+(loop_1050_start)-[:PROCESS]->(loop_1050_given_gate)
+(loop_1050_given_gate)-[:PROCESS { case: "ok" }]->(loop_1050_when_gate)
+(loop_1050_given_gate)-[:PROCESS { case: "err" }]->(loop_1050_inactive)
+(loop_1050_when_gate)-[:PROCESS { case: "ok" }]->(loop_1050_context)
+(loop_1050_when_gate)-[:PROCESS { case: "err" }]->(loop_1050_inactive)
+(loop_1050_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1050_context_branch | loop_1050_then_branch | loop_1050_operator_branch | loop_1050_result_branch | loop_1050_taxonomy_branch | loop_1050_intervention_recognize | loop_1050_intervention_interdict | loop_1050_intervention_minimize)
+(loop_1050_context_branch | loop_1050_then_branch | loop_1050_operator_branch | loop_1050_result_branch | loop_1050_taxonomy_branch | loop_1050_intervention_recognize | loop_1050_intervention_interdict | loop_1050_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1050_verdict)
+(loop_1050_inactive)-[:PROCESS]->(loop_1050_sink)
+(loop_1050_verdict)-[:PROCESS]->(loop_1050_sink)
+(loop_1050_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1050_then_branch)
+(loop_1050_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1050_then_branch)
+(loop_1050_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1050_then_branch)

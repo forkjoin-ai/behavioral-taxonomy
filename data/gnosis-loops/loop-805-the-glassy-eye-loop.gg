@@ -1,0 +1,33 @@
+// behavioral-loop-805.gg
+// Executable Gnosis projection for The Glassy Eye Loop.
+
+// Nodes
+(loop_805_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_805_context_branch: BehaviorEmit { emission: 'context' })
+(loop_805_given_gate: BehaviorAssess { stage: 'given', text: 'Shiny%2C%20watery%20eyes%20due%20to%20fever%20or%20inflammation' })
+(loop_805_inactive: BehaviorTerminal { loopId: 805, loopName: 'The%20Glassy%20Eye%20Loop' })
+(loop_805_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_805_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_805_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_805_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fever%20Operator', mechanism: 'it%20signals%20%22Contagion%22%20or%20%22Vulnerability%22' })
+(loop_805_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20taking%20a%20physical%20step%20back' })
+(loop_805_sink: BehaviorSink)
+(loop_805_start: BehaviorStart { loopId: 805, loopName: 'The%20Glassy%20Eye%20Loop', given: 'Shiny%2C%20watery%20eyes%20due%20to%20fever%20or%20inflammation', when: 'making%20eye%20contact', then: 'it%20signals%20%22Contagion%22%20or%20%22Vulnerability%22%20(The%20Fever%20Operator)', result: 'peers%20taking%20a%20physical%20step%20back', operatorName: 'The%20Fever%20Operator', operatorMechanism: 'it%20signals%20%22Contagion%22%20or%20%22Vulnerability%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_805_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_805_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Contagion%22%20or%20%22Vulnerability%22%20(The%20Fever%20Operator)' })
+(loop_805_verdict: BehaviorVerdict { loopId: 805, loopName: 'The%20Glassy%20Eye%20Loop', then: 'it%20signals%20%22Contagion%22%20or%20%22Vulnerability%22%20(The%20Fever%20Operator)', result: 'peers%20taking%20a%20physical%20step%20back', operatorName: 'The%20Fever%20Operator', operatorMechanism: 'it%20signals%20%22Contagion%22%20or%20%22Vulnerability%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_805_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_805_start)-[:PROCESS]->(loop_805_given_gate)
+(loop_805_given_gate)-[:PROCESS { case: "ok" }]->(loop_805_when_gate)
+(loop_805_given_gate)-[:PROCESS { case: "err" }]->(loop_805_inactive)
+(loop_805_when_gate)-[:PROCESS { case: "ok" }]->(loop_805_context)
+(loop_805_when_gate)-[:PROCESS { case: "err" }]->(loop_805_inactive)
+(loop_805_context)-[:FORK { strategy: "behavior-branches" }]->(loop_805_context_branch | loop_805_then_branch | loop_805_operator_branch | loop_805_result_branch | loop_805_taxonomy_branch | loop_805_intervention_recognize | loop_805_intervention_interdict | loop_805_intervention_minimize)
+(loop_805_context_branch | loop_805_then_branch | loop_805_operator_branch | loop_805_result_branch | loop_805_taxonomy_branch | loop_805_intervention_recognize | loop_805_intervention_interdict | loop_805_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_805_verdict)
+(loop_805_inactive)-[:PROCESS]->(loop_805_sink)
+(loop_805_verdict)-[:PROCESS]->(loop_805_sink)
+(loop_805_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_805_then_branch)
+(loop_805_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_805_then_branch)
+(loop_805_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_805_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-808.gg
+// Executable Gnosis projection for The Flush Loop.
+
+// Nodes
+(loop_808_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_808_context_branch: BehaviorEmit { emission: 'context' })
+(loop_808_given_gate: BehaviorAssess { stage: 'given', text: "Bright%20red%20cheeks%20that%20won't%20fade" })
+(loop_808_inactive: BehaviorTerminal { loopId: 808, loopName: 'The%20Flush%20Loop' })
+(loop_808_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_808_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_808_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_808_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tomato%20Operator', mechanism: 'it%20looks%20like%20%22Rage%22%20or%20%22Embarrassment%22' })
+(loop_808_result_branch: BehaviorEmit { emission: 'result', text: 'the%20opponent%20thinking%20they%20have%20won%20the%20argument' })
+(loop_808_sink: BehaviorSink)
+(loop_808_start: BehaviorStart { loopId: 808, loopName: 'The%20Flush%20Loop', given: "Bright%20red%20cheeks%20that%20won't%20fade", when: 'debating', then: 'it%20looks%20like%20%22Rage%22%20or%20%22Embarrassment%22%20(The%20Tomato%20Operator)', result: 'the%20opponent%20thinking%20they%20have%20won%20the%20argument', operatorName: 'The%20Tomato%20Operator', operatorMechanism: 'it%20looks%20like%20%22Rage%22%20or%20%22Embarrassment%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_808_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_808_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Rage%22%20or%20%22Embarrassment%22%20(The%20Tomato%20Operator)' })
+(loop_808_verdict: BehaviorVerdict { loopId: 808, loopName: 'The%20Flush%20Loop', then: 'it%20looks%20like%20%22Rage%22%20or%20%22Embarrassment%22%20(The%20Tomato%20Operator)', result: 'the%20opponent%20thinking%20they%20have%20won%20the%20argument', operatorName: 'The%20Tomato%20Operator', operatorMechanism: 'it%20looks%20like%20%22Rage%22%20or%20%22Embarrassment%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_808_when_gate: BehaviorAssess { stage: 'when', text: 'debating' })
+
+// Topology
+(loop_808_start)-[:PROCESS]->(loop_808_given_gate)
+(loop_808_given_gate)-[:PROCESS { case: "ok" }]->(loop_808_when_gate)
+(loop_808_given_gate)-[:PROCESS { case: "err" }]->(loop_808_inactive)
+(loop_808_when_gate)-[:PROCESS { case: "ok" }]->(loop_808_context)
+(loop_808_when_gate)-[:PROCESS { case: "err" }]->(loop_808_inactive)
+(loop_808_context)-[:FORK { strategy: "behavior-branches" }]->(loop_808_context_branch | loop_808_then_branch | loop_808_operator_branch | loop_808_result_branch | loop_808_taxonomy_branch | loop_808_intervention_recognize | loop_808_intervention_interdict | loop_808_intervention_minimize)
+(loop_808_context_branch | loop_808_then_branch | loop_808_operator_branch | loop_808_result_branch | loop_808_taxonomy_branch | loop_808_intervention_recognize | loop_808_intervention_interdict | loop_808_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_808_verdict)
+(loop_808_inactive)-[:PROCESS]->(loop_808_sink)
+(loop_808_verdict)-[:PROCESS]->(loop_808_sink)
+(loop_808_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_808_then_branch)
+(loop_808_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_808_then_branch)
+(loop_808_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_808_then_branch)

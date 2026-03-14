@@ -1,0 +1,33 @@
+// behavioral-loop-1005.gg
+// Executable Gnosis projection for The Irish Goodbye Loop.
+
+// Nodes
+(loop_1005_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1005_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1005_given_gate: BehaviorAssess { stage: 'given', text: 'Social%20anxiety%20or%20boredom' })
+(loop_1005_inactive: BehaviorTerminal { loopId: 1005, loopName: 'The%20Irish%20Goodbye%20Loop' })
+(loop_1005_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1005_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1005_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1005_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Phantom%20Operator', mechanism: 'the%20individual%20vanishes%20without%20a%20trace' })
+(loop_1005_result_branch: BehaviorEmit { emission: 'result', text: 'confusing%20the%20host%20but%20avoiding%20the%20awkward%20%22doorway%20conversation.%22' })
+(loop_1005_sink: BehaviorSink)
+(loop_1005_start: BehaviorStart { loopId: 1005, loopName: 'The%20Irish%20Goodbye%20Loop', given: 'Social%20anxiety%20or%20boredom', when: 'the%20host%20looks%20away', then: 'the%20individual%20vanishes%20without%20a%20trace%20(The%20Phantom%20Operator)', result: 'confusing%20the%20host%20but%20avoiding%20the%20awkward%20%22doorway%20conversation.%22', operatorName: 'The%20Phantom%20Operator', operatorMechanism: 'the%20individual%20vanishes%20without%20a%20trace', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION|DISRUPTION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1005_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION|DISRUPTION' })
+(loop_1005_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20vanishes%20without%20a%20trace%20(The%20Phantom%20Operator)' })
+(loop_1005_verdict: BehaviorVerdict { loopId: 1005, loopName: 'The%20Irish%20Goodbye%20Loop', then: 'the%20individual%20vanishes%20without%20a%20trace%20(The%20Phantom%20Operator)', result: 'confusing%20the%20host%20but%20avoiding%20the%20awkward%20%22doorway%20conversation.%22', operatorName: 'The%20Phantom%20Operator', operatorMechanism: 'the%20individual%20vanishes%20without%20a%20trace', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION|DISRUPTION' })
+(loop_1005_when_gate: BehaviorAssess { stage: 'when', text: 'the%20host%20looks%20away' })
+
+// Topology
+(loop_1005_start)-[:PROCESS]->(loop_1005_given_gate)
+(loop_1005_given_gate)-[:PROCESS { case: "ok" }]->(loop_1005_when_gate)
+(loop_1005_given_gate)-[:PROCESS { case: "err" }]->(loop_1005_inactive)
+(loop_1005_when_gate)-[:PROCESS { case: "ok" }]->(loop_1005_context)
+(loop_1005_when_gate)-[:PROCESS { case: "err" }]->(loop_1005_inactive)
+(loop_1005_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1005_context_branch | loop_1005_then_branch | loop_1005_operator_branch | loop_1005_result_branch | loop_1005_taxonomy_branch | loop_1005_intervention_recognize | loop_1005_intervention_interdict | loop_1005_intervention_minimize)
+(loop_1005_context_branch | loop_1005_then_branch | loop_1005_operator_branch | loop_1005_result_branch | loop_1005_taxonomy_branch | loop_1005_intervention_recognize | loop_1005_intervention_interdict | loop_1005_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1005_verdict)
+(loop_1005_inactive)-[:PROCESS]->(loop_1005_sink)
+(loop_1005_verdict)-[:PROCESS]->(loop_1005_sink)
+(loop_1005_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1005_then_branch)
+(loop_1005_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1005_then_branch)
+(loop_1005_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1005_then_branch)

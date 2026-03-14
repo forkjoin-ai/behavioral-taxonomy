@@ -1,0 +1,33 @@
+// behavioral-loop-773.gg
+// Executable Gnosis projection for The Sanpaku Loop.
+
+// Nodes
+(loop_773_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_773_context_branch: BehaviorEmit { emission: 'context' })
+(loop_773_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20white%20space%20below%20the%20iris%20(Yin%20Sanpaku)' })
+(loop_773_inactive: BehaviorTerminal { loopId: 773, loopName: 'The%20Sanpaku%20Loop' })
+(loop_773_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Create%20transition%20rituals%20between%20contexts' })
+(loop_773_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_773_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20spatial%20behaviors%20in%20group%20dynamics' })
+(loop_773_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Kennedy%20Operator', mechanism: 'it%20signals%20%22Spiritual%20Imbalance%2C%22%20%22Exhaustion%2C%22%20or%20%22Madness%22' })
+(loop_773_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20feeling%20a%20vague%2C%20spiritual%20unease%20around%20the%20individual' })
+(loop_773_sink: BehaviorSink)
+(loop_773_start: BehaviorStart { loopId: 773, loopName: 'The%20Sanpaku%20Loop', given: 'Visible%20white%20space%20below%20the%20iris%20(Yin%20Sanpaku)', when: 'the%20face%20is%20neutral', then: 'it%20signals%20%22Spiritual%20Imbalance%2C%22%20%22Exhaustion%2C%22%20or%20%22Madness%22%20(The%20Kennedy%20Operator)', result: 'observers%20feeling%20a%20vague%2C%20spiritual%20unease%20around%20the%20individual', operatorName: 'The%20Kennedy%20Operator', operatorMechanism: 'it%20signals%20%22Spiritual%20Imbalance%2C%22%20%22Exhaustion%2C%22%20or%20%22Madness%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20spatial%20behaviors%20in%20group%20dynamics', intervention_interdict: 'Create%20transition%20rituals%20between%20contexts', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_773_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_773_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Spiritual%20Imbalance%2C%22%20%22Exhaustion%2C%22%20or%20%22Madness%22%20(The%20Kennedy%20Operator)' })
+(loop_773_verdict: BehaviorVerdict { loopId: 773, loopName: 'The%20Sanpaku%20Loop', then: 'it%20signals%20%22Spiritual%20Imbalance%2C%22%20%22Exhaustion%2C%22%20or%20%22Madness%22%20(The%20Kennedy%20Operator)', result: 'observers%20feeling%20a%20vague%2C%20spiritual%20unease%20around%20the%20individual', operatorName: 'The%20Kennedy%20Operator', operatorMechanism: 'it%20signals%20%22Spiritual%20Imbalance%2C%22%20%22Exhaustion%2C%22%20or%20%22Madness%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_773_when_gate: BehaviorAssess { stage: 'when', text: 'the%20face%20is%20neutral' })
+
+// Topology
+(loop_773_start)-[:PROCESS]->(loop_773_given_gate)
+(loop_773_given_gate)-[:PROCESS { case: "ok" }]->(loop_773_when_gate)
+(loop_773_given_gate)-[:PROCESS { case: "err" }]->(loop_773_inactive)
+(loop_773_when_gate)-[:PROCESS { case: "ok" }]->(loop_773_context)
+(loop_773_when_gate)-[:PROCESS { case: "err" }]->(loop_773_inactive)
+(loop_773_context)-[:FORK { strategy: "behavior-branches" }]->(loop_773_context_branch | loop_773_then_branch | loop_773_operator_branch | loop_773_result_branch | loop_773_taxonomy_branch | loop_773_intervention_recognize | loop_773_intervention_interdict | loop_773_intervention_minimize)
+(loop_773_context_branch | loop_773_then_branch | loop_773_operator_branch | loop_773_result_branch | loop_773_taxonomy_branch | loop_773_intervention_recognize | loop_773_intervention_interdict | loop_773_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_773_verdict)
+(loop_773_inactive)-[:PROCESS]->(loop_773_sink)
+(loop_773_verdict)-[:PROCESS]->(loop_773_sink)
+(loop_773_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_773_then_branch)
+(loop_773_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_773_then_branch)
+(loop_773_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_773_then_branch)

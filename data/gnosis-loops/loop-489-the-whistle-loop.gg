@@ -1,0 +1,33 @@
+// behavioral-loop-489.gg
+// Executable Gnosis projection for The Whistle Loop.
+
+// Nodes
+(loop_489_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_489_context_branch: BehaviorEmit { emission: 'context' })
+(loop_489_given_gate: BehaviorAssess { stage: 'given', text: 'Air%20escaping%20between%20incisors' })
+(loop_489_inactive: BehaviorTerminal { loopId: 489, loopName: 'The%20Whistle%20Loop' })
+(loop_489_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_489_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_489_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_489_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cartoon%20Operator', mechanism: 'a%20high-pitched%20whistle%20underscores%20words' })
+(loop_489_result_branch: BehaviorEmit { emission: 'result', text: 'difficulty%20delivering%20%22Serious%22%20news%20(e.g.%2C%20firings%2C%20breakups)%20without%20seemingly%20mocking%20the%20situation' })
+(loop_489_sink: BehaviorSink)
+(loop_489_start: BehaviorStart { loopId: 489, loopName: 'The%20Whistle%20Loop', given: 'Air%20escaping%20between%20incisors', when: 'speaking%20quickly', then: 'a%20high-pitched%20whistle%20underscores%20words%20(The%20Cartoon%20Operator)', result: 'difficulty%20delivering%20%22Serious%22%20news%20(e.g.%2C%20firings%2C%20breakups)%20without%20seemingly%20mocking%20the%20situation', operatorName: 'The%20Cartoon%20Operator', operatorMechanism: 'a%20high-pitched%20whistle%20underscores%20words', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_489_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_489_then_branch: BehaviorEmit { emission: 'then', text: 'a%20high-pitched%20whistle%20underscores%20words%20(The%20Cartoon%20Operator)' })
+(loop_489_verdict: BehaviorVerdict { loopId: 489, loopName: 'The%20Whistle%20Loop', then: 'a%20high-pitched%20whistle%20underscores%20words%20(The%20Cartoon%20Operator)', result: 'difficulty%20delivering%20%22Serious%22%20news%20(e.g.%2C%20firings%2C%20breakups)%20without%20seemingly%20mocking%20the%20situation', operatorName: 'The%20Cartoon%20Operator', operatorMechanism: 'a%20high-pitched%20whistle%20underscores%20words', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_489_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20quickly' })
+
+// Topology
+(loop_489_start)-[:PROCESS]->(loop_489_given_gate)
+(loop_489_given_gate)-[:PROCESS { case: "ok" }]->(loop_489_when_gate)
+(loop_489_given_gate)-[:PROCESS { case: "err" }]->(loop_489_inactive)
+(loop_489_when_gate)-[:PROCESS { case: "ok" }]->(loop_489_context)
+(loop_489_when_gate)-[:PROCESS { case: "err" }]->(loop_489_inactive)
+(loop_489_context)-[:FORK { strategy: "behavior-branches" }]->(loop_489_context_branch | loop_489_then_branch | loop_489_operator_branch | loop_489_result_branch | loop_489_taxonomy_branch | loop_489_intervention_recognize | loop_489_intervention_interdict | loop_489_intervention_minimize)
+(loop_489_context_branch | loop_489_then_branch | loop_489_operator_branch | loop_489_result_branch | loop_489_taxonomy_branch | loop_489_intervention_recognize | loop_489_intervention_interdict | loop_489_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_489_verdict)
+(loop_489_inactive)-[:PROCESS]->(loop_489_sink)
+(loop_489_verdict)-[:PROCESS]->(loop_489_sink)
+(loop_489_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_489_then_branch)
+(loop_489_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_489_then_branch)
+(loop_489_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_489_then_branch)

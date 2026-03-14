@@ -1,0 +1,33 @@
+// behavioral-loop-1085.gg
+// Executable Gnosis projection for The Spark Loop.
+
+// Nodes
+(loop_1085_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1085_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1085_given_gate: BehaviorAssess { stage: 'given', text: 'The%20randomness%20of%20genetic%20recombination' })
+(loop_1085_inactive: BehaviorTerminal { loopId: 1085, loopName: 'The%20Spark%20Loop' })
+(loop_1085_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait' })
+(loop_1085_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1085_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1085_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'a%20new%20set%20of%20vectors%20is%20drawn%20(The%20Reroll)' })
+(loop_1085_result_branch: BehaviorEmit { emission: 'result', text: 'infinite%20variation' })
+(loop_1085_sink: BehaviorSink)
+(loop_1085_start: BehaviorStart { loopId: 1085, loopName: 'The%20Spark%20Loop', given: 'The%20randomness%20of%20genetic%20recombination', when: 'the%20loop%20begins%20again', then: 'a%20new%20set%20of%20vectors%20is%20drawn%20(The%20Reroll)', result: 'infinite%20variation', operatorName: 'Unknown%20Operator', operatorMechanism: 'a%20new%20set%20of%20vectors%20is%20drawn%20(The%20Reroll)', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1085_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1085_then_branch: BehaviorEmit { emission: 'then', text: 'a%20new%20set%20of%20vectors%20is%20drawn%20(The%20Reroll)' })
+(loop_1085_verdict: BehaviorVerdict { loopId: 1085, loopName: 'The%20Spark%20Loop', then: 'a%20new%20set%20of%20vectors%20is%20drawn%20(The%20Reroll)', result: 'infinite%20variation', operatorName: 'Unknown%20Operator', operatorMechanism: 'a%20new%20set%20of%20vectors%20is%20drawn%20(The%20Reroll)', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1085_when_gate: BehaviorAssess { stage: 'when', text: 'the%20loop%20begins%20again' })
+
+// Topology
+(loop_1085_start)-[:PROCESS]->(loop_1085_given_gate)
+(loop_1085_given_gate)-[:PROCESS { case: "ok" }]->(loop_1085_when_gate)
+(loop_1085_given_gate)-[:PROCESS { case: "err" }]->(loop_1085_inactive)
+(loop_1085_when_gate)-[:PROCESS { case: "ok" }]->(loop_1085_context)
+(loop_1085_when_gate)-[:PROCESS { case: "err" }]->(loop_1085_inactive)
+(loop_1085_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1085_context_branch | loop_1085_then_branch | loop_1085_operator_branch | loop_1085_result_branch | loop_1085_taxonomy_branch | loop_1085_intervention_recognize | loop_1085_intervention_interdict | loop_1085_intervention_minimize)
+(loop_1085_context_branch | loop_1085_then_branch | loop_1085_operator_branch | loop_1085_result_branch | loop_1085_taxonomy_branch | loop_1085_intervention_recognize | loop_1085_intervention_interdict | loop_1085_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1085_verdict)
+(loop_1085_inactive)-[:PROCESS]->(loop_1085_sink)
+(loop_1085_verdict)-[:PROCESS]->(loop_1085_sink)
+(loop_1085_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1085_then_branch)
+(loop_1085_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1085_then_branch)
+(loop_1085_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1085_then_branch)

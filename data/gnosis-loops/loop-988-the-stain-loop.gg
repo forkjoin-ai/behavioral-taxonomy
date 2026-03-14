@@ -1,0 +1,33 @@
+// behavioral-loop-988.gg
+// Executable Gnosis projection for The Stain Loop.
+
+// Nodes
+(loop_988_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_988_context_branch: BehaviorEmit { emission: 'context' })
+(loop_988_given_gate: BehaviorAssess { stage: 'given', text: 'Old%20oil%20stain%20on%20the%20chest' })
+(loop_988_inactive: BehaviorTerminal { loopId: 988, loopName: 'The%20Stain%20Loop' })
+(loop_988_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_988_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_988_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_988_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Target%20Operator', mechanism: 'it%20becomes%20a%20focal%20point' })
+(loop_988_result_branch: BehaviorEmit { emission: 'result', text: 'the%20observer%20wondering%20%22What%20did%20they%20eat%3F%22%20instead%20of%20listening' })
+(loop_988_sink: BehaviorSink)
+(loop_988_start: BehaviorStart { loopId: 988, loopName: 'The%20Stain%20Loop', given: 'Old%20oil%20stain%20on%20the%20chest', when: 'light%20hits%20it', then: 'it%20becomes%20a%20focal%20point%20(The%20Target%20Operator)', result: 'the%20observer%20wondering%20%22What%20did%20they%20eat%3F%22%20instead%20of%20listening', operatorName: 'The%20Target%20Operator', operatorMechanism: 'it%20becomes%20a%20focal%20point', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_988_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_988_then_branch: BehaviorEmit { emission: 'then', text: 'it%20becomes%20a%20focal%20point%20(The%20Target%20Operator)' })
+(loop_988_verdict: BehaviorVerdict { loopId: 988, loopName: 'The%20Stain%20Loop', then: 'it%20becomes%20a%20focal%20point%20(The%20Target%20Operator)', result: 'the%20observer%20wondering%20%22What%20did%20they%20eat%3F%22%20instead%20of%20listening', operatorName: 'The%20Target%20Operator', operatorMechanism: 'it%20becomes%20a%20focal%20point', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_988_when_gate: BehaviorAssess { stage: 'when', text: 'light%20hits%20it' })
+
+// Topology
+(loop_988_start)-[:PROCESS]->(loop_988_given_gate)
+(loop_988_given_gate)-[:PROCESS { case: "ok" }]->(loop_988_when_gate)
+(loop_988_given_gate)-[:PROCESS { case: "err" }]->(loop_988_inactive)
+(loop_988_when_gate)-[:PROCESS { case: "ok" }]->(loop_988_context)
+(loop_988_when_gate)-[:PROCESS { case: "err" }]->(loop_988_inactive)
+(loop_988_context)-[:FORK { strategy: "behavior-branches" }]->(loop_988_context_branch | loop_988_then_branch | loop_988_operator_branch | loop_988_result_branch | loop_988_taxonomy_branch | loop_988_intervention_recognize | loop_988_intervention_interdict | loop_988_intervention_minimize)
+(loop_988_context_branch | loop_988_then_branch | loop_988_operator_branch | loop_988_result_branch | loop_988_taxonomy_branch | loop_988_intervention_recognize | loop_988_intervention_interdict | loop_988_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_988_verdict)
+(loop_988_inactive)-[:PROCESS]->(loop_988_sink)
+(loop_988_verdict)-[:PROCESS]->(loop_988_sink)
+(loop_988_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_988_then_branch)
+(loop_988_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_988_then_branch)
+(loop_988_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_988_then_branch)

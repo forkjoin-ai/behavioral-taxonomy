@@ -1,0 +1,33 @@
+// behavioral-loop-555.gg
+// Executable Gnosis projection for The Delayer Loop.
+
+// Nodes
+(loop_555_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_555_context_branch: BehaviorEmit { emission: 'context' })
+(loop_555_given_gate: BehaviorAssess { stage: 'given', text: 'Slow%20auditory%20processing%20speed' })
+(loop_555_inactive: BehaviorTerminal { loopId: 555, loopName: 'The%20Delayer%20Loop' })
+(loop_555_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_555_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_555_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_555_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Lag%20Operator', mechanism: 'the%20individual%20laughs%202%20seconds%20after%20everyone%20else' })
+(loop_555_result_branch: BehaviorEmit { emission: 'result', text: 'being%20the%20%22Slow%20One%22%20of%20the%20group%2C%20regardless%20of%20actual%20IQ' })
+(loop_555_sink: BehaviorSink)
+(loop_555_start: BehaviorStart { loopId: 555, loopName: 'The%20Delayer%20Loop', given: 'Slow%20auditory%20processing%20speed', when: 'a%20joke%20is%20told', then: 'the%20individual%20laughs%202%20seconds%20after%20everyone%20else%20(The%20Lag%20Operator)', result: 'being%20the%20%22Slow%20One%22%20of%20the%20group%2C%20regardless%20of%20actual%20IQ', operatorName: 'The%20Lag%20Operator', operatorMechanism: 'the%20individual%20laughs%202%20seconds%20after%20everyone%20else', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_555_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_555_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20laughs%202%20seconds%20after%20everyone%20else%20(The%20Lag%20Operator)' })
+(loop_555_verdict: BehaviorVerdict { loopId: 555, loopName: 'The%20Delayer%20Loop', then: 'the%20individual%20laughs%202%20seconds%20after%20everyone%20else%20(The%20Lag%20Operator)', result: 'being%20the%20%22Slow%20One%22%20of%20the%20group%2C%20regardless%20of%20actual%20IQ', operatorName: 'The%20Lag%20Operator', operatorMechanism: 'the%20individual%20laughs%202%20seconds%20after%20everyone%20else', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_555_when_gate: BehaviorAssess { stage: 'when', text: 'a%20joke%20is%20told' })
+
+// Topology
+(loop_555_start)-[:PROCESS]->(loop_555_given_gate)
+(loop_555_given_gate)-[:PROCESS { case: "ok" }]->(loop_555_when_gate)
+(loop_555_given_gate)-[:PROCESS { case: "err" }]->(loop_555_inactive)
+(loop_555_when_gate)-[:PROCESS { case: "ok" }]->(loop_555_context)
+(loop_555_when_gate)-[:PROCESS { case: "err" }]->(loop_555_inactive)
+(loop_555_context)-[:FORK { strategy: "behavior-branches" }]->(loop_555_context_branch | loop_555_then_branch | loop_555_operator_branch | loop_555_result_branch | loop_555_taxonomy_branch | loop_555_intervention_recognize | loop_555_intervention_interdict | loop_555_intervention_minimize)
+(loop_555_context_branch | loop_555_then_branch | loop_555_operator_branch | loop_555_result_branch | loop_555_taxonomy_branch | loop_555_intervention_recognize | loop_555_intervention_interdict | loop_555_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_555_verdict)
+(loop_555_inactive)-[:PROCESS]->(loop_555_sink)
+(loop_555_verdict)-[:PROCESS]->(loop_555_sink)
+(loop_555_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_555_then_branch)
+(loop_555_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_555_then_branch)
+(loop_555_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_555_then_branch)

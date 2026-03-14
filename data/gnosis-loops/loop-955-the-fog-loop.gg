@@ -1,0 +1,33 @@
+// behavioral-loop-955.gg
+// Executable Gnosis projection for The Fog Loop.
+
+// Nodes
+(loop_955_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_955_context_branch: BehaviorEmit { emission: 'context' })
+(loop_955_given_gate: BehaviorAssess { stage: 'given', text: 'minimal%20lip%20movement%20%2B%20low%20volume' })
+(loop_955_inactive: BehaviorTerminal { loopId: 955, loopName: 'The%20Fog%20Loop' })
+(loop_955_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_955_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_955_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_955_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mute%20Operator', mechanism: 'listener%20says%20%22What%3F%22%20repeatedly' })
+(loop_955_result_branch: BehaviorEmit { emission: 'result', text: 'frustration%20and%20eventual%20silence' })
+(loop_955_sink: BehaviorSink)
+(loop_955_start: BehaviorStart { loopId: 955, loopName: 'The%20Fog%20Loop', given: 'minimal%20lip%20movement%20%2B%20low%20volume', when: 'ordering%20food%20or%20speaking', then: 'listener%20says%20%22What%3F%22%20repeatedly%20(The%20Mute%20Operator)', result: 'frustration%20and%20eventual%20silence', operatorName: 'The%20Mute%20Operator', operatorMechanism: 'listener%20says%20%22What%3F%22%20repeatedly', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_955_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_955_then_branch: BehaviorEmit { emission: 'then', text: 'listener%20says%20%22What%3F%22%20repeatedly%20(The%20Mute%20Operator)' })
+(loop_955_verdict: BehaviorVerdict { loopId: 955, loopName: 'The%20Fog%20Loop', then: 'listener%20says%20%22What%3F%22%20repeatedly%20(The%20Mute%20Operator)', result: 'frustration%20and%20eventual%20silence', operatorName: 'The%20Mute%20Operator', operatorMechanism: 'listener%20says%20%22What%3F%22%20repeatedly', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_955_when_gate: BehaviorAssess { stage: 'when', text: 'ordering%20food%20or%20speaking' })
+
+// Topology
+(loop_955_start)-[:PROCESS]->(loop_955_given_gate)
+(loop_955_given_gate)-[:PROCESS { case: "ok" }]->(loop_955_when_gate)
+(loop_955_given_gate)-[:PROCESS { case: "err" }]->(loop_955_inactive)
+(loop_955_when_gate)-[:PROCESS { case: "ok" }]->(loop_955_context)
+(loop_955_when_gate)-[:PROCESS { case: "err" }]->(loop_955_inactive)
+(loop_955_context)-[:FORK { strategy: "behavior-branches" }]->(loop_955_context_branch | loop_955_then_branch | loop_955_operator_branch | loop_955_result_branch | loop_955_taxonomy_branch | loop_955_intervention_recognize | loop_955_intervention_interdict | loop_955_intervention_minimize)
+(loop_955_context_branch | loop_955_then_branch | loop_955_operator_branch | loop_955_result_branch | loop_955_taxonomy_branch | loop_955_intervention_recognize | loop_955_intervention_interdict | loop_955_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_955_verdict)
+(loop_955_inactive)-[:PROCESS]->(loop_955_sink)
+(loop_955_verdict)-[:PROCESS]->(loop_955_sink)
+(loop_955_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_955_then_branch)
+(loop_955_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_955_then_branch)
+(loop_955_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_955_then_branch)

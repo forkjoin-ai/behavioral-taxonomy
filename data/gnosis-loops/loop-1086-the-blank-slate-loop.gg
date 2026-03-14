@@ -1,0 +1,33 @@
+// behavioral-loop-1086.gg
+// Executable Gnosis projection for The Blank Slate Loop.
+
+// Nodes
+(loop_1086_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1086_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1086_given_gate: BehaviorAssess { stage: 'given', text: "A%20newborn's%20lack%20of%20social%20software" })
+(loop_1086_inactive: BehaviorTerminal { loopId: 1086, loopName: 'The%20Blank%20Slate%20Loop' })
+(loop_1086_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1086_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1086_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1086_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20download%20begins%20(The%20Upload)' })
+(loop_1086_result_branch: BehaviorEmit { emission: 'result', text: 'the%20first%20loop%3A%20The%20Attachment%20Loop' })
+(loop_1086_sink: BehaviorSink)
+(loop_1086_start: BehaviorStart { loopId: 1086, loopName: 'The%20Blank%20Slate%20Loop', given: "A%20newborn's%20lack%20of%20social%20software", when: 'first%20eye%20contact%20is%20made', then: 'the%20download%20begins%20(The%20Upload)', result: 'the%20first%20loop%3A%20The%20Attachment%20Loop', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20download%20begins%20(The%20Upload)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1086_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1086_then_branch: BehaviorEmit { emission: 'then', text: 'the%20download%20begins%20(The%20Upload)' })
+(loop_1086_verdict: BehaviorVerdict { loopId: 1086, loopName: 'The%20Blank%20Slate%20Loop', then: 'the%20download%20begins%20(The%20Upload)', result: 'the%20first%20loop%3A%20The%20Attachment%20Loop', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20download%20begins%20(The%20Upload)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1086_when_gate: BehaviorAssess { stage: 'when', text: 'first%20eye%20contact%20is%20made' })
+
+// Topology
+(loop_1086_start)-[:PROCESS]->(loop_1086_given_gate)
+(loop_1086_given_gate)-[:PROCESS { case: "ok" }]->(loop_1086_when_gate)
+(loop_1086_given_gate)-[:PROCESS { case: "err" }]->(loop_1086_inactive)
+(loop_1086_when_gate)-[:PROCESS { case: "ok" }]->(loop_1086_context)
+(loop_1086_when_gate)-[:PROCESS { case: "err" }]->(loop_1086_inactive)
+(loop_1086_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1086_context_branch | loop_1086_then_branch | loop_1086_operator_branch | loop_1086_result_branch | loop_1086_taxonomy_branch | loop_1086_intervention_recognize | loop_1086_intervention_interdict | loop_1086_intervention_minimize)
+(loop_1086_context_branch | loop_1086_then_branch | loop_1086_operator_branch | loop_1086_result_branch | loop_1086_taxonomy_branch | loop_1086_intervention_recognize | loop_1086_intervention_interdict | loop_1086_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1086_verdict)
+(loop_1086_inactive)-[:PROCESS]->(loop_1086_sink)
+(loop_1086_verdict)-[:PROCESS]->(loop_1086_sink)
+(loop_1086_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1086_then_branch)
+(loop_1086_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1086_then_branch)
+(loop_1086_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1086_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-785.gg
+// Executable Gnosis projection for The Crackle Loop.
+
+// Nodes
+(loop_785_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_785_context_branch: BehaviorEmit { emission: 'context' })
+(loop_785_given_gate: BehaviorAssess { stage: 'given', text: 'Voice%20breaking%20between%20registers' })
+(loop_785_inactive: BehaviorTerminal { loopId: 785, loopName: 'The%20Crackle%20Loop' })
+(loop_785_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_785_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_785_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_785_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Brady%20Operator', mechanism: 'the%20break%20triggers%20%22Humor%22%20or%20%22Pity%22' })
+(loop_785_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20speaking%20less%20to%20avoid%20humiliation' })
+(loop_785_sink: BehaviorSink)
+(loop_785_start: BehaviorStart { loopId: 785, loopName: 'The%20Crackle%20Loop', given: 'Voice%20breaking%20between%20registers', when: 'trying%20to%20be%20serious', then: 'the%20break%20triggers%20%22Humor%22%20or%20%22Pity%22%20(The%20Brady%20Operator)', result: 'the%20individual%20speaking%20less%20to%20avoid%20humiliation', operatorName: 'The%20Brady%20Operator', operatorMechanism: 'the%20break%20triggers%20%22Humor%22%20or%20%22Pity%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_785_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'REPULSION' })
+(loop_785_then_branch: BehaviorEmit { emission: 'then', text: 'the%20break%20triggers%20%22Humor%22%20or%20%22Pity%22%20(The%20Brady%20Operator)' })
+(loop_785_verdict: BehaviorVerdict { loopId: 785, loopName: 'The%20Crackle%20Loop', then: 'the%20break%20triggers%20%22Humor%22%20or%20%22Pity%22%20(The%20Brady%20Operator)', result: 'the%20individual%20speaking%20less%20to%20avoid%20humiliation', operatorName: 'The%20Brady%20Operator', operatorMechanism: 'the%20break%20triggers%20%22Humor%22%20or%20%22Pity%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'REPULSION' })
+(loop_785_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20to%20be%20serious' })
+
+// Topology
+(loop_785_start)-[:PROCESS]->(loop_785_given_gate)
+(loop_785_given_gate)-[:PROCESS { case: "ok" }]->(loop_785_when_gate)
+(loop_785_given_gate)-[:PROCESS { case: "err" }]->(loop_785_inactive)
+(loop_785_when_gate)-[:PROCESS { case: "ok" }]->(loop_785_context)
+(loop_785_when_gate)-[:PROCESS { case: "err" }]->(loop_785_inactive)
+(loop_785_context)-[:FORK { strategy: "behavior-branches" }]->(loop_785_context_branch | loop_785_then_branch | loop_785_operator_branch | loop_785_result_branch | loop_785_taxonomy_branch | loop_785_intervention_recognize | loop_785_intervention_interdict | loop_785_intervention_minimize)
+(loop_785_context_branch | loop_785_then_branch | loop_785_operator_branch | loop_785_result_branch | loop_785_taxonomy_branch | loop_785_intervention_recognize | loop_785_intervention_interdict | loop_785_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_785_verdict)
+(loop_785_inactive)-[:PROCESS]->(loop_785_sink)
+(loop_785_verdict)-[:PROCESS]->(loop_785_sink)
+(loop_785_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_785_then_branch)
+(loop_785_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_785_then_branch)
+(loop_785_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_785_then_branch)

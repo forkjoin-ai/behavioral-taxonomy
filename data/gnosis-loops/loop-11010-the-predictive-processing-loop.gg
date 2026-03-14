@@ -1,0 +1,33 @@
+// behavioral-loop-11010.gg
+// Executable Gnosis projection for The Predictive Processing Loop.
+
+// Nodes
+(loop_11010_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_11010_context_branch: BehaviorEmit { emission: 'context' })
+(loop_11010_given_gate: BehaviorAssess { stage: 'given', text: 'Brain%20generates%20top-down%20probabilistic%20model%20of%20what%20is%20happening' })
+(loop_11010_inactive: BehaviorTerminal { loopId: 11010, loopName: 'The%20Predictive%20Processing%20Loop' })
+(loop_11010_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Seek%20novel%20experiences%20that%20force%20model%20updating' })
+(loop_11010_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: "Practice%20precision%20weighting%20-%20ask%20'how%20confident%20am%20I%20in%20this%20perception%3F'" })
+(loop_11010_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20you%20see%20what%20you%20expect%20rather%20than%20what%20is%20there' })
+(loop_11010_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Free%20Energy%20Minimizer', mechanism: 'Predictive%20processing%20%2F%20Bayesian%20inference%3A%20top-down%20predictions%20compete%20with%20bottom-up%20sensory%20error%20signals.' })
+(loop_11010_result_branch: BehaviorEmit { emission: 'result', text: 'Perception%20is%20successful%20suppression%20of%20prediction%20error%3B%20failures%20cause%20distortion' })
+(loop_11010_sink: BehaviorSink)
+(loop_11010_start: BehaviorStart { loopId: 11010, loopName: 'The%20Predictive%20Processing%20Loop', given: 'Brain%20generates%20top-down%20probabilistic%20model%20of%20what%20is%20happening', when: 'Sensory%20input%20differs%20from%20prediction%2C%20creating%20prediction%20error', then: 'Brain%20must%20either%20update%20model%20OR%20act%20on%20world%20to%20match%20prediction', result: 'Perception%20is%20successful%20suppression%20of%20prediction%20error%3B%20failures%20cause%20distortion', operatorName: 'The%20Free%20Energy%20Minimizer', operatorMechanism: 'Predictive%20processing%20%2F%20Bayesian%20inference%3A%20top-down%20predictions%20compete%20with%20bottom-up%20sensory%20error%20signals.', origin: 'NEUROBIOLOGICAL', modality: 'COGNITIVE', mutability: 'FLUID', valences: 'PERCEPTION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20you%20see%20what%20you%20expect%20rather%20than%20what%20is%20there', intervention_interdict: 'Seek%20novel%20experiences%20that%20force%20model%20updating', intervention_minimize: "Practice%20precision%20weighting%20-%20ask%20'how%20confident%20am%20I%20in%20this%20perception%3F'" })
+(loop_11010_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'NEUROBIOLOGICAL', modality: 'COGNITIVE', mutability: 'FLUID', valences: 'PERCEPTION' })
+(loop_11010_then_branch: BehaviorEmit { emission: 'then', text: 'Brain%20must%20either%20update%20model%20OR%20act%20on%20world%20to%20match%20prediction' })
+(loop_11010_verdict: BehaviorVerdict { loopId: 11010, loopName: 'The%20Predictive%20Processing%20Loop', then: 'Brain%20must%20either%20update%20model%20OR%20act%20on%20world%20to%20match%20prediction', result: 'Perception%20is%20successful%20suppression%20of%20prediction%20error%3B%20failures%20cause%20distortion', operatorName: 'The%20Free%20Energy%20Minimizer', operatorMechanism: 'Predictive%20processing%20%2F%20Bayesian%20inference%3A%20top-down%20predictions%20compete%20with%20bottom-up%20sensory%20error%20signals.', origin: 'NEUROBIOLOGICAL', modality: 'COGNITIVE', mutability: 'FLUID', valences: 'PERCEPTION' })
+(loop_11010_when_gate: BehaviorAssess { stage: 'when', text: 'Sensory%20input%20differs%20from%20prediction%2C%20creating%20prediction%20error' })
+
+// Topology
+(loop_11010_start)-[:PROCESS]->(loop_11010_given_gate)
+(loop_11010_given_gate)-[:PROCESS { case: "ok" }]->(loop_11010_when_gate)
+(loop_11010_given_gate)-[:PROCESS { case: "err" }]->(loop_11010_inactive)
+(loop_11010_when_gate)-[:PROCESS { case: "ok" }]->(loop_11010_context)
+(loop_11010_when_gate)-[:PROCESS { case: "err" }]->(loop_11010_inactive)
+(loop_11010_context)-[:FORK { strategy: "behavior-branches" }]->(loop_11010_context_branch | loop_11010_then_branch | loop_11010_operator_branch | loop_11010_result_branch | loop_11010_taxonomy_branch | loop_11010_intervention_recognize | loop_11010_intervention_interdict | loop_11010_intervention_minimize)
+(loop_11010_context_branch | loop_11010_then_branch | loop_11010_operator_branch | loop_11010_result_branch | loop_11010_taxonomy_branch | loop_11010_intervention_recognize | loop_11010_intervention_interdict | loop_11010_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_11010_verdict)
+(loop_11010_inactive)-[:PROCESS]->(loop_11010_sink)
+(loop_11010_verdict)-[:PROCESS]->(loop_11010_sink)
+(loop_11010_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_11010_then_branch)
+(loop_11010_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_11010_then_branch)
+(loop_11010_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_11010_then_branch)

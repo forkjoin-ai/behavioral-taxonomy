@@ -1,0 +1,33 @@
+// behavioral-loop-1034.gg
+// Executable Gnosis projection for The Imposter Loop.
+
+// Nodes
+(loop_1034_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1034_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1034_given_gate: BehaviorAssess { stage: 'given', text: 'High%20competence%20%2B%20Low%20internal%20validation' })
+(loop_1034_inactive: BehaviorTerminal { loopId: 1034, loopName: 'The%20Imposter%20Loop' })
+(loop_1034_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Actively%20construct%20and%20share%20an%20alternative%20narrative' })
+(loop_1034_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Set%20hard%20boundaries%3B%20this%20loop%20will%20consume%20all%20available%20energy%20if%20unchecked.' })
+(loop_1034_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20internal%20narratives%20affect%20external%20behavior' })
+(loop_1034_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Con%20Artist%20Operator', mechanism: 'Success%20is%20re-contextualized%20as%20deception%20rather%20than%20merit.' })
+(loop_1034_result_branch: BehaviorEmit { emission: 'result', text: 'Over-preparation%20and%20eventual%20burnout' })
+(loop_1034_sink: BehaviorSink)
+(loop_1034_start: BehaviorStart { loopId: 1034, loopName: 'The%20Imposter%20Loop', given: 'High%20competence%20%2B%20Low%20internal%20validation', when: 'Receiving%20praise%20or%20a%20promotion', then: "Subject%20panics%2C%20believing%20they%20have%20'tricked'%20everyone", result: 'Over-preparation%20and%20eventual%20burnout', operatorName: 'The%20Con%20Artist%20Operator', operatorMechanism: 'Success%20is%20re-contextualized%20as%20deception%20rather%20than%20merit.', origin: 'NARRATIVE', modality: 'META', mutability: 'STUBBORN', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20internal%20narratives%20affect%20external%20behavior', intervention_interdict: 'Actively%20construct%20and%20share%20an%20alternative%20narrative', intervention_minimize: 'Set%20hard%20boundaries%3B%20this%20loop%20will%20consume%20all%20available%20energy%20if%20unchecked.' })
+(loop_1034_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'NARRATIVE', modality: 'META', mutability: 'STUBBORN', valences: 'SUBMISSION' })
+(loop_1034_then_branch: BehaviorEmit { emission: 'then', text: "Subject%20panics%2C%20believing%20they%20have%20'tricked'%20everyone" })
+(loop_1034_verdict: BehaviorVerdict { loopId: 1034, loopName: 'The%20Imposter%20Loop', then: "Subject%20panics%2C%20believing%20they%20have%20'tricked'%20everyone", result: 'Over-preparation%20and%20eventual%20burnout', operatorName: 'The%20Con%20Artist%20Operator', operatorMechanism: 'Success%20is%20re-contextualized%20as%20deception%20rather%20than%20merit.', origin: 'NARRATIVE', modality: 'META', mutability: 'STUBBORN', valences: 'SUBMISSION' })
+(loop_1034_when_gate: BehaviorAssess { stage: 'when', text: 'Receiving%20praise%20or%20a%20promotion' })
+
+// Topology
+(loop_1034_start)-[:PROCESS]->(loop_1034_given_gate)
+(loop_1034_given_gate)-[:PROCESS { case: "ok" }]->(loop_1034_when_gate)
+(loop_1034_given_gate)-[:PROCESS { case: "err" }]->(loop_1034_inactive)
+(loop_1034_when_gate)-[:PROCESS { case: "ok" }]->(loop_1034_context)
+(loop_1034_when_gate)-[:PROCESS { case: "err" }]->(loop_1034_inactive)
+(loop_1034_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1034_context_branch | loop_1034_then_branch | loop_1034_operator_branch | loop_1034_result_branch | loop_1034_taxonomy_branch | loop_1034_intervention_recognize | loop_1034_intervention_interdict | loop_1034_intervention_minimize)
+(loop_1034_context_branch | loop_1034_then_branch | loop_1034_operator_branch | loop_1034_result_branch | loop_1034_taxonomy_branch | loop_1034_intervention_recognize | loop_1034_intervention_interdict | loop_1034_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1034_verdict)
+(loop_1034_inactive)-[:PROCESS]->(loop_1034_sink)
+(loop_1034_verdict)-[:PROCESS]->(loop_1034_sink)
+(loop_1034_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1034_then_branch)
+(loop_1034_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1034_then_branch)
+(loop_1034_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1034_then_branch)

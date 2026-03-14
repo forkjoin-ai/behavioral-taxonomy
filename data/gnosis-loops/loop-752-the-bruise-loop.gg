@@ -1,0 +1,33 @@
+// behavioral-loop-752.gg
+// Executable Gnosis projection for The Bruise Loop.
+
+// Nodes
+(loop_752_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_752_context_branch: BehaviorEmit { emission: 'context' })
+(loop_752_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20hematoma%20on%20arms%2Flegs' })
+(loop_752_inactive: BehaviorTerminal { loopId: 752, loopName: 'The%20Bruise%20Loop' })
+(loop_752_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_752_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_752_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_752_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rough%20Operator', mechanism: 'it%20signals%20%22Clumsiness%2C%22%20%22Violence%2C%22%20or%20%22Activity%22' })
+(loop_752_result_branch: BehaviorEmit { emission: 'result', text: "unspoken%20questions%20about%20the%20individual's%20home%20life%20or%20hobbies" })
+(loop_752_sink: BehaviorSink)
+(loop_752_start: BehaviorStart { loopId: 752, loopName: 'The%20Bruise%20Loop', given: 'Visible%20hematoma%20on%20arms%2Flegs', when: 'wearing%20revealing%20clothes', then: 'it%20signals%20%22Clumsiness%2C%22%20%22Violence%2C%22%20or%20%22Activity%22%20(The%20Rough%20Operator)', result: "unspoken%20questions%20about%20the%20individual's%20home%20life%20or%20hobbies", operatorName: 'The%20Rough%20Operator', operatorMechanism: 'it%20signals%20%22Clumsiness%2C%22%20%22Violence%2C%22%20or%20%22Activity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_752_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_752_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Clumsiness%2C%22%20%22Violence%2C%22%20or%20%22Activity%22%20(The%20Rough%20Operator)' })
+(loop_752_verdict: BehaviorVerdict { loopId: 752, loopName: 'The%20Bruise%20Loop', then: 'it%20signals%20%22Clumsiness%2C%22%20%22Violence%2C%22%20or%20%22Activity%22%20(The%20Rough%20Operator)', result: "unspoken%20questions%20about%20the%20individual's%20home%20life%20or%20hobbies", operatorName: 'The%20Rough%20Operator', operatorMechanism: 'it%20signals%20%22Clumsiness%2C%22%20%22Violence%2C%22%20or%20%22Activity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_752_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20revealing%20clothes' })
+
+// Topology
+(loop_752_start)-[:PROCESS]->(loop_752_given_gate)
+(loop_752_given_gate)-[:PROCESS { case: "ok" }]->(loop_752_when_gate)
+(loop_752_given_gate)-[:PROCESS { case: "err" }]->(loop_752_inactive)
+(loop_752_when_gate)-[:PROCESS { case: "ok" }]->(loop_752_context)
+(loop_752_when_gate)-[:PROCESS { case: "err" }]->(loop_752_inactive)
+(loop_752_context)-[:FORK { strategy: "behavior-branches" }]->(loop_752_context_branch | loop_752_then_branch | loop_752_operator_branch | loop_752_result_branch | loop_752_taxonomy_branch | loop_752_intervention_recognize | loop_752_intervention_interdict | loop_752_intervention_minimize)
+(loop_752_context_branch | loop_752_then_branch | loop_752_operator_branch | loop_752_result_branch | loop_752_taxonomy_branch | loop_752_intervention_recognize | loop_752_intervention_interdict | loop_752_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_752_verdict)
+(loop_752_inactive)-[:PROCESS]->(loop_752_sink)
+(loop_752_verdict)-[:PROCESS]->(loop_752_sink)
+(loop_752_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_752_then_branch)
+(loop_752_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_752_then_branch)
+(loop_752_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_752_then_branch)

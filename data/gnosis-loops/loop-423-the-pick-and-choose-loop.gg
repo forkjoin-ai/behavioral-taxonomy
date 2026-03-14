@@ -1,0 +1,33 @@
+// behavioral-loop-423.gg
+// Executable Gnosis projection for The Pick-and-Choose Loop.
+
+// Nodes
+(loop_423_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_423_context_branch: BehaviorEmit { emission: 'context' })
+(loop_423_given_gate: BehaviorAssess { stage: 'given', text: 'Dissecting%20food%20to%20remove%20ingredients%20(onions%2Fcrust)' })
+(loop_423_inactive: BehaviorTerminal { loopId: 423, loopName: 'The%20Pick-and-Choose%20Loop' })
+(loop_423_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_423_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_423_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_423_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Picky%20Operator', mechanism: 'it%20signals%20%22Childishness%22%20or%20%22Neuroticism%22' })
+(loop_423_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20rarely%20being%20invited%20to%20high-status%20tasting%20menus' })
+(loop_423_sink: BehaviorSink)
+(loop_423_start: BehaviorStart { loopId: 423, loopName: 'The%20Pick-and-Choose%20Loop', given: 'Dissecting%20food%20to%20remove%20ingredients%20(onions%2Fcrust)', when: 'at%20a%20formal%20dinner', then: 'it%20signals%20%22Childishness%22%20or%20%22Neuroticism%22%20(The%20Picky%20Operator)', result: 'the%20individual%20rarely%20being%20invited%20to%20high-status%20tasting%20menus', operatorName: 'The%20Picky%20Operator', operatorMechanism: 'it%20signals%20%22Childishness%22%20or%20%22Neuroticism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_423_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_423_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Childishness%22%20or%20%22Neuroticism%22%20(The%20Picky%20Operator)' })
+(loop_423_verdict: BehaviorVerdict { loopId: 423, loopName: 'The%20Pick-and-Choose%20Loop', then: 'it%20signals%20%22Childishness%22%20or%20%22Neuroticism%22%20(The%20Picky%20Operator)', result: 'the%20individual%20rarely%20being%20invited%20to%20high-status%20tasting%20menus', operatorName: 'The%20Picky%20Operator', operatorMechanism: 'it%20signals%20%22Childishness%22%20or%20%22Neuroticism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_423_when_gate: BehaviorAssess { stage: 'when', text: 'at%20a%20formal%20dinner' })
+
+// Topology
+(loop_423_start)-[:PROCESS]->(loop_423_given_gate)
+(loop_423_given_gate)-[:PROCESS { case: "ok" }]->(loop_423_when_gate)
+(loop_423_given_gate)-[:PROCESS { case: "err" }]->(loop_423_inactive)
+(loop_423_when_gate)-[:PROCESS { case: "ok" }]->(loop_423_context)
+(loop_423_when_gate)-[:PROCESS { case: "err" }]->(loop_423_inactive)
+(loop_423_context)-[:FORK { strategy: "behavior-branches" }]->(loop_423_context_branch | loop_423_then_branch | loop_423_operator_branch | loop_423_result_branch | loop_423_taxonomy_branch | loop_423_intervention_recognize | loop_423_intervention_interdict | loop_423_intervention_minimize)
+(loop_423_context_branch | loop_423_then_branch | loop_423_operator_branch | loop_423_result_branch | loop_423_taxonomy_branch | loop_423_intervention_recognize | loop_423_intervention_interdict | loop_423_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_423_verdict)
+(loop_423_inactive)-[:PROCESS]->(loop_423_sink)
+(loop_423_verdict)-[:PROCESS]->(loop_423_sink)
+(loop_423_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_423_then_branch)
+(loop_423_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_423_then_branch)
+(loop_423_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_423_then_branch)

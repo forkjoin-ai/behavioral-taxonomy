@@ -1,0 +1,33 @@
+// behavioral-loop-226.gg
+// Executable Gnosis projection for The Shaking Eye Loop.
+
+// Nodes
+(loop_226_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_226_context_branch: BehaviorEmit { emission: 'context' })
+(loop_226_given_gate: BehaviorAssess { stage: 'given', text: 'Involuntary%20repetitive%20eye%20movement' })
+(loop_226_inactive: BehaviorTerminal { loopId: 226, loopName: 'The%20Shaking%20Eye%20Loop' })
+(loop_226_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_226_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_226_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_226_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Instability%20Operator', mechanism: 'observers%20perceive%20%22Intoxication%2C%22%20%22Dizziness%2C%22%20or%20%22Drug%20Use%22' })
+(loop_226_result_branch: BehaviorEmit { emission: 'result', text: 'frequent%2C%20unfair%20drug%20testing%20or%20police%20scrutiny%2C%20leading%20to%20**Institutional%20Paranoia**' })
+(loop_226_sink: BehaviorSink)
+(loop_226_start: BehaviorStart { loopId: 226, loopName: 'The%20Shaking%20Eye%20Loop', given: 'Involuntary%20repetitive%20eye%20movement', when: 'attempting%20to%20hold%20a%20steady%20gaze', then: 'observers%20perceive%20%22Intoxication%2C%22%20%22Dizziness%2C%22%20or%20%22Drug%20Use%22%20(The%20Instability%20Operator)', result: 'frequent%2C%20unfair%20drug%20testing%20or%20police%20scrutiny%2C%20leading%20to%20**Institutional%20Paranoia**', operatorName: 'The%20Instability%20Operator', operatorMechanism: 'observers%20perceive%20%22Intoxication%2C%22%20%22Dizziness%2C%22%20or%20%22Drug%20Use%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_226_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_226_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Intoxication%2C%22%20%22Dizziness%2C%22%20or%20%22Drug%20Use%22%20(The%20Instability%20Operator)' })
+(loop_226_verdict: BehaviorVerdict { loopId: 226, loopName: 'The%20Shaking%20Eye%20Loop', then: 'observers%20perceive%20%22Intoxication%2C%22%20%22Dizziness%2C%22%20or%20%22Drug%20Use%22%20(The%20Instability%20Operator)', result: 'frequent%2C%20unfair%20drug%20testing%20or%20police%20scrutiny%2C%20leading%20to%20**Institutional%20Paranoia**', operatorName: 'The%20Instability%20Operator', operatorMechanism: 'observers%20perceive%20%22Intoxication%2C%22%20%22Dizziness%2C%22%20or%20%22Drug%20Use%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_226_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20to%20hold%20a%20steady%20gaze' })
+
+// Topology
+(loop_226_start)-[:PROCESS]->(loop_226_given_gate)
+(loop_226_given_gate)-[:PROCESS { case: "ok" }]->(loop_226_when_gate)
+(loop_226_given_gate)-[:PROCESS { case: "err" }]->(loop_226_inactive)
+(loop_226_when_gate)-[:PROCESS { case: "ok" }]->(loop_226_context)
+(loop_226_when_gate)-[:PROCESS { case: "err" }]->(loop_226_inactive)
+(loop_226_context)-[:FORK { strategy: "behavior-branches" }]->(loop_226_context_branch | loop_226_then_branch | loop_226_operator_branch | loop_226_result_branch | loop_226_taxonomy_branch | loop_226_intervention_recognize | loop_226_intervention_interdict | loop_226_intervention_minimize)
+(loop_226_context_branch | loop_226_then_branch | loop_226_operator_branch | loop_226_result_branch | loop_226_taxonomy_branch | loop_226_intervention_recognize | loop_226_intervention_interdict | loop_226_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_226_verdict)
+(loop_226_inactive)-[:PROCESS]->(loop_226_sink)
+(loop_226_verdict)-[:PROCESS]->(loop_226_sink)
+(loop_226_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_226_then_branch)
+(loop_226_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_226_then_branch)
+(loop_226_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_226_then_branch)

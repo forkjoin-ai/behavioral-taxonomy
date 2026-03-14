@@ -1,0 +1,33 @@
+// behavioral-loop-280.gg
+// Executable Gnosis projection for The Silent Weep Loop.
+
+// Nodes
+(loop_280_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_280_context_branch: BehaviorEmit { emission: 'context' })
+(loop_280_given_gate: BehaviorAssess { stage: 'given', text: 'Tears%20without%20vocalization%2Fcontortion' })
+(loop_280_inactive: BehaviorTerminal { loopId: 280, loopName: 'The%20Silent%20Weep%20Loop' })
+(loop_280_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_280_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_280_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_280_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Romantic%20Operator', mechanism: 'observers%20see%20a%20%22Poetic%22%20or%20%22Beautiful%22%20sadness' })
+(loop_280_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20viewed%20as%20**Deep%2FSoulful**' })
+(loop_280_sink: BehaviorSink)
+(loop_280_start: BehaviorStart { loopId: 280, loopName: 'The%20Silent%20Weep%20Loop', given: 'Tears%20without%20vocalization%2Fcontortion', when: 'watching%20a%20movie%20or%20listening%20to%20music', then: 'observers%20see%20a%20%22Poetic%22%20or%20%22Beautiful%22%20sadness%20(The%20Romantic%20Operator)', result: 'the%20individual%20being%20viewed%20as%20**Deep%2FSoulful**', operatorName: 'The%20Romantic%20Operator', operatorMechanism: 'observers%20see%20a%20%22Poetic%22%20or%20%22Beautiful%22%20sadness', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_280_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_280_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20see%20a%20%22Poetic%22%20or%20%22Beautiful%22%20sadness%20(The%20Romantic%20Operator)' })
+(loop_280_verdict: BehaviorVerdict { loopId: 280, loopName: 'The%20Silent%20Weep%20Loop', then: 'observers%20see%20a%20%22Poetic%22%20or%20%22Beautiful%22%20sadness%20(The%20Romantic%20Operator)', result: 'the%20individual%20being%20viewed%20as%20**Deep%2FSoulful**', operatorName: 'The%20Romantic%20Operator', operatorMechanism: 'observers%20see%20a%20%22Poetic%22%20or%20%22Beautiful%22%20sadness', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_280_when_gate: BehaviorAssess { stage: 'when', text: 'watching%20a%20movie%20or%20listening%20to%20music' })
+
+// Topology
+(loop_280_start)-[:PROCESS]->(loop_280_given_gate)
+(loop_280_given_gate)-[:PROCESS { case: "ok" }]->(loop_280_when_gate)
+(loop_280_given_gate)-[:PROCESS { case: "err" }]->(loop_280_inactive)
+(loop_280_when_gate)-[:PROCESS { case: "ok" }]->(loop_280_context)
+(loop_280_when_gate)-[:PROCESS { case: "err" }]->(loop_280_inactive)
+(loop_280_context)-[:FORK { strategy: "behavior-branches" }]->(loop_280_context_branch | loop_280_then_branch | loop_280_operator_branch | loop_280_result_branch | loop_280_taxonomy_branch | loop_280_intervention_recognize | loop_280_intervention_interdict | loop_280_intervention_minimize)
+(loop_280_context_branch | loop_280_then_branch | loop_280_operator_branch | loop_280_result_branch | loop_280_taxonomy_branch | loop_280_intervention_recognize | loop_280_intervention_interdict | loop_280_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_280_verdict)
+(loop_280_inactive)-[:PROCESS]->(loop_280_sink)
+(loop_280_verdict)-[:PROCESS]->(loop_280_sink)
+(loop_280_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_280_then_branch)
+(loop_280_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_280_then_branch)
+(loop_280_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_280_then_branch)

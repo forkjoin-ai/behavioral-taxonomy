@@ -1,0 +1,35 @@
+// behavioral-loop-449.gg
+// Executable Gnosis projection for The Turtle Loop.
+
+// Nodes
+(loop_449_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_449_context_branch: BehaviorEmit { emission: 'context' })
+(loop_449_given_gate: BehaviorAssess { stage: 'given', text: 'Cervical%20spine%20extended%20forward%202%2B%20inches%20(Tech%20Neck)' })
+(loop_449_inactive: BehaviorTerminal { loopId: 449, loopName: 'The%20Turtle%20Loop' })
+(loop_449_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Create%20tech-free%20zones%20or%20time%20blocks' })
+(loop_449_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_449_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_449_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_449_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Eager%2FWeak%20Operator', mechanism: 'the%20head%20arrives%20before%20the%20body' })
+(loop_449_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20%22Desperate%22%20or%20%22Submissive%2C%22%20inviting%20dominance' })
+(loop_449_sink: BehaviorSink)
+(loop_449_start: BehaviorStart { loopId: 449, loopName: 'The%20Turtle%20Loop', given: 'Cervical%20spine%20extended%20forward%202%2B%20inches%20(Tech%20Neck)', when: 'entering%20a%20room', then: 'the%20head%20arrives%20before%20the%20body%20(The%20Eager%2FWeak%20Operator)', result: 'the%20individual%20looking%20%22Desperate%22%20or%20%22Submissive%2C%22%20inviting%20dominance', operatorName: 'The%20Eager%2FWeak%20Operator', operatorMechanism: 'the%20head%20arrives%20before%20the%20body', origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE|SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Create%20tech-free%20zones%20or%20time%20blocks', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_449_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE|SUBMISSION' })
+(loop_449_then_branch: BehaviorEmit { emission: 'then', text: 'the%20head%20arrives%20before%20the%20body%20(The%20Eager%2FWeak%20Operator)' })
+(loop_449_verdict: BehaviorVerdict { loopId: 449, loopName: 'The%20Turtle%20Loop', then: 'the%20head%20arrives%20before%20the%20body%20(The%20Eager%2FWeak%20Operator)', result: 'the%20individual%20looking%20%22Desperate%22%20or%20%22Submissive%2C%22%20inviting%20dominance', operatorName: 'The%20Eager%2FWeak%20Operator', operatorMechanism: 'the%20head%20arrives%20before%20the%20body', origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE|SUBMISSION' })
+(loop_449_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20room' })
+
+// Topology
+(loop_449_start)-[:PROCESS]->(loop_449_given_gate)
+(loop_449_given_gate)-[:PROCESS { case: "ok" }]->(loop_449_when_gate)
+(loop_449_given_gate)-[:PROCESS { case: "err" }]->(loop_449_inactive)
+(loop_449_when_gate)-[:PROCESS { case: "ok" }]->(loop_449_context)
+(loop_449_when_gate)-[:PROCESS { case: "err" }]->(loop_449_inactive)
+(loop_449_context)-[:FORK { strategy: "behavior-branches" }]->(loop_449_context_branch | loop_449_then_branch | loop_449_operator_branch | loop_449_result_branch | loop_449_taxonomy_branch | loop_449_intervention_recognize | loop_449_intervention_interdict | loop_449_intervention_minimize | loop_449_intervention_leverage)
+(loop_449_context_branch | loop_449_then_branch | loop_449_operator_branch | loop_449_result_branch | loop_449_taxonomy_branch | loop_449_intervention_recognize | loop_449_intervention_interdict | loop_449_intervention_minimize | loop_449_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_449_verdict)
+(loop_449_inactive)-[:PROCESS]->(loop_449_sink)
+(loop_449_verdict)-[:PROCESS]->(loop_449_sink)
+(loop_449_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_449_then_branch)
+(loop_449_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_449_then_branch)
+(loop_449_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_449_then_branch)
+(loop_449_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_449_result_branch)

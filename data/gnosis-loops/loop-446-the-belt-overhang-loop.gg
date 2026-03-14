@@ -1,0 +1,33 @@
+// behavioral-loop-446.gg
+// Executable Gnosis projection for The Belt Overhang Loop.
+
+// Nodes
+(loop_446_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_446_context_branch: BehaviorEmit { emission: 'context' })
+(loop_446_given_gate: BehaviorAssess { stage: 'given', text: 'Belly%20hanging%20over%20the%20belt%20buckle' })
+(loop_446_inactive: BehaviorTerminal { loopId: 446, loopName: 'The%20Belt%20Overhang%20Loop' })
+(loop_446_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_446_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_446_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_446_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Gluttony%20Operator', mechanism: 'it%20signals%20%22Loss%20of%20Control%22' })
+(loop_446_result_branch: BehaviorEmit { emission: 'result', text: 'being%20judged%20as%20undisciplined%20in%20business' })
+(loop_446_sink: BehaviorSink)
+(loop_446_start: BehaviorStart { loopId: 446, loopName: 'The%20Belt%20Overhang%20Loop', given: 'Belly%20hanging%20over%20the%20belt%20buckle', when: 'standing', then: 'it%20signals%20%22Loss%20of%20Control%22%20(The%20Gluttony%20Operator)', result: 'being%20judged%20as%20undisciplined%20in%20business', operatorName: 'The%20Gluttony%20Operator', operatorMechanism: 'it%20signals%20%22Loss%20of%20Control%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_446_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_446_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Loss%20of%20Control%22%20(The%20Gluttony%20Operator)' })
+(loop_446_verdict: BehaviorVerdict { loopId: 446, loopName: 'The%20Belt%20Overhang%20Loop', then: 'it%20signals%20%22Loss%20of%20Control%22%20(The%20Gluttony%20Operator)', result: 'being%20judged%20as%20undisciplined%20in%20business', operatorName: 'The%20Gluttony%20Operator', operatorMechanism: 'it%20signals%20%22Loss%20of%20Control%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_446_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_446_start)-[:PROCESS]->(loop_446_given_gate)
+(loop_446_given_gate)-[:PROCESS { case: "ok" }]->(loop_446_when_gate)
+(loop_446_given_gate)-[:PROCESS { case: "err" }]->(loop_446_inactive)
+(loop_446_when_gate)-[:PROCESS { case: "ok" }]->(loop_446_context)
+(loop_446_when_gate)-[:PROCESS { case: "err" }]->(loop_446_inactive)
+(loop_446_context)-[:FORK { strategy: "behavior-branches" }]->(loop_446_context_branch | loop_446_then_branch | loop_446_operator_branch | loop_446_result_branch | loop_446_taxonomy_branch | loop_446_intervention_recognize | loop_446_intervention_interdict | loop_446_intervention_minimize)
+(loop_446_context_branch | loop_446_then_branch | loop_446_operator_branch | loop_446_result_branch | loop_446_taxonomy_branch | loop_446_intervention_recognize | loop_446_intervention_interdict | loop_446_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_446_verdict)
+(loop_446_inactive)-[:PROCESS]->(loop_446_sink)
+(loop_446_verdict)-[:PROCESS]->(loop_446_sink)
+(loop_446_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_446_then_branch)
+(loop_446_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_446_then_branch)
+(loop_446_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_446_then_branch)

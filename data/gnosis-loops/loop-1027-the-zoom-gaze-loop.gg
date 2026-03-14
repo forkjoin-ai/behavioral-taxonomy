@@ -1,0 +1,33 @@
+// behavioral-loop-1027.gg
+// Executable Gnosis projection for The Zoom Gaze Loop.
+
+// Nodes
+(loop_1027_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1027_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1027_given_gate: BehaviorAssess { stage: 'given', text: 'Years%20of%20video%20conferencing' })
+(loop_1027_inactive: BehaviorTerminal { loopId: 1027, loopName: 'The%20Zoom%20Gaze%20Loop' })
+(loop_1027_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1027_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1027_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1027_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20individual%20looks%20at%20the%20*mouth*%20or%20*forehead*%20(simulating%20camera%20lens%20looking)%2C%20not%20the%20eyes' })
+(loop_1027_result_branch: BehaviorEmit { emission: 'result', text: 'an%20%22Uncanny%20Valley%22%20feeling%20in%20real-life%20intimacy' })
+(loop_1027_sink: BehaviorSink)
+(loop_1027_start: BehaviorStart { loopId: 1027, loopName: 'The%20Zoom%20Gaze%20Loop', given: 'Years%20of%20video%20conferencing', when: 'speaking%20face-to-face', then: 'the%20individual%20looks%20at%20the%20*mouth*%20or%20*forehead*%20(simulating%20camera%20lens%20looking)%2C%20not%20the%20eyes', result: 'an%20%22Uncanny%20Valley%22%20feeling%20in%20real-life%20intimacy', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20looks%20at%20the%20*mouth*%20or%20*forehead*%20(simulating%20camera%20lens%20looking)%2C%20not%20the%20eyes', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1027_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1027_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20looks%20at%20the%20*mouth*%20or%20*forehead*%20(simulating%20camera%20lens%20looking)%2C%20not%20the%20eyes' })
+(loop_1027_verdict: BehaviorVerdict { loopId: 1027, loopName: 'The%20Zoom%20Gaze%20Loop', then: 'the%20individual%20looks%20at%20the%20*mouth*%20or%20*forehead*%20(simulating%20camera%20lens%20looking)%2C%20not%20the%20eyes', result: 'an%20%22Uncanny%20Valley%22%20feeling%20in%20real-life%20intimacy', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20looks%20at%20the%20*mouth*%20or%20*forehead*%20(simulating%20camera%20lens%20looking)%2C%20not%20the%20eyes', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1027_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20face-to-face' })
+
+// Topology
+(loop_1027_start)-[:PROCESS]->(loop_1027_given_gate)
+(loop_1027_given_gate)-[:PROCESS { case: "ok" }]->(loop_1027_when_gate)
+(loop_1027_given_gate)-[:PROCESS { case: "err" }]->(loop_1027_inactive)
+(loop_1027_when_gate)-[:PROCESS { case: "ok" }]->(loop_1027_context)
+(loop_1027_when_gate)-[:PROCESS { case: "err" }]->(loop_1027_inactive)
+(loop_1027_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1027_context_branch | loop_1027_then_branch | loop_1027_operator_branch | loop_1027_result_branch | loop_1027_taxonomy_branch | loop_1027_intervention_recognize | loop_1027_intervention_interdict | loop_1027_intervention_minimize)
+(loop_1027_context_branch | loop_1027_then_branch | loop_1027_operator_branch | loop_1027_result_branch | loop_1027_taxonomy_branch | loop_1027_intervention_recognize | loop_1027_intervention_interdict | loop_1027_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1027_verdict)
+(loop_1027_inactive)-[:PROCESS]->(loop_1027_sink)
+(loop_1027_verdict)-[:PROCESS]->(loop_1027_sink)
+(loop_1027_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1027_then_branch)
+(loop_1027_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1027_then_branch)
+(loop_1027_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1027_then_branch)

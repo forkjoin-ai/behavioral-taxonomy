@@ -1,0 +1,33 @@
+// behavioral-loop-195.gg
+// Executable Gnosis projection for The Jaw Clench Loop.
+
+// Nodes
+(loop_195_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_195_context_branch: BehaviorEmit { emission: 'context' })
+(loop_195_given_gate: BehaviorAssess { stage: 'given', text: 'Hypertrophied%20masseter%20muscles%20from%20chronic%20stress' })
+(loop_195_inactive: BehaviorTerminal { loopId: 195, loopName: 'The%20Jaw%20Clench%20Loop' })
+(loop_195_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_195_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_195_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_195_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Warning%20Operator', mechanism: 'the%20muscle%20pulses%20visibly%2C%20signaling%20%22Defensiveness%22%20or%20%22Violence%22' })
+(loop_195_result_branch: BehaviorEmit { emission: 'result', text: 'managers%20walking%20on%20eggshells%2C%20giving%20the%20individual%20**Less%20Critical%20Feedback**' })
+(loop_195_sink: BehaviorSink)
+(loop_195_start: BehaviorStart { loopId: 195, loopName: 'The%20Jaw%20Clench%20Loop', given: 'Hypertrophied%20masseter%20muscles%20from%20chronic%20stress', when: 'receiving%20feedback', then: 'the%20muscle%20pulses%20visibly%2C%20signaling%20%22Defensiveness%22%20or%20%22Violence%22%20(The%20Warning%20Operator)', result: 'managers%20walking%20on%20eggshells%2C%20giving%20the%20individual%20**Less%20Critical%20Feedback**', operatorName: 'The%20Warning%20Operator', operatorMechanism: 'the%20muscle%20pulses%20visibly%2C%20signaling%20%22Defensiveness%22%20or%20%22Violence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_195_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_195_then_branch: BehaviorEmit { emission: 'then', text: 'the%20muscle%20pulses%20visibly%2C%20signaling%20%22Defensiveness%22%20or%20%22Violence%22%20(The%20Warning%20Operator)' })
+(loop_195_verdict: BehaviorVerdict { loopId: 195, loopName: 'The%20Jaw%20Clench%20Loop', then: 'the%20muscle%20pulses%20visibly%2C%20signaling%20%22Defensiveness%22%20or%20%22Violence%22%20(The%20Warning%20Operator)', result: 'managers%20walking%20on%20eggshells%2C%20giving%20the%20individual%20**Less%20Critical%20Feedback**', operatorName: 'The%20Warning%20Operator', operatorMechanism: 'the%20muscle%20pulses%20visibly%2C%20signaling%20%22Defensiveness%22%20or%20%22Violence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_195_when_gate: BehaviorAssess { stage: 'when', text: 'receiving%20feedback' })
+
+// Topology
+(loop_195_start)-[:PROCESS]->(loop_195_given_gate)
+(loop_195_given_gate)-[:PROCESS { case: "ok" }]->(loop_195_when_gate)
+(loop_195_given_gate)-[:PROCESS { case: "err" }]->(loop_195_inactive)
+(loop_195_when_gate)-[:PROCESS { case: "ok" }]->(loop_195_context)
+(loop_195_when_gate)-[:PROCESS { case: "err" }]->(loop_195_inactive)
+(loop_195_context)-[:FORK { strategy: "behavior-branches" }]->(loop_195_context_branch | loop_195_then_branch | loop_195_operator_branch | loop_195_result_branch | loop_195_taxonomy_branch | loop_195_intervention_recognize | loop_195_intervention_interdict | loop_195_intervention_minimize)
+(loop_195_context_branch | loop_195_then_branch | loop_195_operator_branch | loop_195_result_branch | loop_195_taxonomy_branch | loop_195_intervention_recognize | loop_195_intervention_interdict | loop_195_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_195_verdict)
+(loop_195_inactive)-[:PROCESS]->(loop_195_sink)
+(loop_195_verdict)-[:PROCESS]->(loop_195_sink)
+(loop_195_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_195_then_branch)
+(loop_195_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_195_then_branch)
+(loop_195_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_195_then_branch)

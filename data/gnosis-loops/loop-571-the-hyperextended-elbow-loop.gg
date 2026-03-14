@@ -1,0 +1,33 @@
+// behavioral-loop-571.gg
+// Executable Gnosis projection for The Hyperextended Elbow Loop.
+
+// Nodes
+(loop_571_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_571_context_branch: BehaviorEmit { emission: 'context' })
+(loop_571_given_gate: BehaviorAssess { stage: 'given', text: 'Carrying%20angle%20%3E%2015%20degrees' })
+(loop_571_inactive: BehaviorTerminal { loopId: 571, loopName: 'The%20Hyperextended%20Elbow%20Loop' })
+(loop_571_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_571_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_571_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_571_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20arms%20look%20%22Broken%22%20or%20%22Awkward%22' })
+(loop_571_result_branch: BehaviorEmit { emission: 'result', text: 'males%20offering%20to%20carry%20things%20for%20them%20(Benevolent%20Sexism)' })
+(loop_571_sink: BehaviorSink)
+(loop_571_start: BehaviorStart { loopId: 571, loopName: 'The%20Hyperextended%20Elbow%20Loop', given: 'Carrying%20angle%20%3E%2015%20degrees', when: 'carrying%20objects', then: 'the%20arms%20look%20%22Broken%22%20or%20%22Awkward%22%20(The%20Fragility%20Operator)', result: 'males%20offering%20to%20carry%20things%20for%20them%20(Benevolent%20Sexism)', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20arms%20look%20%22Broken%22%20or%20%22Awkward%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_571_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_571_then_branch: BehaviorEmit { emission: 'then', text: 'the%20arms%20look%20%22Broken%22%20or%20%22Awkward%22%20(The%20Fragility%20Operator)' })
+(loop_571_verdict: BehaviorVerdict { loopId: 571, loopName: 'The%20Hyperextended%20Elbow%20Loop', then: 'the%20arms%20look%20%22Broken%22%20or%20%22Awkward%22%20(The%20Fragility%20Operator)', result: 'males%20offering%20to%20carry%20things%20for%20them%20(Benevolent%20Sexism)', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20arms%20look%20%22Broken%22%20or%20%22Awkward%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_571_when_gate: BehaviorAssess { stage: 'when', text: 'carrying%20objects' })
+
+// Topology
+(loop_571_start)-[:PROCESS]->(loop_571_given_gate)
+(loop_571_given_gate)-[:PROCESS { case: "ok" }]->(loop_571_when_gate)
+(loop_571_given_gate)-[:PROCESS { case: "err" }]->(loop_571_inactive)
+(loop_571_when_gate)-[:PROCESS { case: "ok" }]->(loop_571_context)
+(loop_571_when_gate)-[:PROCESS { case: "err" }]->(loop_571_inactive)
+(loop_571_context)-[:FORK { strategy: "behavior-branches" }]->(loop_571_context_branch | loop_571_then_branch | loop_571_operator_branch | loop_571_result_branch | loop_571_taxonomy_branch | loop_571_intervention_recognize | loop_571_intervention_interdict | loop_571_intervention_minimize)
+(loop_571_context_branch | loop_571_then_branch | loop_571_operator_branch | loop_571_result_branch | loop_571_taxonomy_branch | loop_571_intervention_recognize | loop_571_intervention_interdict | loop_571_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_571_verdict)
+(loop_571_inactive)-[:PROCESS]->(loop_571_sink)
+(loop_571_verdict)-[:PROCESS]->(loop_571_sink)
+(loop_571_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_571_then_branch)
+(loop_571_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_571_then_branch)
+(loop_571_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_571_then_branch)

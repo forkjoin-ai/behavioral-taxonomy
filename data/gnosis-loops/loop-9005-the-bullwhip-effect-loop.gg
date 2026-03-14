@@ -1,0 +1,33 @@
+// behavioral-loop-9005.gg
+// Executable Gnosis projection for The Bullwhip Effect Loop.
+
+// Nodes
+(loop_9005_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_9005_context_branch: BehaviorEmit { emission: 'context' })
+(loop_9005_given_gate: BehaviorAssess { stage: 'given', text: 'A%20multi-stage%20supply%20chain%20(Retail%20-%3E%20Distributor%20-%3E%20Factory)' })
+(loop_9005_inactive: BehaviorTerminal { loopId: 9005, loopName: 'The%20Bullwhip%20Effect%20Loop' })
+(loop_9005_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_9005_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_9005_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_9005_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_9005_result_branch: BehaviorEmit { emission: 'result', text: 'Massive%20volatility%20at%20the%20source%20(Factory%20builds%20%2B50%25)%20based%20on%20minor%20noise%20at%20the%20endpoint' })
+(loop_9005_sink: BehaviorSink)
+(loop_9005_start: BehaviorStart { loopId: 9005, loopName: 'The%20Bullwhip%20Effect%20Loop', given: 'A%20multi-stage%20supply%20chain%20(Retail%20-%3E%20Distributor%20-%3E%20Factory)', when: 'A%20small%20fluctuation%20in%20consumer%20demand%20occurs%20(%2B5%25)', then: 'Each%20upstream%20node%20over-orders%20to%20create%20a%20safety%20buffer', result: 'Massive%20volatility%20at%20the%20source%20(Factory%20builds%20%2B50%25)%20based%20on%20minor%20noise%20at%20the%20endpoint', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_9005_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_9005_then_branch: BehaviorEmit { emission: 'then', text: 'Each%20upstream%20node%20over-orders%20to%20create%20a%20safety%20buffer' })
+(loop_9005_verdict: BehaviorVerdict { loopId: 9005, loopName: 'The%20Bullwhip%20Effect%20Loop', then: 'Each%20upstream%20node%20over-orders%20to%20create%20a%20safety%20buffer', result: 'Massive%20volatility%20at%20the%20source%20(Factory%20builds%20%2B50%25)%20based%20on%20minor%20noise%20at%20the%20endpoint', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_9005_when_gate: BehaviorAssess { stage: 'when', text: 'A%20small%20fluctuation%20in%20consumer%20demand%20occurs%20(%2B5%25)' })
+
+// Topology
+(loop_9005_start)-[:PROCESS]->(loop_9005_given_gate)
+(loop_9005_given_gate)-[:PROCESS { case: "ok" }]->(loop_9005_when_gate)
+(loop_9005_given_gate)-[:PROCESS { case: "err" }]->(loop_9005_inactive)
+(loop_9005_when_gate)-[:PROCESS { case: "ok" }]->(loop_9005_context)
+(loop_9005_when_gate)-[:PROCESS { case: "err" }]->(loop_9005_inactive)
+(loop_9005_context)-[:FORK { strategy: "behavior-branches" }]->(loop_9005_context_branch | loop_9005_then_branch | loop_9005_operator_branch | loop_9005_result_branch | loop_9005_taxonomy_branch | loop_9005_intervention_recognize | loop_9005_intervention_interdict | loop_9005_intervention_minimize)
+(loop_9005_context_branch | loop_9005_then_branch | loop_9005_operator_branch | loop_9005_result_branch | loop_9005_taxonomy_branch | loop_9005_intervention_recognize | loop_9005_intervention_interdict | loop_9005_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_9005_verdict)
+(loop_9005_inactive)-[:PROCESS]->(loop_9005_sink)
+(loop_9005_verdict)-[:PROCESS]->(loop_9005_sink)
+(loop_9005_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_9005_then_branch)
+(loop_9005_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_9005_then_branch)
+(loop_9005_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_9005_then_branch)

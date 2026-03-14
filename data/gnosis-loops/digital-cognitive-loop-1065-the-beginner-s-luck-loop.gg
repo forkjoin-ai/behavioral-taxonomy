@@ -1,0 +1,35 @@
+// behavioral-loop-1065.gg
+// Executable Gnosis projection for The Beginner's Luck Loop.
+
+// Nodes
+(loop_1065_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1065_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1065_given_gate: BehaviorAssess { stage: 'given', text: 'Total%20lack%20of%20expectation%20or%20fear%20of%20failure' })
+(loop_1065_inactive: BehaviorTerminal { loopId: 1065, loopName: "The%20Beginner's%20Luck%20Loop" })
+(loop_1065_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1065_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_1065_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1065_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_1065_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Flow%20State', mechanism: 'Absence%20of%20pre-frontal%20cortex%20interference%20in%20motor%20tasks.' })
+(loop_1065_result_branch: BehaviorEmit { emission: 'result', text: "Success%20that%20vanishes%20the%20moment%20the%20subject%20'tries'" })
+(loop_1065_sink: BehaviorSink)
+(loop_1065_start: BehaviorStart { loopId: 1065, loopName: "The%20Beginner's%20Luck%20Loop", given: 'Total%20lack%20of%20expectation%20or%20fear%20of%20failure', when: 'Attempting%20a%20complex%20task%20(e.g.%2C%20pool%20shot)', then: 'Muscle%20tension%20is%20absent%2C%20allowing%20perfect%20fluidity', result: "Success%20that%20vanishes%20the%20moment%20the%20subject%20'tries'", operatorName: 'The%20Flow%20State', operatorMechanism: 'Absence%20of%20pre-frontal%20cortex%20interference%20in%20motor%20tasks.', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: 'VOLATILE', valences: 'ATTRACTION|DISRUPTION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting', intervention_leverage: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_1065_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: 'VOLATILE', valences: 'ATTRACTION|DISRUPTION' })
+(loop_1065_then_branch: BehaviorEmit { emission: 'then', text: 'Muscle%20tension%20is%20absent%2C%20allowing%20perfect%20fluidity' })
+(loop_1065_verdict: BehaviorVerdict { loopId: 1065, loopName: "The%20Beginner's%20Luck%20Loop", then: 'Muscle%20tension%20is%20absent%2C%20allowing%20perfect%20fluidity', result: "Success%20that%20vanishes%20the%20moment%20the%20subject%20'tries'", operatorName: 'The%20Flow%20State', operatorMechanism: 'Absence%20of%20pre-frontal%20cortex%20interference%20in%20motor%20tasks.', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: 'VOLATILE', valences: 'ATTRACTION|DISRUPTION' })
+(loop_1065_when_gate: BehaviorAssess { stage: 'when', text: 'Attempting%20a%20complex%20task%20(e.g.%2C%20pool%20shot)' })
+
+// Topology
+(loop_1065_start)-[:PROCESS]->(loop_1065_given_gate)
+(loop_1065_given_gate)-[:PROCESS { case: "ok" }]->(loop_1065_when_gate)
+(loop_1065_given_gate)-[:PROCESS { case: "err" }]->(loop_1065_inactive)
+(loop_1065_when_gate)-[:PROCESS { case: "ok" }]->(loop_1065_context)
+(loop_1065_when_gate)-[:PROCESS { case: "err" }]->(loop_1065_inactive)
+(loop_1065_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1065_context_branch | loop_1065_then_branch | loop_1065_operator_branch | loop_1065_result_branch | loop_1065_taxonomy_branch | loop_1065_intervention_recognize | loop_1065_intervention_interdict | loop_1065_intervention_minimize | loop_1065_intervention_leverage)
+(loop_1065_context_branch | loop_1065_then_branch | loop_1065_operator_branch | loop_1065_result_branch | loop_1065_taxonomy_branch | loop_1065_intervention_recognize | loop_1065_intervention_interdict | loop_1065_intervention_minimize | loop_1065_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1065_verdict)
+(loop_1065_inactive)-[:PROCESS]->(loop_1065_sink)
+(loop_1065_verdict)-[:PROCESS]->(loop_1065_sink)
+(loop_1065_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1065_then_branch)
+(loop_1065_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1065_then_branch)
+(loop_1065_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1065_then_branch)
+(loop_1065_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_1065_result_branch)

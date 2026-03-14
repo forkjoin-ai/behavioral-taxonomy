@@ -1,0 +1,33 @@
+// behavioral-loop-6001.gg
+// Executable Gnosis projection for The Reality Check.
+
+// Nodes
+(loop_6001_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_6001_context_branch: BehaviorEmit { emission: 'context' })
+(loop_6001_given_gate: BehaviorAssess { stage: 'given', text: 'Unknown%20condition' })
+(loop_6001_inactive: BehaviorTerminal { loopId: 6001, loopName: 'The%20Reality%20Check' })
+(loop_6001_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_6001_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_6001_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_6001_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_6001_result_branch: BehaviorEmit { emission: 'result', text: 'Unknown%20outcome' })
+(loop_6001_sink: BehaviorSink)
+(loop_6001_start: BehaviorStart { loopId: 6001, loopName: 'The%20Reality%20Check', given: 'Unknown%20condition', when: 'Unknown%20trigger', then: 'Unknown%20response', result: 'Unknown%20outcome', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_6001_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_6001_then_branch: BehaviorEmit { emission: 'then', text: 'Unknown%20response' })
+(loop_6001_verdict: BehaviorVerdict { loopId: 6001, loopName: 'The%20Reality%20Check', then: 'Unknown%20response', result: 'Unknown%20outcome', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_6001_when_gate: BehaviorAssess { stage: 'when', text: 'Unknown%20trigger' })
+
+// Topology
+(loop_6001_start)-[:PROCESS]->(loop_6001_given_gate)
+(loop_6001_given_gate)-[:PROCESS { case: "ok" }]->(loop_6001_when_gate)
+(loop_6001_given_gate)-[:PROCESS { case: "err" }]->(loop_6001_inactive)
+(loop_6001_when_gate)-[:PROCESS { case: "ok" }]->(loop_6001_context)
+(loop_6001_when_gate)-[:PROCESS { case: "err" }]->(loop_6001_inactive)
+(loop_6001_context)-[:FORK { strategy: "behavior-branches" }]->(loop_6001_context_branch | loop_6001_then_branch | loop_6001_operator_branch | loop_6001_result_branch | loop_6001_taxonomy_branch | loop_6001_intervention_recognize | loop_6001_intervention_interdict | loop_6001_intervention_minimize)
+(loop_6001_context_branch | loop_6001_then_branch | loop_6001_operator_branch | loop_6001_result_branch | loop_6001_taxonomy_branch | loop_6001_intervention_recognize | loop_6001_intervention_interdict | loop_6001_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_6001_verdict)
+(loop_6001_inactive)-[:PROCESS]->(loop_6001_sink)
+(loop_6001_verdict)-[:PROCESS]->(loop_6001_sink)
+(loop_6001_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_6001_then_branch)
+(loop_6001_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_6001_then_branch)
+(loop_6001_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_6001_then_branch)

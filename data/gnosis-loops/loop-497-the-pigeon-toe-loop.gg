@@ -1,0 +1,33 @@
+// behavioral-loop-497.gg
+// Executable Gnosis projection for The Pigeon Toe Loop.
+
+// Nodes
+(loop_497_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_497_context_branch: BehaviorEmit { emission: 'context' })
+(loop_497_given_gate: BehaviorAssess { stage: 'given', text: 'Femoral%20anteversion%20(toes%20point%20in)' })
+(loop_497_inactive: BehaviorTerminal { loopId: 497, loopName: 'The%20Pigeon%20Toe%20Loop' })
+(loop_497_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_497_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_497_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_497_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cute%2FWeak%20Operator', mechanism: 'the%20stance%20looks%20%22Childish%2C%22%20%22Insecure%2C%22%20or%20%22Anime-esque%22' })
+(loop_497_result_branch: BehaviorEmit { emission: 'result', text: 'being%20protected%2Finfantilized%20rather%20than%20respected' })
+(loop_497_sink: BehaviorSink)
+(loop_497_start: BehaviorStart { loopId: 497, loopName: 'The%20Pigeon%20Toe%20Loop', given: 'Femoral%20anteversion%20(toes%20point%20in)', when: 'standing', then: 'the%20stance%20looks%20%22Childish%2C%22%20%22Insecure%2C%22%20or%20%22Anime-esque%22%20(The%20Cute%2FWeak%20Operator)', result: 'being%20protected%2Finfantilized%20rather%20than%20respected', operatorName: 'The%20Cute%2FWeak%20Operator', operatorMechanism: 'the%20stance%20looks%20%22Childish%2C%22%20%22Insecure%2C%22%20or%20%22Anime-esque%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_497_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_497_then_branch: BehaviorEmit { emission: 'then', text: 'the%20stance%20looks%20%22Childish%2C%22%20%22Insecure%2C%22%20or%20%22Anime-esque%22%20(The%20Cute%2FWeak%20Operator)' })
+(loop_497_verdict: BehaviorVerdict { loopId: 497, loopName: 'The%20Pigeon%20Toe%20Loop', then: 'the%20stance%20looks%20%22Childish%2C%22%20%22Insecure%2C%22%20or%20%22Anime-esque%22%20(The%20Cute%2FWeak%20Operator)', result: 'being%20protected%2Finfantilized%20rather%20than%20respected', operatorName: 'The%20Cute%2FWeak%20Operator', operatorMechanism: 'the%20stance%20looks%20%22Childish%2C%22%20%22Insecure%2C%22%20or%20%22Anime-esque%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_497_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_497_start)-[:PROCESS]->(loop_497_given_gate)
+(loop_497_given_gate)-[:PROCESS { case: "ok" }]->(loop_497_when_gate)
+(loop_497_given_gate)-[:PROCESS { case: "err" }]->(loop_497_inactive)
+(loop_497_when_gate)-[:PROCESS { case: "ok" }]->(loop_497_context)
+(loop_497_when_gate)-[:PROCESS { case: "err" }]->(loop_497_inactive)
+(loop_497_context)-[:FORK { strategy: "behavior-branches" }]->(loop_497_context_branch | loop_497_then_branch | loop_497_operator_branch | loop_497_result_branch | loop_497_taxonomy_branch | loop_497_intervention_recognize | loop_497_intervention_interdict | loop_497_intervention_minimize)
+(loop_497_context_branch | loop_497_then_branch | loop_497_operator_branch | loop_497_result_branch | loop_497_taxonomy_branch | loop_497_intervention_recognize | loop_497_intervention_interdict | loop_497_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_497_verdict)
+(loop_497_inactive)-[:PROCESS]->(loop_497_sink)
+(loop_497_verdict)-[:PROCESS]->(loop_497_sink)
+(loop_497_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_497_then_branch)
+(loop_497_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_497_then_branch)
+(loop_497_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_497_then_branch)

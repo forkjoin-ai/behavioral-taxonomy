@@ -1,0 +1,33 @@
+// behavioral-loop-341.gg
+// Executable Gnosis projection for The Bunny Nose Loop.
+
+// Nodes
+(loop_341_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_341_context_branch: BehaviorEmit { emission: 'context' })
+(loop_341_given_gate: BehaviorAssess { stage: 'given', text: 'Involuntary%20nasalis%20muscle%20contraction' })
+(loop_341_inactive: BehaviorTerminal { loopId: 341, loopName: 'The%20Bunny%20Nose%20Loop' })
+(loop_341_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_341_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_341_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_341_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Micro-Expression%20Operator', mechanism: 'it%20looks%20like%20%22Disgust%22' })
+(loop_341_result_branch: BehaviorEmit { emission: 'result', text: 'people%20asking%20%22Does%20something%20smell%3F%22%20or%20feeling%20insulted' })
+(loop_341_sink: BehaviorSink)
+(loop_341_start: BehaviorStart { loopId: 341, loopName: 'The%20Bunny%20Nose%20Loop', given: 'Involuntary%20nasalis%20muscle%20contraction', when: 'encountering%20a%20smell%20or%20thought', then: 'it%20looks%20like%20%22Disgust%22%20(The%20Micro-Expression%20Operator)', result: 'people%20asking%20%22Does%20something%20smell%3F%22%20or%20feeling%20insulted', operatorName: 'The%20Micro-Expression%20Operator', operatorMechanism: 'it%20looks%20like%20%22Disgust%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_341_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_341_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Disgust%22%20(The%20Micro-Expression%20Operator)' })
+(loop_341_verdict: BehaviorVerdict { loopId: 341, loopName: 'The%20Bunny%20Nose%20Loop', then: 'it%20looks%20like%20%22Disgust%22%20(The%20Micro-Expression%20Operator)', result: 'people%20asking%20%22Does%20something%20smell%3F%22%20or%20feeling%20insulted', operatorName: 'The%20Micro-Expression%20Operator', operatorMechanism: 'it%20looks%20like%20%22Disgust%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_341_when_gate: BehaviorAssess { stage: 'when', text: 'encountering%20a%20smell%20or%20thought' })
+
+// Topology
+(loop_341_start)-[:PROCESS]->(loop_341_given_gate)
+(loop_341_given_gate)-[:PROCESS { case: "ok" }]->(loop_341_when_gate)
+(loop_341_given_gate)-[:PROCESS { case: "err" }]->(loop_341_inactive)
+(loop_341_when_gate)-[:PROCESS { case: "ok" }]->(loop_341_context)
+(loop_341_when_gate)-[:PROCESS { case: "err" }]->(loop_341_inactive)
+(loop_341_context)-[:FORK { strategy: "behavior-branches" }]->(loop_341_context_branch | loop_341_then_branch | loop_341_operator_branch | loop_341_result_branch | loop_341_taxonomy_branch | loop_341_intervention_recognize | loop_341_intervention_interdict | loop_341_intervention_minimize)
+(loop_341_context_branch | loop_341_then_branch | loop_341_operator_branch | loop_341_result_branch | loop_341_taxonomy_branch | loop_341_intervention_recognize | loop_341_intervention_interdict | loop_341_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_341_verdict)
+(loop_341_inactive)-[:PROCESS]->(loop_341_sink)
+(loop_341_verdict)-[:PROCESS]->(loop_341_sink)
+(loop_341_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_341_then_branch)
+(loop_341_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_341_then_branch)
+(loop_341_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_341_then_branch)

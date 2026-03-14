@@ -1,0 +1,33 @@
+// behavioral-loop-427.gg
+// Executable Gnosis projection for The Barefoot Walker Loop.
+
+// Nodes
+(loop_427_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_427_context_branch: BehaviorEmit { emission: 'context' })
+(loop_427_given_gate: BehaviorAssess { stage: 'given', text: 'Cracked%2C%20blackened%20heels%20(from%20sandals%2Fbarefoot%20life)' })
+(loop_427_inactive: BehaviorTerminal { loopId: 427, loopName: 'The%20Barefoot%20Walker%20Loop' })
+(loop_427_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_427_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_427_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_427_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Earthy%20Operator', mechanism: 'it%20signals%20%22Hippie%22%20or%20%22Low%20Hygiene%22%20status' })
+(loop_427_result_branch: BehaviorEmit { emission: 'result', text: 'exclusion%20from%20luxury%2Fsterile%20spaces' })
+(loop_427_sink: BehaviorSink)
+(loop_427_start: BehaviorStart { loopId: 427, loopName: 'The%20Barefoot%20Walker%20Loop', given: 'Cracked%2C%20blackened%20heels%20(from%20sandals%2Fbarefoot%20life)', when: 'visible%20in%20summer', then: 'it%20signals%20%22Hippie%22%20or%20%22Low%20Hygiene%22%20status%20(The%20Earthy%20Operator)', result: 'exclusion%20from%20luxury%2Fsterile%20spaces', operatorName: 'The%20Earthy%20Operator', operatorMechanism: 'it%20signals%20%22Hippie%22%20or%20%22Low%20Hygiene%22%20status', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_427_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_427_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Hippie%22%20or%20%22Low%20Hygiene%22%20status%20(The%20Earthy%20Operator)' })
+(loop_427_verdict: BehaviorVerdict { loopId: 427, loopName: 'The%20Barefoot%20Walker%20Loop', then: 'it%20signals%20%22Hippie%22%20or%20%22Low%20Hygiene%22%20status%20(The%20Earthy%20Operator)', result: 'exclusion%20from%20luxury%2Fsterile%20spaces', operatorName: 'The%20Earthy%20Operator', operatorMechanism: 'it%20signals%20%22Hippie%22%20or%20%22Low%20Hygiene%22%20status', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_427_when_gate: BehaviorAssess { stage: 'when', text: 'visible%20in%20summer' })
+
+// Topology
+(loop_427_start)-[:PROCESS]->(loop_427_given_gate)
+(loop_427_given_gate)-[:PROCESS { case: "ok" }]->(loop_427_when_gate)
+(loop_427_given_gate)-[:PROCESS { case: "err" }]->(loop_427_inactive)
+(loop_427_when_gate)-[:PROCESS { case: "ok" }]->(loop_427_context)
+(loop_427_when_gate)-[:PROCESS { case: "err" }]->(loop_427_inactive)
+(loop_427_context)-[:FORK { strategy: "behavior-branches" }]->(loop_427_context_branch | loop_427_then_branch | loop_427_operator_branch | loop_427_result_branch | loop_427_taxonomy_branch | loop_427_intervention_recognize | loop_427_intervention_interdict | loop_427_intervention_minimize)
+(loop_427_context_branch | loop_427_then_branch | loop_427_operator_branch | loop_427_result_branch | loop_427_taxonomy_branch | loop_427_intervention_recognize | loop_427_intervention_interdict | loop_427_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_427_verdict)
+(loop_427_inactive)-[:PROCESS]->(loop_427_sink)
+(loop_427_verdict)-[:PROCESS]->(loop_427_sink)
+(loop_427_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_427_then_branch)
+(loop_427_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_427_then_branch)
+(loop_427_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_427_then_branch)

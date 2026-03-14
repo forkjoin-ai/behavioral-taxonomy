@@ -1,0 +1,33 @@
+// behavioral-loop-434.gg
+// Executable Gnosis projection for The Greasy Nose Loop.
+
+// Nodes
+(loop_434_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_434_context_branch: BehaviorEmit { emission: 'context' })
+(loop_434_given_gate: BehaviorAssess { stage: 'given', text: 'Hyperactive%20sebaceous%20glands%20on%20the%20nose' })
+(loop_434_inactive: BehaviorTerminal { loopId: 434, loopName: 'The%20Greasy%20Nose%20Loop' })
+(loop_434_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_434_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_434_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_434_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Oily%20Operator', mechanism: 'the%20nose%20shines%20like%20a%20beacon' })
+(loop_434_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20%22Poor%20Hygiene%22%20or%20%22Puberty.%22' })
+(loop_434_sink: BehaviorSink)
+(loop_434_start: BehaviorStart { loopId: 434, loopName: 'The%20Greasy%20Nose%20Loop', given: 'Hyperactive%20sebaceous%20glands%20on%20the%20nose', when: 'under%20fluorescent%20lighting', then: 'the%20nose%20shines%20like%20a%20beacon%20(The%20Oily%20Operator)', result: 'observers%20assuming%20%22Poor%20Hygiene%22%20or%20%22Puberty.%22', operatorName: 'The%20Oily%20Operator', operatorMechanism: 'the%20nose%20shines%20like%20a%20beacon', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_434_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_434_then_branch: BehaviorEmit { emission: 'then', text: 'the%20nose%20shines%20like%20a%20beacon%20(The%20Oily%20Operator)' })
+(loop_434_verdict: BehaviorVerdict { loopId: 434, loopName: 'The%20Greasy%20Nose%20Loop', then: 'the%20nose%20shines%20like%20a%20beacon%20(The%20Oily%20Operator)', result: 'observers%20assuming%20%22Poor%20Hygiene%22%20or%20%22Puberty.%22', operatorName: 'The%20Oily%20Operator', operatorMechanism: 'the%20nose%20shines%20like%20a%20beacon', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_434_when_gate: BehaviorAssess { stage: 'when', text: 'under%20fluorescent%20lighting' })
+
+// Topology
+(loop_434_start)-[:PROCESS]->(loop_434_given_gate)
+(loop_434_given_gate)-[:PROCESS { case: "ok" }]->(loop_434_when_gate)
+(loop_434_given_gate)-[:PROCESS { case: "err" }]->(loop_434_inactive)
+(loop_434_when_gate)-[:PROCESS { case: "ok" }]->(loop_434_context)
+(loop_434_when_gate)-[:PROCESS { case: "err" }]->(loop_434_inactive)
+(loop_434_context)-[:FORK { strategy: "behavior-branches" }]->(loop_434_context_branch | loop_434_then_branch | loop_434_operator_branch | loop_434_result_branch | loop_434_taxonomy_branch | loop_434_intervention_recognize | loop_434_intervention_interdict | loop_434_intervention_minimize)
+(loop_434_context_branch | loop_434_then_branch | loop_434_operator_branch | loop_434_result_branch | loop_434_taxonomy_branch | loop_434_intervention_recognize | loop_434_intervention_interdict | loop_434_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_434_verdict)
+(loop_434_inactive)-[:PROCESS]->(loop_434_sink)
+(loop_434_verdict)-[:PROCESS]->(loop_434_sink)
+(loop_434_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_434_then_branch)
+(loop_434_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_434_then_branch)
+(loop_434_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_434_then_branch)

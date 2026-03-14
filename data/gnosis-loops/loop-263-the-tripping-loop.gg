@@ -1,0 +1,31 @@
+// behavioral-loop-263.gg
+// Executable Gnosis projection for The Tripping Loop.
+
+// Nodes
+(loop_263_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_263_context_branch: BehaviorEmit { emission: 'context' })
+(loop_263_given_gate: BehaviorAssess { stage: 'given', text: 'Legs%20shorter%20than%20standard%20inseams' })
+(loop_263_inactive: BehaviorTerminal { loopId: 263, loopName: 'The%20Tripping%20Loop' })
+(loop_263_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_263_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_263_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Childlike%20Operator', mechanism: 'the%20fabric%20drags%20or%20bunches%20at%20the%20shoe' })
+(loop_263_result_branch: BehaviorEmit { emission: 'result', text: "the%20individual%20looking%20like%20they%20are%20%22playing%20dress-up%22%20in%20parents'%20clothes%2C%20reducing%20**Authority**" })
+(loop_263_sink: BehaviorSink)
+(loop_263_start: BehaviorStart { loopId: 263, loopName: 'The%20Tripping%20Loop', given: 'Legs%20shorter%20than%20standard%20inseams', when: 'wearing%20un-hemmed%20pants', then: 'the%20fabric%20drags%20or%20bunches%20at%20the%20shoe%20(The%20Childlike%20Operator)', result: "the%20individual%20looking%20like%20they%20are%20%22playing%20dress-up%22%20in%20parents'%20clothes%2C%20reducing%20**Authority**", operatorName: 'The%20Childlike%20Operator', operatorMechanism: 'the%20fabric%20drags%20or%20bunches%20at%20the%20shoe', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_263_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_263_then_branch: BehaviorEmit { emission: 'then', text: 'the%20fabric%20drags%20or%20bunches%20at%20the%20shoe%20(The%20Childlike%20Operator)' })
+(loop_263_verdict: BehaviorVerdict { loopId: 263, loopName: 'The%20Tripping%20Loop', then: 'the%20fabric%20drags%20or%20bunches%20at%20the%20shoe%20(The%20Childlike%20Operator)', result: "the%20individual%20looking%20like%20they%20are%20%22playing%20dress-up%22%20in%20parents'%20clothes%2C%20reducing%20**Authority**", operatorName: 'The%20Childlike%20Operator', operatorMechanism: 'the%20fabric%20drags%20or%20bunches%20at%20the%20shoe', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_263_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20un-hemmed%20pants' })
+
+// Topology
+(loop_263_start)-[:PROCESS]->(loop_263_given_gate)
+(loop_263_given_gate)-[:PROCESS { case: "ok" }]->(loop_263_when_gate)
+(loop_263_given_gate)-[:PROCESS { case: "err" }]->(loop_263_inactive)
+(loop_263_when_gate)-[:PROCESS { case: "ok" }]->(loop_263_context)
+(loop_263_when_gate)-[:PROCESS { case: "err" }]->(loop_263_inactive)
+(loop_263_context)-[:FORK { strategy: "behavior-branches" }]->(loop_263_context_branch | loop_263_then_branch | loop_263_operator_branch | loop_263_result_branch | loop_263_taxonomy_branch | loop_263_intervention_recognize | loop_263_intervention_leverage)
+(loop_263_context_branch | loop_263_then_branch | loop_263_operator_branch | loop_263_result_branch | loop_263_taxonomy_branch | loop_263_intervention_recognize | loop_263_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_263_verdict)
+(loop_263_inactive)-[:PROCESS]->(loop_263_sink)
+(loop_263_verdict)-[:PROCESS]->(loop_263_sink)
+(loop_263_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_263_then_branch)
+(loop_263_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_263_result_branch)

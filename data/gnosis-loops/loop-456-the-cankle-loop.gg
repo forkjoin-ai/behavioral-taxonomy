@@ -1,0 +1,33 @@
+// behavioral-loop-456.gg
+// Executable Gnosis projection for The Cankle Loop.
+
+// Nodes
+(loop_456_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_456_context_branch: BehaviorEmit { emission: 'context' })
+(loop_456_given_gate: BehaviorAssess { stage: 'given', text: 'Lack%20of%20definition%20between%20calf%20and%20ankle' })
+(loop_456_inactive: BehaviorTerminal { loopId: 456, loopName: 'The%20Cankle%20Loop' })
+(loop_456_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_456_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_456_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_456_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Heavy%20Operator', mechanism: 'observers%20perceive%20%22Fluid%20Retention%22%20or%20%22Inactivity%22' })
+(loop_456_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20avoiding%20athletic%20wear%20and%20beach%20social%20events' })
+(loop_456_sink: BehaviorSink)
+(loop_456_start: BehaviorStart { loopId: 456, loopName: 'The%20Cankle%20Loop', given: 'Lack%20of%20definition%20between%20calf%20and%20ankle', when: 'wearing%20skirts%20or%20shorts', then: 'observers%20perceive%20%22Fluid%20Retention%22%20or%20%22Inactivity%22%20(The%20Heavy%20Operator)', result: 'the%20individual%20avoiding%20athletic%20wear%20and%20beach%20social%20events', operatorName: 'The%20Heavy%20Operator', operatorMechanism: 'observers%20perceive%20%22Fluid%20Retention%22%20or%20%22Inactivity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_456_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_456_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Fluid%20Retention%22%20or%20%22Inactivity%22%20(The%20Heavy%20Operator)' })
+(loop_456_verdict: BehaviorVerdict { loopId: 456, loopName: 'The%20Cankle%20Loop', then: 'observers%20perceive%20%22Fluid%20Retention%22%20or%20%22Inactivity%22%20(The%20Heavy%20Operator)', result: 'the%20individual%20avoiding%20athletic%20wear%20and%20beach%20social%20events', operatorName: 'The%20Heavy%20Operator', operatorMechanism: 'observers%20perceive%20%22Fluid%20Retention%22%20or%20%22Inactivity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_456_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20skirts%20or%20shorts' })
+
+// Topology
+(loop_456_start)-[:PROCESS]->(loop_456_given_gate)
+(loop_456_given_gate)-[:PROCESS { case: "ok" }]->(loop_456_when_gate)
+(loop_456_given_gate)-[:PROCESS { case: "err" }]->(loop_456_inactive)
+(loop_456_when_gate)-[:PROCESS { case: "ok" }]->(loop_456_context)
+(loop_456_when_gate)-[:PROCESS { case: "err" }]->(loop_456_inactive)
+(loop_456_context)-[:FORK { strategy: "behavior-branches" }]->(loop_456_context_branch | loop_456_then_branch | loop_456_operator_branch | loop_456_result_branch | loop_456_taxonomy_branch | loop_456_intervention_recognize | loop_456_intervention_interdict | loop_456_intervention_minimize)
+(loop_456_context_branch | loop_456_then_branch | loop_456_operator_branch | loop_456_result_branch | loop_456_taxonomy_branch | loop_456_intervention_recognize | loop_456_intervention_interdict | loop_456_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_456_verdict)
+(loop_456_inactive)-[:PROCESS]->(loop_456_sink)
+(loop_456_verdict)-[:PROCESS]->(loop_456_sink)
+(loop_456_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_456_then_branch)
+(loop_456_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_456_then_branch)
+(loop_456_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_456_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-48.gg
+// Executable Gnosis projection for The Always Hot Loop.
+
+// Nodes
+(loop_48_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_48_context_branch: BehaviorEmit { emission: 'context' })
+(loop_48_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20High%20Basal%20Metabolic%20Rate%20(Sweats%20in%20AC)' })
+(loop_48_inactive: BehaviorTerminal { loopId: 48, loopName: 'The%20Always%20Hot%20Loop' })
+(loop_48_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait' })
+(loop_48_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_48_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_48_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Exclusion%20Operator', mechanism: 'they%20are%20physically%20avoided%20due%20to%20heat%20radiation' })
+(loop_48_result_branch: BehaviorEmit { emission: 'result', text: 'a%20preference%20for%20**Solitary%20Work%20Environments**' })
+(loop_48_sink: BehaviorSink)
+(loop_48_start: BehaviorStart { loopId: 48, loopName: 'The%20Always%20Hot%20Loop', given: 'an%20individual%20possesses%20High%20Basal%20Metabolic%20Rate%20(Sweats%20in%20AC)', when: 'in%20close%20proximity%20(elevators%2Fcars)', then: 'they%20are%20physically%20avoided%20due%20to%20heat%20radiation%20(The%20Exclusion%20Operator)', result: 'a%20preference%20for%20**Solitary%20Work%20Environments**', operatorName: 'The%20Exclusion%20Operator', operatorMechanism: 'they%20are%20physically%20avoided%20due%20to%20heat%20radiation', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_48_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_48_then_branch: BehaviorEmit { emission: 'then', text: 'they%20are%20physically%20avoided%20due%20to%20heat%20radiation%20(The%20Exclusion%20Operator)' })
+(loop_48_verdict: BehaviorVerdict { loopId: 48, loopName: 'The%20Always%20Hot%20Loop', then: 'they%20are%20physically%20avoided%20due%20to%20heat%20radiation%20(The%20Exclusion%20Operator)', result: 'a%20preference%20for%20**Solitary%20Work%20Environments**', operatorName: 'The%20Exclusion%20Operator', operatorMechanism: 'they%20are%20physically%20avoided%20due%20to%20heat%20radiation', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_48_when_gate: BehaviorAssess { stage: 'when', text: 'in%20close%20proximity%20(elevators%2Fcars)' })
+
+// Topology
+(loop_48_start)-[:PROCESS]->(loop_48_given_gate)
+(loop_48_given_gate)-[:PROCESS { case: "ok" }]->(loop_48_when_gate)
+(loop_48_given_gate)-[:PROCESS { case: "err" }]->(loop_48_inactive)
+(loop_48_when_gate)-[:PROCESS { case: "ok" }]->(loop_48_context)
+(loop_48_when_gate)-[:PROCESS { case: "err" }]->(loop_48_inactive)
+(loop_48_context)-[:FORK { strategy: "behavior-branches" }]->(loop_48_context_branch | loop_48_then_branch | loop_48_operator_branch | loop_48_result_branch | loop_48_taxonomy_branch | loop_48_intervention_recognize | loop_48_intervention_interdict | loop_48_intervention_minimize)
+(loop_48_context_branch | loop_48_then_branch | loop_48_operator_branch | loop_48_result_branch | loop_48_taxonomy_branch | loop_48_intervention_recognize | loop_48_intervention_interdict | loop_48_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_48_verdict)
+(loop_48_inactive)-[:PROCESS]->(loop_48_sink)
+(loop_48_verdict)-[:PROCESS]->(loop_48_sink)
+(loop_48_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_48_then_branch)
+(loop_48_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_48_then_branch)
+(loop_48_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_48_then_branch)

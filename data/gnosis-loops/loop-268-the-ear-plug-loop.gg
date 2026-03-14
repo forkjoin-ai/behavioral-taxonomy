@@ -1,0 +1,33 @@
+// behavioral-loop-268.gg
+// Executable Gnosis projection for The Ear Plug Loop.
+
+// Nodes
+(loop_268_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_268_context_branch: BehaviorEmit { emission: 'context' })
+(loop_268_given_gate: BehaviorAssess { stage: 'given', text: 'Hatred%20of%20specific%20sounds%20(chewing%2Ftapping)' })
+(loop_268_inactive: BehaviorTerminal { loopId: 268, loopName: 'The%20Ear%20Plug%20Loop' })
+(loop_268_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_268_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_268_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_268_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Antisocial%20Operator', mechanism: 'the%20individual%20wears%20noise-canceling%20headphones%2024%2F7' })
+(loop_268_result_branch: BehaviorEmit { emission: 'result', text: 'missing%20out%20on%20%22water%20cooler%22%20bonding%2C%20leading%20to%20**Professional%20Isolation**' })
+(loop_268_sink: BehaviorSink)
+(loop_268_start: BehaviorStart { loopId: 268, loopName: 'The%20Ear%20Plug%20Loop', given: 'Hatred%20of%20specific%20sounds%20(chewing%2Ftapping)', when: 'in%20an%20open-plan%20office', then: 'the%20individual%20wears%20noise-canceling%20headphones%2024%2F7%20(The%20Antisocial%20Operator)', result: 'missing%20out%20on%20%22water%20cooler%22%20bonding%2C%20leading%20to%20**Professional%20Isolation**', operatorName: 'The%20Antisocial%20Operator', operatorMechanism: 'the%20individual%20wears%20noise-canceling%20headphones%2024%2F7', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_268_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_268_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20wears%20noise-canceling%20headphones%2024%2F7%20(The%20Antisocial%20Operator)' })
+(loop_268_verdict: BehaviorVerdict { loopId: 268, loopName: 'The%20Ear%20Plug%20Loop', then: 'the%20individual%20wears%20noise-canceling%20headphones%2024%2F7%20(The%20Antisocial%20Operator)', result: 'missing%20out%20on%20%22water%20cooler%22%20bonding%2C%20leading%20to%20**Professional%20Isolation**', operatorName: 'The%20Antisocial%20Operator', operatorMechanism: 'the%20individual%20wears%20noise-canceling%20headphones%2024%2F7', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_268_when_gate: BehaviorAssess { stage: 'when', text: 'in%20an%20open-plan%20office' })
+
+// Topology
+(loop_268_start)-[:PROCESS]->(loop_268_given_gate)
+(loop_268_given_gate)-[:PROCESS { case: "ok" }]->(loop_268_when_gate)
+(loop_268_given_gate)-[:PROCESS { case: "err" }]->(loop_268_inactive)
+(loop_268_when_gate)-[:PROCESS { case: "ok" }]->(loop_268_context)
+(loop_268_when_gate)-[:PROCESS { case: "err" }]->(loop_268_inactive)
+(loop_268_context)-[:FORK { strategy: "behavior-branches" }]->(loop_268_context_branch | loop_268_then_branch | loop_268_operator_branch | loop_268_result_branch | loop_268_taxonomy_branch | loop_268_intervention_recognize | loop_268_intervention_interdict | loop_268_intervention_minimize)
+(loop_268_context_branch | loop_268_then_branch | loop_268_operator_branch | loop_268_result_branch | loop_268_taxonomy_branch | loop_268_intervention_recognize | loop_268_intervention_interdict | loop_268_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_268_verdict)
+(loop_268_inactive)-[:PROCESS]->(loop_268_sink)
+(loop_268_verdict)-[:PROCESS]->(loop_268_sink)
+(loop_268_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_268_then_branch)
+(loop_268_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_268_then_branch)
+(loop_268_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_268_then_branch)

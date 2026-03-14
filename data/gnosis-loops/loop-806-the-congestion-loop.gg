@@ -1,0 +1,33 @@
+// behavioral-loop-806.gg
+// Executable Gnosis projection for The Congestion Loop.
+
+// Nodes
+(loop_806_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_806_context_branch: BehaviorEmit { emission: 'context' })
+(loop_806_given_gate: BehaviorAssess { stage: 'given', text: 'Blocked%20sinuses%20affecting%20speech%20tone' })
+(loop_806_inactive: BehaviorTerminal { loopId: 806, loopName: 'The%20Congestion%20Loop' })
+(loop_806_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_806_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_806_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_806_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cold%20Operator', mechanism: 'the%20voice%20sounds%20%22Stuffed%22' })
+(loop_806_result_branch: BehaviorEmit { emission: 'result', text: "the%20audience%20focusing%20on%20the%20speaker's%20health%20rather%20than%20the%20data" })
+(loop_806_sink: BehaviorSink)
+(loop_806_start: BehaviorStart { loopId: 806, loopName: 'The%20Congestion%20Loop', given: 'Blocked%20sinuses%20affecting%20speech%20tone', when: 'presenting', then: 'the%20voice%20sounds%20%22Stuffed%22%20(The%20Cold%20Operator)', result: "the%20audience%20focusing%20on%20the%20speaker's%20health%20rather%20than%20the%20data", operatorName: 'The%20Cold%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Stuffed%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_806_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_806_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20sounds%20%22Stuffed%22%20(The%20Cold%20Operator)' })
+(loop_806_verdict: BehaviorVerdict { loopId: 806, loopName: 'The%20Congestion%20Loop', then: 'the%20voice%20sounds%20%22Stuffed%22%20(The%20Cold%20Operator)', result: "the%20audience%20focusing%20on%20the%20speaker's%20health%20rather%20than%20the%20data", operatorName: 'The%20Cold%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Stuffed%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_806_when_gate: BehaviorAssess { stage: 'when', text: 'presenting' })
+
+// Topology
+(loop_806_start)-[:PROCESS]->(loop_806_given_gate)
+(loop_806_given_gate)-[:PROCESS { case: "ok" }]->(loop_806_when_gate)
+(loop_806_given_gate)-[:PROCESS { case: "err" }]->(loop_806_inactive)
+(loop_806_when_gate)-[:PROCESS { case: "ok" }]->(loop_806_context)
+(loop_806_when_gate)-[:PROCESS { case: "err" }]->(loop_806_inactive)
+(loop_806_context)-[:FORK { strategy: "behavior-branches" }]->(loop_806_context_branch | loop_806_then_branch | loop_806_operator_branch | loop_806_result_branch | loop_806_taxonomy_branch | loop_806_intervention_recognize | loop_806_intervention_interdict | loop_806_intervention_minimize)
+(loop_806_context_branch | loop_806_then_branch | loop_806_operator_branch | loop_806_result_branch | loop_806_taxonomy_branch | loop_806_intervention_recognize | loop_806_intervention_interdict | loop_806_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_806_verdict)
+(loop_806_inactive)-[:PROCESS]->(loop_806_sink)
+(loop_806_verdict)-[:PROCESS]->(loop_806_sink)
+(loop_806_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_806_then_branch)
+(loop_806_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_806_then_branch)
+(loop_806_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_806_then_branch)

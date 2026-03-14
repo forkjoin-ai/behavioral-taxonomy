@@ -1,0 +1,33 @@
+// behavioral-loop-319.gg
+// Executable Gnosis projection for The Stick Figure Loop.
+
+// Nodes
+(loop_319_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_319_context_branch: BehaviorEmit { emission: 'context' })
+(loop_319_given_gate: BehaviorAssess { stage: 'given', text: 'Difficulty%20gaining%20mass' })
+(loop_319_inactive: BehaviorTerminal { loopId: 319, loopName: 'The%20Stick%20Figure%20Loop' })
+(loop_319_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_319_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_319_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_319_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Scrappy%20Doo%20Operator', mechanism: 'the%20visual%20is%20%22Comical%22' })
+(loop_319_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20using%20**Weapons**%20or%20**Words**%20to%20equalize%20force' })
+(loop_319_sink: BehaviorSink)
+(loop_319_start: BehaviorStart { loopId: 319, loopName: 'The%20Stick%20Figure%20Loop', given: 'Difficulty%20gaining%20mass', when: 'attempting%20to%20be%20physically%20intimidating', then: 'the%20visual%20is%20%22Comical%22%20(The%20Scrappy%20Doo%20Operator)', result: 'the%20individual%20using%20**Weapons**%20or%20**Words**%20to%20equalize%20force', operatorName: 'The%20Scrappy%20Doo%20Operator', operatorMechanism: 'the%20visual%20is%20%22Comical%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_319_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_319_then_branch: BehaviorEmit { emission: 'then', text: 'the%20visual%20is%20%22Comical%22%20(The%20Scrappy%20Doo%20Operator)' })
+(loop_319_verdict: BehaviorVerdict { loopId: 319, loopName: 'The%20Stick%20Figure%20Loop', then: 'the%20visual%20is%20%22Comical%22%20(The%20Scrappy%20Doo%20Operator)', result: 'the%20individual%20using%20**Weapons**%20or%20**Words**%20to%20equalize%20force', operatorName: 'The%20Scrappy%20Doo%20Operator', operatorMechanism: 'the%20visual%20is%20%22Comical%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_319_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20to%20be%20physically%20intimidating' })
+
+// Topology
+(loop_319_start)-[:PROCESS]->(loop_319_given_gate)
+(loop_319_given_gate)-[:PROCESS { case: "ok" }]->(loop_319_when_gate)
+(loop_319_given_gate)-[:PROCESS { case: "err" }]->(loop_319_inactive)
+(loop_319_when_gate)-[:PROCESS { case: "ok" }]->(loop_319_context)
+(loop_319_when_gate)-[:PROCESS { case: "err" }]->(loop_319_inactive)
+(loop_319_context)-[:FORK { strategy: "behavior-branches" }]->(loop_319_context_branch | loop_319_then_branch | loop_319_operator_branch | loop_319_result_branch | loop_319_taxonomy_branch | loop_319_intervention_recognize | loop_319_intervention_interdict | loop_319_intervention_minimize)
+(loop_319_context_branch | loop_319_then_branch | loop_319_operator_branch | loop_319_result_branch | loop_319_taxonomy_branch | loop_319_intervention_recognize | loop_319_intervention_interdict | loop_319_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_319_verdict)
+(loop_319_inactive)-[:PROCESS]->(loop_319_sink)
+(loop_319_verdict)-[:PROCESS]->(loop_319_sink)
+(loop_319_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_319_then_branch)
+(loop_319_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_319_then_branch)
+(loop_319_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_319_then_branch)

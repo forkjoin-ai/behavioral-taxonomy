@@ -1,0 +1,33 @@
+// behavioral-loop-1021.gg
+// Executable Gnosis projection for The Shadow Loop.
+
+// Nodes
+(loop_1021_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1021_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1021_given_gate: BehaviorAssess { stage: 'given', text: 'High%20admiration%20or%20lack%20of%20self' })
+(loop_1021_inactive: BehaviorTerminal { loopId: 1021, loopName: 'The%20Shadow%20Loop' })
+(loop_1021_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1021_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1021_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1021_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Clone%20Operator', mechanism: 'adopting%20their%20slang%2Fmannerisms%20instantly' })
+(loop_1021_result_branch: BehaviorEmit { emission: 'result', text: '%22Single%20White%20Female%22%20vibes' })
+(loop_1021_sink: BehaviorSink)
+(loop_1021_start: BehaviorStart { loopId: 1021, loopName: 'The%20Shadow%20Loop', given: 'High%20admiration%20or%20lack%20of%20self', when: 'hanging%20out%20with%20a%20dominant%20personality', then: 'adopting%20their%20slang%2Fmannerisms%20instantly%20(The%20Clone%20Operator)', result: '%22Single%20White%20Female%22%20vibes', operatorName: 'The%20Clone%20Operator', operatorMechanism: 'adopting%20their%20slang%2Fmannerisms%20instantly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1021_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1021_then_branch: BehaviorEmit { emission: 'then', text: 'adopting%20their%20slang%2Fmannerisms%20instantly%20(The%20Clone%20Operator)' })
+(loop_1021_verdict: BehaviorVerdict { loopId: 1021, loopName: 'The%20Shadow%20Loop', then: 'adopting%20their%20slang%2Fmannerisms%20instantly%20(The%20Clone%20Operator)', result: '%22Single%20White%20Female%22%20vibes', operatorName: 'The%20Clone%20Operator', operatorMechanism: 'adopting%20their%20slang%2Fmannerisms%20instantly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1021_when_gate: BehaviorAssess { stage: 'when', text: 'hanging%20out%20with%20a%20dominant%20personality' })
+
+// Topology
+(loop_1021_start)-[:PROCESS]->(loop_1021_given_gate)
+(loop_1021_given_gate)-[:PROCESS { case: "ok" }]->(loop_1021_when_gate)
+(loop_1021_given_gate)-[:PROCESS { case: "err" }]->(loop_1021_inactive)
+(loop_1021_when_gate)-[:PROCESS { case: "ok" }]->(loop_1021_context)
+(loop_1021_when_gate)-[:PROCESS { case: "err" }]->(loop_1021_inactive)
+(loop_1021_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1021_context_branch | loop_1021_then_branch | loop_1021_operator_branch | loop_1021_result_branch | loop_1021_taxonomy_branch | loop_1021_intervention_recognize | loop_1021_intervention_interdict | loop_1021_intervention_minimize)
+(loop_1021_context_branch | loop_1021_then_branch | loop_1021_operator_branch | loop_1021_result_branch | loop_1021_taxonomy_branch | loop_1021_intervention_recognize | loop_1021_intervention_interdict | loop_1021_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1021_verdict)
+(loop_1021_inactive)-[:PROCESS]->(loop_1021_sink)
+(loop_1021_verdict)-[:PROCESS]->(loop_1021_sink)
+(loop_1021_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1021_then_branch)
+(loop_1021_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1021_then_branch)
+(loop_1021_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1021_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-355.gg
+// Executable Gnosis projection for The Code Switch Loop.
+
+// Nodes
+(loop_355_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_355_context_branch: BehaviorEmit { emission: 'context' })
+(loop_355_given_gate: BehaviorAssess { stage: 'given', text: 'Ability%20to%20toggle%20between%20dialects%20(e.g.%2C%20AAVE%20and%20Standard%20English)' })
+(loop_355_inactive: BehaviorTerminal { loopId: 355, loopName: 'The%20Code%20Switch%20Loop' })
+(loop_355_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_355_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_355_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_355_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Diplomat%20Operator', mechanism: 'the%20individual%20gains%20trust%20in%20*both*%20spheres' })
+(loop_355_result_branch: BehaviorEmit { emission: 'result', text: 'high%20social%20mobility%20but%20a%20fractured%20**Sense%20of%20Self**' })
+(loop_355_sink: BehaviorSink)
+(loop_355_start: BehaviorStart { loopId: 355, loopName: 'The%20Code%20Switch%20Loop', given: 'Ability%20to%20toggle%20between%20dialects%20(e.g.%2C%20AAVE%20and%20Standard%20English)', when: 'moving%20between%20social%20groups', then: 'the%20individual%20gains%20trust%20in%20*both*%20spheres%20(The%20Diplomat%20Operator)', result: 'high%20social%20mobility%20but%20a%20fractured%20**Sense%20of%20Self**', operatorName: 'The%20Diplomat%20Operator', operatorMechanism: 'the%20individual%20gains%20trust%20in%20*both*%20spheres', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_355_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_355_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20gains%20trust%20in%20*both*%20spheres%20(The%20Diplomat%20Operator)' })
+(loop_355_verdict: BehaviorVerdict { loopId: 355, loopName: 'The%20Code%20Switch%20Loop', then: 'the%20individual%20gains%20trust%20in%20*both*%20spheres%20(The%20Diplomat%20Operator)', result: 'high%20social%20mobility%20but%20a%20fractured%20**Sense%20of%20Self**', operatorName: 'The%20Diplomat%20Operator', operatorMechanism: 'the%20individual%20gains%20trust%20in%20*both*%20spheres', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_355_when_gate: BehaviorAssess { stage: 'when', text: 'moving%20between%20social%20groups' })
+
+// Topology
+(loop_355_start)-[:PROCESS]->(loop_355_given_gate)
+(loop_355_given_gate)-[:PROCESS { case: "ok" }]->(loop_355_when_gate)
+(loop_355_given_gate)-[:PROCESS { case: "err" }]->(loop_355_inactive)
+(loop_355_when_gate)-[:PROCESS { case: "ok" }]->(loop_355_context)
+(loop_355_when_gate)-[:PROCESS { case: "err" }]->(loop_355_inactive)
+(loop_355_context)-[:FORK { strategy: "behavior-branches" }]->(loop_355_context_branch | loop_355_then_branch | loop_355_operator_branch | loop_355_result_branch | loop_355_taxonomy_branch | loop_355_intervention_recognize | loop_355_intervention_interdict | loop_355_intervention_minimize)
+(loop_355_context_branch | loop_355_then_branch | loop_355_operator_branch | loop_355_result_branch | loop_355_taxonomy_branch | loop_355_intervention_recognize | loop_355_intervention_interdict | loop_355_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_355_verdict)
+(loop_355_inactive)-[:PROCESS]->(loop_355_sink)
+(loop_355_verdict)-[:PROCESS]->(loop_355_sink)
+(loop_355_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_355_then_branch)
+(loop_355_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_355_then_branch)
+(loop_355_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_355_then_branch)

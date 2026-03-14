@@ -1,0 +1,33 @@
+// behavioral-loop-1062.gg
+// Executable Gnosis projection for The Accent Loop.
+
+// Nodes
+(loop_1062_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1062_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1062_given_gate: BehaviorAssess { stage: 'given', text: 'High%20agreeableness' })
+(loop_1062_inactive: BehaviorTerminal { loopId: 1062, loopName: 'The%20Accent%20Loop' })
+(loop_1062_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1062_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1062_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1062_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20individual%20subconsciously%20mimics%20the%20accent%20(The%20Sponge)' })
+(loop_1062_result_branch: BehaviorEmit { emission: 'result', text: 'increased%20rapport%20but%20risk%20of%20looking%20%22Fake.%22' })
+(loop_1062_sink: BehaviorSink)
+(loop_1062_start: BehaviorStart { loopId: 1062, loopName: 'The%20Accent%20Loop', given: 'High%20agreeableness', when: 'talking%20to%20someone%20with%20a%20Southern%20drawl', then: 'the%20individual%20subconsciously%20mimics%20the%20accent%20(The%20Sponge)', result: 'increased%20rapport%20but%20risk%20of%20looking%20%22Fake.%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20subconsciously%20mimics%20the%20accent%20(The%20Sponge)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1062_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1062_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20subconsciously%20mimics%20the%20accent%20(The%20Sponge)' })
+(loop_1062_verdict: BehaviorVerdict { loopId: 1062, loopName: 'The%20Accent%20Loop', then: 'the%20individual%20subconsciously%20mimics%20the%20accent%20(The%20Sponge)', result: 'increased%20rapport%20but%20risk%20of%20looking%20%22Fake.%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20subconsciously%20mimics%20the%20accent%20(The%20Sponge)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1062_when_gate: BehaviorAssess { stage: 'when', text: 'talking%20to%20someone%20with%20a%20Southern%20drawl' })
+
+// Topology
+(loop_1062_start)-[:PROCESS]->(loop_1062_given_gate)
+(loop_1062_given_gate)-[:PROCESS { case: "ok" }]->(loop_1062_when_gate)
+(loop_1062_given_gate)-[:PROCESS { case: "err" }]->(loop_1062_inactive)
+(loop_1062_when_gate)-[:PROCESS { case: "ok" }]->(loop_1062_context)
+(loop_1062_when_gate)-[:PROCESS { case: "err" }]->(loop_1062_inactive)
+(loop_1062_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1062_context_branch | loop_1062_then_branch | loop_1062_operator_branch | loop_1062_result_branch | loop_1062_taxonomy_branch | loop_1062_intervention_recognize | loop_1062_intervention_interdict | loop_1062_intervention_minimize)
+(loop_1062_context_branch | loop_1062_then_branch | loop_1062_operator_branch | loop_1062_result_branch | loop_1062_taxonomy_branch | loop_1062_intervention_recognize | loop_1062_intervention_interdict | loop_1062_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1062_verdict)
+(loop_1062_inactive)-[:PROCESS]->(loop_1062_sink)
+(loop_1062_verdict)-[:PROCESS]->(loop_1062_sink)
+(loop_1062_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1062_then_branch)
+(loop_1062_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1062_then_branch)
+(loop_1062_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1062_then_branch)

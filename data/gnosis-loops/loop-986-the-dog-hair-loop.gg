@@ -1,0 +1,33 @@
+// behavioral-loop-986.gg
+// Executable Gnosis projection for The Dog Hair Loop.
+
+// Nodes
+(loop_986_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_986_context_branch: BehaviorEmit { emission: 'context' })
+(loop_986_given_gate: BehaviorAssess { stage: 'given', text: 'Pet%20shedding%20on%20clothes' })
+(loop_986_inactive: BehaviorTerminal { loopId: 986, loopName: 'The%20Dog%20Hair%20Loop' })
+(loop_986_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_986_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_986_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_986_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Animal%20House%20Operator', mechanism: 'it%20signals%20%22Messy%20Home%22' })
+(loop_986_result_branch: BehaviorEmit { emission: 'result', text: 'sneezing%20from%20allergic%20colleagues' })
+(loop_986_sink: BehaviorSink)
+(loop_986_start: BehaviorStart { loopId: 986, loopName: 'The%20Dog%20Hair%20Loop', given: 'Pet%20shedding%20on%20clothes', when: 'attending%20a%20meeting', then: 'it%20signals%20%22Messy%20Home%22%20(The%20Animal%20House%20Operator)', result: 'sneezing%20from%20allergic%20colleagues', operatorName: 'The%20Animal%20House%20Operator', operatorMechanism: 'it%20signals%20%22Messy%20Home%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_986_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_986_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Messy%20Home%22%20(The%20Animal%20House%20Operator)' })
+(loop_986_verdict: BehaviorVerdict { loopId: 986, loopName: 'The%20Dog%20Hair%20Loop', then: 'it%20signals%20%22Messy%20Home%22%20(The%20Animal%20House%20Operator)', result: 'sneezing%20from%20allergic%20colleagues', operatorName: 'The%20Animal%20House%20Operator', operatorMechanism: 'it%20signals%20%22Messy%20Home%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_986_when_gate: BehaviorAssess { stage: 'when', text: 'attending%20a%20meeting' })
+
+// Topology
+(loop_986_start)-[:PROCESS]->(loop_986_given_gate)
+(loop_986_given_gate)-[:PROCESS { case: "ok" }]->(loop_986_when_gate)
+(loop_986_given_gate)-[:PROCESS { case: "err" }]->(loop_986_inactive)
+(loop_986_when_gate)-[:PROCESS { case: "ok" }]->(loop_986_context)
+(loop_986_when_gate)-[:PROCESS { case: "err" }]->(loop_986_inactive)
+(loop_986_context)-[:FORK { strategy: "behavior-branches" }]->(loop_986_context_branch | loop_986_then_branch | loop_986_operator_branch | loop_986_result_branch | loop_986_taxonomy_branch | loop_986_intervention_recognize | loop_986_intervention_interdict | loop_986_intervention_minimize)
+(loop_986_context_branch | loop_986_then_branch | loop_986_operator_branch | loop_986_result_branch | loop_986_taxonomy_branch | loop_986_intervention_recognize | loop_986_intervention_interdict | loop_986_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_986_verdict)
+(loop_986_inactive)-[:PROCESS]->(loop_986_sink)
+(loop_986_verdict)-[:PROCESS]->(loop_986_sink)
+(loop_986_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_986_then_branch)
+(loop_986_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_986_then_branch)
+(loop_986_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_986_then_branch)

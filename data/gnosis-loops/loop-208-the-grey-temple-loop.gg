@@ -1,0 +1,33 @@
+// behavioral-loop-208.gg
+// Executable Gnosis projection for The Grey Temple Loop.
+
+// Nodes
+(loop_208_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_208_context_branch: BehaviorEmit { emission: 'context' })
+(loop_208_given_gate: BehaviorAssess { stage: 'given', text: 'Localized%20poliosis%20(grey%20patches)%20at%20temples' })
+(loop_208_inactive: BehaviorTerminal { loopId: 208, loopName: 'The%20Grey%20Temple%20Loop' })
+(loop_208_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_208_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_208_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_208_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Authority%20Operator', mechanism: 'it%20signals%20%22Distinguished%22%20or%20%22Stress-Hardened%22' })
+(loop_208_result_branch: BehaviorEmit { emission: 'result', text: 'premature%20promotion%20to%20**Leadership%20Roles**' })
+(loop_208_sink: BehaviorSink)
+(loop_208_start: BehaviorStart { loopId: 208, loopName: 'The%20Grey%20Temple%20Loop', given: 'Localized%20poliosis%20(grey%20patches)%20at%20temples', when: 'in%20a%20young%20person', then: 'it%20signals%20%22Distinguished%22%20or%20%22Stress-Hardened%22%20(The%20Authority%20Operator)', result: 'premature%20promotion%20to%20**Leadership%20Roles**', operatorName: 'The%20Authority%20Operator', operatorMechanism: 'it%20signals%20%22Distinguished%22%20or%20%22Stress-Hardened%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_208_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_208_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Distinguished%22%20or%20%22Stress-Hardened%22%20(The%20Authority%20Operator)' })
+(loop_208_verdict: BehaviorVerdict { loopId: 208, loopName: 'The%20Grey%20Temple%20Loop', then: 'it%20signals%20%22Distinguished%22%20or%20%22Stress-Hardened%22%20(The%20Authority%20Operator)', result: 'premature%20promotion%20to%20**Leadership%20Roles**', operatorName: 'The%20Authority%20Operator', operatorMechanism: 'it%20signals%20%22Distinguished%22%20or%20%22Stress-Hardened%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_208_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20young%20person' })
+
+// Topology
+(loop_208_start)-[:PROCESS]->(loop_208_given_gate)
+(loop_208_given_gate)-[:PROCESS { case: "ok" }]->(loop_208_when_gate)
+(loop_208_given_gate)-[:PROCESS { case: "err" }]->(loop_208_inactive)
+(loop_208_when_gate)-[:PROCESS { case: "ok" }]->(loop_208_context)
+(loop_208_when_gate)-[:PROCESS { case: "err" }]->(loop_208_inactive)
+(loop_208_context)-[:FORK { strategy: "behavior-branches" }]->(loop_208_context_branch | loop_208_then_branch | loop_208_operator_branch | loop_208_result_branch | loop_208_taxonomy_branch | loop_208_intervention_recognize | loop_208_intervention_interdict | loop_208_intervention_minimize)
+(loop_208_context_branch | loop_208_then_branch | loop_208_operator_branch | loop_208_result_branch | loop_208_taxonomy_branch | loop_208_intervention_recognize | loop_208_intervention_interdict | loop_208_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_208_verdict)
+(loop_208_inactive)-[:PROCESS]->(loop_208_sink)
+(loop_208_verdict)-[:PROCESS]->(loop_208_sink)
+(loop_208_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_208_then_branch)
+(loop_208_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_208_then_branch)
+(loop_208_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_208_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-1018.gg
+// Executable Gnosis projection for The Brain Freeze Loop.
+
+// Nodes
+(loop_1018_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1018_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1018_given_gate: BehaviorAssess { stage: 'given', text: 'Cognitive%20overload' })
+(loop_1018_inactive: BehaviorTerminal { loopId: 1018, loopName: 'The%20Brain%20Freeze%20Loop' })
+(loop_1018_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1018_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1018_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1018_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Blue%20Screen%20Operator', mechanism: 'the%20mind%20goes%20blank' })
+(loop_1018_result_branch: BehaviorEmit { emission: 'result', text: 'an%20excruciating%20silence%20while%20the%20system%20reboots' })
+(loop_1018_sink: BehaviorSink)
+(loop_1018_start: BehaviorStart { loopId: 1018, loopName: 'The%20Brain%20Freeze%20Loop', given: 'Cognitive%20overload', when: 'mid-sentence', then: 'the%20mind%20goes%20blank%20(The%20Blue%20Screen%20Operator)', result: 'an%20excruciating%20silence%20while%20the%20system%20reboots', operatorName: 'The%20Blue%20Screen%20Operator', operatorMechanism: 'the%20mind%20goes%20blank', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1018_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1018_then_branch: BehaviorEmit { emission: 'then', text: 'the%20mind%20goes%20blank%20(The%20Blue%20Screen%20Operator)' })
+(loop_1018_verdict: BehaviorVerdict { loopId: 1018, loopName: 'The%20Brain%20Freeze%20Loop', then: 'the%20mind%20goes%20blank%20(The%20Blue%20Screen%20Operator)', result: 'an%20excruciating%20silence%20while%20the%20system%20reboots', operatorName: 'The%20Blue%20Screen%20Operator', operatorMechanism: 'the%20mind%20goes%20blank', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1018_when_gate: BehaviorAssess { stage: 'when', text: 'mid-sentence' })
+
+// Topology
+(loop_1018_start)-[:PROCESS]->(loop_1018_given_gate)
+(loop_1018_given_gate)-[:PROCESS { case: "ok" }]->(loop_1018_when_gate)
+(loop_1018_given_gate)-[:PROCESS { case: "err" }]->(loop_1018_inactive)
+(loop_1018_when_gate)-[:PROCESS { case: "ok" }]->(loop_1018_context)
+(loop_1018_when_gate)-[:PROCESS { case: "err" }]->(loop_1018_inactive)
+(loop_1018_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1018_context_branch | loop_1018_then_branch | loop_1018_operator_branch | loop_1018_result_branch | loop_1018_taxonomy_branch | loop_1018_intervention_recognize | loop_1018_intervention_interdict | loop_1018_intervention_minimize)
+(loop_1018_context_branch | loop_1018_then_branch | loop_1018_operator_branch | loop_1018_result_branch | loop_1018_taxonomy_branch | loop_1018_intervention_recognize | loop_1018_intervention_interdict | loop_1018_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1018_verdict)
+(loop_1018_inactive)-[:PROCESS]->(loop_1018_sink)
+(loop_1018_verdict)-[:PROCESS]->(loop_1018_sink)
+(loop_1018_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1018_then_branch)
+(loop_1018_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1018_then_branch)
+(loop_1018_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1018_then_branch)

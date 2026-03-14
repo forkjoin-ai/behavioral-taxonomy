@@ -1,0 +1,33 @@
+// behavioral-loop-179.gg
+// Executable Gnosis projection for The Pale Lip Loop.
+
+// Nodes
+(loop_179_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_179_context_branch: BehaviorEmit { emission: 'context' })
+(loop_179_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20hemoglobin%20or%20vascularity%20in%20vermilion' })
+(loop_179_inactive: BehaviorTerminal { loopId: 179, loopName: 'The%20Pale%20Lip%20Loop' })
+(loop_179_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_179_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_179_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_179_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Pity%20Operator', mechanism: 'the%20face%20looks%20%22Sickly%22%20or%20%22Anemic%22' })
+(loop_179_result_branch: BehaviorEmit { emission: 'result', text: 'constant%20inquiries%20of%20%22Are%20you%20okay%3F%22%2C%20leading%20to%20**Irritability**' })
+(loop_179_sink: BehaviorSink)
+(loop_179_start: BehaviorStart { loopId: 179, loopName: 'The%20Pale%20Lip%20Loop', given: 'Low%20hemoglobin%20or%20vascularity%20in%20vermilion', when: 'resting', then: 'the%20face%20looks%20%22Sickly%22%20or%20%22Anemic%22%20(The%20Pity%20Operator)', result: 'constant%20inquiries%20of%20%22Are%20you%20okay%3F%22%2C%20leading%20to%20**Irritability**', operatorName: 'The%20Pity%20Operator', operatorMechanism: 'the%20face%20looks%20%22Sickly%22%20or%20%22Anemic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_179_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_179_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Sickly%22%20or%20%22Anemic%22%20(The%20Pity%20Operator)' })
+(loop_179_verdict: BehaviorVerdict { loopId: 179, loopName: 'The%20Pale%20Lip%20Loop', then: 'the%20face%20looks%20%22Sickly%22%20or%20%22Anemic%22%20(The%20Pity%20Operator)', result: 'constant%20inquiries%20of%20%22Are%20you%20okay%3F%22%2C%20leading%20to%20**Irritability**', operatorName: 'The%20Pity%20Operator', operatorMechanism: 'the%20face%20looks%20%22Sickly%22%20or%20%22Anemic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_179_when_gate: BehaviorAssess { stage: 'when', text: 'resting' })
+
+// Topology
+(loop_179_start)-[:PROCESS]->(loop_179_given_gate)
+(loop_179_given_gate)-[:PROCESS { case: "ok" }]->(loop_179_when_gate)
+(loop_179_given_gate)-[:PROCESS { case: "err" }]->(loop_179_inactive)
+(loop_179_when_gate)-[:PROCESS { case: "ok" }]->(loop_179_context)
+(loop_179_when_gate)-[:PROCESS { case: "err" }]->(loop_179_inactive)
+(loop_179_context)-[:FORK { strategy: "behavior-branches" }]->(loop_179_context_branch | loop_179_then_branch | loop_179_operator_branch | loop_179_result_branch | loop_179_taxonomy_branch | loop_179_intervention_recognize | loop_179_intervention_interdict | loop_179_intervention_minimize)
+(loop_179_context_branch | loop_179_then_branch | loop_179_operator_branch | loop_179_result_branch | loop_179_taxonomy_branch | loop_179_intervention_recognize | loop_179_intervention_interdict | loop_179_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_179_verdict)
+(loop_179_inactive)-[:PROCESS]->(loop_179_sink)
+(loop_179_verdict)-[:PROCESS]->(loop_179_sink)
+(loop_179_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_179_then_branch)
+(loop_179_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_179_then_branch)
+(loop_179_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_179_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-339.gg
+// Executable Gnosis projection for The Superman Loop.
+
+// Nodes
+(loop_339_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_339_context_branch: BehaviorEmit { emission: 'context' })
+(loop_339_given_gate: BehaviorAssess { stage: 'given', text: 'Akimbo%20stance%20(elbows%20out)' })
+(loop_339_inactive: BehaviorTerminal { loopId: 339, loopName: 'The%20Superman%20Loop' })
+(loop_339_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_339_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_339_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_339_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Authority%2FDominance%20Operator', mechanism: 'the%20body%20occupies%20maximum%20lateral%20space' })
+(loop_339_result_branch: BehaviorEmit { emission: 'result', text: 'being%20perceived%20as%20%22In%20Charge%22%20or%20%22Bossy.%22' })
+(loop_339_sink: BehaviorSink)
+(loop_339_start: BehaviorStart { loopId: 339, loopName: 'The%20Superman%20Loop', given: 'Akimbo%20stance%20(elbows%20out)', when: 'standing', then: 'the%20body%20occupies%20maximum%20lateral%20space%20(The%20Authority%2FDominance%20Operator)', result: 'being%20perceived%20as%20%22In%20Charge%22%20or%20%22Bossy.%22', operatorName: 'The%20Authority%2FDominance%20Operator', operatorMechanism: 'the%20body%20occupies%20maximum%20lateral%20space', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_339_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_339_then_branch: BehaviorEmit { emission: 'then', text: 'the%20body%20occupies%20maximum%20lateral%20space%20(The%20Authority%2FDominance%20Operator)' })
+(loop_339_verdict: BehaviorVerdict { loopId: 339, loopName: 'The%20Superman%20Loop', then: 'the%20body%20occupies%20maximum%20lateral%20space%20(The%20Authority%2FDominance%20Operator)', result: 'being%20perceived%20as%20%22In%20Charge%22%20or%20%22Bossy.%22', operatorName: 'The%20Authority%2FDominance%20Operator', operatorMechanism: 'the%20body%20occupies%20maximum%20lateral%20space', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_339_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_339_start)-[:PROCESS]->(loop_339_given_gate)
+(loop_339_given_gate)-[:PROCESS { case: "ok" }]->(loop_339_when_gate)
+(loop_339_given_gate)-[:PROCESS { case: "err" }]->(loop_339_inactive)
+(loop_339_when_gate)-[:PROCESS { case: "ok" }]->(loop_339_context)
+(loop_339_when_gate)-[:PROCESS { case: "err" }]->(loop_339_inactive)
+(loop_339_context)-[:FORK { strategy: "behavior-branches" }]->(loop_339_context_branch | loop_339_then_branch | loop_339_operator_branch | loop_339_result_branch | loop_339_taxonomy_branch | loop_339_intervention_recognize | loop_339_intervention_interdict | loop_339_intervention_minimize)
+(loop_339_context_branch | loop_339_then_branch | loop_339_operator_branch | loop_339_result_branch | loop_339_taxonomy_branch | loop_339_intervention_recognize | loop_339_intervention_interdict | loop_339_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_339_verdict)
+(loop_339_inactive)-[:PROCESS]->(loop_339_sink)
+(loop_339_verdict)-[:PROCESS]->(loop_339_sink)
+(loop_339_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_339_then_branch)
+(loop_339_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_339_then_branch)
+(loop_339_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_339_then_branch)

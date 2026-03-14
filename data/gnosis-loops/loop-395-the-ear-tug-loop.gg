@@ -1,0 +1,33 @@
+// behavioral-loop-395.gg
+// Executable Gnosis projection for The Ear Tug Loop.
+
+// Nodes
+(loop_395_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_395_context_branch: BehaviorEmit { emission: 'context' })
+(loop_395_given_gate: BehaviorAssess { stage: 'given', text: 'Pulling%20on%20the%20earlobe' })
+(loop_395_inactive: BehaviorTerminal { loopId: 395, loopName: 'The%20Ear%20Tug%20Loop' })
+(loop_395_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_395_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_395_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_395_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Doubt%20Operator', mechanism: 'it%20signals%20%22Uncertainty%22%20or%20%22Wish%20to%20not%20hear%22' })
+(loop_395_result_branch: BehaviorEmit { emission: 'result', text: 'the%20salesperson%20or%20opponent%20pushing%20for%20the%20close' })
+(loop_395_sink: BehaviorSink)
+(loop_395_start: BehaviorStart { loopId: 395, loopName: 'The%20Ear%20Tug%20Loop', given: 'Pulling%20on%20the%20earlobe', when: 'making%20a%20choice', then: 'it%20signals%20%22Uncertainty%22%20or%20%22Wish%20to%20not%20hear%22%20(The%20Doubt%20Operator)', result: 'the%20salesperson%20or%20opponent%20pushing%20for%20the%20close', operatorName: 'The%20Doubt%20Operator', operatorMechanism: 'it%20signals%20%22Uncertainty%22%20or%20%22Wish%20to%20not%20hear%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_395_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_395_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Uncertainty%22%20or%20%22Wish%20to%20not%20hear%22%20(The%20Doubt%20Operator)' })
+(loop_395_verdict: BehaviorVerdict { loopId: 395, loopName: 'The%20Ear%20Tug%20Loop', then: 'it%20signals%20%22Uncertainty%22%20or%20%22Wish%20to%20not%20hear%22%20(The%20Doubt%20Operator)', result: 'the%20salesperson%20or%20opponent%20pushing%20for%20the%20close', operatorName: 'The%20Doubt%20Operator', operatorMechanism: 'it%20signals%20%22Uncertainty%22%20or%20%22Wish%20to%20not%20hear%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_395_when_gate: BehaviorAssess { stage: 'when', text: 'making%20a%20choice' })
+
+// Topology
+(loop_395_start)-[:PROCESS]->(loop_395_given_gate)
+(loop_395_given_gate)-[:PROCESS { case: "ok" }]->(loop_395_when_gate)
+(loop_395_given_gate)-[:PROCESS { case: "err" }]->(loop_395_inactive)
+(loop_395_when_gate)-[:PROCESS { case: "ok" }]->(loop_395_context)
+(loop_395_when_gate)-[:PROCESS { case: "err" }]->(loop_395_inactive)
+(loop_395_context)-[:FORK { strategy: "behavior-branches" }]->(loop_395_context_branch | loop_395_then_branch | loop_395_operator_branch | loop_395_result_branch | loop_395_taxonomy_branch | loop_395_intervention_recognize | loop_395_intervention_interdict | loop_395_intervention_minimize)
+(loop_395_context_branch | loop_395_then_branch | loop_395_operator_branch | loop_395_result_branch | loop_395_taxonomy_branch | loop_395_intervention_recognize | loop_395_intervention_interdict | loop_395_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_395_verdict)
+(loop_395_inactive)-[:PROCESS]->(loop_395_sink)
+(loop_395_verdict)-[:PROCESS]->(loop_395_sink)
+(loop_395_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_395_then_branch)
+(loop_395_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_395_then_branch)
+(loop_395_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_395_then_branch)

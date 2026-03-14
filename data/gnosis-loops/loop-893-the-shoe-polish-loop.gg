@@ -1,0 +1,33 @@
+// behavioral-loop-893.gg
+// Executable Gnosis projection for The Shoe Polish Loop.
+
+// Nodes
+(loop_893_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_893_context_branch: BehaviorEmit { emission: 'context' })
+(loop_893_given_gate: BehaviorAssess { stage: 'given', text: 'Hair%20dyed%20too%20dark%20for%20skin%20tone' })
+(loop_893_inactive: BehaviorTerminal { loopId: 893, loopName: 'The%20Shoe%20Polish%20Loop' })
+(loop_893_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_893_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_893_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_893_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Paint%20Operator', mechanism: 'the%20hair%20looks%20%22Inky%22%20and%20fake' })
+(loop_893_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20focusing%20on%20the%20dye%20job%2C%20not%20the%20person' })
+(loop_893_sink: BehaviorSink)
+(loop_893_start: BehaviorStart { loopId: 893, loopName: 'The%20Shoe%20Polish%20Loop', given: 'Hair%20dyed%20too%20dark%20for%20skin%20tone', when: 'under%20fluorescent%20light', then: 'the%20hair%20looks%20%22Inky%22%20and%20fake%20(The%20Paint%20Operator)', result: 'observers%20focusing%20on%20the%20dye%20job%2C%20not%20the%20person', operatorName: 'The%20Paint%20Operator', operatorMechanism: 'the%20hair%20looks%20%22Inky%22%20and%20fake', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_893_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_893_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hair%20looks%20%22Inky%22%20and%20fake%20(The%20Paint%20Operator)' })
+(loop_893_verdict: BehaviorVerdict { loopId: 893, loopName: 'The%20Shoe%20Polish%20Loop', then: 'the%20hair%20looks%20%22Inky%22%20and%20fake%20(The%20Paint%20Operator)', result: 'observers%20focusing%20on%20the%20dye%20job%2C%20not%20the%20person', operatorName: 'The%20Paint%20Operator', operatorMechanism: 'the%20hair%20looks%20%22Inky%22%20and%20fake', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_893_when_gate: BehaviorAssess { stage: 'when', text: 'under%20fluorescent%20light' })
+
+// Topology
+(loop_893_start)-[:PROCESS]->(loop_893_given_gate)
+(loop_893_given_gate)-[:PROCESS { case: "ok" }]->(loop_893_when_gate)
+(loop_893_given_gate)-[:PROCESS { case: "err" }]->(loop_893_inactive)
+(loop_893_when_gate)-[:PROCESS { case: "ok" }]->(loop_893_context)
+(loop_893_when_gate)-[:PROCESS { case: "err" }]->(loop_893_inactive)
+(loop_893_context)-[:FORK { strategy: "behavior-branches" }]->(loop_893_context_branch | loop_893_then_branch | loop_893_operator_branch | loop_893_result_branch | loop_893_taxonomy_branch | loop_893_intervention_recognize | loop_893_intervention_interdict | loop_893_intervention_minimize)
+(loop_893_context_branch | loop_893_then_branch | loop_893_operator_branch | loop_893_result_branch | loop_893_taxonomy_branch | loop_893_intervention_recognize | loop_893_intervention_interdict | loop_893_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_893_verdict)
+(loop_893_inactive)-[:PROCESS]->(loop_893_sink)
+(loop_893_verdict)-[:PROCESS]->(loop_893_sink)
+(loop_893_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_893_then_branch)
+(loop_893_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_893_then_branch)
+(loop_893_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_893_then_branch)

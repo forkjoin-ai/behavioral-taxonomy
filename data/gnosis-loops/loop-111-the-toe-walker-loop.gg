@@ -1,0 +1,33 @@
+// behavioral-loop-111.gg
+// Executable Gnosis projection for The Toe Walker Loop.
+
+// Nodes
+(loop_111_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_111_context_branch: BehaviorEmit { emission: 'context' })
+(loop_111_given_gate: BehaviorAssess { stage: 'given', text: 'Equinus%20Gait%20(Walking%20on%20toes%2Fballs%20of%20feet)' })
+(loop_111_inactive: BehaviorTerminal { loopId: 111, loopName: 'The%20Toe%20Walker%20Loop' })
+(loop_111_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_111_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_111_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_111_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%2FDeception%20Operator', mechanism: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Odd%22' })
+(loop_111_result_branch: BehaviorEmit { emission: 'result', text: 'ridicule%20in%20childhood%2C%20leading%20to%20**Movement%20Inhibition**%20(sitting%20still)%20in%20adulthood' })
+(loop_111_sink: BehaviorSink)
+(loop_111_start: BehaviorStart { loopId: 111, loopName: 'The%20Toe%20Walker%20Loop', given: 'Equinus%20Gait%20(Walking%20on%20toes%2Fballs%20of%20feet)', when: 'moving%20through%20a%20room', then: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Odd%22%20(The%20Novelty%2FDeception%20Operator)', result: 'ridicule%20in%20childhood%2C%20leading%20to%20**Movement%20Inhibition**%20(sitting%20still)%20in%20adulthood', operatorName: 'The%20Novelty%2FDeception%20Operator', operatorMechanism: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Odd%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_111_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_111_then_branch: BehaviorEmit { emission: 'then', text: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Odd%22%20(The%20Novelty%2FDeception%20Operator)' })
+(loop_111_verdict: BehaviorVerdict { loopId: 111, loopName: 'The%20Toe%20Walker%20Loop', then: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Odd%22%20(The%20Novelty%2FDeception%20Operator)', result: 'ridicule%20in%20childhood%2C%20leading%20to%20**Movement%20Inhibition**%20(sitting%20still)%20in%20adulthood', operatorName: 'The%20Novelty%2FDeception%20Operator', operatorMechanism: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Odd%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_111_when_gate: BehaviorAssess { stage: 'when', text: 'moving%20through%20a%20room' })
+
+// Topology
+(loop_111_start)-[:PROCESS]->(loop_111_given_gate)
+(loop_111_given_gate)-[:PROCESS { case: "ok" }]->(loop_111_when_gate)
+(loop_111_given_gate)-[:PROCESS { case: "err" }]->(loop_111_inactive)
+(loop_111_when_gate)-[:PROCESS { case: "ok" }]->(loop_111_context)
+(loop_111_when_gate)-[:PROCESS { case: "err" }]->(loop_111_inactive)
+(loop_111_context)-[:FORK { strategy: "behavior-branches" }]->(loop_111_context_branch | loop_111_then_branch | loop_111_operator_branch | loop_111_result_branch | loop_111_taxonomy_branch | loop_111_intervention_recognize | loop_111_intervention_interdict | loop_111_intervention_minimize)
+(loop_111_context_branch | loop_111_then_branch | loop_111_operator_branch | loop_111_result_branch | loop_111_taxonomy_branch | loop_111_intervention_recognize | loop_111_intervention_interdict | loop_111_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_111_verdict)
+(loop_111_inactive)-[:PROCESS]->(loop_111_sink)
+(loop_111_verdict)-[:PROCESS]->(loop_111_sink)
+(loop_111_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_111_then_branch)
+(loop_111_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_111_then_branch)
+(loop_111_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_111_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-637.gg
+// Executable Gnosis projection for The Bird Chest Loop.
+
+// Nodes
+(loop_637_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_637_context_branch: BehaviorEmit { emission: 'context' })
+(loop_637_given_gate: BehaviorAssess { stage: 'given', text: 'Sternum%20protruding%20outward' })
+(loop_637_inactive: BehaviorTerminal { loopId: 637, loopName: 'The%20Bird%20Chest%20Loop' })
+(loop_637_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_637_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_637_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_637_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Beak%20Operator', mechanism: 'the%20chest%20looks%20%22Pointy%22' })
+(loop_637_result_branch: BehaviorEmit { emission: 'result', text: 'self-consciousness%20and%20wearing%20baggy%20clothes' })
+(loop_637_sink: BehaviorSink)
+(loop_637_start: BehaviorStart { loopId: 637, loopName: 'The%20Bird%20Chest%20Loop', given: 'Sternum%20protruding%20outward', when: 'wearing%20tight%20shirts', then: 'the%20chest%20looks%20%22Pointy%22%20(The%20Beak%20Operator)', result: 'self-consciousness%20and%20wearing%20baggy%20clothes', operatorName: 'The%20Beak%20Operator', operatorMechanism: 'the%20chest%20looks%20%22Pointy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_637_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_637_then_branch: BehaviorEmit { emission: 'then', text: 'the%20chest%20looks%20%22Pointy%22%20(The%20Beak%20Operator)' })
+(loop_637_verdict: BehaviorVerdict { loopId: 637, loopName: 'The%20Bird%20Chest%20Loop', then: 'the%20chest%20looks%20%22Pointy%22%20(The%20Beak%20Operator)', result: 'self-consciousness%20and%20wearing%20baggy%20clothes', operatorName: 'The%20Beak%20Operator', operatorMechanism: 'the%20chest%20looks%20%22Pointy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_637_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20tight%20shirts' })
+
+// Topology
+(loop_637_start)-[:PROCESS]->(loop_637_given_gate)
+(loop_637_given_gate)-[:PROCESS { case: "ok" }]->(loop_637_when_gate)
+(loop_637_given_gate)-[:PROCESS { case: "err" }]->(loop_637_inactive)
+(loop_637_when_gate)-[:PROCESS { case: "ok" }]->(loop_637_context)
+(loop_637_when_gate)-[:PROCESS { case: "err" }]->(loop_637_inactive)
+(loop_637_context)-[:FORK { strategy: "behavior-branches" }]->(loop_637_context_branch | loop_637_then_branch | loop_637_operator_branch | loop_637_result_branch | loop_637_taxonomy_branch | loop_637_intervention_recognize | loop_637_intervention_interdict | loop_637_intervention_minimize)
+(loop_637_context_branch | loop_637_then_branch | loop_637_operator_branch | loop_637_result_branch | loop_637_taxonomy_branch | loop_637_intervention_recognize | loop_637_intervention_interdict | loop_637_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_637_verdict)
+(loop_637_inactive)-[:PROCESS]->(loop_637_sink)
+(loop_637_verdict)-[:PROCESS]->(loop_637_sink)
+(loop_637_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_637_then_branch)
+(loop_637_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_637_then_branch)
+(loop_637_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_637_then_branch)

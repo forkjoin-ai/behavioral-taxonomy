@@ -1,0 +1,31 @@
+// behavioral-loop-21.gg
+// Executable Gnosis projection for The Silver Fox Loop.
+
+// Nodes
+(loop_21_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_21_context_branch: BehaviorEmit { emission: 'context' })
+(loop_21_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20(Male)%20possesses%20Canities%20(Graying%20hair)%20%2B%20Mesomorphy' })
+(loop_21_inactive: BehaviorTerminal { loopId: 21, loopName: 'The%20Silver%20Fox%20Loop' })
+(loop_21_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_21_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_21_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mentorship%20Operator', mechanism: 'peers%20conflate%20age%20with%20wisdom' })
+(loop_21_result_branch: BehaviorEmit { emission: 'result', text: 'accelerated%20promotion%20to%20executive%20roles%20and%20**High%20Authority**' })
+(loop_21_sink: BehaviorSink)
+(loop_21_start: BehaviorStart { loopId: 21, loopName: 'The%20Silver%20Fox%20Loop', given: 'an%20individual%20(Male)%20possesses%20Canities%20(Graying%20hair)%20%2B%20Mesomorphy', when: 'they%20are%20in%20a%20professional%20environment', then: 'peers%20conflate%20age%20with%20wisdom%20(The%20Mentorship%20Operator)', result: 'accelerated%20promotion%20to%20executive%20roles%20and%20**High%20Authority**', operatorName: 'The%20Mentorship%20Operator', operatorMechanism: 'peers%20conflate%20age%20with%20wisdom', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_21_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_21_then_branch: BehaviorEmit { emission: 'then', text: 'peers%20conflate%20age%20with%20wisdom%20(The%20Mentorship%20Operator)' })
+(loop_21_verdict: BehaviorVerdict { loopId: 21, loopName: 'The%20Silver%20Fox%20Loop', then: 'peers%20conflate%20age%20with%20wisdom%20(The%20Mentorship%20Operator)', result: 'accelerated%20promotion%20to%20executive%20roles%20and%20**High%20Authority**', operatorName: 'The%20Mentorship%20Operator', operatorMechanism: 'peers%20conflate%20age%20with%20wisdom', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_21_when_gate: BehaviorAssess { stage: 'when', text: 'they%20are%20in%20a%20professional%20environment' })
+
+// Topology
+(loop_21_start)-[:PROCESS]->(loop_21_given_gate)
+(loop_21_given_gate)-[:PROCESS { case: "ok" }]->(loop_21_when_gate)
+(loop_21_given_gate)-[:PROCESS { case: "err" }]->(loop_21_inactive)
+(loop_21_when_gate)-[:PROCESS { case: "ok" }]->(loop_21_context)
+(loop_21_when_gate)-[:PROCESS { case: "err" }]->(loop_21_inactive)
+(loop_21_context)-[:FORK { strategy: "behavior-branches" }]->(loop_21_context_branch | loop_21_then_branch | loop_21_operator_branch | loop_21_result_branch | loop_21_taxonomy_branch | loop_21_intervention_recognize | loop_21_intervention_leverage)
+(loop_21_context_branch | loop_21_then_branch | loop_21_operator_branch | loop_21_result_branch | loop_21_taxonomy_branch | loop_21_intervention_recognize | loop_21_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_21_verdict)
+(loop_21_inactive)-[:PROCESS]->(loop_21_sink)
+(loop_21_verdict)-[:PROCESS]->(loop_21_sink)
+(loop_21_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_21_then_branch)
+(loop_21_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_21_result_branch)

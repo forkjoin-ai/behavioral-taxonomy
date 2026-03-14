@@ -1,0 +1,33 @@
+// behavioral-loop-20.gg
+// Executable Gnosis projection for The Hyperhidrosis Anxiety Loop.
+
+// Nodes
+(loop_20_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_20_context_branch: BehaviorEmit { emission: 'context' })
+(loop_20_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20Palmar%20Hyperhidrosis%20(Clammy%2Fsweaty%20hands)' })
+(loop_20_inactive: BehaviorTerminal { loopId: 20, loopName: 'The%20Hyperhidrosis%20Anxiety%20Loop' })
+(loop_20_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait' })
+(loop_20_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_20_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_20_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%20Operator', mechanism: 'the%20recipient%20feels%20a%20visceral%20recoil' })
+(loop_20_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20avoiding%20touch%2C%20leading%20to%20**Touch%20Starvation**%20and%20**Social%20Distance**' })
+(loop_20_sink: BehaviorSink)
+(loop_20_start: BehaviorStart { loopId: 20, loopName: 'The%20Hyperhidrosis%20Anxiety%20Loop', given: 'an%20individual%20possesses%20Palmar%20Hyperhidrosis%20(Clammy%2Fsweaty%20hands)', when: 'a%20greeting%20ritual%20occurs', then: 'the%20recipient%20feels%20a%20visceral%20recoil%20(The%20Disgust%20Operator%20-%20mild)', result: 'the%20individual%20avoiding%20touch%2C%20leading%20to%20**Touch%20Starvation**%20and%20**Social%20Distance**', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'the%20recipient%20feels%20a%20visceral%20recoil', origin: 'GENETIC', modality: 'HAPTIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_20_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'HAPTIC', mutability: '1', valences: 'REPULSION' })
+(loop_20_then_branch: BehaviorEmit { emission: 'then', text: 'the%20recipient%20feels%20a%20visceral%20recoil%20(The%20Disgust%20Operator%20-%20mild)' })
+(loop_20_verdict: BehaviorVerdict { loopId: 20, loopName: 'The%20Hyperhidrosis%20Anxiety%20Loop', then: 'the%20recipient%20feels%20a%20visceral%20recoil%20(The%20Disgust%20Operator%20-%20mild)', result: 'the%20individual%20avoiding%20touch%2C%20leading%20to%20**Touch%20Starvation**%20and%20**Social%20Distance**', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'the%20recipient%20feels%20a%20visceral%20recoil', origin: 'GENETIC', modality: 'HAPTIC', mutability: '1', valences: 'REPULSION' })
+(loop_20_when_gate: BehaviorAssess { stage: 'when', text: 'a%20greeting%20ritual%20occurs' })
+
+// Topology
+(loop_20_start)-[:PROCESS]->(loop_20_given_gate)
+(loop_20_given_gate)-[:PROCESS { case: "ok" }]->(loop_20_when_gate)
+(loop_20_given_gate)-[:PROCESS { case: "err" }]->(loop_20_inactive)
+(loop_20_when_gate)-[:PROCESS { case: "ok" }]->(loop_20_context)
+(loop_20_when_gate)-[:PROCESS { case: "err" }]->(loop_20_inactive)
+(loop_20_context)-[:FORK { strategy: "behavior-branches" }]->(loop_20_context_branch | loop_20_then_branch | loop_20_operator_branch | loop_20_result_branch | loop_20_taxonomy_branch | loop_20_intervention_recognize | loop_20_intervention_interdict | loop_20_intervention_minimize)
+(loop_20_context_branch | loop_20_then_branch | loop_20_operator_branch | loop_20_result_branch | loop_20_taxonomy_branch | loop_20_intervention_recognize | loop_20_intervention_interdict | loop_20_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_20_verdict)
+(loop_20_inactive)-[:PROCESS]->(loop_20_sink)
+(loop_20_verdict)-[:PROCESS]->(loop_20_sink)
+(loop_20_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_20_then_branch)
+(loop_20_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_20_then_branch)
+(loop_20_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_20_then_branch)

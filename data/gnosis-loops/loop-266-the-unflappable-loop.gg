@@ -1,0 +1,33 @@
+// behavioral-loop-266.gg
+// Executable Gnosis projection for The Unflappable Loop.
+
+// Nodes
+(loop_266_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_266_context_branch: BehaviorEmit { emission: 'context' })
+(loop_266_given_gate: BehaviorAssess { stage: 'given', text: 'High%20sensory%20gating' })
+(loop_266_inactive: BehaviorTerminal { loopId: 266, loopName: 'The%20Unflappable%20Loop' })
+(loop_266_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_266_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_266_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_266_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stoic%2FPsychopath%20Operator', mechanism: "the%20individual%20doesn't%20blink" })
+(loop_266_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20feeling%20safe%20(Leadership)%20or%20unnerved%20(Lack%20of%20Empathy)' })
+(loop_266_sink: BehaviorSink)
+(loop_266_start: BehaviorStart { loopId: 266, loopName: 'The%20Unflappable%20Loop', given: 'High%20sensory%20gating', when: 'a%20loud%20crash%20occurs', then: "the%20individual%20doesn't%20blink%20(The%20Stoic%2FPsychopath%20Operator)", result: 'observers%20feeling%20safe%20(Leadership)%20or%20unnerved%20(Lack%20of%20Empathy)', operatorName: 'The%20Stoic%2FPsychopath%20Operator', operatorMechanism: "the%20individual%20doesn't%20blink", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_266_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_266_then_branch: BehaviorEmit { emission: 'then', text: "the%20individual%20doesn't%20blink%20(The%20Stoic%2FPsychopath%20Operator)" })
+(loop_266_verdict: BehaviorVerdict { loopId: 266, loopName: 'The%20Unflappable%20Loop', then: "the%20individual%20doesn't%20blink%20(The%20Stoic%2FPsychopath%20Operator)", result: 'observers%20feeling%20safe%20(Leadership)%20or%20unnerved%20(Lack%20of%20Empathy)', operatorName: 'The%20Stoic%2FPsychopath%20Operator', operatorMechanism: "the%20individual%20doesn't%20blink", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_266_when_gate: BehaviorAssess { stage: 'when', text: 'a%20loud%20crash%20occurs' })
+
+// Topology
+(loop_266_start)-[:PROCESS]->(loop_266_given_gate)
+(loop_266_given_gate)-[:PROCESS { case: "ok" }]->(loop_266_when_gate)
+(loop_266_given_gate)-[:PROCESS { case: "err" }]->(loop_266_inactive)
+(loop_266_when_gate)-[:PROCESS { case: "ok" }]->(loop_266_context)
+(loop_266_when_gate)-[:PROCESS { case: "err" }]->(loop_266_inactive)
+(loop_266_context)-[:FORK { strategy: "behavior-branches" }]->(loop_266_context_branch | loop_266_then_branch | loop_266_operator_branch | loop_266_result_branch | loop_266_taxonomy_branch | loop_266_intervention_recognize | loop_266_intervention_interdict | loop_266_intervention_minimize)
+(loop_266_context_branch | loop_266_then_branch | loop_266_operator_branch | loop_266_result_branch | loop_266_taxonomy_branch | loop_266_intervention_recognize | loop_266_intervention_interdict | loop_266_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_266_verdict)
+(loop_266_inactive)-[:PROCESS]->(loop_266_sink)
+(loop_266_verdict)-[:PROCESS]->(loop_266_sink)
+(loop_266_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_266_then_branch)
+(loop_266_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_266_then_branch)
+(loop_266_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_266_then_branch)

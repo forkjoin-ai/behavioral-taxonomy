@@ -1,0 +1,31 @@
+// behavioral-loop-541.gg
+// Executable Gnosis projection for The Messy Eater Loop.
+
+// Nodes
+(loop_541_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_541_context_branch: BehaviorEmit { emission: 'context' })
+(loop_541_given_gate: BehaviorAssess { stage: 'given', text: 'Food%20debris%20on%20face%2Fclothes%20during%20meal' })
+(loop_541_inactive: BehaviorTerminal { loopId: 541, loopName: 'The%20Messy%20Eater%20Loop' })
+(loop_541_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_541_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_541_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Slob%20Operator', mechanism: 'it%20signals%20%22Lack%20of%20Self-Awareness%22' })
+(loop_541_result_branch: BehaviorEmit { emission: 'result', text: 'total%20loss%20of%20professional%20credibility' })
+(loop_541_sink: BehaviorSink)
+(loop_541_start: BehaviorStart { loopId: 541, loopName: 'The%20Messy%20Eater%20Loop', given: 'Food%20debris%20on%20face%2Fclothes%20during%20meal', when: 'doing%20business%20lunch', then: 'it%20signals%20%22Lack%20of%20Self-Awareness%22%20(The%20Slob%20Operator)', result: 'total%20loss%20of%20professional%20credibility', operatorName: 'The%20Slob%20Operator', operatorMechanism: 'it%20signals%20%22Lack%20of%20Self-Awareness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_541_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_541_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Lack%20of%20Self-Awareness%22%20(The%20Slob%20Operator)' })
+(loop_541_verdict: BehaviorVerdict { loopId: 541, loopName: 'The%20Messy%20Eater%20Loop', then: 'it%20signals%20%22Lack%20of%20Self-Awareness%22%20(The%20Slob%20Operator)', result: 'total%20loss%20of%20professional%20credibility', operatorName: 'The%20Slob%20Operator', operatorMechanism: 'it%20signals%20%22Lack%20of%20Self-Awareness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_541_when_gate: BehaviorAssess { stage: 'when', text: 'doing%20business%20lunch' })
+
+// Topology
+(loop_541_start)-[:PROCESS]->(loop_541_given_gate)
+(loop_541_given_gate)-[:PROCESS { case: "ok" }]->(loop_541_when_gate)
+(loop_541_given_gate)-[:PROCESS { case: "err" }]->(loop_541_inactive)
+(loop_541_when_gate)-[:PROCESS { case: "ok" }]->(loop_541_context)
+(loop_541_when_gate)-[:PROCESS { case: "err" }]->(loop_541_inactive)
+(loop_541_context)-[:FORK { strategy: "behavior-branches" }]->(loop_541_context_branch | loop_541_then_branch | loop_541_operator_branch | loop_541_result_branch | loop_541_taxonomy_branch | loop_541_intervention_recognize | loop_541_intervention_leverage)
+(loop_541_context_branch | loop_541_then_branch | loop_541_operator_branch | loop_541_result_branch | loop_541_taxonomy_branch | loop_541_intervention_recognize | loop_541_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_541_verdict)
+(loop_541_inactive)-[:PROCESS]->(loop_541_sink)
+(loop_541_verdict)-[:PROCESS]->(loop_541_sink)
+(loop_541_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_541_then_branch)
+(loop_541_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_541_result_branch)

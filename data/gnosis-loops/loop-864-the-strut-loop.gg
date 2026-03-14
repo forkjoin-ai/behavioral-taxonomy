@@ -1,0 +1,31 @@
+// behavioral-loop-864.gg
+// Executable Gnosis projection for The Strut Loop.
+
+// Nodes
+(loop_864_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_864_context_branch: BehaviorEmit { emission: 'context' })
+(loop_864_given_gate: BehaviorAssess { stage: 'given', text: 'Leading%20with%20hips%20%2B%20shoulder%20roll' })
+(loop_864_inactive: BehaviorTerminal { loopId: 864, loopName: 'The%20Strut%20Loop' })
+(loop_864_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_864_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_864_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Peacock%20Operator', mechanism: 'it%20signals%20%22Sexual%20Confidence%22' })
+(loop_864_result_branch: BehaviorEmit { emission: 'result', text: 'high%20visibility%20and%20attraction%2Fchallenge%20responses' })
+(loop_864_sink: BehaviorSink)
+(loop_864_start: BehaviorStart { loopId: 864, loopName: 'The%20Strut%20Loop', given: 'Leading%20with%20hips%20%2B%20shoulder%20roll', when: 'entering%20a%20bar', then: 'it%20signals%20%22Sexual%20Confidence%22%20(The%20Peacock%20Operator)', result: 'high%20visibility%20and%20attraction%2Fchallenge%20responses', operatorName: 'The%20Peacock%20Operator', operatorMechanism: 'it%20signals%20%22Sexual%20Confidence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_864_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_864_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Sexual%20Confidence%22%20(The%20Peacock%20Operator)' })
+(loop_864_verdict: BehaviorVerdict { loopId: 864, loopName: 'The%20Strut%20Loop', then: 'it%20signals%20%22Sexual%20Confidence%22%20(The%20Peacock%20Operator)', result: 'high%20visibility%20and%20attraction%2Fchallenge%20responses', operatorName: 'The%20Peacock%20Operator', operatorMechanism: 'it%20signals%20%22Sexual%20Confidence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_864_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20bar' })
+
+// Topology
+(loop_864_start)-[:PROCESS]->(loop_864_given_gate)
+(loop_864_given_gate)-[:PROCESS { case: "ok" }]->(loop_864_when_gate)
+(loop_864_given_gate)-[:PROCESS { case: "err" }]->(loop_864_inactive)
+(loop_864_when_gate)-[:PROCESS { case: "ok" }]->(loop_864_context)
+(loop_864_when_gate)-[:PROCESS { case: "err" }]->(loop_864_inactive)
+(loop_864_context)-[:FORK { strategy: "behavior-branches" }]->(loop_864_context_branch | loop_864_then_branch | loop_864_operator_branch | loop_864_result_branch | loop_864_taxonomy_branch | loop_864_intervention_recognize | loop_864_intervention_leverage)
+(loop_864_context_branch | loop_864_then_branch | loop_864_operator_branch | loop_864_result_branch | loop_864_taxonomy_branch | loop_864_intervention_recognize | loop_864_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_864_verdict)
+(loop_864_inactive)-[:PROCESS]->(loop_864_sink)
+(loop_864_verdict)-[:PROCESS]->(loop_864_sink)
+(loop_864_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_864_then_branch)
+(loop_864_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_864_result_branch)

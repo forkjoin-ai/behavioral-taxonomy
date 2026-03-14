@@ -1,0 +1,33 @@
+// behavioral-loop-197.gg
+// Executable Gnosis projection for The Slow Eater Loop.
+
+// Nodes
+(loop_197_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_197_context_branch: BehaviorEmit { emission: 'context' })
+(loop_197_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20mastication%20speed%20or%20satiety%20signaling' })
+(loop_197_inactive: BehaviorTerminal { loopId: 197, loopName: 'The%20Slow%20Eater%20Loop' })
+(loop_197_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_197_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_197_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_197_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Obstruction%20Operator', mechanism: 'the%20table%20waits%20for%20them%20to%20finish%2C%20creating%20%22Time%20Anxiety%22' })
+(loop_197_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20viewed%20as%20%22Inconsiderate%22%20or%20%22Inefficient.%22' })
+(loop_197_sink: BehaviorSink)
+(loop_197_start: BehaviorStart { loopId: 197, loopName: 'The%20Slow%20Eater%20Loop', given: 'Low%20mastication%20speed%20or%20satiety%20signaling', when: 'dining%20in%20a%20group%20(business%20lunch)', then: 'the%20table%20waits%20for%20them%20to%20finish%2C%20creating%20%22Time%20Anxiety%22%20(The%20Obstruction%20Operator)', result: 'the%20individual%20being%20viewed%20as%20%22Inconsiderate%22%20or%20%22Inefficient.%22', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'the%20table%20waits%20for%20them%20to%20finish%2C%20creating%20%22Time%20Anxiety%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_197_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_197_then_branch: BehaviorEmit { emission: 'then', text: 'the%20table%20waits%20for%20them%20to%20finish%2C%20creating%20%22Time%20Anxiety%22%20(The%20Obstruction%20Operator)' })
+(loop_197_verdict: BehaviorVerdict { loopId: 197, loopName: 'The%20Slow%20Eater%20Loop', then: 'the%20table%20waits%20for%20them%20to%20finish%2C%20creating%20%22Time%20Anxiety%22%20(The%20Obstruction%20Operator)', result: 'the%20individual%20being%20viewed%20as%20%22Inconsiderate%22%20or%20%22Inefficient.%22', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'the%20table%20waits%20for%20them%20to%20finish%2C%20creating%20%22Time%20Anxiety%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_197_when_gate: BehaviorAssess { stage: 'when', text: 'dining%20in%20a%20group%20(business%20lunch)' })
+
+// Topology
+(loop_197_start)-[:PROCESS]->(loop_197_given_gate)
+(loop_197_given_gate)-[:PROCESS { case: "ok" }]->(loop_197_when_gate)
+(loop_197_given_gate)-[:PROCESS { case: "err" }]->(loop_197_inactive)
+(loop_197_when_gate)-[:PROCESS { case: "ok" }]->(loop_197_context)
+(loop_197_when_gate)-[:PROCESS { case: "err" }]->(loop_197_inactive)
+(loop_197_context)-[:FORK { strategy: "behavior-branches" }]->(loop_197_context_branch | loop_197_then_branch | loop_197_operator_branch | loop_197_result_branch | loop_197_taxonomy_branch | loop_197_intervention_recognize | loop_197_intervention_interdict | loop_197_intervention_minimize)
+(loop_197_context_branch | loop_197_then_branch | loop_197_operator_branch | loop_197_result_branch | loop_197_taxonomy_branch | loop_197_intervention_recognize | loop_197_intervention_interdict | loop_197_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_197_verdict)
+(loop_197_inactive)-[:PROCESS]->(loop_197_sink)
+(loop_197_verdict)-[:PROCESS]->(loop_197_sink)
+(loop_197_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_197_then_branch)
+(loop_197_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_197_then_branch)
+(loop_197_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_197_then_branch)

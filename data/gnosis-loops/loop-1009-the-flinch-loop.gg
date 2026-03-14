@@ -1,0 +1,33 @@
+// behavioral-loop-1009.gg
+// Executable Gnosis projection for The Flinch Loop.
+
+// Nodes
+(loop_1009_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1009_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1009_given_gate: BehaviorAssess { stage: 'given', text: 'History%20of%20physical%20abuse' })
+(loop_1009_inactive: BehaviorTerminal { loopId: 1009, loopName: 'The%20Flinch%20Loop' })
+(loop_1009_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Actively%20construct%20and%20share%20an%20alternative%20narrative' })
+(loop_1009_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1009_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1009_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dodge%20Operator', mechanism: 'the%20individual%20recoils%2Fblinks' })
+(loop_1009_result_branch: BehaviorEmit { emission: 'result', text: "the%20other%20person%20realizing%2C%20%22Oh%2C%20they've%20been%20hit%20before%2C%22%20changing%20the%20dynamic%20to%20**Pity%2FCare**" })
+(loop_1009_sink: BehaviorSink)
+(loop_1009_start: BehaviorStart { loopId: 1009, loopName: 'The%20Flinch%20Loop', given: 'History%20of%20physical%20abuse', when: 'someone%20raises%20a%20hand%20quickly%20(even%20to%20wave)', then: 'the%20individual%20recoils%2Fblinks%20(The%20Dodge%20Operator)', result: "the%20other%20person%20realizing%2C%20%22Oh%2C%20they've%20been%20hit%20before%2C%22%20changing%20the%20dynamic%20to%20**Pity%2FCare**", operatorName: 'The%20Dodge%20Operator', operatorMechanism: 'the%20individual%20recoils%2Fblinks', origin: 'NARRATIVE', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Actively%20construct%20and%20share%20an%20alternative%20narrative', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1009_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'NARRATIVE', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1009_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20recoils%2Fblinks%20(The%20Dodge%20Operator)' })
+(loop_1009_verdict: BehaviorVerdict { loopId: 1009, loopName: 'The%20Flinch%20Loop', then: 'the%20individual%20recoils%2Fblinks%20(The%20Dodge%20Operator)', result: "the%20other%20person%20realizing%2C%20%22Oh%2C%20they've%20been%20hit%20before%2C%22%20changing%20the%20dynamic%20to%20**Pity%2FCare**", operatorName: 'The%20Dodge%20Operator', operatorMechanism: 'the%20individual%20recoils%2Fblinks', origin: 'NARRATIVE', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1009_when_gate: BehaviorAssess { stage: 'when', text: 'someone%20raises%20a%20hand%20quickly%20(even%20to%20wave)' })
+
+// Topology
+(loop_1009_start)-[:PROCESS]->(loop_1009_given_gate)
+(loop_1009_given_gate)-[:PROCESS { case: "ok" }]->(loop_1009_when_gate)
+(loop_1009_given_gate)-[:PROCESS { case: "err" }]->(loop_1009_inactive)
+(loop_1009_when_gate)-[:PROCESS { case: "ok" }]->(loop_1009_context)
+(loop_1009_when_gate)-[:PROCESS { case: "err" }]->(loop_1009_inactive)
+(loop_1009_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1009_context_branch | loop_1009_then_branch | loop_1009_operator_branch | loop_1009_result_branch | loop_1009_taxonomy_branch | loop_1009_intervention_recognize | loop_1009_intervention_interdict | loop_1009_intervention_minimize)
+(loop_1009_context_branch | loop_1009_then_branch | loop_1009_operator_branch | loop_1009_result_branch | loop_1009_taxonomy_branch | loop_1009_intervention_recognize | loop_1009_intervention_interdict | loop_1009_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1009_verdict)
+(loop_1009_inactive)-[:PROCESS]->(loop_1009_sink)
+(loop_1009_verdict)-[:PROCESS]->(loop_1009_sink)
+(loop_1009_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1009_then_branch)
+(loop_1009_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1009_then_branch)
+(loop_1009_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1009_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-592.gg
+// Executable Gnosis projection for The Manspread Loop.
+
+// Nodes
+(loop_592_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_592_context_branch: BehaviorEmit { emission: 'context' })
+(loop_592_given_gate: BehaviorAssess { stage: 'given', text: 'Wide%20hips%20or%20habit%20of%20spreading%20knees' })
+(loop_592_inactive: BehaviorTerminal { loopId: 592, loopName: 'The%20Manspread%20Loop' })
+(loop_592_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_592_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_592_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_592_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Territory%20Operator', mechanism: "it%20consumes%20neighbor's%20space" })
+(loop_592_result_branch: BehaviorEmit { emission: 'result', text: 'silent%20hostility%20from%20adjacent%20passengers' })
+(loop_592_sink: BehaviorSink)
+(loop_592_start: BehaviorStart { loopId: 592, loopName: 'The%20Manspread%20Loop', given: 'Wide%20hips%20or%20habit%20of%20spreading%20knees', when: 'on%20public%20transit', then: "it%20consumes%20neighbor's%20space%20(The%20Territory%20Operator)", result: 'silent%20hostility%20from%20adjacent%20passengers', operatorName: 'The%20Territory%20Operator', operatorMechanism: "it%20consumes%20neighbor's%20space", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_592_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_592_then_branch: BehaviorEmit { emission: 'then', text: "it%20consumes%20neighbor's%20space%20(The%20Territory%20Operator)" })
+(loop_592_verdict: BehaviorVerdict { loopId: 592, loopName: 'The%20Manspread%20Loop', then: "it%20consumes%20neighbor's%20space%20(The%20Territory%20Operator)", result: 'silent%20hostility%20from%20adjacent%20passengers', operatorName: 'The%20Territory%20Operator', operatorMechanism: "it%20consumes%20neighbor's%20space", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_592_when_gate: BehaviorAssess { stage: 'when', text: 'on%20public%20transit' })
+
+// Topology
+(loop_592_start)-[:PROCESS]->(loop_592_given_gate)
+(loop_592_given_gate)-[:PROCESS { case: "ok" }]->(loop_592_when_gate)
+(loop_592_given_gate)-[:PROCESS { case: "err" }]->(loop_592_inactive)
+(loop_592_when_gate)-[:PROCESS { case: "ok" }]->(loop_592_context)
+(loop_592_when_gate)-[:PROCESS { case: "err" }]->(loop_592_inactive)
+(loop_592_context)-[:FORK { strategy: "behavior-branches" }]->(loop_592_context_branch | loop_592_then_branch | loop_592_operator_branch | loop_592_result_branch | loop_592_taxonomy_branch | loop_592_intervention_recognize | loop_592_intervention_interdict | loop_592_intervention_minimize)
+(loop_592_context_branch | loop_592_then_branch | loop_592_operator_branch | loop_592_result_branch | loop_592_taxonomy_branch | loop_592_intervention_recognize | loop_592_intervention_interdict | loop_592_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_592_verdict)
+(loop_592_inactive)-[:PROCESS]->(loop_592_sink)
+(loop_592_verdict)-[:PROCESS]->(loop_592_sink)
+(loop_592_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_592_then_branch)
+(loop_592_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_592_then_branch)
+(loop_592_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_592_then_branch)

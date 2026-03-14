@@ -1,0 +1,33 @@
+// behavioral-loop-535.gg
+// Executable Gnosis projection for The Inhale Loop.
+
+// Nodes
+(loop_535_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_535_context_branch: BehaviorEmit { emission: 'context' })
+(loop_535_given_gate: BehaviorAssess { stage: 'given', text: 'Sharp%20audible%20intake%20of%20breath%20before%20speaking' })
+(loop_535_inactive: BehaviorTerminal { loopId: 535, loopName: 'The%20Inhale%20Loop' })
+(loop_535_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_535_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_535_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_535_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Drama%20Operator', mechanism: 'it%20sounds%20like%20%22Panic%22%20or%20%22Shock%22' })
+(loop_535_result_branch: BehaviorEmit { emission: 'result', text: 'the%20room%20stopping%20to%20see%20what%20the%20emergency%20is' })
+(loop_535_sink: BehaviorSink)
+(loop_535_start: BehaviorStart { loopId: 535, loopName: 'The%20Inhale%20Loop', given: 'Sharp%20audible%20intake%20of%20breath%20before%20speaking', when: 'interrupting', then: 'it%20sounds%20like%20%22Panic%22%20or%20%22Shock%22%20(The%20Drama%20Operator)', result: 'the%20room%20stopping%20to%20see%20what%20the%20emergency%20is', operatorName: 'The%20Drama%20Operator', operatorMechanism: 'it%20sounds%20like%20%22Panic%22%20or%20%22Shock%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_535_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_535_then_branch: BehaviorEmit { emission: 'then', text: 'it%20sounds%20like%20%22Panic%22%20or%20%22Shock%22%20(The%20Drama%20Operator)' })
+(loop_535_verdict: BehaviorVerdict { loopId: 535, loopName: 'The%20Inhale%20Loop', then: 'it%20sounds%20like%20%22Panic%22%20or%20%22Shock%22%20(The%20Drama%20Operator)', result: 'the%20room%20stopping%20to%20see%20what%20the%20emergency%20is', operatorName: 'The%20Drama%20Operator', operatorMechanism: 'it%20sounds%20like%20%22Panic%22%20or%20%22Shock%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_535_when_gate: BehaviorAssess { stage: 'when', text: 'interrupting' })
+
+// Topology
+(loop_535_start)-[:PROCESS]->(loop_535_given_gate)
+(loop_535_given_gate)-[:PROCESS { case: "ok" }]->(loop_535_when_gate)
+(loop_535_given_gate)-[:PROCESS { case: "err" }]->(loop_535_inactive)
+(loop_535_when_gate)-[:PROCESS { case: "ok" }]->(loop_535_context)
+(loop_535_when_gate)-[:PROCESS { case: "err" }]->(loop_535_inactive)
+(loop_535_context)-[:FORK { strategy: "behavior-branches" }]->(loop_535_context_branch | loop_535_then_branch | loop_535_operator_branch | loop_535_result_branch | loop_535_taxonomy_branch | loop_535_intervention_recognize | loop_535_intervention_interdict | loop_535_intervention_minimize)
+(loop_535_context_branch | loop_535_then_branch | loop_535_operator_branch | loop_535_result_branch | loop_535_taxonomy_branch | loop_535_intervention_recognize | loop_535_intervention_interdict | loop_535_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_535_verdict)
+(loop_535_inactive)-[:PROCESS]->(loop_535_sink)
+(loop_535_verdict)-[:PROCESS]->(loop_535_sink)
+(loop_535_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_535_then_branch)
+(loop_535_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_535_then_branch)
+(loop_535_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_535_then_branch)

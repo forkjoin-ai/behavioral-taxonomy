@@ -1,0 +1,33 @@
+// behavioral-loop-619.gg
+// Executable Gnosis projection for The Scissor Loop.
+
+// Nodes
+(loop_619_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_619_context_branch: BehaviorEmit { emission: 'context' })
+(loop_619_given_gate: BehaviorAssess { stage: 'given', text: 'Legs%20crossing%20over%20each%20other%20while%20walking' })
+(loop_619_inactive: BehaviorTerminal { loopId: 619, loopName: 'The%20Scissor%20Loop' })
+(loop_619_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_619_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_619_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_619_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fall%20Hazard%20Operator', mechanism: 'the%20movement%20looks%20%22Tangled%22%20and%20%22Precarious%22' })
+(loop_619_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20hovering%20nearby%20to%20catch%20them' })
+(loop_619_sink: BehaviorSink)
+(loop_619_start: BehaviorStart { loopId: 619, loopName: 'The%20Scissor%20Loop', given: 'Legs%20crossing%20over%20each%20other%20while%20walking', when: 'navigating%20a%20hallway', then: 'the%20movement%20looks%20%22Tangled%22%20and%20%22Precarious%22%20(The%20Fall%20Hazard%20Operator)', result: 'peers%20hovering%20nearby%20to%20catch%20them', operatorName: 'The%20Fall%20Hazard%20Operator', operatorMechanism: 'the%20movement%20looks%20%22Tangled%22%20and%20%22Precarious%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_619_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_619_then_branch: BehaviorEmit { emission: 'then', text: 'the%20movement%20looks%20%22Tangled%22%20and%20%22Precarious%22%20(The%20Fall%20Hazard%20Operator)' })
+(loop_619_verdict: BehaviorVerdict { loopId: 619, loopName: 'The%20Scissor%20Loop', then: 'the%20movement%20looks%20%22Tangled%22%20and%20%22Precarious%22%20(The%20Fall%20Hazard%20Operator)', result: 'peers%20hovering%20nearby%20to%20catch%20them', operatorName: 'The%20Fall%20Hazard%20Operator', operatorMechanism: 'the%20movement%20looks%20%22Tangled%22%20and%20%22Precarious%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_619_when_gate: BehaviorAssess { stage: 'when', text: 'navigating%20a%20hallway' })
+
+// Topology
+(loop_619_start)-[:PROCESS]->(loop_619_given_gate)
+(loop_619_given_gate)-[:PROCESS { case: "ok" }]->(loop_619_when_gate)
+(loop_619_given_gate)-[:PROCESS { case: "err" }]->(loop_619_inactive)
+(loop_619_when_gate)-[:PROCESS { case: "ok" }]->(loop_619_context)
+(loop_619_when_gate)-[:PROCESS { case: "err" }]->(loop_619_inactive)
+(loop_619_context)-[:FORK { strategy: "behavior-branches" }]->(loop_619_context_branch | loop_619_then_branch | loop_619_operator_branch | loop_619_result_branch | loop_619_taxonomy_branch | loop_619_intervention_recognize | loop_619_intervention_interdict | loop_619_intervention_minimize)
+(loop_619_context_branch | loop_619_then_branch | loop_619_operator_branch | loop_619_result_branch | loop_619_taxonomy_branch | loop_619_intervention_recognize | loop_619_intervention_interdict | loop_619_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_619_verdict)
+(loop_619_inactive)-[:PROCESS]->(loop_619_sink)
+(loop_619_verdict)-[:PROCESS]->(loop_619_sink)
+(loop_619_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_619_then_branch)
+(loop_619_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_619_then_branch)
+(loop_619_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_619_then_branch)

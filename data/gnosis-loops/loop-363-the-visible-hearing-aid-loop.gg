@@ -1,0 +1,33 @@
+// behavioral-loop-363.gg
+// Executable Gnosis projection for The Visible Hearing Aid Loop.
+
+// Nodes
+(loop_363_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_363_context_branch: BehaviorEmit { emission: 'context' })
+(loop_363_given_gate: BehaviorAssess { stage: 'given', text: 'External%20auditory%20device' })
+(loop_363_inactive: BehaviorTerminal { loopId: 363, loopName: 'The%20Visible%20Hearing%20Aid%20Loop' })
+(loop_363_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_363_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_363_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_363_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Infantilization%20Operator', mechanism: 'the%20speaker%20shouts' })
+(loop_363_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20treated%20as%20%22Slow%22%20rather%20than%20just%20hard%20of%20hearing' })
+(loop_363_sink: BehaviorSink)
+(loop_363_start: BehaviorStart { loopId: 363, loopName: 'The%20Visible%20Hearing%20Aid%20Loop', given: 'External%20auditory%20device', when: 'asking%20someone%20to%20repeat%20themselves', then: 'the%20speaker%20shouts%20(The%20Infantilization%20Operator)', result: 'the%20individual%20being%20treated%20as%20%22Slow%22%20rather%20than%20just%20hard%20of%20hearing', operatorName: 'The%20Infantilization%20Operator', operatorMechanism: 'the%20speaker%20shouts', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_363_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_363_then_branch: BehaviorEmit { emission: 'then', text: 'the%20speaker%20shouts%20(The%20Infantilization%20Operator)' })
+(loop_363_verdict: BehaviorVerdict { loopId: 363, loopName: 'The%20Visible%20Hearing%20Aid%20Loop', then: 'the%20speaker%20shouts%20(The%20Infantilization%20Operator)', result: 'the%20individual%20being%20treated%20as%20%22Slow%22%20rather%20than%20just%20hard%20of%20hearing', operatorName: 'The%20Infantilization%20Operator', operatorMechanism: 'the%20speaker%20shouts', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_363_when_gate: BehaviorAssess { stage: 'when', text: 'asking%20someone%20to%20repeat%20themselves' })
+
+// Topology
+(loop_363_start)-[:PROCESS]->(loop_363_given_gate)
+(loop_363_given_gate)-[:PROCESS { case: "ok" }]->(loop_363_when_gate)
+(loop_363_given_gate)-[:PROCESS { case: "err" }]->(loop_363_inactive)
+(loop_363_when_gate)-[:PROCESS { case: "ok" }]->(loop_363_context)
+(loop_363_when_gate)-[:PROCESS { case: "err" }]->(loop_363_inactive)
+(loop_363_context)-[:FORK { strategy: "behavior-branches" }]->(loop_363_context_branch | loop_363_then_branch | loop_363_operator_branch | loop_363_result_branch | loop_363_taxonomy_branch | loop_363_intervention_recognize | loop_363_intervention_interdict | loop_363_intervention_minimize)
+(loop_363_context_branch | loop_363_then_branch | loop_363_operator_branch | loop_363_result_branch | loop_363_taxonomy_branch | loop_363_intervention_recognize | loop_363_intervention_interdict | loop_363_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_363_verdict)
+(loop_363_inactive)-[:PROCESS]->(loop_363_sink)
+(loop_363_verdict)-[:PROCESS]->(loop_363_sink)
+(loop_363_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_363_then_branch)
+(loop_363_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_363_then_branch)
+(loop_363_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_363_then_branch)

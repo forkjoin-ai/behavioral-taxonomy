@@ -1,0 +1,33 @@
+// behavioral-loop-682.gg
+// Executable Gnosis projection for The Shoulder Dust Loop.
+
+// Nodes
+(loop_682_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_682_context_branch: BehaviorEmit { emission: 'context' })
+(loop_682_given_gate: BehaviorAssess { stage: 'given', text: 'Seborrheic%20dermatitis%20flakes%20on%20a%20blazer' })
+(loop_682_inactive: BehaviorTerminal { loopId: 682, loopName: 'The%20Shoulder%20Dust%20Loop' })
+(loop_682_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_682_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_682_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_682_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Snow%20Operator', mechanism: 'it%20signals%20%22Poor%20Hygiene%22%20or%20%22Stress%22' })
+(loop_682_result_branch: BehaviorEmit { emission: 'result', text: 'physical%20avoidance%2Fdistancing' })
+(loop_682_sink: BehaviorSink)
+(loop_682_start: BehaviorStart { loopId: 682, loopName: 'The%20Shoulder%20Dust%20Loop', given: 'Seborrheic%20dermatitis%20flakes%20on%20a%20blazer', when: 'standing%20close', then: 'it%20signals%20%22Poor%20Hygiene%22%20or%20%22Stress%22%20(The%20Snow%20Operator)', result: 'physical%20avoidance%2Fdistancing', operatorName: 'The%20Snow%20Operator', operatorMechanism: 'it%20signals%20%22Poor%20Hygiene%22%20or%20%22Stress%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_682_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_682_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Poor%20Hygiene%22%20or%20%22Stress%22%20(The%20Snow%20Operator)' })
+(loop_682_verdict: BehaviorVerdict { loopId: 682, loopName: 'The%20Shoulder%20Dust%20Loop', then: 'it%20signals%20%22Poor%20Hygiene%22%20or%20%22Stress%22%20(The%20Snow%20Operator)', result: 'physical%20avoidance%2Fdistancing', operatorName: 'The%20Snow%20Operator', operatorMechanism: 'it%20signals%20%22Poor%20Hygiene%22%20or%20%22Stress%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_682_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20close' })
+
+// Topology
+(loop_682_start)-[:PROCESS]->(loop_682_given_gate)
+(loop_682_given_gate)-[:PROCESS { case: "ok" }]->(loop_682_when_gate)
+(loop_682_given_gate)-[:PROCESS { case: "err" }]->(loop_682_inactive)
+(loop_682_when_gate)-[:PROCESS { case: "ok" }]->(loop_682_context)
+(loop_682_when_gate)-[:PROCESS { case: "err" }]->(loop_682_inactive)
+(loop_682_context)-[:FORK { strategy: "behavior-branches" }]->(loop_682_context_branch | loop_682_then_branch | loop_682_operator_branch | loop_682_result_branch | loop_682_taxonomy_branch | loop_682_intervention_recognize | loop_682_intervention_interdict | loop_682_intervention_minimize)
+(loop_682_context_branch | loop_682_then_branch | loop_682_operator_branch | loop_682_result_branch | loop_682_taxonomy_branch | loop_682_intervention_recognize | loop_682_intervention_interdict | loop_682_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_682_verdict)
+(loop_682_inactive)-[:PROCESS]->(loop_682_sink)
+(loop_682_verdict)-[:PROCESS]->(loop_682_sink)
+(loop_682_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_682_then_branch)
+(loop_682_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_682_then_branch)
+(loop_682_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_682_then_branch)

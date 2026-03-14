@@ -1,0 +1,33 @@
+// behavioral-loop-897.gg
+// Executable Gnosis projection for The Pillow Loop.
+
+// Nodes
+(loop_897_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_897_context_branch: BehaviorEmit { emission: 'context' })
+(loop_897_given_gate: BehaviorAssess { stage: 'given', text: 'Excessive%20dermal%20filler%20in%20cheeks%2Flips' })
+(loop_897_inactive: BehaviorTerminal { loopId: 897, loopName: 'The%20Pillow%20Loop' })
+(loop_897_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_897_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_897_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_897_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Inflation%20Operator', mechanism: 'the%20eyes%20squint%20shut%20and%20the%20face%20does%20not%20crease%20naturally' })
+(loop_897_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20feeling%20%22Uncanny%20Valley%22%20unease%2C%20perceiving%20%22Vanity%22%20or%20%22Insecurity.%22' })
+(loop_897_sink: BehaviorSink)
+(loop_897_start: BehaviorStart { loopId: 897, loopName: 'The%20Pillow%20Loop', given: 'Excessive%20dermal%20filler%20in%20cheeks%2Flips', when: 'smiling', then: 'the%20eyes%20squint%20shut%20and%20the%20face%20does%20not%20crease%20naturally%20(The%20Inflation%20Operator)', result: 'observers%20feeling%20%22Uncanny%20Valley%22%20unease%2C%20perceiving%20%22Vanity%22%20or%20%22Insecurity.%22', operatorName: 'The%20Inflation%20Operator', operatorMechanism: 'the%20eyes%20squint%20shut%20and%20the%20face%20does%20not%20crease%20naturally', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_897_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_897_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20squint%20shut%20and%20the%20face%20does%20not%20crease%20naturally%20(The%20Inflation%20Operator)' })
+(loop_897_verdict: BehaviorVerdict { loopId: 897, loopName: 'The%20Pillow%20Loop', then: 'the%20eyes%20squint%20shut%20and%20the%20face%20does%20not%20crease%20naturally%20(The%20Inflation%20Operator)', result: 'observers%20feeling%20%22Uncanny%20Valley%22%20unease%2C%20perceiving%20%22Vanity%22%20or%20%22Insecurity.%22', operatorName: 'The%20Inflation%20Operator', operatorMechanism: 'the%20eyes%20squint%20shut%20and%20the%20face%20does%20not%20crease%20naturally', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_897_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_897_start)-[:PROCESS]->(loop_897_given_gate)
+(loop_897_given_gate)-[:PROCESS { case: "ok" }]->(loop_897_when_gate)
+(loop_897_given_gate)-[:PROCESS { case: "err" }]->(loop_897_inactive)
+(loop_897_when_gate)-[:PROCESS { case: "ok" }]->(loop_897_context)
+(loop_897_when_gate)-[:PROCESS { case: "err" }]->(loop_897_inactive)
+(loop_897_context)-[:FORK { strategy: "behavior-branches" }]->(loop_897_context_branch | loop_897_then_branch | loop_897_operator_branch | loop_897_result_branch | loop_897_taxonomy_branch | loop_897_intervention_recognize | loop_897_intervention_interdict | loop_897_intervention_minimize)
+(loop_897_context_branch | loop_897_then_branch | loop_897_operator_branch | loop_897_result_branch | loop_897_taxonomy_branch | loop_897_intervention_recognize | loop_897_intervention_interdict | loop_897_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_897_verdict)
+(loop_897_inactive)-[:PROCESS]->(loop_897_sink)
+(loop_897_verdict)-[:PROCESS]->(loop_897_sink)
+(loop_897_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_897_then_branch)
+(loop_897_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_897_then_branch)
+(loop_897_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_897_then_branch)

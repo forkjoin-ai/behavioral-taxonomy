@@ -1,0 +1,31 @@
+// behavioral-loop-834.gg
+// Executable Gnosis projection for The Dart Loop.
+
+// Nodes
+(loop_834_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_834_context_branch: BehaviorEmit { emission: 'context' })
+(loop_834_given_gate: BehaviorAssess { stage: 'given', text: 'Eyes%20constantly%20scanning%20the%20perimeter%20(Vigilance)' })
+(loop_834_inactive: BehaviorTerminal { loopId: 834, loopName: 'The%20Dart%20Loop' })
+(loop_834_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_834_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_834_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fugitive%20Operator', mechanism: 'it%20signals%20%22Paranoia%22%20or%20%22Guilt%22' })
+(loop_834_result_branch: BehaviorEmit { emission: 'result', text: 'low%20trust%3B%20observers%20wonder%20%22What%20are%20they%20running%20from%3F%22' })
+(loop_834_sink: BehaviorSink)
+(loop_834_start: BehaviorStart { loopId: 834, loopName: 'The%20Dart%20Loop', given: 'Eyes%20constantly%20scanning%20the%20perimeter%20(Vigilance)', when: 'in%20a%20safe%20social%20setting', then: 'it%20signals%20%22Paranoia%22%20or%20%22Guilt%22%20(The%20Fugitive%20Operator)', result: 'low%20trust%3B%20observers%20wonder%20%22What%20are%20they%20running%20from%3F%22', operatorName: 'The%20Fugitive%20Operator', operatorMechanism: 'it%20signals%20%22Paranoia%22%20or%20%22Guilt%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_834_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_834_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Paranoia%22%20or%20%22Guilt%22%20(The%20Fugitive%20Operator)' })
+(loop_834_verdict: BehaviorVerdict { loopId: 834, loopName: 'The%20Dart%20Loop', then: 'it%20signals%20%22Paranoia%22%20or%20%22Guilt%22%20(The%20Fugitive%20Operator)', result: 'low%20trust%3B%20observers%20wonder%20%22What%20are%20they%20running%20from%3F%22', operatorName: 'The%20Fugitive%20Operator', operatorMechanism: 'it%20signals%20%22Paranoia%22%20or%20%22Guilt%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_834_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20safe%20social%20setting' })
+
+// Topology
+(loop_834_start)-[:PROCESS]->(loop_834_given_gate)
+(loop_834_given_gate)-[:PROCESS { case: "ok" }]->(loop_834_when_gate)
+(loop_834_given_gate)-[:PROCESS { case: "err" }]->(loop_834_inactive)
+(loop_834_when_gate)-[:PROCESS { case: "ok" }]->(loop_834_context)
+(loop_834_when_gate)-[:PROCESS { case: "err" }]->(loop_834_inactive)
+(loop_834_context)-[:FORK { strategy: "behavior-branches" }]->(loop_834_context_branch | loop_834_then_branch | loop_834_operator_branch | loop_834_result_branch | loop_834_taxonomy_branch | loop_834_intervention_recognize | loop_834_intervention_leverage)
+(loop_834_context_branch | loop_834_then_branch | loop_834_operator_branch | loop_834_result_branch | loop_834_taxonomy_branch | loop_834_intervention_recognize | loop_834_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_834_verdict)
+(loop_834_inactive)-[:PROCESS]->(loop_834_sink)
+(loop_834_verdict)-[:PROCESS]->(loop_834_sink)
+(loop_834_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_834_then_branch)
+(loop_834_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_834_result_branch)

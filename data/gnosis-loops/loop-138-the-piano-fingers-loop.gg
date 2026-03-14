@@ -1,0 +1,33 @@
+// behavioral-loop-138.gg
+// Executable Gnosis projection for The Piano Fingers Loop.
+
+// Nodes
+(loop_138_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_138_context_branch: BehaviorEmit { emission: 'context' })
+(loop_138_given_gate: BehaviorAssess { stage: 'given', text: 'Long%2C%20slender%20digits' })
+(loop_138_inactive: BehaviorTerminal { loopId: 138, loopName: 'The%20Piano%20Fingers%20Loop' })
+(loop_138_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_138_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_138_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_138_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%2FStereotype%20Operator', mechanism: 'observers%20assume%20%22Artistry%2C%22%20%22Sensitivity%2C%22%20or%20%22Musicality%22' })
+(loop_138_result_branch: BehaviorEmit { emission: 'result', text: 'social%20pressure%20to%20pursue%20**Creative%20Arts**%20regardless%20of%20actual%20talent' })
+(loop_138_sink: BehaviorSink)
+(loop_138_start: BehaviorStart { loopId: 138, loopName: 'The%20Piano%20Fingers%20Loop', given: 'Long%2C%20slender%20digits', when: 'seen%20resting%20on%20a%20table', then: 'observers%20assume%20%22Artistry%2C%22%20%22Sensitivity%2C%22%20or%20%22Musicality%22%20(The%20Novelty%2FStereotype%20Operator)', result: 'social%20pressure%20to%20pursue%20**Creative%20Arts**%20regardless%20of%20actual%20talent', operatorName: 'The%20Novelty%2FStereotype%20Operator', operatorMechanism: 'observers%20assume%20%22Artistry%2C%22%20%22Sensitivity%2C%22%20or%20%22Musicality%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_138_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_138_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Artistry%2C%22%20%22Sensitivity%2C%22%20or%20%22Musicality%22%20(The%20Novelty%2FStereotype%20Operator)' })
+(loop_138_verdict: BehaviorVerdict { loopId: 138, loopName: 'The%20Piano%20Fingers%20Loop', then: 'observers%20assume%20%22Artistry%2C%22%20%22Sensitivity%2C%22%20or%20%22Musicality%22%20(The%20Novelty%2FStereotype%20Operator)', result: 'social%20pressure%20to%20pursue%20**Creative%20Arts**%20regardless%20of%20actual%20talent', operatorName: 'The%20Novelty%2FStereotype%20Operator', operatorMechanism: 'observers%20assume%20%22Artistry%2C%22%20%22Sensitivity%2C%22%20or%20%22Musicality%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_138_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20resting%20on%20a%20table' })
+
+// Topology
+(loop_138_start)-[:PROCESS]->(loop_138_given_gate)
+(loop_138_given_gate)-[:PROCESS { case: "ok" }]->(loop_138_when_gate)
+(loop_138_given_gate)-[:PROCESS { case: "err" }]->(loop_138_inactive)
+(loop_138_when_gate)-[:PROCESS { case: "ok" }]->(loop_138_context)
+(loop_138_when_gate)-[:PROCESS { case: "err" }]->(loop_138_inactive)
+(loop_138_context)-[:FORK { strategy: "behavior-branches" }]->(loop_138_context_branch | loop_138_then_branch | loop_138_operator_branch | loop_138_result_branch | loop_138_taxonomy_branch | loop_138_intervention_recognize | loop_138_intervention_interdict | loop_138_intervention_minimize)
+(loop_138_context_branch | loop_138_then_branch | loop_138_operator_branch | loop_138_result_branch | loop_138_taxonomy_branch | loop_138_intervention_recognize | loop_138_intervention_interdict | loop_138_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_138_verdict)
+(loop_138_inactive)-[:PROCESS]->(loop_138_sink)
+(loop_138_verdict)-[:PROCESS]->(loop_138_sink)
+(loop_138_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_138_then_branch)
+(loop_138_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_138_then_branch)
+(loop_138_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_138_then_branch)

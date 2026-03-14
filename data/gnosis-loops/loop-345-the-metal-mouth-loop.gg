@@ -1,0 +1,33 @@
+// behavioral-loop-345.gg
+// Executable Gnosis projection for The Metal Mouth Loop.
+
+// Nodes
+(loop_345_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_345_context_branch: BehaviorEmit { emission: 'context' })
+(loop_345_given_gate: BehaviorAssess { stage: 'given', text: 'Orthodontic%20appliances%20%3E%20age%2025' })
+(loop_345_inactive: BehaviorTerminal { loopId: 345, loopName: 'The%20Metal%20Mouth%20Loop' })
+(loop_345_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_345_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_345_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_345_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Transition%20Operator', mechanism: 'observers%20perceive%20%22Self-Improvement%22%20but%20also%20%22Adolescence%22' })
+(loop_345_result_branch: BehaviorEmit { emission: 'result', text: 'being%20treated%20as%20%22Junior%22%20regardless%20of%20actual%20seniority' })
+(loop_345_sink: BehaviorSink)
+(loop_345_start: BehaviorStart { loopId: 345, loopName: 'The%20Metal%20Mouth%20Loop', given: 'Orthodontic%20appliances%20%3E%20age%2025', when: 'smiling', then: 'observers%20perceive%20%22Self-Improvement%22%20but%20also%20%22Adolescence%22%20(The%20Transition%20Operator)', result: 'being%20treated%20as%20%22Junior%22%20regardless%20of%20actual%20seniority', operatorName: 'The%20Transition%20Operator', operatorMechanism: 'observers%20perceive%20%22Self-Improvement%22%20but%20also%20%22Adolescence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_345_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_345_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Self-Improvement%22%20but%20also%20%22Adolescence%22%20(The%20Transition%20Operator)' })
+(loop_345_verdict: BehaviorVerdict { loopId: 345, loopName: 'The%20Metal%20Mouth%20Loop', then: 'observers%20perceive%20%22Self-Improvement%22%20but%20also%20%22Adolescence%22%20(The%20Transition%20Operator)', result: 'being%20treated%20as%20%22Junior%22%20regardless%20of%20actual%20seniority', operatorName: 'The%20Transition%20Operator', operatorMechanism: 'observers%20perceive%20%22Self-Improvement%22%20but%20also%20%22Adolescence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_345_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_345_start)-[:PROCESS]->(loop_345_given_gate)
+(loop_345_given_gate)-[:PROCESS { case: "ok" }]->(loop_345_when_gate)
+(loop_345_given_gate)-[:PROCESS { case: "err" }]->(loop_345_inactive)
+(loop_345_when_gate)-[:PROCESS { case: "ok" }]->(loop_345_context)
+(loop_345_when_gate)-[:PROCESS { case: "err" }]->(loop_345_inactive)
+(loop_345_context)-[:FORK { strategy: "behavior-branches" }]->(loop_345_context_branch | loop_345_then_branch | loop_345_operator_branch | loop_345_result_branch | loop_345_taxonomy_branch | loop_345_intervention_recognize | loop_345_intervention_interdict | loop_345_intervention_minimize)
+(loop_345_context_branch | loop_345_then_branch | loop_345_operator_branch | loop_345_result_branch | loop_345_taxonomy_branch | loop_345_intervention_recognize | loop_345_intervention_interdict | loop_345_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_345_verdict)
+(loop_345_inactive)-[:PROCESS]->(loop_345_sink)
+(loop_345_verdict)-[:PROCESS]->(loop_345_sink)
+(loop_345_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_345_then_branch)
+(loop_345_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_345_then_branch)
+(loop_345_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_345_then_branch)

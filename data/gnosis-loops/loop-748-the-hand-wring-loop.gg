@@ -1,0 +1,33 @@
+// behavioral-loop-748.gg
+// Executable Gnosis projection for The Hand-Wring Loop.
+
+// Nodes
+(loop_748_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_748_context_branch: BehaviorEmit { emission: 'context' })
+(loop_748_given_gate: BehaviorAssess { stage: 'given', text: 'Rubbing%20hands%20together%20or%20picking%20skin' })
+(loop_748_inactive: BehaviorTerminal { loopId: 748, loopName: 'The%20Hand-Wring%20Loop' })
+(loop_748_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_748_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_748_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_748_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nervous%20Operator', mechanism: 'it%20signals%20%22Guilt%22%20or%20%22Extreme%20Worry%22' })
+(loop_748_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20the%20individual%20has%20something%20to%20hide' })
+(loop_748_sink: BehaviorSink)
+(loop_748_start: BehaviorStart { loopId: 748, loopName: 'The%20Hand-Wring%20Loop', given: 'Rubbing%20hands%20together%20or%20picking%20skin', when: 'receiving%20news', then: 'it%20signals%20%22Guilt%22%20or%20%22Extreme%20Worry%22%20(The%20Nervous%20Operator)', result: 'observers%20assuming%20the%20individual%20has%20something%20to%20hide', operatorName: 'The%20Nervous%20Operator', operatorMechanism: 'it%20signals%20%22Guilt%22%20or%20%22Extreme%20Worry%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_748_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_748_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Guilt%22%20or%20%22Extreme%20Worry%22%20(The%20Nervous%20Operator)' })
+(loop_748_verdict: BehaviorVerdict { loopId: 748, loopName: 'The%20Hand-Wring%20Loop', then: 'it%20signals%20%22Guilt%22%20or%20%22Extreme%20Worry%22%20(The%20Nervous%20Operator)', result: 'observers%20assuming%20the%20individual%20has%20something%20to%20hide', operatorName: 'The%20Nervous%20Operator', operatorMechanism: 'it%20signals%20%22Guilt%22%20or%20%22Extreme%20Worry%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_748_when_gate: BehaviorAssess { stage: 'when', text: 'receiving%20news' })
+
+// Topology
+(loop_748_start)-[:PROCESS]->(loop_748_given_gate)
+(loop_748_given_gate)-[:PROCESS { case: "ok" }]->(loop_748_when_gate)
+(loop_748_given_gate)-[:PROCESS { case: "err" }]->(loop_748_inactive)
+(loop_748_when_gate)-[:PROCESS { case: "ok" }]->(loop_748_context)
+(loop_748_when_gate)-[:PROCESS { case: "err" }]->(loop_748_inactive)
+(loop_748_context)-[:FORK { strategy: "behavior-branches" }]->(loop_748_context_branch | loop_748_then_branch | loop_748_operator_branch | loop_748_result_branch | loop_748_taxonomy_branch | loop_748_intervention_recognize | loop_748_intervention_interdict | loop_748_intervention_minimize)
+(loop_748_context_branch | loop_748_then_branch | loop_748_operator_branch | loop_748_result_branch | loop_748_taxonomy_branch | loop_748_intervention_recognize | loop_748_intervention_interdict | loop_748_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_748_verdict)
+(loop_748_inactive)-[:PROCESS]->(loop_748_sink)
+(loop_748_verdict)-[:PROCESS]->(loop_748_sink)
+(loop_748_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_748_then_branch)
+(loop_748_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_748_then_branch)
+(loop_748_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_748_then_branch)

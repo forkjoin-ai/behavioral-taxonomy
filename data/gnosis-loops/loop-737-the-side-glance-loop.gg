@@ -1,0 +1,33 @@
+// behavioral-loop-737.gg
+// Executable Gnosis projection for The Side-Glance Loop.
+
+// Nodes
+(loop_737_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_737_context_branch: BehaviorEmit { emission: 'context' })
+(loop_737_given_gate: BehaviorAssess { stage: 'given', text: 'Looking%20at%20someone%20without%20turning%20the%20head' })
+(loop_737_inactive: BehaviorTerminal { loopId: 737, loopName: 'The%20Side-Glance%20Loop' })
+(loop_737_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_737_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_737_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_737_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Spy%20Operator', mechanism: 'it%20signals%20%22Suspicion%2C%22%20%22Attraction%2C%22%20or%20%22Checking%20for%20Threats%22' })
+(loop_737_result_branch: BehaviorEmit { emission: 'result', text: 'the%20target%20feeling%20monitored%20or%20singled%20out' })
+(loop_737_sink: BehaviorSink)
+(loop_737_start: BehaviorStart { loopId: 737, loopName: 'The%20Side-Glance%20Loop', given: 'Looking%20at%20someone%20without%20turning%20the%20head', when: 'in%20a%20group%20conversation', then: 'it%20signals%20%22Suspicion%2C%22%20%22Attraction%2C%22%20or%20%22Checking%20for%20Threats%22%20(The%20Spy%20Operator)', result: 'the%20target%20feeling%20monitored%20or%20singled%20out', operatorName: 'The%20Spy%20Operator', operatorMechanism: 'it%20signals%20%22Suspicion%2C%22%20%22Attraction%2C%22%20or%20%22Checking%20for%20Threats%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_737_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_737_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Suspicion%2C%22%20%22Attraction%2C%22%20or%20%22Checking%20for%20Threats%22%20(The%20Spy%20Operator)' })
+(loop_737_verdict: BehaviorVerdict { loopId: 737, loopName: 'The%20Side-Glance%20Loop', then: 'it%20signals%20%22Suspicion%2C%22%20%22Attraction%2C%22%20or%20%22Checking%20for%20Threats%22%20(The%20Spy%20Operator)', result: 'the%20target%20feeling%20monitored%20or%20singled%20out', operatorName: 'The%20Spy%20Operator', operatorMechanism: 'it%20signals%20%22Suspicion%2C%22%20%22Attraction%2C%22%20or%20%22Checking%20for%20Threats%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_737_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20group%20conversation' })
+
+// Topology
+(loop_737_start)-[:PROCESS]->(loop_737_given_gate)
+(loop_737_given_gate)-[:PROCESS { case: "ok" }]->(loop_737_when_gate)
+(loop_737_given_gate)-[:PROCESS { case: "err" }]->(loop_737_inactive)
+(loop_737_when_gate)-[:PROCESS { case: "ok" }]->(loop_737_context)
+(loop_737_when_gate)-[:PROCESS { case: "err" }]->(loop_737_inactive)
+(loop_737_context)-[:FORK { strategy: "behavior-branches" }]->(loop_737_context_branch | loop_737_then_branch | loop_737_operator_branch | loop_737_result_branch | loop_737_taxonomy_branch | loop_737_intervention_recognize | loop_737_intervention_interdict | loop_737_intervention_minimize)
+(loop_737_context_branch | loop_737_then_branch | loop_737_operator_branch | loop_737_result_branch | loop_737_taxonomy_branch | loop_737_intervention_recognize | loop_737_intervention_interdict | loop_737_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_737_verdict)
+(loop_737_inactive)-[:PROCESS]->(loop_737_sink)
+(loop_737_verdict)-[:PROCESS]->(loop_737_sink)
+(loop_737_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_737_then_branch)
+(loop_737_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_737_then_branch)
+(loop_737_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_737_then_branch)

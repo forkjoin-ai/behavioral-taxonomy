@@ -1,0 +1,33 @@
+// behavioral-loop-365.gg
+// Executable Gnosis projection for The Dandruff Loop.
+
+// Nodes
+(loop_365_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_365_context_branch: BehaviorEmit { emission: 'context' })
+(loop_365_given_gate: BehaviorAssess { stage: 'given', text: 'Seborrheic%20dermatitis%20on%20dark%20clothing' })
+(loop_365_inactive: BehaviorTerminal { loopId: 365, loopName: 'The%20Dandruff%20Loop' })
+(loop_365_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Modify%20or%20remove%20the%20triggering%20element' })
+(loop_365_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_365_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_365_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Messy%20Operator', mechanism: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Neglect%22' })
+(loop_365_result_branch: BehaviorEmit { emission: 'result', text: 'reluctance%20to%20share%20physical%20space%2Fchairs' })
+(loop_365_sink: BehaviorSink)
+(loop_365_start: BehaviorStart { loopId: 365, loopName: 'The%20Dandruff%20Loop', given: 'Seborrheic%20dermatitis%20on%20dark%20clothing', when: 'seen%20in%20close%20proximity', then: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Neglect%22%20(The%20Messy%20Operator)', result: 'reluctance%20to%20share%20physical%20space%2Fchairs', operatorName: 'The%20Messy%20Operator', operatorMechanism: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Neglect%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Modify%20or%20remove%20the%20triggering%20element', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_365_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_365_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Neglect%22%20(The%20Messy%20Operator)' })
+(loop_365_verdict: BehaviorVerdict { loopId: 365, loopName: 'The%20Dandruff%20Loop', then: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Neglect%22%20(The%20Messy%20Operator)', result: 'reluctance%20to%20share%20physical%20space%2Fchairs', operatorName: 'The%20Messy%20Operator', operatorMechanism: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Neglect%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_365_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20in%20close%20proximity' })
+
+// Topology
+(loop_365_start)-[:PROCESS]->(loop_365_given_gate)
+(loop_365_given_gate)-[:PROCESS { case: "ok" }]->(loop_365_when_gate)
+(loop_365_given_gate)-[:PROCESS { case: "err" }]->(loop_365_inactive)
+(loop_365_when_gate)-[:PROCESS { case: "ok" }]->(loop_365_context)
+(loop_365_when_gate)-[:PROCESS { case: "err" }]->(loop_365_inactive)
+(loop_365_context)-[:FORK { strategy: "behavior-branches" }]->(loop_365_context_branch | loop_365_then_branch | loop_365_operator_branch | loop_365_result_branch | loop_365_taxonomy_branch | loop_365_intervention_recognize | loop_365_intervention_interdict | loop_365_intervention_minimize)
+(loop_365_context_branch | loop_365_then_branch | loop_365_operator_branch | loop_365_result_branch | loop_365_taxonomy_branch | loop_365_intervention_recognize | loop_365_intervention_interdict | loop_365_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_365_verdict)
+(loop_365_inactive)-[:PROCESS]->(loop_365_sink)
+(loop_365_verdict)-[:PROCESS]->(loop_365_sink)
+(loop_365_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_365_then_branch)
+(loop_365_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_365_then_branch)
+(loop_365_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_365_then_branch)

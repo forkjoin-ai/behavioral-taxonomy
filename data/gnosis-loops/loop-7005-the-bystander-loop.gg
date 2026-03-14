@@ -1,0 +1,33 @@
+// behavioral-loop-7005.gg
+// Executable Gnosis projection for The Bystander Loop.
+
+// Nodes
+(loop_7005_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_7005_context_branch: BehaviorEmit { emission: 'context' })
+(loop_7005_given_gate: BehaviorAssess { stage: 'given', text: 'An%20emergency%20situation%20%2B%20Presence%20of%20many%20observers' })
+(loop_7005_inactive: BehaviorTerminal { loopId: 7005, loopName: 'The%20Bystander%20Loop' })
+(loop_7005_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_7005_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_7005_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_7005_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_7005_result_branch: BehaviorEmit { emission: 'result', text: 'Diffusion%20of%20responsibility%20(No%20one%20helps%20because%20everyone%20is%20waiting%20for%20someone%20else)' })
+(loop_7005_sink: BehaviorSink)
+(loop_7005_start: BehaviorStart { loopId: 7005, loopName: 'The%20Bystander%20Loop', given: 'An%20emergency%20situation%20%2B%20Presence%20of%20many%20observers', when: 'Subject%20notices%20the%20event', then: 'Subject%20looks%20at%20others%3B%20sees%20them%20doing%20nothing%3B%20concludes%20inaction%20is%20the%20correct%20response', result: 'Diffusion%20of%20responsibility%20(No%20one%20helps%20because%20everyone%20is%20waiting%20for%20someone%20else)', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_7005_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_7005_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20looks%20at%20others%3B%20sees%20them%20doing%20nothing%3B%20concludes%20inaction%20is%20the%20correct%20response' })
+(loop_7005_verdict: BehaviorVerdict { loopId: 7005, loopName: 'The%20Bystander%20Loop', then: 'Subject%20looks%20at%20others%3B%20sees%20them%20doing%20nothing%3B%20concludes%20inaction%20is%20the%20correct%20response', result: 'Diffusion%20of%20responsibility%20(No%20one%20helps%20because%20everyone%20is%20waiting%20for%20someone%20else)', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_7005_when_gate: BehaviorAssess { stage: 'when', text: 'Subject%20notices%20the%20event' })
+
+// Topology
+(loop_7005_start)-[:PROCESS]->(loop_7005_given_gate)
+(loop_7005_given_gate)-[:PROCESS { case: "ok" }]->(loop_7005_when_gate)
+(loop_7005_given_gate)-[:PROCESS { case: "err" }]->(loop_7005_inactive)
+(loop_7005_when_gate)-[:PROCESS { case: "ok" }]->(loop_7005_context)
+(loop_7005_when_gate)-[:PROCESS { case: "err" }]->(loop_7005_inactive)
+(loop_7005_context)-[:FORK { strategy: "behavior-branches" }]->(loop_7005_context_branch | loop_7005_then_branch | loop_7005_operator_branch | loop_7005_result_branch | loop_7005_taxonomy_branch | loop_7005_intervention_recognize | loop_7005_intervention_interdict | loop_7005_intervention_minimize)
+(loop_7005_context_branch | loop_7005_then_branch | loop_7005_operator_branch | loop_7005_result_branch | loop_7005_taxonomy_branch | loop_7005_intervention_recognize | loop_7005_intervention_interdict | loop_7005_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_7005_verdict)
+(loop_7005_inactive)-[:PROCESS]->(loop_7005_sink)
+(loop_7005_verdict)-[:PROCESS]->(loop_7005_sink)
+(loop_7005_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_7005_then_branch)
+(loop_7005_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_7005_then_branch)
+(loop_7005_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_7005_then_branch)

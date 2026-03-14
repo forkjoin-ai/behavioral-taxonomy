@@ -1,0 +1,33 @@
+// behavioral-loop-1053.gg
+// Executable Gnosis projection for The Left on Read Loop.
+
+// Nodes
+(loop_1053_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1053_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1053_given_gate: BehaviorAssess { stage: 'given', text: 'Seeing%20a%20message%20but%20not%20replying' })
+(loop_1053_inactive: BehaviorTerminal { loopId: 1053, loopName: 'The%20Left%20on%20Read%20Loop' })
+(loop_1053_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_1053_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_1053_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1053_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'a%20power%20dynamic%20is%20established%20(The%20Silence%20is%20Loud)' })
+(loop_1053_result_branch: BehaviorEmit { emission: 'result', text: 'the%20sender%20spiraling%20into%20anxiety%20while%20the%20receiver%20holds%20power' })
+(loop_1053_sink: BehaviorSink)
+(loop_1053_start: BehaviorStart { loopId: 1053, loopName: 'The%20Left%20on%20Read%20Loop', given: 'Seeing%20a%20message%20but%20not%20replying', when: 'the%20%22Read%22%20receipt%20triggers', then: 'a%20power%20dynamic%20is%20established%20(The%20Silence%20is%20Loud)', result: 'the%20sender%20spiraling%20into%20anxiety%20while%20the%20receiver%20holds%20power', operatorName: 'Unknown%20Operator', operatorMechanism: 'a%20power%20dynamic%20is%20established%20(The%20Silence%20is%20Loud)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_1053_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_1053_then_branch: BehaviorEmit { emission: 'then', text: 'a%20power%20dynamic%20is%20established%20(The%20Silence%20is%20Loud)' })
+(loop_1053_verdict: BehaviorVerdict { loopId: 1053, loopName: 'The%20Left%20on%20Read%20Loop', then: 'a%20power%20dynamic%20is%20established%20(The%20Silence%20is%20Loud)', result: 'the%20sender%20spiraling%20into%20anxiety%20while%20the%20receiver%20holds%20power', operatorName: 'Unknown%20Operator', operatorMechanism: 'a%20power%20dynamic%20is%20established%20(The%20Silence%20is%20Loud)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_1053_when_gate: BehaviorAssess { stage: 'when', text: 'the%20%22Read%22%20receipt%20triggers' })
+
+// Topology
+(loop_1053_start)-[:PROCESS]->(loop_1053_given_gate)
+(loop_1053_given_gate)-[:PROCESS { case: "ok" }]->(loop_1053_when_gate)
+(loop_1053_given_gate)-[:PROCESS { case: "err" }]->(loop_1053_inactive)
+(loop_1053_when_gate)-[:PROCESS { case: "ok" }]->(loop_1053_context)
+(loop_1053_when_gate)-[:PROCESS { case: "err" }]->(loop_1053_inactive)
+(loop_1053_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1053_context_branch | loop_1053_then_branch | loop_1053_operator_branch | loop_1053_result_branch | loop_1053_taxonomy_branch | loop_1053_intervention_recognize | loop_1053_intervention_minimize | loop_1053_intervention_leverage)
+(loop_1053_context_branch | loop_1053_then_branch | loop_1053_operator_branch | loop_1053_result_branch | loop_1053_taxonomy_branch | loop_1053_intervention_recognize | loop_1053_intervention_minimize | loop_1053_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1053_verdict)
+(loop_1053_inactive)-[:PROCESS]->(loop_1053_sink)
+(loop_1053_verdict)-[:PROCESS]->(loop_1053_sink)
+(loop_1053_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1053_then_branch)
+(loop_1053_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1053_then_branch)
+(loop_1053_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_1053_result_branch)

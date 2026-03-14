@@ -1,0 +1,31 @@
+// behavioral-loop-173.gg
+// Executable Gnosis projection for The Bitten Nail Loop.
+
+// Nodes
+(loop_173_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_173_context_branch: BehaviorEmit { emission: 'context' })
+(loop_173_given_gate: BehaviorAssess { stage: 'given', text: 'Ragged%2C%20bleeding%20cuticles' })
+(loop_173_inactive: BehaviorTerminal { loopId: 173, loopName: 'The%20Bitten%20Nail%20Loop' })
+(loop_173_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_173_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_173_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Scrutiny%20Operator', mechanism: 'observers%20assume%20%22Neuroticism%22%20or%20%22Lack%20of%20Discipline%22' })
+(loop_173_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20trust%20in%20high-stakes%20negotiations' })
+(loop_173_sink: BehaviorSink)
+(loop_173_start: BehaviorStart { loopId: 173, loopName: 'The%20Bitten%20Nail%20Loop', given: 'Ragged%2C%20bleeding%20cuticles', when: 'gesturing%20or%20signing%20documents', then: 'observers%20assume%20%22Neuroticism%22%20or%20%22Lack%20of%20Discipline%22%20(The%20Scrutiny%20Operator)', result: 'loss%20of%20trust%20in%20high-stakes%20negotiations', operatorName: 'The%20Scrutiny%20Operator', operatorMechanism: 'observers%20assume%20%22Neuroticism%22%20or%20%22Lack%20of%20Discipline%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_173_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_173_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Neuroticism%22%20or%20%22Lack%20of%20Discipline%22%20(The%20Scrutiny%20Operator)' })
+(loop_173_verdict: BehaviorVerdict { loopId: 173, loopName: 'The%20Bitten%20Nail%20Loop', then: 'observers%20assume%20%22Neuroticism%22%20or%20%22Lack%20of%20Discipline%22%20(The%20Scrutiny%20Operator)', result: 'loss%20of%20trust%20in%20high-stakes%20negotiations', operatorName: 'The%20Scrutiny%20Operator', operatorMechanism: 'observers%20assume%20%22Neuroticism%22%20or%20%22Lack%20of%20Discipline%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_173_when_gate: BehaviorAssess { stage: 'when', text: 'gesturing%20or%20signing%20documents' })
+
+// Topology
+(loop_173_start)-[:PROCESS]->(loop_173_given_gate)
+(loop_173_given_gate)-[:PROCESS { case: "ok" }]->(loop_173_when_gate)
+(loop_173_given_gate)-[:PROCESS { case: "err" }]->(loop_173_inactive)
+(loop_173_when_gate)-[:PROCESS { case: "ok" }]->(loop_173_context)
+(loop_173_when_gate)-[:PROCESS { case: "err" }]->(loop_173_inactive)
+(loop_173_context)-[:FORK { strategy: "behavior-branches" }]->(loop_173_context_branch | loop_173_then_branch | loop_173_operator_branch | loop_173_result_branch | loop_173_taxonomy_branch | loop_173_intervention_recognize | loop_173_intervention_leverage)
+(loop_173_context_branch | loop_173_then_branch | loop_173_operator_branch | loop_173_result_branch | loop_173_taxonomy_branch | loop_173_intervention_recognize | loop_173_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_173_verdict)
+(loop_173_inactive)-[:PROCESS]->(loop_173_sink)
+(loop_173_verdict)-[:PROCESS]->(loop_173_sink)
+(loop_173_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_173_then_branch)
+(loop_173_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_173_result_branch)

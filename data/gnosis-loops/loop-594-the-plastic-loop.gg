@@ -1,0 +1,33 @@
+// behavioral-loop-594.gg
+// Executable Gnosis projection for The Plastic Loop.
+
+// Nodes
+(loop_594_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_594_context_branch: BehaviorEmit { emission: 'context' })
+(loop_594_given_gate: BehaviorAssess { stage: 'given', text: 'Shiny%2C%20immobile%20skin' })
+(loop_594_inactive: BehaviorTerminal { loopId: 594, loopName: 'The%20Plastic%20Loop' })
+(loop_594_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_594_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_594_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_594_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mannequin%20Operator', mechanism: 'nothing%20moves' })
+(loop_594_result_branch: BehaviorEmit { emission: 'result', text: '%22Uncanny%20Valley%22%20discomfort%20in%20observers' })
+(loop_594_sink: BehaviorSink)
+(loop_594_start: BehaviorStart { loopId: 594, loopName: 'The%20Plastic%20Loop', given: 'Shiny%2C%20immobile%20skin', when: 'attempting%20to%20frown', then: 'nothing%20moves%20(The%20Mannequin%20Operator)', result: '%22Uncanny%20Valley%22%20discomfort%20in%20observers', operatorName: 'The%20Mannequin%20Operator', operatorMechanism: 'nothing%20moves', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_594_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_594_then_branch: BehaviorEmit { emission: 'then', text: 'nothing%20moves%20(The%20Mannequin%20Operator)' })
+(loop_594_verdict: BehaviorVerdict { loopId: 594, loopName: 'The%20Plastic%20Loop', then: 'nothing%20moves%20(The%20Mannequin%20Operator)', result: '%22Uncanny%20Valley%22%20discomfort%20in%20observers', operatorName: 'The%20Mannequin%20Operator', operatorMechanism: 'nothing%20moves', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_594_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20to%20frown' })
+
+// Topology
+(loop_594_start)-[:PROCESS]->(loop_594_given_gate)
+(loop_594_given_gate)-[:PROCESS { case: "ok" }]->(loop_594_when_gate)
+(loop_594_given_gate)-[:PROCESS { case: "err" }]->(loop_594_inactive)
+(loop_594_when_gate)-[:PROCESS { case: "ok" }]->(loop_594_context)
+(loop_594_when_gate)-[:PROCESS { case: "err" }]->(loop_594_inactive)
+(loop_594_context)-[:FORK { strategy: "behavior-branches" }]->(loop_594_context_branch | loop_594_then_branch | loop_594_operator_branch | loop_594_result_branch | loop_594_taxonomy_branch | loop_594_intervention_recognize | loop_594_intervention_interdict | loop_594_intervention_minimize)
+(loop_594_context_branch | loop_594_then_branch | loop_594_operator_branch | loop_594_result_branch | loop_594_taxonomy_branch | loop_594_intervention_recognize | loop_594_intervention_interdict | loop_594_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_594_verdict)
+(loop_594_inactive)-[:PROCESS]->(loop_594_sink)
+(loop_594_verdict)-[:PROCESS]->(loop_594_sink)
+(loop_594_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_594_then_branch)
+(loop_594_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_594_then_branch)
+(loop_594_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_594_then_branch)

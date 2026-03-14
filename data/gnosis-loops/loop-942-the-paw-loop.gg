@@ -1,0 +1,33 @@
+// behavioral-loop-942.gg
+// Executable Gnosis projection for The Paw Loop.
+
+// Nodes
+(loop_942_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_942_context_branch: BehaviorEmit { emission: 'context' })
+(loop_942_given_gate: BehaviorAssess { stage: 'given', text: 'Touching%20arm%2Fshoulder%20of%20strangers' })
+(loop_942_inactive: BehaviorTerminal { loopId: 942, loopName: 'The%20Paw%20Loop' })
+(loop_942_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_942_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_942_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_942_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Handler%20Operator', mechanism: 'it%20signals%20%22Presumption%22%20or%20%22Dominance%22' })
+(loop_942_result_branch: BehaviorEmit { emission: 'result', text: 'stiffening%20of%20the%20recipient%20(Recoil)' })
+(loop_942_sink: BehaviorSink)
+(loop_942_start: BehaviorStart { loopId: 942, loopName: 'The%20Paw%20Loop', given: 'Touching%20arm%2Fshoulder%20of%20strangers', when: 'emphasizing%20a%20point', then: 'it%20signals%20%22Presumption%22%20or%20%22Dominance%22%20(The%20Handler%20Operator)', result: 'stiffening%20of%20the%20recipient%20(Recoil)', operatorName: 'The%20Handler%20Operator', operatorMechanism: 'it%20signals%20%22Presumption%22%20or%20%22Dominance%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_942_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_942_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Presumption%22%20or%20%22Dominance%22%20(The%20Handler%20Operator)' })
+(loop_942_verdict: BehaviorVerdict { loopId: 942, loopName: 'The%20Paw%20Loop', then: 'it%20signals%20%22Presumption%22%20or%20%22Dominance%22%20(The%20Handler%20Operator)', result: 'stiffening%20of%20the%20recipient%20(Recoil)', operatorName: 'The%20Handler%20Operator', operatorMechanism: 'it%20signals%20%22Presumption%22%20or%20%22Dominance%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_942_when_gate: BehaviorAssess { stage: 'when', text: 'emphasizing%20a%20point' })
+
+// Topology
+(loop_942_start)-[:PROCESS]->(loop_942_given_gate)
+(loop_942_given_gate)-[:PROCESS { case: "ok" }]->(loop_942_when_gate)
+(loop_942_given_gate)-[:PROCESS { case: "err" }]->(loop_942_inactive)
+(loop_942_when_gate)-[:PROCESS { case: "ok" }]->(loop_942_context)
+(loop_942_when_gate)-[:PROCESS { case: "err" }]->(loop_942_inactive)
+(loop_942_context)-[:FORK { strategy: "behavior-branches" }]->(loop_942_context_branch | loop_942_then_branch | loop_942_operator_branch | loop_942_result_branch | loop_942_taxonomy_branch | loop_942_intervention_recognize | loop_942_intervention_interdict | loop_942_intervention_minimize)
+(loop_942_context_branch | loop_942_then_branch | loop_942_operator_branch | loop_942_result_branch | loop_942_taxonomy_branch | loop_942_intervention_recognize | loop_942_intervention_interdict | loop_942_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_942_verdict)
+(loop_942_inactive)-[:PROCESS]->(loop_942_sink)
+(loop_942_verdict)-[:PROCESS]->(loop_942_sink)
+(loop_942_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_942_then_branch)
+(loop_942_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_942_then_branch)
+(loop_942_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_942_then_branch)

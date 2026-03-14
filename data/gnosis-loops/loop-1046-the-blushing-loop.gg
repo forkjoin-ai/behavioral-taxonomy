@@ -1,0 +1,33 @@
+// behavioral-loop-1046.gg
+// Executable Gnosis projection for The Blushing Loop.
+
+// Nodes
+(loop_1046_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1046_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1046_given_gate: BehaviorAssess { stage: 'given', text: 'Fear%20of%20looking%20embarrassed' })
+(loop_1046_inactive: BehaviorTerminal { loopId: 1046, loopName: 'The%20Blushing%20Loop' })
+(loop_1046_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1046_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1046_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1046_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20brain%20panics%20about%20blushing%2C%20causing%20more%20blushing%20(The%20Red%20Spiral)' })
+(loop_1046_result_branch: BehaviorEmit { emission: 'result', text: 'a%20self-fulfilling%20prophecy%20of%20maximum%20redness' })
+(loop_1046_sink: BehaviorSink)
+(loop_1046_start: BehaviorStart { loopId: 1046, loopName: 'The%20Blushing%20Loop', given: 'Fear%20of%20looking%20embarrassed', when: 'a%20cheek%20warms%20slightly', then: 'the%20brain%20panics%20about%20blushing%2C%20causing%20more%20blushing%20(The%20Red%20Spiral)', result: 'a%20self-fulfilling%20prophecy%20of%20maximum%20redness', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20brain%20panics%20about%20blushing%2C%20causing%20more%20blushing%20(The%20Red%20Spiral)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1046_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1046_then_branch: BehaviorEmit { emission: 'then', text: 'the%20brain%20panics%20about%20blushing%2C%20causing%20more%20blushing%20(The%20Red%20Spiral)' })
+(loop_1046_verdict: BehaviorVerdict { loopId: 1046, loopName: 'The%20Blushing%20Loop', then: 'the%20brain%20panics%20about%20blushing%2C%20causing%20more%20blushing%20(The%20Red%20Spiral)', result: 'a%20self-fulfilling%20prophecy%20of%20maximum%20redness', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20brain%20panics%20about%20blushing%2C%20causing%20more%20blushing%20(The%20Red%20Spiral)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1046_when_gate: BehaviorAssess { stage: 'when', text: 'a%20cheek%20warms%20slightly' })
+
+// Topology
+(loop_1046_start)-[:PROCESS]->(loop_1046_given_gate)
+(loop_1046_given_gate)-[:PROCESS { case: "ok" }]->(loop_1046_when_gate)
+(loop_1046_given_gate)-[:PROCESS { case: "err" }]->(loop_1046_inactive)
+(loop_1046_when_gate)-[:PROCESS { case: "ok" }]->(loop_1046_context)
+(loop_1046_when_gate)-[:PROCESS { case: "err" }]->(loop_1046_inactive)
+(loop_1046_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1046_context_branch | loop_1046_then_branch | loop_1046_operator_branch | loop_1046_result_branch | loop_1046_taxonomy_branch | loop_1046_intervention_recognize | loop_1046_intervention_interdict | loop_1046_intervention_minimize)
+(loop_1046_context_branch | loop_1046_then_branch | loop_1046_operator_branch | loop_1046_result_branch | loop_1046_taxonomy_branch | loop_1046_intervention_recognize | loop_1046_intervention_interdict | loop_1046_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1046_verdict)
+(loop_1046_inactive)-[:PROCESS]->(loop_1046_sink)
+(loop_1046_verdict)-[:PROCESS]->(loop_1046_sink)
+(loop_1046_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1046_then_branch)
+(loop_1046_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1046_then_branch)
+(loop_1046_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1046_then_branch)

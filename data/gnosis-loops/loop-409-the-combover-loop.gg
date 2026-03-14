@@ -1,0 +1,33 @@
+// behavioral-loop-409.gg
+// Executable Gnosis projection for The Combover Loop.
+
+// Nodes
+(loop_409_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_409_context_branch: BehaviorEmit { emission: 'context' })
+(loop_409_given_gate: BehaviorAssess { stage: 'given', text: 'Long%20hair%20swept%20over%20a%20bald%20spot' })
+(loop_409_inactive: BehaviorTerminal { loopId: 409, loopName: 'The%20Combover%20Loop' })
+(loop_409_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_409_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_409_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_409_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Humiliation%20Operator', mechanism: 'the%20illusion%20fails%20catastrophically' })
+(loop_409_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20feeling%20%22Second-hand%20Embarrassment.%22' })
+(loop_409_sink: BehaviorSink)
+(loop_409_start: BehaviorStart { loopId: 409, loopName: 'The%20Combover%20Loop', given: 'Long%20hair%20swept%20over%20a%20bald%20spot', when: 'a%20breeze%20blows', then: 'the%20illusion%20fails%20catastrophically%20(The%20Humiliation%20Operator)', result: 'observers%20feeling%20%22Second-hand%20Embarrassment.%22', operatorName: 'The%20Humiliation%20Operator', operatorMechanism: 'the%20illusion%20fails%20catastrophically', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_409_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_409_then_branch: BehaviorEmit { emission: 'then', text: 'the%20illusion%20fails%20catastrophically%20(The%20Humiliation%20Operator)' })
+(loop_409_verdict: BehaviorVerdict { loopId: 409, loopName: 'The%20Combover%20Loop', then: 'the%20illusion%20fails%20catastrophically%20(The%20Humiliation%20Operator)', result: 'observers%20feeling%20%22Second-hand%20Embarrassment.%22', operatorName: 'The%20Humiliation%20Operator', operatorMechanism: 'the%20illusion%20fails%20catastrophically', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_409_when_gate: BehaviorAssess { stage: 'when', text: 'a%20breeze%20blows' })
+
+// Topology
+(loop_409_start)-[:PROCESS]->(loop_409_given_gate)
+(loop_409_given_gate)-[:PROCESS { case: "ok" }]->(loop_409_when_gate)
+(loop_409_given_gate)-[:PROCESS { case: "err" }]->(loop_409_inactive)
+(loop_409_when_gate)-[:PROCESS { case: "ok" }]->(loop_409_context)
+(loop_409_when_gate)-[:PROCESS { case: "err" }]->(loop_409_inactive)
+(loop_409_context)-[:FORK { strategy: "behavior-branches" }]->(loop_409_context_branch | loop_409_then_branch | loop_409_operator_branch | loop_409_result_branch | loop_409_taxonomy_branch | loop_409_intervention_recognize | loop_409_intervention_interdict | loop_409_intervention_minimize)
+(loop_409_context_branch | loop_409_then_branch | loop_409_operator_branch | loop_409_result_branch | loop_409_taxonomy_branch | loop_409_intervention_recognize | loop_409_intervention_interdict | loop_409_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_409_verdict)
+(loop_409_inactive)-[:PROCESS]->(loop_409_sink)
+(loop_409_verdict)-[:PROCESS]->(loop_409_sink)
+(loop_409_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_409_then_branch)
+(loop_409_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_409_then_branch)
+(loop_409_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_409_then_branch)

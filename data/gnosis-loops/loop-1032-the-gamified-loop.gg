@@ -1,0 +1,33 @@
+// behavioral-loop-1032.gg
+// Executable Gnosis projection for The Gamified Loop.
+
+// Nodes
+(loop_1032_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1032_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1032_given_gate: BehaviorAssess { stage: 'given', text: 'viewing%20life%20mechanics%20through%20a%20gaming%20lens' })
+(loop_1032_inactive: BehaviorTerminal { loopId: 1032, loopName: 'The%20Gamified%20Loop' })
+(loop_1032_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1032_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1032_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1032_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20individual%20rushes%20to%20beat%20an%20imaginary%20timer%20(The%20Speedrun)' })
+(loop_1032_result_branch: BehaviorEmit { emission: 'result', text: 'high%20efficiency%20but%20zero%20mindfulness%20(and%20often%20broken%20dishes)' })
+(loop_1032_sink: BehaviorSink)
+(loop_1032_start: BehaviorStart { loopId: 1032, loopName: 'The%20Gamified%20Loop', given: 'viewing%20life%20mechanics%20through%20a%20gaming%20lens', when: 'performing%20chores', then: 'the%20individual%20rushes%20to%20beat%20an%20imaginary%20timer%20(The%20Speedrun)', result: 'high%20efficiency%20but%20zero%20mindfulness%20(and%20often%20broken%20dishes)', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20rushes%20to%20beat%20an%20imaginary%20timer%20(The%20Speedrun)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1032_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1032_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20rushes%20to%20beat%20an%20imaginary%20timer%20(The%20Speedrun)' })
+(loop_1032_verdict: BehaviorVerdict { loopId: 1032, loopName: 'The%20Gamified%20Loop', then: 'the%20individual%20rushes%20to%20beat%20an%20imaginary%20timer%20(The%20Speedrun)', result: 'high%20efficiency%20but%20zero%20mindfulness%20(and%20often%20broken%20dishes)', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20rushes%20to%20beat%20an%20imaginary%20timer%20(The%20Speedrun)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1032_when_gate: BehaviorAssess { stage: 'when', text: 'performing%20chores' })
+
+// Topology
+(loop_1032_start)-[:PROCESS]->(loop_1032_given_gate)
+(loop_1032_given_gate)-[:PROCESS { case: "ok" }]->(loop_1032_when_gate)
+(loop_1032_given_gate)-[:PROCESS { case: "err" }]->(loop_1032_inactive)
+(loop_1032_when_gate)-[:PROCESS { case: "ok" }]->(loop_1032_context)
+(loop_1032_when_gate)-[:PROCESS { case: "err" }]->(loop_1032_inactive)
+(loop_1032_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1032_context_branch | loop_1032_then_branch | loop_1032_operator_branch | loop_1032_result_branch | loop_1032_taxonomy_branch | loop_1032_intervention_recognize | loop_1032_intervention_interdict | loop_1032_intervention_minimize)
+(loop_1032_context_branch | loop_1032_then_branch | loop_1032_operator_branch | loop_1032_result_branch | loop_1032_taxonomy_branch | loop_1032_intervention_recognize | loop_1032_intervention_interdict | loop_1032_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1032_verdict)
+(loop_1032_inactive)-[:PROCESS]->(loop_1032_sink)
+(loop_1032_verdict)-[:PROCESS]->(loop_1032_sink)
+(loop_1032_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1032_then_branch)
+(loop_1032_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1032_then_branch)
+(loop_1032_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1032_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-577.gg
+// Executable Gnosis projection for The Quiver Loop.
+
+// Nodes
+(loop_577_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_577_context_branch: BehaviorEmit { emission: 'context' })
+(loop_577_given_gate: BehaviorAssess { stage: 'given', text: 'Laryngeal%20muscle%20spasms%20due%20to%20anxiety%20or%20essential%20tremor' })
+(loop_577_inactive: BehaviorTerminal { loopId: 577, loopName: 'The%20Quiver%20Loop' })
+(loop_577_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_577_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_577_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_577_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fear%20Operator', mechanism: 'the%20voice%20shakes%20uncontrollably' })
+(loop_577_result_branch: BehaviorEmit { emission: 'result', text: 'the%20audience%20feeling%20pity%20or%20assuming%20the%20speaker%20is%20lying%2Fterrified' })
+(loop_577_sink: BehaviorSink)
+(loop_577_start: BehaviorStart { loopId: 577, loopName: 'The%20Quiver%20Loop', given: 'Laryngeal%20muscle%20spasms%20due%20to%20anxiety%20or%20essential%20tremor', when: 'attempting%20to%20speak%20with%20authority', then: 'the%20voice%20shakes%20uncontrollably%20(The%20Fear%20Operator)', result: 'the%20audience%20feeling%20pity%20or%20assuming%20the%20speaker%20is%20lying%2Fterrified', operatorName: 'The%20Fear%20Operator', operatorMechanism: 'the%20voice%20shakes%20uncontrollably', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_577_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_577_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20shakes%20uncontrollably%20(The%20Fear%20Operator)' })
+(loop_577_verdict: BehaviorVerdict { loopId: 577, loopName: 'The%20Quiver%20Loop', then: 'the%20voice%20shakes%20uncontrollably%20(The%20Fear%20Operator)', result: 'the%20audience%20feeling%20pity%20or%20assuming%20the%20speaker%20is%20lying%2Fterrified', operatorName: 'The%20Fear%20Operator', operatorMechanism: 'the%20voice%20shakes%20uncontrollably', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_577_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20to%20speak%20with%20authority' })
+
+// Topology
+(loop_577_start)-[:PROCESS]->(loop_577_given_gate)
+(loop_577_given_gate)-[:PROCESS { case: "ok" }]->(loop_577_when_gate)
+(loop_577_given_gate)-[:PROCESS { case: "err" }]->(loop_577_inactive)
+(loop_577_when_gate)-[:PROCESS { case: "ok" }]->(loop_577_context)
+(loop_577_when_gate)-[:PROCESS { case: "err" }]->(loop_577_inactive)
+(loop_577_context)-[:FORK { strategy: "behavior-branches" }]->(loop_577_context_branch | loop_577_then_branch | loop_577_operator_branch | loop_577_result_branch | loop_577_taxonomy_branch | loop_577_intervention_recognize | loop_577_intervention_interdict | loop_577_intervention_minimize)
+(loop_577_context_branch | loop_577_then_branch | loop_577_operator_branch | loop_577_result_branch | loop_577_taxonomy_branch | loop_577_intervention_recognize | loop_577_intervention_interdict | loop_577_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_577_verdict)
+(loop_577_inactive)-[:PROCESS]->(loop_577_sink)
+(loop_577_verdict)-[:PROCESS]->(loop_577_sink)
+(loop_577_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_577_then_branch)
+(loop_577_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_577_then_branch)
+(loop_577_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_577_then_branch)

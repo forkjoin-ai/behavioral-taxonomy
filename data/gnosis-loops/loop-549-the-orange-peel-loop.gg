@@ -1,0 +1,33 @@
+// behavioral-loop-549.gg
+// Executable Gnosis projection for The Orange Peel Loop.
+
+// Nodes
+(loop_549_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_549_context_branch: BehaviorEmit { emission: 'context' })
+(loop_549_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20follicular%20ostia%20on%20cheeks%2Fnose' })
+(loop_549_inactive: BehaviorTerminal { loopId: 549, loopName: 'The%20Orange%20Peel%20Loop' })
+(loop_549_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_549_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_549_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_549_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'observers%20assume%20%22Oily%22%20or%20%22Unclean%22%20skin%20(The%20Texture%20Bias)' })
+(loop_549_result_branch: BehaviorEmit { emission: 'result', text: 'lower%20aesthetic%20scoring%20despite%20hygiene%2C%20leading%20to%20**Self-Consciousness**' })
+(loop_549_sink: BehaviorSink)
+(loop_549_start: BehaviorStart { loopId: 549, loopName: 'The%20Orange%20Peel%20Loop', given: 'Visible%20follicular%20ostia%20on%20cheeks%2Fnose', when: 'seen%20in%20HD%20video%20or%20harsh%20light', then: 'observers%20assume%20%22Oily%22%20or%20%22Unclean%22%20skin%20(The%20Texture%20Bias)', result: 'lower%20aesthetic%20scoring%20despite%20hygiene%2C%20leading%20to%20**Self-Consciousness**', operatorName: 'Unknown%20Operator', operatorMechanism: 'observers%20assume%20%22Oily%22%20or%20%22Unclean%22%20skin%20(The%20Texture%20Bias)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_549_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_549_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Oily%22%20or%20%22Unclean%22%20skin%20(The%20Texture%20Bias)' })
+(loop_549_verdict: BehaviorVerdict { loopId: 549, loopName: 'The%20Orange%20Peel%20Loop', then: 'observers%20assume%20%22Oily%22%20or%20%22Unclean%22%20skin%20(The%20Texture%20Bias)', result: 'lower%20aesthetic%20scoring%20despite%20hygiene%2C%20leading%20to%20**Self-Consciousness**', operatorName: 'Unknown%20Operator', operatorMechanism: 'observers%20assume%20%22Oily%22%20or%20%22Unclean%22%20skin%20(The%20Texture%20Bias)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_549_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20in%20HD%20video%20or%20harsh%20light' })
+
+// Topology
+(loop_549_start)-[:PROCESS]->(loop_549_given_gate)
+(loop_549_given_gate)-[:PROCESS { case: "ok" }]->(loop_549_when_gate)
+(loop_549_given_gate)-[:PROCESS { case: "err" }]->(loop_549_inactive)
+(loop_549_when_gate)-[:PROCESS { case: "ok" }]->(loop_549_context)
+(loop_549_when_gate)-[:PROCESS { case: "err" }]->(loop_549_inactive)
+(loop_549_context)-[:FORK { strategy: "behavior-branches" }]->(loop_549_context_branch | loop_549_then_branch | loop_549_operator_branch | loop_549_result_branch | loop_549_taxonomy_branch | loop_549_intervention_recognize | loop_549_intervention_interdict | loop_549_intervention_minimize)
+(loop_549_context_branch | loop_549_then_branch | loop_549_operator_branch | loop_549_result_branch | loop_549_taxonomy_branch | loop_549_intervention_recognize | loop_549_intervention_interdict | loop_549_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_549_verdict)
+(loop_549_inactive)-[:PROCESS]->(loop_549_sink)
+(loop_549_verdict)-[:PROCESS]->(loop_549_sink)
+(loop_549_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_549_then_branch)
+(loop_549_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_549_then_branch)
+(loop_549_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_549_then_branch)

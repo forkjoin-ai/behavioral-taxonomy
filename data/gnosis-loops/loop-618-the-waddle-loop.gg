@@ -1,0 +1,33 @@
+// behavioral-loop-618.gg
+// Executable Gnosis projection for The Waddle Loop.
+
+// Nodes
+(loop_618_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_618_context_branch: BehaviorEmit { emission: 'context' })
+(loop_618_given_gate: BehaviorAssess { stage: 'given', text: 'Weak%20hip%20abductors%20causing%20pelvic%20drop' })
+(loop_618_inactive: BehaviorTerminal { loopId: 618, loopName: 'The%20Waddle%20Loop' })
+(loop_618_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_618_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_618_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_618_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Duck%20Operator', mechanism: 'the%20hips%20swing%20excessively%20side-to-side' })
+(loop_618_result_branch: BehaviorEmit { emission: 'result', text: 'the%20gait%20looking%20%22Comical%22%20or%20%22Unathletic.%22' })
+(loop_618_sink: BehaviorSink)
+(loop_618_start: BehaviorStart { loopId: 618, loopName: 'The%20Waddle%20Loop', given: 'Weak%20hip%20abductors%20causing%20pelvic%20drop', when: 'walking%20away', then: 'the%20hips%20swing%20excessively%20side-to-side%20(The%20Duck%20Operator)', result: 'the%20gait%20looking%20%22Comical%22%20or%20%22Unathletic.%22', operatorName: 'The%20Duck%20Operator', operatorMechanism: 'the%20hips%20swing%20excessively%20side-to-side', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_618_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_618_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hips%20swing%20excessively%20side-to-side%20(The%20Duck%20Operator)' })
+(loop_618_verdict: BehaviorVerdict { loopId: 618, loopName: 'The%20Waddle%20Loop', then: 'the%20hips%20swing%20excessively%20side-to-side%20(The%20Duck%20Operator)', result: 'the%20gait%20looking%20%22Comical%22%20or%20%22Unathletic.%22', operatorName: 'The%20Duck%20Operator', operatorMechanism: 'the%20hips%20swing%20excessively%20side-to-side', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_618_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20away' })
+
+// Topology
+(loop_618_start)-[:PROCESS]->(loop_618_given_gate)
+(loop_618_given_gate)-[:PROCESS { case: "ok" }]->(loop_618_when_gate)
+(loop_618_given_gate)-[:PROCESS { case: "err" }]->(loop_618_inactive)
+(loop_618_when_gate)-[:PROCESS { case: "ok" }]->(loop_618_context)
+(loop_618_when_gate)-[:PROCESS { case: "err" }]->(loop_618_inactive)
+(loop_618_context)-[:FORK { strategy: "behavior-branches" }]->(loop_618_context_branch | loop_618_then_branch | loop_618_operator_branch | loop_618_result_branch | loop_618_taxonomy_branch | loop_618_intervention_recognize | loop_618_intervention_interdict | loop_618_intervention_minimize)
+(loop_618_context_branch | loop_618_then_branch | loop_618_operator_branch | loop_618_result_branch | loop_618_taxonomy_branch | loop_618_intervention_recognize | loop_618_intervention_interdict | loop_618_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_618_verdict)
+(loop_618_inactive)-[:PROCESS]->(loop_618_sink)
+(loop_618_verdict)-[:PROCESS]->(loop_618_sink)
+(loop_618_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_618_then_branch)
+(loop_618_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_618_then_branch)
+(loop_618_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_618_then_branch)

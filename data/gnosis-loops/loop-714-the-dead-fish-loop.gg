@@ -1,0 +1,33 @@
+// behavioral-loop-714.gg
+// Executable Gnosis projection for The Dead Fish Loop.
+
+// Nodes
+(loop_714_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_714_context_branch: BehaviorEmit { emission: 'context' })
+(loop_714_given_gate: BehaviorAssess { stage: 'given', text: 'Zero%20grip%20pressure' })
+(loop_714_inactive: BehaviorTerminal { loopId: 714, loopName: 'The%20Dead%20Fish%20Loop' })
+(loop_714_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_714_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_714_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_714_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Corpse%20Operator', mechanism: 'it%20signals%20%22Weak%20Character%22%20or%20%22Disinterest%22' })
+(loop_714_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20loss%20of%20respect%20in%20traditional%20business%20settings' })
+(loop_714_sink: BehaviorSink)
+(loop_714_start: BehaviorStart { loopId: 714, loopName: 'The%20Dead%20Fish%20Loop', given: 'Zero%20grip%20pressure', when: 'shaking%20hands', then: 'it%20signals%20%22Weak%20Character%22%20or%20%22Disinterest%22%20(The%20Corpse%20Operator)', result: 'immediate%20loss%20of%20respect%20in%20traditional%20business%20settings', operatorName: 'The%20Corpse%20Operator', operatorMechanism: 'it%20signals%20%22Weak%20Character%22%20or%20%22Disinterest%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_714_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_714_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Weak%20Character%22%20or%20%22Disinterest%22%20(The%20Corpse%20Operator)' })
+(loop_714_verdict: BehaviorVerdict { loopId: 714, loopName: 'The%20Dead%20Fish%20Loop', then: 'it%20signals%20%22Weak%20Character%22%20or%20%22Disinterest%22%20(The%20Corpse%20Operator)', result: 'immediate%20loss%20of%20respect%20in%20traditional%20business%20settings', operatorName: 'The%20Corpse%20Operator', operatorMechanism: 'it%20signals%20%22Weak%20Character%22%20or%20%22Disinterest%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_714_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_714_start)-[:PROCESS]->(loop_714_given_gate)
+(loop_714_given_gate)-[:PROCESS { case: "ok" }]->(loop_714_when_gate)
+(loop_714_given_gate)-[:PROCESS { case: "err" }]->(loop_714_inactive)
+(loop_714_when_gate)-[:PROCESS { case: "ok" }]->(loop_714_context)
+(loop_714_when_gate)-[:PROCESS { case: "err" }]->(loop_714_inactive)
+(loop_714_context)-[:FORK { strategy: "behavior-branches" }]->(loop_714_context_branch | loop_714_then_branch | loop_714_operator_branch | loop_714_result_branch | loop_714_taxonomy_branch | loop_714_intervention_recognize | loop_714_intervention_interdict | loop_714_intervention_minimize)
+(loop_714_context_branch | loop_714_then_branch | loop_714_operator_branch | loop_714_result_branch | loop_714_taxonomy_branch | loop_714_intervention_recognize | loop_714_intervention_interdict | loop_714_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_714_verdict)
+(loop_714_inactive)-[:PROCESS]->(loop_714_sink)
+(loop_714_verdict)-[:PROCESS]->(loop_714_sink)
+(loop_714_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_714_then_branch)
+(loop_714_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_714_then_branch)
+(loop_714_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_714_then_branch)

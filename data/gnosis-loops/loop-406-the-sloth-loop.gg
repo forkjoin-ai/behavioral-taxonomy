@@ -1,0 +1,33 @@
+// behavioral-loop-406.gg
+// Executable Gnosis projection for The Sloth Loop.
+
+// Nodes
+(loop_406_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_406_context_branch: BehaviorEmit { emission: 'context' })
+(loop_406_given_gate: BehaviorAssess { stage: 'given', text: 'Slow%20movements%20and%20heavy%20eyelids' })
+(loop_406_inactive: BehaviorTerminal { loopId: 406, loopName: 'The%20Sloth%20Loop' })
+(loop_406_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_406_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_406_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_406_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Resistance%20Operator', mechanism: 'the%20individual%20moves%20at%20the%20same%20slow%20pace' })
+(loop_406_result_branch: BehaviorEmit { emission: 'result', text: 'being%20labeled%20%22Lazy%22%20even%20if%20highly%20productive%20mentally' })
+(loop_406_sink: BehaviorSink)
+(loop_406_start: BehaviorStart { loopId: 406, loopName: 'The%20Sloth%20Loop', given: 'Slow%20movements%20and%20heavy%20eyelids', when: 'asked%20to%20hurry', then: 'the%20individual%20moves%20at%20the%20same%20slow%20pace%20(The%20Resistance%20Operator)', result: 'being%20labeled%20%22Lazy%22%20even%20if%20highly%20productive%20mentally', operatorName: 'The%20Resistance%20Operator', operatorMechanism: 'the%20individual%20moves%20at%20the%20same%20slow%20pace', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_406_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_406_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20moves%20at%20the%20same%20slow%20pace%20(The%20Resistance%20Operator)' })
+(loop_406_verdict: BehaviorVerdict { loopId: 406, loopName: 'The%20Sloth%20Loop', then: 'the%20individual%20moves%20at%20the%20same%20slow%20pace%20(The%20Resistance%20Operator)', result: 'being%20labeled%20%22Lazy%22%20even%20if%20highly%20productive%20mentally', operatorName: 'The%20Resistance%20Operator', operatorMechanism: 'the%20individual%20moves%20at%20the%20same%20slow%20pace', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_406_when_gate: BehaviorAssess { stage: 'when', text: 'asked%20to%20hurry' })
+
+// Topology
+(loop_406_start)-[:PROCESS]->(loop_406_given_gate)
+(loop_406_given_gate)-[:PROCESS { case: "ok" }]->(loop_406_when_gate)
+(loop_406_given_gate)-[:PROCESS { case: "err" }]->(loop_406_inactive)
+(loop_406_when_gate)-[:PROCESS { case: "ok" }]->(loop_406_context)
+(loop_406_when_gate)-[:PROCESS { case: "err" }]->(loop_406_inactive)
+(loop_406_context)-[:FORK { strategy: "behavior-branches" }]->(loop_406_context_branch | loop_406_then_branch | loop_406_operator_branch | loop_406_result_branch | loop_406_taxonomy_branch | loop_406_intervention_recognize | loop_406_intervention_interdict | loop_406_intervention_minimize)
+(loop_406_context_branch | loop_406_then_branch | loop_406_operator_branch | loop_406_result_branch | loop_406_taxonomy_branch | loop_406_intervention_recognize | loop_406_intervention_interdict | loop_406_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_406_verdict)
+(loop_406_inactive)-[:PROCESS]->(loop_406_sink)
+(loop_406_verdict)-[:PROCESS]->(loop_406_sink)
+(loop_406_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_406_then_branch)
+(loop_406_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_406_then_branch)
+(loop_406_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_406_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-240.gg
+// Executable Gnosis projection for The Skulker Loop.
+
+// Nodes
+(loop_240_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_240_context_branch: BehaviorEmit { emission: 'context' })
+(loop_240_given_gate: BehaviorAssess { stage: 'given', text: 'High%20anxiety%20%2B%20fast%20walking%20speed' })
+(loop_240_inactive: BehaviorTerminal { loopId: 240, loopName: 'The%20Skulker%20Loop' })
+(loop_240_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_240_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_240_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_240_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Criminality%20Operator', mechanism: 'the%20body%20language%20triggers%20%22Guilt%22%20detection' })
+(loop_240_result_branch: BehaviorEmit { emission: 'result', text: 'frequent%20stops%20and%20searches%2C%20reinforcing%20**Paranoia**' })
+(loop_240_sink: BehaviorSink)
+(loop_240_start: BehaviorStart { loopId: 240, loopName: 'The%20Skulker%20Loop', given: 'High%20anxiety%20%2B%20fast%20walking%20speed', when: 'passing%20security%20or%20police', then: 'the%20body%20language%20triggers%20%22Guilt%22%20detection%20(The%20Criminality%20Operator)', result: 'frequent%20stops%20and%20searches%2C%20reinforcing%20**Paranoia**', operatorName: 'The%20Criminality%20Operator', operatorMechanism: 'the%20body%20language%20triggers%20%22Guilt%22%20detection', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_240_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_240_then_branch: BehaviorEmit { emission: 'then', text: 'the%20body%20language%20triggers%20%22Guilt%22%20detection%20(The%20Criminality%20Operator)' })
+(loop_240_verdict: BehaviorVerdict { loopId: 240, loopName: 'The%20Skulker%20Loop', then: 'the%20body%20language%20triggers%20%22Guilt%22%20detection%20(The%20Criminality%20Operator)', result: 'frequent%20stops%20and%20searches%2C%20reinforcing%20**Paranoia**', operatorName: 'The%20Criminality%20Operator', operatorMechanism: 'the%20body%20language%20triggers%20%22Guilt%22%20detection', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_240_when_gate: BehaviorAssess { stage: 'when', text: 'passing%20security%20or%20police' })
+
+// Topology
+(loop_240_start)-[:PROCESS]->(loop_240_given_gate)
+(loop_240_given_gate)-[:PROCESS { case: "ok" }]->(loop_240_when_gate)
+(loop_240_given_gate)-[:PROCESS { case: "err" }]->(loop_240_inactive)
+(loop_240_when_gate)-[:PROCESS { case: "ok" }]->(loop_240_context)
+(loop_240_when_gate)-[:PROCESS { case: "err" }]->(loop_240_inactive)
+(loop_240_context)-[:FORK { strategy: "behavior-branches" }]->(loop_240_context_branch | loop_240_then_branch | loop_240_operator_branch | loop_240_result_branch | loop_240_taxonomy_branch | loop_240_intervention_recognize | loop_240_intervention_interdict | loop_240_intervention_minimize)
+(loop_240_context_branch | loop_240_then_branch | loop_240_operator_branch | loop_240_result_branch | loop_240_taxonomy_branch | loop_240_intervention_recognize | loop_240_intervention_interdict | loop_240_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_240_verdict)
+(loop_240_inactive)-[:PROCESS]->(loop_240_sink)
+(loop_240_verdict)-[:PROCESS]->(loop_240_sink)
+(loop_240_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_240_then_branch)
+(loop_240_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_240_then_branch)
+(loop_240_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_240_then_branch)

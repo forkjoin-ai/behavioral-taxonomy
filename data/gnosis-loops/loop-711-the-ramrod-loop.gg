@@ -1,0 +1,33 @@
+// behavioral-loop-711.gg
+// Executable Gnosis projection for The Ramrod Loop.
+
+// Nodes
+(loop_711_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_711_context_branch: BehaviorEmit { emission: 'context' })
+(loop_711_given_gate: BehaviorAssess { stage: 'given', text: 'Inability%20to%20rotate%20the%20torso' })
+(loop_711_inactive: BehaviorTerminal { loopId: 711, loopName: 'The%20Ramrod%20Loop' })
+(loop_711_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_711_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_711_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_711_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Batman%20Operator', mechanism: 'the%20individual%20turns%20the%20whole%20body' })
+(loop_711_result_branch: BehaviorEmit { emission: 'result', text: 'an%20intimidating%2C%20robotic%20presence%20that%20inhibits%20casual%20banter' })
+(loop_711_sink: BehaviorSink)
+(loop_711_start: BehaviorStart { loopId: 711, loopName: 'The%20Ramrod%20Loop', given: 'Inability%20to%20rotate%20the%20torso', when: 'someone%20calls%20from%20behind', then: 'the%20individual%20turns%20the%20whole%20body%20(The%20Batman%20Operator)', result: 'an%20intimidating%2C%20robotic%20presence%20that%20inhibits%20casual%20banter', operatorName: 'The%20Batman%20Operator', operatorMechanism: 'the%20individual%20turns%20the%20whole%20body', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_711_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_711_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20turns%20the%20whole%20body%20(The%20Batman%20Operator)' })
+(loop_711_verdict: BehaviorVerdict { loopId: 711, loopName: 'The%20Ramrod%20Loop', then: 'the%20individual%20turns%20the%20whole%20body%20(The%20Batman%20Operator)', result: 'an%20intimidating%2C%20robotic%20presence%20that%20inhibits%20casual%20banter', operatorName: 'The%20Batman%20Operator', operatorMechanism: 'the%20individual%20turns%20the%20whole%20body', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_711_when_gate: BehaviorAssess { stage: 'when', text: 'someone%20calls%20from%20behind' })
+
+// Topology
+(loop_711_start)-[:PROCESS]->(loop_711_given_gate)
+(loop_711_given_gate)-[:PROCESS { case: "ok" }]->(loop_711_when_gate)
+(loop_711_given_gate)-[:PROCESS { case: "err" }]->(loop_711_inactive)
+(loop_711_when_gate)-[:PROCESS { case: "ok" }]->(loop_711_context)
+(loop_711_when_gate)-[:PROCESS { case: "err" }]->(loop_711_inactive)
+(loop_711_context)-[:FORK { strategy: "behavior-branches" }]->(loop_711_context_branch | loop_711_then_branch | loop_711_operator_branch | loop_711_result_branch | loop_711_taxonomy_branch | loop_711_intervention_recognize | loop_711_intervention_interdict | loop_711_intervention_minimize)
+(loop_711_context_branch | loop_711_then_branch | loop_711_operator_branch | loop_711_result_branch | loop_711_taxonomy_branch | loop_711_intervention_recognize | loop_711_intervention_interdict | loop_711_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_711_verdict)
+(loop_711_inactive)-[:PROCESS]->(loop_711_sink)
+(loop_711_verdict)-[:PROCESS]->(loop_711_sink)
+(loop_711_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_711_then_branch)
+(loop_711_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_711_then_branch)
+(loop_711_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_711_then_branch)

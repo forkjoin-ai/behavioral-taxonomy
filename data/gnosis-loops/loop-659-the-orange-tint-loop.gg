@@ -1,0 +1,33 @@
+// behavioral-loop-659.gg
+// Executable Gnosis projection for The Orange Tint Loop.
+
+// Nodes
+(loop_659_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_659_context_branch: BehaviorEmit { emission: 'context' })
+(loop_659_given_gate: BehaviorAssess { stage: 'given', text: 'Excess%20carrot%2Fsweet%20potato%20consumption' })
+(loop_659_inactive: BehaviorTerminal { loopId: 659, loopName: 'The%20Orange%20Tint%20Loop' })
+(loop_659_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_659_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_659_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_659_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Oompa%20Loompa%20Operator', mechanism: 'palms%2Fface%20look%20%22Jaundiced%22%20or%20%22Fake%20Tan%22' })
+(loop_659_result_branch: BehaviorEmit { emission: 'result', text: 'confusion%20about%20health%20or%20vanity' })
+(loop_659_sink: BehaviorSink)
+(loop_659_start: BehaviorStart { loopId: 659, loopName: 'The%20Orange%20Tint%20Loop', given: 'Excess%20carrot%2Fsweet%20potato%20consumption', when: 'viewed%20in%20daylight', then: 'palms%2Fface%20look%20%22Jaundiced%22%20or%20%22Fake%20Tan%22%20(The%20Oompa%20Loompa%20Operator)', result: 'confusion%20about%20health%20or%20vanity', operatorName: 'The%20Oompa%20Loompa%20Operator', operatorMechanism: 'palms%2Fface%20look%20%22Jaundiced%22%20or%20%22Fake%20Tan%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_659_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_659_then_branch: BehaviorEmit { emission: 'then', text: 'palms%2Fface%20look%20%22Jaundiced%22%20or%20%22Fake%20Tan%22%20(The%20Oompa%20Loompa%20Operator)' })
+(loop_659_verdict: BehaviorVerdict { loopId: 659, loopName: 'The%20Orange%20Tint%20Loop', then: 'palms%2Fface%20look%20%22Jaundiced%22%20or%20%22Fake%20Tan%22%20(The%20Oompa%20Loompa%20Operator)', result: 'confusion%20about%20health%20or%20vanity', operatorName: 'The%20Oompa%20Loompa%20Operator', operatorMechanism: 'palms%2Fface%20look%20%22Jaundiced%22%20or%20%22Fake%20Tan%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_659_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20in%20daylight' })
+
+// Topology
+(loop_659_start)-[:PROCESS]->(loop_659_given_gate)
+(loop_659_given_gate)-[:PROCESS { case: "ok" }]->(loop_659_when_gate)
+(loop_659_given_gate)-[:PROCESS { case: "err" }]->(loop_659_inactive)
+(loop_659_when_gate)-[:PROCESS { case: "ok" }]->(loop_659_context)
+(loop_659_when_gate)-[:PROCESS { case: "err" }]->(loop_659_inactive)
+(loop_659_context)-[:FORK { strategy: "behavior-branches" }]->(loop_659_context_branch | loop_659_then_branch | loop_659_operator_branch | loop_659_result_branch | loop_659_taxonomy_branch | loop_659_intervention_recognize | loop_659_intervention_interdict | loop_659_intervention_minimize)
+(loop_659_context_branch | loop_659_then_branch | loop_659_operator_branch | loop_659_result_branch | loop_659_taxonomy_branch | loop_659_intervention_recognize | loop_659_intervention_interdict | loop_659_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_659_verdict)
+(loop_659_inactive)-[:PROCESS]->(loop_659_sink)
+(loop_659_verdict)-[:PROCESS]->(loop_659_sink)
+(loop_659_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_659_then_branch)
+(loop_659_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_659_then_branch)
+(loop_659_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_659_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-557.gg
+// Executable Gnosis projection for The Toe Dragger Loop.
+
+// Nodes
+(loop_557_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_557_context_branch: BehaviorEmit { emission: 'context' })
+(loop_557_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20foot%20clearance%20during%20swing%20phase' })
+(loop_557_inactive: BehaviorTerminal { loopId: 557, loopName: 'The%20Toe%20Dragger%20Loop' })
+(loop_557_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_557_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_557_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_557_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Depression%2FFatigue%20Operator', mechanism: 'the%20sound%20is%20%22Scuff-Scuff%22' })
+(loop_557_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20low%20energy%20or%20sadness' })
+(loop_557_sink: BehaviorSink)
+(loop_557_start: BehaviorStart { loopId: 557, loopName: 'The%20Toe%20Dragger%20Loop', given: 'Low%20foot%20clearance%20during%20swing%20phase', when: 'walking%20on%20carpet%2Fpavement', then: 'the%20sound%20is%20%22Scuff-Scuff%22%20(The%20Depression%2FFatigue%20Operator)', result: 'observers%20assuming%20low%20energy%20or%20sadness', operatorName: 'The%20Depression%2FFatigue%20Operator', operatorMechanism: 'the%20sound%20is%20%22Scuff-Scuff%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_557_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_557_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20is%20%22Scuff-Scuff%22%20(The%20Depression%2FFatigue%20Operator)' })
+(loop_557_verdict: BehaviorVerdict { loopId: 557, loopName: 'The%20Toe%20Dragger%20Loop', then: 'the%20sound%20is%20%22Scuff-Scuff%22%20(The%20Depression%2FFatigue%20Operator)', result: 'observers%20assuming%20low%20energy%20or%20sadness', operatorName: 'The%20Depression%2FFatigue%20Operator', operatorMechanism: 'the%20sound%20is%20%22Scuff-Scuff%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_557_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20on%20carpet%2Fpavement' })
+
+// Topology
+(loop_557_start)-[:PROCESS]->(loop_557_given_gate)
+(loop_557_given_gate)-[:PROCESS { case: "ok" }]->(loop_557_when_gate)
+(loop_557_given_gate)-[:PROCESS { case: "err" }]->(loop_557_inactive)
+(loop_557_when_gate)-[:PROCESS { case: "ok" }]->(loop_557_context)
+(loop_557_when_gate)-[:PROCESS { case: "err" }]->(loop_557_inactive)
+(loop_557_context)-[:FORK { strategy: "behavior-branches" }]->(loop_557_context_branch | loop_557_then_branch | loop_557_operator_branch | loop_557_result_branch | loop_557_taxonomy_branch | loop_557_intervention_recognize | loop_557_intervention_interdict | loop_557_intervention_minimize)
+(loop_557_context_branch | loop_557_then_branch | loop_557_operator_branch | loop_557_result_branch | loop_557_taxonomy_branch | loop_557_intervention_recognize | loop_557_intervention_interdict | loop_557_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_557_verdict)
+(loop_557_inactive)-[:PROCESS]->(loop_557_sink)
+(loop_557_verdict)-[:PROCESS]->(loop_557_sink)
+(loop_557_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_557_then_branch)
+(loop_557_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_557_then_branch)
+(loop_557_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_557_then_branch)

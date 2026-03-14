@@ -1,0 +1,33 @@
+// behavioral-loop-123.gg
+// Executable Gnosis projection for The Angry Brow Loop.
+
+// Nodes
+(loop_123_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_123_context_branch: BehaviorEmit { emission: 'context' })
+(loop_123_given_gate: BehaviorAssess { stage: 'given', text: 'Low%2C%20flat%20eyebrows' })
+(loop_123_inactive: BehaviorTerminal { loopId: 123, loopName: 'The%20Angry%20Brow%20Loop' })
+(loop_123_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_123_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Set%20hard%20boundaries%3B%20this%20loop%20will%20consume%20all%20available%20energy%20if%20unchecked.' })
+(loop_123_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_123_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'the%20face%20looks%20%22Furious%22' })
+(loop_123_result_branch: BehaviorEmit { emission: 'result', text: 'people%20asking%20%22Why%20are%20you%20mad%3F%22%2C%20leading%20to%20**Emotional%20Exhaustion**%20(explaining%20%22this%20is%20just%20my%20face%22)' })
+(loop_123_sink: BehaviorSink)
+(loop_123_start: BehaviorStart { loopId: 123, loopName: 'The%20Angry%20Brow%20Loop', given: 'Low%2C%20flat%20eyebrows', when: 'listening%20intently', then: 'the%20face%20looks%20%22Furious%22%20(The%20Threat%20Operator)', result: 'people%20asking%20%22Why%20are%20you%20mad%3F%22%2C%20leading%20to%20**Emotional%20Exhaustion**%20(explaining%20%22this%20is%20just%20my%20face%22)', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20face%20looks%20%22Furious%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Set%20hard%20boundaries%3B%20this%20loop%20will%20consume%20all%20available%20energy%20if%20unchecked.' })
+(loop_123_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_123_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Furious%22%20(The%20Threat%20Operator)' })
+(loop_123_verdict: BehaviorVerdict { loopId: 123, loopName: 'The%20Angry%20Brow%20Loop', then: 'the%20face%20looks%20%22Furious%22%20(The%20Threat%20Operator)', result: 'people%20asking%20%22Why%20are%20you%20mad%3F%22%2C%20leading%20to%20**Emotional%20Exhaustion**%20(explaining%20%22this%20is%20just%20my%20face%22)', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20face%20looks%20%22Furious%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_123_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20intently' })
+
+// Topology
+(loop_123_start)-[:PROCESS]->(loop_123_given_gate)
+(loop_123_given_gate)-[:PROCESS { case: "ok" }]->(loop_123_when_gate)
+(loop_123_given_gate)-[:PROCESS { case: "err" }]->(loop_123_inactive)
+(loop_123_when_gate)-[:PROCESS { case: "ok" }]->(loop_123_context)
+(loop_123_when_gate)-[:PROCESS { case: "err" }]->(loop_123_inactive)
+(loop_123_context)-[:FORK { strategy: "behavior-branches" }]->(loop_123_context_branch | loop_123_then_branch | loop_123_operator_branch | loop_123_result_branch | loop_123_taxonomy_branch | loop_123_intervention_recognize | loop_123_intervention_interdict | loop_123_intervention_minimize)
+(loop_123_context_branch | loop_123_then_branch | loop_123_operator_branch | loop_123_result_branch | loop_123_taxonomy_branch | loop_123_intervention_recognize | loop_123_intervention_interdict | loop_123_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_123_verdict)
+(loop_123_inactive)-[:PROCESS]->(loop_123_sink)
+(loop_123_verdict)-[:PROCESS]->(loop_123_sink)
+(loop_123_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_123_then_branch)
+(loop_123_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_123_then_branch)
+(loop_123_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_123_then_branch)

@@ -1,0 +1,31 @@
+// behavioral-loop-88.gg
+// Executable Gnosis projection for The Up-Speak Loop.
+
+// Nodes
+(loop_88_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_88_context_branch: BehaviorEmit { emission: 'context' })
+(loop_88_given_gate: BehaviorAssess { stage: 'given', text: 'Rising%20Terminal%20Intonation%20(Habitual)' })
+(loop_88_inactive: BehaviorTerminal { loopId: 88, loopName: 'The%20Up-Speak%20Loop' })
+(loop_88_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_88_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_88_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Submission%20Operator', mechanism: 'it%20sounds%20like%20a%20question' })
+(loop_88_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20authority%20and%20others%20challenging%20their%20expertise%20constantly' })
+(loop_88_sink: BehaviorSink)
+(loop_88_start: BehaviorStart { loopId: 88, loopName: 'The%20Up-Speak%20Loop', given: 'Rising%20Terminal%20Intonation%20(Habitual)', when: 'making%20a%20statement', then: 'it%20sounds%20like%20a%20question%20(The%20Submission%20Operator)', result: 'loss%20of%20authority%20and%20others%20challenging%20their%20expertise%20constantly', operatorName: 'The%20Submission%20Operator', operatorMechanism: 'it%20sounds%20like%20a%20question', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_88_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_88_then_branch: BehaviorEmit { emission: 'then', text: 'it%20sounds%20like%20a%20question%20(The%20Submission%20Operator)' })
+(loop_88_verdict: BehaviorVerdict { loopId: 88, loopName: 'The%20Up-Speak%20Loop', then: 'it%20sounds%20like%20a%20question%20(The%20Submission%20Operator)', result: 'loss%20of%20authority%20and%20others%20challenging%20their%20expertise%20constantly', operatorName: 'The%20Submission%20Operator', operatorMechanism: 'it%20sounds%20like%20a%20question', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_88_when_gate: BehaviorAssess { stage: 'when', text: 'making%20a%20statement' })
+
+// Topology
+(loop_88_start)-[:PROCESS]->(loop_88_given_gate)
+(loop_88_given_gate)-[:PROCESS { case: "ok" }]->(loop_88_when_gate)
+(loop_88_given_gate)-[:PROCESS { case: "err" }]->(loop_88_inactive)
+(loop_88_when_gate)-[:PROCESS { case: "ok" }]->(loop_88_context)
+(loop_88_when_gate)-[:PROCESS { case: "err" }]->(loop_88_inactive)
+(loop_88_context)-[:FORK { strategy: "behavior-branches" }]->(loop_88_context_branch | loop_88_then_branch | loop_88_operator_branch | loop_88_result_branch | loop_88_taxonomy_branch | loop_88_intervention_recognize | loop_88_intervention_leverage)
+(loop_88_context_branch | loop_88_then_branch | loop_88_operator_branch | loop_88_result_branch | loop_88_taxonomy_branch | loop_88_intervention_recognize | loop_88_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_88_verdict)
+(loop_88_inactive)-[:PROCESS]->(loop_88_sink)
+(loop_88_verdict)-[:PROCESS]->(loop_88_sink)
+(loop_88_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_88_then_branch)
+(loop_88_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_88_result_branch)

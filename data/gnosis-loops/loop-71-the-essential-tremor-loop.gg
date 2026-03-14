@@ -1,0 +1,33 @@
+// behavioral-loop-71.gg
+// Executable Gnosis projection for The Essential Tremor Loop.
+
+// Nodes
+(loop_71_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_71_context_branch: BehaviorEmit { emission: 'context' })
+(loop_71_given_gate: BehaviorAssess { stage: 'given', text: 'a%20Benign%20Essential%20Tremor%20(Shaking%20hands)' })
+(loop_71_inactive: BehaviorTerminal { loopId: 71, loopName: 'The%20Essential%20Tremor%20Loop' })
+(loop_71_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_71_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_71_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_71_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%2FDeception%20Operator', mechanism: 'observers%20assume%20%22Nervousness%22%20or%20%22Alcoholism%22' })
+(loop_71_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20avoiding%20public%20eating%2Fspeaking%2C%20or%20developing%20a%20**Self-Deprecating**%20persona%20to%20explain%20the%20shake' })
+(loop_71_sink: BehaviorSink)
+(loop_71_start: BehaviorStart { loopId: 71, loopName: 'The%20Essential%20Tremor%20Loop', given: 'a%20Benign%20Essential%20Tremor%20(Shaking%20hands)', when: 'holding%20a%20paper%20or%20drink%20in%20public', then: 'observers%20assume%20%22Nervousness%22%20or%20%22Alcoholism%22%20(The%20Fragility%2FDeception%20Operator)', result: 'the%20individual%20avoiding%20public%20eating%2Fspeaking%2C%20or%20developing%20a%20**Self-Deprecating**%20persona%20to%20explain%20the%20shake', operatorName: 'The%20Fragility%2FDeception%20Operator', operatorMechanism: 'observers%20assume%20%22Nervousness%22%20or%20%22Alcoholism%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_71_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'REPULSION' })
+(loop_71_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Nervousness%22%20or%20%22Alcoholism%22%20(The%20Fragility%2FDeception%20Operator)' })
+(loop_71_verdict: BehaviorVerdict { loopId: 71, loopName: 'The%20Essential%20Tremor%20Loop', then: 'observers%20assume%20%22Nervousness%22%20or%20%22Alcoholism%22%20(The%20Fragility%2FDeception%20Operator)', result: 'the%20individual%20avoiding%20public%20eating%2Fspeaking%2C%20or%20developing%20a%20**Self-Deprecating**%20persona%20to%20explain%20the%20shake', operatorName: 'The%20Fragility%2FDeception%20Operator', operatorMechanism: 'observers%20assume%20%22Nervousness%22%20or%20%22Alcoholism%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'REPULSION' })
+(loop_71_when_gate: BehaviorAssess { stage: 'when', text: 'holding%20a%20paper%20or%20drink%20in%20public' })
+
+// Topology
+(loop_71_start)-[:PROCESS]->(loop_71_given_gate)
+(loop_71_given_gate)-[:PROCESS { case: "ok" }]->(loop_71_when_gate)
+(loop_71_given_gate)-[:PROCESS { case: "err" }]->(loop_71_inactive)
+(loop_71_when_gate)-[:PROCESS { case: "ok" }]->(loop_71_context)
+(loop_71_when_gate)-[:PROCESS { case: "err" }]->(loop_71_inactive)
+(loop_71_context)-[:FORK { strategy: "behavior-branches" }]->(loop_71_context_branch | loop_71_then_branch | loop_71_operator_branch | loop_71_result_branch | loop_71_taxonomy_branch | loop_71_intervention_recognize | loop_71_intervention_interdict | loop_71_intervention_minimize)
+(loop_71_context_branch | loop_71_then_branch | loop_71_operator_branch | loop_71_result_branch | loop_71_taxonomy_branch | loop_71_intervention_recognize | loop_71_intervention_interdict | loop_71_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_71_verdict)
+(loop_71_inactive)-[:PROCESS]->(loop_71_sink)
+(loop_71_verdict)-[:PROCESS]->(loop_71_sink)
+(loop_71_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_71_then_branch)
+(loop_71_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_71_then_branch)
+(loop_71_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_71_then_branch)

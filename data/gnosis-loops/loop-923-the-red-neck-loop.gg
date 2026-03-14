@@ -1,0 +1,33 @@
+// behavioral-loop-923.gg
+// Executable Gnosis projection for The Red Neck Loop.
+
+// Nodes
+(loop_923_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_923_context_branch: BehaviorEmit { emission: 'context' })
+(loop_923_given_gate: BehaviorAssess { stage: 'given', text: 'Deep%20burn%2Ftan%20only%20on%20the%20neck' })
+(loop_923_inactive: BehaviorTerminal { loopId: 923, loopName: 'The%20Red%20Neck%20Loop' })
+(loop_923_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_923_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_923_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_923_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Class%20Operator', mechanism: 'it%20signals%20%22Outdoor%20Labor%22' })
+(loop_923_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20socio-economic%20sorting' })
+(loop_923_sink: BehaviorSink)
+(loop_923_start: BehaviorStart { loopId: 923, loopName: 'The%20Red%20Neck%20Loop', given: 'Deep%20burn%2Ftan%20only%20on%20the%20neck', when: 'wearing%20a%20collarless%20shirt', then: 'it%20signals%20%22Outdoor%20Labor%22%20(The%20Class%20Operator)', result: 'immediate%20socio-economic%20sorting', operatorName: 'The%20Class%20Operator', operatorMechanism: 'it%20signals%20%22Outdoor%20Labor%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_923_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_923_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Outdoor%20Labor%22%20(The%20Class%20Operator)' })
+(loop_923_verdict: BehaviorVerdict { loopId: 923, loopName: 'The%20Red%20Neck%20Loop', then: 'it%20signals%20%22Outdoor%20Labor%22%20(The%20Class%20Operator)', result: 'immediate%20socio-economic%20sorting', operatorName: 'The%20Class%20Operator', operatorMechanism: 'it%20signals%20%22Outdoor%20Labor%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_923_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20a%20collarless%20shirt' })
+
+// Topology
+(loop_923_start)-[:PROCESS]->(loop_923_given_gate)
+(loop_923_given_gate)-[:PROCESS { case: "ok" }]->(loop_923_when_gate)
+(loop_923_given_gate)-[:PROCESS { case: "err" }]->(loop_923_inactive)
+(loop_923_when_gate)-[:PROCESS { case: "ok" }]->(loop_923_context)
+(loop_923_when_gate)-[:PROCESS { case: "err" }]->(loop_923_inactive)
+(loop_923_context)-[:FORK { strategy: "behavior-branches" }]->(loop_923_context_branch | loop_923_then_branch | loop_923_operator_branch | loop_923_result_branch | loop_923_taxonomy_branch | loop_923_intervention_recognize | loop_923_intervention_interdict | loop_923_intervention_minimize)
+(loop_923_context_branch | loop_923_then_branch | loop_923_operator_branch | loop_923_result_branch | loop_923_taxonomy_branch | loop_923_intervention_recognize | loop_923_intervention_interdict | loop_923_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_923_verdict)
+(loop_923_inactive)-[:PROCESS]->(loop_923_sink)
+(loop_923_verdict)-[:PROCESS]->(loop_923_sink)
+(loop_923_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_923_then_branch)
+(loop_923_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_923_then_branch)
+(loop_923_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_923_then_branch)

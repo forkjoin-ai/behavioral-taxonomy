@@ -1,0 +1,31 @@
+// behavioral-loop-79.gg
+// Executable Gnosis projection for The Rosacea Loop.
+
+// Nodes
+(loop_79_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_79_context_branch: BehaviorEmit { emission: 'context' })
+(loop_79_given_gate: BehaviorAssess { stage: 'given', text: 'Facial%20Rosacea%20(Redness%20on%20nose%2Fcheeks)' })
+(loop_79_inactive: BehaviorTerminal { loopId: 79, loopName: 'The%20Rosacea%20Loop' })
+(loop_79_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_79_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_79_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%2FVice%20Operator', mechanism: 'observers%20subconsciously%20associate%20it%20with%20Alcoholism' })
+(loop_79_result_branch: BehaviorEmit { emission: 'result', text: 'lower%20trust%20and%20the%20individual%20over-compensating%20with%20**Perfectionism**' })
+(loop_79_sink: BehaviorSink)
+(loop_79_start: BehaviorStart { loopId: 79, loopName: 'The%20Rosacea%20Loop', given: 'Facial%20Rosacea%20(Redness%20on%20nose%2Fcheeks)', when: 'in%20a%20professional%20setting', then: 'observers%20subconsciously%20associate%20it%20with%20Alcoholism%20(The%20Deception%2FVice%20Operator)', result: 'lower%20trust%20and%20the%20individual%20over-compensating%20with%20**Perfectionism**', operatorName: 'The%20Deception%2FVice%20Operator', operatorMechanism: 'observers%20subconsciously%20associate%20it%20with%20Alcoholism', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_79_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_79_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20subconsciously%20associate%20it%20with%20Alcoholism%20(The%20Deception%2FVice%20Operator)' })
+(loop_79_verdict: BehaviorVerdict { loopId: 79, loopName: 'The%20Rosacea%20Loop', then: 'observers%20subconsciously%20associate%20it%20with%20Alcoholism%20(The%20Deception%2FVice%20Operator)', result: 'lower%20trust%20and%20the%20individual%20over-compensating%20with%20**Perfectionism**', operatorName: 'The%20Deception%2FVice%20Operator', operatorMechanism: 'observers%20subconsciously%20associate%20it%20with%20Alcoholism', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_79_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20professional%20setting' })
+
+// Topology
+(loop_79_start)-[:PROCESS]->(loop_79_given_gate)
+(loop_79_given_gate)-[:PROCESS { case: "ok" }]->(loop_79_when_gate)
+(loop_79_given_gate)-[:PROCESS { case: "err" }]->(loop_79_inactive)
+(loop_79_when_gate)-[:PROCESS { case: "ok" }]->(loop_79_context)
+(loop_79_when_gate)-[:PROCESS { case: "err" }]->(loop_79_inactive)
+(loop_79_context)-[:FORK { strategy: "behavior-branches" }]->(loop_79_context_branch | loop_79_then_branch | loop_79_operator_branch | loop_79_result_branch | loop_79_taxonomy_branch | loop_79_intervention_recognize | loop_79_intervention_leverage)
+(loop_79_context_branch | loop_79_then_branch | loop_79_operator_branch | loop_79_result_branch | loop_79_taxonomy_branch | loop_79_intervention_recognize | loop_79_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_79_verdict)
+(loop_79_inactive)-[:PROCESS]->(loop_79_sink)
+(loop_79_verdict)-[:PROCESS]->(loop_79_sink)
+(loop_79_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_79_then_branch)
+(loop_79_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_79_result_branch)

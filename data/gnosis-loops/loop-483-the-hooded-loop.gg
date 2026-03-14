@@ -1,0 +1,33 @@
+// behavioral-loop-483.gg
+// Executable Gnosis projection for The Hooded Loop.
+
+// Nodes
+(loop_483_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_483_context_branch: BehaviorEmit { emission: 'context' })
+(loop_483_given_gate: BehaviorAssess { stage: 'given', text: 'Heavy%20upper%20eyelids%20that%20cover%20the%20crease' })
+(loop_483_inactive: BehaviorTerminal { loopId: 483, loopName: 'The%20Hooded%20Loop' })
+(loop_483_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_483_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_483_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_483_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Clint%20Eastwood%20Operator', mechanism: 'the%20eyes%20look%20%22Sleepy%2C%22%20%22Mysterious%2C%22%20or%20%22Judgemental%22' })
+(loop_483_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20assuming%20the%20individual%20is%20**Calm%2FDangerous**%2C%20leading%20to%20respect' })
+(loop_483_sink: BehaviorSink)
+(loop_483_start: BehaviorStart { loopId: 483, loopName: 'The%20Hooded%20Loop', given: 'Heavy%20upper%20eyelids%20that%20cover%20the%20crease', when: 'resting', then: 'the%20eyes%20look%20%22Sleepy%2C%22%20%22Mysterious%2C%22%20or%20%22Judgemental%22%20(The%20Clint%20Eastwood%20Operator)', result: 'observers%20assuming%20the%20individual%20is%20**Calm%2FDangerous**%2C%20leading%20to%20respect', operatorName: 'The%20Clint%20Eastwood%20Operator', operatorMechanism: 'the%20eyes%20look%20%22Sleepy%2C%22%20%22Mysterious%2C%22%20or%20%22Judgemental%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_483_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_483_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20look%20%22Sleepy%2C%22%20%22Mysterious%2C%22%20or%20%22Judgemental%22%20(The%20Clint%20Eastwood%20Operator)' })
+(loop_483_verdict: BehaviorVerdict { loopId: 483, loopName: 'The%20Hooded%20Loop', then: 'the%20eyes%20look%20%22Sleepy%2C%22%20%22Mysterious%2C%22%20or%20%22Judgemental%22%20(The%20Clint%20Eastwood%20Operator)', result: 'observers%20assuming%20the%20individual%20is%20**Calm%2FDangerous**%2C%20leading%20to%20respect', operatorName: 'The%20Clint%20Eastwood%20Operator', operatorMechanism: 'the%20eyes%20look%20%22Sleepy%2C%22%20%22Mysterious%2C%22%20or%20%22Judgemental%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_483_when_gate: BehaviorAssess { stage: 'when', text: 'resting' })
+
+// Topology
+(loop_483_start)-[:PROCESS]->(loop_483_given_gate)
+(loop_483_given_gate)-[:PROCESS { case: "ok" }]->(loop_483_when_gate)
+(loop_483_given_gate)-[:PROCESS { case: "err" }]->(loop_483_inactive)
+(loop_483_when_gate)-[:PROCESS { case: "ok" }]->(loop_483_context)
+(loop_483_when_gate)-[:PROCESS { case: "err" }]->(loop_483_inactive)
+(loop_483_context)-[:FORK { strategy: "behavior-branches" }]->(loop_483_context_branch | loop_483_then_branch | loop_483_operator_branch | loop_483_result_branch | loop_483_taxonomy_branch | loop_483_intervention_recognize | loop_483_intervention_interdict | loop_483_intervention_minimize)
+(loop_483_context_branch | loop_483_then_branch | loop_483_operator_branch | loop_483_result_branch | loop_483_taxonomy_branch | loop_483_intervention_recognize | loop_483_intervention_interdict | loop_483_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_483_verdict)
+(loop_483_inactive)-[:PROCESS]->(loop_483_sink)
+(loop_483_verdict)-[:PROCESS]->(loop_483_sink)
+(loop_483_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_483_then_branch)
+(loop_483_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_483_then_branch)
+(loop_483_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_483_then_branch)

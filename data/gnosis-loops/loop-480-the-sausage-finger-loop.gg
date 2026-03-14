@@ -1,0 +1,33 @@
+// behavioral-loop-480.gg
+// Executable Gnosis projection for The Sausage Finger Loop.
+
+// Nodes
+(loop_480_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_480_context_branch: BehaviorEmit { emission: 'context' })
+(loop_480_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20digit%20ratio%20and%20high%20girth' })
+(loop_480_inactive: BehaviorTerminal { loopId: 480, loopName: 'The%20Sausage%20Finger%20Loop' })
+(loop_480_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_480_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_480_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_480_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fumble%20Operator', mechanism: 'it%20looks%20%22Clumsy%22' })
+(loop_480_result_branch: BehaviorEmit { emission: 'result', text: 'surprise%20when%20the%20individual%20displays%20fine%20motor%20skill%20(**The%20Virtuoso%20Surprise**)' })
+(loop_480_sink: BehaviorSink)
+(loop_480_start: BehaviorStart { loopId: 480, loopName: 'The%20Sausage%20Finger%20Loop', given: 'Low%20digit%20ratio%20and%20high%20girth', when: 'typing%20or%20playing%20music', then: 'it%20looks%20%22Clumsy%22%20(The%20Fumble%20Operator)', result: 'surprise%20when%20the%20individual%20displays%20fine%20motor%20skill%20(**The%20Virtuoso%20Surprise**)', operatorName: 'The%20Fumble%20Operator', operatorMechanism: 'it%20looks%20%22Clumsy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_480_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_480_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20%22Clumsy%22%20(The%20Fumble%20Operator)' })
+(loop_480_verdict: BehaviorVerdict { loopId: 480, loopName: 'The%20Sausage%20Finger%20Loop', then: 'it%20looks%20%22Clumsy%22%20(The%20Fumble%20Operator)', result: 'surprise%20when%20the%20individual%20displays%20fine%20motor%20skill%20(**The%20Virtuoso%20Surprise**)', operatorName: 'The%20Fumble%20Operator', operatorMechanism: 'it%20looks%20%22Clumsy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_480_when_gate: BehaviorAssess { stage: 'when', text: 'typing%20or%20playing%20music' })
+
+// Topology
+(loop_480_start)-[:PROCESS]->(loop_480_given_gate)
+(loop_480_given_gate)-[:PROCESS { case: "ok" }]->(loop_480_when_gate)
+(loop_480_given_gate)-[:PROCESS { case: "err" }]->(loop_480_inactive)
+(loop_480_when_gate)-[:PROCESS { case: "ok" }]->(loop_480_context)
+(loop_480_when_gate)-[:PROCESS { case: "err" }]->(loop_480_inactive)
+(loop_480_context)-[:FORK { strategy: "behavior-branches" }]->(loop_480_context_branch | loop_480_then_branch | loop_480_operator_branch | loop_480_result_branch | loop_480_taxonomy_branch | loop_480_intervention_recognize | loop_480_intervention_interdict | loop_480_intervention_minimize)
+(loop_480_context_branch | loop_480_then_branch | loop_480_operator_branch | loop_480_result_branch | loop_480_taxonomy_branch | loop_480_intervention_recognize | loop_480_intervention_interdict | loop_480_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_480_verdict)
+(loop_480_inactive)-[:PROCESS]->(loop_480_sink)
+(loop_480_verdict)-[:PROCESS]->(loop_480_sink)
+(loop_480_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_480_then_branch)
+(loop_480_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_480_then_branch)
+(loop_480_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_480_then_branch)

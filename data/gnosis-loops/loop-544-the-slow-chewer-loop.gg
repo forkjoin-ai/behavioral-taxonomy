@@ -1,0 +1,33 @@
+// behavioral-loop-544.gg
+// Executable Gnosis projection for The Slow Chewer Loop.
+
+// Nodes
+(loop_544_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_544_context_branch: BehaviorEmit { emission: 'context' })
+(loop_544_given_gate: BehaviorAssess { stage: 'given', text: 'Excessive%20mastication%20(30%2B%20chews)' })
+(loop_544_inactive: BehaviorTerminal { loopId: 544, loopName: 'The%20Slow%20Chewer%20Loop' })
+(loop_544_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_544_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_544_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_544_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Delay%20Operator', mechanism: 'the%20table%20is%20held%20hostage' })
+(loop_544_result_branch: BehaviorEmit { emission: 'result', text: 'the%20group%20becoming%20resentful%20of%20the%20time%20waste' })
+(loop_544_sink: BehaviorSink)
+(loop_544_start: BehaviorStart { loopId: 544, loopName: 'The%20Slow%20Chewer%20Loop', given: 'Excessive%20mastication%20(30%2B%20chews)', when: 'everyone%20else%20is%20done', then: 'the%20table%20is%20held%20hostage%20(The%20Delay%20Operator)', result: 'the%20group%20becoming%20resentful%20of%20the%20time%20waste', operatorName: 'The%20Delay%20Operator', operatorMechanism: 'the%20table%20is%20held%20hostage', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_544_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_544_then_branch: BehaviorEmit { emission: 'then', text: 'the%20table%20is%20held%20hostage%20(The%20Delay%20Operator)' })
+(loop_544_verdict: BehaviorVerdict { loopId: 544, loopName: 'The%20Slow%20Chewer%20Loop', then: 'the%20table%20is%20held%20hostage%20(The%20Delay%20Operator)', result: 'the%20group%20becoming%20resentful%20of%20the%20time%20waste', operatorName: 'The%20Delay%20Operator', operatorMechanism: 'the%20table%20is%20held%20hostage', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_544_when_gate: BehaviorAssess { stage: 'when', text: 'everyone%20else%20is%20done' })
+
+// Topology
+(loop_544_start)-[:PROCESS]->(loop_544_given_gate)
+(loop_544_given_gate)-[:PROCESS { case: "ok" }]->(loop_544_when_gate)
+(loop_544_given_gate)-[:PROCESS { case: "err" }]->(loop_544_inactive)
+(loop_544_when_gate)-[:PROCESS { case: "ok" }]->(loop_544_context)
+(loop_544_when_gate)-[:PROCESS { case: "err" }]->(loop_544_inactive)
+(loop_544_context)-[:FORK { strategy: "behavior-branches" }]->(loop_544_context_branch | loop_544_then_branch | loop_544_operator_branch | loop_544_result_branch | loop_544_taxonomy_branch | loop_544_intervention_recognize | loop_544_intervention_interdict | loop_544_intervention_minimize)
+(loop_544_context_branch | loop_544_then_branch | loop_544_operator_branch | loop_544_result_branch | loop_544_taxonomy_branch | loop_544_intervention_recognize | loop_544_intervention_interdict | loop_544_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_544_verdict)
+(loop_544_inactive)-[:PROCESS]->(loop_544_sink)
+(loop_544_verdict)-[:PROCESS]->(loop_544_sink)
+(loop_544_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_544_then_branch)
+(loop_544_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_544_then_branch)
+(loop_544_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_544_then_branch)

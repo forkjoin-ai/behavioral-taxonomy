@@ -1,0 +1,33 @@
+// behavioral-loop-426.gg
+// Executable Gnosis projection for The Toe Tapper Loop.
+
+// Nodes
+(loop_426_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_426_context_branch: BehaviorEmit { emission: 'context' })
+(loop_426_given_gate: BehaviorAssess { stage: 'given', text: 'Rhythmic%20tapping%20of%20the%20foot%20against%20the%20floor' })
+(loop_426_inactive: BehaviorTerminal { loopId: 426, loopName: 'The%20Toe%20Tapper%20Loop' })
+(loop_426_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_426_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_426_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_426_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nuisance%20Operator', mechanism: 'the%20sound%20breaks%20the%20concentration%20of%20others' })
+(loop_426_result_branch: BehaviorEmit { emission: 'result', text: 'passive-aggressive%20glares%20and%20social%20policing' })
+(loop_426_sink: BehaviorSink)
+(loop_426_start: BehaviorStart { loopId: 426, loopName: 'The%20Toe%20Tapper%20Loop', given: 'Rhythmic%20tapping%20of%20the%20foot%20against%20the%20floor', when: 'in%20a%20quiet%20library%20or%20test%20center', then: 'the%20sound%20breaks%20the%20concentration%20of%20others%20(The%20Nuisance%20Operator)', result: 'passive-aggressive%20glares%20and%20social%20policing', operatorName: 'The%20Nuisance%20Operator', operatorMechanism: 'the%20sound%20breaks%20the%20concentration%20of%20others', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_426_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_426_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20breaks%20the%20concentration%20of%20others%20(The%20Nuisance%20Operator)' })
+(loop_426_verdict: BehaviorVerdict { loopId: 426, loopName: 'The%20Toe%20Tapper%20Loop', then: 'the%20sound%20breaks%20the%20concentration%20of%20others%20(The%20Nuisance%20Operator)', result: 'passive-aggressive%20glares%20and%20social%20policing', operatorName: 'The%20Nuisance%20Operator', operatorMechanism: 'the%20sound%20breaks%20the%20concentration%20of%20others', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_426_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20quiet%20library%20or%20test%20center' })
+
+// Topology
+(loop_426_start)-[:PROCESS]->(loop_426_given_gate)
+(loop_426_given_gate)-[:PROCESS { case: "ok" }]->(loop_426_when_gate)
+(loop_426_given_gate)-[:PROCESS { case: "err" }]->(loop_426_inactive)
+(loop_426_when_gate)-[:PROCESS { case: "ok" }]->(loop_426_context)
+(loop_426_when_gate)-[:PROCESS { case: "err" }]->(loop_426_inactive)
+(loop_426_context)-[:FORK { strategy: "behavior-branches" }]->(loop_426_context_branch | loop_426_then_branch | loop_426_operator_branch | loop_426_result_branch | loop_426_taxonomy_branch | loop_426_intervention_recognize | loop_426_intervention_interdict | loop_426_intervention_minimize)
+(loop_426_context_branch | loop_426_then_branch | loop_426_operator_branch | loop_426_result_branch | loop_426_taxonomy_branch | loop_426_intervention_recognize | loop_426_intervention_interdict | loop_426_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_426_verdict)
+(loop_426_inactive)-[:PROCESS]->(loop_426_sink)
+(loop_426_verdict)-[:PROCESS]->(loop_426_sink)
+(loop_426_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_426_then_branch)
+(loop_426_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_426_then_branch)
+(loop_426_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_426_then_branch)

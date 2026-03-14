@@ -1,0 +1,31 @@
+// behavioral-loop-963.gg
+// Executable Gnosis projection for The Digit Fidget Loop.
+
+// Nodes
+(loop_963_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_963_context_branch: BehaviorEmit { emission: 'context' })
+(loop_963_given_gate: BehaviorAssess { stage: 'given', text: 'Constant%20drumming%20or%20wiggling%20of%20fingers' })
+(loop_963_inactive: BehaviorTerminal { loopId: 963, loopName: 'The%20Digit%20Fidget%20Loop' })
+(loop_963_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_963_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_963_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Static%20Operator', mechanism: 'the%20motion%20creates%20visual%20noise' })
+(loop_963_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20viewed%20as%20%22High%20Strung%22%20or%20%22Unreliable.%22' })
+(loop_963_sink: BehaviorSink)
+(loop_963_start: BehaviorStart { loopId: 963, loopName: 'The%20Digit%20Fidget%20Loop', given: 'Constant%20drumming%20or%20wiggling%20of%20fingers', when: 'silence%20falls', then: 'the%20motion%20creates%20visual%20noise%20(The%20Static%20Operator)', result: 'the%20individual%20being%20viewed%20as%20%22High%20Strung%22%20or%20%22Unreliable.%22', operatorName: 'The%20Static%20Operator', operatorMechanism: 'the%20motion%20creates%20visual%20noise', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_963_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_963_then_branch: BehaviorEmit { emission: 'then', text: 'the%20motion%20creates%20visual%20noise%20(The%20Static%20Operator)' })
+(loop_963_verdict: BehaviorVerdict { loopId: 963, loopName: 'The%20Digit%20Fidget%20Loop', then: 'the%20motion%20creates%20visual%20noise%20(The%20Static%20Operator)', result: 'the%20individual%20being%20viewed%20as%20%22High%20Strung%22%20or%20%22Unreliable.%22', operatorName: 'The%20Static%20Operator', operatorMechanism: 'the%20motion%20creates%20visual%20noise', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_963_when_gate: BehaviorAssess { stage: 'when', text: 'silence%20falls' })
+
+// Topology
+(loop_963_start)-[:PROCESS]->(loop_963_given_gate)
+(loop_963_given_gate)-[:PROCESS { case: "ok" }]->(loop_963_when_gate)
+(loop_963_given_gate)-[:PROCESS { case: "err" }]->(loop_963_inactive)
+(loop_963_when_gate)-[:PROCESS { case: "ok" }]->(loop_963_context)
+(loop_963_when_gate)-[:PROCESS { case: "err" }]->(loop_963_inactive)
+(loop_963_context)-[:FORK { strategy: "behavior-branches" }]->(loop_963_context_branch | loop_963_then_branch | loop_963_operator_branch | loop_963_result_branch | loop_963_taxonomy_branch | loop_963_intervention_recognize | loop_963_intervention_leverage)
+(loop_963_context_branch | loop_963_then_branch | loop_963_operator_branch | loop_963_result_branch | loop_963_taxonomy_branch | loop_963_intervention_recognize | loop_963_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_963_verdict)
+(loop_963_inactive)-[:PROCESS]->(loop_963_sink)
+(loop_963_verdict)-[:PROCESS]->(loop_963_sink)
+(loop_963_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_963_then_branch)
+(loop_963_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_963_result_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-951.gg
+// Executable Gnosis projection for The Slick Loop.
+
+// Nodes
+(loop_951_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_951_context_branch: BehaviorEmit { emission: 'context' })
+(loop_951_given_gate: BehaviorAssess { stage: 'given', text: 'Excess%20oil%20production%20on%20face' })
+(loop_951_inactive: BehaviorTerminal { loopId: 951, loopName: 'The%20Slick%20Loop' })
+(loop_951_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_951_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_951_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_951_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Grease%20Operator', mechanism: 'the%20face%20reflects%20light%20like%20a%20mirror' })
+(loop_951_result_branch: BehaviorEmit { emission: 'result', text: 'looking%20%22Sweaty%22%20or%20%22Nervous%22%20even%20when%20calm' })
+(loop_951_sink: BehaviorSink)
+(loop_951_start: BehaviorStart { loopId: 951, loopName: 'The%20Slick%20Loop', given: 'Excess%20oil%20production%20on%20face', when: 'midday', then: 'the%20face%20reflects%20light%20like%20a%20mirror%20(The%20Grease%20Operator)', result: 'looking%20%22Sweaty%22%20or%20%22Nervous%22%20even%20when%20calm', operatorName: 'The%20Grease%20Operator', operatorMechanism: 'the%20face%20reflects%20light%20like%20a%20mirror', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_951_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_951_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20reflects%20light%20like%20a%20mirror%20(The%20Grease%20Operator)' })
+(loop_951_verdict: BehaviorVerdict { loopId: 951, loopName: 'The%20Slick%20Loop', then: 'the%20face%20reflects%20light%20like%20a%20mirror%20(The%20Grease%20Operator)', result: 'looking%20%22Sweaty%22%20or%20%22Nervous%22%20even%20when%20calm', operatorName: 'The%20Grease%20Operator', operatorMechanism: 'the%20face%20reflects%20light%20like%20a%20mirror', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_951_when_gate: BehaviorAssess { stage: 'when', text: 'midday' })
+
+// Topology
+(loop_951_start)-[:PROCESS]->(loop_951_given_gate)
+(loop_951_given_gate)-[:PROCESS { case: "ok" }]->(loop_951_when_gate)
+(loop_951_given_gate)-[:PROCESS { case: "err" }]->(loop_951_inactive)
+(loop_951_when_gate)-[:PROCESS { case: "ok" }]->(loop_951_context)
+(loop_951_when_gate)-[:PROCESS { case: "err" }]->(loop_951_inactive)
+(loop_951_context)-[:FORK { strategy: "behavior-branches" }]->(loop_951_context_branch | loop_951_then_branch | loop_951_operator_branch | loop_951_result_branch | loop_951_taxonomy_branch | loop_951_intervention_recognize | loop_951_intervention_interdict | loop_951_intervention_minimize)
+(loop_951_context_branch | loop_951_then_branch | loop_951_operator_branch | loop_951_result_branch | loop_951_taxonomy_branch | loop_951_intervention_recognize | loop_951_intervention_interdict | loop_951_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_951_verdict)
+(loop_951_inactive)-[:PROCESS]->(loop_951_sink)
+(loop_951_verdict)-[:PROCESS]->(loop_951_sink)
+(loop_951_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_951_then_branch)
+(loop_951_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_951_then_branch)
+(loop_951_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_951_then_branch)

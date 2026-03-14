@@ -1,0 +1,33 @@
+// behavioral-loop-836.gg
+// Executable Gnosis projection for The Squint Loop.
+
+// Nodes
+(loop_836_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_836_context_branch: BehaviorEmit { emission: 'context' })
+(loop_836_given_gate: BehaviorAssess { stage: 'given', text: 'Narrowing%20the%20palpebral%20fissure%20(Myopia%20or%20habit)' })
+(loop_836_inactive: BehaviorTerminal { loopId: 836, loopName: 'The%20Squint%20Loop' })
+(loop_836_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_836_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_836_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_836_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Critic%20Operator', mechanism: 'it%20signals%20%22Disbelief%22%20or%20%22Judgment%22' })
+(loop_836_result_branch: BehaviorEmit { emission: 'result', text: 'the%20presenter%20becoming%20defensive%20and%20over-explaining' })
+(loop_836_sink: BehaviorSink)
+(loop_836_start: BehaviorStart { loopId: 836, loopName: 'The%20Squint%20Loop', given: 'Narrowing%20the%20palpebral%20fissure%20(Myopia%20or%20habit)', when: 'hearing%20a%20new%20idea', then: 'it%20signals%20%22Disbelief%22%20or%20%22Judgment%22%20(The%20Critic%20Operator)', result: 'the%20presenter%20becoming%20defensive%20and%20over-explaining', operatorName: 'The%20Critic%20Operator', operatorMechanism: 'it%20signals%20%22Disbelief%22%20or%20%22Judgment%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_836_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_836_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Disbelief%22%20or%20%22Judgment%22%20(The%20Critic%20Operator)' })
+(loop_836_verdict: BehaviorVerdict { loopId: 836, loopName: 'The%20Squint%20Loop', then: 'it%20signals%20%22Disbelief%22%20or%20%22Judgment%22%20(The%20Critic%20Operator)', result: 'the%20presenter%20becoming%20defensive%20and%20over-explaining', operatorName: 'The%20Critic%20Operator', operatorMechanism: 'it%20signals%20%22Disbelief%22%20or%20%22Judgment%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_836_when_gate: BehaviorAssess { stage: 'when', text: 'hearing%20a%20new%20idea' })
+
+// Topology
+(loop_836_start)-[:PROCESS]->(loop_836_given_gate)
+(loop_836_given_gate)-[:PROCESS { case: "ok" }]->(loop_836_when_gate)
+(loop_836_given_gate)-[:PROCESS { case: "err" }]->(loop_836_inactive)
+(loop_836_when_gate)-[:PROCESS { case: "ok" }]->(loop_836_context)
+(loop_836_when_gate)-[:PROCESS { case: "err" }]->(loop_836_inactive)
+(loop_836_context)-[:FORK { strategy: "behavior-branches" }]->(loop_836_context_branch | loop_836_then_branch | loop_836_operator_branch | loop_836_result_branch | loop_836_taxonomy_branch | loop_836_intervention_recognize | loop_836_intervention_interdict | loop_836_intervention_minimize)
+(loop_836_context_branch | loop_836_then_branch | loop_836_operator_branch | loop_836_result_branch | loop_836_taxonomy_branch | loop_836_intervention_recognize | loop_836_intervention_interdict | loop_836_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_836_verdict)
+(loop_836_inactive)-[:PROCESS]->(loop_836_sink)
+(loop_836_verdict)-[:PROCESS]->(loop_836_sink)
+(loop_836_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_836_then_branch)
+(loop_836_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_836_then_branch)
+(loop_836_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_836_then_branch)

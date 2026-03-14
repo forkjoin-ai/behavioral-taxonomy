@@ -1,0 +1,33 @@
+// behavioral-loop-1083.gg
+// Executable Gnosis projection for The Heirloom Loop.
+
+// Nodes
+(loop_1083_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1083_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1083_given_gate: BehaviorAssess { stage: 'given', text: 'An%20object%20owned%20by%20the%20deceased' })
+(loop_1083_inactive: BehaviorTerminal { loopId: 1083, loopName: 'The%20Heirloom%20Loop' })
+(loop_1083_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1083_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1083_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1083_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'it%20carries%20%22Mana%22%20or%20%22Weight%22%20(The%20Relic)' })
+(loop_1083_result_branch: BehaviorEmit { emission: 'result', text: 'inability%20to%20throw%20away%20a%20useless%20item' })
+(loop_1083_sink: BehaviorSink)
+(loop_1083_start: BehaviorStart { loopId: 1083, loopName: 'The%20Heirloom%20Loop', given: 'An%20object%20owned%20by%20the%20deceased', when: 'held%20by%20a%20descendant', then: 'it%20carries%20%22Mana%22%20or%20%22Weight%22%20(The%20Relic)', result: 'inability%20to%20throw%20away%20a%20useless%20item', operatorName: 'Unknown%20Operator', operatorMechanism: 'it%20carries%20%22Mana%22%20or%20%22Weight%22%20(The%20Relic)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1083_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1083_then_branch: BehaviorEmit { emission: 'then', text: 'it%20carries%20%22Mana%22%20or%20%22Weight%22%20(The%20Relic)' })
+(loop_1083_verdict: BehaviorVerdict { loopId: 1083, loopName: 'The%20Heirloom%20Loop', then: 'it%20carries%20%22Mana%22%20or%20%22Weight%22%20(The%20Relic)', result: 'inability%20to%20throw%20away%20a%20useless%20item', operatorName: 'Unknown%20Operator', operatorMechanism: 'it%20carries%20%22Mana%22%20or%20%22Weight%22%20(The%20Relic)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1083_when_gate: BehaviorAssess { stage: 'when', text: 'held%20by%20a%20descendant' })
+
+// Topology
+(loop_1083_start)-[:PROCESS]->(loop_1083_given_gate)
+(loop_1083_given_gate)-[:PROCESS { case: "ok" }]->(loop_1083_when_gate)
+(loop_1083_given_gate)-[:PROCESS { case: "err" }]->(loop_1083_inactive)
+(loop_1083_when_gate)-[:PROCESS { case: "ok" }]->(loop_1083_context)
+(loop_1083_when_gate)-[:PROCESS { case: "err" }]->(loop_1083_inactive)
+(loop_1083_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1083_context_branch | loop_1083_then_branch | loop_1083_operator_branch | loop_1083_result_branch | loop_1083_taxonomy_branch | loop_1083_intervention_recognize | loop_1083_intervention_interdict | loop_1083_intervention_minimize)
+(loop_1083_context_branch | loop_1083_then_branch | loop_1083_operator_branch | loop_1083_result_branch | loop_1083_taxonomy_branch | loop_1083_intervention_recognize | loop_1083_intervention_interdict | loop_1083_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1083_verdict)
+(loop_1083_inactive)-[:PROCESS]->(loop_1083_sink)
+(loop_1083_verdict)-[:PROCESS]->(loop_1083_sink)
+(loop_1083_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1083_then_branch)
+(loop_1083_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1083_then_branch)
+(loop_1083_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1083_then_branch)

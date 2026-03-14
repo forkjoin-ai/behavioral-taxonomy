@@ -1,0 +1,33 @@
+// behavioral-loop-256.gg
+// Executable Gnosis projection for The Yawner Loop.
+
+// Nodes
+(loop_256_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_256_context_branch: BehaviorEmit { emission: 'context' })
+(loop_256_given_gate: BehaviorAssess { stage: 'given', text: 'Brain%20requiring%20high%20O2%20(frequent%20yawning)' })
+(loop_256_inactive: BehaviorTerminal { loopId: 256, loopName: 'The%20Yawner%20Loop' })
+(loop_256_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_256_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_256_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_256_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disrespect%20Operator', mechanism: 'the%20speaker%20feels%20%22Insulted%22%20by%20the%20boredom%20signal' })
+(loop_256_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20labeled%20%22Rude%22%20or%20%22Uninterested.%22' })
+(loop_256_sink: BehaviorSink)
+(loop_256_start: BehaviorStart { loopId: 256, loopName: 'The%20Yawner%20Loop', given: 'Brain%20requiring%20high%20O2%20(frequent%20yawning)', when: 'in%20a%20lecture%20or%20conversation', then: 'the%20speaker%20feels%20%22Insulted%22%20by%20the%20boredom%20signal%20(The%20Disrespect%20Operator)', result: 'the%20individual%20being%20labeled%20%22Rude%22%20or%20%22Uninterested.%22', operatorName: 'The%20Disrespect%20Operator', operatorMechanism: 'the%20speaker%20feels%20%22Insulted%22%20by%20the%20boredom%20signal', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_256_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_256_then_branch: BehaviorEmit { emission: 'then', text: 'the%20speaker%20feels%20%22Insulted%22%20by%20the%20boredom%20signal%20(The%20Disrespect%20Operator)' })
+(loop_256_verdict: BehaviorVerdict { loopId: 256, loopName: 'The%20Yawner%20Loop', then: 'the%20speaker%20feels%20%22Insulted%22%20by%20the%20boredom%20signal%20(The%20Disrespect%20Operator)', result: 'the%20individual%20being%20labeled%20%22Rude%22%20or%20%22Uninterested.%22', operatorName: 'The%20Disrespect%20Operator', operatorMechanism: 'the%20speaker%20feels%20%22Insulted%22%20by%20the%20boredom%20signal', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_256_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20lecture%20or%20conversation' })
+
+// Topology
+(loop_256_start)-[:PROCESS]->(loop_256_given_gate)
+(loop_256_given_gate)-[:PROCESS { case: "ok" }]->(loop_256_when_gate)
+(loop_256_given_gate)-[:PROCESS { case: "err" }]->(loop_256_inactive)
+(loop_256_when_gate)-[:PROCESS { case: "ok" }]->(loop_256_context)
+(loop_256_when_gate)-[:PROCESS { case: "err" }]->(loop_256_inactive)
+(loop_256_context)-[:FORK { strategy: "behavior-branches" }]->(loop_256_context_branch | loop_256_then_branch | loop_256_operator_branch | loop_256_result_branch | loop_256_taxonomy_branch | loop_256_intervention_recognize | loop_256_intervention_interdict | loop_256_intervention_minimize)
+(loop_256_context_branch | loop_256_then_branch | loop_256_operator_branch | loop_256_result_branch | loop_256_taxonomy_branch | loop_256_intervention_recognize | loop_256_intervention_interdict | loop_256_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_256_verdict)
+(loop_256_inactive)-[:PROCESS]->(loop_256_sink)
+(loop_256_verdict)-[:PROCESS]->(loop_256_sink)
+(loop_256_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_256_then_branch)
+(loop_256_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_256_then_branch)
+(loop_256_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_256_then_branch)

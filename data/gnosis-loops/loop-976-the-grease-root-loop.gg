@@ -1,0 +1,33 @@
+// behavioral-loop-976.gg
+// Executable Gnosis projection for The Grease Root Loop.
+
+// Nodes
+(loop_976_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_976_context_branch: BehaviorEmit { emission: 'context' })
+(loop_976_given_gate: BehaviorAssess { stage: 'given', text: 'Oily%20roots%20with%20dry%20ends%20(Combination%20hair)' })
+(loop_976_inactive: BehaviorTerminal { loopId: 976, loopName: 'The%20Grease%20Root%20Loop' })
+(loop_976_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_976_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_976_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_976_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Slick%20Operator', mechanism: 'hair%20clumps%20at%20the%20scalp' })
+(loop_976_result_branch: BehaviorEmit { emission: 'result', text: 'looking%20%22Dirty%22%20even%20if%20the%20person%20is%20clean' })
+(loop_976_sink: BehaviorSink)
+(loop_976_start: BehaviorStart { loopId: 976, loopName: 'The%20Grease%20Root%20Loop', given: 'Oily%20roots%20with%20dry%20ends%20(Combination%20hair)', when: 'day%202%20after%20washing', then: 'hair%20clumps%20at%20the%20scalp%20(The%20Slick%20Operator)', result: 'looking%20%22Dirty%22%20even%20if%20the%20person%20is%20clean', operatorName: 'The%20Slick%20Operator', operatorMechanism: 'hair%20clumps%20at%20the%20scalp', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_976_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_976_then_branch: BehaviorEmit { emission: 'then', text: 'hair%20clumps%20at%20the%20scalp%20(The%20Slick%20Operator)' })
+(loop_976_verdict: BehaviorVerdict { loopId: 976, loopName: 'The%20Grease%20Root%20Loop', then: 'hair%20clumps%20at%20the%20scalp%20(The%20Slick%20Operator)', result: 'looking%20%22Dirty%22%20even%20if%20the%20person%20is%20clean', operatorName: 'The%20Slick%20Operator', operatorMechanism: 'hair%20clumps%20at%20the%20scalp', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_976_when_gate: BehaviorAssess { stage: 'when', text: 'day%202%20after%20washing' })
+
+// Topology
+(loop_976_start)-[:PROCESS]->(loop_976_given_gate)
+(loop_976_given_gate)-[:PROCESS { case: "ok" }]->(loop_976_when_gate)
+(loop_976_given_gate)-[:PROCESS { case: "err" }]->(loop_976_inactive)
+(loop_976_when_gate)-[:PROCESS { case: "ok" }]->(loop_976_context)
+(loop_976_when_gate)-[:PROCESS { case: "err" }]->(loop_976_inactive)
+(loop_976_context)-[:FORK { strategy: "behavior-branches" }]->(loop_976_context_branch | loop_976_then_branch | loop_976_operator_branch | loop_976_result_branch | loop_976_taxonomy_branch | loop_976_intervention_recognize | loop_976_intervention_interdict | loop_976_intervention_minimize)
+(loop_976_context_branch | loop_976_then_branch | loop_976_operator_branch | loop_976_result_branch | loop_976_taxonomy_branch | loop_976_intervention_recognize | loop_976_intervention_interdict | loop_976_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_976_verdict)
+(loop_976_inactive)-[:PROCESS]->(loop_976_sink)
+(loop_976_verdict)-[:PROCESS]->(loop_976_sink)
+(loop_976_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_976_then_branch)
+(loop_976_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_976_then_branch)
+(loop_976_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_976_then_branch)

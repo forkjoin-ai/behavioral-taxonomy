@@ -1,0 +1,33 @@
+// behavioral-loop-507.gg
+// Executable Gnosis projection for The Fried Loop.
+
+// Nodes
+(loop_507_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_507_context_branch: BehaviorEmit { emission: 'context' })
+(loop_507_given_gate: BehaviorAssess { stage: 'given', text: 'Over-bleached%2C%20straw-like%20texture' })
+(loop_507_inactive: BehaviorTerminal { loopId: 507, loopName: 'The%20Fried%20Loop' })
+(loop_507_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_507_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_507_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_507_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Trashy%20Operator', mechanism: 'it%20signals%20%22Vanity%22%20%2B%20%22Failure%22' })
+(loop_507_result_branch: BehaviorEmit { emission: 'result', text: 'class-based%20judgment' })
+(loop_507_sink: BehaviorSink)
+(loop_507_start: BehaviorStart { loopId: 507, loopName: 'The%20Fried%20Loop', given: 'Over-bleached%2C%20straw-like%20texture', when: 'in%20direct%20light', then: 'it%20signals%20%22Vanity%22%20%2B%20%22Failure%22%20(The%20Trashy%20Operator)', result: 'class-based%20judgment', operatorName: 'The%20Trashy%20Operator', operatorMechanism: 'it%20signals%20%22Vanity%22%20%2B%20%22Failure%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_507_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_507_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Vanity%22%20%2B%20%22Failure%22%20(The%20Trashy%20Operator)' })
+(loop_507_verdict: BehaviorVerdict { loopId: 507, loopName: 'The%20Fried%20Loop', then: 'it%20signals%20%22Vanity%22%20%2B%20%22Failure%22%20(The%20Trashy%20Operator)', result: 'class-based%20judgment', operatorName: 'The%20Trashy%20Operator', operatorMechanism: 'it%20signals%20%22Vanity%22%20%2B%20%22Failure%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_507_when_gate: BehaviorAssess { stage: 'when', text: 'in%20direct%20light' })
+
+// Topology
+(loop_507_start)-[:PROCESS]->(loop_507_given_gate)
+(loop_507_given_gate)-[:PROCESS { case: "ok" }]->(loop_507_when_gate)
+(loop_507_given_gate)-[:PROCESS { case: "err" }]->(loop_507_inactive)
+(loop_507_when_gate)-[:PROCESS { case: "ok" }]->(loop_507_context)
+(loop_507_when_gate)-[:PROCESS { case: "err" }]->(loop_507_inactive)
+(loop_507_context)-[:FORK { strategy: "behavior-branches" }]->(loop_507_context_branch | loop_507_then_branch | loop_507_operator_branch | loop_507_result_branch | loop_507_taxonomy_branch | loop_507_intervention_recognize | loop_507_intervention_interdict | loop_507_intervention_minimize)
+(loop_507_context_branch | loop_507_then_branch | loop_507_operator_branch | loop_507_result_branch | loop_507_taxonomy_branch | loop_507_intervention_recognize | loop_507_intervention_interdict | loop_507_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_507_verdict)
+(loop_507_inactive)-[:PROCESS]->(loop_507_sink)
+(loop_507_verdict)-[:PROCESS]->(loop_507_sink)
+(loop_507_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_507_then_branch)
+(loop_507_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_507_then_branch)
+(loop_507_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_507_then_branch)

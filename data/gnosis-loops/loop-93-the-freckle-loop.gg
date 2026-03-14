@@ -1,0 +1,31 @@
+// behavioral-loop-93.gg
+// Executable Gnosis projection for The Freckle Loop.
+
+// Nodes
+(loop_93_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_93_context_branch: BehaviorEmit { emission: 'context' })
+(loop_93_given_gate: BehaviorAssess { stage: 'given', text: 'Ephelides%20(Freckles)' })
+(loop_93_inactive: BehaviorTerminal { loopId: 93, loopName: 'The%20Freckle%20Loop' })
+(loop_93_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_93_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_93_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nurture%20Operator', mechanism: 'observers%20associate%20it%20with%20%22Youth%22%20and%20%22Outdoorsiness%22' })
+(loop_93_result_branch: BehaviorEmit { emission: 'result', text: 'a%20struggle%20to%20be%20taken%20seriously%20as%20a%20%22Senior%22%20authority%20figure' })
+(loop_93_sink: BehaviorSink)
+(loop_93_start: BehaviorStart { loopId: 93, loopName: 'The%20Freckle%20Loop', given: 'Ephelides%20(Freckles)', when: 'seen%20on%20an%20adult', then: 'observers%20associate%20it%20with%20%22Youth%22%20and%20%22Outdoorsiness%22%20(The%20Nurture%20Operator)', result: 'a%20struggle%20to%20be%20taken%20seriously%20as%20a%20%22Senior%22%20authority%20figure', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'observers%20associate%20it%20with%20%22Youth%22%20and%20%22Outdoorsiness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_93_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_93_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20associate%20it%20with%20%22Youth%22%20and%20%22Outdoorsiness%22%20(The%20Nurture%20Operator)' })
+(loop_93_verdict: BehaviorVerdict { loopId: 93, loopName: 'The%20Freckle%20Loop', then: 'observers%20associate%20it%20with%20%22Youth%22%20and%20%22Outdoorsiness%22%20(The%20Nurture%20Operator)', result: 'a%20struggle%20to%20be%20taken%20seriously%20as%20a%20%22Senior%22%20authority%20figure', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'observers%20associate%20it%20with%20%22Youth%22%20and%20%22Outdoorsiness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_93_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20on%20an%20adult' })
+
+// Topology
+(loop_93_start)-[:PROCESS]->(loop_93_given_gate)
+(loop_93_given_gate)-[:PROCESS { case: "ok" }]->(loop_93_when_gate)
+(loop_93_given_gate)-[:PROCESS { case: "err" }]->(loop_93_inactive)
+(loop_93_when_gate)-[:PROCESS { case: "ok" }]->(loop_93_context)
+(loop_93_when_gate)-[:PROCESS { case: "err" }]->(loop_93_inactive)
+(loop_93_context)-[:FORK { strategy: "behavior-branches" }]->(loop_93_context_branch | loop_93_then_branch | loop_93_operator_branch | loop_93_result_branch | loop_93_taxonomy_branch | loop_93_intervention_recognize | loop_93_intervention_leverage)
+(loop_93_context_branch | loop_93_then_branch | loop_93_operator_branch | loop_93_result_branch | loop_93_taxonomy_branch | loop_93_intervention_recognize | loop_93_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_93_verdict)
+(loop_93_inactive)-[:PROCESS]->(loop_93_sink)
+(loop_93_verdict)-[:PROCESS]->(loop_93_sink)
+(loop_93_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_93_then_branch)
+(loop_93_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_93_result_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-1004.gg
+// Executable Gnosis projection for The Doll Hair Loop.
+
+// Nodes
+(loop_1004_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1004_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1004_given_gate: BehaviorAssess { stage: 'given', text: 'Old-school%20hair%20transplant%20with%20large%20follicle%20groupings' })
+(loop_1004_inactive: BehaviorTerminal { loopId: 1004, loopName: 'The%20Doll%20Hair%20Loop' })
+(loop_1004_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1004_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1004_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1004_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cornfield%20Operator', mechanism: 'it%20looks%20like%20%22Row%20Crops%22' })
+(loop_1004_result_branch: BehaviorEmit { emission: 'result', text: 'the%20%22Artificiality%22%20distracting%20from%20the%20face' })
+(loop_1004_sink: BehaviorSink)
+(loop_1004_start: BehaviorStart { loopId: 1004, loopName: 'The%20Doll%20Hair%20Loop', given: 'Old-school%20hair%20transplant%20with%20large%20follicle%20groupings', when: 'looking%20at%20the%20hairline', then: 'it%20looks%20like%20%22Row%20Crops%22%20(The%20Cornfield%20Operator)', result: 'the%20%22Artificiality%22%20distracting%20from%20the%20face', operatorName: 'The%20Cornfield%20Operator', operatorMechanism: 'it%20looks%20like%20%22Row%20Crops%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1004_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1004_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Row%20Crops%22%20(The%20Cornfield%20Operator)' })
+(loop_1004_verdict: BehaviorVerdict { loopId: 1004, loopName: 'The%20Doll%20Hair%20Loop', then: 'it%20looks%20like%20%22Row%20Crops%22%20(The%20Cornfield%20Operator)', result: 'the%20%22Artificiality%22%20distracting%20from%20the%20face', operatorName: 'The%20Cornfield%20Operator', operatorMechanism: 'it%20looks%20like%20%22Row%20Crops%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1004_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20at%20the%20hairline' })
+
+// Topology
+(loop_1004_start)-[:PROCESS]->(loop_1004_given_gate)
+(loop_1004_given_gate)-[:PROCESS { case: "ok" }]->(loop_1004_when_gate)
+(loop_1004_given_gate)-[:PROCESS { case: "err" }]->(loop_1004_inactive)
+(loop_1004_when_gate)-[:PROCESS { case: "ok" }]->(loop_1004_context)
+(loop_1004_when_gate)-[:PROCESS { case: "err" }]->(loop_1004_inactive)
+(loop_1004_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1004_context_branch | loop_1004_then_branch | loop_1004_operator_branch | loop_1004_result_branch | loop_1004_taxonomy_branch | loop_1004_intervention_recognize | loop_1004_intervention_interdict | loop_1004_intervention_minimize)
+(loop_1004_context_branch | loop_1004_then_branch | loop_1004_operator_branch | loop_1004_result_branch | loop_1004_taxonomy_branch | loop_1004_intervention_recognize | loop_1004_intervention_interdict | loop_1004_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1004_verdict)
+(loop_1004_inactive)-[:PROCESS]->(loop_1004_sink)
+(loop_1004_verdict)-[:PROCESS]->(loop_1004_sink)
+(loop_1004_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1004_then_branch)
+(loop_1004_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1004_then_branch)
+(loop_1004_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1004_then_branch)

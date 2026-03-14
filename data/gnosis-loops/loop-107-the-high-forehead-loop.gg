@@ -1,0 +1,33 @@
+// behavioral-loop-107.gg
+// Executable Gnosis projection for The High Forehead Loop.
+
+// Nodes
+(loop_107_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_107_context_branch: BehaviorEmit { emission: 'context' })
+(loop_107_given_gate: BehaviorAssess { stage: 'given', text: 'High%20Hairline%2FLarge%20Frontal%20Bone' })
+(loop_107_inactive: BehaviorTerminal { loopId: 107, loopName: 'The%20High%20Forehead%20Loop' })
+(loop_107_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_107_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_107_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_107_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intellectual%20Operator', mechanism: 'observers%20assume%20%22Intelligence%22%20or%20%22Deep%20Thought%22' })
+(loop_107_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20waiting%20for%20the%20individual%20to%20speak%2C%20creating%20**Pressure%20to%20be%20Profound**' })
+(loop_107_sink: BehaviorSink)
+(loop_107_start: BehaviorStart { loopId: 107, loopName: 'The%20High%20Forehead%20Loop', given: 'High%20Hairline%2FLarge%20Frontal%20Bone', when: 'silent', then: 'observers%20assume%20%22Intelligence%22%20or%20%22Deep%20Thought%22%20(The%20Intellectual%20Operator)', result: 'peers%20waiting%20for%20the%20individual%20to%20speak%2C%20creating%20**Pressure%20to%20be%20Profound**', operatorName: 'The%20Intellectual%20Operator', operatorMechanism: 'observers%20assume%20%22Intelligence%22%20or%20%22Deep%20Thought%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_107_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_107_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Intelligence%22%20or%20%22Deep%20Thought%22%20(The%20Intellectual%20Operator)' })
+(loop_107_verdict: BehaviorVerdict { loopId: 107, loopName: 'The%20High%20Forehead%20Loop', then: 'observers%20assume%20%22Intelligence%22%20or%20%22Deep%20Thought%22%20(The%20Intellectual%20Operator)', result: 'peers%20waiting%20for%20the%20individual%20to%20speak%2C%20creating%20**Pressure%20to%20be%20Profound**', operatorName: 'The%20Intellectual%20Operator', operatorMechanism: 'observers%20assume%20%22Intelligence%22%20or%20%22Deep%20Thought%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_107_when_gate: BehaviorAssess { stage: 'when', text: 'silent' })
+
+// Topology
+(loop_107_start)-[:PROCESS]->(loop_107_given_gate)
+(loop_107_given_gate)-[:PROCESS { case: "ok" }]->(loop_107_when_gate)
+(loop_107_given_gate)-[:PROCESS { case: "err" }]->(loop_107_inactive)
+(loop_107_when_gate)-[:PROCESS { case: "ok" }]->(loop_107_context)
+(loop_107_when_gate)-[:PROCESS { case: "err" }]->(loop_107_inactive)
+(loop_107_context)-[:FORK { strategy: "behavior-branches" }]->(loop_107_context_branch | loop_107_then_branch | loop_107_operator_branch | loop_107_result_branch | loop_107_taxonomy_branch | loop_107_intervention_recognize | loop_107_intervention_interdict | loop_107_intervention_minimize)
+(loop_107_context_branch | loop_107_then_branch | loop_107_operator_branch | loop_107_result_branch | loop_107_taxonomy_branch | loop_107_intervention_recognize | loop_107_intervention_interdict | loop_107_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_107_verdict)
+(loop_107_inactive)-[:PROCESS]->(loop_107_sink)
+(loop_107_verdict)-[:PROCESS]->(loop_107_sink)
+(loop_107_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_107_then_branch)
+(loop_107_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_107_then_branch)
+(loop_107_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_107_then_branch)

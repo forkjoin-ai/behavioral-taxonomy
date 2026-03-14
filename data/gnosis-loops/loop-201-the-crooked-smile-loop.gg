@@ -1,0 +1,33 @@
+// behavioral-loop-201.gg
+// Executable Gnosis projection for The Crooked Smile Loop.
+
+// Nodes
+(loop_201_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_201_context_branch: BehaviorEmit { emission: 'context' })
+(loop_201_given_gate: BehaviorAssess { stage: 'given', text: 'Hemifacial%20weakness%20or%20asymmetry' })
+(loop_201_inactive: BehaviorTerminal { loopId: 201, loopName: 'The%20Crooked%20Smile%20Loop' })
+(loop_201_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_201_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_201_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_201_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%20Operator', mechanism: 'observers%20perceive%20%22Sarcasm%2C%22%20%22Cynicism%2C%22%20or%20%22Duplicity%22' })
+(loop_201_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20struggling%20to%20convey%20**Sincerity**' })
+(loop_201_sink: BehaviorSink)
+(loop_201_start: BehaviorStart { loopId: 201, loopName: 'The%20Crooked%20Smile%20Loop', given: 'Hemifacial%20weakness%20or%20asymmetry', when: 'smiling%20genuinely', then: 'observers%20perceive%20%22Sarcasm%2C%22%20%22Cynicism%2C%22%20or%20%22Duplicity%22%20(The%20Deception%20Operator)', result: 'the%20individual%20struggling%20to%20convey%20**Sincerity**', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'observers%20perceive%20%22Sarcasm%2C%22%20%22Cynicism%2C%22%20or%20%22Duplicity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_201_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_201_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Sarcasm%2C%22%20%22Cynicism%2C%22%20or%20%22Duplicity%22%20(The%20Deception%20Operator)' })
+(loop_201_verdict: BehaviorVerdict { loopId: 201, loopName: 'The%20Crooked%20Smile%20Loop', then: 'observers%20perceive%20%22Sarcasm%2C%22%20%22Cynicism%2C%22%20or%20%22Duplicity%22%20(The%20Deception%20Operator)', result: 'the%20individual%20struggling%20to%20convey%20**Sincerity**', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'observers%20perceive%20%22Sarcasm%2C%22%20%22Cynicism%2C%22%20or%20%22Duplicity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_201_when_gate: BehaviorAssess { stage: 'when', text: 'smiling%20genuinely' })
+
+// Topology
+(loop_201_start)-[:PROCESS]->(loop_201_given_gate)
+(loop_201_given_gate)-[:PROCESS { case: "ok" }]->(loop_201_when_gate)
+(loop_201_given_gate)-[:PROCESS { case: "err" }]->(loop_201_inactive)
+(loop_201_when_gate)-[:PROCESS { case: "ok" }]->(loop_201_context)
+(loop_201_when_gate)-[:PROCESS { case: "err" }]->(loop_201_inactive)
+(loop_201_context)-[:FORK { strategy: "behavior-branches" }]->(loop_201_context_branch | loop_201_then_branch | loop_201_operator_branch | loop_201_result_branch | loop_201_taxonomy_branch | loop_201_intervention_recognize | loop_201_intervention_interdict | loop_201_intervention_minimize)
+(loop_201_context_branch | loop_201_then_branch | loop_201_operator_branch | loop_201_result_branch | loop_201_taxonomy_branch | loop_201_intervention_recognize | loop_201_intervention_interdict | loop_201_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_201_verdict)
+(loop_201_inactive)-[:PROCESS]->(loop_201_sink)
+(loop_201_verdict)-[:PROCESS]->(loop_201_sink)
+(loop_201_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_201_then_branch)
+(loop_201_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_201_then_branch)
+(loop_201_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_201_then_branch)

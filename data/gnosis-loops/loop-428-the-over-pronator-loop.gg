@@ -1,0 +1,33 @@
+// behavioral-loop-428.gg
+// Executable Gnosis projection for The Over-Pronator Loop.
+
+// Nodes
+(loop_428_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_428_context_branch: BehaviorEmit { emission: 'context' })
+(loop_428_given_gate: BehaviorAssess { stage: 'given', text: 'Ankles%20collapsing%20inward%20when%20walking' })
+(loop_428_inactive: BehaviorTerminal { loopId: 428, loopName: 'The%20Over-Pronator%20Loop' })
+(loop_428_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_428_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_428_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_428_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Athletic%20Discount%20Operator', mechanism: 'the%20gait%20looks%20%22Broken%22%20or%20%22Weak%22' })
+(loop_428_result_branch: BehaviorEmit { emission: 'result', text: 'being%20picked%20last%20for%20sports%20teams' })
+(loop_428_sink: BehaviorSink)
+(loop_428_start: BehaviorStart { loopId: 428, loopName: 'The%20Over-Pronator%20Loop', given: 'Ankles%20collapsing%20inward%20when%20walking', when: 'running%20or%20walking%20away', then: 'the%20gait%20looks%20%22Broken%22%20or%20%22Weak%22%20(The%20Athletic%20Discount%20Operator)', result: 'being%20picked%20last%20for%20sports%20teams', operatorName: 'The%20Athletic%20Discount%20Operator', operatorMechanism: 'the%20gait%20looks%20%22Broken%22%20or%20%22Weak%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_428_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_428_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gait%20looks%20%22Broken%22%20or%20%22Weak%22%20(The%20Athletic%20Discount%20Operator)' })
+(loop_428_verdict: BehaviorVerdict { loopId: 428, loopName: 'The%20Over-Pronator%20Loop', then: 'the%20gait%20looks%20%22Broken%22%20or%20%22Weak%22%20(The%20Athletic%20Discount%20Operator)', result: 'being%20picked%20last%20for%20sports%20teams', operatorName: 'The%20Athletic%20Discount%20Operator', operatorMechanism: 'the%20gait%20looks%20%22Broken%22%20or%20%22Weak%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_428_when_gate: BehaviorAssess { stage: 'when', text: 'running%20or%20walking%20away' })
+
+// Topology
+(loop_428_start)-[:PROCESS]->(loop_428_given_gate)
+(loop_428_given_gate)-[:PROCESS { case: "ok" }]->(loop_428_when_gate)
+(loop_428_given_gate)-[:PROCESS { case: "err" }]->(loop_428_inactive)
+(loop_428_when_gate)-[:PROCESS { case: "ok" }]->(loop_428_context)
+(loop_428_when_gate)-[:PROCESS { case: "err" }]->(loop_428_inactive)
+(loop_428_context)-[:FORK { strategy: "behavior-branches" }]->(loop_428_context_branch | loop_428_then_branch | loop_428_operator_branch | loop_428_result_branch | loop_428_taxonomy_branch | loop_428_intervention_recognize | loop_428_intervention_interdict | loop_428_intervention_minimize)
+(loop_428_context_branch | loop_428_then_branch | loop_428_operator_branch | loop_428_result_branch | loop_428_taxonomy_branch | loop_428_intervention_recognize | loop_428_intervention_interdict | loop_428_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_428_verdict)
+(loop_428_inactive)-[:PROCESS]->(loop_428_sink)
+(loop_428_verdict)-[:PROCESS]->(loop_428_sink)
+(loop_428_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_428_then_branch)
+(loop_428_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_428_then_branch)
+(loop_428_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_428_then_branch)

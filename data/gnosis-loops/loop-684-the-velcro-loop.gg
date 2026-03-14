@@ -1,0 +1,33 @@
+// behavioral-loop-684.gg
+// Executable Gnosis projection for The Velcro Loop.
+
+// Nodes
+(loop_684_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_684_context_branch: BehaviorEmit { emission: 'context' })
+(loop_684_given_gate: BehaviorAssess { stage: 'given', text: 'Skirt%20or%20pants%20sticking%20to%20legs' })
+(loop_684_inactive: BehaviorTerminal { loopId: 684, loopName: 'The%20Velcro%20Loop' })
+(loop_684_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_684_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_684_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_684_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cling%20Operator', mechanism: 'the%20silhouette%20is%20disrupted%2Frevealing' })
+(loop_684_result_branch: BehaviorEmit { emission: 'result', text: 'awkward%20anatomical%20highlighting' })
+(loop_684_sink: BehaviorSink)
+(loop_684_start: BehaviorStart { loopId: 684, loopName: 'The%20Velcro%20Loop', given: 'Skirt%20or%20pants%20sticking%20to%20legs', when: 'walking', then: 'the%20silhouette%20is%20disrupted%2Frevealing%20(The%20Cling%20Operator)', result: 'awkward%20anatomical%20highlighting', operatorName: 'The%20Cling%20Operator', operatorMechanism: 'the%20silhouette%20is%20disrupted%2Frevealing', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_684_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_684_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20is%20disrupted%2Frevealing%20(The%20Cling%20Operator)' })
+(loop_684_verdict: BehaviorVerdict { loopId: 684, loopName: 'The%20Velcro%20Loop', then: 'the%20silhouette%20is%20disrupted%2Frevealing%20(The%20Cling%20Operator)', result: 'awkward%20anatomical%20highlighting', operatorName: 'The%20Cling%20Operator', operatorMechanism: 'the%20silhouette%20is%20disrupted%2Frevealing', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_684_when_gate: BehaviorAssess { stage: 'when', text: 'walking' })
+
+// Topology
+(loop_684_start)-[:PROCESS]->(loop_684_given_gate)
+(loop_684_given_gate)-[:PROCESS { case: "ok" }]->(loop_684_when_gate)
+(loop_684_given_gate)-[:PROCESS { case: "err" }]->(loop_684_inactive)
+(loop_684_when_gate)-[:PROCESS { case: "ok" }]->(loop_684_context)
+(loop_684_when_gate)-[:PROCESS { case: "err" }]->(loop_684_inactive)
+(loop_684_context)-[:FORK { strategy: "behavior-branches" }]->(loop_684_context_branch | loop_684_then_branch | loop_684_operator_branch | loop_684_result_branch | loop_684_taxonomy_branch | loop_684_intervention_recognize | loop_684_intervention_interdict | loop_684_intervention_minimize)
+(loop_684_context_branch | loop_684_then_branch | loop_684_operator_branch | loop_684_result_branch | loop_684_taxonomy_branch | loop_684_intervention_recognize | loop_684_intervention_interdict | loop_684_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_684_verdict)
+(loop_684_inactive)-[:PROCESS]->(loop_684_sink)
+(loop_684_verdict)-[:PROCESS]->(loop_684_sink)
+(loop_684_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_684_then_branch)
+(loop_684_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_684_then_branch)
+(loop_684_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_684_then_branch)

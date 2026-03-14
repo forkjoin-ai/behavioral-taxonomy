@@ -1,0 +1,33 @@
+// behavioral-loop-132.gg
+// Executable Gnosis projection for The Ripped Loop.
+
+// Nodes
+(loop_132_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_132_context_branch: BehaviorEmit { emission: 'context' })
+(loop_132_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20striations%20and%20extreme%20vascularity' })
+(loop_132_inactive: BehaviorTerminal { loopId: 132, loopName: 'The%20Ripped%20Loop' })
+(loop_132_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_132_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_132_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_132_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intimidation%2FJudgment%20Operator', mechanism: 'observers%20assume%20%22Narcissism%22%20or%20%22Obsessive%20Discipline%22' })
+(loop_132_result_branch: BehaviorEmit { emission: 'result', text: 'superficial%20praise%20but%20**Emotional%20Distance**%20(people%20are%20afraid%20to%20invite%20them%20to%20dinner%2Fdrinks)' })
+(loop_132_sink: BehaviorSink)
+(loop_132_start: BehaviorStart { loopId: 132, loopName: 'The%20Ripped%20Loop', given: 'Visible%20striations%20and%20extreme%20vascularity', when: 'in%20a%20casual%20setting', then: 'observers%20assume%20%22Narcissism%22%20or%20%22Obsessive%20Discipline%22%20(The%20Intimidation%2FJudgment%20Operator)', result: 'superficial%20praise%20but%20**Emotional%20Distance**%20(people%20are%20afraid%20to%20invite%20them%20to%20dinner%2Fdrinks)', operatorName: 'The%20Intimidation%2FJudgment%20Operator', operatorMechanism: 'observers%20assume%20%22Narcissism%22%20or%20%22Obsessive%20Discipline%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_132_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_132_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Narcissism%22%20or%20%22Obsessive%20Discipline%22%20(The%20Intimidation%2FJudgment%20Operator)' })
+(loop_132_verdict: BehaviorVerdict { loopId: 132, loopName: 'The%20Ripped%20Loop', then: 'observers%20assume%20%22Narcissism%22%20or%20%22Obsessive%20Discipline%22%20(The%20Intimidation%2FJudgment%20Operator)', result: 'superficial%20praise%20but%20**Emotional%20Distance**%20(people%20are%20afraid%20to%20invite%20them%20to%20dinner%2Fdrinks)', operatorName: 'The%20Intimidation%2FJudgment%20Operator', operatorMechanism: 'observers%20assume%20%22Narcissism%22%20or%20%22Obsessive%20Discipline%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_132_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20casual%20setting' })
+
+// Topology
+(loop_132_start)-[:PROCESS]->(loop_132_given_gate)
+(loop_132_given_gate)-[:PROCESS { case: "ok" }]->(loop_132_when_gate)
+(loop_132_given_gate)-[:PROCESS { case: "err" }]->(loop_132_inactive)
+(loop_132_when_gate)-[:PROCESS { case: "ok" }]->(loop_132_context)
+(loop_132_when_gate)-[:PROCESS { case: "err" }]->(loop_132_inactive)
+(loop_132_context)-[:FORK { strategy: "behavior-branches" }]->(loop_132_context_branch | loop_132_then_branch | loop_132_operator_branch | loop_132_result_branch | loop_132_taxonomy_branch | loop_132_intervention_recognize | loop_132_intervention_interdict | loop_132_intervention_minimize)
+(loop_132_context_branch | loop_132_then_branch | loop_132_operator_branch | loop_132_result_branch | loop_132_taxonomy_branch | loop_132_intervention_recognize | loop_132_intervention_interdict | loop_132_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_132_verdict)
+(loop_132_inactive)-[:PROCESS]->(loop_132_sink)
+(loop_132_verdict)-[:PROCESS]->(loop_132_sink)
+(loop_132_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_132_then_branch)
+(loop_132_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_132_then_branch)
+(loop_132_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_132_then_branch)

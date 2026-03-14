@@ -1,0 +1,33 @@
+// behavioral-loop-440.gg
+// Executable Gnosis projection for The Squinty Smile Loop.
+
+// Nodes
+(loop_440_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_440_context_branch: BehaviorEmit { emission: 'context' })
+(loop_440_given_gate: BehaviorAssess { stage: 'given', text: 'Eyes%20that%20close%20completely%20when%20smiling' })
+(loop_440_inactive: BehaviorTerminal { loopId: 440, loopName: 'The%20Squinty%20Smile%20Loop' })
+(loop_440_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_440_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_440_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_440_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Trust%20Operator', mechanism: 'vision%20is%20temporarily%20blocked' })
+(loop_440_result_branch: BehaviorEmit { emission: 'result', text: 'extremely%20high%20**Likability**%20(signals%20lack%20of%20threat)' })
+(loop_440_sink: BehaviorSink)
+(loop_440_start: BehaviorStart { loopId: 440, loopName: 'The%20Squinty%20Smile%20Loop', given: 'Eyes%20that%20close%20completely%20when%20smiling', when: 'expressing%20joy', then: 'vision%20is%20temporarily%20blocked%20(The%20Trust%20Operator)', result: 'extremely%20high%20**Likability**%20(signals%20lack%20of%20threat)', operatorName: 'The%20Trust%20Operator', operatorMechanism: 'vision%20is%20temporarily%20blocked', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_440_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_440_then_branch: BehaviorEmit { emission: 'then', text: 'vision%20is%20temporarily%20blocked%20(The%20Trust%20Operator)' })
+(loop_440_verdict: BehaviorVerdict { loopId: 440, loopName: 'The%20Squinty%20Smile%20Loop', then: 'vision%20is%20temporarily%20blocked%20(The%20Trust%20Operator)', result: 'extremely%20high%20**Likability**%20(signals%20lack%20of%20threat)', operatorName: 'The%20Trust%20Operator', operatorMechanism: 'vision%20is%20temporarily%20blocked', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_440_when_gate: BehaviorAssess { stage: 'when', text: 'expressing%20joy' })
+
+// Topology
+(loop_440_start)-[:PROCESS]->(loop_440_given_gate)
+(loop_440_given_gate)-[:PROCESS { case: "ok" }]->(loop_440_when_gate)
+(loop_440_given_gate)-[:PROCESS { case: "err" }]->(loop_440_inactive)
+(loop_440_when_gate)-[:PROCESS { case: "ok" }]->(loop_440_context)
+(loop_440_when_gate)-[:PROCESS { case: "err" }]->(loop_440_inactive)
+(loop_440_context)-[:FORK { strategy: "behavior-branches" }]->(loop_440_context_branch | loop_440_then_branch | loop_440_operator_branch | loop_440_result_branch | loop_440_taxonomy_branch | loop_440_intervention_recognize | loop_440_intervention_interdict | loop_440_intervention_minimize)
+(loop_440_context_branch | loop_440_then_branch | loop_440_operator_branch | loop_440_result_branch | loop_440_taxonomy_branch | loop_440_intervention_recognize | loop_440_intervention_interdict | loop_440_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_440_verdict)
+(loop_440_inactive)-[:PROCESS]->(loop_440_sink)
+(loop_440_verdict)-[:PROCESS]->(loop_440_sink)
+(loop_440_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_440_then_branch)
+(loop_440_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_440_then_branch)
+(loop_440_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_440_then_branch)

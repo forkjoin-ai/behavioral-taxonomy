@@ -1,0 +1,33 @@
+// behavioral-loop-652.gg
+// Executable Gnosis projection for The Pinky Up Loop.
+
+// Nodes
+(loop_652_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_652_context_branch: BehaviorEmit { emission: 'context' })
+(loop_652_given_gate: BehaviorAssess { stage: 'given', text: 'Extension%20of%20the%20fifth%20digit%20while%20drinking' })
+(loop_652_inactive: BehaviorTerminal { loopId: 652, loopName: 'The%20Pinky%20Up%20Loop' })
+(loop_652_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_652_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_652_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_652_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tea%20Time%20Operator', mechanism: 'it%20signals%20%22Pretension%22%20or%20%22Effeminacy%22' })
+(loop_652_result_branch: BehaviorEmit { emission: 'result', text: 'mockery%20in%20masculine%20environments' })
+(loop_652_sink: BehaviorSink)
+(loop_652_start: BehaviorStart { loopId: 652, loopName: 'The%20Pinky%20Up%20Loop', given: 'Extension%20of%20the%20fifth%20digit%20while%20drinking', when: 'holding%20a%20mug%2Fglass', then: 'it%20signals%20%22Pretension%22%20or%20%22Effeminacy%22%20(The%20Tea%20Time%20Operator)', result: 'mockery%20in%20masculine%20environments', operatorName: 'The%20Tea%20Time%20Operator', operatorMechanism: 'it%20signals%20%22Pretension%22%20or%20%22Effeminacy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_652_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_652_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Pretension%22%20or%20%22Effeminacy%22%20(The%20Tea%20Time%20Operator)' })
+(loop_652_verdict: BehaviorVerdict { loopId: 652, loopName: 'The%20Pinky%20Up%20Loop', then: 'it%20signals%20%22Pretension%22%20or%20%22Effeminacy%22%20(The%20Tea%20Time%20Operator)', result: 'mockery%20in%20masculine%20environments', operatorName: 'The%20Tea%20Time%20Operator', operatorMechanism: 'it%20signals%20%22Pretension%22%20or%20%22Effeminacy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_652_when_gate: BehaviorAssess { stage: 'when', text: 'holding%20a%20mug%2Fglass' })
+
+// Topology
+(loop_652_start)-[:PROCESS]->(loop_652_given_gate)
+(loop_652_given_gate)-[:PROCESS { case: "ok" }]->(loop_652_when_gate)
+(loop_652_given_gate)-[:PROCESS { case: "err" }]->(loop_652_inactive)
+(loop_652_when_gate)-[:PROCESS { case: "ok" }]->(loop_652_context)
+(loop_652_when_gate)-[:PROCESS { case: "err" }]->(loop_652_inactive)
+(loop_652_context)-[:FORK { strategy: "behavior-branches" }]->(loop_652_context_branch | loop_652_then_branch | loop_652_operator_branch | loop_652_result_branch | loop_652_taxonomy_branch | loop_652_intervention_recognize | loop_652_intervention_interdict | loop_652_intervention_minimize)
+(loop_652_context_branch | loop_652_then_branch | loop_652_operator_branch | loop_652_result_branch | loop_652_taxonomy_branch | loop_652_intervention_recognize | loop_652_intervention_interdict | loop_652_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_652_verdict)
+(loop_652_inactive)-[:PROCESS]->(loop_652_sink)
+(loop_652_verdict)-[:PROCESS]->(loop_652_sink)
+(loop_652_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_652_then_branch)
+(loop_652_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_652_then_branch)
+(loop_652_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_652_then_branch)

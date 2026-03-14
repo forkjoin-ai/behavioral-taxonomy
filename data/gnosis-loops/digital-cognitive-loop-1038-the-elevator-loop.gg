@@ -1,0 +1,33 @@
+// behavioral-loop-1038.gg
+// Executable Gnosis projection for The Elevator Loop.
+
+// Nodes
+(loop_1038_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1038_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1038_given_gate: BehaviorAssess { stage: 'given', text: 'Forced%20proximity%20in%20a%20metal%20box' })
+(loop_1038_inactive: BehaviorTerminal { loopId: 1038, loopName: 'The%20Elevator%20Loop' })
+(loop_1038_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Change%20or%20modify%20the%20triggering%20environment' })
+(loop_1038_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1038_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20spatial%20behaviors%20in%20group%20dynamics' })
+(loop_1038_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Collective%20Trance', mechanism: 'Temporary%20suspension%20of%20social%20contract%20to%20manage%20territorial%20stress.' })
+(loop_1038_result_branch: BehaviorEmit { emission: 'result', text: 'Suppression%20of%20all%20human%20interaction%20until%20the%20ding' })
+(loop_1038_sink: BehaviorSink)
+(loop_1038_start: BehaviorStart { loopId: 1038, loopName: 'The%20Elevator%20Loop', given: 'Forced%20proximity%20in%20a%20metal%20box', when: 'The%20doors%20close', then: 'Everyone%20fixates%20on%20the%20floor%20numbers', result: 'Suppression%20of%20all%20human%20interaction%20until%20the%20ding', operatorName: 'The%20Collective%20Trance', operatorMechanism: 'Temporary%20suspension%20of%20social%20contract%20to%20manage%20territorial%20stress.', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20spatial%20behaviors%20in%20group%20dynamics', intervention_interdict: 'Change%20or%20modify%20the%20triggering%20environment', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1038_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_1038_then_branch: BehaviorEmit { emission: 'then', text: 'Everyone%20fixates%20on%20the%20floor%20numbers' })
+(loop_1038_verdict: BehaviorVerdict { loopId: 1038, loopName: 'The%20Elevator%20Loop', then: 'Everyone%20fixates%20on%20the%20floor%20numbers', result: 'Suppression%20of%20all%20human%20interaction%20until%20the%20ding', operatorName: 'The%20Collective%20Trance', operatorMechanism: 'Temporary%20suspension%20of%20social%20contract%20to%20manage%20territorial%20stress.', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_1038_when_gate: BehaviorAssess { stage: 'when', text: 'The%20doors%20close' })
+
+// Topology
+(loop_1038_start)-[:PROCESS]->(loop_1038_given_gate)
+(loop_1038_given_gate)-[:PROCESS { case: "ok" }]->(loop_1038_when_gate)
+(loop_1038_given_gate)-[:PROCESS { case: "err" }]->(loop_1038_inactive)
+(loop_1038_when_gate)-[:PROCESS { case: "ok" }]->(loop_1038_context)
+(loop_1038_when_gate)-[:PROCESS { case: "err" }]->(loop_1038_inactive)
+(loop_1038_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1038_context_branch | loop_1038_then_branch | loop_1038_operator_branch | loop_1038_result_branch | loop_1038_taxonomy_branch | loop_1038_intervention_recognize | loop_1038_intervention_interdict | loop_1038_intervention_minimize)
+(loop_1038_context_branch | loop_1038_then_branch | loop_1038_operator_branch | loop_1038_result_branch | loop_1038_taxonomy_branch | loop_1038_intervention_recognize | loop_1038_intervention_interdict | loop_1038_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1038_verdict)
+(loop_1038_inactive)-[:PROCESS]->(loop_1038_sink)
+(loop_1038_verdict)-[:PROCESS]->(loop_1038_sink)
+(loop_1038_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1038_then_branch)
+(loop_1038_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1038_then_branch)
+(loop_1038_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1038_then_branch)

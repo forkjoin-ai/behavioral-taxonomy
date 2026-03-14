@@ -1,0 +1,33 @@
+// behavioral-loop-143.gg
+// Executable Gnosis projection for The Buck Tooth Loop.
+
+// Nodes
+(loop_143_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_143_context_branch: BehaviorEmit { emission: 'context' })
+(loop_143_given_gate: BehaviorAssess { stage: 'given', text: 'Protruding%20upper%20incisors' })
+(loop_143_inactive: BehaviorTerminal { loopId: 143, loopName: 'The%20Buck%20Tooth%20Loop' })
+(loop_143_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_143_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_143_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_143_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nerd%20Stereotype%20Operator', mechanism: 'the%20visual%20signals%20%22Goofiness%22%20or%20%22Intellect%22' })
+(loop_143_result_branch: BehaviorEmit { emission: 'result', text: 'difficulty%20being%20seen%20as%20a%20sexual%20option%2C%20leading%20to%20**Academic%20Over-Compensation**' })
+(loop_143_sink: BehaviorSink)
+(loop_143_start: BehaviorStart { loopId: 143, loopName: 'The%20Buck%20Tooth%20Loop', given: 'Protruding%20upper%20incisors', when: 'speaking%20or%20smiling', then: 'the%20visual%20signals%20%22Goofiness%22%20or%20%22Intellect%22%20(The%20Nerd%20Stereotype%20Operator)', result: 'difficulty%20being%20seen%20as%20a%20sexual%20option%2C%20leading%20to%20**Academic%20Over-Compensation**', operatorName: 'The%20Nerd%20Stereotype%20Operator', operatorMechanism: 'the%20visual%20signals%20%22Goofiness%22%20or%20%22Intellect%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_143_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_143_then_branch: BehaviorEmit { emission: 'then', text: 'the%20visual%20signals%20%22Goofiness%22%20or%20%22Intellect%22%20(The%20Nerd%20Stereotype%20Operator)' })
+(loop_143_verdict: BehaviorVerdict { loopId: 143, loopName: 'The%20Buck%20Tooth%20Loop', then: 'the%20visual%20signals%20%22Goofiness%22%20or%20%22Intellect%22%20(The%20Nerd%20Stereotype%20Operator)', result: 'difficulty%20being%20seen%20as%20a%20sexual%20option%2C%20leading%20to%20**Academic%20Over-Compensation**', operatorName: 'The%20Nerd%20Stereotype%20Operator', operatorMechanism: 'the%20visual%20signals%20%22Goofiness%22%20or%20%22Intellect%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_143_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20or%20smiling' })
+
+// Topology
+(loop_143_start)-[:PROCESS]->(loop_143_given_gate)
+(loop_143_given_gate)-[:PROCESS { case: "ok" }]->(loop_143_when_gate)
+(loop_143_given_gate)-[:PROCESS { case: "err" }]->(loop_143_inactive)
+(loop_143_when_gate)-[:PROCESS { case: "ok" }]->(loop_143_context)
+(loop_143_when_gate)-[:PROCESS { case: "err" }]->(loop_143_inactive)
+(loop_143_context)-[:FORK { strategy: "behavior-branches" }]->(loop_143_context_branch | loop_143_then_branch | loop_143_operator_branch | loop_143_result_branch | loop_143_taxonomy_branch | loop_143_intervention_recognize | loop_143_intervention_interdict | loop_143_intervention_minimize)
+(loop_143_context_branch | loop_143_then_branch | loop_143_operator_branch | loop_143_result_branch | loop_143_taxonomy_branch | loop_143_intervention_recognize | loop_143_intervention_interdict | loop_143_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_143_verdict)
+(loop_143_inactive)-[:PROCESS]->(loop_143_sink)
+(loop_143_verdict)-[:PROCESS]->(loop_143_sink)
+(loop_143_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_143_then_branch)
+(loop_143_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_143_then_branch)
+(loop_143_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_143_then_branch)

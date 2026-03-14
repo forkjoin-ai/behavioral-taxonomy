@@ -1,0 +1,31 @@
+// behavioral-loop-83.gg
+// Executable Gnosis projection for The Knuckle Cracker Loop.
+
+// Nodes
+(loop_83_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_83_context_branch: BehaviorEmit { emission: 'context' })
+(loop_83_given_gate: BehaviorAssess { stage: 'given', text: 'Cavitation%20tendency%20in%20joints' })
+(loop_83_inactive: BehaviorTerminal { loopId: 83, loopName: 'The%20Knuckle%20Cracker%20Loop' })
+(loop_83_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_83_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_83_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%2FAnnoyance%20Operator', mechanism: 'the%20sound%20cracks%20the%20silence' })
+(loop_83_result_branch: BehaviorEmit { emission: 'result', text: 'the%20sound%20becoming%20a%20%22dominance%20signal%22%20that%20clears%20the%20room%2C%20or%20a%20%22gross%20habit%22%20that%20isolates' })
+(loop_83_sink: BehaviorSink)
+(loop_83_start: BehaviorStart { loopId: 83, loopName: 'The%20Knuckle%20Cracker%20Loop', given: 'Cavitation%20tendency%20in%20joints', when: 'stressed%20or%20thinking', then: 'the%20sound%20cracks%20the%20silence%20(The%20Threat%2FAnnoyance%20Operator)', result: 'the%20sound%20becoming%20a%20%22dominance%20signal%22%20that%20clears%20the%20room%2C%20or%20a%20%22gross%20habit%22%20that%20isolates', operatorName: 'The%20Threat%2FAnnoyance%20Operator', operatorMechanism: 'the%20sound%20cracks%20the%20silence', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_83_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_83_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20cracks%20the%20silence%20(The%20Threat%2FAnnoyance%20Operator)' })
+(loop_83_verdict: BehaviorVerdict { loopId: 83, loopName: 'The%20Knuckle%20Cracker%20Loop', then: 'the%20sound%20cracks%20the%20silence%20(The%20Threat%2FAnnoyance%20Operator)', result: 'the%20sound%20becoming%20a%20%22dominance%20signal%22%20that%20clears%20the%20room%2C%20or%20a%20%22gross%20habit%22%20that%20isolates', operatorName: 'The%20Threat%2FAnnoyance%20Operator', operatorMechanism: 'the%20sound%20cracks%20the%20silence', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_83_when_gate: BehaviorAssess { stage: 'when', text: 'stressed%20or%20thinking' })
+
+// Topology
+(loop_83_start)-[:PROCESS]->(loop_83_given_gate)
+(loop_83_given_gate)-[:PROCESS { case: "ok" }]->(loop_83_when_gate)
+(loop_83_given_gate)-[:PROCESS { case: "err" }]->(loop_83_inactive)
+(loop_83_when_gate)-[:PROCESS { case: "ok" }]->(loop_83_context)
+(loop_83_when_gate)-[:PROCESS { case: "err" }]->(loop_83_inactive)
+(loop_83_context)-[:FORK { strategy: "behavior-branches" }]->(loop_83_context_branch | loop_83_then_branch | loop_83_operator_branch | loop_83_result_branch | loop_83_taxonomy_branch | loop_83_intervention_recognize | loop_83_intervention_leverage)
+(loop_83_context_branch | loop_83_then_branch | loop_83_operator_branch | loop_83_result_branch | loop_83_taxonomy_branch | loop_83_intervention_recognize | loop_83_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_83_verdict)
+(loop_83_inactive)-[:PROCESS]->(loop_83_sink)
+(loop_83_verdict)-[:PROCESS]->(loop_83_sink)
+(loop_83_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_83_then_branch)
+(loop_83_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_83_result_branch)

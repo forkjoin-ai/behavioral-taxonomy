@@ -1,0 +1,31 @@
+// behavioral-loop-780.gg
+// Executable Gnosis projection for The Manicure Loop.
+
+// Nodes
+(loop_780_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_780_context_branch: BehaviorEmit { emission: 'context' })
+(loop_780_given_gate: BehaviorAssess { stage: 'given', text: 'Perfectly%20groomed%2C%20shiny%20nails%20(Male)' })
+(loop_780_inactive: BehaviorTerminal { loopId: 780, loopName: 'The%20Manicure%20Loop' })
+(loop_780_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_780_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_780_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Office%20Operator', mechanism: 'it%20signals%20%22Softness%22%20or%20%22Management%22' })
+(loop_780_result_branch: BehaviorEmit { emission: 'result', text: 'distrust%20from%20laborers' })
+(loop_780_sink: BehaviorSink)
+(loop_780_start: BehaviorStart { loopId: 780, loopName: 'The%20Manicure%20Loop', given: 'Perfectly%20groomed%2C%20shiny%20nails%20(Male)', when: 'in%20a%20blue-collar%20setting', then: 'it%20signals%20%22Softness%22%20or%20%22Management%22%20(The%20Office%20Operator)', result: 'distrust%20from%20laborers', operatorName: 'The%20Office%20Operator', operatorMechanism: 'it%20signals%20%22Softness%22%20or%20%22Management%22', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_780_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_780_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Softness%22%20or%20%22Management%22%20(The%20Office%20Operator)' })
+(loop_780_verdict: BehaviorVerdict { loopId: 780, loopName: 'The%20Manicure%20Loop', then: 'it%20signals%20%22Softness%22%20or%20%22Management%22%20(The%20Office%20Operator)', result: 'distrust%20from%20laborers', operatorName: 'The%20Office%20Operator', operatorMechanism: 'it%20signals%20%22Softness%22%20or%20%22Management%22', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_780_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20blue-collar%20setting' })
+
+// Topology
+(loop_780_start)-[:PROCESS]->(loop_780_given_gate)
+(loop_780_given_gate)-[:PROCESS { case: "ok" }]->(loop_780_when_gate)
+(loop_780_given_gate)-[:PROCESS { case: "err" }]->(loop_780_inactive)
+(loop_780_when_gate)-[:PROCESS { case: "ok" }]->(loop_780_context)
+(loop_780_when_gate)-[:PROCESS { case: "err" }]->(loop_780_inactive)
+(loop_780_context)-[:FORK { strategy: "behavior-branches" }]->(loop_780_context_branch | loop_780_then_branch | loop_780_operator_branch | loop_780_result_branch | loop_780_taxonomy_branch | loop_780_intervention_recognize | loop_780_intervention_leverage)
+(loop_780_context_branch | loop_780_then_branch | loop_780_operator_branch | loop_780_result_branch | loop_780_taxonomy_branch | loop_780_intervention_recognize | loop_780_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_780_verdict)
+(loop_780_inactive)-[:PROCESS]->(loop_780_sink)
+(loop_780_verdict)-[:PROCESS]->(loop_780_sink)
+(loop_780_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_780_then_branch)
+(loop_780_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_780_result_branch)

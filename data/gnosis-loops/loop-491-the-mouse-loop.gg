@@ -1,0 +1,33 @@
+// behavioral-loop-491.gg
+// Executable Gnosis projection for The Mouse Loop.
+
+// Nodes
+(loop_491_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_491_context_branch: BehaviorEmit { emission: 'context' })
+(loop_491_given_gate: BehaviorAssess { stage: 'given', text: 'Inability%20to%20project%20from%20the%20diaphragm' })
+(loop_491_inactive: BehaviorTerminal { loopId: 491, loopName: 'The%20Mouse%20Loop' })
+(loop_491_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_491_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_491_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_491_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Silence%20Operator', mechanism: 'the%20individual%20cannot%20be%20heard' })
+(loop_491_result_branch: BehaviorEmit { emission: 'result', text: 'dropping%20out%20of%20the%20conversation%20and%20becoming%20an%20**Observer**' })
+(loop_491_sink: BehaviorSink)
+(loop_491_start: BehaviorStart { loopId: 491, loopName: 'The%20Mouse%20Loop', given: 'Inability%20to%20project%20from%20the%20diaphragm', when: 'in%20a%20noisy%20bar%2Frestaurant', then: 'the%20individual%20cannot%20be%20heard%20(The%20Silence%20Operator)', result: 'dropping%20out%20of%20the%20conversation%20and%20becoming%20an%20**Observer**', operatorName: 'The%20Silence%20Operator', operatorMechanism: 'the%20individual%20cannot%20be%20heard', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_491_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_491_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20cannot%20be%20heard%20(The%20Silence%20Operator)' })
+(loop_491_verdict: BehaviorVerdict { loopId: 491, loopName: 'The%20Mouse%20Loop', then: 'the%20individual%20cannot%20be%20heard%20(The%20Silence%20Operator)', result: 'dropping%20out%20of%20the%20conversation%20and%20becoming%20an%20**Observer**', operatorName: 'The%20Silence%20Operator', operatorMechanism: 'the%20individual%20cannot%20be%20heard', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_491_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20noisy%20bar%2Frestaurant' })
+
+// Topology
+(loop_491_start)-[:PROCESS]->(loop_491_given_gate)
+(loop_491_given_gate)-[:PROCESS { case: "ok" }]->(loop_491_when_gate)
+(loop_491_given_gate)-[:PROCESS { case: "err" }]->(loop_491_inactive)
+(loop_491_when_gate)-[:PROCESS { case: "ok" }]->(loop_491_context)
+(loop_491_when_gate)-[:PROCESS { case: "err" }]->(loop_491_inactive)
+(loop_491_context)-[:FORK { strategy: "behavior-branches" }]->(loop_491_context_branch | loop_491_then_branch | loop_491_operator_branch | loop_491_result_branch | loop_491_taxonomy_branch | loop_491_intervention_recognize | loop_491_intervention_interdict | loop_491_intervention_minimize)
+(loop_491_context_branch | loop_491_then_branch | loop_491_operator_branch | loop_491_result_branch | loop_491_taxonomy_branch | loop_491_intervention_recognize | loop_491_intervention_interdict | loop_491_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_491_verdict)
+(loop_491_inactive)-[:PROCESS]->(loop_491_sink)
+(loop_491_verdict)-[:PROCESS]->(loop_491_sink)
+(loop_491_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_491_then_branch)
+(loop_491_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_491_then_branch)
+(loop_491_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_491_then_branch)

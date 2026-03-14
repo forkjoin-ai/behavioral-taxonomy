@@ -1,0 +1,33 @@
+// behavioral-loop-598.gg
+// Executable Gnosis projection for The Straw Loop.
+
+// Nodes
+(loop_598_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_598_context_branch: BehaviorEmit { emission: 'context' })
+(loop_598_given_gate: BehaviorAssess { stage: 'given', text: 'Dry%2C%20brittle%20ends%20from%20styling' })
+(loop_598_inactive: BehaviorTerminal { loopId: 598, loopName: 'The%20Straw%20Loop' })
+(loop_598_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_598_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_598_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_598_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fried%20Operator', mechanism: 'the%20halo%20looks%20%22Frizzy%22%20and%20%22Dead%22' })
+(loop_598_result_branch: BehaviorEmit { emission: 'result', text: 'judgment%20of%20%22High%20Maintenance%22%20but%20low%20success' })
+(loop_598_sink: BehaviorSink)
+(loop_598_start: BehaviorStart { loopId: 598, loopName: 'The%20Straw%20Loop', given: 'Dry%2C%20brittle%20ends%20from%20styling', when: 'backlit', then: 'the%20halo%20looks%20%22Frizzy%22%20and%20%22Dead%22%20(The%20Fried%20Operator)', result: 'judgment%20of%20%22High%20Maintenance%22%20but%20low%20success', operatorName: 'The%20Fried%20Operator', operatorMechanism: 'the%20halo%20looks%20%22Frizzy%22%20and%20%22Dead%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_598_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_598_then_branch: BehaviorEmit { emission: 'then', text: 'the%20halo%20looks%20%22Frizzy%22%20and%20%22Dead%22%20(The%20Fried%20Operator)' })
+(loop_598_verdict: BehaviorVerdict { loopId: 598, loopName: 'The%20Straw%20Loop', then: 'the%20halo%20looks%20%22Frizzy%22%20and%20%22Dead%22%20(The%20Fried%20Operator)', result: 'judgment%20of%20%22High%20Maintenance%22%20but%20low%20success', operatorName: 'The%20Fried%20Operator', operatorMechanism: 'the%20halo%20looks%20%22Frizzy%22%20and%20%22Dead%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_598_when_gate: BehaviorAssess { stage: 'when', text: 'backlit' })
+
+// Topology
+(loop_598_start)-[:PROCESS]->(loop_598_given_gate)
+(loop_598_given_gate)-[:PROCESS { case: "ok" }]->(loop_598_when_gate)
+(loop_598_given_gate)-[:PROCESS { case: "err" }]->(loop_598_inactive)
+(loop_598_when_gate)-[:PROCESS { case: "ok" }]->(loop_598_context)
+(loop_598_when_gate)-[:PROCESS { case: "err" }]->(loop_598_inactive)
+(loop_598_context)-[:FORK { strategy: "behavior-branches" }]->(loop_598_context_branch | loop_598_then_branch | loop_598_operator_branch | loop_598_result_branch | loop_598_taxonomy_branch | loop_598_intervention_recognize | loop_598_intervention_interdict | loop_598_intervention_minimize)
+(loop_598_context_branch | loop_598_then_branch | loop_598_operator_branch | loop_598_result_branch | loop_598_taxonomy_branch | loop_598_intervention_recognize | loop_598_intervention_interdict | loop_598_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_598_verdict)
+(loop_598_inactive)-[:PROCESS]->(loop_598_sink)
+(loop_598_verdict)-[:PROCESS]->(loop_598_sink)
+(loop_598_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_598_then_branch)
+(loop_598_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_598_then_branch)
+(loop_598_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_598_then_branch)

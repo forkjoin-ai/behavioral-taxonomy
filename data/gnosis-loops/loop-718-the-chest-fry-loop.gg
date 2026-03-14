@@ -1,0 +1,31 @@
+// behavioral-loop-718.gg
+// Executable Gnosis projection for The Chest Fry Loop.
+
+// Nodes
+(loop_718_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_718_context_branch: BehaviorEmit { emission: 'context' })
+(loop_718_given_gate: BehaviorAssess { stage: 'given', text: 'Deep%20thoracic%20resonance%20%2B%20glottal%20fry' })
+(loop_718_inactive: BehaviorTerminal { loopId: 718, loopName: 'The%20Chest%20Fry%20Loop' })
+(loop_718_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_718_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_718_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Subwoofer%20Operator', mechanism: 'the%20sound%20carries%20via%20vibration' })
+(loop_718_result_branch: BehaviorEmit { emission: 'result', text: 'high%20authority%20even%20at%20low%20volume' })
+(loop_718_sink: BehaviorSink)
+(loop_718_start: BehaviorStart { loopId: 718, loopName: 'The%20Chest%20Fry%20Loop', given: 'Deep%20thoracic%20resonance%20%2B%20glottal%20fry', when: 'speaking%20quietly', then: 'the%20sound%20carries%20via%20vibration%20(The%20Subwoofer%20Operator)', result: 'high%20authority%20even%20at%20low%20volume', operatorName: 'The%20Subwoofer%20Operator', operatorMechanism: 'the%20sound%20carries%20via%20vibration', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_718_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_718_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20carries%20via%20vibration%20(The%20Subwoofer%20Operator)' })
+(loop_718_verdict: BehaviorVerdict { loopId: 718, loopName: 'The%20Chest%20Fry%20Loop', then: 'the%20sound%20carries%20via%20vibration%20(The%20Subwoofer%20Operator)', result: 'high%20authority%20even%20at%20low%20volume', operatorName: 'The%20Subwoofer%20Operator', operatorMechanism: 'the%20sound%20carries%20via%20vibration', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_718_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20quietly' })
+
+// Topology
+(loop_718_start)-[:PROCESS]->(loop_718_given_gate)
+(loop_718_given_gate)-[:PROCESS { case: "ok" }]->(loop_718_when_gate)
+(loop_718_given_gate)-[:PROCESS { case: "err" }]->(loop_718_inactive)
+(loop_718_when_gate)-[:PROCESS { case: "ok" }]->(loop_718_context)
+(loop_718_when_gate)-[:PROCESS { case: "err" }]->(loop_718_inactive)
+(loop_718_context)-[:FORK { strategy: "behavior-branches" }]->(loop_718_context_branch | loop_718_then_branch | loop_718_operator_branch | loop_718_result_branch | loop_718_taxonomy_branch | loop_718_intervention_recognize | loop_718_intervention_leverage)
+(loop_718_context_branch | loop_718_then_branch | loop_718_operator_branch | loop_718_result_branch | loop_718_taxonomy_branch | loop_718_intervention_recognize | loop_718_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_718_verdict)
+(loop_718_inactive)-[:PROCESS]->(loop_718_sink)
+(loop_718_verdict)-[:PROCESS]->(loop_718_sink)
+(loop_718_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_718_then_branch)
+(loop_718_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_718_result_branch)

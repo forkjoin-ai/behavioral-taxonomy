@@ -1,0 +1,33 @@
+// behavioral-loop-148.gg
+// Executable Gnosis projection for The Wheeze Loop.
+
+// Nodes
+(loop_148_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_148_context_branch: BehaviorEmit { emission: 'context' })
+(loop_148_given_gate: BehaviorAssess { stage: 'given', text: 'Asthmatic-sounding%20laughter' })
+(loop_148_inactive: BehaviorTerminal { loopId: 148, loopName: 'The%20Wheeze%20Loop' })
+(loop_148_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_148_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_148_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_148_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mirror%20Neuron%20Operator', mechanism: 'it%20triggers%20%22Contagious%20Laughter%22%20in%20others' })
+(loop_148_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20becoming%20the%20**Group%20Jester**' })
+(loop_148_sink: BehaviorSink)
+(loop_148_start: BehaviorStart { loopId: 148, loopName: 'The%20Wheeze%20Loop', given: 'Asthmatic-sounding%20laughter', when: 'laughing%20hard', then: 'it%20triggers%20%22Contagious%20Laughter%22%20in%20others%20(The%20Mirror%20Neuron%20Operator)', result: 'the%20individual%20becoming%20the%20**Group%20Jester**', operatorName: 'The%20Mirror%20Neuron%20Operator', operatorMechanism: 'it%20triggers%20%22Contagious%20Laughter%22%20in%20others', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_148_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_148_then_branch: BehaviorEmit { emission: 'then', text: 'it%20triggers%20%22Contagious%20Laughter%22%20in%20others%20(The%20Mirror%20Neuron%20Operator)' })
+(loop_148_verdict: BehaviorVerdict { loopId: 148, loopName: 'The%20Wheeze%20Loop', then: 'it%20triggers%20%22Contagious%20Laughter%22%20in%20others%20(The%20Mirror%20Neuron%20Operator)', result: 'the%20individual%20becoming%20the%20**Group%20Jester**', operatorName: 'The%20Mirror%20Neuron%20Operator', operatorMechanism: 'it%20triggers%20%22Contagious%20Laughter%22%20in%20others', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_148_when_gate: BehaviorAssess { stage: 'when', text: 'laughing%20hard' })
+
+// Topology
+(loop_148_start)-[:PROCESS]->(loop_148_given_gate)
+(loop_148_given_gate)-[:PROCESS { case: "ok" }]->(loop_148_when_gate)
+(loop_148_given_gate)-[:PROCESS { case: "err" }]->(loop_148_inactive)
+(loop_148_when_gate)-[:PROCESS { case: "ok" }]->(loop_148_context)
+(loop_148_when_gate)-[:PROCESS { case: "err" }]->(loop_148_inactive)
+(loop_148_context)-[:FORK { strategy: "behavior-branches" }]->(loop_148_context_branch | loop_148_then_branch | loop_148_operator_branch | loop_148_result_branch | loop_148_taxonomy_branch | loop_148_intervention_recognize | loop_148_intervention_interdict | loop_148_intervention_minimize)
+(loop_148_context_branch | loop_148_then_branch | loop_148_operator_branch | loop_148_result_branch | loop_148_taxonomy_branch | loop_148_intervention_recognize | loop_148_intervention_interdict | loop_148_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_148_verdict)
+(loop_148_inactive)-[:PROCESS]->(loop_148_sink)
+(loop_148_verdict)-[:PROCESS]->(loop_148_sink)
+(loop_148_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_148_then_branch)
+(loop_148_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_148_then_branch)
+(loop_148_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_148_then_branch)

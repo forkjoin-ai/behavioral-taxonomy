@@ -1,0 +1,33 @@
+// behavioral-loop-378.gg
+// Executable Gnosis projection for The Musty Loop.
+
+// Nodes
+(loop_378_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_378_context_branch: BehaviorEmit { emission: 'context' })
+(loop_378_given_gate: BehaviorAssess { stage: 'given', text: 'Clothes%20left%20in%20the%20washer%20too%20long' })
+(loop_378_inactive: BehaviorTerminal { loopId: 378, loopName: 'The%20Musty%20Loop' })
+(loop_378_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_378_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_378_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_378_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Neglect%20Operator', mechanism: 'the%20scent%20signals%20%22Bachelorhood%22%20or%20%22Domestic%20Incompetence%22' })
+(loop_378_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20romantic%20viability' })
+(loop_378_sink: BehaviorSink)
+(loop_378_start: BehaviorStart { loopId: 378, loopName: 'The%20Musty%20Loop', given: 'Clothes%20left%20in%20the%20washer%20too%20long', when: 'in%20close%20quarters', then: 'the%20scent%20signals%20%22Bachelorhood%22%20or%20%22Domestic%20Incompetence%22%20(The%20Neglect%20Operator)', result: 'loss%20of%20romantic%20viability', operatorName: 'The%20Neglect%20Operator', operatorMechanism: 'the%20scent%20signals%20%22Bachelorhood%22%20or%20%22Domestic%20Incompetence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_378_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_378_then_branch: BehaviorEmit { emission: 'then', text: 'the%20scent%20signals%20%22Bachelorhood%22%20or%20%22Domestic%20Incompetence%22%20(The%20Neglect%20Operator)' })
+(loop_378_verdict: BehaviorVerdict { loopId: 378, loopName: 'The%20Musty%20Loop', then: 'the%20scent%20signals%20%22Bachelorhood%22%20or%20%22Domestic%20Incompetence%22%20(The%20Neglect%20Operator)', result: 'loss%20of%20romantic%20viability', operatorName: 'The%20Neglect%20Operator', operatorMechanism: 'the%20scent%20signals%20%22Bachelorhood%22%20or%20%22Domestic%20Incompetence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_378_when_gate: BehaviorAssess { stage: 'when', text: 'in%20close%20quarters' })
+
+// Topology
+(loop_378_start)-[:PROCESS]->(loop_378_given_gate)
+(loop_378_given_gate)-[:PROCESS { case: "ok" }]->(loop_378_when_gate)
+(loop_378_given_gate)-[:PROCESS { case: "err" }]->(loop_378_inactive)
+(loop_378_when_gate)-[:PROCESS { case: "ok" }]->(loop_378_context)
+(loop_378_when_gate)-[:PROCESS { case: "err" }]->(loop_378_inactive)
+(loop_378_context)-[:FORK { strategy: "behavior-branches" }]->(loop_378_context_branch | loop_378_then_branch | loop_378_operator_branch | loop_378_result_branch | loop_378_taxonomy_branch | loop_378_intervention_recognize | loop_378_intervention_interdict | loop_378_intervention_minimize)
+(loop_378_context_branch | loop_378_then_branch | loop_378_operator_branch | loop_378_result_branch | loop_378_taxonomy_branch | loop_378_intervention_recognize | loop_378_intervention_interdict | loop_378_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_378_verdict)
+(loop_378_inactive)-[:PROCESS]->(loop_378_sink)
+(loop_378_verdict)-[:PROCESS]->(loop_378_sink)
+(loop_378_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_378_then_branch)
+(loop_378_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_378_then_branch)
+(loop_378_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_378_then_branch)

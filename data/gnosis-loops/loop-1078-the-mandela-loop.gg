@@ -1,0 +1,33 @@
+// behavioral-loop-1078.gg
+// Executable Gnosis projection for The Mandela Loop.
+
+// Nodes
+(loop_1078_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1078_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1078_given_gate: BehaviorAssess { stage: 'given', text: 'Collective%20false%20memory' })
+(loop_1078_inactive: BehaviorTerminal { loopId: 1078, loopName: 'The%20Mandela%20Loop' })
+(loop_1078_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1078_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1078_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1078_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20false%20fact%20becomes%20socially%20%22True%22%20(The%20Consensus%20Reality)' })
+(loop_1078_result_branch: BehaviorEmit { emission: 'result', text: 'objective%20history%20being%20rewritten%20by%20the%20crowd' })
+(loop_1078_sink: BehaviorSink)
+(loop_1078_start: BehaviorStart { loopId: 1078, loopName: 'The%20Mandela%20Loop', given: 'Collective%20false%20memory', when: 'a%20group%20agrees%20on%20a%20wrong%20fact%20(Shazaam%20movie)', then: 'the%20false%20fact%20becomes%20socially%20%22True%22%20(The%20Consensus%20Reality)', result: 'objective%20history%20being%20rewritten%20by%20the%20crowd', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20false%20fact%20becomes%20socially%20%22True%22%20(The%20Consensus%20Reality)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1078_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1078_then_branch: BehaviorEmit { emission: 'then', text: 'the%20false%20fact%20becomes%20socially%20%22True%22%20(The%20Consensus%20Reality)' })
+(loop_1078_verdict: BehaviorVerdict { loopId: 1078, loopName: 'The%20Mandela%20Loop', then: 'the%20false%20fact%20becomes%20socially%20%22True%22%20(The%20Consensus%20Reality)', result: 'objective%20history%20being%20rewritten%20by%20the%20crowd', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20false%20fact%20becomes%20socially%20%22True%22%20(The%20Consensus%20Reality)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1078_when_gate: BehaviorAssess { stage: 'when', text: 'a%20group%20agrees%20on%20a%20wrong%20fact%20(Shazaam%20movie)' })
+
+// Topology
+(loop_1078_start)-[:PROCESS]->(loop_1078_given_gate)
+(loop_1078_given_gate)-[:PROCESS { case: "ok" }]->(loop_1078_when_gate)
+(loop_1078_given_gate)-[:PROCESS { case: "err" }]->(loop_1078_inactive)
+(loop_1078_when_gate)-[:PROCESS { case: "ok" }]->(loop_1078_context)
+(loop_1078_when_gate)-[:PROCESS { case: "err" }]->(loop_1078_inactive)
+(loop_1078_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1078_context_branch | loop_1078_then_branch | loop_1078_operator_branch | loop_1078_result_branch | loop_1078_taxonomy_branch | loop_1078_intervention_recognize | loop_1078_intervention_interdict | loop_1078_intervention_minimize)
+(loop_1078_context_branch | loop_1078_then_branch | loop_1078_operator_branch | loop_1078_result_branch | loop_1078_taxonomy_branch | loop_1078_intervention_recognize | loop_1078_intervention_interdict | loop_1078_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1078_verdict)
+(loop_1078_inactive)-[:PROCESS]->(loop_1078_sink)
+(loop_1078_verdict)-[:PROCESS]->(loop_1078_sink)
+(loop_1078_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1078_then_branch)
+(loop_1078_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1078_then_branch)
+(loop_1078_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1078_then_branch)

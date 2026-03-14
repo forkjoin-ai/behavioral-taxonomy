@@ -1,0 +1,33 @@
+// behavioral-loop-249.gg
+// Executable Gnosis projection for The Slumper Loop.
+
+// Nodes
+(loop_249_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_249_context_branch: BehaviorEmit { emission: 'context' })
+(loop_249_given_gate: BehaviorAssess { stage: 'given', text: 'C-shaped%20spine%20while%20sitting' })
+(loop_249_inactive: BehaviorTerminal { loopId: 249, loopName: 'The%20Slumper%20Loop' })
+(loop_249_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_249_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_249_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_249_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Apathy%20Operator', mechanism: 'observers%20perceive%20%22Low%20Energy%2C%22%20%22Depression%2C%22%20or%20%22Disengagement%22' })
+(loop_249_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20ignored%20during%20brainstorming' })
+(loop_249_sink: BehaviorSink)
+(loop_249_start: BehaviorStart { loopId: 249, loopName: 'The%20Slumper%20Loop', given: 'C-shaped%20spine%20while%20sitting', when: 'in%20a%20meeting', then: 'observers%20perceive%20%22Low%20Energy%2C%22%20%22Depression%2C%22%20or%20%22Disengagement%22%20(The%20Apathy%20Operator)', result: 'the%20individual%20being%20ignored%20during%20brainstorming', operatorName: 'The%20Apathy%20Operator', operatorMechanism: 'observers%20perceive%20%22Low%20Energy%2C%22%20%22Depression%2C%22%20or%20%22Disengagement%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_249_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_249_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Low%20Energy%2C%22%20%22Depression%2C%22%20or%20%22Disengagement%22%20(The%20Apathy%20Operator)' })
+(loop_249_verdict: BehaviorVerdict { loopId: 249, loopName: 'The%20Slumper%20Loop', then: 'observers%20perceive%20%22Low%20Energy%2C%22%20%22Depression%2C%22%20or%20%22Disengagement%22%20(The%20Apathy%20Operator)', result: 'the%20individual%20being%20ignored%20during%20brainstorming', operatorName: 'The%20Apathy%20Operator', operatorMechanism: 'observers%20perceive%20%22Low%20Energy%2C%22%20%22Depression%2C%22%20or%20%22Disengagement%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_249_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20meeting' })
+
+// Topology
+(loop_249_start)-[:PROCESS]->(loop_249_given_gate)
+(loop_249_given_gate)-[:PROCESS { case: "ok" }]->(loop_249_when_gate)
+(loop_249_given_gate)-[:PROCESS { case: "err" }]->(loop_249_inactive)
+(loop_249_when_gate)-[:PROCESS { case: "ok" }]->(loop_249_context)
+(loop_249_when_gate)-[:PROCESS { case: "err" }]->(loop_249_inactive)
+(loop_249_context)-[:FORK { strategy: "behavior-branches" }]->(loop_249_context_branch | loop_249_then_branch | loop_249_operator_branch | loop_249_result_branch | loop_249_taxonomy_branch | loop_249_intervention_recognize | loop_249_intervention_interdict | loop_249_intervention_minimize)
+(loop_249_context_branch | loop_249_then_branch | loop_249_operator_branch | loop_249_result_branch | loop_249_taxonomy_branch | loop_249_intervention_recognize | loop_249_intervention_interdict | loop_249_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_249_verdict)
+(loop_249_inactive)-[:PROCESS]->(loop_249_sink)
+(loop_249_verdict)-[:PROCESS]->(loop_249_sink)
+(loop_249_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_249_then_branch)
+(loop_249_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_249_then_branch)
+(loop_249_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_249_then_branch)

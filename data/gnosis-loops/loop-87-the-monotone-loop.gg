@@ -1,0 +1,33 @@
+// behavioral-loop-87.gg
+// Executable Gnosis projection for The Monotone Loop.
+
+// Nodes
+(loop_87_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_87_context_branch: BehaviorEmit { emission: 'context' })
+(loop_87_given_gate: BehaviorAssess { stage: 'given', text: 'Limited%20Prosodic%20Range%20(Flat%20voice)' })
+(loop_87_inactive: BehaviorTerminal { loopId: 87, loopName: 'The%20Monotone%20Loop' })
+(loop_87_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_87_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_87_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_87_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%20Operator', mechanism: 'the%20listener%20hears%20%22Sarcasm%22%20or%20%22Boredom%22' })
+(loop_87_result_branch: BehaviorEmit { emission: 'result', text: 'chronic%20misunderstandings%20and%20the%20individual%20relying%20on%20**Explicit%20Verbal%20Confirmation**%20(%22I%20am%20actually%20very%20happy%22)' })
+(loop_87_sink: BehaviorSink)
+(loop_87_start: BehaviorStart { loopId: 87, loopName: 'The%20Monotone%20Loop', given: 'Limited%20Prosodic%20Range%20(Flat%20voice)', when: 'expressing%20excitement%20or%20empathy', then: 'the%20listener%20hears%20%22Sarcasm%22%20or%20%22Boredom%22%20(The%20Deception%20Operator)', result: 'chronic%20misunderstandings%20and%20the%20individual%20relying%20on%20**Explicit%20Verbal%20Confirmation**%20(%22I%20am%20actually%20very%20happy%22)', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'the%20listener%20hears%20%22Sarcasm%22%20or%20%22Boredom%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_87_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_87_then_branch: BehaviorEmit { emission: 'then', text: 'the%20listener%20hears%20%22Sarcasm%22%20or%20%22Boredom%22%20(The%20Deception%20Operator)' })
+(loop_87_verdict: BehaviorVerdict { loopId: 87, loopName: 'The%20Monotone%20Loop', then: 'the%20listener%20hears%20%22Sarcasm%22%20or%20%22Boredom%22%20(The%20Deception%20Operator)', result: 'chronic%20misunderstandings%20and%20the%20individual%20relying%20on%20**Explicit%20Verbal%20Confirmation**%20(%22I%20am%20actually%20very%20happy%22)', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'the%20listener%20hears%20%22Sarcasm%22%20or%20%22Boredom%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_87_when_gate: BehaviorAssess { stage: 'when', text: 'expressing%20excitement%20or%20empathy' })
+
+// Topology
+(loop_87_start)-[:PROCESS]->(loop_87_given_gate)
+(loop_87_given_gate)-[:PROCESS { case: "ok" }]->(loop_87_when_gate)
+(loop_87_given_gate)-[:PROCESS { case: "err" }]->(loop_87_inactive)
+(loop_87_when_gate)-[:PROCESS { case: "ok" }]->(loop_87_context)
+(loop_87_when_gate)-[:PROCESS { case: "err" }]->(loop_87_inactive)
+(loop_87_context)-[:FORK { strategy: "behavior-branches" }]->(loop_87_context_branch | loop_87_then_branch | loop_87_operator_branch | loop_87_result_branch | loop_87_taxonomy_branch | loop_87_intervention_recognize | loop_87_intervention_interdict | loop_87_intervention_minimize)
+(loop_87_context_branch | loop_87_then_branch | loop_87_operator_branch | loop_87_result_branch | loop_87_taxonomy_branch | loop_87_intervention_recognize | loop_87_intervention_interdict | loop_87_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_87_verdict)
+(loop_87_inactive)-[:PROCESS]->(loop_87_sink)
+(loop_87_verdict)-[:PROCESS]->(loop_87_sink)
+(loop_87_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_87_then_branch)
+(loop_87_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_87_then_branch)
+(loop_87_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_87_then_branch)

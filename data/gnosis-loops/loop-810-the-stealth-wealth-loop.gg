@@ -1,0 +1,33 @@
+// behavioral-loop-810.gg
+// Executable Gnosis projection for The Stealth Wealth Loop.
+
+// Nodes
+(loop_810_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_810_context_branch: BehaviorEmit { emission: 'context' })
+(loop_810_given_gate: BehaviorAssess { stage: 'given', text: 'Unbranded%20but%20visibly%20high-quality%20fabric' })
+(loop_810_inactive: BehaviorTerminal { loopId: 810, loopName: 'The%20Stealth%20Wealth%20Loop' })
+(loop_810_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_810_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_810_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_810_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Code%20Operator', mechanism: 'it%20signals%20%22Insider%20Status%22' })
+(loop_810_result_branch: BehaviorEmit { emission: 'result', text: 'nod%20of%20approval%20from%20other%20elites' })
+(loop_810_sink: BehaviorSink)
+(loop_810_start: BehaviorStart { loopId: 810, loopName: 'The%20Stealth%20Wealth%20Loop', given: 'Unbranded%20but%20visibly%20high-quality%20fabric', when: 'touched%20or%20seen%20up%20close', then: 'it%20signals%20%22Insider%20Status%22%20(The%20Code%20Operator)', result: 'nod%20of%20approval%20from%20other%20elites', operatorName: 'The%20Code%20Operator', operatorMechanism: 'it%20signals%20%22Insider%20Status%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_810_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_810_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Insider%20Status%22%20(The%20Code%20Operator)' })
+(loop_810_verdict: BehaviorVerdict { loopId: 810, loopName: 'The%20Stealth%20Wealth%20Loop', then: 'it%20signals%20%22Insider%20Status%22%20(The%20Code%20Operator)', result: 'nod%20of%20approval%20from%20other%20elites', operatorName: 'The%20Code%20Operator', operatorMechanism: 'it%20signals%20%22Insider%20Status%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_810_when_gate: BehaviorAssess { stage: 'when', text: 'touched%20or%20seen%20up%20close' })
+
+// Topology
+(loop_810_start)-[:PROCESS]->(loop_810_given_gate)
+(loop_810_given_gate)-[:PROCESS { case: "ok" }]->(loop_810_when_gate)
+(loop_810_given_gate)-[:PROCESS { case: "err" }]->(loop_810_inactive)
+(loop_810_when_gate)-[:PROCESS { case: "ok" }]->(loop_810_context)
+(loop_810_when_gate)-[:PROCESS { case: "err" }]->(loop_810_inactive)
+(loop_810_context)-[:FORK { strategy: "behavior-branches" }]->(loop_810_context_branch | loop_810_then_branch | loop_810_operator_branch | loop_810_result_branch | loop_810_taxonomy_branch | loop_810_intervention_recognize | loop_810_intervention_interdict | loop_810_intervention_minimize)
+(loop_810_context_branch | loop_810_then_branch | loop_810_operator_branch | loop_810_result_branch | loop_810_taxonomy_branch | loop_810_intervention_recognize | loop_810_intervention_interdict | loop_810_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_810_verdict)
+(loop_810_inactive)-[:PROCESS]->(loop_810_sink)
+(loop_810_verdict)-[:PROCESS]->(loop_810_sink)
+(loop_810_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_810_then_branch)
+(loop_810_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_810_then_branch)
+(loop_810_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_810_then_branch)

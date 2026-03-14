@@ -1,0 +1,31 @@
+// behavioral-loop-655.gg
+// Executable Gnosis projection for The Shrimp Loop.
+
+// Nodes
+(loop_655_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_655_context_branch: BehaviorEmit { emission: 'context' })
+(loop_655_given_gate: BehaviorAssess { stage: 'given', text: 'Curling%20the%20spine%20into%20a%20C-shape' })
+(loop_655_inactive: BehaviorTerminal { loopId: 655, loopName: 'The%20Shrimp%20Loop' })
+(loop_655_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_655_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_655_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Gamer%20Operator', mechanism: 'the%20silhouette%20is%20%22Fetal%22' })
+(loop_655_result_branch: BehaviorEmit { emission: 'result', text: 'visible%20lack%20of%20%22Backbone%22%20or%20authority' })
+(loop_655_sink: BehaviorSink)
+(loop_655_start: BehaviorStart { loopId: 655, loopName: 'The%20Shrimp%20Loop', given: 'Curling%20the%20spine%20into%20a%20C-shape', when: 'gaming%20or%20working', then: 'the%20silhouette%20is%20%22Fetal%22%20(The%20Gamer%20Operator)', result: 'visible%20lack%20of%20%22Backbone%22%20or%20authority', operatorName: 'The%20Gamer%20Operator', operatorMechanism: 'the%20silhouette%20is%20%22Fetal%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_655_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_655_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20is%20%22Fetal%22%20(The%20Gamer%20Operator)' })
+(loop_655_verdict: BehaviorVerdict { loopId: 655, loopName: 'The%20Shrimp%20Loop', then: 'the%20silhouette%20is%20%22Fetal%22%20(The%20Gamer%20Operator)', result: 'visible%20lack%20of%20%22Backbone%22%20or%20authority', operatorName: 'The%20Gamer%20Operator', operatorMechanism: 'the%20silhouette%20is%20%22Fetal%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_655_when_gate: BehaviorAssess { stage: 'when', text: 'gaming%20or%20working' })
+
+// Topology
+(loop_655_start)-[:PROCESS]->(loop_655_given_gate)
+(loop_655_given_gate)-[:PROCESS { case: "ok" }]->(loop_655_when_gate)
+(loop_655_given_gate)-[:PROCESS { case: "err" }]->(loop_655_inactive)
+(loop_655_when_gate)-[:PROCESS { case: "ok" }]->(loop_655_context)
+(loop_655_when_gate)-[:PROCESS { case: "err" }]->(loop_655_inactive)
+(loop_655_context)-[:FORK { strategy: "behavior-branches" }]->(loop_655_context_branch | loop_655_then_branch | loop_655_operator_branch | loop_655_result_branch | loop_655_taxonomy_branch | loop_655_intervention_recognize | loop_655_intervention_leverage)
+(loop_655_context_branch | loop_655_then_branch | loop_655_operator_branch | loop_655_result_branch | loop_655_taxonomy_branch | loop_655_intervention_recognize | loop_655_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_655_verdict)
+(loop_655_inactive)-[:PROCESS]->(loop_655_sink)
+(loop_655_verdict)-[:PROCESS]->(loop_655_sink)
+(loop_655_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_655_then_branch)
+(loop_655_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_655_result_branch)

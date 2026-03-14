@@ -1,0 +1,33 @@
+// behavioral-loop-977.gg
+// Executable Gnosis projection for The Coffee Breath Loop.
+
+// Nodes
+(loop_977_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_977_context_branch: BehaviorEmit { emission: 'context' })
+(loop_977_given_gate: BehaviorAssess { stage: 'given', text: 'Stale%20coffee%20residue%20%2B%20dry%20mouth' })
+(loop_977_inactive: BehaviorTerminal { loopId: 977, loopName: 'The%20Coffee%20Breath%20Loop' })
+(loop_977_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_977_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_977_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_977_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Office%20Operator', mechanism: 'the%20smell%20is%20%22Acidic%22%20and%20%22Bitter%22' })
+(loop_977_result_branch: BehaviorEmit { emission: 'result', text: 'the%20listener%20pulling%20back' })
+(loop_977_sink: BehaviorSink)
+(loop_977_start: BehaviorStart { loopId: 977, loopName: 'The%20Coffee%20Breath%20Loop', given: 'Stale%20coffee%20residue%20%2B%20dry%20mouth', when: 'leaning%20in%20to%20whisper', then: 'the%20smell%20is%20%22Acidic%22%20and%20%22Bitter%22%20(The%20Office%20Operator)', result: 'the%20listener%20pulling%20back', operatorName: 'The%20Office%20Operator', operatorMechanism: 'the%20smell%20is%20%22Acidic%22%20and%20%22Bitter%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_977_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_977_then_branch: BehaviorEmit { emission: 'then', text: 'the%20smell%20is%20%22Acidic%22%20and%20%22Bitter%22%20(The%20Office%20Operator)' })
+(loop_977_verdict: BehaviorVerdict { loopId: 977, loopName: 'The%20Coffee%20Breath%20Loop', then: 'the%20smell%20is%20%22Acidic%22%20and%20%22Bitter%22%20(The%20Office%20Operator)', result: 'the%20listener%20pulling%20back', operatorName: 'The%20Office%20Operator', operatorMechanism: 'the%20smell%20is%20%22Acidic%22%20and%20%22Bitter%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_977_when_gate: BehaviorAssess { stage: 'when', text: 'leaning%20in%20to%20whisper' })
+
+// Topology
+(loop_977_start)-[:PROCESS]->(loop_977_given_gate)
+(loop_977_given_gate)-[:PROCESS { case: "ok" }]->(loop_977_when_gate)
+(loop_977_given_gate)-[:PROCESS { case: "err" }]->(loop_977_inactive)
+(loop_977_when_gate)-[:PROCESS { case: "ok" }]->(loop_977_context)
+(loop_977_when_gate)-[:PROCESS { case: "err" }]->(loop_977_inactive)
+(loop_977_context)-[:FORK { strategy: "behavior-branches" }]->(loop_977_context_branch | loop_977_then_branch | loop_977_operator_branch | loop_977_result_branch | loop_977_taxonomy_branch | loop_977_intervention_recognize | loop_977_intervention_interdict | loop_977_intervention_minimize)
+(loop_977_context_branch | loop_977_then_branch | loop_977_operator_branch | loop_977_result_branch | loop_977_taxonomy_branch | loop_977_intervention_recognize | loop_977_intervention_interdict | loop_977_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_977_verdict)
+(loop_977_inactive)-[:PROCESS]->(loop_977_sink)
+(loop_977_verdict)-[:PROCESS]->(loop_977_sink)
+(loop_977_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_977_then_branch)
+(loop_977_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_977_then_branch)
+(loop_977_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_977_then_branch)

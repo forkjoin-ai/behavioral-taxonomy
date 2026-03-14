@@ -1,0 +1,33 @@
+// behavioral-loop-361.gg
+// Executable Gnosis projection for The Thick Frames Loop.
+
+// Nodes
+(loop_361_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_361_context_branch: BehaviorEmit { emission: 'context' })
+(loop_361_given_gate: BehaviorAssess { stage: 'given', text: 'Bold%2C%20black-rimmed%20glasses' })
+(loop_361_inactive: BehaviorTerminal { loopId: 361, loopName: 'The%20Thick%20Frames%20Loop' })
+(loop_361_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Modify%20or%20remove%20the%20triggering%20element' })
+(loop_361_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_361_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_361_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hipster%20Operator', mechanism: 'observers%20assume%20%22Design%20Thinking%22%20or%20%22Creativity%22' })
+(loop_361_result_branch: BehaviorEmit { emission: 'result', text: 'opinions%20on%20aesthetics%20being%20taken%20as%20gospel' })
+(loop_361_sink: BehaviorSink)
+(loop_361_start: BehaviorStart { loopId: 361, loopName: 'The%20Thick%20Frames%20Loop', given: 'Bold%2C%20black-rimmed%20glasses', when: 'remaining%20silent', then: 'observers%20assume%20%22Design%20Thinking%22%20or%20%22Creativity%22%20(The%20Hipster%20Operator)', result: 'opinions%20on%20aesthetics%20being%20taken%20as%20gospel', operatorName: 'The%20Hipster%20Operator', operatorMechanism: 'observers%20assume%20%22Design%20Thinking%22%20or%20%22Creativity%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Modify%20or%20remove%20the%20triggering%20element', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_361_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_361_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Design%20Thinking%22%20or%20%22Creativity%22%20(The%20Hipster%20Operator)' })
+(loop_361_verdict: BehaviorVerdict { loopId: 361, loopName: 'The%20Thick%20Frames%20Loop', then: 'observers%20assume%20%22Design%20Thinking%22%20or%20%22Creativity%22%20(The%20Hipster%20Operator)', result: 'opinions%20on%20aesthetics%20being%20taken%20as%20gospel', operatorName: 'The%20Hipster%20Operator', operatorMechanism: 'observers%20assume%20%22Design%20Thinking%22%20or%20%22Creativity%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_361_when_gate: BehaviorAssess { stage: 'when', text: 'remaining%20silent' })
+
+// Topology
+(loop_361_start)-[:PROCESS]->(loop_361_given_gate)
+(loop_361_given_gate)-[:PROCESS { case: "ok" }]->(loop_361_when_gate)
+(loop_361_given_gate)-[:PROCESS { case: "err" }]->(loop_361_inactive)
+(loop_361_when_gate)-[:PROCESS { case: "ok" }]->(loop_361_context)
+(loop_361_when_gate)-[:PROCESS { case: "err" }]->(loop_361_inactive)
+(loop_361_context)-[:FORK { strategy: "behavior-branches" }]->(loop_361_context_branch | loop_361_then_branch | loop_361_operator_branch | loop_361_result_branch | loop_361_taxonomy_branch | loop_361_intervention_recognize | loop_361_intervention_interdict | loop_361_intervention_minimize)
+(loop_361_context_branch | loop_361_then_branch | loop_361_operator_branch | loop_361_result_branch | loop_361_taxonomy_branch | loop_361_intervention_recognize | loop_361_intervention_interdict | loop_361_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_361_verdict)
+(loop_361_inactive)-[:PROCESS]->(loop_361_sink)
+(loop_361_verdict)-[:PROCESS]->(loop_361_sink)
+(loop_361_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_361_then_branch)
+(loop_361_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_361_then_branch)
+(loop_361_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_361_then_branch)

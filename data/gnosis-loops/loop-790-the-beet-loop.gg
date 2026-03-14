@@ -1,0 +1,33 @@
+// behavioral-loop-790.gg
+// Executable Gnosis projection for The Beet Loop.
+
+// Nodes
+(loop_790_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_790_context_branch: BehaviorEmit { emission: 'context' })
+(loop_790_given_gate: BehaviorAssess { stage: 'given', text: 'Rapid%20capillary%20dilation' })
+(loop_790_inactive: BehaviorTerminal { loopId: 790, loopName: 'The%20Beet%20Loop' })
+(loop_790_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_790_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_790_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_790_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tomato%20Operator', mechanism: 'the%20face%20turns%20deep%20purple%2Fred' })
+(loop_790_result_branch: BehaviorEmit { emission: 'result', text: 'concern%20(%22Are%20you%20having%20a%20stroke%3F%22)%20disrupting%20the%20activity' })
+(loop_790_sink: BehaviorSink)
+(loop_790_start: BehaviorStart { loopId: 790, loopName: 'The%20Beet%20Loop', given: 'Rapid%20capillary%20dilation', when: 'embarrassed%20or%20exercising', then: 'the%20face%20turns%20deep%20purple%2Fred%20(The%20Tomato%20Operator)', result: 'concern%20(%22Are%20you%20having%20a%20stroke%3F%22)%20disrupting%20the%20activity', operatorName: 'The%20Tomato%20Operator', operatorMechanism: 'the%20face%20turns%20deep%20purple%2Fred', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_790_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_790_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20turns%20deep%20purple%2Fred%20(The%20Tomato%20Operator)' })
+(loop_790_verdict: BehaviorVerdict { loopId: 790, loopName: 'The%20Beet%20Loop', then: 'the%20face%20turns%20deep%20purple%2Fred%20(The%20Tomato%20Operator)', result: 'concern%20(%22Are%20you%20having%20a%20stroke%3F%22)%20disrupting%20the%20activity', operatorName: 'The%20Tomato%20Operator', operatorMechanism: 'the%20face%20turns%20deep%20purple%2Fred', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_790_when_gate: BehaviorAssess { stage: 'when', text: 'embarrassed%20or%20exercising' })
+
+// Topology
+(loop_790_start)-[:PROCESS]->(loop_790_given_gate)
+(loop_790_given_gate)-[:PROCESS { case: "ok" }]->(loop_790_when_gate)
+(loop_790_given_gate)-[:PROCESS { case: "err" }]->(loop_790_inactive)
+(loop_790_when_gate)-[:PROCESS { case: "ok" }]->(loop_790_context)
+(loop_790_when_gate)-[:PROCESS { case: "err" }]->(loop_790_inactive)
+(loop_790_context)-[:FORK { strategy: "behavior-branches" }]->(loop_790_context_branch | loop_790_then_branch | loop_790_operator_branch | loop_790_result_branch | loop_790_taxonomy_branch | loop_790_intervention_recognize | loop_790_intervention_interdict | loop_790_intervention_minimize)
+(loop_790_context_branch | loop_790_then_branch | loop_790_operator_branch | loop_790_result_branch | loop_790_taxonomy_branch | loop_790_intervention_recognize | loop_790_intervention_interdict | loop_790_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_790_verdict)
+(loop_790_inactive)-[:PROCESS]->(loop_790_sink)
+(loop_790_verdict)-[:PROCESS]->(loop_790_sink)
+(loop_790_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_790_then_branch)
+(loop_790_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_790_then_branch)
+(loop_790_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_790_then_branch)

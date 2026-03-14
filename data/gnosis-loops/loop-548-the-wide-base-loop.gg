@@ -1,0 +1,33 @@
+// behavioral-loop-548.gg
+// Executable Gnosis projection for The Wide Base Loop.
+
+// Nodes
+(loop_548_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_548_context_branch: BehaviorEmit { emission: 'context' })
+(loop_548_given_gate: BehaviorAssess { stage: 'given', text: 'Broad%20nasal%20base' })
+(loop_548_inactive: BehaviorTerminal { loopId: 548, loopName: 'The%20Wide%20Base%20Loop' })
+(loop_548_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_548_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_548_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_548_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Exotic%20Operator', mechanism: 'it%20triggers%20%22Ruggedness%22%20or%20%22Ethnic%20Othering%22' })
+(loop_548_result_branch: BehaviorEmit { emission: 'result', text: 'specific%20typecasting%20in%20media%20and%20social%20expectations%20of%20%22toughness.%22' })
+(loop_548_sink: BehaviorSink)
+(loop_548_start: BehaviorStart { loopId: 548, loopName: 'The%20Wide%20Base%20Loop', given: 'Broad%20nasal%20base', when: 'in%20a%20Eurocentric%20beauty%20standard%20context', then: 'it%20triggers%20%22Ruggedness%22%20or%20%22Ethnic%20Othering%22%20(The%20Exotic%20Operator)', result: 'specific%20typecasting%20in%20media%20and%20social%20expectations%20of%20%22toughness.%22', operatorName: 'The%20Exotic%20Operator', operatorMechanism: 'it%20triggers%20%22Ruggedness%22%20or%20%22Ethnic%20Othering%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_548_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_548_then_branch: BehaviorEmit { emission: 'then', text: 'it%20triggers%20%22Ruggedness%22%20or%20%22Ethnic%20Othering%22%20(The%20Exotic%20Operator)' })
+(loop_548_verdict: BehaviorVerdict { loopId: 548, loopName: 'The%20Wide%20Base%20Loop', then: 'it%20triggers%20%22Ruggedness%22%20or%20%22Ethnic%20Othering%22%20(The%20Exotic%20Operator)', result: 'specific%20typecasting%20in%20media%20and%20social%20expectations%20of%20%22toughness.%22', operatorName: 'The%20Exotic%20Operator', operatorMechanism: 'it%20triggers%20%22Ruggedness%22%20or%20%22Ethnic%20Othering%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_548_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20Eurocentric%20beauty%20standard%20context' })
+
+// Topology
+(loop_548_start)-[:PROCESS]->(loop_548_given_gate)
+(loop_548_given_gate)-[:PROCESS { case: "ok" }]->(loop_548_when_gate)
+(loop_548_given_gate)-[:PROCESS { case: "err" }]->(loop_548_inactive)
+(loop_548_when_gate)-[:PROCESS { case: "ok" }]->(loop_548_context)
+(loop_548_when_gate)-[:PROCESS { case: "err" }]->(loop_548_inactive)
+(loop_548_context)-[:FORK { strategy: "behavior-branches" }]->(loop_548_context_branch | loop_548_then_branch | loop_548_operator_branch | loop_548_result_branch | loop_548_taxonomy_branch | loop_548_intervention_recognize | loop_548_intervention_interdict | loop_548_intervention_minimize)
+(loop_548_context_branch | loop_548_then_branch | loop_548_operator_branch | loop_548_result_branch | loop_548_taxonomy_branch | loop_548_intervention_recognize | loop_548_intervention_interdict | loop_548_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_548_verdict)
+(loop_548_inactive)-[:PROCESS]->(loop_548_sink)
+(loop_548_verdict)-[:PROCESS]->(loop_548_sink)
+(loop_548_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_548_then_branch)
+(loop_548_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_548_then_branch)
+(loop_548_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_548_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-926.gg
+// Executable Gnosis projection for The Chemical Cut Loop.
+
+// Nodes
+(loop_926_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_926_context_branch: BehaviorEmit { emission: 'context' })
+(loop_926_given_gate: BehaviorAssess { stage: 'given', text: 'Hair%20breaking%20off%20at%20mid-shaft%20due%20to%20bleach' })
+(loop_926_inactive: BehaviorTerminal { loopId: 926, loopName: 'The%20Chemical%20Cut%20Loop' })
+(loop_926_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_926_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_926_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_926_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fry%20Operator', mechanism: 'the%20halo%20is%20fuzzy%20and%20uneven' })
+(loop_926_result_branch: BehaviorEmit { emission: 'result', text: 'judgment%20of%20%22Failed%20Vanity.%22' })
+(loop_926_sink: BehaviorSink)
+(loop_926_start: BehaviorStart { loopId: 926, loopName: 'The%20Chemical%20Cut%20Loop', given: 'Hair%20breaking%20off%20at%20mid-shaft%20due%20to%20bleach', when: 'backlit', then: 'the%20halo%20is%20fuzzy%20and%20uneven%20(The%20Fry%20Operator)', result: 'judgment%20of%20%22Failed%20Vanity.%22', operatorName: 'The%20Fry%20Operator', operatorMechanism: 'the%20halo%20is%20fuzzy%20and%20uneven', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_926_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_926_then_branch: BehaviorEmit { emission: 'then', text: 'the%20halo%20is%20fuzzy%20and%20uneven%20(The%20Fry%20Operator)' })
+(loop_926_verdict: BehaviorVerdict { loopId: 926, loopName: 'The%20Chemical%20Cut%20Loop', then: 'the%20halo%20is%20fuzzy%20and%20uneven%20(The%20Fry%20Operator)', result: 'judgment%20of%20%22Failed%20Vanity.%22', operatorName: 'The%20Fry%20Operator', operatorMechanism: 'the%20halo%20is%20fuzzy%20and%20uneven', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_926_when_gate: BehaviorAssess { stage: 'when', text: 'backlit' })
+
+// Topology
+(loop_926_start)-[:PROCESS]->(loop_926_given_gate)
+(loop_926_given_gate)-[:PROCESS { case: "ok" }]->(loop_926_when_gate)
+(loop_926_given_gate)-[:PROCESS { case: "err" }]->(loop_926_inactive)
+(loop_926_when_gate)-[:PROCESS { case: "ok" }]->(loop_926_context)
+(loop_926_when_gate)-[:PROCESS { case: "err" }]->(loop_926_inactive)
+(loop_926_context)-[:FORK { strategy: "behavior-branches" }]->(loop_926_context_branch | loop_926_then_branch | loop_926_operator_branch | loop_926_result_branch | loop_926_taxonomy_branch | loop_926_intervention_recognize | loop_926_intervention_interdict | loop_926_intervention_minimize)
+(loop_926_context_branch | loop_926_then_branch | loop_926_operator_branch | loop_926_result_branch | loop_926_taxonomy_branch | loop_926_intervention_recognize | loop_926_intervention_interdict | loop_926_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_926_verdict)
+(loop_926_inactive)-[:PROCESS]->(loop_926_sink)
+(loop_926_verdict)-[:PROCESS]->(loop_926_sink)
+(loop_926_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_926_then_branch)
+(loop_926_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_926_then_branch)
+(loop_926_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_926_then_branch)

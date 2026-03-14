@@ -1,0 +1,33 @@
+// behavioral-loop-869.gg
+// Executable Gnosis projection for The Wink Loop.
+
+// Nodes
+(loop_869_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_869_context_branch: BehaviorEmit { emission: 'context' })
+(loop_869_given_gate: BehaviorAssess { stage: 'given', text: 'Hemifacial%20spasm%20or%20nervous%20tic' })
+(loop_869_inactive: BehaviorTerminal { loopId: 869, loopName: 'The%20Wink%20Loop' })
+(loop_869_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_869_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_869_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_869_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Signal%20Operator', mechanism: 'the%20eye%20closes%20rapidly' })
+(loop_869_result_branch: BehaviorEmit { emission: 'result', text: 'the%20listener%20confusing%20the%20tic%20for%20%22Sarcasm%22%20or%20%22Flirtation.%22' })
+(loop_869_sink: BehaviorSink)
+(loop_869_start: BehaviorStart { loopId: 869, loopName: 'The%20Wink%20Loop', given: 'Hemifacial%20spasm%20or%20nervous%20tic', when: 'speaking%20seriously', then: 'the%20eye%20closes%20rapidly%20(The%20Signal%20Operator)', result: 'the%20listener%20confusing%20the%20tic%20for%20%22Sarcasm%22%20or%20%22Flirtation.%22', operatorName: 'The%20Signal%20Operator', operatorMechanism: 'the%20eye%20closes%20rapidly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_869_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_869_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eye%20closes%20rapidly%20(The%20Signal%20Operator)' })
+(loop_869_verdict: BehaviorVerdict { loopId: 869, loopName: 'The%20Wink%20Loop', then: 'the%20eye%20closes%20rapidly%20(The%20Signal%20Operator)', result: 'the%20listener%20confusing%20the%20tic%20for%20%22Sarcasm%22%20or%20%22Flirtation.%22', operatorName: 'The%20Signal%20Operator', operatorMechanism: 'the%20eye%20closes%20rapidly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_869_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20seriously' })
+
+// Topology
+(loop_869_start)-[:PROCESS]->(loop_869_given_gate)
+(loop_869_given_gate)-[:PROCESS { case: "ok" }]->(loop_869_when_gate)
+(loop_869_given_gate)-[:PROCESS { case: "err" }]->(loop_869_inactive)
+(loop_869_when_gate)-[:PROCESS { case: "ok" }]->(loop_869_context)
+(loop_869_when_gate)-[:PROCESS { case: "err" }]->(loop_869_inactive)
+(loop_869_context)-[:FORK { strategy: "behavior-branches" }]->(loop_869_context_branch | loop_869_then_branch | loop_869_operator_branch | loop_869_result_branch | loop_869_taxonomy_branch | loop_869_intervention_recognize | loop_869_intervention_interdict | loop_869_intervention_minimize)
+(loop_869_context_branch | loop_869_then_branch | loop_869_operator_branch | loop_869_result_branch | loop_869_taxonomy_branch | loop_869_intervention_recognize | loop_869_intervention_interdict | loop_869_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_869_verdict)
+(loop_869_inactive)-[:PROCESS]->(loop_869_sink)
+(loop_869_verdict)-[:PROCESS]->(loop_869_sink)
+(loop_869_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_869_then_branch)
+(loop_869_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_869_then_branch)
+(loop_869_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_869_then_branch)

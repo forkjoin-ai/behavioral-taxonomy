@@ -1,0 +1,33 @@
+// behavioral-loop-546.gg
+// Executable Gnosis projection for The Button Nose Loop.
+
+// Nodes
+(loop_546_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_546_context_branch: BehaviorEmit { emission: 'context' })
+(loop_546_given_gate: BehaviorAssess { stage: 'given', text: 'Small%2C%20upturned%20nasal%20tip%20with%20concave%20bridge' })
+(loop_546_inactive: BehaviorTerminal { loopId: 546, loopName: 'The%20Button%20Nose%20Loop' })
+(loop_546_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_546_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_546_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_546_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tinkerbell%20Operator', mechanism: 'the%20visual%20signals%20%22Cute%22%20or%20%22Petulant%22%20rather%20than%20threatening' })
+(loop_546_result_branch: BehaviorEmit { emission: 'result', text: 'extreme%20difficulty%20in%20being%20taken%20seriously%20during%20confrontation' })
+(loop_546_sink: BehaviorSink)
+(loop_546_start: BehaviorStart { loopId: 546, loopName: 'The%20Button%20Nose%20Loop', given: 'Small%2C%20upturned%20nasal%20tip%20with%20concave%20bridge', when: 'expressing%20anger', then: 'the%20visual%20signals%20%22Cute%22%20or%20%22Petulant%22%20rather%20than%20threatening%20(The%20Tinkerbell%20Operator)', result: 'extreme%20difficulty%20in%20being%20taken%20seriously%20during%20confrontation', operatorName: 'The%20Tinkerbell%20Operator', operatorMechanism: 'the%20visual%20signals%20%22Cute%22%20or%20%22Petulant%22%20rather%20than%20threatening', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_546_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_546_then_branch: BehaviorEmit { emission: 'then', text: 'the%20visual%20signals%20%22Cute%22%20or%20%22Petulant%22%20rather%20than%20threatening%20(The%20Tinkerbell%20Operator)' })
+(loop_546_verdict: BehaviorVerdict { loopId: 546, loopName: 'The%20Button%20Nose%20Loop', then: 'the%20visual%20signals%20%22Cute%22%20or%20%22Petulant%22%20rather%20than%20threatening%20(The%20Tinkerbell%20Operator)', result: 'extreme%20difficulty%20in%20being%20taken%20seriously%20during%20confrontation', operatorName: 'The%20Tinkerbell%20Operator', operatorMechanism: 'the%20visual%20signals%20%22Cute%22%20or%20%22Petulant%22%20rather%20than%20threatening', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_546_when_gate: BehaviorAssess { stage: 'when', text: 'expressing%20anger' })
+
+// Topology
+(loop_546_start)-[:PROCESS]->(loop_546_given_gate)
+(loop_546_given_gate)-[:PROCESS { case: "ok" }]->(loop_546_when_gate)
+(loop_546_given_gate)-[:PROCESS { case: "err" }]->(loop_546_inactive)
+(loop_546_when_gate)-[:PROCESS { case: "ok" }]->(loop_546_context)
+(loop_546_when_gate)-[:PROCESS { case: "err" }]->(loop_546_inactive)
+(loop_546_context)-[:FORK { strategy: "behavior-branches" }]->(loop_546_context_branch | loop_546_then_branch | loop_546_operator_branch | loop_546_result_branch | loop_546_taxonomy_branch | loop_546_intervention_recognize | loop_546_intervention_interdict | loop_546_intervention_minimize)
+(loop_546_context_branch | loop_546_then_branch | loop_546_operator_branch | loop_546_result_branch | loop_546_taxonomy_branch | loop_546_intervention_recognize | loop_546_intervention_interdict | loop_546_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_546_verdict)
+(loop_546_inactive)-[:PROCESS]->(loop_546_sink)
+(loop_546_verdict)-[:PROCESS]->(loop_546_sink)
+(loop_546_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_546_then_branch)
+(loop_546_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_546_then_branch)
+(loop_546_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_546_then_branch)

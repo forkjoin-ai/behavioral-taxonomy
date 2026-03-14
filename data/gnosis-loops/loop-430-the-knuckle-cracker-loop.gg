@@ -1,0 +1,33 @@
+// behavioral-loop-430.gg
+// Executable Gnosis projection for The Knuckle Cracker Loop.
+
+// Nodes
+(loop_430_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_430_context_branch: BehaviorEmit { emission: 'context' })
+(loop_430_given_gate: BehaviorAssess { stage: 'given', text: 'Habitual%20cavitation%20of%20joints' })
+(loop_430_inactive: BehaviorTerminal { loopId: 430, loopName: 'The%20Knuckle%20Cracker%20Loop' })
+(loop_430_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_430_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_430_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_430_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Aggression%2FNerves%20Operator', mechanism: 'the%20*crack*%20sounds%20violent' })
+(loop_430_result_branch: BehaviorEmit { emission: 'result', text: 'sensitive%20people%20flinching%20and%20feeling%20physically%20unsafe' })
+(loop_430_sink: BehaviorSink)
+(loop_430_start: BehaviorStart { loopId: 430, loopName: 'The%20Knuckle%20Cracker%20Loop', given: 'Habitual%20cavitation%20of%20joints', when: 'a%20silence%20falls%20in%20conversation', then: 'the%20*crack*%20sounds%20violent%20(The%20Aggression%2FNerves%20Operator)', result: 'sensitive%20people%20flinching%20and%20feeling%20physically%20unsafe', operatorName: 'The%20Aggression%2FNerves%20Operator', operatorMechanism: 'the%20*crack*%20sounds%20violent', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_430_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_430_then_branch: BehaviorEmit { emission: 'then', text: 'the%20*crack*%20sounds%20violent%20(The%20Aggression%2FNerves%20Operator)' })
+(loop_430_verdict: BehaviorVerdict { loopId: 430, loopName: 'The%20Knuckle%20Cracker%20Loop', then: 'the%20*crack*%20sounds%20violent%20(The%20Aggression%2FNerves%20Operator)', result: 'sensitive%20people%20flinching%20and%20feeling%20physically%20unsafe', operatorName: 'The%20Aggression%2FNerves%20Operator', operatorMechanism: 'the%20*crack*%20sounds%20violent', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_430_when_gate: BehaviorAssess { stage: 'when', text: 'a%20silence%20falls%20in%20conversation' })
+
+// Topology
+(loop_430_start)-[:PROCESS]->(loop_430_given_gate)
+(loop_430_given_gate)-[:PROCESS { case: "ok" }]->(loop_430_when_gate)
+(loop_430_given_gate)-[:PROCESS { case: "err" }]->(loop_430_inactive)
+(loop_430_when_gate)-[:PROCESS { case: "ok" }]->(loop_430_context)
+(loop_430_when_gate)-[:PROCESS { case: "err" }]->(loop_430_inactive)
+(loop_430_context)-[:FORK { strategy: "behavior-branches" }]->(loop_430_context_branch | loop_430_then_branch | loop_430_operator_branch | loop_430_result_branch | loop_430_taxonomy_branch | loop_430_intervention_recognize | loop_430_intervention_interdict | loop_430_intervention_minimize)
+(loop_430_context_branch | loop_430_then_branch | loop_430_operator_branch | loop_430_result_branch | loop_430_taxonomy_branch | loop_430_intervention_recognize | loop_430_intervention_interdict | loop_430_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_430_verdict)
+(loop_430_inactive)-[:PROCESS]->(loop_430_sink)
+(loop_430_verdict)-[:PROCESS]->(loop_430_sink)
+(loop_430_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_430_then_branch)
+(loop_430_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_430_then_branch)
+(loop_430_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_430_then_branch)

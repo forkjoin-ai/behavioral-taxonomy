@@ -1,0 +1,33 @@
+// behavioral-loop-1008.gg
+// Executable Gnosis projection for The Door Blocker Loop.
+
+// Nodes
+(loop_1008_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1008_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1008_given_gate: BehaviorAssess { stage: 'given', text: 'Stopping%20immediately%20upon%20entering%20a%20room%20to%20scan' })
+(loop_1008_inactive: BehaviorTerminal { loopId: 1008, loopName: 'The%20Door%20Blocker%20Loop' })
+(loop_1008_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Introduce%20environmental%20anchors%20for%20desired%20behavior' })
+(loop_1008_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1008_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1008_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cork%20Operator', mechanism: 'a%20traffic%20jam%20forms' })
+(loop_1008_result_branch: BehaviorEmit { emission: 'result', text: 'being%20physically%20shoved%20from%20behind' })
+(loop_1008_sink: BehaviorSink)
+(loop_1008_start: BehaviorStart { loopId: 1008, loopName: 'The%20Door%20Blocker%20Loop', given: 'Stopping%20immediately%20upon%20entering%20a%20room%20to%20scan', when: 'a%20crowd%20is%20behind%20them', then: 'a%20traffic%20jam%20forms%20(The%20Cork%20Operator)', result: 'being%20physically%20shoved%20from%20behind', operatorName: 'The%20Cork%20Operator', operatorMechanism: 'a%20traffic%20jam%20forms', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Introduce%20environmental%20anchors%20for%20desired%20behavior', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1008_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1008_then_branch: BehaviorEmit { emission: 'then', text: 'a%20traffic%20jam%20forms%20(The%20Cork%20Operator)' })
+(loop_1008_verdict: BehaviorVerdict { loopId: 1008, loopName: 'The%20Door%20Blocker%20Loop', then: 'a%20traffic%20jam%20forms%20(The%20Cork%20Operator)', result: 'being%20physically%20shoved%20from%20behind', operatorName: 'The%20Cork%20Operator', operatorMechanism: 'a%20traffic%20jam%20forms', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1008_when_gate: BehaviorAssess { stage: 'when', text: 'a%20crowd%20is%20behind%20them' })
+
+// Topology
+(loop_1008_start)-[:PROCESS]->(loop_1008_given_gate)
+(loop_1008_given_gate)-[:PROCESS { case: "ok" }]->(loop_1008_when_gate)
+(loop_1008_given_gate)-[:PROCESS { case: "err" }]->(loop_1008_inactive)
+(loop_1008_when_gate)-[:PROCESS { case: "ok" }]->(loop_1008_context)
+(loop_1008_when_gate)-[:PROCESS { case: "err" }]->(loop_1008_inactive)
+(loop_1008_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1008_context_branch | loop_1008_then_branch | loop_1008_operator_branch | loop_1008_result_branch | loop_1008_taxonomy_branch | loop_1008_intervention_recognize | loop_1008_intervention_interdict | loop_1008_intervention_minimize)
+(loop_1008_context_branch | loop_1008_then_branch | loop_1008_operator_branch | loop_1008_result_branch | loop_1008_taxonomy_branch | loop_1008_intervention_recognize | loop_1008_intervention_interdict | loop_1008_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1008_verdict)
+(loop_1008_inactive)-[:PROCESS]->(loop_1008_sink)
+(loop_1008_verdict)-[:PROCESS]->(loop_1008_sink)
+(loop_1008_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1008_then_branch)
+(loop_1008_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1008_then_branch)
+(loop_1008_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1008_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-583.gg
+// Executable Gnosis projection for The Red Eye Loop.
+
+// Nodes
+(loop_583_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_583_context_branch: BehaviorEmit { emission: 'context' })
+(loop_583_given_gate: BehaviorAssess { stage: 'given', text: 'Inflamed%20scleral%20vessels' })
+(loop_583_inactive: BehaviorTerminal { loopId: 583, loopName: 'The%20Red%20Eye%20Loop' })
+(loop_583_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_583_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_583_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_583_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Plague%20Operator', mechanism: 'observers%20assume%20%22Hangover%22%20or%20%22Contagion%22' })
+(loop_583_result_branch: BehaviorEmit { emission: 'result', text: 'physical%20avoidance%20and%20judgment%20of%20lifestyle' })
+(loop_583_sink: BehaviorSink)
+(loop_583_start: BehaviorStart { loopId: 583, loopName: 'The%20Red%20Eye%20Loop', given: 'Inflamed%20scleral%20vessels', when: 'arriving%20at%20work', then: 'observers%20assume%20%22Hangover%22%20or%20%22Contagion%22%20(The%20Plague%20Operator)', result: 'physical%20avoidance%20and%20judgment%20of%20lifestyle', operatorName: 'The%20Plague%20Operator', operatorMechanism: 'observers%20assume%20%22Hangover%22%20or%20%22Contagion%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_583_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_583_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Hangover%22%20or%20%22Contagion%22%20(The%20Plague%20Operator)' })
+(loop_583_verdict: BehaviorVerdict { loopId: 583, loopName: 'The%20Red%20Eye%20Loop', then: 'observers%20assume%20%22Hangover%22%20or%20%22Contagion%22%20(The%20Plague%20Operator)', result: 'physical%20avoidance%20and%20judgment%20of%20lifestyle', operatorName: 'The%20Plague%20Operator', operatorMechanism: 'observers%20assume%20%22Hangover%22%20or%20%22Contagion%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_583_when_gate: BehaviorAssess { stage: 'when', text: 'arriving%20at%20work' })
+
+// Topology
+(loop_583_start)-[:PROCESS]->(loop_583_given_gate)
+(loop_583_given_gate)-[:PROCESS { case: "ok" }]->(loop_583_when_gate)
+(loop_583_given_gate)-[:PROCESS { case: "err" }]->(loop_583_inactive)
+(loop_583_when_gate)-[:PROCESS { case: "ok" }]->(loop_583_context)
+(loop_583_when_gate)-[:PROCESS { case: "err" }]->(loop_583_inactive)
+(loop_583_context)-[:FORK { strategy: "behavior-branches" }]->(loop_583_context_branch | loop_583_then_branch | loop_583_operator_branch | loop_583_result_branch | loop_583_taxonomy_branch | loop_583_intervention_recognize | loop_583_intervention_interdict | loop_583_intervention_minimize)
+(loop_583_context_branch | loop_583_then_branch | loop_583_operator_branch | loop_583_result_branch | loop_583_taxonomy_branch | loop_583_intervention_recognize | loop_583_intervention_interdict | loop_583_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_583_verdict)
+(loop_583_inactive)-[:PROCESS]->(loop_583_sink)
+(loop_583_verdict)-[:PROCESS]->(loop_583_sink)
+(loop_583_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_583_then_branch)
+(loop_583_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_583_then_branch)
+(loop_583_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_583_then_branch)

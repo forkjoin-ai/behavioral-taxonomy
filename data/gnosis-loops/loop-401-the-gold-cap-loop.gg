@@ -1,0 +1,33 @@
+// behavioral-loop-401.gg
+// Executable Gnosis projection for The Gold Cap Loop.
+
+// Nodes
+(loop_401_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_401_context_branch: BehaviorEmit { emission: 'context' })
+(loop_401_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20gold%20crown%2Fgrill' })
+(loop_401_inactive: BehaviorTerminal { loopId: 401, loopName: 'The%20Gold%20Cap%20Loop' })
+(loop_401_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_401_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_401_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_401_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Outlier%20Operator', mechanism: 'it%20signals%20%22Risk%2C%22%20%22Street%2C%22%20or%20%22Ostentation%22' })
+(loop_401_result_branch: BehaviorEmit { emission: 'result', text: 'polarization%3A%20loved%20by%20risk-takers%2C%20hated%20by%20conservatives' })
+(loop_401_sink: BehaviorSink)
+(loop_401_start: BehaviorStart { loopId: 401, loopName: 'The%20Gold%20Cap%20Loop', given: 'Visible%20gold%20crown%2Fgrill', when: 'smiling%20in%20a%20corporate%20setting', then: 'it%20signals%20%22Risk%2C%22%20%22Street%2C%22%20or%20%22Ostentation%22%20(The%20Outlier%20Operator)', result: 'polarization%3A%20loved%20by%20risk-takers%2C%20hated%20by%20conservatives', operatorName: 'The%20Outlier%20Operator', operatorMechanism: 'it%20signals%20%22Risk%2C%22%20%22Street%2C%22%20or%20%22Ostentation%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_401_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_401_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Risk%2C%22%20%22Street%2C%22%20or%20%22Ostentation%22%20(The%20Outlier%20Operator)' })
+(loop_401_verdict: BehaviorVerdict { loopId: 401, loopName: 'The%20Gold%20Cap%20Loop', then: 'it%20signals%20%22Risk%2C%22%20%22Street%2C%22%20or%20%22Ostentation%22%20(The%20Outlier%20Operator)', result: 'polarization%3A%20loved%20by%20risk-takers%2C%20hated%20by%20conservatives', operatorName: 'The%20Outlier%20Operator', operatorMechanism: 'it%20signals%20%22Risk%2C%22%20%22Street%2C%22%20or%20%22Ostentation%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_401_when_gate: BehaviorAssess { stage: 'when', text: 'smiling%20in%20a%20corporate%20setting' })
+
+// Topology
+(loop_401_start)-[:PROCESS]->(loop_401_given_gate)
+(loop_401_given_gate)-[:PROCESS { case: "ok" }]->(loop_401_when_gate)
+(loop_401_given_gate)-[:PROCESS { case: "err" }]->(loop_401_inactive)
+(loop_401_when_gate)-[:PROCESS { case: "ok" }]->(loop_401_context)
+(loop_401_when_gate)-[:PROCESS { case: "err" }]->(loop_401_inactive)
+(loop_401_context)-[:FORK { strategy: "behavior-branches" }]->(loop_401_context_branch | loop_401_then_branch | loop_401_operator_branch | loop_401_result_branch | loop_401_taxonomy_branch | loop_401_intervention_recognize | loop_401_intervention_interdict | loop_401_intervention_minimize)
+(loop_401_context_branch | loop_401_then_branch | loop_401_operator_branch | loop_401_result_branch | loop_401_taxonomy_branch | loop_401_intervention_recognize | loop_401_intervention_interdict | loop_401_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_401_verdict)
+(loop_401_inactive)-[:PROCESS]->(loop_401_sink)
+(loop_401_verdict)-[:PROCESS]->(loop_401_sink)
+(loop_401_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_401_then_branch)
+(loop_401_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_401_then_branch)
+(loop_401_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_401_then_branch)

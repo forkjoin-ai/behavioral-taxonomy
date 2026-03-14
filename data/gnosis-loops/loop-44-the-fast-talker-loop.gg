@@ -1,0 +1,31 @@
+// behavioral-loop-44.gg
+// Executable Gnosis projection for The Fast Talker Loop.
+
+// Nodes
+(loop_44_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_44_context_branch: BehaviorEmit { emission: 'context' })
+(loop_44_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20High%20Words-Per-Minute%20(WPM)' })
+(loop_44_inactive: BehaviorTerminal { loopId: 44, loopName: 'The%20Fast%20Talker%20Loop' })
+(loop_44_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_44_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_44_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%20Operator', mechanism: 'the%20listener%20assumes%20%22Anxiety%22%20or%20%22Salesmanship%22' })
+(loop_44_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20learning%20to%20**Mask%2FSlow%20Down**%20to%20gain%20trust' })
+(loop_44_sink: BehaviorSink)
+(loop_44_start: BehaviorStart { loopId: 44, loopName: 'The%20Fast%20Talker%20Loop', given: 'an%20individual%20possesses%20High%20Words-Per-Minute%20(WPM)', when: 'explaining%20complex%20topics', then: 'the%20listener%20assumes%20%22Anxiety%22%20or%20%22Salesmanship%22%20(The%20Deception%20Operator)', result: 'the%20individual%20learning%20to%20**Mask%2FSlow%20Down**%20to%20gain%20trust', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'the%20listener%20assumes%20%22Anxiety%22%20or%20%22Salesmanship%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_44_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_44_then_branch: BehaviorEmit { emission: 'then', text: 'the%20listener%20assumes%20%22Anxiety%22%20or%20%22Salesmanship%22%20(The%20Deception%20Operator)' })
+(loop_44_verdict: BehaviorVerdict { loopId: 44, loopName: 'The%20Fast%20Talker%20Loop', then: 'the%20listener%20assumes%20%22Anxiety%22%20or%20%22Salesmanship%22%20(The%20Deception%20Operator)', result: 'the%20individual%20learning%20to%20**Mask%2FSlow%20Down**%20to%20gain%20trust', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'the%20listener%20assumes%20%22Anxiety%22%20or%20%22Salesmanship%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_44_when_gate: BehaviorAssess { stage: 'when', text: 'explaining%20complex%20topics' })
+
+// Topology
+(loop_44_start)-[:PROCESS]->(loop_44_given_gate)
+(loop_44_given_gate)-[:PROCESS { case: "ok" }]->(loop_44_when_gate)
+(loop_44_given_gate)-[:PROCESS { case: "err" }]->(loop_44_inactive)
+(loop_44_when_gate)-[:PROCESS { case: "ok" }]->(loop_44_context)
+(loop_44_when_gate)-[:PROCESS { case: "err" }]->(loop_44_inactive)
+(loop_44_context)-[:FORK { strategy: "behavior-branches" }]->(loop_44_context_branch | loop_44_then_branch | loop_44_operator_branch | loop_44_result_branch | loop_44_taxonomy_branch | loop_44_intervention_recognize | loop_44_intervention_leverage)
+(loop_44_context_branch | loop_44_then_branch | loop_44_operator_branch | loop_44_result_branch | loop_44_taxonomy_branch | loop_44_intervention_recognize | loop_44_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_44_verdict)
+(loop_44_inactive)-[:PROCESS]->(loop_44_sink)
+(loop_44_verdict)-[:PROCESS]->(loop_44_sink)
+(loop_44_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_44_then_branch)
+(loop_44_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_44_result_branch)

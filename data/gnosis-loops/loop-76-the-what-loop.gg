@@ -1,0 +1,33 @@
+// behavioral-loop-76.gg
+// Executable Gnosis projection for The What? Loop.
+
+// Nodes
+(loop_76_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_76_context_branch: BehaviorEmit { emission: 'context' })
+(loop_76_given_gate: BehaviorAssess { stage: 'given', text: 'Auditory%20Processing%20Disorder%20(Lag%20in%20decoding%20speech)' })
+(loop_76_inactive: BehaviorTerminal { loopId: 76, loopName: 'The%20What%3F%20Loop' })
+(loop_76_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_76_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_76_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_76_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Annoyance%20Operator', mechanism: 'the%20individual%20says%20%22What%3F%22%20but%20answers%20before%20the%20repeat%20finishes' })
+(loop_76_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20perceiving%20them%20as%20%22Absent-Minded%2C%22%20leading%20to%20**Intellectual%20Underestimation**' })
+(loop_76_sink: BehaviorSink)
+(loop_76_start: BehaviorStart { loopId: 76, loopName: 'The%20What%3F%20Loop', given: 'Auditory%20Processing%20Disorder%20(Lag%20in%20decoding%20speech)', when: 'answering%20a%20question', then: 'the%20individual%20says%20%22What%3F%22%20but%20answers%20before%20the%20repeat%20finishes%20(The%20Annoyance%20Operator)', result: 'peers%20perceiving%20them%20as%20%22Absent-Minded%2C%22%20leading%20to%20**Intellectual%20Underestimation**', operatorName: 'The%20Annoyance%20Operator', operatorMechanism: 'the%20individual%20says%20%22What%3F%22%20but%20answers%20before%20the%20repeat%20finishes', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_76_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_76_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20says%20%22What%3F%22%20but%20answers%20before%20the%20repeat%20finishes%20(The%20Annoyance%20Operator)' })
+(loop_76_verdict: BehaviorVerdict { loopId: 76, loopName: 'The%20What%3F%20Loop', then: 'the%20individual%20says%20%22What%3F%22%20but%20answers%20before%20the%20repeat%20finishes%20(The%20Annoyance%20Operator)', result: 'peers%20perceiving%20them%20as%20%22Absent-Minded%2C%22%20leading%20to%20**Intellectual%20Underestimation**', operatorName: 'The%20Annoyance%20Operator', operatorMechanism: 'the%20individual%20says%20%22What%3F%22%20but%20answers%20before%20the%20repeat%20finishes', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_76_when_gate: BehaviorAssess { stage: 'when', text: 'answering%20a%20question' })
+
+// Topology
+(loop_76_start)-[:PROCESS]->(loop_76_given_gate)
+(loop_76_given_gate)-[:PROCESS { case: "ok" }]->(loop_76_when_gate)
+(loop_76_given_gate)-[:PROCESS { case: "err" }]->(loop_76_inactive)
+(loop_76_when_gate)-[:PROCESS { case: "ok" }]->(loop_76_context)
+(loop_76_when_gate)-[:PROCESS { case: "err" }]->(loop_76_inactive)
+(loop_76_context)-[:FORK { strategy: "behavior-branches" }]->(loop_76_context_branch | loop_76_then_branch | loop_76_operator_branch | loop_76_result_branch | loop_76_taxonomy_branch | loop_76_intervention_recognize | loop_76_intervention_interdict | loop_76_intervention_minimize)
+(loop_76_context_branch | loop_76_then_branch | loop_76_operator_branch | loop_76_result_branch | loop_76_taxonomy_branch | loop_76_intervention_recognize | loop_76_intervention_interdict | loop_76_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_76_verdict)
+(loop_76_inactive)-[:PROCESS]->(loop_76_sink)
+(loop_76_verdict)-[:PROCESS]->(loop_76_sink)
+(loop_76_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_76_then_branch)
+(loop_76_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_76_then_branch)
+(loop_76_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_76_then_branch)

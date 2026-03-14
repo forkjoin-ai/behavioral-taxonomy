@@ -1,0 +1,33 @@
+// behavioral-loop-620.gg
+// Executable Gnosis projection for The Propulsion Loop.
+
+// Nodes
+(loop_620_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_620_context_branch: BehaviorEmit { emission: 'context' })
+(loop_620_given_gate: BehaviorAssess { stage: 'given', text: 'Short%2C%20accelerating%20steps%20(leaning%20forward)' })
+(loop_620_inactive: BehaviorTerminal { loopId: 620, loopName: 'The%20Propulsion%20Loop' })
+(loop_620_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_620_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_620_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_620_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rush%20Operator', mechanism: 'it%20looks%20like%20%22Falling%20Forward%22' })
+(loop_620_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20clearing%20the%20path%20rapidly%20to%20avoid%20being%20run%20over' })
+(loop_620_sink: BehaviorSink)
+(loop_620_start: BehaviorStart { loopId: 620, loopName: 'The%20Propulsion%20Loop', given: 'Short%2C%20accelerating%20steps%20(leaning%20forward)', when: 'starting%20to%20walk', then: 'it%20looks%20like%20%22Falling%20Forward%22%20(The%20Rush%20Operator)', result: 'observers%20clearing%20the%20path%20rapidly%20to%20avoid%20being%20run%20over', operatorName: 'The%20Rush%20Operator', operatorMechanism: 'it%20looks%20like%20%22Falling%20Forward%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_620_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_620_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Falling%20Forward%22%20(The%20Rush%20Operator)' })
+(loop_620_verdict: BehaviorVerdict { loopId: 620, loopName: 'The%20Propulsion%20Loop', then: 'it%20looks%20like%20%22Falling%20Forward%22%20(The%20Rush%20Operator)', result: 'observers%20clearing%20the%20path%20rapidly%20to%20avoid%20being%20run%20over', operatorName: 'The%20Rush%20Operator', operatorMechanism: 'it%20looks%20like%20%22Falling%20Forward%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_620_when_gate: BehaviorAssess { stage: 'when', text: 'starting%20to%20walk' })
+
+// Topology
+(loop_620_start)-[:PROCESS]->(loop_620_given_gate)
+(loop_620_given_gate)-[:PROCESS { case: "ok" }]->(loop_620_when_gate)
+(loop_620_given_gate)-[:PROCESS { case: "err" }]->(loop_620_inactive)
+(loop_620_when_gate)-[:PROCESS { case: "ok" }]->(loop_620_context)
+(loop_620_when_gate)-[:PROCESS { case: "err" }]->(loop_620_inactive)
+(loop_620_context)-[:FORK { strategy: "behavior-branches" }]->(loop_620_context_branch | loop_620_then_branch | loop_620_operator_branch | loop_620_result_branch | loop_620_taxonomy_branch | loop_620_intervention_recognize | loop_620_intervention_interdict | loop_620_intervention_minimize)
+(loop_620_context_branch | loop_620_then_branch | loop_620_operator_branch | loop_620_result_branch | loop_620_taxonomy_branch | loop_620_intervention_recognize | loop_620_intervention_interdict | loop_620_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_620_verdict)
+(loop_620_inactive)-[:PROCESS]->(loop_620_sink)
+(loop_620_verdict)-[:PROCESS]->(loop_620_sink)
+(loop_620_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_620_then_branch)
+(loop_620_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_620_then_branch)
+(loop_620_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_620_then_branch)

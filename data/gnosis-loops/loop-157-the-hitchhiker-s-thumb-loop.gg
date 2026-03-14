@@ -1,0 +1,33 @@
+// behavioral-loop-157.gg
+// Executable Gnosis projection for The Hitchhiker's Thumb Loop.
+
+// Nodes
+(loop_157_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_157_context_branch: BehaviorEmit { emission: 'context' })
+(loop_157_given_gate: BehaviorAssess { stage: 'given', text: 'Distal%20hyperextensibility%20(90%20degrees)' })
+(loop_157_inactive: BehaviorTerminal { loopId: 157, loopName: "The%20Hitchhiker's%20Thumb%20Loop" })
+(loop_157_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_157_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_157_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_157_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'it%20becomes%20a%20%22Party%20Trick%22' })
+(loop_157_result_branch: BehaviorEmit { emission: 'result', text: 'a%20minor%20tool%20for%20**Ice-Breaking**' })
+(loop_157_sink: BehaviorSink)
+(loop_157_start: BehaviorStart { loopId: 157, loopName: "The%20Hitchhiker's%20Thumb%20Loop", given: 'Distal%20hyperextensibility%20(90%20degrees)', when: 'showing%20hands', then: 'it%20becomes%20a%20%22Party%20Trick%22%20(The%20Novelty%20Operator)', result: 'a%20minor%20tool%20for%20**Ice-Breaking**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'it%20becomes%20a%20%22Party%20Trick%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_157_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_157_then_branch: BehaviorEmit { emission: 'then', text: 'it%20becomes%20a%20%22Party%20Trick%22%20(The%20Novelty%20Operator)' })
+(loop_157_verdict: BehaviorVerdict { loopId: 157, loopName: "The%20Hitchhiker's%20Thumb%20Loop", then: 'it%20becomes%20a%20%22Party%20Trick%22%20(The%20Novelty%20Operator)', result: 'a%20minor%20tool%20for%20**Ice-Breaking**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'it%20becomes%20a%20%22Party%20Trick%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_157_when_gate: BehaviorAssess { stage: 'when', text: 'showing%20hands' })
+
+// Topology
+(loop_157_start)-[:PROCESS]->(loop_157_given_gate)
+(loop_157_given_gate)-[:PROCESS { case: "ok" }]->(loop_157_when_gate)
+(loop_157_given_gate)-[:PROCESS { case: "err" }]->(loop_157_inactive)
+(loop_157_when_gate)-[:PROCESS { case: "ok" }]->(loop_157_context)
+(loop_157_when_gate)-[:PROCESS { case: "err" }]->(loop_157_inactive)
+(loop_157_context)-[:FORK { strategy: "behavior-branches" }]->(loop_157_context_branch | loop_157_then_branch | loop_157_operator_branch | loop_157_result_branch | loop_157_taxonomy_branch | loop_157_intervention_recognize | loop_157_intervention_interdict | loop_157_intervention_minimize)
+(loop_157_context_branch | loop_157_then_branch | loop_157_operator_branch | loop_157_result_branch | loop_157_taxonomy_branch | loop_157_intervention_recognize | loop_157_intervention_interdict | loop_157_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_157_verdict)
+(loop_157_inactive)-[:PROCESS]->(loop_157_sink)
+(loop_157_verdict)-[:PROCESS]->(loop_157_sink)
+(loop_157_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_157_then_branch)
+(loop_157_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_157_then_branch)
+(loop_157_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_157_then_branch)

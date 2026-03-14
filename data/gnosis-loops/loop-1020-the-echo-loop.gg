@@ -1,0 +1,33 @@
+// behavioral-loop-1020.gg
+// Executable Gnosis projection for The Echo Loop.
+
+// Nodes
+(loop_1020_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1020_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1020_given_gate: BehaviorAssess { stage: 'given', text: 'Lack%20of%20original%20thought%20or%20fear%20of%20disagreement' })
+(loop_1020_inactive: BehaviorTerminal { loopId: 1020, loopName: 'The%20Echo%20Loop' })
+(loop_1020_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1020_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1020_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20recursive%20self-doubt%20or%20self-fulfilling%20prophecies' })
+(loop_1020_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Parrot%20Operator', mechanism: "repeating%20the%20last%20speaker's%20point%20in%20different%20words" })
+(loop_1020_result_branch: BehaviorEmit { emission: 'result', text: 'being%20viewed%20as%20a%20%22Yes%20Man%22%20with%20zero%20value%20add' })
+(loop_1020_sink: BehaviorSink)
+(loop_1020_start: BehaviorStart { loopId: 1020, loopName: 'The%20Echo%20Loop', given: 'Lack%20of%20original%20thought%20or%20fear%20of%20disagreement', when: 'in%20a%20meeting', then: "repeating%20the%20last%20speaker's%20point%20in%20different%20words%20(The%20Parrot%20Operator)", result: 'being%20viewed%20as%20a%20%22Yes%20Man%22%20with%20zero%20value%20add', operatorName: 'The%20Parrot%20Operator', operatorMechanism: "repeating%20the%20last%20speaker's%20point%20in%20different%20words", origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20recursive%20self-doubt%20or%20self-fulfilling%20prophecies', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1020_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION' })
+(loop_1020_then_branch: BehaviorEmit { emission: 'then', text: "repeating%20the%20last%20speaker's%20point%20in%20different%20words%20(The%20Parrot%20Operator)" })
+(loop_1020_verdict: BehaviorVerdict { loopId: 1020, loopName: 'The%20Echo%20Loop', then: "repeating%20the%20last%20speaker's%20point%20in%20different%20words%20(The%20Parrot%20Operator)", result: 'being%20viewed%20as%20a%20%22Yes%20Man%22%20with%20zero%20value%20add', operatorName: 'The%20Parrot%20Operator', operatorMechanism: "repeating%20the%20last%20speaker's%20point%20in%20different%20words", origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION' })
+(loop_1020_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20meeting' })
+
+// Topology
+(loop_1020_start)-[:PROCESS]->(loop_1020_given_gate)
+(loop_1020_given_gate)-[:PROCESS { case: "ok" }]->(loop_1020_when_gate)
+(loop_1020_given_gate)-[:PROCESS { case: "err" }]->(loop_1020_inactive)
+(loop_1020_when_gate)-[:PROCESS { case: "ok" }]->(loop_1020_context)
+(loop_1020_when_gate)-[:PROCESS { case: "err" }]->(loop_1020_inactive)
+(loop_1020_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1020_context_branch | loop_1020_then_branch | loop_1020_operator_branch | loop_1020_result_branch | loop_1020_taxonomy_branch | loop_1020_intervention_recognize | loop_1020_intervention_interdict | loop_1020_intervention_minimize)
+(loop_1020_context_branch | loop_1020_then_branch | loop_1020_operator_branch | loop_1020_result_branch | loop_1020_taxonomy_branch | loop_1020_intervention_recognize | loop_1020_intervention_interdict | loop_1020_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1020_verdict)
+(loop_1020_inactive)-[:PROCESS]->(loop_1020_sink)
+(loop_1020_verdict)-[:PROCESS]->(loop_1020_sink)
+(loop_1020_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1020_then_branch)
+(loop_1020_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1020_then_branch)
+(loop_1020_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1020_then_branch)

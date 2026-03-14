@@ -1,0 +1,33 @@
+// behavioral-loop-721.gg
+// Executable Gnosis projection for The Razor Burn Loop.
+
+// Nodes
+(loop_721_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_721_context_branch: BehaviorEmit { emission: 'context' })
+(loop_721_given_gate: BehaviorAssess { stage: 'given', text: 'Red%20bumps%20on%20the%20neck%20from%20shaving' })
+(loop_721_inactive: BehaviorTerminal { loopId: 721, loopName: 'The%20Razor%20Burn%20Loop' })
+(loop_721_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_721_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_721_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_721_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rash%20Operator', mechanism: 'it%20signals%20%22Amateur%20Grooming%22%20or%20%22Sensitive%20Skin%22' })
+(loop_721_result_branch: BehaviorEmit { emission: 'result', text: 'looking%20less%20%22Polished%22%20than%20peers' })
+(loop_721_sink: BehaviorSink)
+(loop_721_start: BehaviorStart { loopId: 721, loopName: 'The%20Razor%20Burn%20Loop', given: 'Red%20bumps%20on%20the%20neck%20from%20shaving', when: 'wearing%20a%20button-down%20shirt', then: 'it%20signals%20%22Amateur%20Grooming%22%20or%20%22Sensitive%20Skin%22%20(The%20Rash%20Operator)', result: 'looking%20less%20%22Polished%22%20than%20peers', operatorName: 'The%20Rash%20Operator', operatorMechanism: 'it%20signals%20%22Amateur%20Grooming%22%20or%20%22Sensitive%20Skin%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_721_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_721_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Amateur%20Grooming%22%20or%20%22Sensitive%20Skin%22%20(The%20Rash%20Operator)' })
+(loop_721_verdict: BehaviorVerdict { loopId: 721, loopName: 'The%20Razor%20Burn%20Loop', then: 'it%20signals%20%22Amateur%20Grooming%22%20or%20%22Sensitive%20Skin%22%20(The%20Rash%20Operator)', result: 'looking%20less%20%22Polished%22%20than%20peers', operatorName: 'The%20Rash%20Operator', operatorMechanism: 'it%20signals%20%22Amateur%20Grooming%22%20or%20%22Sensitive%20Skin%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_721_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20a%20button-down%20shirt' })
+
+// Topology
+(loop_721_start)-[:PROCESS]->(loop_721_given_gate)
+(loop_721_given_gate)-[:PROCESS { case: "ok" }]->(loop_721_when_gate)
+(loop_721_given_gate)-[:PROCESS { case: "err" }]->(loop_721_inactive)
+(loop_721_when_gate)-[:PROCESS { case: "ok" }]->(loop_721_context)
+(loop_721_when_gate)-[:PROCESS { case: "err" }]->(loop_721_inactive)
+(loop_721_context)-[:FORK { strategy: "behavior-branches" }]->(loop_721_context_branch | loop_721_then_branch | loop_721_operator_branch | loop_721_result_branch | loop_721_taxonomy_branch | loop_721_intervention_recognize | loop_721_intervention_interdict | loop_721_intervention_minimize)
+(loop_721_context_branch | loop_721_then_branch | loop_721_operator_branch | loop_721_result_branch | loop_721_taxonomy_branch | loop_721_intervention_recognize | loop_721_intervention_interdict | loop_721_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_721_verdict)
+(loop_721_inactive)-[:PROCESS]->(loop_721_sink)
+(loop_721_verdict)-[:PROCESS]->(loop_721_sink)
+(loop_721_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_721_then_branch)
+(loop_721_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_721_then_branch)
+(loop_721_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_721_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-259.gg
+// Executable Gnosis projection for The Cross-Dominance Loop.
+
+// Nodes
+(loop_259_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_259_context_branch: BehaviorEmit { emission: 'context' })
+(loop_259_given_gate: BehaviorAssess { stage: 'given', text: 'Mixed%20handedness%20(throws%20right%2C%20writes%20left)' })
+(loop_259_inactive: BehaviorTerminal { loopId: 259, loopName: 'The%20Cross-Dominance%20Loop' })
+(loop_259_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_259_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_259_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_259_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Confusion%20Operator', mechanism: 'instructors%20get%20confused%20and%20give%20poor%20guidance' })
+(loop_259_result_branch: BehaviorEmit { emission: 'result', text: 'a%20slower%20learning%20curve%20and%20higher%20**Frustration**' })
+(loop_259_sink: BehaviorSink)
+(loop_259_start: BehaviorStart { loopId: 259, loopName: 'The%20Cross-Dominance%20Loop', given: 'Mixed%20handedness%20(throws%20right%2C%20writes%20left)', when: 'learning%20a%20new%20physical%20skill%20(sports%2Fsurgery)', then: 'instructors%20get%20confused%20and%20give%20poor%20guidance%20(The%20Confusion%20Operator)', result: 'a%20slower%20learning%20curve%20and%20higher%20**Frustration**', operatorName: 'The%20Confusion%20Operator', operatorMechanism: 'instructors%20get%20confused%20and%20give%20poor%20guidance', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_259_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_259_then_branch: BehaviorEmit { emission: 'then', text: 'instructors%20get%20confused%20and%20give%20poor%20guidance%20(The%20Confusion%20Operator)' })
+(loop_259_verdict: BehaviorVerdict { loopId: 259, loopName: 'The%20Cross-Dominance%20Loop', then: 'instructors%20get%20confused%20and%20give%20poor%20guidance%20(The%20Confusion%20Operator)', result: 'a%20slower%20learning%20curve%20and%20higher%20**Frustration**', operatorName: 'The%20Confusion%20Operator', operatorMechanism: 'instructors%20get%20confused%20and%20give%20poor%20guidance', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_259_when_gate: BehaviorAssess { stage: 'when', text: 'learning%20a%20new%20physical%20skill%20(sports%2Fsurgery)' })
+
+// Topology
+(loop_259_start)-[:PROCESS]->(loop_259_given_gate)
+(loop_259_given_gate)-[:PROCESS { case: "ok" }]->(loop_259_when_gate)
+(loop_259_given_gate)-[:PROCESS { case: "err" }]->(loop_259_inactive)
+(loop_259_when_gate)-[:PROCESS { case: "ok" }]->(loop_259_context)
+(loop_259_when_gate)-[:PROCESS { case: "err" }]->(loop_259_inactive)
+(loop_259_context)-[:FORK { strategy: "behavior-branches" }]->(loop_259_context_branch | loop_259_then_branch | loop_259_operator_branch | loop_259_result_branch | loop_259_taxonomy_branch | loop_259_intervention_recognize | loop_259_intervention_interdict | loop_259_intervention_minimize)
+(loop_259_context_branch | loop_259_then_branch | loop_259_operator_branch | loop_259_result_branch | loop_259_taxonomy_branch | loop_259_intervention_recognize | loop_259_intervention_interdict | loop_259_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_259_verdict)
+(loop_259_inactive)-[:PROCESS]->(loop_259_sink)
+(loop_259_verdict)-[:PROCESS]->(loop_259_sink)
+(loop_259_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_259_then_branch)
+(loop_259_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_259_then_branch)
+(loop_259_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_259_then_branch)

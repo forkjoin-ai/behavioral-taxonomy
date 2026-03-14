@@ -1,0 +1,33 @@
+// behavioral-loop-968.gg
+// Executable Gnosis projection for The High Arch Loop.
+
+// Nodes
+(loop_968_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_968_context_branch: BehaviorEmit { emission: 'context' })
+(loop_968_given_gate: BehaviorAssess { stage: 'given', text: 'Rigid%20foot%20structure%20with%20high%20instep' })
+(loop_968_inactive: BehaviorTerminal { loopId: 968, loopName: 'The%20High%20Arch%20Loop' })
+(loop_968_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_968_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_968_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_968_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stiff%20Operator', mechanism: 'there%20is%20zero%20shock%20absorption' })
+(loop_968_result_branch: BehaviorEmit { emission: 'result', text: 'a%20jarring%20gait%20that%20looks%20%22Military%22%20or%20%22Uptight.%22' })
+(loop_968_sink: BehaviorSink)
+(loop_968_start: BehaviorStart { loopId: 968, loopName: 'The%20High%20Arch%20Loop', given: 'Rigid%20foot%20structure%20with%20high%20instep', when: 'walking', then: 'there%20is%20zero%20shock%20absorption%20(The%20Stiff%20Operator)', result: 'a%20jarring%20gait%20that%20looks%20%22Military%22%20or%20%22Uptight.%22', operatorName: 'The%20Stiff%20Operator', operatorMechanism: 'there%20is%20zero%20shock%20absorption', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_968_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_968_then_branch: BehaviorEmit { emission: 'then', text: 'there%20is%20zero%20shock%20absorption%20(The%20Stiff%20Operator)' })
+(loop_968_verdict: BehaviorVerdict { loopId: 968, loopName: 'The%20High%20Arch%20Loop', then: 'there%20is%20zero%20shock%20absorption%20(The%20Stiff%20Operator)', result: 'a%20jarring%20gait%20that%20looks%20%22Military%22%20or%20%22Uptight.%22', operatorName: 'The%20Stiff%20Operator', operatorMechanism: 'there%20is%20zero%20shock%20absorption', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_968_when_gate: BehaviorAssess { stage: 'when', text: 'walking' })
+
+// Topology
+(loop_968_start)-[:PROCESS]->(loop_968_given_gate)
+(loop_968_given_gate)-[:PROCESS { case: "ok" }]->(loop_968_when_gate)
+(loop_968_given_gate)-[:PROCESS { case: "err" }]->(loop_968_inactive)
+(loop_968_when_gate)-[:PROCESS { case: "ok" }]->(loop_968_context)
+(loop_968_when_gate)-[:PROCESS { case: "err" }]->(loop_968_inactive)
+(loop_968_context)-[:FORK { strategy: "behavior-branches" }]->(loop_968_context_branch | loop_968_then_branch | loop_968_operator_branch | loop_968_result_branch | loop_968_taxonomy_branch | loop_968_intervention_recognize | loop_968_intervention_interdict | loop_968_intervention_minimize)
+(loop_968_context_branch | loop_968_then_branch | loop_968_operator_branch | loop_968_result_branch | loop_968_taxonomy_branch | loop_968_intervention_recognize | loop_968_intervention_interdict | loop_968_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_968_verdict)
+(loop_968_inactive)-[:PROCESS]->(loop_968_sink)
+(loop_968_verdict)-[:PROCESS]->(loop_968_sink)
+(loop_968_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_968_then_branch)
+(loop_968_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_968_then_branch)
+(loop_968_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_968_then_branch)

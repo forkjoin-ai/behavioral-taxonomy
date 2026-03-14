@@ -1,0 +1,33 @@
+// behavioral-loop-588.gg
+// Executable Gnosis projection for The Talon Loop.
+
+// Nodes
+(loop_588_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_588_context_branch: BehaviorEmit { emission: 'context' })
+(loop_588_given_gate: BehaviorAssess { stage: 'given', text: 'Natural%20nails%20kept%20long%20(Male)' })
+(loop_588_inactive: BehaviorTerminal { loopId: 588, loopName: 'The%20Talon%20Loop' })
+(loop_588_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_588_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_588_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_588_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vampire%20Operator', mechanism: 'it%20signals%20%22Eccentricity%2C%22%20%22Coke%20Nail%2C%22%20or%20%22Guitarist%22' })
+(loop_588_result_branch: BehaviorEmit { emission: 'result', text: 'suspicion%20and%20unease%20from%20conservative%20peers' })
+(loop_588_sink: BehaviorSink)
+(loop_588_start: BehaviorStart { loopId: 588, loopName: 'The%20Talon%20Loop', given: 'Natural%20nails%20kept%20long%20(Male)', when: 'seen%20in%20a%20corporate%20setting', then: 'it%20signals%20%22Eccentricity%2C%22%20%22Coke%20Nail%2C%22%20or%20%22Guitarist%22%20(The%20Vampire%20Operator)', result: 'suspicion%20and%20unease%20from%20conservative%20peers', operatorName: 'The%20Vampire%20Operator', operatorMechanism: 'it%20signals%20%22Eccentricity%2C%22%20%22Coke%20Nail%2C%22%20or%20%22Guitarist%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_588_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION' })
+(loop_588_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Eccentricity%2C%22%20%22Coke%20Nail%2C%22%20or%20%22Guitarist%22%20(The%20Vampire%20Operator)' })
+(loop_588_verdict: BehaviorVerdict { loopId: 588, loopName: 'The%20Talon%20Loop', then: 'it%20signals%20%22Eccentricity%2C%22%20%22Coke%20Nail%2C%22%20or%20%22Guitarist%22%20(The%20Vampire%20Operator)', result: 'suspicion%20and%20unease%20from%20conservative%20peers', operatorName: 'The%20Vampire%20Operator', operatorMechanism: 'it%20signals%20%22Eccentricity%2C%22%20%22Coke%20Nail%2C%22%20or%20%22Guitarist%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION' })
+(loop_588_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20in%20a%20corporate%20setting' })
+
+// Topology
+(loop_588_start)-[:PROCESS]->(loop_588_given_gate)
+(loop_588_given_gate)-[:PROCESS { case: "ok" }]->(loop_588_when_gate)
+(loop_588_given_gate)-[:PROCESS { case: "err" }]->(loop_588_inactive)
+(loop_588_when_gate)-[:PROCESS { case: "ok" }]->(loop_588_context)
+(loop_588_when_gate)-[:PROCESS { case: "err" }]->(loop_588_inactive)
+(loop_588_context)-[:FORK { strategy: "behavior-branches" }]->(loop_588_context_branch | loop_588_then_branch | loop_588_operator_branch | loop_588_result_branch | loop_588_taxonomy_branch | loop_588_intervention_recognize | loop_588_intervention_interdict | loop_588_intervention_minimize)
+(loop_588_context_branch | loop_588_then_branch | loop_588_operator_branch | loop_588_result_branch | loop_588_taxonomy_branch | loop_588_intervention_recognize | loop_588_intervention_interdict | loop_588_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_588_verdict)
+(loop_588_inactive)-[:PROCESS]->(loop_588_sink)
+(loop_588_verdict)-[:PROCESS]->(loop_588_sink)
+(loop_588_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_588_then_branch)
+(loop_588_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_588_then_branch)
+(loop_588_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_588_then_branch)

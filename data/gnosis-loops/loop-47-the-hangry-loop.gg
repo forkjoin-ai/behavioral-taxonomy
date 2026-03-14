@@ -1,0 +1,33 @@
+// behavioral-loop-47.gg
+// Executable Gnosis projection for The Hangry Loop.
+
+// Nodes
+(loop_47_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_47_context_branch: BehaviorEmit { emission: 'context' })
+(loop_47_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20Rapid%20Glucose%20Metabolism' })
+(loop_47_inactive: BehaviorTerminal { loopId: 47, loopName: 'The%20Hangry%20Loop' })
+(loop_47_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait' })
+(loop_47_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_47_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_47_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'their%20mood%20visibly%20crashes%2C%20triggering%20concern%20or%20annoyance' })
+(loop_47_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20becoming%20**Routine-Obsessed**%20and%20rigid%20about%20schedules' })
+(loop_47_sink: BehaviorSink)
+(loop_47_start: BehaviorStart { loopId: 47, loopName: 'The%20Hangry%20Loop', given: 'an%20individual%20possesses%20Rapid%20Glucose%20Metabolism', when: 'a%20meeting%20runs%20late%20into%20lunch', then: 'their%20mood%20visibly%20crashes%2C%20triggering%20concern%20or%20annoyance%20(The%20Fragility%20Operator)', result: 'the%20individual%20becoming%20**Routine-Obsessed**%20and%20rigid%20about%20schedules', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'their%20mood%20visibly%20crashes%2C%20triggering%20concern%20or%20annoyance', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_47_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_47_then_branch: BehaviorEmit { emission: 'then', text: 'their%20mood%20visibly%20crashes%2C%20triggering%20concern%20or%20annoyance%20(The%20Fragility%20Operator)' })
+(loop_47_verdict: BehaviorVerdict { loopId: 47, loopName: 'The%20Hangry%20Loop', then: 'their%20mood%20visibly%20crashes%2C%20triggering%20concern%20or%20annoyance%20(The%20Fragility%20Operator)', result: 'the%20individual%20becoming%20**Routine-Obsessed**%20and%20rigid%20about%20schedules', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'their%20mood%20visibly%20crashes%2C%20triggering%20concern%20or%20annoyance', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_47_when_gate: BehaviorAssess { stage: 'when', text: 'a%20meeting%20runs%20late%20into%20lunch' })
+
+// Topology
+(loop_47_start)-[:PROCESS]->(loop_47_given_gate)
+(loop_47_given_gate)-[:PROCESS { case: "ok" }]->(loop_47_when_gate)
+(loop_47_given_gate)-[:PROCESS { case: "err" }]->(loop_47_inactive)
+(loop_47_when_gate)-[:PROCESS { case: "ok" }]->(loop_47_context)
+(loop_47_when_gate)-[:PROCESS { case: "err" }]->(loop_47_inactive)
+(loop_47_context)-[:FORK { strategy: "behavior-branches" }]->(loop_47_context_branch | loop_47_then_branch | loop_47_operator_branch | loop_47_result_branch | loop_47_taxonomy_branch | loop_47_intervention_recognize | loop_47_intervention_interdict | loop_47_intervention_minimize)
+(loop_47_context_branch | loop_47_then_branch | loop_47_operator_branch | loop_47_result_branch | loop_47_taxonomy_branch | loop_47_intervention_recognize | loop_47_intervention_interdict | loop_47_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_47_verdict)
+(loop_47_inactive)-[:PROCESS]->(loop_47_sink)
+(loop_47_verdict)-[:PROCESS]->(loop_47_sink)
+(loop_47_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_47_then_branch)
+(loop_47_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_47_then_branch)
+(loop_47_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_47_then_branch)

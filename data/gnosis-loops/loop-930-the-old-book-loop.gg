@@ -1,0 +1,33 @@
+// behavioral-loop-930.gg
+// Executable Gnosis projection for The Old Book Loop.
+
+// Nodes
+(loop_930_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_930_context_branch: BehaviorEmit { emission: 'context' })
+(loop_930_given_gate: BehaviorAssess { stage: 'given', text: 'Lipid%20oxidation%20on%20the%20skin%20surface%20(Age%2040%2B)' })
+(loop_930_inactive: BehaviorTerminal { loopId: 930, loopName: 'The%20Old%20Book%20Loop' })
+(loop_930_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_930_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_930_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_930_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Senescence%20Operator', mechanism: 'the%20scent%20is%20%22Musty%22%20or%20%22Grassy%22' })
+(loop_930_result_branch: BehaviorEmit { emission: 'result', text: 'instant%20age%20categorization%2C%20regardless%20of%20how%20young%20the%20face%20looks' })
+(loop_930_sink: BehaviorSink)
+(loop_930_start: BehaviorStart { loopId: 930, loopName: 'The%20Old%20Book%20Loop', given: 'Lipid%20oxidation%20on%20the%20skin%20surface%20(Age%2040%2B)', when: 'in%20a%20confined%20space', then: 'the%20scent%20is%20%22Musty%22%20or%20%22Grassy%22%20(The%20Senescence%20Operator)', result: 'instant%20age%20categorization%2C%20regardless%20of%20how%20young%20the%20face%20looks', operatorName: 'The%20Senescence%20Operator', operatorMechanism: 'the%20scent%20is%20%22Musty%22%20or%20%22Grassy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_930_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_930_then_branch: BehaviorEmit { emission: 'then', text: 'the%20scent%20is%20%22Musty%22%20or%20%22Grassy%22%20(The%20Senescence%20Operator)' })
+(loop_930_verdict: BehaviorVerdict { loopId: 930, loopName: 'The%20Old%20Book%20Loop', then: 'the%20scent%20is%20%22Musty%22%20or%20%22Grassy%22%20(The%20Senescence%20Operator)', result: 'instant%20age%20categorization%2C%20regardless%20of%20how%20young%20the%20face%20looks', operatorName: 'The%20Senescence%20Operator', operatorMechanism: 'the%20scent%20is%20%22Musty%22%20or%20%22Grassy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_930_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20confined%20space' })
+
+// Topology
+(loop_930_start)-[:PROCESS]->(loop_930_given_gate)
+(loop_930_given_gate)-[:PROCESS { case: "ok" }]->(loop_930_when_gate)
+(loop_930_given_gate)-[:PROCESS { case: "err" }]->(loop_930_inactive)
+(loop_930_when_gate)-[:PROCESS { case: "ok" }]->(loop_930_context)
+(loop_930_when_gate)-[:PROCESS { case: "err" }]->(loop_930_inactive)
+(loop_930_context)-[:FORK { strategy: "behavior-branches" }]->(loop_930_context_branch | loop_930_then_branch | loop_930_operator_branch | loop_930_result_branch | loop_930_taxonomy_branch | loop_930_intervention_recognize | loop_930_intervention_interdict | loop_930_intervention_minimize)
+(loop_930_context_branch | loop_930_then_branch | loop_930_operator_branch | loop_930_result_branch | loop_930_taxonomy_branch | loop_930_intervention_recognize | loop_930_intervention_interdict | loop_930_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_930_verdict)
+(loop_930_inactive)-[:PROCESS]->(loop_930_sink)
+(loop_930_verdict)-[:PROCESS]->(loop_930_sink)
+(loop_930_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_930_then_branch)
+(loop_930_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_930_then_branch)
+(loop_930_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_930_then_branch)

@@ -1,0 +1,31 @@
+// behavioral-loop-692.gg
+// Executable Gnosis projection for The Wide-Eyed Loop.
+
+// Nodes
+(loop_692_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_692_context_branch: BehaviorEmit { emission: 'context' })
+(loop_692_given_gate: BehaviorAssess { stage: 'given', text: 'Exposed%20sclera%20above%20the%20iris' })
+(loop_692_inactive: BehaviorTerminal { loopId: 692, loopName: 'The%20Wide-Eyed%20Loop' })
+(loop_692_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20strategically%20without%20overexposure' })
+(loop_692_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_692_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Prey%20Operator', mechanism: 'it%20looks%20like%20%22Fear%22%20or%20%22Adoration%22' })
+(loop_692_result_branch: BehaviorEmit { emission: 'result', text: 'attracting%20predators%20or%20narcissists' })
+(loop_692_sink: BehaviorSink)
+(loop_692_start: BehaviorStart { loopId: 692, loopName: 'The%20Wide-Eyed%20Loop', given: 'Exposed%20sclera%20above%20the%20iris', when: 'listening', then: 'it%20looks%20like%20%22Fear%22%20or%20%22Adoration%22%20(The%20Prey%20Operator)', result: 'attracting%20predators%20or%20narcissists', operatorName: 'The%20Prey%20Operator', operatorMechanism: 'it%20looks%20like%20%22Fear%22%20or%20%22Adoration%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Use%20strategically%20without%20overexposure' })
+(loop_692_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_692_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Fear%22%20or%20%22Adoration%22%20(The%20Prey%20Operator)' })
+(loop_692_verdict: BehaviorVerdict { loopId: 692, loopName: 'The%20Wide-Eyed%20Loop', then: 'it%20looks%20like%20%22Fear%22%20or%20%22Adoration%22%20(The%20Prey%20Operator)', result: 'attracting%20predators%20or%20narcissists', operatorName: 'The%20Prey%20Operator', operatorMechanism: 'it%20looks%20like%20%22Fear%22%20or%20%22Adoration%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_692_when_gate: BehaviorAssess { stage: 'when', text: 'listening' })
+
+// Topology
+(loop_692_start)-[:PROCESS]->(loop_692_given_gate)
+(loop_692_given_gate)-[:PROCESS { case: "ok" }]->(loop_692_when_gate)
+(loop_692_given_gate)-[:PROCESS { case: "err" }]->(loop_692_inactive)
+(loop_692_when_gate)-[:PROCESS { case: "ok" }]->(loop_692_context)
+(loop_692_when_gate)-[:PROCESS { case: "err" }]->(loop_692_inactive)
+(loop_692_context)-[:FORK { strategy: "behavior-branches" }]->(loop_692_context_branch | loop_692_then_branch | loop_692_operator_branch | loop_692_result_branch | loop_692_taxonomy_branch | loop_692_intervention_recognize | loop_692_intervention_leverage)
+(loop_692_context_branch | loop_692_then_branch | loop_692_operator_branch | loop_692_result_branch | loop_692_taxonomy_branch | loop_692_intervention_recognize | loop_692_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_692_verdict)
+(loop_692_inactive)-[:PROCESS]->(loop_692_sink)
+(loop_692_verdict)-[:PROCESS]->(loop_692_sink)
+(loop_692_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_692_then_branch)
+(loop_692_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_692_result_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-160.gg
+// Executable Gnosis projection for The Albino Loop.
+
+// Nodes
+(loop_160_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_160_context_branch: BehaviorEmit { emission: 'context' })
+(loop_160_given_gate: BehaviorAssess { stage: 'given', text: 'Lack%20of%20melanin%20pigment' })
+(loop_160_inactive: BehaviorTerminal { loopId: 160, loopName: 'The%20Albino%20Loop' })
+(loop_160_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_160_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_160_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_160_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mythological%20Operator', mechanism: 'the%20individual%20is%20%22Hyper-Visible%22%20yet%20%22Fragile%22' })
+(loop_160_result_branch: BehaviorEmit { emission: 'result', text: 'extreme%20**Othering**%20(being%20treated%20as%20a%20symbol%20rather%20than%20a%20person)' })
+(loop_160_sink: BehaviorSink)
+(loop_160_start: BehaviorStart { loopId: 160, loopName: 'The%20Albino%20Loop', given: 'Lack%20of%20melanin%20pigment', when: 'in%20any%20social%20group', then: 'the%20individual%20is%20%22Hyper-Visible%22%20yet%20%22Fragile%22%20(The%20Mythological%20Operator)', result: 'extreme%20**Othering**%20(being%20treated%20as%20a%20symbol%20rather%20than%20a%20person)', operatorName: 'The%20Mythological%20Operator', operatorMechanism: 'the%20individual%20is%20%22Hyper-Visible%22%20yet%20%22Fragile%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_160_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_160_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20is%20%22Hyper-Visible%22%20yet%20%22Fragile%22%20(The%20Mythological%20Operator)' })
+(loop_160_verdict: BehaviorVerdict { loopId: 160, loopName: 'The%20Albino%20Loop', then: 'the%20individual%20is%20%22Hyper-Visible%22%20yet%20%22Fragile%22%20(The%20Mythological%20Operator)', result: 'extreme%20**Othering**%20(being%20treated%20as%20a%20symbol%20rather%20than%20a%20person)', operatorName: 'The%20Mythological%20Operator', operatorMechanism: 'the%20individual%20is%20%22Hyper-Visible%22%20yet%20%22Fragile%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_160_when_gate: BehaviorAssess { stage: 'when', text: 'in%20any%20social%20group' })
+
+// Topology
+(loop_160_start)-[:PROCESS]->(loop_160_given_gate)
+(loop_160_given_gate)-[:PROCESS { case: "ok" }]->(loop_160_when_gate)
+(loop_160_given_gate)-[:PROCESS { case: "err" }]->(loop_160_inactive)
+(loop_160_when_gate)-[:PROCESS { case: "ok" }]->(loop_160_context)
+(loop_160_when_gate)-[:PROCESS { case: "err" }]->(loop_160_inactive)
+(loop_160_context)-[:FORK { strategy: "behavior-branches" }]->(loop_160_context_branch | loop_160_then_branch | loop_160_operator_branch | loop_160_result_branch | loop_160_taxonomy_branch | loop_160_intervention_recognize | loop_160_intervention_interdict | loop_160_intervention_minimize)
+(loop_160_context_branch | loop_160_then_branch | loop_160_operator_branch | loop_160_result_branch | loop_160_taxonomy_branch | loop_160_intervention_recognize | loop_160_intervention_interdict | loop_160_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_160_verdict)
+(loop_160_inactive)-[:PROCESS]->(loop_160_sink)
+(loop_160_verdict)-[:PROCESS]->(loop_160_sink)
+(loop_160_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_160_then_branch)
+(loop_160_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_160_then_branch)
+(loop_160_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_160_then_branch)

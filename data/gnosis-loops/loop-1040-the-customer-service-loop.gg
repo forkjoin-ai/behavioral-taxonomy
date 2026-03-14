@@ -1,0 +1,33 @@
+// behavioral-loop-1040.gg
+// Executable Gnosis projection for The Customer Service Loop.
+
+// Nodes
+(loop_1040_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1040_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1040_given_gate: BehaviorAssess { stage: 'given', text: 'Social%20conditioning' })
+(loop_1040_inactive: BehaviorTerminal { loopId: 1040, loopName: 'The%20Customer%20Service%20Loop' })
+(loop_1040_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1040_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1040_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1040_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20voice%20raises%202%20octaves%20(The%20Customer%20Service%20Voice)' })
+(loop_1040_result_branch: BehaviorEmit { emission: 'result', text: 'a%20distinct%20%22Fake%20Self%22%20that%20drops%20instantly%20when%20the%20call%20ends' })
+(loop_1040_sink: BehaviorSink)
+(loop_1040_start: BehaviorStart { loopId: 1040, loopName: 'The%20Customer%20Service%20Loop', given: 'Social%20conditioning', when: 'answering%20a%20phone%20call%20from%20a%20stranger', then: 'the%20voice%20raises%202%20octaves%20(The%20Customer%20Service%20Voice)', result: 'a%20distinct%20%22Fake%20Self%22%20that%20drops%20instantly%20when%20the%20call%20ends', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20voice%20raises%202%20octaves%20(The%20Customer%20Service%20Voice)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1040_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1040_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20raises%202%20octaves%20(The%20Customer%20Service%20Voice)' })
+(loop_1040_verdict: BehaviorVerdict { loopId: 1040, loopName: 'The%20Customer%20Service%20Loop', then: 'the%20voice%20raises%202%20octaves%20(The%20Customer%20Service%20Voice)', result: 'a%20distinct%20%22Fake%20Self%22%20that%20drops%20instantly%20when%20the%20call%20ends', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20voice%20raises%202%20octaves%20(The%20Customer%20Service%20Voice)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1040_when_gate: BehaviorAssess { stage: 'when', text: 'answering%20a%20phone%20call%20from%20a%20stranger' })
+
+// Topology
+(loop_1040_start)-[:PROCESS]->(loop_1040_given_gate)
+(loop_1040_given_gate)-[:PROCESS { case: "ok" }]->(loop_1040_when_gate)
+(loop_1040_given_gate)-[:PROCESS { case: "err" }]->(loop_1040_inactive)
+(loop_1040_when_gate)-[:PROCESS { case: "ok" }]->(loop_1040_context)
+(loop_1040_when_gate)-[:PROCESS { case: "err" }]->(loop_1040_inactive)
+(loop_1040_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1040_context_branch | loop_1040_then_branch | loop_1040_operator_branch | loop_1040_result_branch | loop_1040_taxonomy_branch | loop_1040_intervention_recognize | loop_1040_intervention_interdict | loop_1040_intervention_minimize)
+(loop_1040_context_branch | loop_1040_then_branch | loop_1040_operator_branch | loop_1040_result_branch | loop_1040_taxonomy_branch | loop_1040_intervention_recognize | loop_1040_intervention_interdict | loop_1040_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1040_verdict)
+(loop_1040_inactive)-[:PROCESS]->(loop_1040_sink)
+(loop_1040_verdict)-[:PROCESS]->(loop_1040_sink)
+(loop_1040_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1040_then_branch)
+(loop_1040_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1040_then_branch)
+(loop_1040_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1040_then_branch)

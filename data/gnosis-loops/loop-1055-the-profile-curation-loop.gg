@@ -1,0 +1,33 @@
+// behavioral-loop-1055.gg
+// Executable Gnosis projection for The Profile Curation Loop.
+
+// Nodes
+(loop_1055_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1055_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1055_given_gate: BehaviorAssess { stage: 'given', text: 'Discrepancy%20between%20life%20and%20Instagram' })
+(loop_1055_inactive: BehaviorTerminal { loopId: 1055, loopName: 'The%20Profile%20Curation%20Loop' })
+(loop_1055_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1055_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1055_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1055_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20digital%20self%20becomes%20more%20%22Real%22%20than%20the%20physical%20self%20(The%20Avatar)' })
+(loop_1055_result_branch: BehaviorEmit { emission: 'result', text: 'dysphoria%20when%20looking%20in%20a%20mirror' })
+(loop_1055_sink: BehaviorSink)
+(loop_1055_start: BehaviorStart { loopId: 1055, loopName: 'The%20Profile%20Curation%20Loop', given: 'Discrepancy%20between%20life%20and%20Instagram', when: 'posting', then: 'the%20digital%20self%20becomes%20more%20%22Real%22%20than%20the%20physical%20self%20(The%20Avatar)', result: 'dysphoria%20when%20looking%20in%20a%20mirror', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20digital%20self%20becomes%20more%20%22Real%22%20than%20the%20physical%20self%20(The%20Avatar)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1055_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1055_then_branch: BehaviorEmit { emission: 'then', text: 'the%20digital%20self%20becomes%20more%20%22Real%22%20than%20the%20physical%20self%20(The%20Avatar)' })
+(loop_1055_verdict: BehaviorVerdict { loopId: 1055, loopName: 'The%20Profile%20Curation%20Loop', then: 'the%20digital%20self%20becomes%20more%20%22Real%22%20than%20the%20physical%20self%20(The%20Avatar)', result: 'dysphoria%20when%20looking%20in%20a%20mirror', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20digital%20self%20becomes%20more%20%22Real%22%20than%20the%20physical%20self%20(The%20Avatar)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1055_when_gate: BehaviorAssess { stage: 'when', text: 'posting' })
+
+// Topology
+(loop_1055_start)-[:PROCESS]->(loop_1055_given_gate)
+(loop_1055_given_gate)-[:PROCESS { case: "ok" }]->(loop_1055_when_gate)
+(loop_1055_given_gate)-[:PROCESS { case: "err" }]->(loop_1055_inactive)
+(loop_1055_when_gate)-[:PROCESS { case: "ok" }]->(loop_1055_context)
+(loop_1055_when_gate)-[:PROCESS { case: "err" }]->(loop_1055_inactive)
+(loop_1055_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1055_context_branch | loop_1055_then_branch | loop_1055_operator_branch | loop_1055_result_branch | loop_1055_taxonomy_branch | loop_1055_intervention_recognize | loop_1055_intervention_interdict | loop_1055_intervention_minimize)
+(loop_1055_context_branch | loop_1055_then_branch | loop_1055_operator_branch | loop_1055_result_branch | loop_1055_taxonomy_branch | loop_1055_intervention_recognize | loop_1055_intervention_interdict | loop_1055_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1055_verdict)
+(loop_1055_inactive)-[:PROCESS]->(loop_1055_sink)
+(loop_1055_verdict)-[:PROCESS]->(loop_1055_sink)
+(loop_1055_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1055_then_branch)
+(loop_1055_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1055_then_branch)
+(loop_1055_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1055_then_branch)

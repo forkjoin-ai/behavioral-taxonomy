@@ -1,0 +1,33 @@
+// behavioral-loop-582.gg
+// Executable Gnosis projection for The Snake Eye Loop.
+
+// Nodes
+(loop_582_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_582_context_branch: BehaviorEmit { emission: 'context' })
+(loop_582_given_gate: BehaviorAssess { stage: 'given', text: 'Pinpoint%20pupils%20(Light%20eyes%20or%20parasympathetic%20dominance)' })
+(loop_582_inactive: BehaviorTerminal { loopId: 582, loopName: 'The%20Snake%20Eye%20Loop' })
+(loop_582_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_582_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_582_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_582_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Reptile%20Operator', mechanism: 'the%20gaze%20looks%20%22Cold%22%20and%20%22Calculating%22' })
+(loop_582_result_branch: BehaviorEmit { emission: 'result', text: 'effective%20intimidation%20without%20raising%20the%20voice' })
+(loop_582_sink: BehaviorSink)
+(loop_582_start: BehaviorStart { loopId: 582, loopName: 'The%20Snake%20Eye%20Loop', given: 'Pinpoint%20pupils%20(Light%20eyes%20or%20parasympathetic%20dominance)', when: 'angry', then: 'the%20gaze%20looks%20%22Cold%22%20and%20%22Calculating%22%20(The%20Reptile%20Operator)', result: 'effective%20intimidation%20without%20raising%20the%20voice', operatorName: 'The%20Reptile%20Operator', operatorMechanism: 'the%20gaze%20looks%20%22Cold%22%20and%20%22Calculating%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_582_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_582_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gaze%20looks%20%22Cold%22%20and%20%22Calculating%22%20(The%20Reptile%20Operator)' })
+(loop_582_verdict: BehaviorVerdict { loopId: 582, loopName: 'The%20Snake%20Eye%20Loop', then: 'the%20gaze%20looks%20%22Cold%22%20and%20%22Calculating%22%20(The%20Reptile%20Operator)', result: 'effective%20intimidation%20without%20raising%20the%20voice', operatorName: 'The%20Reptile%20Operator', operatorMechanism: 'the%20gaze%20looks%20%22Cold%22%20and%20%22Calculating%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_582_when_gate: BehaviorAssess { stage: 'when', text: 'angry' })
+
+// Topology
+(loop_582_start)-[:PROCESS]->(loop_582_given_gate)
+(loop_582_given_gate)-[:PROCESS { case: "ok" }]->(loop_582_when_gate)
+(loop_582_given_gate)-[:PROCESS { case: "err" }]->(loop_582_inactive)
+(loop_582_when_gate)-[:PROCESS { case: "ok" }]->(loop_582_context)
+(loop_582_when_gate)-[:PROCESS { case: "err" }]->(loop_582_inactive)
+(loop_582_context)-[:FORK { strategy: "behavior-branches" }]->(loop_582_context_branch | loop_582_then_branch | loop_582_operator_branch | loop_582_result_branch | loop_582_taxonomy_branch | loop_582_intervention_recognize | loop_582_intervention_interdict | loop_582_intervention_minimize)
+(loop_582_context_branch | loop_582_then_branch | loop_582_operator_branch | loop_582_result_branch | loop_582_taxonomy_branch | loop_582_intervention_recognize | loop_582_intervention_interdict | loop_582_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_582_verdict)
+(loop_582_inactive)-[:PROCESS]->(loop_582_sink)
+(loop_582_verdict)-[:PROCESS]->(loop_582_sink)
+(loop_582_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_582_then_branch)
+(loop_582_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_582_then_branch)
+(loop_582_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_582_then_branch)

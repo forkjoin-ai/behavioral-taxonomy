@@ -1,0 +1,33 @@
+// behavioral-loop-570.gg
+// Executable Gnosis projection for The Thick Wrist Loop.
+
+// Nodes
+(loop_570_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_570_context_branch: BehaviorEmit { emission: 'context' })
+(loop_570_given_gate: BehaviorAssess { stage: 'given', text: 'High%20bone%20density%20in%20radioulnar%20joint' })
+(loop_570_inactive: BehaviorTerminal { loopId: 570, loopName: 'The%20Thick%20Wrist%20Loop' })
+(loop_570_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_570_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_570_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_570_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Peasant%20Strength%20Operator', mechanism: 'observers%20assume%20%22Power%22%20and%20%22Durability%22' })
+(loop_570_result_branch: BehaviorEmit { emission: 'result', text: 'respect%20in%20manual%20trades' })
+(loop_570_sink: BehaviorSink)
+(loop_570_start: BehaviorStart { loopId: 570, loopName: 'The%20Thick%20Wrist%20Loop', given: 'High%20bone%20density%20in%20radioulnar%20joint', when: 'seen%20in%20a%20fight%20or%20labor', then: 'observers%20assume%20%22Power%22%20and%20%22Durability%22%20(The%20Peasant%20Strength%20Operator)', result: 'respect%20in%20manual%20trades', operatorName: 'The%20Peasant%20Strength%20Operator', operatorMechanism: 'observers%20assume%20%22Power%22%20and%20%22Durability%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_570_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_570_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Power%22%20and%20%22Durability%22%20(The%20Peasant%20Strength%20Operator)' })
+(loop_570_verdict: BehaviorVerdict { loopId: 570, loopName: 'The%20Thick%20Wrist%20Loop', then: 'observers%20assume%20%22Power%22%20and%20%22Durability%22%20(The%20Peasant%20Strength%20Operator)', result: 'respect%20in%20manual%20trades', operatorName: 'The%20Peasant%20Strength%20Operator', operatorMechanism: 'observers%20assume%20%22Power%22%20and%20%22Durability%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_570_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20in%20a%20fight%20or%20labor' })
+
+// Topology
+(loop_570_start)-[:PROCESS]->(loop_570_given_gate)
+(loop_570_given_gate)-[:PROCESS { case: "ok" }]->(loop_570_when_gate)
+(loop_570_given_gate)-[:PROCESS { case: "err" }]->(loop_570_inactive)
+(loop_570_when_gate)-[:PROCESS { case: "ok" }]->(loop_570_context)
+(loop_570_when_gate)-[:PROCESS { case: "err" }]->(loop_570_inactive)
+(loop_570_context)-[:FORK { strategy: "behavior-branches" }]->(loop_570_context_branch | loop_570_then_branch | loop_570_operator_branch | loop_570_result_branch | loop_570_taxonomy_branch | loop_570_intervention_recognize | loop_570_intervention_interdict | loop_570_intervention_minimize)
+(loop_570_context_branch | loop_570_then_branch | loop_570_operator_branch | loop_570_result_branch | loop_570_taxonomy_branch | loop_570_intervention_recognize | loop_570_intervention_interdict | loop_570_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_570_verdict)
+(loop_570_inactive)-[:PROCESS]->(loop_570_sink)
+(loop_570_verdict)-[:PROCESS]->(loop_570_sink)
+(loop_570_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_570_then_branch)
+(loop_570_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_570_then_branch)
+(loop_570_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_570_then_branch)

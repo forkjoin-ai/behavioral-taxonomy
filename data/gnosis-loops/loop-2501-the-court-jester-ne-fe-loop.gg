@@ -1,0 +1,33 @@
+// behavioral-loop-2501.gg
+// Executable Gnosis projection for The Court Jester (Ne-Fe Loop).
+
+// Nodes
+(loop_2501_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_2501_context_branch: BehaviorEmit { emission: 'context' })
+(loop_2501_given_gate: BehaviorAssess { stage: 'given', text: 'Dominant%20Extroverted%20Intuition%20(Ne)%20%2B%20Extroverted%20Feeling%20(Fe)%20bypassing%20Introverted%20Thinking%20(Ti)' })
+(loop_2501_inactive: BehaviorTerminal { loopId: 2501, loopName: 'The%20Court%20Jester%20(Ne-Fe%20Loop)' })
+(loop_2501_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_2501_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2501_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_2501_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_2501_result_branch: BehaviorEmit { emission: 'result', text: 'Loss%20of%20logical%20integrity%3B%20saying%20things%20they%20don' })
+(loop_2501_sink: BehaviorSink)
+(loop_2501_start: BehaviorStart { loopId: 2501, loopName: 'The%20Court%20Jester%20(Ne-Fe%20Loop)', given: 'Dominant%20Extroverted%20Intuition%20(Ne)%20%2B%20Extroverted%20Feeling%20(Fe)%20bypassing%20Introverted%20Thinking%20(Ti)', when: 'Craving%20validation%20or%20avoiding%20serious%20introspection', then: 'Compulsive%20joking%2C%20trolling%2C%20or%20performing%20to%20get%20a%20reaction%20from%20others', result: 'Loss%20of%20logical%20integrity%3B%20saying%20things%20they%20don', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2501_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2501_then_branch: BehaviorEmit { emission: 'then', text: 'Compulsive%20joking%2C%20trolling%2C%20or%20performing%20to%20get%20a%20reaction%20from%20others' })
+(loop_2501_verdict: BehaviorVerdict { loopId: 2501, loopName: 'The%20Court%20Jester%20(Ne-Fe%20Loop)', then: 'Compulsive%20joking%2C%20trolling%2C%20or%20performing%20to%20get%20a%20reaction%20from%20others', result: 'Loss%20of%20logical%20integrity%3B%20saying%20things%20they%20don', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2501_when_gate: BehaviorAssess { stage: 'when', text: 'Craving%20validation%20or%20avoiding%20serious%20introspection' })
+
+// Topology
+(loop_2501_start)-[:PROCESS]->(loop_2501_given_gate)
+(loop_2501_given_gate)-[:PROCESS { case: "ok" }]->(loop_2501_when_gate)
+(loop_2501_given_gate)-[:PROCESS { case: "err" }]->(loop_2501_inactive)
+(loop_2501_when_gate)-[:PROCESS { case: "ok" }]->(loop_2501_context)
+(loop_2501_when_gate)-[:PROCESS { case: "err" }]->(loop_2501_inactive)
+(loop_2501_context)-[:FORK { strategy: "behavior-branches" }]->(loop_2501_context_branch | loop_2501_then_branch | loop_2501_operator_branch | loop_2501_result_branch | loop_2501_taxonomy_branch | loop_2501_intervention_recognize | loop_2501_intervention_interdict | loop_2501_intervention_minimize)
+(loop_2501_context_branch | loop_2501_then_branch | loop_2501_operator_branch | loop_2501_result_branch | loop_2501_taxonomy_branch | loop_2501_intervention_recognize | loop_2501_intervention_interdict | loop_2501_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_2501_verdict)
+(loop_2501_inactive)-[:PROCESS]->(loop_2501_sink)
+(loop_2501_verdict)-[:PROCESS]->(loop_2501_sink)
+(loop_2501_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_2501_then_branch)
+(loop_2501_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_2501_then_branch)
+(loop_2501_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_2501_then_branch)

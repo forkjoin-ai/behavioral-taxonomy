@@ -1,0 +1,33 @@
+// behavioral-loop-391.gg
+// Executable Gnosis projection for The Yellow Cast Loop.
+
+// Nodes
+(loop_391_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_391_context_branch: BehaviorEmit { emission: 'context' })
+(loop_391_given_gate: BehaviorAssess { stage: 'given', text: 'Liver%20stress%20or%20high%20carotene' })
+(loop_391_inactive: BehaviorTerminal { loopId: 391, loopName: 'The%20Yellow%20Cast%20Loop' })
+(loop_391_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_391_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_391_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_391_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sickness%20Operator', mechanism: 'the%20skin%20looks%20%22Sallow%22%20or%20%22Toxic%22' })
+(loop_391_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20subconsciously%20avoiding%20sharing%20food%2Fdrinks' })
+(loop_391_sink: BehaviorSink)
+(loop_391_start: BehaviorStart { loopId: 391, loopName: 'The%20Yellow%20Cast%20Loop', given: 'Liver%20stress%20or%20high%20carotene', when: 'viewed%20in%20daylight', then: 'the%20skin%20looks%20%22Sallow%22%20or%20%22Toxic%22%20(The%20Sickness%20Operator)', result: 'peers%20subconsciously%20avoiding%20sharing%20food%2Fdrinks', operatorName: 'The%20Sickness%20Operator', operatorMechanism: 'the%20skin%20looks%20%22Sallow%22%20or%20%22Toxic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_391_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_391_then_branch: BehaviorEmit { emission: 'then', text: 'the%20skin%20looks%20%22Sallow%22%20or%20%22Toxic%22%20(The%20Sickness%20Operator)' })
+(loop_391_verdict: BehaviorVerdict { loopId: 391, loopName: 'The%20Yellow%20Cast%20Loop', then: 'the%20skin%20looks%20%22Sallow%22%20or%20%22Toxic%22%20(The%20Sickness%20Operator)', result: 'peers%20subconsciously%20avoiding%20sharing%20food%2Fdrinks', operatorName: 'The%20Sickness%20Operator', operatorMechanism: 'the%20skin%20looks%20%22Sallow%22%20or%20%22Toxic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_391_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20in%20daylight' })
+
+// Topology
+(loop_391_start)-[:PROCESS]->(loop_391_given_gate)
+(loop_391_given_gate)-[:PROCESS { case: "ok" }]->(loop_391_when_gate)
+(loop_391_given_gate)-[:PROCESS { case: "err" }]->(loop_391_inactive)
+(loop_391_when_gate)-[:PROCESS { case: "ok" }]->(loop_391_context)
+(loop_391_when_gate)-[:PROCESS { case: "err" }]->(loop_391_inactive)
+(loop_391_context)-[:FORK { strategy: "behavior-branches" }]->(loop_391_context_branch | loop_391_then_branch | loop_391_operator_branch | loop_391_result_branch | loop_391_taxonomy_branch | loop_391_intervention_recognize | loop_391_intervention_interdict | loop_391_intervention_minimize)
+(loop_391_context_branch | loop_391_then_branch | loop_391_operator_branch | loop_391_result_branch | loop_391_taxonomy_branch | loop_391_intervention_recognize | loop_391_intervention_interdict | loop_391_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_391_verdict)
+(loop_391_inactive)-[:PROCESS]->(loop_391_sink)
+(loop_391_verdict)-[:PROCESS]->(loop_391_sink)
+(loop_391_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_391_then_branch)
+(loop_391_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_391_then_branch)
+(loop_391_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_391_then_branch)

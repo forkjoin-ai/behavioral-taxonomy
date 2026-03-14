@@ -1,0 +1,33 @@
+// behavioral-loop-1045.gg
+// Executable Gnosis projection for The Insomnia Loop.
+
+// Nodes
+(loop_1045_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1045_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1045_given_gate: BehaviorAssess { stage: 'given', text: 'Fear%20of%20not%20sleeping' })
+(loop_1045_inactive: BehaviorTerminal { loopId: 1045, loopName: 'The%20Insomnia%20Loop' })
+(loop_1045_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1045_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1045_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1045_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'adrenaline%20spikes%20because%20%22I%20only%20have%204%20hours%20left%22%20(The%20Countdown)' })
+(loop_1045_result_branch: BehaviorEmit { emission: 'result', text: 'ensuring%20no%20sleep%20occurs' })
+(loop_1045_sink: BehaviorSink)
+(loop_1045_start: BehaviorStart { loopId: 1045, loopName: 'The%20Insomnia%20Loop', given: 'Fear%20of%20not%20sleeping', when: 'looking%20at%20the%20clock', then: 'adrenaline%20spikes%20because%20%22I%20only%20have%204%20hours%20left%22%20(The%20Countdown)', result: 'ensuring%20no%20sleep%20occurs', operatorName: 'Unknown%20Operator', operatorMechanism: 'adrenaline%20spikes%20because%20%22I%20only%20have%204%20hours%20left%22%20(The%20Countdown)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1045_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1045_then_branch: BehaviorEmit { emission: 'then', text: 'adrenaline%20spikes%20because%20%22I%20only%20have%204%20hours%20left%22%20(The%20Countdown)' })
+(loop_1045_verdict: BehaviorVerdict { loopId: 1045, loopName: 'The%20Insomnia%20Loop', then: 'adrenaline%20spikes%20because%20%22I%20only%20have%204%20hours%20left%22%20(The%20Countdown)', result: 'ensuring%20no%20sleep%20occurs', operatorName: 'Unknown%20Operator', operatorMechanism: 'adrenaline%20spikes%20because%20%22I%20only%20have%204%20hours%20left%22%20(The%20Countdown)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1045_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20at%20the%20clock' })
+
+// Topology
+(loop_1045_start)-[:PROCESS]->(loop_1045_given_gate)
+(loop_1045_given_gate)-[:PROCESS { case: "ok" }]->(loop_1045_when_gate)
+(loop_1045_given_gate)-[:PROCESS { case: "err" }]->(loop_1045_inactive)
+(loop_1045_when_gate)-[:PROCESS { case: "ok" }]->(loop_1045_context)
+(loop_1045_when_gate)-[:PROCESS { case: "err" }]->(loop_1045_inactive)
+(loop_1045_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1045_context_branch | loop_1045_then_branch | loop_1045_operator_branch | loop_1045_result_branch | loop_1045_taxonomy_branch | loop_1045_intervention_recognize | loop_1045_intervention_interdict | loop_1045_intervention_minimize)
+(loop_1045_context_branch | loop_1045_then_branch | loop_1045_operator_branch | loop_1045_result_branch | loop_1045_taxonomy_branch | loop_1045_intervention_recognize | loop_1045_intervention_interdict | loop_1045_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1045_verdict)
+(loop_1045_inactive)-[:PROCESS]->(loop_1045_sink)
+(loop_1045_verdict)-[:PROCESS]->(loop_1045_sink)
+(loop_1045_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1045_then_branch)
+(loop_1045_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1045_then_branch)
+(loop_1045_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1045_then_branch)

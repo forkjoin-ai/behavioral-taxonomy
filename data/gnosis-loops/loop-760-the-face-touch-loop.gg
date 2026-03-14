@@ -1,0 +1,31 @@
+// behavioral-loop-760.gg
+// Executable Gnosis projection for The Face-Touch Loop.
+
+// Nodes
+(loop_760_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_760_context_branch: BehaviorEmit { emission: 'context' })
+(loop_760_given_gate: BehaviorAssess { stage: 'given', text: 'Covering%20mouth%2Fnose%20while%20speaking' })
+(loop_760_inactive: BehaviorTerminal { loopId: 760, loopName: 'The%20Face-Touch%20Loop' })
+(loop_760_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_760_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_760_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Muffle%20Operator', mechanism: 'it%20signals%20%22Lying%22%20or%20%22Uncertainty%22' })
+(loop_760_result_branch: BehaviorEmit { emission: 'result', text: 'low%20credibility' })
+(loop_760_sink: BehaviorSink)
+(loop_760_start: BehaviorStart { loopId: 760, loopName: 'The%20Face-Touch%20Loop', given: 'Covering%20mouth%2Fnose%20while%20speaking', when: 'telling%20a%20story', then: 'it%20signals%20%22Lying%22%20or%20%22Uncertainty%22%20(The%20Muffle%20Operator)', result: 'low%20credibility', operatorName: 'The%20Muffle%20Operator', operatorMechanism: 'it%20signals%20%22Lying%22%20or%20%22Uncertainty%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'TRUST', interventionDifficulty: '5', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_760_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'TRUST' })
+(loop_760_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Lying%22%20or%20%22Uncertainty%22%20(The%20Muffle%20Operator)' })
+(loop_760_verdict: BehaviorVerdict { loopId: 760, loopName: 'The%20Face-Touch%20Loop', then: 'it%20signals%20%22Lying%22%20or%20%22Uncertainty%22%20(The%20Muffle%20Operator)', result: 'low%20credibility', operatorName: 'The%20Muffle%20Operator', operatorMechanism: 'it%20signals%20%22Lying%22%20or%20%22Uncertainty%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'TRUST' })
+(loop_760_when_gate: BehaviorAssess { stage: 'when', text: 'telling%20a%20story' })
+
+// Topology
+(loop_760_start)-[:PROCESS]->(loop_760_given_gate)
+(loop_760_given_gate)-[:PROCESS { case: "ok" }]->(loop_760_when_gate)
+(loop_760_given_gate)-[:PROCESS { case: "err" }]->(loop_760_inactive)
+(loop_760_when_gate)-[:PROCESS { case: "ok" }]->(loop_760_context)
+(loop_760_when_gate)-[:PROCESS { case: "err" }]->(loop_760_inactive)
+(loop_760_context)-[:FORK { strategy: "behavior-branches" }]->(loop_760_context_branch | loop_760_then_branch | loop_760_operator_branch | loop_760_result_branch | loop_760_taxonomy_branch | loop_760_intervention_recognize | loop_760_intervention_leverage)
+(loop_760_context_branch | loop_760_then_branch | loop_760_operator_branch | loop_760_result_branch | loop_760_taxonomy_branch | loop_760_intervention_recognize | loop_760_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_760_verdict)
+(loop_760_inactive)-[:PROCESS]->(loop_760_sink)
+(loop_760_verdict)-[:PROCESS]->(loop_760_sink)
+(loop_760_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_760_then_branch)
+(loop_760_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_760_result_branch)

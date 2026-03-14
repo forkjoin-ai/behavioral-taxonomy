@@ -1,0 +1,33 @@
+// behavioral-loop-605.gg
+// Executable Gnosis projection for The Choker Loop.
+
+// Nodes
+(loop_605_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_605_context_branch: BehaviorEmit { emission: 'context' })
+(loop_605_given_gate: BehaviorAssess { stage: 'given', text: 'Neck%20size%20larger%20than%20shirt%20size' })
+(loop_605_inactive: BehaviorTerminal { loopId: 605, loopName: 'The%20Choker%20Loop' })
+(loop_605_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_605_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_605_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_605_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sausage%20Operator', mechanism: 'neck%20fat%20bulges%20over%20collar' })
+(loop_605_result_branch: BehaviorEmit { emission: 'result', text: 'looking%20%22Stuffed%22%20and%20uncomfortable' })
+(loop_605_sink: BehaviorSink)
+(loop_605_start: BehaviorStart { loopId: 605, loopName: 'The%20Choker%20Loop', given: 'Neck%20size%20larger%20than%20shirt%20size', when: 'buttoned%20up', then: 'neck%20fat%20bulges%20over%20collar%20(The%20Sausage%20Operator)', result: 'looking%20%22Stuffed%22%20and%20uncomfortable', operatorName: 'The%20Sausage%20Operator', operatorMechanism: 'neck%20fat%20bulges%20over%20collar', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_605_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_605_then_branch: BehaviorEmit { emission: 'then', text: 'neck%20fat%20bulges%20over%20collar%20(The%20Sausage%20Operator)' })
+(loop_605_verdict: BehaviorVerdict { loopId: 605, loopName: 'The%20Choker%20Loop', then: 'neck%20fat%20bulges%20over%20collar%20(The%20Sausage%20Operator)', result: 'looking%20%22Stuffed%22%20and%20uncomfortable', operatorName: 'The%20Sausage%20Operator', operatorMechanism: 'neck%20fat%20bulges%20over%20collar', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_605_when_gate: BehaviorAssess { stage: 'when', text: 'buttoned%20up' })
+
+// Topology
+(loop_605_start)-[:PROCESS]->(loop_605_given_gate)
+(loop_605_given_gate)-[:PROCESS { case: "ok" }]->(loop_605_when_gate)
+(loop_605_given_gate)-[:PROCESS { case: "err" }]->(loop_605_inactive)
+(loop_605_when_gate)-[:PROCESS { case: "ok" }]->(loop_605_context)
+(loop_605_when_gate)-[:PROCESS { case: "err" }]->(loop_605_inactive)
+(loop_605_context)-[:FORK { strategy: "behavior-branches" }]->(loop_605_context_branch | loop_605_then_branch | loop_605_operator_branch | loop_605_result_branch | loop_605_taxonomy_branch | loop_605_intervention_recognize | loop_605_intervention_interdict | loop_605_intervention_minimize)
+(loop_605_context_branch | loop_605_then_branch | loop_605_operator_branch | loop_605_result_branch | loop_605_taxonomy_branch | loop_605_intervention_recognize | loop_605_intervention_interdict | loop_605_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_605_verdict)
+(loop_605_inactive)-[:PROCESS]->(loop_605_sink)
+(loop_605_verdict)-[:PROCESS]->(loop_605_sink)
+(loop_605_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_605_then_branch)
+(loop_605_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_605_then_branch)
+(loop_605_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_605_then_branch)

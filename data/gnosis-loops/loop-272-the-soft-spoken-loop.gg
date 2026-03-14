@@ -1,0 +1,33 @@
+// behavioral-loop-272.gg
+// Executable Gnosis projection for The Soft Spoken Loop.
+
+// Nodes
+(loop_272_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_272_context_branch: BehaviorEmit { emission: 'context' })
+(loop_272_given_gate: BehaviorAssess { stage: 'given', text: 'Small%20lung%20capacity%20or%20vocal%20fold%20gap' })
+(loop_272_inactive: BehaviorTerminal { loopId: 272, loopName: 'The%20Soft%20Spoken%20Loop' })
+(loop_272_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_272_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_272_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_272_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Invisible%20Operator', mechanism: 'the%20voice%20is%20drowned%20out%20physically' })
+(loop_272_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20waiting%20until%20the%20end%20to%20speak%2C%20often%20developing%20a%20**%22Wise%20Observer%22%20Persona**' })
+(loop_272_sink: BehaviorSink)
+(loop_272_start: BehaviorStart { loopId: 272, loopName: 'The%20Soft%20Spoken%20Loop', given: 'Small%20lung%20capacity%20or%20vocal%20fold%20gap', when: 'trying%20to%20interrupt%20a%20loud%20meeting', then: 'the%20voice%20is%20drowned%20out%20physically%20(The%20Invisible%20Operator)', result: 'the%20individual%20waiting%20until%20the%20end%20to%20speak%2C%20often%20developing%20a%20**%22Wise%20Observer%22%20Persona**', operatorName: 'The%20Invisible%20Operator', operatorMechanism: 'the%20voice%20is%20drowned%20out%20physically', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_272_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_272_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20is%20drowned%20out%20physically%20(The%20Invisible%20Operator)' })
+(loop_272_verdict: BehaviorVerdict { loopId: 272, loopName: 'The%20Soft%20Spoken%20Loop', then: 'the%20voice%20is%20drowned%20out%20physically%20(The%20Invisible%20Operator)', result: 'the%20individual%20waiting%20until%20the%20end%20to%20speak%2C%20often%20developing%20a%20**%22Wise%20Observer%22%20Persona**', operatorName: 'The%20Invisible%20Operator', operatorMechanism: 'the%20voice%20is%20drowned%20out%20physically', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_272_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20to%20interrupt%20a%20loud%20meeting' })
+
+// Topology
+(loop_272_start)-[:PROCESS]->(loop_272_given_gate)
+(loop_272_given_gate)-[:PROCESS { case: "ok" }]->(loop_272_when_gate)
+(loop_272_given_gate)-[:PROCESS { case: "err" }]->(loop_272_inactive)
+(loop_272_when_gate)-[:PROCESS { case: "ok" }]->(loop_272_context)
+(loop_272_when_gate)-[:PROCESS { case: "err" }]->(loop_272_inactive)
+(loop_272_context)-[:FORK { strategy: "behavior-branches" }]->(loop_272_context_branch | loop_272_then_branch | loop_272_operator_branch | loop_272_result_branch | loop_272_taxonomy_branch | loop_272_intervention_recognize | loop_272_intervention_interdict | loop_272_intervention_minimize)
+(loop_272_context_branch | loop_272_then_branch | loop_272_operator_branch | loop_272_result_branch | loop_272_taxonomy_branch | loop_272_intervention_recognize | loop_272_intervention_interdict | loop_272_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_272_verdict)
+(loop_272_inactive)-[:PROCESS]->(loop_272_sink)
+(loop_272_verdict)-[:PROCESS]->(loop_272_sink)
+(loop_272_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_272_then_branch)
+(loop_272_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_272_then_branch)
+(loop_272_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_272_then_branch)

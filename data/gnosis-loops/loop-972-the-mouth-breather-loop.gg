@@ -1,0 +1,33 @@
+// behavioral-loop-972.gg
+// Executable Gnosis projection for The Mouth Breather Loop.
+
+// Nodes
+(loop_972_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_972_context_branch: BehaviorEmit { emission: 'context' })
+(loop_972_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20nasal%20obstruction%20leading%20to%20open-mouth%20posture' })
+(loop_972_inactive: BehaviorTerminal { loopId: 972, loopName: 'The%20Mouth%20Breather%20Loop' })
+(loop_972_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_972_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_972_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_972_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Flycatcher%20Operator', mechanism: 'the%20jaw%20hangs%20slack' })
+(loop_972_result_branch: BehaviorEmit { emission: 'result', text: 'unconscious%20assumption%20of%20lower%20IQ' })
+(loop_972_sink: BehaviorSink)
+(loop_972_start: BehaviorStart { loopId: 972, loopName: 'The%20Mouth%20Breather%20Loop', given: 'Chronic%20nasal%20obstruction%20leading%20to%20open-mouth%20posture', when: 'resting', then: 'the%20jaw%20hangs%20slack%20(The%20Flycatcher%20Operator)', result: 'unconscious%20assumption%20of%20lower%20IQ', operatorName: 'The%20Flycatcher%20Operator', operatorMechanism: 'the%20jaw%20hangs%20slack', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_972_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_972_then_branch: BehaviorEmit { emission: 'then', text: 'the%20jaw%20hangs%20slack%20(The%20Flycatcher%20Operator)' })
+(loop_972_verdict: BehaviorVerdict { loopId: 972, loopName: 'The%20Mouth%20Breather%20Loop', then: 'the%20jaw%20hangs%20slack%20(The%20Flycatcher%20Operator)', result: 'unconscious%20assumption%20of%20lower%20IQ', operatorName: 'The%20Flycatcher%20Operator', operatorMechanism: 'the%20jaw%20hangs%20slack', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_972_when_gate: BehaviorAssess { stage: 'when', text: 'resting' })
+
+// Topology
+(loop_972_start)-[:PROCESS]->(loop_972_given_gate)
+(loop_972_given_gate)-[:PROCESS { case: "ok" }]->(loop_972_when_gate)
+(loop_972_given_gate)-[:PROCESS { case: "err" }]->(loop_972_inactive)
+(loop_972_when_gate)-[:PROCESS { case: "ok" }]->(loop_972_context)
+(loop_972_when_gate)-[:PROCESS { case: "err" }]->(loop_972_inactive)
+(loop_972_context)-[:FORK { strategy: "behavior-branches" }]->(loop_972_context_branch | loop_972_then_branch | loop_972_operator_branch | loop_972_result_branch | loop_972_taxonomy_branch | loop_972_intervention_recognize | loop_972_intervention_interdict | loop_972_intervention_minimize)
+(loop_972_context_branch | loop_972_then_branch | loop_972_operator_branch | loop_972_result_branch | loop_972_taxonomy_branch | loop_972_intervention_recognize | loop_972_intervention_interdict | loop_972_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_972_verdict)
+(loop_972_inactive)-[:PROCESS]->(loop_972_sink)
+(loop_972_verdict)-[:PROCESS]->(loop_972_sink)
+(loop_972_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_972_then_branch)
+(loop_972_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_972_then_branch)
+(loop_972_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_972_then_branch)

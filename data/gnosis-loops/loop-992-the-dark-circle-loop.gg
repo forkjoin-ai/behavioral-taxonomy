@@ -1,0 +1,33 @@
+// behavioral-loop-992.gg
+// Executable Gnosis projection for The Dark Circle Loop.
+
+// Nodes
+(loop_992_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_992_context_branch: BehaviorEmit { emission: 'context' })
+(loop_992_given_gate: BehaviorAssess { stage: 'given', text: 'Thin%20skin%20revealing%20orbital%20bone%2Fveins' })
+(loop_992_inactive: BehaviorTerminal { loopId: 992, loopName: 'The%20Dark%20Circle%20Loop' })
+(loop_992_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_992_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_992_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_992_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Zombie%20Operator', mechanism: 'still%20looking%20%22Exhausted%22' })
+(loop_992_result_branch: BehaviorEmit { emission: 'result', text: 'consistent%20underestimation%20of%20energy%20levels' })
+(loop_992_sink: BehaviorSink)
+(loop_992_start: BehaviorStart { loopId: 992, loopName: 'The%20Dark%20Circle%20Loop', given: 'Thin%20skin%20revealing%20orbital%20bone%2Fveins', when: 'rested', then: 'still%20looking%20%22Exhausted%22%20(The%20Zombie%20Operator)', result: 'consistent%20underestimation%20of%20energy%20levels', operatorName: 'The%20Zombie%20Operator', operatorMechanism: 'still%20looking%20%22Exhausted%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_992_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_992_then_branch: BehaviorEmit { emission: 'then', text: 'still%20looking%20%22Exhausted%22%20(The%20Zombie%20Operator)' })
+(loop_992_verdict: BehaviorVerdict { loopId: 992, loopName: 'The%20Dark%20Circle%20Loop', then: 'still%20looking%20%22Exhausted%22%20(The%20Zombie%20Operator)', result: 'consistent%20underestimation%20of%20energy%20levels', operatorName: 'The%20Zombie%20Operator', operatorMechanism: 'still%20looking%20%22Exhausted%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_992_when_gate: BehaviorAssess { stage: 'when', text: 'rested' })
+
+// Topology
+(loop_992_start)-[:PROCESS]->(loop_992_given_gate)
+(loop_992_given_gate)-[:PROCESS { case: "ok" }]->(loop_992_when_gate)
+(loop_992_given_gate)-[:PROCESS { case: "err" }]->(loop_992_inactive)
+(loop_992_when_gate)-[:PROCESS { case: "ok" }]->(loop_992_context)
+(loop_992_when_gate)-[:PROCESS { case: "err" }]->(loop_992_inactive)
+(loop_992_context)-[:FORK { strategy: "behavior-branches" }]->(loop_992_context_branch | loop_992_then_branch | loop_992_operator_branch | loop_992_result_branch | loop_992_taxonomy_branch | loop_992_intervention_recognize | loop_992_intervention_interdict | loop_992_intervention_minimize)
+(loop_992_context_branch | loop_992_then_branch | loop_992_operator_branch | loop_992_result_branch | loop_992_taxonomy_branch | loop_992_intervention_recognize | loop_992_intervention_interdict | loop_992_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_992_verdict)
+(loop_992_inactive)-[:PROCESS]->(loop_992_sink)
+(loop_992_verdict)-[:PROCESS]->(loop_992_sink)
+(loop_992_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_992_then_branch)
+(loop_992_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_992_then_branch)
+(loop_992_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_992_then_branch)

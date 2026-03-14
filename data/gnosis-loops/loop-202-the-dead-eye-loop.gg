@@ -1,0 +1,33 @@
+// behavioral-loop-202.gg
+// Executable Gnosis projection for The Dead Eye Loop.
+
+// Nodes
+(loop_202_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_202_context_branch: BehaviorEmit { emission: 'context' })
+(loop_202_given_gate: BehaviorAssess { stage: 'given', text: 'Drooping%20of%20one%20eyelid' })
+(loop_202_inactive: BehaviorTerminal { loopId: 202, loopName: 'The%20Dead%20Eye%20Loop' })
+(loop_202_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_202_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_202_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_202_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Competence%20Operator', mechanism: 'observers%20assume%20%22Drunkenness%2C%22%20%22Stroke%2C%22%20or%20%22Low%20Intelligence%22' })
+(loop_202_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20constantly%20having%20to%20prove%20they%20are%20**Sober%2FAlert**' })
+(loop_202_sink: BehaviorSink)
+(loop_202_start: BehaviorStart { loopId: 202, loopName: 'The%20Dead%20Eye%20Loop', given: 'Drooping%20of%20one%20eyelid', when: 'looking%20alert', then: 'observers%20assume%20%22Drunkenness%2C%22%20%22Stroke%2C%22%20or%20%22Low%20Intelligence%22%20(The%20Competence%20Operator%20-%20Negative)', result: 'the%20individual%20constantly%20having%20to%20prove%20they%20are%20**Sober%2FAlert**', operatorName: 'The%20Competence%20Operator', operatorMechanism: 'observers%20assume%20%22Drunkenness%2C%22%20%22Stroke%2C%22%20or%20%22Low%20Intelligence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_202_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_202_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Drunkenness%2C%22%20%22Stroke%2C%22%20or%20%22Low%20Intelligence%22%20(The%20Competence%20Operator%20-%20Negative)' })
+(loop_202_verdict: BehaviorVerdict { loopId: 202, loopName: 'The%20Dead%20Eye%20Loop', then: 'observers%20assume%20%22Drunkenness%2C%22%20%22Stroke%2C%22%20or%20%22Low%20Intelligence%22%20(The%20Competence%20Operator%20-%20Negative)', result: 'the%20individual%20constantly%20having%20to%20prove%20they%20are%20**Sober%2FAlert**', operatorName: 'The%20Competence%20Operator', operatorMechanism: 'observers%20assume%20%22Drunkenness%2C%22%20%22Stroke%2C%22%20or%20%22Low%20Intelligence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_202_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20alert' })
+
+// Topology
+(loop_202_start)-[:PROCESS]->(loop_202_given_gate)
+(loop_202_given_gate)-[:PROCESS { case: "ok" }]->(loop_202_when_gate)
+(loop_202_given_gate)-[:PROCESS { case: "err" }]->(loop_202_inactive)
+(loop_202_when_gate)-[:PROCESS { case: "ok" }]->(loop_202_context)
+(loop_202_when_gate)-[:PROCESS { case: "err" }]->(loop_202_inactive)
+(loop_202_context)-[:FORK { strategy: "behavior-branches" }]->(loop_202_context_branch | loop_202_then_branch | loop_202_operator_branch | loop_202_result_branch | loop_202_taxonomy_branch | loop_202_intervention_recognize | loop_202_intervention_interdict | loop_202_intervention_minimize)
+(loop_202_context_branch | loop_202_then_branch | loop_202_operator_branch | loop_202_result_branch | loop_202_taxonomy_branch | loop_202_intervention_recognize | loop_202_intervention_interdict | loop_202_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_202_verdict)
+(loop_202_inactive)-[:PROCESS]->(loop_202_sink)
+(loop_202_verdict)-[:PROCESS]->(loop_202_sink)
+(loop_202_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_202_then_branch)
+(loop_202_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_202_then_branch)
+(loop_202_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_202_then_branch)

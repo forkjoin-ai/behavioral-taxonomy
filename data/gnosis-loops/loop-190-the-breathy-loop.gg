@@ -1,0 +1,31 @@
+// behavioral-loop-190.gg
+// Executable Gnosis projection for The Breathy Loop.
+
+// Nodes
+(loop_190_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_190_context_branch: BehaviorEmit { emission: 'context' })
+(loop_190_given_gate: BehaviorAssess { stage: 'given', text: 'Incomplete%20vocal%20cord%20closure' })
+(loop_190_inactive: BehaviorTerminal { loopId: 190, loopName: 'The%20Breathy%20Loop' })
+(loop_190_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_190_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_190_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intimacy%20Operator', mechanism: 'the%20voice%20sounds%20%22Seductive%22%20or%20%22Secretive%22' })
+(loop_190_result_branch: BehaviorEmit { emission: 'result', text: 'people%20leaning%20in%2C%20but%20also%20assuming%20**Low%20Competence%2FAuthority**' })
+(loop_190_sink: BehaviorSink)
+(loop_190_start: BehaviorStart { loopId: 190, loopName: 'The%20Breathy%20Loop', given: 'Incomplete%20vocal%20cord%20closure', when: 'speaking', then: 'the%20voice%20sounds%20%22Seductive%22%20or%20%22Secretive%22%20(The%20Intimacy%20Operator)', result: 'people%20leaning%20in%2C%20but%20also%20assuming%20**Low%20Competence%2FAuthority**', operatorName: 'The%20Intimacy%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Seductive%22%20or%20%22Secretive%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_190_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_190_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20sounds%20%22Seductive%22%20or%20%22Secretive%22%20(The%20Intimacy%20Operator)' })
+(loop_190_verdict: BehaviorVerdict { loopId: 190, loopName: 'The%20Breathy%20Loop', then: 'the%20voice%20sounds%20%22Seductive%22%20or%20%22Secretive%22%20(The%20Intimacy%20Operator)', result: 'people%20leaning%20in%2C%20but%20also%20assuming%20**Low%20Competence%2FAuthority**', operatorName: 'The%20Intimacy%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Seductive%22%20or%20%22Secretive%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_190_when_gate: BehaviorAssess { stage: 'when', text: 'speaking' })
+
+// Topology
+(loop_190_start)-[:PROCESS]->(loop_190_given_gate)
+(loop_190_given_gate)-[:PROCESS { case: "ok" }]->(loop_190_when_gate)
+(loop_190_given_gate)-[:PROCESS { case: "err" }]->(loop_190_inactive)
+(loop_190_when_gate)-[:PROCESS { case: "ok" }]->(loop_190_context)
+(loop_190_when_gate)-[:PROCESS { case: "err" }]->(loop_190_inactive)
+(loop_190_context)-[:FORK { strategy: "behavior-branches" }]->(loop_190_context_branch | loop_190_then_branch | loop_190_operator_branch | loop_190_result_branch | loop_190_taxonomy_branch | loop_190_intervention_recognize | loop_190_intervention_leverage)
+(loop_190_context_branch | loop_190_then_branch | loop_190_operator_branch | loop_190_result_branch | loop_190_taxonomy_branch | loop_190_intervention_recognize | loop_190_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_190_verdict)
+(loop_190_inactive)-[:PROCESS]->(loop_190_sink)
+(loop_190_verdict)-[:PROCESS]->(loop_190_sink)
+(loop_190_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_190_then_branch)
+(loop_190_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_190_result_branch)

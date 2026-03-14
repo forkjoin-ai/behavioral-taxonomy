@@ -1,0 +1,33 @@
+// behavioral-loop-993.gg
+// Executable Gnosis projection for The Missed Spot Loop.
+
+// Nodes
+(loop_993_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_993_context_branch: BehaviorEmit { emission: 'context' })
+(loop_993_given_gate: BehaviorAssess { stage: 'given', text: 'A%20roughly%20shaved%20face%20with%20a%20patch%20of%20hair%20left%20on%20the%20jawline' })
+(loop_993_inactive: BehaviorTerminal { loopId: 993, loopName: 'The%20Missed%20Spot%20Loop' })
+(loop_993_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_993_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_993_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_993_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Blind%20Spot%20Operator', mechanism: 'the%20patch%20catches%20the%20light' })
+(loop_993_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20fixating%20on%20the%20error%2C%20wondering%20if%20the%20individual%20rushed%20or%20has%20poor%20eyesight' })
+(loop_993_sink: BehaviorSink)
+(loop_993_start: BehaviorStart { loopId: 993, loopName: 'The%20Missed%20Spot%20Loop', given: 'A%20roughly%20shaved%20face%20with%20a%20patch%20of%20hair%20left%20on%20the%20jawline', when: 'turning%20the%20head%20in%20a%20meeting', then: 'the%20patch%20catches%20the%20light%20(The%20Blind%20Spot%20Operator)', result: 'observers%20fixating%20on%20the%20error%2C%20wondering%20if%20the%20individual%20rushed%20or%20has%20poor%20eyesight', operatorName: 'The%20Blind%20Spot%20Operator', operatorMechanism: 'the%20patch%20catches%20the%20light', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_993_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_993_then_branch: BehaviorEmit { emission: 'then', text: 'the%20patch%20catches%20the%20light%20(The%20Blind%20Spot%20Operator)' })
+(loop_993_verdict: BehaviorVerdict { loopId: 993, loopName: 'The%20Missed%20Spot%20Loop', then: 'the%20patch%20catches%20the%20light%20(The%20Blind%20Spot%20Operator)', result: 'observers%20fixating%20on%20the%20error%2C%20wondering%20if%20the%20individual%20rushed%20or%20has%20poor%20eyesight', operatorName: 'The%20Blind%20Spot%20Operator', operatorMechanism: 'the%20patch%20catches%20the%20light', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_993_when_gate: BehaviorAssess { stage: 'when', text: 'turning%20the%20head%20in%20a%20meeting' })
+
+// Topology
+(loop_993_start)-[:PROCESS]->(loop_993_given_gate)
+(loop_993_given_gate)-[:PROCESS { case: "ok" }]->(loop_993_when_gate)
+(loop_993_given_gate)-[:PROCESS { case: "err" }]->(loop_993_inactive)
+(loop_993_when_gate)-[:PROCESS { case: "ok" }]->(loop_993_context)
+(loop_993_when_gate)-[:PROCESS { case: "err" }]->(loop_993_inactive)
+(loop_993_context)-[:FORK { strategy: "behavior-branches" }]->(loop_993_context_branch | loop_993_then_branch | loop_993_operator_branch | loop_993_result_branch | loop_993_taxonomy_branch | loop_993_intervention_recognize | loop_993_intervention_interdict | loop_993_intervention_minimize)
+(loop_993_context_branch | loop_993_then_branch | loop_993_operator_branch | loop_993_result_branch | loop_993_taxonomy_branch | loop_993_intervention_recognize | loop_993_intervention_interdict | loop_993_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_993_verdict)
+(loop_993_inactive)-[:PROCESS]->(loop_993_sink)
+(loop_993_verdict)-[:PROCESS]->(loop_993_sink)
+(loop_993_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_993_then_branch)
+(loop_993_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_993_then_branch)
+(loop_993_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_993_then_branch)

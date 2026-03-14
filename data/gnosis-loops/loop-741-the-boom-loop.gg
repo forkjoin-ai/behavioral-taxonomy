@@ -1,0 +1,33 @@
+// behavioral-loop-741.gg
+// Executable Gnosis projection for The Boom Loop.
+
+// Nodes
+(loop_741_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_741_context_branch: BehaviorEmit { emission: 'context' })
+(loop_741_given_gate: BehaviorAssess { stage: 'given', text: 'Inability%20to%20whisper%20(Sensorineural%20issue%20or%20habit)' })
+(loop_741_inactive: BehaviorTerminal { loopId: 741, loopName: 'The%20Boom%20Loop' })
+(loop_741_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_741_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_741_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_741_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Broadcast%20Operator', mechanism: 'the%20whole%20room%20hears%20it' })
+(loop_741_result_branch: BehaviorEmit { emission: 'result', text: 'exclusion%20from%20gossip%20circles%20or%20sensitive%20strategy%20meetings' })
+(loop_741_sink: BehaviorSink)
+(loop_741_start: BehaviorStart { loopId: 741, loopName: 'The%20Boom%20Loop', given: 'Inability%20to%20whisper%20(Sensorineural%20issue%20or%20habit)', when: 'sharing%20a%20private%20comment', then: 'the%20whole%20room%20hears%20it%20(The%20Broadcast%20Operator)', result: 'exclusion%20from%20gossip%20circles%20or%20sensitive%20strategy%20meetings', operatorName: 'The%20Broadcast%20Operator', operatorMechanism: 'the%20whole%20room%20hears%20it', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_741_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_741_then_branch: BehaviorEmit { emission: 'then', text: 'the%20whole%20room%20hears%20it%20(The%20Broadcast%20Operator)' })
+(loop_741_verdict: BehaviorVerdict { loopId: 741, loopName: 'The%20Boom%20Loop', then: 'the%20whole%20room%20hears%20it%20(The%20Broadcast%20Operator)', result: 'exclusion%20from%20gossip%20circles%20or%20sensitive%20strategy%20meetings', operatorName: 'The%20Broadcast%20Operator', operatorMechanism: 'the%20whole%20room%20hears%20it', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_741_when_gate: BehaviorAssess { stage: 'when', text: 'sharing%20a%20private%20comment' })
+
+// Topology
+(loop_741_start)-[:PROCESS]->(loop_741_given_gate)
+(loop_741_given_gate)-[:PROCESS { case: "ok" }]->(loop_741_when_gate)
+(loop_741_given_gate)-[:PROCESS { case: "err" }]->(loop_741_inactive)
+(loop_741_when_gate)-[:PROCESS { case: "ok" }]->(loop_741_context)
+(loop_741_when_gate)-[:PROCESS { case: "err" }]->(loop_741_inactive)
+(loop_741_context)-[:FORK { strategy: "behavior-branches" }]->(loop_741_context_branch | loop_741_then_branch | loop_741_operator_branch | loop_741_result_branch | loop_741_taxonomy_branch | loop_741_intervention_recognize | loop_741_intervention_interdict | loop_741_intervention_minimize)
+(loop_741_context_branch | loop_741_then_branch | loop_741_operator_branch | loop_741_result_branch | loop_741_taxonomy_branch | loop_741_intervention_recognize | loop_741_intervention_interdict | loop_741_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_741_verdict)
+(loop_741_inactive)-[:PROCESS]->(loop_741_sink)
+(loop_741_verdict)-[:PROCESS]->(loop_741_sink)
+(loop_741_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_741_then_branch)
+(loop_741_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_741_then_branch)
+(loop_741_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_741_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-278.gg
+// Executable Gnosis projection for The Dry Eye Loop.
+
+// Nodes
+(loop_278_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_278_context_branch: BehaviorEmit { emission: 'context' })
+(loop_278_given_gate: BehaviorAssess { stage: 'given', text: 'Extreme%20capillary%20dilation%20during%20emotion' })
+(loop_278_inactive: BehaviorTerminal { loopId: 278, loopName: 'The%20Dry%20Eye%20Loop' })
+(loop_278_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_278_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_278_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_278_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Alarm%20Operator', mechanism: 'the%20face%20turns%20deep%20purple%2Fred' })
+(loop_278_result_branch: BehaviorEmit { emission: 'result', text: 'everyone%20stopping%20to%20ask%20%22Are%20you%20okay%3F%22%2C%20escalating%20the%20**Embarrassment**' })
+(loop_278_sink: BehaviorSink)
+(loop_278_start: BehaviorStart { loopId: 278, loopName: 'The%20Dry%20Eye%20Loop', given: 'Extreme%20capillary%20dilation%20during%20emotion', when: 'slightly%20embarrassed', then: 'the%20face%20turns%20deep%20purple%2Fred%20(The%20Alarm%20Operator)', result: 'everyone%20stopping%20to%20ask%20%22Are%20you%20okay%3F%22%2C%20escalating%20the%20**Embarrassment**', operatorName: 'The%20Alarm%20Operator', operatorMechanism: 'the%20face%20turns%20deep%20purple%2Fred', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_278_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_278_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20turns%20deep%20purple%2Fred%20(The%20Alarm%20Operator)' })
+(loop_278_verdict: BehaviorVerdict { loopId: 278, loopName: 'The%20Dry%20Eye%20Loop', then: 'the%20face%20turns%20deep%20purple%2Fred%20(The%20Alarm%20Operator)', result: 'everyone%20stopping%20to%20ask%20%22Are%20you%20okay%3F%22%2C%20escalating%20the%20**Embarrassment**', operatorName: 'The%20Alarm%20Operator', operatorMechanism: 'the%20face%20turns%20deep%20purple%2Fred', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_278_when_gate: BehaviorAssess { stage: 'when', text: 'slightly%20embarrassed' })
+
+// Topology
+(loop_278_start)-[:PROCESS]->(loop_278_given_gate)
+(loop_278_given_gate)-[:PROCESS { case: "ok" }]->(loop_278_when_gate)
+(loop_278_given_gate)-[:PROCESS { case: "err" }]->(loop_278_inactive)
+(loop_278_when_gate)-[:PROCESS { case: "ok" }]->(loop_278_context)
+(loop_278_when_gate)-[:PROCESS { case: "err" }]->(loop_278_inactive)
+(loop_278_context)-[:FORK { strategy: "behavior-branches" }]->(loop_278_context_branch | loop_278_then_branch | loop_278_operator_branch | loop_278_result_branch | loop_278_taxonomy_branch | loop_278_intervention_recognize | loop_278_intervention_interdict | loop_278_intervention_minimize)
+(loop_278_context_branch | loop_278_then_branch | loop_278_operator_branch | loop_278_result_branch | loop_278_taxonomy_branch | loop_278_intervention_recognize | loop_278_intervention_interdict | loop_278_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_278_verdict)
+(loop_278_inactive)-[:PROCESS]->(loop_278_sink)
+(loop_278_verdict)-[:PROCESS]->(loop_278_sink)
+(loop_278_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_278_then_branch)
+(loop_278_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_278_then_branch)
+(loop_278_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_278_then_branch)

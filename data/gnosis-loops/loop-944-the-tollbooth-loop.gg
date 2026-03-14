@@ -1,0 +1,33 @@
+// behavioral-loop-944.gg
+// Executable Gnosis projection for The Tollbooth Loop.
+
+// Nodes
+(loop_944_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_944_context_branch: BehaviorEmit { emission: 'context' })
+(loop_944_given_gate: BehaviorAssess { stage: 'given', text: 'Stopping%20in%20a%20doorway%20or%20high-traffic%20area' })
+(loop_944_inactive: BehaviorTerminal { loopId: 944, loopName: 'The%20Tollbooth%20Loop' })
+(loop_944_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_944_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_944_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_944_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cork%20Operator', mechanism: 'it%20blocks%20flow' })
+(loop_944_result_branch: BehaviorEmit { emission: 'result', text: 'getting%20bumped%20and%20glared%20at' })
+(loop_944_sink: BehaviorSink)
+(loop_944_start: BehaviorStart { loopId: 944, loopName: 'The%20Tollbooth%20Loop', given: 'Stopping%20in%20a%20doorway%20or%20high-traffic%20area', when: 'checking%20a%20phone', then: 'it%20blocks%20flow%20(The%20Cork%20Operator)', result: 'getting%20bumped%20and%20glared%20at', operatorName: 'The%20Cork%20Operator', operatorMechanism: 'it%20blocks%20flow', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_944_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_944_then_branch: BehaviorEmit { emission: 'then', text: 'it%20blocks%20flow%20(The%20Cork%20Operator)' })
+(loop_944_verdict: BehaviorVerdict { loopId: 944, loopName: 'The%20Tollbooth%20Loop', then: 'it%20blocks%20flow%20(The%20Cork%20Operator)', result: 'getting%20bumped%20and%20glared%20at', operatorName: 'The%20Cork%20Operator', operatorMechanism: 'it%20blocks%20flow', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_944_when_gate: BehaviorAssess { stage: 'when', text: 'checking%20a%20phone' })
+
+// Topology
+(loop_944_start)-[:PROCESS]->(loop_944_given_gate)
+(loop_944_given_gate)-[:PROCESS { case: "ok" }]->(loop_944_when_gate)
+(loop_944_given_gate)-[:PROCESS { case: "err" }]->(loop_944_inactive)
+(loop_944_when_gate)-[:PROCESS { case: "ok" }]->(loop_944_context)
+(loop_944_when_gate)-[:PROCESS { case: "err" }]->(loop_944_inactive)
+(loop_944_context)-[:FORK { strategy: "behavior-branches" }]->(loop_944_context_branch | loop_944_then_branch | loop_944_operator_branch | loop_944_result_branch | loop_944_taxonomy_branch | loop_944_intervention_recognize | loop_944_intervention_interdict | loop_944_intervention_minimize)
+(loop_944_context_branch | loop_944_then_branch | loop_944_operator_branch | loop_944_result_branch | loop_944_taxonomy_branch | loop_944_intervention_recognize | loop_944_intervention_interdict | loop_944_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_944_verdict)
+(loop_944_inactive)-[:PROCESS]->(loop_944_sink)
+(loop_944_verdict)-[:PROCESS]->(loop_944_sink)
+(loop_944_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_944_then_branch)
+(loop_944_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_944_then_branch)
+(loop_944_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_944_then_branch)

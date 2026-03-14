@@ -1,0 +1,33 @@
+// behavioral-loop-540.gg
+// Executable Gnosis projection for The Lean In Loop.
+
+// Nodes
+(loop_540_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_540_context_branch: BehaviorEmit { emission: 'context' })
+(loop_540_given_gate: BehaviorAssess { stage: 'given', text: 'Leaning%20torso%20across%20the%20table' })
+(loop_540_inactive: BehaviorTerminal { loopId: 540, loopName: 'The%20Lean%20In%20Loop' })
+(loop_540_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_540_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_540_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_540_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Pressure%20Operator', mechanism: 'it%20signals%20%22Intimacy%22%20or%20%22Aggression%22' })
+(loop_540_result_branch: BehaviorEmit { emission: 'result', text: 'the%20listener%20leaning%20back%20to%20compensate' })
+(loop_540_sink: BehaviorSink)
+(loop_540_start: BehaviorStart { loopId: 540, loopName: 'The%20Lean%20In%20Loop', given: 'Leaning%20torso%20across%20the%20table', when: 'making%20a%20point', then: 'it%20signals%20%22Intimacy%22%20or%20%22Aggression%22%20(The%20Pressure%20Operator)', result: 'the%20listener%20leaning%20back%20to%20compensate', operatorName: 'The%20Pressure%20Operator', operatorMechanism: 'it%20signals%20%22Intimacy%22%20or%20%22Aggression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_540_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_540_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Intimacy%22%20or%20%22Aggression%22%20(The%20Pressure%20Operator)' })
+(loop_540_verdict: BehaviorVerdict { loopId: 540, loopName: 'The%20Lean%20In%20Loop', then: 'it%20signals%20%22Intimacy%22%20or%20%22Aggression%22%20(The%20Pressure%20Operator)', result: 'the%20listener%20leaning%20back%20to%20compensate', operatorName: 'The%20Pressure%20Operator', operatorMechanism: 'it%20signals%20%22Intimacy%22%20or%20%22Aggression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_540_when_gate: BehaviorAssess { stage: 'when', text: 'making%20a%20point' })
+
+// Topology
+(loop_540_start)-[:PROCESS]->(loop_540_given_gate)
+(loop_540_given_gate)-[:PROCESS { case: "ok" }]->(loop_540_when_gate)
+(loop_540_given_gate)-[:PROCESS { case: "err" }]->(loop_540_inactive)
+(loop_540_when_gate)-[:PROCESS { case: "ok" }]->(loop_540_context)
+(loop_540_when_gate)-[:PROCESS { case: "err" }]->(loop_540_inactive)
+(loop_540_context)-[:FORK { strategy: "behavior-branches" }]->(loop_540_context_branch | loop_540_then_branch | loop_540_operator_branch | loop_540_result_branch | loop_540_taxonomy_branch | loop_540_intervention_recognize | loop_540_intervention_interdict | loop_540_intervention_minimize)
+(loop_540_context_branch | loop_540_then_branch | loop_540_operator_branch | loop_540_result_branch | loop_540_taxonomy_branch | loop_540_intervention_recognize | loop_540_intervention_interdict | loop_540_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_540_verdict)
+(loop_540_inactive)-[:PROCESS]->(loop_540_sink)
+(loop_540_verdict)-[:PROCESS]->(loop_540_sink)
+(loop_540_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_540_then_branch)
+(loop_540_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_540_then_branch)
+(loop_540_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_540_then_branch)

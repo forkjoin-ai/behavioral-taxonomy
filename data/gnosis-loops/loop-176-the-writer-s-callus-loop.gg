@@ -1,0 +1,33 @@
+// behavioral-loop-176.gg
+// Executable Gnosis projection for The Writer's Callus Loop.
+
+// Nodes
+(loop_176_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_176_context_branch: BehaviorEmit { emission: 'context' })
+(loop_176_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20bump%20on%20the%20middle%20finger' })
+(loop_176_inactive: BehaviorTerminal { loopId: 176, loopName: "The%20Writer's%20Callus%20Loop" })
+(loop_176_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_176_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_176_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_176_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intellectual%20Operator', mechanism: 'it%20signals%20%22Academic%22%20or%20%22Analog%22%20dedication' })
+(loop_176_result_branch: BehaviorEmit { emission: 'result', text: 'camaraderie%20with%20other%20intellectuals%2Fwriters' })
+(loop_176_sink: BehaviorSink)
+(loop_176_start: BehaviorStart { loopId: 176, loopName: "The%20Writer's%20Callus%20Loop", given: 'Visible%20bump%20on%20the%20middle%20finger', when: 'inspected%20closely', then: 'it%20signals%20%22Academic%22%20or%20%22Analog%22%20dedication%20(The%20Intellectual%20Operator)', result: 'camaraderie%20with%20other%20intellectuals%2Fwriters', operatorName: 'The%20Intellectual%20Operator', operatorMechanism: 'it%20signals%20%22Academic%22%20or%20%22Analog%22%20dedication', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_176_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_176_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Academic%22%20or%20%22Analog%22%20dedication%20(The%20Intellectual%20Operator)' })
+(loop_176_verdict: BehaviorVerdict { loopId: 176, loopName: "The%20Writer's%20Callus%20Loop", then: 'it%20signals%20%22Academic%22%20or%20%22Analog%22%20dedication%20(The%20Intellectual%20Operator)', result: 'camaraderie%20with%20other%20intellectuals%2Fwriters', operatorName: 'The%20Intellectual%20Operator', operatorMechanism: 'it%20signals%20%22Academic%22%20or%20%22Analog%22%20dedication', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_176_when_gate: BehaviorAssess { stage: 'when', text: 'inspected%20closely' })
+
+// Topology
+(loop_176_start)-[:PROCESS]->(loop_176_given_gate)
+(loop_176_given_gate)-[:PROCESS { case: "ok" }]->(loop_176_when_gate)
+(loop_176_given_gate)-[:PROCESS { case: "err" }]->(loop_176_inactive)
+(loop_176_when_gate)-[:PROCESS { case: "ok" }]->(loop_176_context)
+(loop_176_when_gate)-[:PROCESS { case: "err" }]->(loop_176_inactive)
+(loop_176_context)-[:FORK { strategy: "behavior-branches" }]->(loop_176_context_branch | loop_176_then_branch | loop_176_operator_branch | loop_176_result_branch | loop_176_taxonomy_branch | loop_176_intervention_recognize | loop_176_intervention_interdict | loop_176_intervention_minimize)
+(loop_176_context_branch | loop_176_then_branch | loop_176_operator_branch | loop_176_result_branch | loop_176_taxonomy_branch | loop_176_intervention_recognize | loop_176_intervention_interdict | loop_176_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_176_verdict)
+(loop_176_inactive)-[:PROCESS]->(loop_176_sink)
+(loop_176_verdict)-[:PROCESS]->(loop_176_sink)
+(loop_176_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_176_then_branch)
+(loop_176_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_176_then_branch)
+(loop_176_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_176_then_branch)

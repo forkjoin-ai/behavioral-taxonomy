@@ -1,0 +1,33 @@
+// behavioral-loop-414.gg
+// Executable Gnosis projection for The Saggy Seat Loop.
+
+// Nodes
+(loop_414_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_414_context_branch: BehaviorEmit { emission: 'context' })
+(loop_414_given_gate: BehaviorAssess { stage: 'given', text: 'Flat%20buttocks%20%2B%20loose%20pants' })
+(loop_414_inactive: BehaviorTerminal { loopId: 414, loopName: 'The%20Saggy%20Seat%20Loop' })
+(loop_414_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_414_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_414_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_414_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20fabric%20gathers%2Fdroops%20(The%20Diaper%20Effect)' })
+(loop_414_result_branch: BehaviorEmit { emission: 'result', text: 'a%20distinct%20lack%20of%20sex%20appeal%20or%20athletic%20signaling' })
+(loop_414_sink: BehaviorSink)
+(loop_414_start: BehaviorStart { loopId: 414, loopName: 'The%20Saggy%20Seat%20Loop', given: 'Flat%20buttocks%20%2B%20loose%20pants', when: 'walking', then: 'the%20fabric%20gathers%2Fdroops%20(The%20Diaper%20Effect)', result: 'a%20distinct%20lack%20of%20sex%20appeal%20or%20athletic%20signaling', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20fabric%20gathers%2Fdroops%20(The%20Diaper%20Effect)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_414_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_414_then_branch: BehaviorEmit { emission: 'then', text: 'the%20fabric%20gathers%2Fdroops%20(The%20Diaper%20Effect)' })
+(loop_414_verdict: BehaviorVerdict { loopId: 414, loopName: 'The%20Saggy%20Seat%20Loop', then: 'the%20fabric%20gathers%2Fdroops%20(The%20Diaper%20Effect)', result: 'a%20distinct%20lack%20of%20sex%20appeal%20or%20athletic%20signaling', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20fabric%20gathers%2Fdroops%20(The%20Diaper%20Effect)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_414_when_gate: BehaviorAssess { stage: 'when', text: 'walking' })
+
+// Topology
+(loop_414_start)-[:PROCESS]->(loop_414_given_gate)
+(loop_414_given_gate)-[:PROCESS { case: "ok" }]->(loop_414_when_gate)
+(loop_414_given_gate)-[:PROCESS { case: "err" }]->(loop_414_inactive)
+(loop_414_when_gate)-[:PROCESS { case: "ok" }]->(loop_414_context)
+(loop_414_when_gate)-[:PROCESS { case: "err" }]->(loop_414_inactive)
+(loop_414_context)-[:FORK { strategy: "behavior-branches" }]->(loop_414_context_branch | loop_414_then_branch | loop_414_operator_branch | loop_414_result_branch | loop_414_taxonomy_branch | loop_414_intervention_recognize | loop_414_intervention_interdict | loop_414_intervention_minimize)
+(loop_414_context_branch | loop_414_then_branch | loop_414_operator_branch | loop_414_result_branch | loop_414_taxonomy_branch | loop_414_intervention_recognize | loop_414_intervention_interdict | loop_414_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_414_verdict)
+(loop_414_inactive)-[:PROCESS]->(loop_414_sink)
+(loop_414_verdict)-[:PROCESS]->(loop_414_sink)
+(loop_414_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_414_then_branch)
+(loop_414_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_414_then_branch)
+(loop_414_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_414_then_branch)

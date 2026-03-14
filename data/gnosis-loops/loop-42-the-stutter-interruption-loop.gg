@@ -1,0 +1,33 @@
+// behavioral-loop-42.gg
+// Executable Gnosis projection for The Stutter-Interruption Loop.
+
+// Nodes
+(loop_42_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_42_context_branch: BehaviorEmit { emission: 'context' })
+(loop_42_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20a%20Dysfluency%20(Stutter)' })
+(loop_42_inactive: BehaviorTerminal { loopId: 42, loopName: 'The%20Stutter-Interruption%20Loop' })
+(loop_42_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Reframe%20the%20narrative%20around%20this%20characteristic' })
+(loop_42_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_42_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_42_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Interruption%20Operator', mechanism: 'impatient%20peers%20finish%20their%20sentences' })
+(loop_42_result_branch: BehaviorEmit { emission: 'result', text: 'the%20development%20of%20**Conciseness**%20(speaking%20in%20short%20bursts)%20or%20**Digital%20Communication%20Preference**%20(writing%20over%20speaking)' })
+(loop_42_sink: BehaviorSink)
+(loop_42_start: BehaviorStart { loopId: 42, loopName: 'The%20Stutter-Interruption%20Loop', given: 'an%20individual%20possesses%20a%20Dysfluency%20(Stutter)', when: 'they%20attempt%20to%20hold%20the%20floor', then: 'impatient%20peers%20finish%20their%20sentences%20(The%20Interruption%20Operator)', result: 'the%20development%20of%20**Conciseness**%20(speaking%20in%20short%20bursts)%20or%20**Digital%20Communication%20Preference**%20(writing%20over%20speaking)', operatorName: 'The%20Interruption%20Operator', operatorMechanism: 'impatient%20peers%20finish%20their%20sentences', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Reframe%20the%20narrative%20around%20this%20characteristic', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_42_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_42_then_branch: BehaviorEmit { emission: 'then', text: 'impatient%20peers%20finish%20their%20sentences%20(The%20Interruption%20Operator)' })
+(loop_42_verdict: BehaviorVerdict { loopId: 42, loopName: 'The%20Stutter-Interruption%20Loop', then: 'impatient%20peers%20finish%20their%20sentences%20(The%20Interruption%20Operator)', result: 'the%20development%20of%20**Conciseness**%20(speaking%20in%20short%20bursts)%20or%20**Digital%20Communication%20Preference**%20(writing%20over%20speaking)', operatorName: 'The%20Interruption%20Operator', operatorMechanism: 'impatient%20peers%20finish%20their%20sentences', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_42_when_gate: BehaviorAssess { stage: 'when', text: 'they%20attempt%20to%20hold%20the%20floor' })
+
+// Topology
+(loop_42_start)-[:PROCESS]->(loop_42_given_gate)
+(loop_42_given_gate)-[:PROCESS { case: "ok" }]->(loop_42_when_gate)
+(loop_42_given_gate)-[:PROCESS { case: "err" }]->(loop_42_inactive)
+(loop_42_when_gate)-[:PROCESS { case: "ok" }]->(loop_42_context)
+(loop_42_when_gate)-[:PROCESS { case: "err" }]->(loop_42_inactive)
+(loop_42_context)-[:FORK { strategy: "behavior-branches" }]->(loop_42_context_branch | loop_42_then_branch | loop_42_operator_branch | loop_42_result_branch | loop_42_taxonomy_branch | loop_42_intervention_recognize | loop_42_intervention_interdict | loop_42_intervention_minimize)
+(loop_42_context_branch | loop_42_then_branch | loop_42_operator_branch | loop_42_result_branch | loop_42_taxonomy_branch | loop_42_intervention_recognize | loop_42_intervention_interdict | loop_42_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_42_verdict)
+(loop_42_inactive)-[:PROCESS]->(loop_42_sink)
+(loop_42_verdict)-[:PROCESS]->(loop_42_sink)
+(loop_42_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_42_then_branch)
+(loop_42_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_42_then_branch)
+(loop_42_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_42_then_branch)

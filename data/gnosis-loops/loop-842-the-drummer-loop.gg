@@ -1,0 +1,33 @@
+// behavioral-loop-842.gg
+// Executable Gnosis projection for The Drummer Loop.
+
+// Nodes
+(loop_842_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_842_context_branch: BehaviorEmit { emission: 'context' })
+(loop_842_given_gate: BehaviorAssess { stage: 'given', text: 'Rhythmic%20tapping%20of%20fingers%20on%20a%20surface' })
+(loop_842_inactive: BehaviorTerminal { loopId: 842, loopName: 'The%20Drummer%20Loop' })
+(loop_842_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_842_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_842_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_842_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Countdown%20Operator', mechanism: 'the%20sound%20creates%20%22Time%20Pressure%22' })
+(loop_842_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20rushing%20and%20making%20errors' })
+(loop_842_sink: BehaviorSink)
+(loop_842_start: BehaviorStart { loopId: 842, loopName: 'The%20Drummer%20Loop', given: 'Rhythmic%20tapping%20of%20fingers%20on%20a%20surface', when: 'a%20meeting%20runs%20long', then: 'the%20sound%20creates%20%22Time%20Pressure%22%20(The%20Countdown%20Operator)', result: 'the%20speaker%20rushing%20and%20making%20errors', operatorName: 'The%20Countdown%20Operator', operatorMechanism: 'the%20sound%20creates%20%22Time%20Pressure%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_842_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_842_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20creates%20%22Time%20Pressure%22%20(The%20Countdown%20Operator)' })
+(loop_842_verdict: BehaviorVerdict { loopId: 842, loopName: 'The%20Drummer%20Loop', then: 'the%20sound%20creates%20%22Time%20Pressure%22%20(The%20Countdown%20Operator)', result: 'the%20speaker%20rushing%20and%20making%20errors', operatorName: 'The%20Countdown%20Operator', operatorMechanism: 'the%20sound%20creates%20%22Time%20Pressure%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_842_when_gate: BehaviorAssess { stage: 'when', text: 'a%20meeting%20runs%20long' })
+
+// Topology
+(loop_842_start)-[:PROCESS]->(loop_842_given_gate)
+(loop_842_given_gate)-[:PROCESS { case: "ok" }]->(loop_842_when_gate)
+(loop_842_given_gate)-[:PROCESS { case: "err" }]->(loop_842_inactive)
+(loop_842_when_gate)-[:PROCESS { case: "ok" }]->(loop_842_context)
+(loop_842_when_gate)-[:PROCESS { case: "err" }]->(loop_842_inactive)
+(loop_842_context)-[:FORK { strategy: "behavior-branches" }]->(loop_842_context_branch | loop_842_then_branch | loop_842_operator_branch | loop_842_result_branch | loop_842_taxonomy_branch | loop_842_intervention_recognize | loop_842_intervention_interdict | loop_842_intervention_minimize)
+(loop_842_context_branch | loop_842_then_branch | loop_842_operator_branch | loop_842_result_branch | loop_842_taxonomy_branch | loop_842_intervention_recognize | loop_842_intervention_interdict | loop_842_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_842_verdict)
+(loop_842_inactive)-[:PROCESS]->(loop_842_sink)
+(loop_842_verdict)-[:PROCESS]->(loop_842_sink)
+(loop_842_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_842_then_branch)
+(loop_842_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_842_then_branch)
+(loop_842_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_842_then_branch)

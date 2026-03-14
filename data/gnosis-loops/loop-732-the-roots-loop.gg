@@ -1,0 +1,33 @@
+// behavioral-loop-732.gg
+// Executable Gnosis projection for The Roots Loop.
+
+// Nodes
+(loop_732_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_732_context_branch: BehaviorEmit { emission: 'context' })
+(loop_732_given_gate: BehaviorAssess { stage: 'given', text: '1%20inch%20of%20natural%20color%20showing' })
+(loop_732_inactive: BehaviorTerminal { loopId: 732, loopName: 'The%20Roots%20Loop' })
+(loop_732_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_732_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_732_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_732_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Maintenance%20Operator', mechanism: 'it%20signals%20%22Budget%20Issue%22%20or%20%22Time%20Poor%22' })
+(loop_732_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20the%20%22Rich%2FPolished%22%20illusion' })
+(loop_732_sink: BehaviorSink)
+(loop_732_start: BehaviorStart { loopId: 732, loopName: 'The%20Roots%20Loop', given: '1%20inch%20of%20natural%20color%20showing', when: 'looking%20down', then: 'it%20signals%20%22Budget%20Issue%22%20or%20%22Time%20Poor%22%20(The%20Maintenance%20Operator)', result: 'loss%20of%20the%20%22Rich%2FPolished%22%20illusion', operatorName: 'The%20Maintenance%20Operator', operatorMechanism: 'it%20signals%20%22Budget%20Issue%22%20or%20%22Time%20Poor%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_732_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_732_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Budget%20Issue%22%20or%20%22Time%20Poor%22%20(The%20Maintenance%20Operator)' })
+(loop_732_verdict: BehaviorVerdict { loopId: 732, loopName: 'The%20Roots%20Loop', then: 'it%20signals%20%22Budget%20Issue%22%20or%20%22Time%20Poor%22%20(The%20Maintenance%20Operator)', result: 'loss%20of%20the%20%22Rich%2FPolished%22%20illusion', operatorName: 'The%20Maintenance%20Operator', operatorMechanism: 'it%20signals%20%22Budget%20Issue%22%20or%20%22Time%20Poor%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_732_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20down' })
+
+// Topology
+(loop_732_start)-[:PROCESS]->(loop_732_given_gate)
+(loop_732_given_gate)-[:PROCESS { case: "ok" }]->(loop_732_when_gate)
+(loop_732_given_gate)-[:PROCESS { case: "err" }]->(loop_732_inactive)
+(loop_732_when_gate)-[:PROCESS { case: "ok" }]->(loop_732_context)
+(loop_732_when_gate)-[:PROCESS { case: "err" }]->(loop_732_inactive)
+(loop_732_context)-[:FORK { strategy: "behavior-branches" }]->(loop_732_context_branch | loop_732_then_branch | loop_732_operator_branch | loop_732_result_branch | loop_732_taxonomy_branch | loop_732_intervention_recognize | loop_732_intervention_interdict | loop_732_intervention_minimize)
+(loop_732_context_branch | loop_732_then_branch | loop_732_operator_branch | loop_732_result_branch | loop_732_taxonomy_branch | loop_732_intervention_recognize | loop_732_intervention_interdict | loop_732_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_732_verdict)
+(loop_732_inactive)-[:PROCESS]->(loop_732_sink)
+(loop_732_verdict)-[:PROCESS]->(loop_732_sink)
+(loop_732_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_732_then_branch)
+(loop_732_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_732_then_branch)
+(loop_732_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_732_then_branch)

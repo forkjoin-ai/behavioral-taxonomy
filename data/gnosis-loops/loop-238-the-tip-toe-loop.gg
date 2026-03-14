@@ -1,0 +1,31 @@
+// behavioral-loop-238.gg
+// Executable Gnosis projection for The Tip-Toe Loop.
+
+// Nodes
+(loop_238_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_238_context_branch: BehaviorEmit { emission: 'context' })
+(loop_238_given_gate: BehaviorAssess { stage: 'given', text: 'Calf%20tightness%20or%20sensory%20preference' })
+(loop_238_inactive: BehaviorTerminal { loopId: 238, loopName: 'The%20Tip-Toe%20Loop' })
+(loop_238_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_238_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_238_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Suspicion%20Operator', mechanism: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Thief-like%22' })
+(loop_238_result_branch: BehaviorEmit { emission: 'result', text: 'low%20trust%3B%20people%20instinctively%20check%20their%20belongings' })
+(loop_238_sink: BehaviorSink)
+(loop_238_start: BehaviorStart { loopId: 238, loopName: 'The%20Tip-Toe%20Loop', given: 'Calf%20tightness%20or%20sensory%20preference', when: 'entering%20a%20room', then: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Thief-like%22%20(The%20Suspicion%20Operator)', result: 'low%20trust%3B%20people%20instinctively%20check%20their%20belongings', operatorName: 'The%20Suspicion%20Operator', operatorMechanism: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Thief-like%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_238_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_238_then_branch: BehaviorEmit { emission: 'then', text: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Thief-like%22%20(The%20Suspicion%20Operator)' })
+(loop_238_verdict: BehaviorVerdict { loopId: 238, loopName: 'The%20Tip-Toe%20Loop', then: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Thief-like%22%20(The%20Suspicion%20Operator)', result: 'low%20trust%3B%20people%20instinctively%20check%20their%20belongings', operatorName: 'The%20Suspicion%20Operator', operatorMechanism: 'the%20movement%20looks%20%22Sneaky%22%20or%20%22Thief-like%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_238_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20room' })
+
+// Topology
+(loop_238_start)-[:PROCESS]->(loop_238_given_gate)
+(loop_238_given_gate)-[:PROCESS { case: "ok" }]->(loop_238_when_gate)
+(loop_238_given_gate)-[:PROCESS { case: "err" }]->(loop_238_inactive)
+(loop_238_when_gate)-[:PROCESS { case: "ok" }]->(loop_238_context)
+(loop_238_when_gate)-[:PROCESS { case: "err" }]->(loop_238_inactive)
+(loop_238_context)-[:FORK { strategy: "behavior-branches" }]->(loop_238_context_branch | loop_238_then_branch | loop_238_operator_branch | loop_238_result_branch | loop_238_taxonomy_branch | loop_238_intervention_recognize | loop_238_intervention_leverage)
+(loop_238_context_branch | loop_238_then_branch | loop_238_operator_branch | loop_238_result_branch | loop_238_taxonomy_branch | loop_238_intervention_recognize | loop_238_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_238_verdict)
+(loop_238_inactive)-[:PROCESS]->(loop_238_sink)
+(loop_238_verdict)-[:PROCESS]->(loop_238_sink)
+(loop_238_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_238_then_branch)
+(loop_238_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_238_result_branch)

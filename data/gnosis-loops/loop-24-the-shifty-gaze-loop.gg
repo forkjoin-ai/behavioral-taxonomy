@@ -1,0 +1,33 @@
+// behavioral-loop-24.gg
+// Executable Gnosis projection for The Shifty Gaze Loop.
+
+// Nodes
+(loop_24_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_24_context_branch: BehaviorEmit { emission: 'context' })
+(loop_24_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20High%20Saccadic%20Rate%20(Darting%20eyes)' })
+(loop_24_inactive: BehaviorTerminal { loopId: 24, loopName: 'The%20Shifty%20Gaze%20Loop' })
+(loop_24_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Reframe%20the%20narrative%20around%20this%20characteristic' })
+(loop_24_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_24_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_24_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Scrutiny%20Operator', mechanism: 'the%20authority%20suspects%20guilt%20or%20instability' })
+(loop_24_result_branch: BehaviorEmit { emission: 'result', text: 'false%20accusations%20or%20micromanagement%2C%20creating%20**Paranoia**' })
+(loop_24_sink: BehaviorSink)
+(loop_24_start: BehaviorStart { loopId: 24, loopName: 'The%20Shifty%20Gaze%20Loop', given: 'an%20individual%20possesses%20High%20Saccadic%20Rate%20(Darting%20eyes)', when: 'speaking%20to%20authority', then: 'the%20authority%20suspects%20guilt%20or%20instability%20(The%20Scrutiny%20Operator)', result: 'false%20accusations%20or%20micromanagement%2C%20creating%20**Paranoia**', operatorName: 'The%20Scrutiny%20Operator', operatorMechanism: 'the%20authority%20suspects%20guilt%20or%20instability', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Reframe%20the%20narrative%20around%20this%20characteristic', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_24_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_24_then_branch: BehaviorEmit { emission: 'then', text: 'the%20authority%20suspects%20guilt%20or%20instability%20(The%20Scrutiny%20Operator)' })
+(loop_24_verdict: BehaviorVerdict { loopId: 24, loopName: 'The%20Shifty%20Gaze%20Loop', then: 'the%20authority%20suspects%20guilt%20or%20instability%20(The%20Scrutiny%20Operator)', result: 'false%20accusations%20or%20micromanagement%2C%20creating%20**Paranoia**', operatorName: 'The%20Scrutiny%20Operator', operatorMechanism: 'the%20authority%20suspects%20guilt%20or%20instability', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_24_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20to%20authority' })
+
+// Topology
+(loop_24_start)-[:PROCESS]->(loop_24_given_gate)
+(loop_24_given_gate)-[:PROCESS { case: "ok" }]->(loop_24_when_gate)
+(loop_24_given_gate)-[:PROCESS { case: "err" }]->(loop_24_inactive)
+(loop_24_when_gate)-[:PROCESS { case: "ok" }]->(loop_24_context)
+(loop_24_when_gate)-[:PROCESS { case: "err" }]->(loop_24_inactive)
+(loop_24_context)-[:FORK { strategy: "behavior-branches" }]->(loop_24_context_branch | loop_24_then_branch | loop_24_operator_branch | loop_24_result_branch | loop_24_taxonomy_branch | loop_24_intervention_recognize | loop_24_intervention_interdict | loop_24_intervention_minimize)
+(loop_24_context_branch | loop_24_then_branch | loop_24_operator_branch | loop_24_result_branch | loop_24_taxonomy_branch | loop_24_intervention_recognize | loop_24_intervention_interdict | loop_24_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_24_verdict)
+(loop_24_inactive)-[:PROCESS]->(loop_24_sink)
+(loop_24_verdict)-[:PROCESS]->(loop_24_sink)
+(loop_24_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_24_then_branch)
+(loop_24_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_24_then_branch)
+(loop_24_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_24_then_branch)

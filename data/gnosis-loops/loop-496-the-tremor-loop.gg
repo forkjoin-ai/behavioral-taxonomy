@@ -1,0 +1,33 @@
+// behavioral-loop-496.gg
+// Executable Gnosis projection for The Tremor Loop.
+
+// Nodes
+(loop_496_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_496_context_branch: BehaviorEmit { emission: 'context' })
+(loop_496_given_gate: BehaviorAssess { stage: 'given', text: 'Hand%20shaking%20only%20when%20reaching%20for%20something' })
+(loop_496_inactive: BehaviorTerminal { loopId: 496, loopName: 'The%20Tremor%20Loop' })
+(loop_496_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_496_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_496_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_496_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'it%20signals%20%22Nerves%22%20or%20%22Neurology%22' })
+(loop_496_result_branch: BehaviorEmit { emission: 'result', text: 'others%20taking%20the%20object%20*from*%20them%20quickly%20to%20%22help.%22' })
+(loop_496_sink: BehaviorSink)
+(loop_496_start: BehaviorStart { loopId: 496, loopName: 'The%20Tremor%20Loop', given: 'Hand%20shaking%20only%20when%20reaching%20for%20something', when: 'passing%20a%20drink%2Fpaper', then: 'it%20signals%20%22Nerves%22%20or%20%22Neurology%22%20(The%20Fragility%20Operator)', result: 'others%20taking%20the%20object%20*from*%20them%20quickly%20to%20%22help.%22', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'it%20signals%20%22Nerves%22%20or%20%22Neurology%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_496_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_496_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Nerves%22%20or%20%22Neurology%22%20(The%20Fragility%20Operator)' })
+(loop_496_verdict: BehaviorVerdict { loopId: 496, loopName: 'The%20Tremor%20Loop', then: 'it%20signals%20%22Nerves%22%20or%20%22Neurology%22%20(The%20Fragility%20Operator)', result: 'others%20taking%20the%20object%20*from*%20them%20quickly%20to%20%22help.%22', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'it%20signals%20%22Nerves%22%20or%20%22Neurology%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_496_when_gate: BehaviorAssess { stage: 'when', text: 'passing%20a%20drink%2Fpaper' })
+
+// Topology
+(loop_496_start)-[:PROCESS]->(loop_496_given_gate)
+(loop_496_given_gate)-[:PROCESS { case: "ok" }]->(loop_496_when_gate)
+(loop_496_given_gate)-[:PROCESS { case: "err" }]->(loop_496_inactive)
+(loop_496_when_gate)-[:PROCESS { case: "ok" }]->(loop_496_context)
+(loop_496_when_gate)-[:PROCESS { case: "err" }]->(loop_496_inactive)
+(loop_496_context)-[:FORK { strategy: "behavior-branches" }]->(loop_496_context_branch | loop_496_then_branch | loop_496_operator_branch | loop_496_result_branch | loop_496_taxonomy_branch | loop_496_intervention_recognize | loop_496_intervention_interdict | loop_496_intervention_minimize)
+(loop_496_context_branch | loop_496_then_branch | loop_496_operator_branch | loop_496_result_branch | loop_496_taxonomy_branch | loop_496_intervention_recognize | loop_496_intervention_interdict | loop_496_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_496_verdict)
+(loop_496_inactive)-[:PROCESS]->(loop_496_sink)
+(loop_496_verdict)-[:PROCESS]->(loop_496_sink)
+(loop_496_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_496_then_branch)
+(loop_496_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_496_then_branch)
+(loop_496_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_496_then_branch)

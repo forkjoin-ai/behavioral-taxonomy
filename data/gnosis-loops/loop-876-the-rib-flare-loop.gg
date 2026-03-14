@@ -1,0 +1,33 @@
+// behavioral-loop-876.gg
+// Executable Gnosis projection for The Rib Flare Loop.
+
+// Nodes
+(loop_876_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_876_context_branch: BehaviorEmit { emission: 'context' })
+(loop_876_given_gate: BehaviorAssess { stage: 'given', text: 'Lower%20ribs%20jutting%20out%20when%20standing' })
+(loop_876_inactive: BehaviorTerminal { loopId: 876, loopName: 'The%20Rib%20Flare%20Loop' })
+(loop_876_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_876_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_876_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_876_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Accordion%20Operator', mechanism: 'the%20torso%20looks%20%22Disconnected%22' })
+(loop_876_result_branch: BehaviorEmit { emission: 'result', text: 'perceived%20lack%20of%20athletic%20aesthetic' })
+(loop_876_sink: BehaviorSink)
+(loop_876_start: BehaviorStart { loopId: 876, loopName: 'The%20Rib%20Flare%20Loop', given: 'Lower%20ribs%20jutting%20out%20when%20standing', when: 'viewed%20in%20profile', then: 'the%20torso%20looks%20%22Disconnected%22%20(The%20Accordion%20Operator)', result: 'perceived%20lack%20of%20athletic%20aesthetic', operatorName: 'The%20Accordion%20Operator', operatorMechanism: 'the%20torso%20looks%20%22Disconnected%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_876_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_876_then_branch: BehaviorEmit { emission: 'then', text: 'the%20torso%20looks%20%22Disconnected%22%20(The%20Accordion%20Operator)' })
+(loop_876_verdict: BehaviorVerdict { loopId: 876, loopName: 'The%20Rib%20Flare%20Loop', then: 'the%20torso%20looks%20%22Disconnected%22%20(The%20Accordion%20Operator)', result: 'perceived%20lack%20of%20athletic%20aesthetic', operatorName: 'The%20Accordion%20Operator', operatorMechanism: 'the%20torso%20looks%20%22Disconnected%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_876_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20in%20profile' })
+
+// Topology
+(loop_876_start)-[:PROCESS]->(loop_876_given_gate)
+(loop_876_given_gate)-[:PROCESS { case: "ok" }]->(loop_876_when_gate)
+(loop_876_given_gate)-[:PROCESS { case: "err" }]->(loop_876_inactive)
+(loop_876_when_gate)-[:PROCESS { case: "ok" }]->(loop_876_context)
+(loop_876_when_gate)-[:PROCESS { case: "err" }]->(loop_876_inactive)
+(loop_876_context)-[:FORK { strategy: "behavior-branches" }]->(loop_876_context_branch | loop_876_then_branch | loop_876_operator_branch | loop_876_result_branch | loop_876_taxonomy_branch | loop_876_intervention_recognize | loop_876_intervention_interdict | loop_876_intervention_minimize)
+(loop_876_context_branch | loop_876_then_branch | loop_876_operator_branch | loop_876_result_branch | loop_876_taxonomy_branch | loop_876_intervention_recognize | loop_876_intervention_interdict | loop_876_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_876_verdict)
+(loop_876_inactive)-[:PROCESS]->(loop_876_sink)
+(loop_876_verdict)-[:PROCESS]->(loop_876_sink)
+(loop_876_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_876_then_branch)
+(loop_876_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_876_then_branch)
+(loop_876_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_876_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-822.gg
+// Executable Gnosis projection for The Turkey Neck Loop.
+
+// Nodes
+(loop_822_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_822_context_branch: BehaviorEmit { emission: 'context' })
+(loop_822_given_gate: BehaviorAssess { stage: 'given', text: 'Vertical%20cords%20on%20the%20neck' })
+(loop_822_inactive: BehaviorTerminal { loopId: 822, loopName: 'The%20Turkey%20Neck%20Loop' })
+(loop_822_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_822_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_822_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_822_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Age%20Operator', mechanism: 'the%20neck%20looks%20%22Stringy%22' })
+(loop_822_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20the%20%22Youthful%22%20profile' })
+(loop_822_sink: BehaviorSink)
+(loop_822_start: BehaviorStart { loopId: 822, loopName: 'The%20Turkey%20Neck%20Loop', given: 'Vertical%20cords%20on%20the%20neck', when: 'straining%20or%20speaking', then: 'the%20neck%20looks%20%22Stringy%22%20(The%20Age%20Operator)', result: 'loss%20of%20the%20%22Youthful%22%20profile', operatorName: 'The%20Age%20Operator', operatorMechanism: 'the%20neck%20looks%20%22Stringy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_822_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_822_then_branch: BehaviorEmit { emission: 'then', text: 'the%20neck%20looks%20%22Stringy%22%20(The%20Age%20Operator)' })
+(loop_822_verdict: BehaviorVerdict { loopId: 822, loopName: 'The%20Turkey%20Neck%20Loop', then: 'the%20neck%20looks%20%22Stringy%22%20(The%20Age%20Operator)', result: 'loss%20of%20the%20%22Youthful%22%20profile', operatorName: 'The%20Age%20Operator', operatorMechanism: 'the%20neck%20looks%20%22Stringy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_822_when_gate: BehaviorAssess { stage: 'when', text: 'straining%20or%20speaking' })
+
+// Topology
+(loop_822_start)-[:PROCESS]->(loop_822_given_gate)
+(loop_822_given_gate)-[:PROCESS { case: "ok" }]->(loop_822_when_gate)
+(loop_822_given_gate)-[:PROCESS { case: "err" }]->(loop_822_inactive)
+(loop_822_when_gate)-[:PROCESS { case: "ok" }]->(loop_822_context)
+(loop_822_when_gate)-[:PROCESS { case: "err" }]->(loop_822_inactive)
+(loop_822_context)-[:FORK { strategy: "behavior-branches" }]->(loop_822_context_branch | loop_822_then_branch | loop_822_operator_branch | loop_822_result_branch | loop_822_taxonomy_branch | loop_822_intervention_recognize | loop_822_intervention_interdict | loop_822_intervention_minimize)
+(loop_822_context_branch | loop_822_then_branch | loop_822_operator_branch | loop_822_result_branch | loop_822_taxonomy_branch | loop_822_intervention_recognize | loop_822_intervention_interdict | loop_822_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_822_verdict)
+(loop_822_inactive)-[:PROCESS]->(loop_822_sink)
+(loop_822_verdict)-[:PROCESS]->(loop_822_sink)
+(loop_822_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_822_then_branch)
+(loop_822_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_822_then_branch)
+(loop_822_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_822_then_branch)

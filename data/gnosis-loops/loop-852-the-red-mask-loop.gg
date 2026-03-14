@@ -1,0 +1,33 @@
+// behavioral-loop-852.gg
+// Executable Gnosis projection for The Red Mask Loop.
+
+// Nodes
+(loop_852_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_852_context_branch: BehaviorEmit { emission: 'context' })
+(loop_852_given_gate: BehaviorAssess { stage: 'given', text: 'Inability%20to%20control%20facial%20flushing' })
+(loop_852_inactive: BehaviorTerminal { loopId: 852, loopName: 'The%20Red%20Mask%20Loop' })
+(loop_852_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_852_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_852_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_852_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Traffic%20Light%20Operator', mechanism: 'the%20face%20betrays%20the%20emotion%20instantly' })
+(loop_852_result_branch: BehaviorEmit { emission: 'result', text: 'total%20transparency%3B%20poker%20faces%20are%20impossible' })
+(loop_852_sink: BehaviorSink)
+(loop_852_start: BehaviorStart { loopId: 852, loopName: 'The%20Red%20Mask%20Loop', given: 'Inability%20to%20control%20facial%20flushing', when: 'lying%20or%20angry', then: 'the%20face%20betrays%20the%20emotion%20instantly%20(The%20Traffic%20Light%20Operator)', result: 'total%20transparency%3B%20poker%20faces%20are%20impossible', operatorName: 'The%20Traffic%20Light%20Operator', operatorMechanism: 'the%20face%20betrays%20the%20emotion%20instantly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_852_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_852_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20betrays%20the%20emotion%20instantly%20(The%20Traffic%20Light%20Operator)' })
+(loop_852_verdict: BehaviorVerdict { loopId: 852, loopName: 'The%20Red%20Mask%20Loop', then: 'the%20face%20betrays%20the%20emotion%20instantly%20(The%20Traffic%20Light%20Operator)', result: 'total%20transparency%3B%20poker%20faces%20are%20impossible', operatorName: 'The%20Traffic%20Light%20Operator', operatorMechanism: 'the%20face%20betrays%20the%20emotion%20instantly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_852_when_gate: BehaviorAssess { stage: 'when', text: 'lying%20or%20angry' })
+
+// Topology
+(loop_852_start)-[:PROCESS]->(loop_852_given_gate)
+(loop_852_given_gate)-[:PROCESS { case: "ok" }]->(loop_852_when_gate)
+(loop_852_given_gate)-[:PROCESS { case: "err" }]->(loop_852_inactive)
+(loop_852_when_gate)-[:PROCESS { case: "ok" }]->(loop_852_context)
+(loop_852_when_gate)-[:PROCESS { case: "err" }]->(loop_852_inactive)
+(loop_852_context)-[:FORK { strategy: "behavior-branches" }]->(loop_852_context_branch | loop_852_then_branch | loop_852_operator_branch | loop_852_result_branch | loop_852_taxonomy_branch | loop_852_intervention_recognize | loop_852_intervention_interdict | loop_852_intervention_minimize)
+(loop_852_context_branch | loop_852_then_branch | loop_852_operator_branch | loop_852_result_branch | loop_852_taxonomy_branch | loop_852_intervention_recognize | loop_852_intervention_interdict | loop_852_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_852_verdict)
+(loop_852_inactive)-[:PROCESS]->(loop_852_sink)
+(loop_852_verdict)-[:PROCESS]->(loop_852_sink)
+(loop_852_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_852_then_branch)
+(loop_852_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_852_then_branch)
+(loop_852_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_852_then_branch)

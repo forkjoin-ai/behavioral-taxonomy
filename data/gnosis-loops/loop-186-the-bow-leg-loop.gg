@@ -1,0 +1,33 @@
+// behavioral-loop-186.gg
+// Executable Gnosis projection for The Bow Leg Loop.
+
+// Nodes
+(loop_186_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_186_context_branch: BehaviorEmit { emission: 'context' })
+(loop_186_given_gate: BehaviorAssess { stage: 'given', text: 'Outward%20curvature%20of%20knees' })
+(loop_186_inactive: BehaviorTerminal { loopId: 186, loopName: 'The%20Bow%20Leg%20Loop' })
+(loop_186_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_186_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_186_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_186_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stereotype%20Operator', mechanism: 'the%20gait%20looks%20%22Cowboyish%22%20or%20%22Rugged%22' })
+(loop_186_result_branch: BehaviorEmit { emission: 'result', text: 'an%20assumption%20of%20**Physical%20Toughness**%20or%20blue-collar%20background' })
+(loop_186_sink: BehaviorSink)
+(loop_186_start: BehaviorStart { loopId: 186, loopName: 'The%20Bow%20Leg%20Loop', given: 'Outward%20curvature%20of%20knees', when: 'walking', then: 'the%20gait%20looks%20%22Cowboyish%22%20or%20%22Rugged%22%20(The%20Stereotype%20Operator)', result: 'an%20assumption%20of%20**Physical%20Toughness**%20or%20blue-collar%20background', operatorName: 'The%20Stereotype%20Operator', operatorMechanism: 'the%20gait%20looks%20%22Cowboyish%22%20or%20%22Rugged%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_186_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_186_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gait%20looks%20%22Cowboyish%22%20or%20%22Rugged%22%20(The%20Stereotype%20Operator)' })
+(loop_186_verdict: BehaviorVerdict { loopId: 186, loopName: 'The%20Bow%20Leg%20Loop', then: 'the%20gait%20looks%20%22Cowboyish%22%20or%20%22Rugged%22%20(The%20Stereotype%20Operator)', result: 'an%20assumption%20of%20**Physical%20Toughness**%20or%20blue-collar%20background', operatorName: 'The%20Stereotype%20Operator', operatorMechanism: 'the%20gait%20looks%20%22Cowboyish%22%20or%20%22Rugged%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_186_when_gate: BehaviorAssess { stage: 'when', text: 'walking' })
+
+// Topology
+(loop_186_start)-[:PROCESS]->(loop_186_given_gate)
+(loop_186_given_gate)-[:PROCESS { case: "ok" }]->(loop_186_when_gate)
+(loop_186_given_gate)-[:PROCESS { case: "err" }]->(loop_186_inactive)
+(loop_186_when_gate)-[:PROCESS { case: "ok" }]->(loop_186_context)
+(loop_186_when_gate)-[:PROCESS { case: "err" }]->(loop_186_inactive)
+(loop_186_context)-[:FORK { strategy: "behavior-branches" }]->(loop_186_context_branch | loop_186_then_branch | loop_186_operator_branch | loop_186_result_branch | loop_186_taxonomy_branch | loop_186_intervention_recognize | loop_186_intervention_interdict | loop_186_intervention_minimize)
+(loop_186_context_branch | loop_186_then_branch | loop_186_operator_branch | loop_186_result_branch | loop_186_taxonomy_branch | loop_186_intervention_recognize | loop_186_intervention_interdict | loop_186_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_186_verdict)
+(loop_186_inactive)-[:PROCESS]->(loop_186_sink)
+(loop_186_verdict)-[:PROCESS]->(loop_186_sink)
+(loop_186_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_186_then_branch)
+(loop_186_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_186_then_branch)
+(loop_186_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_186_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-586.gg
+// Executable Gnosis projection for The Slippery Grip Loop.
+
+// Nodes
+(loop_586_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_586_context_branch: BehaviorEmit { emission: 'context' })
+(loop_586_given_gate: BehaviorAssess { stage: 'given', text: 'Excessive%20palmar%20sweating' })
+(loop_586_inactive: BehaviorTerminal { loopId: 586, loopName: 'The%20Slippery%20Grip%20Loop' })
+(loop_586_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_586_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_586_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_586_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Eel%20Operator', mechanism: 'the%20hand%20slides%20out%20of%20the%20grip' })
+(loop_586_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20wiping%20hands%20on%20pants%20constantly%20(The%20Nervous%20Tic)' })
+(loop_586_sink: BehaviorSink)
+(loop_586_start: BehaviorStart { loopId: 586, loopName: 'The%20Slippery%20Grip%20Loop', given: 'Excessive%20palmar%20sweating', when: 'greeting', then: 'the%20hand%20slides%20out%20of%20the%20grip%20(The%20Eel%20Operator)', result: 'the%20individual%20wiping%20hands%20on%20pants%20constantly%20(The%20Nervous%20Tic)', operatorName: 'The%20Eel%20Operator', operatorMechanism: 'the%20hand%20slides%20out%20of%20the%20grip', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_586_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_586_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hand%20slides%20out%20of%20the%20grip%20(The%20Eel%20Operator)' })
+(loop_586_verdict: BehaviorVerdict { loopId: 586, loopName: 'The%20Slippery%20Grip%20Loop', then: 'the%20hand%20slides%20out%20of%20the%20grip%20(The%20Eel%20Operator)', result: 'the%20individual%20wiping%20hands%20on%20pants%20constantly%20(The%20Nervous%20Tic)', operatorName: 'The%20Eel%20Operator', operatorMechanism: 'the%20hand%20slides%20out%20of%20the%20grip', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_586_when_gate: BehaviorAssess { stage: 'when', text: 'greeting' })
+
+// Topology
+(loop_586_start)-[:PROCESS]->(loop_586_given_gate)
+(loop_586_given_gate)-[:PROCESS { case: "ok" }]->(loop_586_when_gate)
+(loop_586_given_gate)-[:PROCESS { case: "err" }]->(loop_586_inactive)
+(loop_586_when_gate)-[:PROCESS { case: "ok" }]->(loop_586_context)
+(loop_586_when_gate)-[:PROCESS { case: "err" }]->(loop_586_inactive)
+(loop_586_context)-[:FORK { strategy: "behavior-branches" }]->(loop_586_context_branch | loop_586_then_branch | loop_586_operator_branch | loop_586_result_branch | loop_586_taxonomy_branch | loop_586_intervention_recognize | loop_586_intervention_interdict | loop_586_intervention_minimize)
+(loop_586_context_branch | loop_586_then_branch | loop_586_operator_branch | loop_586_result_branch | loop_586_taxonomy_branch | loop_586_intervention_recognize | loop_586_intervention_interdict | loop_586_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_586_verdict)
+(loop_586_inactive)-[:PROCESS]->(loop_586_sink)
+(loop_586_verdict)-[:PROCESS]->(loop_586_sink)
+(loop_586_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_586_then_branch)
+(loop_586_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_586_then_branch)
+(loop_586_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_586_then_branch)

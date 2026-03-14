@@ -1,0 +1,33 @@
+// behavioral-loop-755.gg
+// Executable Gnosis projection for The Pop-Collar Loop.
+
+// Nodes
+(loop_755_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_755_context_branch: BehaviorEmit { emission: 'context' })
+(loop_755_given_gate: BehaviorAssess { stage: 'given', text: 'Collar%20turned%20up%20(intentionally%20or%20not)' })
+(loop_755_inactive: BehaviorTerminal { loopId: 755, loopName: 'The%20Pop-Collar%20Loop' })
+(loop_755_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_755_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_755_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_755_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Chad%20Operator', mechanism: 'it%20signals%20%22Arrogance%22%20or%20%2280s%20Villain%22' })
+(loop_755_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20assumption%20of%20entitlement' })
+(loop_755_sink: BehaviorSink)
+(loop_755_start: BehaviorStart { loopId: 755, loopName: 'The%20Pop-Collar%20Loop', given: 'Collar%20turned%20up%20(intentionally%20or%20not)', when: 'indoors', then: 'it%20signals%20%22Arrogance%22%20or%20%2280s%20Villain%22%20(The%20Chad%20Operator)', result: 'immediate%20assumption%20of%20entitlement', operatorName: 'The%20Chad%20Operator', operatorMechanism: 'it%20signals%20%22Arrogance%22%20or%20%2280s%20Villain%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_755_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_755_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Arrogance%22%20or%20%2280s%20Villain%22%20(The%20Chad%20Operator)' })
+(loop_755_verdict: BehaviorVerdict { loopId: 755, loopName: 'The%20Pop-Collar%20Loop', then: 'it%20signals%20%22Arrogance%22%20or%20%2280s%20Villain%22%20(The%20Chad%20Operator)', result: 'immediate%20assumption%20of%20entitlement', operatorName: 'The%20Chad%20Operator', operatorMechanism: 'it%20signals%20%22Arrogance%22%20or%20%2280s%20Villain%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_755_when_gate: BehaviorAssess { stage: 'when', text: 'indoors' })
+
+// Topology
+(loop_755_start)-[:PROCESS]->(loop_755_given_gate)
+(loop_755_given_gate)-[:PROCESS { case: "ok" }]->(loop_755_when_gate)
+(loop_755_given_gate)-[:PROCESS { case: "err" }]->(loop_755_inactive)
+(loop_755_when_gate)-[:PROCESS { case: "ok" }]->(loop_755_context)
+(loop_755_when_gate)-[:PROCESS { case: "err" }]->(loop_755_inactive)
+(loop_755_context)-[:FORK { strategy: "behavior-branches" }]->(loop_755_context_branch | loop_755_then_branch | loop_755_operator_branch | loop_755_result_branch | loop_755_taxonomy_branch | loop_755_intervention_recognize | loop_755_intervention_interdict | loop_755_intervention_minimize)
+(loop_755_context_branch | loop_755_then_branch | loop_755_operator_branch | loop_755_result_branch | loop_755_taxonomy_branch | loop_755_intervention_recognize | loop_755_intervention_interdict | loop_755_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_755_verdict)
+(loop_755_inactive)-[:PROCESS]->(loop_755_sink)
+(loop_755_verdict)-[:PROCESS]->(loop_755_sink)
+(loop_755_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_755_then_branch)
+(loop_755_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_755_then_branch)
+(loop_755_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_755_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-674.gg
+// Executable Gnosis projection for The Gum Bleed Loop.
+
+// Nodes
+(loop_674_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_674_context_branch: BehaviorEmit { emission: 'context' })
+(loop_674_given_gate: BehaviorAssess { stage: 'given', text: 'Inflamed%2C%20red%20gum%20margins' })
+(loop_674_inactive: BehaviorTerminal { loopId: 674, loopName: 'The%20Gum%20Bleed%20Loop' })
+(loop_674_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_674_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_674_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_674_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Bio-Hazard%20Operator', mechanism: 'the%20red-to-white%20contrast%20looks%20%22Angry%22%20or%20%22Infected%22' })
+(loop_674_result_branch: BehaviorEmit { emission: 'result', text: 'reduced%20mating%20viability%20due%20to%20%22Health%22%20heuristics' })
+(loop_674_sink: BehaviorSink)
+(loop_674_start: BehaviorStart { loopId: 674, loopName: 'The%20Gum%20Bleed%20Loop', given: 'Inflamed%2C%20red%20gum%20margins', when: 'smiling%20broadly', then: 'the%20red-to-white%20contrast%20looks%20%22Angry%22%20or%20%22Infected%22%20(The%20Bio-Hazard%20Operator)', result: 'reduced%20mating%20viability%20due%20to%20%22Health%22%20heuristics', operatorName: 'The%20Bio-Hazard%20Operator', operatorMechanism: 'the%20red-to-white%20contrast%20looks%20%22Angry%22%20or%20%22Infected%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_674_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_674_then_branch: BehaviorEmit { emission: 'then', text: 'the%20red-to-white%20contrast%20looks%20%22Angry%22%20or%20%22Infected%22%20(The%20Bio-Hazard%20Operator)' })
+(loop_674_verdict: BehaviorVerdict { loopId: 674, loopName: 'The%20Gum%20Bleed%20Loop', then: 'the%20red-to-white%20contrast%20looks%20%22Angry%22%20or%20%22Infected%22%20(The%20Bio-Hazard%20Operator)', result: 'reduced%20mating%20viability%20due%20to%20%22Health%22%20heuristics', operatorName: 'The%20Bio-Hazard%20Operator', operatorMechanism: 'the%20red-to-white%20contrast%20looks%20%22Angry%22%20or%20%22Infected%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_674_when_gate: BehaviorAssess { stage: 'when', text: 'smiling%20broadly' })
+
+// Topology
+(loop_674_start)-[:PROCESS]->(loop_674_given_gate)
+(loop_674_given_gate)-[:PROCESS { case: "ok" }]->(loop_674_when_gate)
+(loop_674_given_gate)-[:PROCESS { case: "err" }]->(loop_674_inactive)
+(loop_674_when_gate)-[:PROCESS { case: "ok" }]->(loop_674_context)
+(loop_674_when_gate)-[:PROCESS { case: "err" }]->(loop_674_inactive)
+(loop_674_context)-[:FORK { strategy: "behavior-branches" }]->(loop_674_context_branch | loop_674_then_branch | loop_674_operator_branch | loop_674_result_branch | loop_674_taxonomy_branch | loop_674_intervention_recognize | loop_674_intervention_interdict | loop_674_intervention_minimize)
+(loop_674_context_branch | loop_674_then_branch | loop_674_operator_branch | loop_674_result_branch | loop_674_taxonomy_branch | loop_674_intervention_recognize | loop_674_intervention_interdict | loop_674_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_674_verdict)
+(loop_674_inactive)-[:PROCESS]->(loop_674_sink)
+(loop_674_verdict)-[:PROCESS]->(loop_674_sink)
+(loop_674_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_674_then_branch)
+(loop_674_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_674_then_branch)
+(loop_674_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_674_then_branch)

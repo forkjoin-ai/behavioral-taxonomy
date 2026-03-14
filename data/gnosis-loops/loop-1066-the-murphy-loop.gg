@@ -1,0 +1,33 @@
+// behavioral-loop-1066.gg
+// Executable Gnosis projection for The Murphy Loop.
+
+// Nodes
+(loop_1066_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1066_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1066_given_gate: BehaviorAssess { stage: 'given', text: 'Expecting%20the%20worst' })
+(loop_1066_inactive: BehaviorTerminal { loopId: 1066, loopName: 'The%20Murphy%20Loop' })
+(loop_1066_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1066_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1066_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1066_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'hyper-fixation%20on%20risks%20causes%20the%20individual%20to%20manifest%20them%20(The%20Self-Sabotage)' })
+(loop_1066_result_branch: BehaviorEmit { emission: 'result', text: '%22I%20knew%20it%20would%20go%20wrong.%22' })
+(loop_1066_sink: BehaviorSink)
+(loop_1066_start: BehaviorStart { loopId: 1066, loopName: 'The%20Murphy%20Loop', given: 'Expecting%20the%20worst', when: 'executing%20a%20plan', then: 'hyper-fixation%20on%20risks%20causes%20the%20individual%20to%20manifest%20them%20(The%20Self-Sabotage)', result: '%22I%20knew%20it%20would%20go%20wrong.%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'hyper-fixation%20on%20risks%20causes%20the%20individual%20to%20manifest%20them%20(The%20Self-Sabotage)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1066_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1066_then_branch: BehaviorEmit { emission: 'then', text: 'hyper-fixation%20on%20risks%20causes%20the%20individual%20to%20manifest%20them%20(The%20Self-Sabotage)' })
+(loop_1066_verdict: BehaviorVerdict { loopId: 1066, loopName: 'The%20Murphy%20Loop', then: 'hyper-fixation%20on%20risks%20causes%20the%20individual%20to%20manifest%20them%20(The%20Self-Sabotage)', result: '%22I%20knew%20it%20would%20go%20wrong.%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'hyper-fixation%20on%20risks%20causes%20the%20individual%20to%20manifest%20them%20(The%20Self-Sabotage)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1066_when_gate: BehaviorAssess { stage: 'when', text: 'executing%20a%20plan' })
+
+// Topology
+(loop_1066_start)-[:PROCESS]->(loop_1066_given_gate)
+(loop_1066_given_gate)-[:PROCESS { case: "ok" }]->(loop_1066_when_gate)
+(loop_1066_given_gate)-[:PROCESS { case: "err" }]->(loop_1066_inactive)
+(loop_1066_when_gate)-[:PROCESS { case: "ok" }]->(loop_1066_context)
+(loop_1066_when_gate)-[:PROCESS { case: "err" }]->(loop_1066_inactive)
+(loop_1066_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1066_context_branch | loop_1066_then_branch | loop_1066_operator_branch | loop_1066_result_branch | loop_1066_taxonomy_branch | loop_1066_intervention_recognize | loop_1066_intervention_interdict | loop_1066_intervention_minimize)
+(loop_1066_context_branch | loop_1066_then_branch | loop_1066_operator_branch | loop_1066_result_branch | loop_1066_taxonomy_branch | loop_1066_intervention_recognize | loop_1066_intervention_interdict | loop_1066_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1066_verdict)
+(loop_1066_inactive)-[:PROCESS]->(loop_1066_sink)
+(loop_1066_verdict)-[:PROCESS]->(loop_1066_sink)
+(loop_1066_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1066_then_branch)
+(loop_1066_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1066_then_branch)
+(loop_1066_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1066_then_branch)

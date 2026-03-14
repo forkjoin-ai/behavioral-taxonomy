@@ -1,0 +1,35 @@
+// behavioral-loop-581.gg
+// Executable Gnosis projection for The Saucer Eye Loop.
+
+// Nodes
+(loop_581_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_581_context_branch: BehaviorEmit { emission: 'context' })
+(loop_581_given_gate: BehaviorAssess { stage: 'given', text: 'Naturally%20large%20pupils%20or%20sympathetic%20arousal' })
+(loop_581_inactive: BehaviorTerminal { loopId: 581, loopName: 'The%20Saucer%20Eye%20Loop' })
+(loop_581_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_581_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Combine%20with%20approachability%20signals' })
+(loop_581_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_581_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_581_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dilated%20Operator', mechanism: 'it%20signals%20%22Attraction%22%20or%20%22Drug%20Use%22' })
+(loop_581_result_branch: BehaviorEmit { emission: 'result', text: 'high%20reciprocal%20interest%20(if%20attraction%20is%20assumed)%20or%20suspicion%20(if%20drugs%20are%20assumed)' })
+(loop_581_sink: BehaviorSink)
+(loop_581_start: BehaviorStart { loopId: 581, loopName: 'The%20Saucer%20Eye%20Loop', given: 'Naturally%20large%20pupils%20or%20sympathetic%20arousal', when: 'looking%20at%20a%20potential%20partner', then: 'it%20signals%20%22Attraction%22%20or%20%22Drug%20Use%22%20(The%20Dilated%20Operator)', result: 'high%20reciprocal%20interest%20(if%20attraction%20is%20assumed)%20or%20suspicion%20(if%20drugs%20are%20assumed)', operatorName: 'The%20Dilated%20Operator', operatorMechanism: 'it%20signals%20%22Attraction%22%20or%20%22Drug%20Use%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION|ATTRACTION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting', intervention_leverage: 'Combine%20with%20approachability%20signals' })
+(loop_581_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION|ATTRACTION' })
+(loop_581_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Attraction%22%20or%20%22Drug%20Use%22%20(The%20Dilated%20Operator)' })
+(loop_581_verdict: BehaviorVerdict { loopId: 581, loopName: 'The%20Saucer%20Eye%20Loop', then: 'it%20signals%20%22Attraction%22%20or%20%22Drug%20Use%22%20(The%20Dilated%20Operator)', result: 'high%20reciprocal%20interest%20(if%20attraction%20is%20assumed)%20or%20suspicion%20(if%20drugs%20are%20assumed)', operatorName: 'The%20Dilated%20Operator', operatorMechanism: 'it%20signals%20%22Attraction%22%20or%20%22Drug%20Use%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION|ATTRACTION' })
+(loop_581_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20at%20a%20potential%20partner' })
+
+// Topology
+(loop_581_start)-[:PROCESS]->(loop_581_given_gate)
+(loop_581_given_gate)-[:PROCESS { case: "ok" }]->(loop_581_when_gate)
+(loop_581_given_gate)-[:PROCESS { case: "err" }]->(loop_581_inactive)
+(loop_581_when_gate)-[:PROCESS { case: "ok" }]->(loop_581_context)
+(loop_581_when_gate)-[:PROCESS { case: "err" }]->(loop_581_inactive)
+(loop_581_context)-[:FORK { strategy: "behavior-branches" }]->(loop_581_context_branch | loop_581_then_branch | loop_581_operator_branch | loop_581_result_branch | loop_581_taxonomy_branch | loop_581_intervention_recognize | loop_581_intervention_interdict | loop_581_intervention_minimize | loop_581_intervention_leverage)
+(loop_581_context_branch | loop_581_then_branch | loop_581_operator_branch | loop_581_result_branch | loop_581_taxonomy_branch | loop_581_intervention_recognize | loop_581_intervention_interdict | loop_581_intervention_minimize | loop_581_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_581_verdict)
+(loop_581_inactive)-[:PROCESS]->(loop_581_sink)
+(loop_581_verdict)-[:PROCESS]->(loop_581_sink)
+(loop_581_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_581_then_branch)
+(loop_581_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_581_then_branch)
+(loop_581_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_581_then_branch)
+(loop_581_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_581_result_branch)

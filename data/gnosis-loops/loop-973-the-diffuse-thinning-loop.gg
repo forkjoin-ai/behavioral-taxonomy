@@ -1,0 +1,33 @@
+// behavioral-loop-973.gg
+// Executable Gnosis projection for The Diffuse Thinning Loop.
+
+// Nodes
+(loop_973_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_973_context_branch: BehaviorEmit { emission: 'context' })
+(loop_973_given_gate: BehaviorAssess { stage: 'given', text: 'General%20loss%20of%20density%20(Female%20Pattern)' })
+(loop_973_inactive: BehaviorTerminal { loopId: 973, loopName: 'The%20Diffuse%20Thinning%20Loop' })
+(loop_973_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_973_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_973_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_973_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Ghost%20Operator', mechanism: 'the%20scalp%20is%20visible%20through%20the%20hair' })
+(loop_973_result_branch: BehaviorEmit { emission: 'result', text: 'extreme%20self-consciousness%20and%20avoidance%20of%20bright%20rooms' })
+(loop_973_sink: BehaviorSink)
+(loop_973_start: BehaviorStart { loopId: 973, loopName: 'The%20Diffuse%20Thinning%20Loop', given: 'General%20loss%20of%20density%20(Female%20Pattern)', when: 'under%20harsh%20downlighting', then: 'the%20scalp%20is%20visible%20through%20the%20hair%20(The%20Ghost%20Operator)', result: 'extreme%20self-consciousness%20and%20avoidance%20of%20bright%20rooms', operatorName: 'The%20Ghost%20Operator', operatorMechanism: 'the%20scalp%20is%20visible%20through%20the%20hair', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_973_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_973_then_branch: BehaviorEmit { emission: 'then', text: 'the%20scalp%20is%20visible%20through%20the%20hair%20(The%20Ghost%20Operator)' })
+(loop_973_verdict: BehaviorVerdict { loopId: 973, loopName: 'The%20Diffuse%20Thinning%20Loop', then: 'the%20scalp%20is%20visible%20through%20the%20hair%20(The%20Ghost%20Operator)', result: 'extreme%20self-consciousness%20and%20avoidance%20of%20bright%20rooms', operatorName: 'The%20Ghost%20Operator', operatorMechanism: 'the%20scalp%20is%20visible%20through%20the%20hair', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_973_when_gate: BehaviorAssess { stage: 'when', text: 'under%20harsh%20downlighting' })
+
+// Topology
+(loop_973_start)-[:PROCESS]->(loop_973_given_gate)
+(loop_973_given_gate)-[:PROCESS { case: "ok" }]->(loop_973_when_gate)
+(loop_973_given_gate)-[:PROCESS { case: "err" }]->(loop_973_inactive)
+(loop_973_when_gate)-[:PROCESS { case: "ok" }]->(loop_973_context)
+(loop_973_when_gate)-[:PROCESS { case: "err" }]->(loop_973_inactive)
+(loop_973_context)-[:FORK { strategy: "behavior-branches" }]->(loop_973_context_branch | loop_973_then_branch | loop_973_operator_branch | loop_973_result_branch | loop_973_taxonomy_branch | loop_973_intervention_recognize | loop_973_intervention_interdict | loop_973_intervention_minimize)
+(loop_973_context_branch | loop_973_then_branch | loop_973_operator_branch | loop_973_result_branch | loop_973_taxonomy_branch | loop_973_intervention_recognize | loop_973_intervention_interdict | loop_973_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_973_verdict)
+(loop_973_inactive)-[:PROCESS]->(loop_973_sink)
+(loop_973_verdict)-[:PROCESS]->(loop_973_sink)
+(loop_973_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_973_then_branch)
+(loop_973_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_973_then_branch)
+(loop_973_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_973_then_branch)

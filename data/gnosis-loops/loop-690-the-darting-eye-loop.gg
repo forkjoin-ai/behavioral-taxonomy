@@ -1,0 +1,31 @@
+// behavioral-loop-690.gg
+// Executable Gnosis projection for The Darting Eye Loop.
+
+// Nodes
+(loop_690_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_690_context_branch: BehaviorEmit { emission: 'context' })
+(loop_690_given_gate: BehaviorAssess { stage: 'given', text: 'Hyper-vigilance%20(checking%20exits%2Fthreats)' })
+(loop_690_inactive: BehaviorTerminal { loopId: 690, loopName: 'The%20Darting%20Eye%20Loop' })
+(loop_690_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_690_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_690_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Criminal%20Operator', mechanism: 'it%20looks%20like%20%22Guilt%22%20or%20%22Paranoia%22' })
+(loop_690_result_branch: BehaviorEmit { emission: 'result', text: 'low%20trust%20(%22What%20are%20they%20looking%20for%3F%22)' })
+(loop_690_sink: BehaviorSink)
+(loop_690_start: BehaviorStart { loopId: 690, loopName: 'The%20Darting%20Eye%20Loop', given: 'Hyper-vigilance%20(checking%20exits%2Fthreats)', when: 'in%20casual%20conversation', then: 'it%20looks%20like%20%22Guilt%22%20or%20%22Paranoia%22%20(The%20Criminal%20Operator)', result: 'low%20trust%20(%22What%20are%20they%20looking%20for%3F%22)', operatorName: 'The%20Criminal%20Operator', operatorMechanism: 'it%20looks%20like%20%22Guilt%22%20or%20%22Paranoia%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_690_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_690_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Guilt%22%20or%20%22Paranoia%22%20(The%20Criminal%20Operator)' })
+(loop_690_verdict: BehaviorVerdict { loopId: 690, loopName: 'The%20Darting%20Eye%20Loop', then: 'it%20looks%20like%20%22Guilt%22%20or%20%22Paranoia%22%20(The%20Criminal%20Operator)', result: 'low%20trust%20(%22What%20are%20they%20looking%20for%3F%22)', operatorName: 'The%20Criminal%20Operator', operatorMechanism: 'it%20looks%20like%20%22Guilt%22%20or%20%22Paranoia%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_690_when_gate: BehaviorAssess { stage: 'when', text: 'in%20casual%20conversation' })
+
+// Topology
+(loop_690_start)-[:PROCESS]->(loop_690_given_gate)
+(loop_690_given_gate)-[:PROCESS { case: "ok" }]->(loop_690_when_gate)
+(loop_690_given_gate)-[:PROCESS { case: "err" }]->(loop_690_inactive)
+(loop_690_when_gate)-[:PROCESS { case: "ok" }]->(loop_690_context)
+(loop_690_when_gate)-[:PROCESS { case: "err" }]->(loop_690_inactive)
+(loop_690_context)-[:FORK { strategy: "behavior-branches" }]->(loop_690_context_branch | loop_690_then_branch | loop_690_operator_branch | loop_690_result_branch | loop_690_taxonomy_branch | loop_690_intervention_recognize | loop_690_intervention_leverage)
+(loop_690_context_branch | loop_690_then_branch | loop_690_operator_branch | loop_690_result_branch | loop_690_taxonomy_branch | loop_690_intervention_recognize | loop_690_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_690_verdict)
+(loop_690_inactive)-[:PROCESS]->(loop_690_sink)
+(loop_690_verdict)-[:PROCESS]->(loop_690_sink)
+(loop_690_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_690_then_branch)
+(loop_690_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_690_result_branch)

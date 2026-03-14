@@ -1,0 +1,33 @@
+// behavioral-loop-554.gg
+// Executable Gnosis projection for The Lip Reader Loop.
+
+// Nodes
+(loop_554_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_554_context_branch: BehaviorEmit { emission: 'context' })
+(loop_554_given_gate: BehaviorAssess { stage: 'given', text: 'Reliance%20on%20visual%20cues%20for%20speech%20decoding' })
+(loop_554_inactive: BehaviorTerminal { loopId: 554, loopName: 'The%20Lip%20Reader%20Loop' })
+(loop_554_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_554_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_554_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_554_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Lost%20Connection%20Operator', mechanism: 'the%20listener%20panics%20or%20disconnects' })
+(loop_554_result_branch: BehaviorEmit { emission: 'result', text: 'appearing%20%22Spacey%22%20or%20%22Unfocused%22%20when%20visual%20line-of-sight%20is%20broken' })
+(loop_554_sink: BehaviorSink)
+(loop_554_start: BehaviorStart { loopId: 554, loopName: 'The%20Lip%20Reader%20Loop', given: 'Reliance%20on%20visual%20cues%20for%20speech%20decoding', when: 'the%20speaker%20covers%20their%20mouth', then: 'the%20listener%20panics%20or%20disconnects%20(The%20Lost%20Connection%20Operator)', result: 'appearing%20%22Spacey%22%20or%20%22Unfocused%22%20when%20visual%20line-of-sight%20is%20broken', operatorName: 'The%20Lost%20Connection%20Operator', operatorMechanism: 'the%20listener%20panics%20or%20disconnects', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_554_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_554_then_branch: BehaviorEmit { emission: 'then', text: 'the%20listener%20panics%20or%20disconnects%20(The%20Lost%20Connection%20Operator)' })
+(loop_554_verdict: BehaviorVerdict { loopId: 554, loopName: 'The%20Lip%20Reader%20Loop', then: 'the%20listener%20panics%20or%20disconnects%20(The%20Lost%20Connection%20Operator)', result: 'appearing%20%22Spacey%22%20or%20%22Unfocused%22%20when%20visual%20line-of-sight%20is%20broken', operatorName: 'The%20Lost%20Connection%20Operator', operatorMechanism: 'the%20listener%20panics%20or%20disconnects', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_554_when_gate: BehaviorAssess { stage: 'when', text: 'the%20speaker%20covers%20their%20mouth' })
+
+// Topology
+(loop_554_start)-[:PROCESS]->(loop_554_given_gate)
+(loop_554_given_gate)-[:PROCESS { case: "ok" }]->(loop_554_when_gate)
+(loop_554_given_gate)-[:PROCESS { case: "err" }]->(loop_554_inactive)
+(loop_554_when_gate)-[:PROCESS { case: "ok" }]->(loop_554_context)
+(loop_554_when_gate)-[:PROCESS { case: "err" }]->(loop_554_inactive)
+(loop_554_context)-[:FORK { strategy: "behavior-branches" }]->(loop_554_context_branch | loop_554_then_branch | loop_554_operator_branch | loop_554_result_branch | loop_554_taxonomy_branch | loop_554_intervention_recognize | loop_554_intervention_interdict | loop_554_intervention_minimize)
+(loop_554_context_branch | loop_554_then_branch | loop_554_operator_branch | loop_554_result_branch | loop_554_taxonomy_branch | loop_554_intervention_recognize | loop_554_intervention_interdict | loop_554_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_554_verdict)
+(loop_554_inactive)-[:PROCESS]->(loop_554_sink)
+(loop_554_verdict)-[:PROCESS]->(loop_554_sink)
+(loop_554_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_554_then_branch)
+(loop_554_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_554_then_branch)
+(loop_554_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_554_then_branch)

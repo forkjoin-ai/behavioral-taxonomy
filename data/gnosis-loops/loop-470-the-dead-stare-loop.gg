@@ -1,0 +1,33 @@
+// behavioral-loop-470.gg
+// Executable Gnosis projection for The Dead Stare Loop.
+
+// Nodes
+(loop_470_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_470_context_branch: BehaviorEmit { emission: 'context' })
+(loop_470_given_gate: BehaviorAssess { stage: 'given', text: 'Unfocused%20gaze%20through%20the%20listener' })
+(loop_470_inactive: BehaviorTerminal { loopId: 470, loopName: 'The%20Dead%20Stare%20Loop' })
+(loop_470_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_470_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_470_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_470_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dissociation%20Operator', mechanism: 'the%20listener%20feels%20%22Unseen%22%20or%20%22Objectified%22' })
+(loop_470_result_branch: BehaviorEmit { emission: 'result', text: 'the%20conversation%20dying%20quickly' })
+(loop_470_sink: BehaviorSink)
+(loop_470_start: BehaviorStart { loopId: 470, loopName: 'The%20Dead%20Stare%20Loop', given: 'Unfocused%20gaze%20through%20the%20listener', when: 'in%20casual%20conversation', then: 'the%20listener%20feels%20%22Unseen%22%20or%20%22Objectified%22%20(The%20Dissociation%20Operator)', result: 'the%20conversation%20dying%20quickly', operatorName: 'The%20Dissociation%20Operator', operatorMechanism: 'the%20listener%20feels%20%22Unseen%22%20or%20%22Objectified%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_470_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_470_then_branch: BehaviorEmit { emission: 'then', text: 'the%20listener%20feels%20%22Unseen%22%20or%20%22Objectified%22%20(The%20Dissociation%20Operator)' })
+(loop_470_verdict: BehaviorVerdict { loopId: 470, loopName: 'The%20Dead%20Stare%20Loop', then: 'the%20listener%20feels%20%22Unseen%22%20or%20%22Objectified%22%20(The%20Dissociation%20Operator)', result: 'the%20conversation%20dying%20quickly', operatorName: 'The%20Dissociation%20Operator', operatorMechanism: 'the%20listener%20feels%20%22Unseen%22%20or%20%22Objectified%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_470_when_gate: BehaviorAssess { stage: 'when', text: 'in%20casual%20conversation' })
+
+// Topology
+(loop_470_start)-[:PROCESS]->(loop_470_given_gate)
+(loop_470_given_gate)-[:PROCESS { case: "ok" }]->(loop_470_when_gate)
+(loop_470_given_gate)-[:PROCESS { case: "err" }]->(loop_470_inactive)
+(loop_470_when_gate)-[:PROCESS { case: "ok" }]->(loop_470_context)
+(loop_470_when_gate)-[:PROCESS { case: "err" }]->(loop_470_inactive)
+(loop_470_context)-[:FORK { strategy: "behavior-branches" }]->(loop_470_context_branch | loop_470_then_branch | loop_470_operator_branch | loop_470_result_branch | loop_470_taxonomy_branch | loop_470_intervention_recognize | loop_470_intervention_interdict | loop_470_intervention_minimize)
+(loop_470_context_branch | loop_470_then_branch | loop_470_operator_branch | loop_470_result_branch | loop_470_taxonomy_branch | loop_470_intervention_recognize | loop_470_intervention_interdict | loop_470_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_470_verdict)
+(loop_470_inactive)-[:PROCESS]->(loop_470_sink)
+(loop_470_verdict)-[:PROCESS]->(loop_470_sink)
+(loop_470_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_470_then_branch)
+(loop_470_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_470_then_branch)
+(loop_470_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_470_then_branch)

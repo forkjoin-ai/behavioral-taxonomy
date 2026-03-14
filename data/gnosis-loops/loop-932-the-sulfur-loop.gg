@@ -1,0 +1,33 @@
+// behavioral-loop-932.gg
+// Executable Gnosis projection for The Sulfur Loop.
+
+// Nodes
+(loop_932_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_932_context_branch: BehaviorEmit { emission: 'context' })
+(loop_932_given_gate: BehaviorAssess { stage: 'given', text: 'High%20consumption%20of%20garlic%2Fonions%2Fcruciferous%20veg' })
+(loop_932_inactive: BehaviorTerminal { loopId: 932, loopName: 'The%20Sulfur%20Loop' })
+(loop_932_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_932_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_932_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_932_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Spice%20Operator', mechanism: 'the%20pores%20release%20a%20%22Pungent%22%20cloud' })
+(loop_932_result_branch: BehaviorEmit { emission: 'result', text: 'empty%20treadmills%20on%20either%20side%20of%20the%20individual' })
+(loop_932_sink: BehaviorSink)
+(loop_932_start: BehaviorStart { loopId: 932, loopName: 'The%20Sulfur%20Loop', given: 'High%20consumption%20of%20garlic%2Fonions%2Fcruciferous%20veg', when: 'sweating%20at%20the%20gym', then: 'the%20pores%20release%20a%20%22Pungent%22%20cloud%20(The%20Spice%20Operator)', result: 'empty%20treadmills%20on%20either%20side%20of%20the%20individual', operatorName: 'The%20Spice%20Operator', operatorMechanism: 'the%20pores%20release%20a%20%22Pungent%22%20cloud', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_932_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_932_then_branch: BehaviorEmit { emission: 'then', text: 'the%20pores%20release%20a%20%22Pungent%22%20cloud%20(The%20Spice%20Operator)' })
+(loop_932_verdict: BehaviorVerdict { loopId: 932, loopName: 'The%20Sulfur%20Loop', then: 'the%20pores%20release%20a%20%22Pungent%22%20cloud%20(The%20Spice%20Operator)', result: 'empty%20treadmills%20on%20either%20side%20of%20the%20individual', operatorName: 'The%20Spice%20Operator', operatorMechanism: 'the%20pores%20release%20a%20%22Pungent%22%20cloud', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_932_when_gate: BehaviorAssess { stage: 'when', text: 'sweating%20at%20the%20gym' })
+
+// Topology
+(loop_932_start)-[:PROCESS]->(loop_932_given_gate)
+(loop_932_given_gate)-[:PROCESS { case: "ok" }]->(loop_932_when_gate)
+(loop_932_given_gate)-[:PROCESS { case: "err" }]->(loop_932_inactive)
+(loop_932_when_gate)-[:PROCESS { case: "ok" }]->(loop_932_context)
+(loop_932_when_gate)-[:PROCESS { case: "err" }]->(loop_932_inactive)
+(loop_932_context)-[:FORK { strategy: "behavior-branches" }]->(loop_932_context_branch | loop_932_then_branch | loop_932_operator_branch | loop_932_result_branch | loop_932_taxonomy_branch | loop_932_intervention_recognize | loop_932_intervention_interdict | loop_932_intervention_minimize)
+(loop_932_context_branch | loop_932_then_branch | loop_932_operator_branch | loop_932_result_branch | loop_932_taxonomy_branch | loop_932_intervention_recognize | loop_932_intervention_interdict | loop_932_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_932_verdict)
+(loop_932_inactive)-[:PROCESS]->(loop_932_sink)
+(loop_932_verdict)-[:PROCESS]->(loop_932_sink)
+(loop_932_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_932_then_branch)
+(loop_932_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_932_then_branch)
+(loop_932_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_932_then_branch)

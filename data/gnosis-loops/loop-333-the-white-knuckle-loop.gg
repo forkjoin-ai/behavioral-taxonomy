@@ -1,0 +1,33 @@
+// behavioral-loop-333.gg
+// Executable Gnosis projection for The White Knuckle Loop.
+
+// Nodes
+(loop_333_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_333_context_branch: BehaviorEmit { emission: 'context' })
+(loop_333_given_gate: BehaviorAssess { stage: 'given', text: 'Tucking%20thumb%20into%20fist' })
+(loop_333_inactive: BehaviorTerminal { loopId: 333, loopName: 'The%20White%20Knuckle%20Loop' })
+(loop_333_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_333_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_333_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_333_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%2FTension%20Operator', mechanism: 'the%20hand%20looks%20ready%20to%20punch' })
+(loop_333_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20keeping%20a%20safe%20distance%2C%20assuming%20**Volatile%20Anger**' })
+(loop_333_sink: BehaviorSink)
+(loop_333_start: BehaviorStart { loopId: 333, loopName: 'The%20White%20Knuckle%20Loop', given: 'Tucking%20thumb%20into%20fist', when: 'standing%20still', then: 'the%20hand%20looks%20ready%20to%20punch%20(The%20Threat%2FTension%20Operator)', result: 'observers%20keeping%20a%20safe%20distance%2C%20assuming%20**Volatile%20Anger**', operatorName: 'The%20Threat%2FTension%20Operator', operatorMechanism: 'the%20hand%20looks%20ready%20to%20punch', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_333_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_333_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hand%20looks%20ready%20to%20punch%20(The%20Threat%2FTension%20Operator)' })
+(loop_333_verdict: BehaviorVerdict { loopId: 333, loopName: 'The%20White%20Knuckle%20Loop', then: 'the%20hand%20looks%20ready%20to%20punch%20(The%20Threat%2FTension%20Operator)', result: 'observers%20keeping%20a%20safe%20distance%2C%20assuming%20**Volatile%20Anger**', operatorName: 'The%20Threat%2FTension%20Operator', operatorMechanism: 'the%20hand%20looks%20ready%20to%20punch', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_333_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20still' })
+
+// Topology
+(loop_333_start)-[:PROCESS]->(loop_333_given_gate)
+(loop_333_given_gate)-[:PROCESS { case: "ok" }]->(loop_333_when_gate)
+(loop_333_given_gate)-[:PROCESS { case: "err" }]->(loop_333_inactive)
+(loop_333_when_gate)-[:PROCESS { case: "ok" }]->(loop_333_context)
+(loop_333_when_gate)-[:PROCESS { case: "err" }]->(loop_333_inactive)
+(loop_333_context)-[:FORK { strategy: "behavior-branches" }]->(loop_333_context_branch | loop_333_then_branch | loop_333_operator_branch | loop_333_result_branch | loop_333_taxonomy_branch | loop_333_intervention_recognize | loop_333_intervention_interdict | loop_333_intervention_minimize)
+(loop_333_context_branch | loop_333_then_branch | loop_333_operator_branch | loop_333_result_branch | loop_333_taxonomy_branch | loop_333_intervention_recognize | loop_333_intervention_interdict | loop_333_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_333_verdict)
+(loop_333_inactive)-[:PROCESS]->(loop_333_sink)
+(loop_333_verdict)-[:PROCESS]->(loop_333_sink)
+(loop_333_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_333_then_branch)
+(loop_333_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_333_then_branch)
+(loop_333_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_333_then_branch)

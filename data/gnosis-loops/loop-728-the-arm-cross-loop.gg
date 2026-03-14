@@ -1,0 +1,33 @@
+// behavioral-loop-728.gg
+// Executable Gnosis projection for The Arm Cross Loop.
+
+// Nodes
+(loop_728_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_728_context_branch: BehaviorEmit { emission: 'context' })
+(loop_728_given_gate: BehaviorAssess { stage: 'given', text: 'Walking%20with%20arms%20crossed' })
+(loop_728_inactive: BehaviorTerminal { loopId: 728, loopName: 'The%20Arm%20Cross%20Loop' })
+(loop_728_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_728_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_728_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_728_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Barrier%20Operator', mechanism: 'it%20signals%20%22Do%20Not%20Talk%20To%20Me%22' })
+(loop_728_result_branch: BehaviorEmit { emission: 'result', text: 'successful%20avoidance%20of%20unwanted%20small%20talk' })
+(loop_728_sink: BehaviorSink)
+(loop_728_start: BehaviorStart { loopId: 728, loopName: 'The%20Arm%20Cross%20Loop', given: 'Walking%20with%20arms%20crossed', when: 'moving%20through%20a%20hallway', then: 'it%20signals%20%22Do%20Not%20Talk%20To%20Me%22%20(The%20Barrier%20Operator)', result: 'successful%20avoidance%20of%20unwanted%20small%20talk', operatorName: 'The%20Barrier%20Operator', operatorMechanism: 'it%20signals%20%22Do%20Not%20Talk%20To%20Me%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_728_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'REPULSION' })
+(loop_728_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Do%20Not%20Talk%20To%20Me%22%20(The%20Barrier%20Operator)' })
+(loop_728_verdict: BehaviorVerdict { loopId: 728, loopName: 'The%20Arm%20Cross%20Loop', then: 'it%20signals%20%22Do%20Not%20Talk%20To%20Me%22%20(The%20Barrier%20Operator)', result: 'successful%20avoidance%20of%20unwanted%20small%20talk', operatorName: 'The%20Barrier%20Operator', operatorMechanism: 'it%20signals%20%22Do%20Not%20Talk%20To%20Me%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'REPULSION' })
+(loop_728_when_gate: BehaviorAssess { stage: 'when', text: 'moving%20through%20a%20hallway' })
+
+// Topology
+(loop_728_start)-[:PROCESS]->(loop_728_given_gate)
+(loop_728_given_gate)-[:PROCESS { case: "ok" }]->(loop_728_when_gate)
+(loop_728_given_gate)-[:PROCESS { case: "err" }]->(loop_728_inactive)
+(loop_728_when_gate)-[:PROCESS { case: "ok" }]->(loop_728_context)
+(loop_728_when_gate)-[:PROCESS { case: "err" }]->(loop_728_inactive)
+(loop_728_context)-[:FORK { strategy: "behavior-branches" }]->(loop_728_context_branch | loop_728_then_branch | loop_728_operator_branch | loop_728_result_branch | loop_728_taxonomy_branch | loop_728_intervention_recognize | loop_728_intervention_interdict | loop_728_intervention_minimize)
+(loop_728_context_branch | loop_728_then_branch | loop_728_operator_branch | loop_728_result_branch | loop_728_taxonomy_branch | loop_728_intervention_recognize | loop_728_intervention_interdict | loop_728_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_728_verdict)
+(loop_728_inactive)-[:PROCESS]->(loop_728_sink)
+(loop_728_verdict)-[:PROCESS]->(loop_728_sink)
+(loop_728_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_728_then_branch)
+(loop_728_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_728_then_branch)
+(loop_728_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_728_then_branch)

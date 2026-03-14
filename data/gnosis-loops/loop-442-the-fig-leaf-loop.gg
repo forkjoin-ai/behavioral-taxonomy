@@ -1,0 +1,33 @@
+// behavioral-loop-442.gg
+// Executable Gnosis projection for The Fig Leaf Loop.
+
+// Nodes
+(loop_442_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_442_context_branch: BehaviorEmit { emission: 'context' })
+(loop_442_given_gate: BehaviorAssess { stage: 'given', text: 'Hands%20clasped%20in%20front%20of%20the%20groin' })
+(loop_442_inactive: BehaviorTerminal { loopId: 442, loopName: 'The%20Fig%20Leaf%20Loop' })
+(loop_442_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_442_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_442_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_442_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Beta%20Operator', mechanism: 'it%20signals%20%22Protection%22%20and%20%22Submissiveness%22' })
+(loop_442_result_branch: BehaviorEmit { emission: 'result', text: "the%20audience%20sensing%20fear%20and%20attacking%20the%20speaker's%20points" })
+(loop_442_sink: BehaviorSink)
+(loop_442_start: BehaviorStart { loopId: 442, loopName: 'The%20Fig%20Leaf%20Loop', given: 'Hands%20clasped%20in%20front%20of%20the%20groin', when: 'standing%20before%20a%20group', then: 'it%20signals%20%22Protection%22%20and%20%22Submissiveness%22%20(The%20Beta%20Operator)', result: "the%20audience%20sensing%20fear%20and%20attacking%20the%20speaker's%20points", operatorName: 'The%20Beta%20Operator', operatorMechanism: 'it%20signals%20%22Protection%22%20and%20%22Submissiveness%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_442_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_442_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Protection%22%20and%20%22Submissiveness%22%20(The%20Beta%20Operator)' })
+(loop_442_verdict: BehaviorVerdict { loopId: 442, loopName: 'The%20Fig%20Leaf%20Loop', then: 'it%20signals%20%22Protection%22%20and%20%22Submissiveness%22%20(The%20Beta%20Operator)', result: "the%20audience%20sensing%20fear%20and%20attacking%20the%20speaker's%20points", operatorName: 'The%20Beta%20Operator', operatorMechanism: 'it%20signals%20%22Protection%22%20and%20%22Submissiveness%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_442_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20before%20a%20group' })
+
+// Topology
+(loop_442_start)-[:PROCESS]->(loop_442_given_gate)
+(loop_442_given_gate)-[:PROCESS { case: "ok" }]->(loop_442_when_gate)
+(loop_442_given_gate)-[:PROCESS { case: "err" }]->(loop_442_inactive)
+(loop_442_when_gate)-[:PROCESS { case: "ok" }]->(loop_442_context)
+(loop_442_when_gate)-[:PROCESS { case: "err" }]->(loop_442_inactive)
+(loop_442_context)-[:FORK { strategy: "behavior-branches" }]->(loop_442_context_branch | loop_442_then_branch | loop_442_operator_branch | loop_442_result_branch | loop_442_taxonomy_branch | loop_442_intervention_recognize | loop_442_intervention_interdict | loop_442_intervention_minimize)
+(loop_442_context_branch | loop_442_then_branch | loop_442_operator_branch | loop_442_result_branch | loop_442_taxonomy_branch | loop_442_intervention_recognize | loop_442_intervention_interdict | loop_442_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_442_verdict)
+(loop_442_inactive)-[:PROCESS]->(loop_442_sink)
+(loop_442_verdict)-[:PROCESS]->(loop_442_sink)
+(loop_442_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_442_then_branch)
+(loop_442_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_442_then_branch)
+(loop_442_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_442_then_branch)

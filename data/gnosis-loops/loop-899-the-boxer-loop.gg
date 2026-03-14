@@ -1,0 +1,31 @@
+// behavioral-loop-899.gg
+// Executable Gnosis projection for The Boxer Loop.
+
+// Nodes
+(loop_899_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_899_context_branch: BehaviorEmit { emission: 'context' })
+(loop_899_given_gate: BehaviorAssess { stage: 'given', text: 'High%20Facial%20Width-to-Height%20Ratio%20(wide%20midface)' })
+(loop_899_inactive: BehaviorTerminal { loopId: 899, loopName: 'The%20Boxer%20Loop' })
+(loop_899_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_899_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_899_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fighter%20Operator', mechanism: 'it%20signals%20%22Aggression%2C%22%20%22Testosterone%2C%22%20and%20%22Dominance%22' })
+(loop_899_result_branch: BehaviorEmit { emission: 'result', text: 'people%20hesitating%20to%20challenge%20the%20individual%20but%20also%20assuming%20they%20are%20less%20trustworthy' })
+(loop_899_sink: BehaviorSink)
+(loop_899_start: BehaviorStart { loopId: 899, loopName: 'The%20Boxer%20Loop', given: 'High%20Facial%20Width-to-Height%20Ratio%20(wide%20midface)', when: 'neutral', then: 'it%20signals%20%22Aggression%2C%22%20%22Testosterone%2C%22%20and%20%22Dominance%22%20(The%20Fighter%20Operator)', result: 'people%20hesitating%20to%20challenge%20the%20individual%20but%20also%20assuming%20they%20are%20less%20trustworthy', operatorName: 'The%20Fighter%20Operator', operatorMechanism: 'it%20signals%20%22Aggression%2C%22%20%22Testosterone%2C%22%20and%20%22Dominance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_899_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_899_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Aggression%2C%22%20%22Testosterone%2C%22%20and%20%22Dominance%22%20(The%20Fighter%20Operator)' })
+(loop_899_verdict: BehaviorVerdict { loopId: 899, loopName: 'The%20Boxer%20Loop', then: 'it%20signals%20%22Aggression%2C%22%20%22Testosterone%2C%22%20and%20%22Dominance%22%20(The%20Fighter%20Operator)', result: 'people%20hesitating%20to%20challenge%20the%20individual%20but%20also%20assuming%20they%20are%20less%20trustworthy', operatorName: 'The%20Fighter%20Operator', operatorMechanism: 'it%20signals%20%22Aggression%2C%22%20%22Testosterone%2C%22%20and%20%22Dominance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_899_when_gate: BehaviorAssess { stage: 'when', text: 'neutral' })
+
+// Topology
+(loop_899_start)-[:PROCESS]->(loop_899_given_gate)
+(loop_899_given_gate)-[:PROCESS { case: "ok" }]->(loop_899_when_gate)
+(loop_899_given_gate)-[:PROCESS { case: "err" }]->(loop_899_inactive)
+(loop_899_when_gate)-[:PROCESS { case: "ok" }]->(loop_899_context)
+(loop_899_when_gate)-[:PROCESS { case: "err" }]->(loop_899_inactive)
+(loop_899_context)-[:FORK { strategy: "behavior-branches" }]->(loop_899_context_branch | loop_899_then_branch | loop_899_operator_branch | loop_899_result_branch | loop_899_taxonomy_branch | loop_899_intervention_recognize | loop_899_intervention_leverage)
+(loop_899_context_branch | loop_899_then_branch | loop_899_operator_branch | loop_899_result_branch | loop_899_taxonomy_branch | loop_899_intervention_recognize | loop_899_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_899_verdict)
+(loop_899_inactive)-[:PROCESS]->(loop_899_sink)
+(loop_899_verdict)-[:PROCESS]->(loop_899_sink)
+(loop_899_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_899_then_branch)
+(loop_899_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_899_result_branch)

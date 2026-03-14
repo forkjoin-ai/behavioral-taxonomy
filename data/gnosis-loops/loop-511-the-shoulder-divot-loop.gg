@@ -1,0 +1,33 @@
+// behavioral-loop-511.gg
+// Executable Gnosis projection for The Shoulder Divot Loop.
+
+// Nodes
+(loop_511_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_511_context_branch: BehaviorEmit { emission: 'context' })
+(loop_511_given_gate: BehaviorAssess { stage: 'given', text: 'Pointy%20bumps%20on%20shoulders%20from%20cheap%20hangers' })
+(loop_511_inactive: BehaviorTerminal { loopId: 511, loopName: 'The%20Shoulder%20Divot%20Loop' })
+(loop_511_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_511_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_511_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_511_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Bachelor%20Operator', mechanism: 'the%20silhouette%20looks%20%22Deformed%22' })
+(loop_511_result_branch: BehaviorEmit { emission: 'result', text: "signals%20of%20%22Mom%20didn't%20teach%20you%20laundry.%22" })
+(loop_511_sink: BehaviorSink)
+(loop_511_start: BehaviorStart { loopId: 511, loopName: 'The%20Shoulder%20Divot%20Loop', given: 'Pointy%20bumps%20on%20shoulders%20from%20cheap%20hangers', when: 'wearing%20a%20knit%20top', then: 'the%20silhouette%20looks%20%22Deformed%22%20(The%20Bachelor%20Operator)', result: "signals%20of%20%22Mom%20didn't%20teach%20you%20laundry.%22", operatorName: 'The%20Bachelor%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Deformed%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_511_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_511_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20looks%20%22Deformed%22%20(The%20Bachelor%20Operator)' })
+(loop_511_verdict: BehaviorVerdict { loopId: 511, loopName: 'The%20Shoulder%20Divot%20Loop', then: 'the%20silhouette%20looks%20%22Deformed%22%20(The%20Bachelor%20Operator)', result: "signals%20of%20%22Mom%20didn't%20teach%20you%20laundry.%22", operatorName: 'The%20Bachelor%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Deformed%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_511_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20a%20knit%20top' })
+
+// Topology
+(loop_511_start)-[:PROCESS]->(loop_511_given_gate)
+(loop_511_given_gate)-[:PROCESS { case: "ok" }]->(loop_511_when_gate)
+(loop_511_given_gate)-[:PROCESS { case: "err" }]->(loop_511_inactive)
+(loop_511_when_gate)-[:PROCESS { case: "ok" }]->(loop_511_context)
+(loop_511_when_gate)-[:PROCESS { case: "err" }]->(loop_511_inactive)
+(loop_511_context)-[:FORK { strategy: "behavior-branches" }]->(loop_511_context_branch | loop_511_then_branch | loop_511_operator_branch | loop_511_result_branch | loop_511_taxonomy_branch | loop_511_intervention_recognize | loop_511_intervention_interdict | loop_511_intervention_minimize)
+(loop_511_context_branch | loop_511_then_branch | loop_511_operator_branch | loop_511_result_branch | loop_511_taxonomy_branch | loop_511_intervention_recognize | loop_511_intervention_interdict | loop_511_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_511_verdict)
+(loop_511_inactive)-[:PROCESS]->(loop_511_sink)
+(loop_511_verdict)-[:PROCESS]->(loop_511_sink)
+(loop_511_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_511_then_branch)
+(loop_511_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_511_then_branch)
+(loop_511_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_511_then_branch)

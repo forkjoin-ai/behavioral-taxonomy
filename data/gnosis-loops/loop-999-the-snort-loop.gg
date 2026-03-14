@@ -1,0 +1,33 @@
+// behavioral-loop-999.gg
+// Executable Gnosis projection for The Snort Loop.
+
+// Nodes
+(loop_999_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_999_context_branch: BehaviorEmit { emission: 'context' })
+(loop_999_given_gate: BehaviorAssess { stage: 'given', text: 'Palatal%20vibration%20during%20inhalation%20laughter' })
+(loop_999_inactive: BehaviorTerminal { loopId: 999, loopName: 'The%20Snort%20Loop' })
+(loop_999_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_999_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_999_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_999_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Barnyard%20Operator', mechanism: 'a%20loud%20snort%20escapes' })
+(loop_999_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20covering%20their%20face%20in%20shame%2C%20often%20endearing%20them%20to%20the%20group%20(**The%20Vulnerability%20Spike**)' })
+(loop_999_sink: BehaviorSink)
+(loop_999_start: BehaviorStart { loopId: 999, loopName: 'The%20Snort%20Loop', given: 'Palatal%20vibration%20during%20inhalation%20laughter', when: 'amused', then: 'a%20loud%20snort%20escapes%20(The%20Barnyard%20Operator)', result: 'the%20individual%20covering%20their%20face%20in%20shame%2C%20often%20endearing%20them%20to%20the%20group%20(**The%20Vulnerability%20Spike**)', operatorName: 'The%20Barnyard%20Operator', operatorMechanism: 'a%20loud%20snort%20escapes', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_999_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_999_then_branch: BehaviorEmit { emission: 'then', text: 'a%20loud%20snort%20escapes%20(The%20Barnyard%20Operator)' })
+(loop_999_verdict: BehaviorVerdict { loopId: 999, loopName: 'The%20Snort%20Loop', then: 'a%20loud%20snort%20escapes%20(The%20Barnyard%20Operator)', result: 'the%20individual%20covering%20their%20face%20in%20shame%2C%20often%20endearing%20them%20to%20the%20group%20(**The%20Vulnerability%20Spike**)', operatorName: 'The%20Barnyard%20Operator', operatorMechanism: 'a%20loud%20snort%20escapes', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_999_when_gate: BehaviorAssess { stage: 'when', text: 'amused' })
+
+// Topology
+(loop_999_start)-[:PROCESS]->(loop_999_given_gate)
+(loop_999_given_gate)-[:PROCESS { case: "ok" }]->(loop_999_when_gate)
+(loop_999_given_gate)-[:PROCESS { case: "err" }]->(loop_999_inactive)
+(loop_999_when_gate)-[:PROCESS { case: "ok" }]->(loop_999_context)
+(loop_999_when_gate)-[:PROCESS { case: "err" }]->(loop_999_inactive)
+(loop_999_context)-[:FORK { strategy: "behavior-branches" }]->(loop_999_context_branch | loop_999_then_branch | loop_999_operator_branch | loop_999_result_branch | loop_999_taxonomy_branch | loop_999_intervention_recognize | loop_999_intervention_interdict | loop_999_intervention_minimize)
+(loop_999_context_branch | loop_999_then_branch | loop_999_operator_branch | loop_999_result_branch | loop_999_taxonomy_branch | loop_999_intervention_recognize | loop_999_intervention_interdict | loop_999_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_999_verdict)
+(loop_999_inactive)-[:PROCESS]->(loop_999_sink)
+(loop_999_verdict)-[:PROCESS]->(loop_999_sink)
+(loop_999_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_999_then_branch)
+(loop_999_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_999_then_branch)
+(loop_999_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_999_then_branch)

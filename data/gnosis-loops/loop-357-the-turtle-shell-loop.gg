@@ -1,0 +1,33 @@
+// behavioral-loop-357.gg
+// Executable Gnosis projection for The Turtle Shell Loop.
+
+// Nodes
+(loop_357_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_357_context_branch: BehaviorEmit { emission: 'context' })
+(loop_357_given_gate: BehaviorAssess { stage: 'given', text: 'Overdeveloped%20Trapezius%20muscles%20%2B%20short%20neck' })
+(loop_357_inactive: BehaviorTerminal { loopId: 357, loopName: 'The%20Turtle%20Shell%20Loop' })
+(loop_357_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_357_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_357_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_357_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Meathead%20Operator', mechanism: 'observers%20assume%20%22Steroid%20Use%22%20or%20%22Violence%22' })
+(loop_357_result_branch: BehaviorEmit { emission: 'result', text: 'people%20avoiding%20intellectual%20debate%20with%20the%20individual%2C%20assuming%20they%20will%20resort%20to%20force' })
+(loop_357_sink: BehaviorSink)
+(loop_357_start: BehaviorStart { loopId: 357, loopName: 'The%20Turtle%20Shell%20Loop', given: 'Overdeveloped%20Trapezius%20muscles%20%2B%20short%20neck', when: 'wearing%20a%20suit%20or%20t-shirt', then: 'observers%20assume%20%22Steroid%20Use%22%20or%20%22Violence%22%20(The%20Meathead%20Operator)', result: 'people%20avoiding%20intellectual%20debate%20with%20the%20individual%2C%20assuming%20they%20will%20resort%20to%20force', operatorName: 'The%20Meathead%20Operator', operatorMechanism: 'observers%20assume%20%22Steroid%20Use%22%20or%20%22Violence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_357_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_357_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Steroid%20Use%22%20or%20%22Violence%22%20(The%20Meathead%20Operator)' })
+(loop_357_verdict: BehaviorVerdict { loopId: 357, loopName: 'The%20Turtle%20Shell%20Loop', then: 'observers%20assume%20%22Steroid%20Use%22%20or%20%22Violence%22%20(The%20Meathead%20Operator)', result: 'people%20avoiding%20intellectual%20debate%20with%20the%20individual%2C%20assuming%20they%20will%20resort%20to%20force', operatorName: 'The%20Meathead%20Operator', operatorMechanism: 'observers%20assume%20%22Steroid%20Use%22%20or%20%22Violence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_357_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20a%20suit%20or%20t-shirt' })
+
+// Topology
+(loop_357_start)-[:PROCESS]->(loop_357_given_gate)
+(loop_357_given_gate)-[:PROCESS { case: "ok" }]->(loop_357_when_gate)
+(loop_357_given_gate)-[:PROCESS { case: "err" }]->(loop_357_inactive)
+(loop_357_when_gate)-[:PROCESS { case: "ok" }]->(loop_357_context)
+(loop_357_when_gate)-[:PROCESS { case: "err" }]->(loop_357_inactive)
+(loop_357_context)-[:FORK { strategy: "behavior-branches" }]->(loop_357_context_branch | loop_357_then_branch | loop_357_operator_branch | loop_357_result_branch | loop_357_taxonomy_branch | loop_357_intervention_recognize | loop_357_intervention_interdict | loop_357_intervention_minimize)
+(loop_357_context_branch | loop_357_then_branch | loop_357_operator_branch | loop_357_result_branch | loop_357_taxonomy_branch | loop_357_intervention_recognize | loop_357_intervention_interdict | loop_357_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_357_verdict)
+(loop_357_inactive)-[:PROCESS]->(loop_357_sink)
+(loop_357_verdict)-[:PROCESS]->(loop_357_sink)
+(loop_357_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_357_then_branch)
+(loop_357_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_357_then_branch)
+(loop_357_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_357_then_branch)

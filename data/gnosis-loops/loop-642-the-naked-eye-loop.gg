@@ -1,0 +1,33 @@
+// behavioral-loop-642.gg
+// Executable Gnosis projection for The Naked Eye Loop.
+
+// Nodes
+(loop_642_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_642_context_branch: BehaviorEmit { emission: 'context' })
+(loop_642_given_gate: BehaviorAssess { stage: 'given', text: 'Sparse%20or%20missing%20eyelashes' })
+(loop_642_inactive: BehaviorTerminal { loopId: 642, loopName: 'The%20Naked%20Eye%20Loop' })
+(loop_642_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_642_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_642_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_642_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Reptile%20Operator', mechanism: 'the%20gaze%20feels%20%22Stark%22%20or%20%22Piercing%22' })
+(loop_642_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20feeling%20exposed%20and%20uncomfortable' })
+(loop_642_sink: BehaviorSink)
+(loop_642_start: BehaviorStart { loopId: 642, loopName: 'The%20Naked%20Eye%20Loop', given: 'Sparse%20or%20missing%20eyelashes', when: 'making%20eye%20contact', then: 'the%20gaze%20feels%20%22Stark%22%20or%20%22Piercing%22%20(The%20Reptile%20Operator)', result: 'observers%20feeling%20exposed%20and%20uncomfortable', operatorName: 'The%20Reptile%20Operator', operatorMechanism: 'the%20gaze%20feels%20%22Stark%22%20or%20%22Piercing%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_642_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_642_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gaze%20feels%20%22Stark%22%20or%20%22Piercing%22%20(The%20Reptile%20Operator)' })
+(loop_642_verdict: BehaviorVerdict { loopId: 642, loopName: 'The%20Naked%20Eye%20Loop', then: 'the%20gaze%20feels%20%22Stark%22%20or%20%22Piercing%22%20(The%20Reptile%20Operator)', result: 'observers%20feeling%20exposed%20and%20uncomfortable', operatorName: 'The%20Reptile%20Operator', operatorMechanism: 'the%20gaze%20feels%20%22Stark%22%20or%20%22Piercing%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_642_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_642_start)-[:PROCESS]->(loop_642_given_gate)
+(loop_642_given_gate)-[:PROCESS { case: "ok" }]->(loop_642_when_gate)
+(loop_642_given_gate)-[:PROCESS { case: "err" }]->(loop_642_inactive)
+(loop_642_when_gate)-[:PROCESS { case: "ok" }]->(loop_642_context)
+(loop_642_when_gate)-[:PROCESS { case: "err" }]->(loop_642_inactive)
+(loop_642_context)-[:FORK { strategy: "behavior-branches" }]->(loop_642_context_branch | loop_642_then_branch | loop_642_operator_branch | loop_642_result_branch | loop_642_taxonomy_branch | loop_642_intervention_recognize | loop_642_intervention_interdict | loop_642_intervention_minimize)
+(loop_642_context_branch | loop_642_then_branch | loop_642_operator_branch | loop_642_result_branch | loop_642_taxonomy_branch | loop_642_intervention_recognize | loop_642_intervention_interdict | loop_642_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_642_verdict)
+(loop_642_inactive)-[:PROCESS]->(loop_642_sink)
+(loop_642_verdict)-[:PROCESS]->(loop_642_sink)
+(loop_642_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_642_then_branch)
+(loop_642_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_642_then_branch)
+(loop_642_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_642_then_branch)

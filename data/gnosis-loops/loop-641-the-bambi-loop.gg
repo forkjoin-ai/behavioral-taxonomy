@@ -1,0 +1,33 @@
+// behavioral-loop-641.gg
+// Executable Gnosis projection for The Bambi Loop.
+
+// Nodes
+(loop_641_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_641_context_branch: BehaviorEmit { emission: 'context' })
+(loop_641_given_gate: BehaviorAssess { stage: 'given', text: 'Exceptionally%20long%2C%20curled%20eyelashes%20(Male)' })
+(loop_641_inactive: BehaviorTerminal { loopId: 641, loopName: 'The%20Bambi%20Loop' })
+(loop_641_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_641_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_641_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_641_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Pretty%20Boy%20Operator', mechanism: 'it%20signals%20%22Softness%22%20or%20%22Beauty%22' })
+(loop_641_result_branch: BehaviorEmit { emission: 'result', text: 'difficulty%20being%20seen%20as%20%22Rugged%22%20or%20%22Dangerous%2C%22%20leading%20to%20typecasting%20as%20the%20romantic%20lead' })
+(loop_641_sink: BehaviorSink)
+(loop_641_start: BehaviorStart { loopId: 641, loopName: 'The%20Bambi%20Loop', given: 'Exceptionally%20long%2C%20curled%20eyelashes%20(Male)', when: 'blinking', then: 'it%20signals%20%22Softness%22%20or%20%22Beauty%22%20(The%20Pretty%20Boy%20Operator)', result: 'difficulty%20being%20seen%20as%20%22Rugged%22%20or%20%22Dangerous%2C%22%20leading%20to%20typecasting%20as%20the%20romantic%20lead', operatorName: 'The%20Pretty%20Boy%20Operator', operatorMechanism: 'it%20signals%20%22Softness%22%20or%20%22Beauty%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_641_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_641_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Softness%22%20or%20%22Beauty%22%20(The%20Pretty%20Boy%20Operator)' })
+(loop_641_verdict: BehaviorVerdict { loopId: 641, loopName: 'The%20Bambi%20Loop', then: 'it%20signals%20%22Softness%22%20or%20%22Beauty%22%20(The%20Pretty%20Boy%20Operator)', result: 'difficulty%20being%20seen%20as%20%22Rugged%22%20or%20%22Dangerous%2C%22%20leading%20to%20typecasting%20as%20the%20romantic%20lead', operatorName: 'The%20Pretty%20Boy%20Operator', operatorMechanism: 'it%20signals%20%22Softness%22%20or%20%22Beauty%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_641_when_gate: BehaviorAssess { stage: 'when', text: 'blinking' })
+
+// Topology
+(loop_641_start)-[:PROCESS]->(loop_641_given_gate)
+(loop_641_given_gate)-[:PROCESS { case: "ok" }]->(loop_641_when_gate)
+(loop_641_given_gate)-[:PROCESS { case: "err" }]->(loop_641_inactive)
+(loop_641_when_gate)-[:PROCESS { case: "ok" }]->(loop_641_context)
+(loop_641_when_gate)-[:PROCESS { case: "err" }]->(loop_641_inactive)
+(loop_641_context)-[:FORK { strategy: "behavior-branches" }]->(loop_641_context_branch | loop_641_then_branch | loop_641_operator_branch | loop_641_result_branch | loop_641_taxonomy_branch | loop_641_intervention_recognize | loop_641_intervention_interdict | loop_641_intervention_minimize)
+(loop_641_context_branch | loop_641_then_branch | loop_641_operator_branch | loop_641_result_branch | loop_641_taxonomy_branch | loop_641_intervention_recognize | loop_641_intervention_interdict | loop_641_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_641_verdict)
+(loop_641_inactive)-[:PROCESS]->(loop_641_sink)
+(loop_641_verdict)-[:PROCESS]->(loop_641_sink)
+(loop_641_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_641_then_branch)
+(loop_641_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_641_then_branch)
+(loop_641_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_641_then_branch)

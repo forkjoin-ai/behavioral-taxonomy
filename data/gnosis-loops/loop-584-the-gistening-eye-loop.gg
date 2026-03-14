@@ -1,0 +1,33 @@
+// behavioral-loop-584.gg
+// Executable Gnosis projection for The Gistening Eye Loop.
+
+// Nodes
+(loop_584_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_584_context_branch: BehaviorEmit { emission: 'context' })
+(loop_584_given_gate: BehaviorAssess { stage: 'given', text: 'High%20tear%20film%20production%20or%20blocked%20ducts' })
+(loop_584_inactive: BehaviorTerminal { loopId: 584, loopName: 'The%20Gistening%20Eye%20Loop' })
+(loop_584_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_584_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_584_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_584_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cry-Baby%20Operator', mechanism: 'eyes%20look%20%22Glassy%22%20or%20%22Emotional%22' })
+(loop_584_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20walking%20on%20eggshells%2C%20expecting%20an%20emotional%20breakdown' })
+(loop_584_sink: BehaviorSink)
+(loop_584_start: BehaviorStart { loopId: 584, loopName: 'The%20Gistening%20Eye%20Loop', given: 'High%20tear%20film%20production%20or%20blocked%20ducts', when: 'in%20a%20neutral%20conversation', then: 'eyes%20look%20%22Glassy%22%20or%20%22Emotional%22%20(The%20Cry-Baby%20Operator)', result: 'peers%20walking%20on%20eggshells%2C%20expecting%20an%20emotional%20breakdown', operatorName: 'The%20Cry-Baby%20Operator', operatorMechanism: 'eyes%20look%20%22Glassy%22%20or%20%22Emotional%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_584_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_584_then_branch: BehaviorEmit { emission: 'then', text: 'eyes%20look%20%22Glassy%22%20or%20%22Emotional%22%20(The%20Cry-Baby%20Operator)' })
+(loop_584_verdict: BehaviorVerdict { loopId: 584, loopName: 'The%20Gistening%20Eye%20Loop', then: 'eyes%20look%20%22Glassy%22%20or%20%22Emotional%22%20(The%20Cry-Baby%20Operator)', result: 'peers%20walking%20on%20eggshells%2C%20expecting%20an%20emotional%20breakdown', operatorName: 'The%20Cry-Baby%20Operator', operatorMechanism: 'eyes%20look%20%22Glassy%22%20or%20%22Emotional%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_584_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20neutral%20conversation' })
+
+// Topology
+(loop_584_start)-[:PROCESS]->(loop_584_given_gate)
+(loop_584_given_gate)-[:PROCESS { case: "ok" }]->(loop_584_when_gate)
+(loop_584_given_gate)-[:PROCESS { case: "err" }]->(loop_584_inactive)
+(loop_584_when_gate)-[:PROCESS { case: "ok" }]->(loop_584_context)
+(loop_584_when_gate)-[:PROCESS { case: "err" }]->(loop_584_inactive)
+(loop_584_context)-[:FORK { strategy: "behavior-branches" }]->(loop_584_context_branch | loop_584_then_branch | loop_584_operator_branch | loop_584_result_branch | loop_584_taxonomy_branch | loop_584_intervention_recognize | loop_584_intervention_interdict | loop_584_intervention_minimize)
+(loop_584_context_branch | loop_584_then_branch | loop_584_operator_branch | loop_584_result_branch | loop_584_taxonomy_branch | loop_584_intervention_recognize | loop_584_intervention_interdict | loop_584_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_584_verdict)
+(loop_584_inactive)-[:PROCESS]->(loop_584_sink)
+(loop_584_verdict)-[:PROCESS]->(loop_584_sink)
+(loop_584_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_584_then_branch)
+(loop_584_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_584_then_branch)
+(loop_584_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_584_then_branch)

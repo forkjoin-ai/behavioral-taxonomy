@@ -1,0 +1,33 @@
+// behavioral-loop-505.gg
+// Executable Gnosis projection for The Skunk Loop.
+
+// Nodes
+(loop_505_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_505_context_branch: BehaviorEmit { emission: 'context' })
+(loop_505_given_gate: BehaviorAssess { stage: 'given', text: 'Patch%20of%20white%20hair%20in%20dark%20field%20(Genetic)' })
+(loop_505_inactive: BehaviorTerminal { loopId: 505, loopName: 'The%20Skunk%20Loop' })
+(loop_505_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20competence%20in%20areas%20that%20compensate' })
+(loop_505_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_505_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_505_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cruella%20Operator', mechanism: 'it%20signals%20%22Villain%2C%22%20%22Hero%2C%22%20or%20%22Eccentric%22' })
+(loop_505_result_branch: BehaviorEmit { emission: 'result', text: 'a%20distinct%20**Personal%20Brand**%20(highly%20memorable)' })
+(loop_505_sink: BehaviorSink)
+(loop_505_start: BehaviorStart { loopId: 505, loopName: 'The%20Skunk%20Loop', given: 'Patch%20of%20white%20hair%20in%20dark%20field%20(Genetic)', when: 'styled%20prominently', then: 'it%20signals%20%22Villain%2C%22%20%22Hero%2C%22%20or%20%22Eccentric%22%20(The%20Cruella%20Operator)', result: 'a%20distinct%20**Personal%20Brand**%20(highly%20memorable)', operatorName: 'The%20Cruella%20Operator', operatorMechanism: 'it%20signals%20%22Villain%2C%22%20%22Hero%2C%22%20or%20%22Eccentric%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20competence%20in%20areas%20that%20compensate', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_505_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_505_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Villain%2C%22%20%22Hero%2C%22%20or%20%22Eccentric%22%20(The%20Cruella%20Operator)' })
+(loop_505_verdict: BehaviorVerdict { loopId: 505, loopName: 'The%20Skunk%20Loop', then: 'it%20signals%20%22Villain%2C%22%20%22Hero%2C%22%20or%20%22Eccentric%22%20(The%20Cruella%20Operator)', result: 'a%20distinct%20**Personal%20Brand**%20(highly%20memorable)', operatorName: 'The%20Cruella%20Operator', operatorMechanism: 'it%20signals%20%22Villain%2C%22%20%22Hero%2C%22%20or%20%22Eccentric%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_505_when_gate: BehaviorAssess { stage: 'when', text: 'styled%20prominently' })
+
+// Topology
+(loop_505_start)-[:PROCESS]->(loop_505_given_gate)
+(loop_505_given_gate)-[:PROCESS { case: "ok" }]->(loop_505_when_gate)
+(loop_505_given_gate)-[:PROCESS { case: "err" }]->(loop_505_inactive)
+(loop_505_when_gate)-[:PROCESS { case: "ok" }]->(loop_505_context)
+(loop_505_when_gate)-[:PROCESS { case: "err" }]->(loop_505_inactive)
+(loop_505_context)-[:FORK { strategy: "behavior-branches" }]->(loop_505_context_branch | loop_505_then_branch | loop_505_operator_branch | loop_505_result_branch | loop_505_taxonomy_branch | loop_505_intervention_recognize | loop_505_intervention_interdict | loop_505_intervention_minimize)
+(loop_505_context_branch | loop_505_then_branch | loop_505_operator_branch | loop_505_result_branch | loop_505_taxonomy_branch | loop_505_intervention_recognize | loop_505_intervention_interdict | loop_505_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_505_verdict)
+(loop_505_inactive)-[:PROCESS]->(loop_505_sink)
+(loop_505_verdict)-[:PROCESS]->(loop_505_sink)
+(loop_505_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_505_then_branch)
+(loop_505_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_505_then_branch)
+(loop_505_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_505_then_branch)

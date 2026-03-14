@@ -1,0 +1,33 @@
+// behavioral-loop-686.gg
+// Executable Gnosis projection for The Pen Clicker Loop.
+
+// Nodes
+(loop_686_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_686_context_branch: BehaviorEmit { emission: 'context' })
+(loop_686_given_gate: BehaviorAssess { stage: 'given', text: 'Repetitive%20clicking%20of%20a%20ballpoint%20pen' })
+(loop_686_inactive: BehaviorTerminal { loopId: 686, loopName: 'The%20Pen%20Clicker%20Loop' })
+(loop_686_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_686_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_686_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_686_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Annoyance%20Operator', mechanism: 'the%20sound%20dominates%20the%20room' })
+(loop_686_result_branch: BehaviorEmit { emission: 'result', text: 'the%20pen%20being%20confiscated%20or%20the%20individual%20being%20shushed' })
+(loop_686_sink: BehaviorSink)
+(loop_686_start: BehaviorStart { loopId: 686, loopName: 'The%20Pen%20Clicker%20Loop', given: 'Repetitive%20clicking%20of%20a%20ballpoint%20pen', when: 'thinking', then: 'the%20sound%20dominates%20the%20room%20(The%20Annoyance%20Operator)', result: 'the%20pen%20being%20confiscated%20or%20the%20individual%20being%20shushed', operatorName: 'The%20Annoyance%20Operator', operatorMechanism: 'the%20sound%20dominates%20the%20room', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_686_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_686_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20dominates%20the%20room%20(The%20Annoyance%20Operator)' })
+(loop_686_verdict: BehaviorVerdict { loopId: 686, loopName: 'The%20Pen%20Clicker%20Loop', then: 'the%20sound%20dominates%20the%20room%20(The%20Annoyance%20Operator)', result: 'the%20pen%20being%20confiscated%20or%20the%20individual%20being%20shushed', operatorName: 'The%20Annoyance%20Operator', operatorMechanism: 'the%20sound%20dominates%20the%20room', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_686_when_gate: BehaviorAssess { stage: 'when', text: 'thinking' })
+
+// Topology
+(loop_686_start)-[:PROCESS]->(loop_686_given_gate)
+(loop_686_given_gate)-[:PROCESS { case: "ok" }]->(loop_686_when_gate)
+(loop_686_given_gate)-[:PROCESS { case: "err" }]->(loop_686_inactive)
+(loop_686_when_gate)-[:PROCESS { case: "ok" }]->(loop_686_context)
+(loop_686_when_gate)-[:PROCESS { case: "err" }]->(loop_686_inactive)
+(loop_686_context)-[:FORK { strategy: "behavior-branches" }]->(loop_686_context_branch | loop_686_then_branch | loop_686_operator_branch | loop_686_result_branch | loop_686_taxonomy_branch | loop_686_intervention_recognize | loop_686_intervention_interdict | loop_686_intervention_minimize)
+(loop_686_context_branch | loop_686_then_branch | loop_686_operator_branch | loop_686_result_branch | loop_686_taxonomy_branch | loop_686_intervention_recognize | loop_686_intervention_interdict | loop_686_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_686_verdict)
+(loop_686_inactive)-[:PROCESS]->(loop_686_sink)
+(loop_686_verdict)-[:PROCESS]->(loop_686_sink)
+(loop_686_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_686_then_branch)
+(loop_686_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_686_then_branch)
+(loop_686_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_686_then_branch)

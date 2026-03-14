@@ -1,0 +1,33 @@
+// behavioral-loop-928.gg
+// Executable Gnosis projection for The Roots Loop.
+
+// Nodes
+(loop_928_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_928_context_branch: BehaviorEmit { emission: 'context' })
+(loop_928_given_gate: BehaviorAssess { stage: 'given', text: 'Distinct%20line%20of%20demarcation%20between%20dye%20and%20growth' })
+(loop_928_inactive: BehaviorTerminal { loopId: 928, loopName: 'The%20Roots%20Loop' })
+(loop_928_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_928_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_928_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_928_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Maintenance%20Operator', mechanism: 'it%20signals%20%22Time%20Poor%22%20or%20%22Cash%20Poor%22' })
+(loop_928_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20the%20%22Natural%22%20illusion' })
+(loop_928_sink: BehaviorSink)
+(loop_928_start: BehaviorStart { loopId: 928, loopName: 'The%20Roots%20Loop', given: 'Distinct%20line%20of%20demarcation%20between%20dye%20and%20growth', when: 'viewed%20from%20above', then: 'it%20signals%20%22Time%20Poor%22%20or%20%22Cash%20Poor%22%20(The%20Maintenance%20Operator)', result: 'loss%20of%20the%20%22Natural%22%20illusion', operatorName: 'The%20Maintenance%20Operator', operatorMechanism: 'it%20signals%20%22Time%20Poor%22%20or%20%22Cash%20Poor%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_928_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_928_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Time%20Poor%22%20or%20%22Cash%20Poor%22%20(The%20Maintenance%20Operator)' })
+(loop_928_verdict: BehaviorVerdict { loopId: 928, loopName: 'The%20Roots%20Loop', then: 'it%20signals%20%22Time%20Poor%22%20or%20%22Cash%20Poor%22%20(The%20Maintenance%20Operator)', result: 'loss%20of%20the%20%22Natural%22%20illusion', operatorName: 'The%20Maintenance%20Operator', operatorMechanism: 'it%20signals%20%22Time%20Poor%22%20or%20%22Cash%20Poor%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_928_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20from%20above' })
+
+// Topology
+(loop_928_start)-[:PROCESS]->(loop_928_given_gate)
+(loop_928_given_gate)-[:PROCESS { case: "ok" }]->(loop_928_when_gate)
+(loop_928_given_gate)-[:PROCESS { case: "err" }]->(loop_928_inactive)
+(loop_928_when_gate)-[:PROCESS { case: "ok" }]->(loop_928_context)
+(loop_928_when_gate)-[:PROCESS { case: "err" }]->(loop_928_inactive)
+(loop_928_context)-[:FORK { strategy: "behavior-branches" }]->(loop_928_context_branch | loop_928_then_branch | loop_928_operator_branch | loop_928_result_branch | loop_928_taxonomy_branch | loop_928_intervention_recognize | loop_928_intervention_interdict | loop_928_intervention_minimize)
+(loop_928_context_branch | loop_928_then_branch | loop_928_operator_branch | loop_928_result_branch | loop_928_taxonomy_branch | loop_928_intervention_recognize | loop_928_intervention_interdict | loop_928_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_928_verdict)
+(loop_928_inactive)-[:PROCESS]->(loop_928_sink)
+(loop_928_verdict)-[:PROCESS]->(loop_928_sink)
+(loop_928_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_928_then_branch)
+(loop_928_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_928_then_branch)
+(loop_928_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_928_then_branch)

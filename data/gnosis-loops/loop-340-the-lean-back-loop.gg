@@ -1,0 +1,33 @@
+// behavioral-loop-340.gg
+// Executable Gnosis projection for The Lean Back Loop.
+
+// Nodes
+(loop_340_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_340_context_branch: BehaviorEmit { emission: 'context' })
+(loop_340_given_gate: BehaviorAssess { stage: 'given', text: 'Tilting%20chair%20back%20or%20slouching%20away' })
+(loop_340_inactive: BehaviorTerminal { loopId: 340, loopName: 'The%20Lean%20Back%20Loop' })
+(loop_340_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_340_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_340_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_340_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Power%20Move%20Operator', mechanism: 'it%20signals%20%22Disengagement%22%20or%20%22Arrogance%22' })
+(loop_340_result_branch: BehaviorEmit { emission: 'result', text: 'either%20respect%20(if%20boss)%20or%20firing%20(if%20employee)' })
+(loop_340_sink: BehaviorSink)
+(loop_340_start: BehaviorStart { loopId: 340, loopName: 'The%20Lean%20Back%20Loop', given: 'Tilting%20chair%20back%20or%20slouching%20away', when: 'in%20a%20meeting', then: 'it%20signals%20%22Disengagement%22%20or%20%22Arrogance%22%20(The%20Power%20Move%20Operator)', result: 'either%20respect%20(if%20boss)%20or%20firing%20(if%20employee)', operatorName: 'The%20Power%20Move%20Operator', operatorMechanism: 'it%20signals%20%22Disengagement%22%20or%20%22Arrogance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_340_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_340_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Disengagement%22%20or%20%22Arrogance%22%20(The%20Power%20Move%20Operator)' })
+(loop_340_verdict: BehaviorVerdict { loopId: 340, loopName: 'The%20Lean%20Back%20Loop', then: 'it%20signals%20%22Disengagement%22%20or%20%22Arrogance%22%20(The%20Power%20Move%20Operator)', result: 'either%20respect%20(if%20boss)%20or%20firing%20(if%20employee)', operatorName: 'The%20Power%20Move%20Operator', operatorMechanism: 'it%20signals%20%22Disengagement%22%20or%20%22Arrogance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_340_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20meeting' })
+
+// Topology
+(loop_340_start)-[:PROCESS]->(loop_340_given_gate)
+(loop_340_given_gate)-[:PROCESS { case: "ok" }]->(loop_340_when_gate)
+(loop_340_given_gate)-[:PROCESS { case: "err" }]->(loop_340_inactive)
+(loop_340_when_gate)-[:PROCESS { case: "ok" }]->(loop_340_context)
+(loop_340_when_gate)-[:PROCESS { case: "err" }]->(loop_340_inactive)
+(loop_340_context)-[:FORK { strategy: "behavior-branches" }]->(loop_340_context_branch | loop_340_then_branch | loop_340_operator_branch | loop_340_result_branch | loop_340_taxonomy_branch | loop_340_intervention_recognize | loop_340_intervention_interdict | loop_340_intervention_minimize)
+(loop_340_context_branch | loop_340_then_branch | loop_340_operator_branch | loop_340_result_branch | loop_340_taxonomy_branch | loop_340_intervention_recognize | loop_340_intervention_interdict | loop_340_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_340_verdict)
+(loop_340_inactive)-[:PROCESS]->(loop_340_sink)
+(loop_340_verdict)-[:PROCESS]->(loop_340_sink)
+(loop_340_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_340_then_branch)
+(loop_340_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_340_then_branch)
+(loop_340_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_340_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-450.gg
+// Executable Gnosis projection for The Duck Butt Loop.
+
+// Nodes
+(loop_450_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_450_context_branch: BehaviorEmit { emission: 'context' })
+(loop_450_given_gate: BehaviorAssess { stage: 'given', text: 'Tight%20hip%20flexors%20causing%20lumbar%20arching' })
+(loop_450_inactive: BehaviorTerminal { loopId: 450, loopName: 'The%20Duck%20Butt%20Loop' })
+(loop_450_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_450_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_450_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_450_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Posturing%20Operator', mechanism: 'the%20abdomen%20protrudes%20and%20buttocks%20stick%20out' })
+(loop_450_result_branch: BehaviorEmit { emission: 'result', text: 'back%20pain%20and%20observers%20assuming%20the%20individual%20is%20%22trying%20too%20hard%22%20to%20be%20sexy%20(female)%20or%20has%20a%20gut%20(male)' })
+(loop_450_sink: BehaviorSink)
+(loop_450_start: BehaviorStart { loopId: 450, loopName: 'The%20Duck%20Butt%20Loop', given: 'Tight%20hip%20flexors%20causing%20lumbar%20arching', when: 'standing%20normally', then: 'the%20abdomen%20protrudes%20and%20buttocks%20stick%20out%20(The%20Posturing%20Operator)', result: 'back%20pain%20and%20observers%20assuming%20the%20individual%20is%20%22trying%20too%20hard%22%20to%20be%20sexy%20(female)%20or%20has%20a%20gut%20(male)', operatorName: 'The%20Posturing%20Operator', operatorMechanism: 'the%20abdomen%20protrudes%20and%20buttocks%20stick%20out', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_450_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_450_then_branch: BehaviorEmit { emission: 'then', text: 'the%20abdomen%20protrudes%20and%20buttocks%20stick%20out%20(The%20Posturing%20Operator)' })
+(loop_450_verdict: BehaviorVerdict { loopId: 450, loopName: 'The%20Duck%20Butt%20Loop', then: 'the%20abdomen%20protrudes%20and%20buttocks%20stick%20out%20(The%20Posturing%20Operator)', result: 'back%20pain%20and%20observers%20assuming%20the%20individual%20is%20%22trying%20too%20hard%22%20to%20be%20sexy%20(female)%20or%20has%20a%20gut%20(male)', operatorName: 'The%20Posturing%20Operator', operatorMechanism: 'the%20abdomen%20protrudes%20and%20buttocks%20stick%20out', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_450_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20normally' })
+
+// Topology
+(loop_450_start)-[:PROCESS]->(loop_450_given_gate)
+(loop_450_given_gate)-[:PROCESS { case: "ok" }]->(loop_450_when_gate)
+(loop_450_given_gate)-[:PROCESS { case: "err" }]->(loop_450_inactive)
+(loop_450_when_gate)-[:PROCESS { case: "ok" }]->(loop_450_context)
+(loop_450_when_gate)-[:PROCESS { case: "err" }]->(loop_450_inactive)
+(loop_450_context)-[:FORK { strategy: "behavior-branches" }]->(loop_450_context_branch | loop_450_then_branch | loop_450_operator_branch | loop_450_result_branch | loop_450_taxonomy_branch | loop_450_intervention_recognize | loop_450_intervention_interdict | loop_450_intervention_minimize)
+(loop_450_context_branch | loop_450_then_branch | loop_450_operator_branch | loop_450_result_branch | loop_450_taxonomy_branch | loop_450_intervention_recognize | loop_450_intervention_interdict | loop_450_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_450_verdict)
+(loop_450_inactive)-[:PROCESS]->(loop_450_sink)
+(loop_450_verdict)-[:PROCESS]->(loop_450_sink)
+(loop_450_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_450_then_branch)
+(loop_450_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_450_then_branch)
+(loop_450_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_450_then_branch)

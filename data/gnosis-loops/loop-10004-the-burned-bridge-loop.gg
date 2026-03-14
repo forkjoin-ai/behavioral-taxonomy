@@ -1,0 +1,33 @@
+// behavioral-loop-10004.gg
+// Executable Gnosis projection for The Burned Bridge Loop.
+
+// Nodes
+(loop_10004_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_10004_context_branch: BehaviorEmit { emission: 'context' })
+(loop_10004_given_gate: BehaviorAssess { stage: 'given', text: 'A%20collaborative%20environment' })
+(loop_10004_inactive: BehaviorTerminal { loopId: 10004, loopName: 'The%20Burned%20Bridge%20Loop' })
+(loop_10004_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_10004_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_10004_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_10004_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_10004_result_branch: BehaviorEmit { emission: 'result', text: 'Short-term%20gain%20maximization%3B%20Long-term%20isolation' })
+(loop_10004_sink: BehaviorSink)
+(loop_10004_start: BehaviorStart { loopId: 10004, loopName: 'The%20Burned%20Bridge%20Loop', given: 'A%20collaborative%20environment', when: 'Subject%20extracts%20maximum%20value%20from%20a%20partner%2Femployer', then: 'Subject%20abruptly%20terminates%20relationship%2C%20often%20inflicting%20damage%20to%20prevent%20pursuit', result: 'Short-term%20gain%20maximization%3B%20Long-term%20isolation', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_10004_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_10004_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20abruptly%20terminates%20relationship%2C%20often%20inflicting%20damage%20to%20prevent%20pursuit' })
+(loop_10004_verdict: BehaviorVerdict { loopId: 10004, loopName: 'The%20Burned%20Bridge%20Loop', then: 'Subject%20abruptly%20terminates%20relationship%2C%20often%20inflicting%20damage%20to%20prevent%20pursuit', result: 'Short-term%20gain%20maximization%3B%20Long-term%20isolation', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_10004_when_gate: BehaviorAssess { stage: 'when', text: 'Subject%20extracts%20maximum%20value%20from%20a%20partner%2Femployer' })
+
+// Topology
+(loop_10004_start)-[:PROCESS]->(loop_10004_given_gate)
+(loop_10004_given_gate)-[:PROCESS { case: "ok" }]->(loop_10004_when_gate)
+(loop_10004_given_gate)-[:PROCESS { case: "err" }]->(loop_10004_inactive)
+(loop_10004_when_gate)-[:PROCESS { case: "ok" }]->(loop_10004_context)
+(loop_10004_when_gate)-[:PROCESS { case: "err" }]->(loop_10004_inactive)
+(loop_10004_context)-[:FORK { strategy: "behavior-branches" }]->(loop_10004_context_branch | loop_10004_then_branch | loop_10004_operator_branch | loop_10004_result_branch | loop_10004_taxonomy_branch | loop_10004_intervention_recognize | loop_10004_intervention_interdict | loop_10004_intervention_minimize)
+(loop_10004_context_branch | loop_10004_then_branch | loop_10004_operator_branch | loop_10004_result_branch | loop_10004_taxonomy_branch | loop_10004_intervention_recognize | loop_10004_intervention_interdict | loop_10004_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_10004_verdict)
+(loop_10004_inactive)-[:PROCESS]->(loop_10004_sink)
+(loop_10004_verdict)-[:PROCESS]->(loop_10004_sink)
+(loop_10004_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_10004_then_branch)
+(loop_10004_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_10004_then_branch)
+(loop_10004_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_10004_then_branch)

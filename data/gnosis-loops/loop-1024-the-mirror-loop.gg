@@ -1,0 +1,33 @@
+// behavioral-loop-1024.gg
+// Executable Gnosis projection for The Mirror Loop.
+
+// Nodes
+(loop_1024_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1024_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1024_given_gate: BehaviorAssess { stage: 'given', text: 'High-empathy%20or%20sociopathic%20adaptability' })
+(loop_1024_inactive: BehaviorTerminal { loopId: 1024, loopName: 'The%20Mirror%20Loop' })
+(loop_1024_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1024_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1024_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1024_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Reflective%20Operator', mechanism: 'perfectly%20reflecting%20their%20energy%2C%20posture%2C%20and%20tone' })
+(loop_1024_result_branch: BehaviorEmit { emission: 'result', text: 'the%20target%20falling%20in%20love%20with%20*themselves*%2C%20seeing%20the%20individual%20as%20the%20%22Perfect%20Match.%22' })
+(loop_1024_sink: BehaviorSink)
+(loop_1024_start: BehaviorStart { loopId: 1024, loopName: 'The%20Mirror%20Loop', given: 'High-empathy%20or%20sociopathic%20adaptability', when: 'interacting%20with%20*anyone*', then: 'perfectly%20reflecting%20their%20energy%2C%20posture%2C%20and%20tone%20(The%20Reflective%20Operator)', result: 'the%20target%20falling%20in%20love%20with%20*themselves*%2C%20seeing%20the%20individual%20as%20the%20%22Perfect%20Match.%22', operatorName: 'The%20Reflective%20Operator', operatorMechanism: 'perfectly%20reflecting%20their%20energy%2C%20posture%2C%20and%20tone', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1024_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1024_then_branch: BehaviorEmit { emission: 'then', text: 'perfectly%20reflecting%20their%20energy%2C%20posture%2C%20and%20tone%20(The%20Reflective%20Operator)' })
+(loop_1024_verdict: BehaviorVerdict { loopId: 1024, loopName: 'The%20Mirror%20Loop', then: 'perfectly%20reflecting%20their%20energy%2C%20posture%2C%20and%20tone%20(The%20Reflective%20Operator)', result: 'the%20target%20falling%20in%20love%20with%20*themselves*%2C%20seeing%20the%20individual%20as%20the%20%22Perfect%20Match.%22', operatorName: 'The%20Reflective%20Operator', operatorMechanism: 'perfectly%20reflecting%20their%20energy%2C%20posture%2C%20and%20tone', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1024_when_gate: BehaviorAssess { stage: 'when', text: 'interacting%20with%20*anyone*' })
+
+// Topology
+(loop_1024_start)-[:PROCESS]->(loop_1024_given_gate)
+(loop_1024_given_gate)-[:PROCESS { case: "ok" }]->(loop_1024_when_gate)
+(loop_1024_given_gate)-[:PROCESS { case: "err" }]->(loop_1024_inactive)
+(loop_1024_when_gate)-[:PROCESS { case: "ok" }]->(loop_1024_context)
+(loop_1024_when_gate)-[:PROCESS { case: "err" }]->(loop_1024_inactive)
+(loop_1024_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1024_context_branch | loop_1024_then_branch | loop_1024_operator_branch | loop_1024_result_branch | loop_1024_taxonomy_branch | loop_1024_intervention_recognize | loop_1024_intervention_interdict | loop_1024_intervention_minimize)
+(loop_1024_context_branch | loop_1024_then_branch | loop_1024_operator_branch | loop_1024_result_branch | loop_1024_taxonomy_branch | loop_1024_intervention_recognize | loop_1024_intervention_interdict | loop_1024_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1024_verdict)
+(loop_1024_inactive)-[:PROCESS]->(loop_1024_sink)
+(loop_1024_verdict)-[:PROCESS]->(loop_1024_sink)
+(loop_1024_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1024_then_branch)
+(loop_1024_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1024_then_branch)
+(loop_1024_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1024_then_branch)

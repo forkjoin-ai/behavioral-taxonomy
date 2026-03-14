@@ -1,0 +1,31 @@
+// behavioral-loop-924.gg
+// Executable Gnosis projection for The Grey Ghost Loop.
+
+// Nodes
+(loop_924_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_924_context_branch: BehaviorEmit { emission: 'context' })
+(loop_924_given_gate: BehaviorAssess { stage: 'given', text: 'Dull%2C%20greyish%20cast%20to%20skin%20(vasoconstriction)' })
+(loop_924_inactive: BehaviorTerminal { loopId: 924, loopName: 'The%20Grey%20Ghost%20Loop' })
+(loop_924_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Combine%20with%20approachability%20signals' })
+(loop_924_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_924_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Ash%20Operator', mechanism: 'the%20individual%20looks%20%22Lifeless%22' })
+(loop_924_result_branch: BehaviorEmit { emission: 'result', text: 'lower%20perceived%20attractiveness%20and%20vitality' })
+(loop_924_sink: BehaviorSink)
+(loop_924_start: BehaviorStart { loopId: 924, loopName: 'The%20Grey%20Ghost%20Loop', given: 'Dull%2C%20greyish%20cast%20to%20skin%20(vasoconstriction)', when: 'standing%20next%20to%20healthy%20peers', then: 'the%20individual%20looks%20%22Lifeless%22%20(The%20Ash%20Operator)', result: 'lower%20perceived%20attractiveness%20and%20vitality', operatorName: 'The%20Ash%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Lifeless%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Combine%20with%20approachability%20signals' })
+(loop_924_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_924_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20looks%20%22Lifeless%22%20(The%20Ash%20Operator)' })
+(loop_924_verdict: BehaviorVerdict { loopId: 924, loopName: 'The%20Grey%20Ghost%20Loop', then: 'the%20individual%20looks%20%22Lifeless%22%20(The%20Ash%20Operator)', result: 'lower%20perceived%20attractiveness%20and%20vitality', operatorName: 'The%20Ash%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Lifeless%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_924_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20next%20to%20healthy%20peers' })
+
+// Topology
+(loop_924_start)-[:PROCESS]->(loop_924_given_gate)
+(loop_924_given_gate)-[:PROCESS { case: "ok" }]->(loop_924_when_gate)
+(loop_924_given_gate)-[:PROCESS { case: "err" }]->(loop_924_inactive)
+(loop_924_when_gate)-[:PROCESS { case: "ok" }]->(loop_924_context)
+(loop_924_when_gate)-[:PROCESS { case: "err" }]->(loop_924_inactive)
+(loop_924_context)-[:FORK { strategy: "behavior-branches" }]->(loop_924_context_branch | loop_924_then_branch | loop_924_operator_branch | loop_924_result_branch | loop_924_taxonomy_branch | loop_924_intervention_recognize | loop_924_intervention_leverage)
+(loop_924_context_branch | loop_924_then_branch | loop_924_operator_branch | loop_924_result_branch | loop_924_taxonomy_branch | loop_924_intervention_recognize | loop_924_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_924_verdict)
+(loop_924_inactive)-[:PROCESS]->(loop_924_sink)
+(loop_924_verdict)-[:PROCESS]->(loop_924_sink)
+(loop_924_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_924_then_branch)
+(loop_924_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_924_result_branch)

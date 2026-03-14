@@ -1,0 +1,33 @@
+// behavioral-loop-413.gg
+// Executable Gnosis projection for The Button Pop Loop.
+
+// Nodes
+(loop_413_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_413_context_branch: BehaviorEmit { emission: 'context' })
+(loop_413_given_gate: BehaviorAssess { stage: 'given', text: 'Shirt%20too%20tight%20for%20belly' })
+(loop_413_inactive: BehaviorTerminal { loopId: 413, loopName: 'The%20Button%20Pop%20Loop' })
+(loop_413_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_413_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_413_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_413_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Burst%20Operator', mechanism: 'the%20buttons%20pull%20horizontally' })
+(loop_413_result_branch: BehaviorEmit { emission: 'result', text: 'signals%20of%20%22Weight%20Gain%22%20or%20%22Lack%20of%20Self-Awareness.%22' })
+(loop_413_sink: BehaviorSink)
+(loop_413_start: BehaviorStart { loopId: 413, loopName: 'The%20Button%20Pop%20Loop', given: 'Shirt%20too%20tight%20for%20belly', when: 'sitting%20down', then: 'the%20buttons%20pull%20horizontally%20(The%20Burst%20Operator)', result: 'signals%20of%20%22Weight%20Gain%22%20or%20%22Lack%20of%20Self-Awareness.%22', operatorName: 'The%20Burst%20Operator', operatorMechanism: 'the%20buttons%20pull%20horizontally', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_413_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_413_then_branch: BehaviorEmit { emission: 'then', text: 'the%20buttons%20pull%20horizontally%20(The%20Burst%20Operator)' })
+(loop_413_verdict: BehaviorVerdict { loopId: 413, loopName: 'The%20Button%20Pop%20Loop', then: 'the%20buttons%20pull%20horizontally%20(The%20Burst%20Operator)', result: 'signals%20of%20%22Weight%20Gain%22%20or%20%22Lack%20of%20Self-Awareness.%22', operatorName: 'The%20Burst%20Operator', operatorMechanism: 'the%20buttons%20pull%20horizontally', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_413_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20down' })
+
+// Topology
+(loop_413_start)-[:PROCESS]->(loop_413_given_gate)
+(loop_413_given_gate)-[:PROCESS { case: "ok" }]->(loop_413_when_gate)
+(loop_413_given_gate)-[:PROCESS { case: "err" }]->(loop_413_inactive)
+(loop_413_when_gate)-[:PROCESS { case: "ok" }]->(loop_413_context)
+(loop_413_when_gate)-[:PROCESS { case: "err" }]->(loop_413_inactive)
+(loop_413_context)-[:FORK { strategy: "behavior-branches" }]->(loop_413_context_branch | loop_413_then_branch | loop_413_operator_branch | loop_413_result_branch | loop_413_taxonomy_branch | loop_413_intervention_recognize | loop_413_intervention_interdict | loop_413_intervention_minimize)
+(loop_413_context_branch | loop_413_then_branch | loop_413_operator_branch | loop_413_result_branch | loop_413_taxonomy_branch | loop_413_intervention_recognize | loop_413_intervention_interdict | loop_413_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_413_verdict)
+(loop_413_inactive)-[:PROCESS]->(loop_413_sink)
+(loop_413_verdict)-[:PROCESS]->(loop_413_sink)
+(loop_413_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_413_then_branch)
+(loop_413_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_413_then_branch)
+(loop_413_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_413_then_branch)

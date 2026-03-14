@@ -1,0 +1,33 @@
+// behavioral-loop-696.gg
+// Executable Gnosis projection for The Pocket Hider Loop.
+
+// Nodes
+(loop_696_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_696_context_branch: BehaviorEmit { emission: 'context' })
+(loop_696_given_gate: BehaviorAssess { stage: 'given', text: 'Hands%20buried%20deep%20in%20pockets' })
+(loop_696_inactive: BehaviorTerminal { loopId: 696, loopName: 'The%20Pocket%20Hider%20Loop' })
+(loop_696_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_696_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_696_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_696_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Slouch%20Operator', mechanism: 'it%20signals%20%22Casualness%22%20or%20%22Hiding%20Something%22' })
+(loop_696_result_branch: BehaviorEmit { emission: 'result', text: 'appearing%20unprofessional%20in%20formal%20settings' })
+(loop_696_sink: BehaviorSink)
+(loop_696_start: BehaviorStart { loopId: 696, loopName: 'The%20Pocket%20Hider%20Loop', given: 'Hands%20buried%20deep%20in%20pockets', when: 'talking', then: 'it%20signals%20%22Casualness%22%20or%20%22Hiding%20Something%22%20(The%20Slouch%20Operator)', result: 'appearing%20unprofessional%20in%20formal%20settings', operatorName: 'The%20Slouch%20Operator', operatorMechanism: 'it%20signals%20%22Casualness%22%20or%20%22Hiding%20Something%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_696_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_696_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Casualness%22%20or%20%22Hiding%20Something%22%20(The%20Slouch%20Operator)' })
+(loop_696_verdict: BehaviorVerdict { loopId: 696, loopName: 'The%20Pocket%20Hider%20Loop', then: 'it%20signals%20%22Casualness%22%20or%20%22Hiding%20Something%22%20(The%20Slouch%20Operator)', result: 'appearing%20unprofessional%20in%20formal%20settings', operatorName: 'The%20Slouch%20Operator', operatorMechanism: 'it%20signals%20%22Casualness%22%20or%20%22Hiding%20Something%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_696_when_gate: BehaviorAssess { stage: 'when', text: 'talking' })
+
+// Topology
+(loop_696_start)-[:PROCESS]->(loop_696_given_gate)
+(loop_696_given_gate)-[:PROCESS { case: "ok" }]->(loop_696_when_gate)
+(loop_696_given_gate)-[:PROCESS { case: "err" }]->(loop_696_inactive)
+(loop_696_when_gate)-[:PROCESS { case: "ok" }]->(loop_696_context)
+(loop_696_when_gate)-[:PROCESS { case: "err" }]->(loop_696_inactive)
+(loop_696_context)-[:FORK { strategy: "behavior-branches" }]->(loop_696_context_branch | loop_696_then_branch | loop_696_operator_branch | loop_696_result_branch | loop_696_taxonomy_branch | loop_696_intervention_recognize | loop_696_intervention_interdict | loop_696_intervention_minimize)
+(loop_696_context_branch | loop_696_then_branch | loop_696_operator_branch | loop_696_result_branch | loop_696_taxonomy_branch | loop_696_intervention_recognize | loop_696_intervention_interdict | loop_696_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_696_verdict)
+(loop_696_inactive)-[:PROCESS]->(loop_696_sink)
+(loop_696_verdict)-[:PROCESS]->(loop_696_sink)
+(loop_696_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_696_then_branch)
+(loop_696_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_696_then_branch)
+(loop_696_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_696_then_branch)

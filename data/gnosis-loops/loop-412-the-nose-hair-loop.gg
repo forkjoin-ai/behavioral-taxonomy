@@ -1,0 +1,33 @@
+// behavioral-loop-412.gg
+// Executable Gnosis projection for The Nose Hair Loop.
+
+// Nodes
+(loop_412_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_412_context_branch: BehaviorEmit { emission: 'context' })
+(loop_412_given_gate: BehaviorAssess { stage: 'given', text: 'Long%20vibrissae%20protruding%20from%20nostril' })
+(loop_412_inactive: BehaviorTerminal { loopId: 412, loopName: 'The%20Nose%20Hair%20Loop' })
+(loop_412_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_412_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_412_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_412_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Distraction%2FGross%20Operator', mechanism: 'the%20listener%20fixates%20on%20the%20hair' })
+(loop_412_result_branch: BehaviorEmit { emission: 'result', text: 'the%20listener%20missing%20the%20verbal%20message%20entirely' })
+(loop_412_sink: BehaviorSink)
+(loop_412_start: BehaviorStart { loopId: 412, loopName: 'The%20Nose%20Hair%20Loop', given: 'Long%20vibrissae%20protruding%20from%20nostril', when: 'talking%20face-to-face', then: 'the%20listener%20fixates%20on%20the%20hair%20(The%20Distraction%2FGross%20Operator)', result: 'the%20listener%20missing%20the%20verbal%20message%20entirely', operatorName: 'The%20Distraction%2FGross%20Operator', operatorMechanism: 'the%20listener%20fixates%20on%20the%20hair', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_412_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_412_then_branch: BehaviorEmit { emission: 'then', text: 'the%20listener%20fixates%20on%20the%20hair%20(The%20Distraction%2FGross%20Operator)' })
+(loop_412_verdict: BehaviorVerdict { loopId: 412, loopName: 'The%20Nose%20Hair%20Loop', then: 'the%20listener%20fixates%20on%20the%20hair%20(The%20Distraction%2FGross%20Operator)', result: 'the%20listener%20missing%20the%20verbal%20message%20entirely', operatorName: 'The%20Distraction%2FGross%20Operator', operatorMechanism: 'the%20listener%20fixates%20on%20the%20hair', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_412_when_gate: BehaviorAssess { stage: 'when', text: 'talking%20face-to-face' })
+
+// Topology
+(loop_412_start)-[:PROCESS]->(loop_412_given_gate)
+(loop_412_given_gate)-[:PROCESS { case: "ok" }]->(loop_412_when_gate)
+(loop_412_given_gate)-[:PROCESS { case: "err" }]->(loop_412_inactive)
+(loop_412_when_gate)-[:PROCESS { case: "ok" }]->(loop_412_context)
+(loop_412_when_gate)-[:PROCESS { case: "err" }]->(loop_412_inactive)
+(loop_412_context)-[:FORK { strategy: "behavior-branches" }]->(loop_412_context_branch | loop_412_then_branch | loop_412_operator_branch | loop_412_result_branch | loop_412_taxonomy_branch | loop_412_intervention_recognize | loop_412_intervention_interdict | loop_412_intervention_minimize)
+(loop_412_context_branch | loop_412_then_branch | loop_412_operator_branch | loop_412_result_branch | loop_412_taxonomy_branch | loop_412_intervention_recognize | loop_412_intervention_interdict | loop_412_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_412_verdict)
+(loop_412_inactive)-[:PROCESS]->(loop_412_sink)
+(loop_412_verdict)-[:PROCESS]->(loop_412_sink)
+(loop_412_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_412_then_branch)
+(loop_412_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_412_then_branch)
+(loop_412_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_412_then_branch)

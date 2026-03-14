@@ -1,0 +1,33 @@
+// behavioral-loop-891.gg
+// Executable Gnosis projection for The Gasper Loop.
+
+// Nodes
+(loop_891_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_891_context_branch: BehaviorEmit { emission: 'context' })
+(loop_891_given_gate: BehaviorAssess { stage: 'given', text: 'Wheezing%20after%20minor%20exertion' })
+(loop_891_inactive: BehaviorTerminal { loopId: 891, loopName: 'The%20Gasper%20Loop' })
+(loop_891_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_891_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_891_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_891_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Struggle%20Operator', mechanism: 'the%20speech%20becomes%20breathless' })
+(loop_891_result_branch: BehaviorEmit { emission: 'result', text: 'the%20listener%20stopping%20to%20let%20them%20catch%20their%20breath' })
+(loop_891_sink: BehaviorSink)
+(loop_891_start: BehaviorStart { loopId: 891, loopName: 'The%20Gasper%20Loop', given: 'Wheezing%20after%20minor%20exertion', when: 'walking%20and%20talking', then: 'the%20speech%20becomes%20breathless%20(The%20Struggle%20Operator)', result: 'the%20listener%20stopping%20to%20let%20them%20catch%20their%20breath', operatorName: 'The%20Struggle%20Operator', operatorMechanism: 'the%20speech%20becomes%20breathless', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_891_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_891_then_branch: BehaviorEmit { emission: 'then', text: 'the%20speech%20becomes%20breathless%20(The%20Struggle%20Operator)' })
+(loop_891_verdict: BehaviorVerdict { loopId: 891, loopName: 'The%20Gasper%20Loop', then: 'the%20speech%20becomes%20breathless%20(The%20Struggle%20Operator)', result: 'the%20listener%20stopping%20to%20let%20them%20catch%20their%20breath', operatorName: 'The%20Struggle%20Operator', operatorMechanism: 'the%20speech%20becomes%20breathless', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_891_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20and%20talking' })
+
+// Topology
+(loop_891_start)-[:PROCESS]->(loop_891_given_gate)
+(loop_891_given_gate)-[:PROCESS { case: "ok" }]->(loop_891_when_gate)
+(loop_891_given_gate)-[:PROCESS { case: "err" }]->(loop_891_inactive)
+(loop_891_when_gate)-[:PROCESS { case: "ok" }]->(loop_891_context)
+(loop_891_when_gate)-[:PROCESS { case: "err" }]->(loop_891_inactive)
+(loop_891_context)-[:FORK { strategy: "behavior-branches" }]->(loop_891_context_branch | loop_891_then_branch | loop_891_operator_branch | loop_891_result_branch | loop_891_taxonomy_branch | loop_891_intervention_recognize | loop_891_intervention_interdict | loop_891_intervention_minimize)
+(loop_891_context_branch | loop_891_then_branch | loop_891_operator_branch | loop_891_result_branch | loop_891_taxonomy_branch | loop_891_intervention_recognize | loop_891_intervention_interdict | loop_891_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_891_verdict)
+(loop_891_inactive)-[:PROCESS]->(loop_891_sink)
+(loop_891_verdict)-[:PROCESS]->(loop_891_sink)
+(loop_891_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_891_then_branch)
+(loop_891_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_891_then_branch)
+(loop_891_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_891_then_branch)

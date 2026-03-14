@@ -1,0 +1,33 @@
+// behavioral-loop-621.gg
+// Executable Gnosis projection for The Spider Loop.
+
+// Nodes
+(loop_621_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_621_context_branch: BehaviorEmit { emission: 'context' })
+(loop_621_given_gate: BehaviorAssess { stage: 'given', text: 'Central%20red%20spot%20with%20radiating%20legs%20(face%2Fchest)' })
+(loop_621_inactive: BehaviorTerminal { loopId: 621, loopName: 'The%20Spider%20Loop' })
+(loop_621_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_621_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_621_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_621_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Toxin%20Operator', mechanism: 'it%20signals%20%22Liver%20Stress%22%20or%20%22Hormones%22' })
+(loop_621_result_branch: BehaviorEmit { emission: 'result', text: 'questions%20about%20alcohol%20consumption%20or%20pregnancy' })
+(loop_621_sink: BehaviorSink)
+(loop_621_start: BehaviorStart { loopId: 621, loopName: 'The%20Spider%20Loop', given: 'Central%20red%20spot%20with%20radiating%20legs%20(face%2Fchest)', when: 'viewed%20in%20daylight', then: 'it%20signals%20%22Liver%20Stress%22%20or%20%22Hormones%22%20(The%20Toxin%20Operator)', result: 'questions%20about%20alcohol%20consumption%20or%20pregnancy', operatorName: 'The%20Toxin%20Operator', operatorMechanism: 'it%20signals%20%22Liver%20Stress%22%20or%20%22Hormones%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_621_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_621_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Liver%20Stress%22%20or%20%22Hormones%22%20(The%20Toxin%20Operator)' })
+(loop_621_verdict: BehaviorVerdict { loopId: 621, loopName: 'The%20Spider%20Loop', then: 'it%20signals%20%22Liver%20Stress%22%20or%20%22Hormones%22%20(The%20Toxin%20Operator)', result: 'questions%20about%20alcohol%20consumption%20or%20pregnancy', operatorName: 'The%20Toxin%20Operator', operatorMechanism: 'it%20signals%20%22Liver%20Stress%22%20or%20%22Hormones%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_621_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20in%20daylight' })
+
+// Topology
+(loop_621_start)-[:PROCESS]->(loop_621_given_gate)
+(loop_621_given_gate)-[:PROCESS { case: "ok" }]->(loop_621_when_gate)
+(loop_621_given_gate)-[:PROCESS { case: "err" }]->(loop_621_inactive)
+(loop_621_when_gate)-[:PROCESS { case: "ok" }]->(loop_621_context)
+(loop_621_when_gate)-[:PROCESS { case: "err" }]->(loop_621_inactive)
+(loop_621_context)-[:FORK { strategy: "behavior-branches" }]->(loop_621_context_branch | loop_621_then_branch | loop_621_operator_branch | loop_621_result_branch | loop_621_taxonomy_branch | loop_621_intervention_recognize | loop_621_intervention_interdict | loop_621_intervention_minimize)
+(loop_621_context_branch | loop_621_then_branch | loop_621_operator_branch | loop_621_result_branch | loop_621_taxonomy_branch | loop_621_intervention_recognize | loop_621_intervention_interdict | loop_621_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_621_verdict)
+(loop_621_inactive)-[:PROCESS]->(loop_621_sink)
+(loop_621_verdict)-[:PROCESS]->(loop_621_sink)
+(loop_621_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_621_then_branch)
+(loop_621_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_621_then_branch)
+(loop_621_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_621_then_branch)

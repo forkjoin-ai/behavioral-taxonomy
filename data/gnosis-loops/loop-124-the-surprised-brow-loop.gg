@@ -1,0 +1,33 @@
+// behavioral-loop-124.gg
+// Executable Gnosis projection for The Surprised Brow Loop.
+
+// Nodes
+(loop_124_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_124_context_branch: BehaviorEmit { emission: 'context' })
+(loop_124_given_gate: BehaviorAssess { stage: 'given', text: 'Permanently%20high-arched%20brows' })
+(loop_124_inactive: BehaviorTerminal { loopId: 124, loopName: 'The%20Surprised%20Brow%20Loop' })
+(loop_124_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_124_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_124_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_124_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20face%20looks%20%22Shocked%22%20or%20%22Na%C3%AFve%22' })
+(loop_124_result_branch: BehaviorEmit { emission: 'result', text: 'others%20sugar-coating%20reality%2C%20keeping%20the%20individual%20**Out%20of%20the%20Loop**' })
+(loop_124_sink: BehaviorSink)
+(loop_124_start: BehaviorStart { loopId: 124, loopName: 'The%20Surprised%20Brow%20Loop', given: 'Permanently%20high-arched%20brows', when: 'hearing%20bad%20news', then: 'the%20face%20looks%20%22Shocked%22%20or%20%22Na%C3%AFve%22%20(The%20Fragility%20Operator)', result: 'others%20sugar-coating%20reality%2C%20keeping%20the%20individual%20**Out%20of%20the%20Loop**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20face%20looks%20%22Shocked%22%20or%20%22Na%C3%AFve%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_124_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_124_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20looks%20%22Shocked%22%20or%20%22Na%C3%AFve%22%20(The%20Fragility%20Operator)' })
+(loop_124_verdict: BehaviorVerdict { loopId: 124, loopName: 'The%20Surprised%20Brow%20Loop', then: 'the%20face%20looks%20%22Shocked%22%20or%20%22Na%C3%AFve%22%20(The%20Fragility%20Operator)', result: 'others%20sugar-coating%20reality%2C%20keeping%20the%20individual%20**Out%20of%20the%20Loop**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20face%20looks%20%22Shocked%22%20or%20%22Na%C3%AFve%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_124_when_gate: BehaviorAssess { stage: 'when', text: 'hearing%20bad%20news' })
+
+// Topology
+(loop_124_start)-[:PROCESS]->(loop_124_given_gate)
+(loop_124_given_gate)-[:PROCESS { case: "ok" }]->(loop_124_when_gate)
+(loop_124_given_gate)-[:PROCESS { case: "err" }]->(loop_124_inactive)
+(loop_124_when_gate)-[:PROCESS { case: "ok" }]->(loop_124_context)
+(loop_124_when_gate)-[:PROCESS { case: "err" }]->(loop_124_inactive)
+(loop_124_context)-[:FORK { strategy: "behavior-branches" }]->(loop_124_context_branch | loop_124_then_branch | loop_124_operator_branch | loop_124_result_branch | loop_124_taxonomy_branch | loop_124_intervention_recognize | loop_124_intervention_interdict | loop_124_intervention_minimize)
+(loop_124_context_branch | loop_124_then_branch | loop_124_operator_branch | loop_124_result_branch | loop_124_taxonomy_branch | loop_124_intervention_recognize | loop_124_intervention_interdict | loop_124_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_124_verdict)
+(loop_124_inactive)-[:PROCESS]->(loop_124_sink)
+(loop_124_verdict)-[:PROCESS]->(loop_124_sink)
+(loop_124_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_124_then_branch)
+(loop_124_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_124_then_branch)
+(loop_124_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_124_then_branch)

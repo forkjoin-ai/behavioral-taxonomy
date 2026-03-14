@@ -1,0 +1,33 @@
+// behavioral-loop-612.gg
+// Executable Gnosis projection for The Pointy Head Loop.
+
+// Nodes
+(loop_612_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_612_context_branch: BehaviorEmit { emission: 'context' })
+(loop_612_given_gate: BehaviorAssess { stage: 'given', text: 'Narrow%2C%20elongated%20skull%20shape' })
+(loop_612_inactive: BehaviorTerminal { loopId: 612, loopName: 'The%20Pointy%20Head%20Loop' })
+(loop_612_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_612_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_612_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_612_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Conehead%20Operator', mechanism: 'the%20fit%20is%20poor%20and%20sits%20high' })
+(loop_612_result_branch: BehaviorEmit { emission: 'result', text: 'mockery%20and%20difficulty%20finding%20%22normal%22%20fitting%20headgear' })
+(loop_612_sink: BehaviorSink)
+(loop_612_start: BehaviorStart { loopId: 612, loopName: 'The%20Pointy%20Head%20Loop', given: 'Narrow%2C%20elongated%20skull%20shape', when: 'wearing%20hats', then: 'the%20fit%20is%20poor%20and%20sits%20high%20(The%20Conehead%20Operator)', result: 'mockery%20and%20difficulty%20finding%20%22normal%22%20fitting%20headgear', operatorName: 'The%20Conehead%20Operator', operatorMechanism: 'the%20fit%20is%20poor%20and%20sits%20high', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_612_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_612_then_branch: BehaviorEmit { emission: 'then', text: 'the%20fit%20is%20poor%20and%20sits%20high%20(The%20Conehead%20Operator)' })
+(loop_612_verdict: BehaviorVerdict { loopId: 612, loopName: 'The%20Pointy%20Head%20Loop', then: 'the%20fit%20is%20poor%20and%20sits%20high%20(The%20Conehead%20Operator)', result: 'mockery%20and%20difficulty%20finding%20%22normal%22%20fitting%20headgear', operatorName: 'The%20Conehead%20Operator', operatorMechanism: 'the%20fit%20is%20poor%20and%20sits%20high', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_612_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20hats' })
+
+// Topology
+(loop_612_start)-[:PROCESS]->(loop_612_given_gate)
+(loop_612_given_gate)-[:PROCESS { case: "ok" }]->(loop_612_when_gate)
+(loop_612_given_gate)-[:PROCESS { case: "err" }]->(loop_612_inactive)
+(loop_612_when_gate)-[:PROCESS { case: "ok" }]->(loop_612_context)
+(loop_612_when_gate)-[:PROCESS { case: "err" }]->(loop_612_inactive)
+(loop_612_context)-[:FORK { strategy: "behavior-branches" }]->(loop_612_context_branch | loop_612_then_branch | loop_612_operator_branch | loop_612_result_branch | loop_612_taxonomy_branch | loop_612_intervention_recognize | loop_612_intervention_interdict | loop_612_intervention_minimize)
+(loop_612_context_branch | loop_612_then_branch | loop_612_operator_branch | loop_612_result_branch | loop_612_taxonomy_branch | loop_612_intervention_recognize | loop_612_intervention_interdict | loop_612_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_612_verdict)
+(loop_612_inactive)-[:PROCESS]->(loop_612_sink)
+(loop_612_verdict)-[:PROCESS]->(loop_612_sink)
+(loop_612_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_612_then_branch)
+(loop_612_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_612_then_branch)
+(loop_612_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_612_then_branch)

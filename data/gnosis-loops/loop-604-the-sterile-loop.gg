@@ -1,0 +1,33 @@
+// behavioral-loop-604.gg
+// Executable Gnosis projection for The Sterile Loop.
+
+// Nodes
+(loop_604_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_604_context_branch: BehaviorEmit { emission: 'context' })
+(loop_604_given_gate: BehaviorAssess { stage: 'given', text: 'Strong%20smell%20of%20Listerine%2FGum' })
+(loop_604_inactive: BehaviorTerminal { loopId: 604, loopName: 'The%20Sterile%20Loop' })
+(loop_604_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_604_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_604_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20smell%20affects%20your%20judgment%20of%20someone' })
+(loop_604_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Masking%20Operator', mechanism: 'signals%20%22Paranoia%22%20or%20%22Cover-up%22' })
+(loop_604_result_branch: BehaviorEmit { emission: 'result', text: 'wondering%20what%20they%20are%20hiding%20(smoking%2Fdrinking)' })
+(loop_604_sink: BehaviorSink)
+(loop_604_start: BehaviorStart { loopId: 604, loopName: 'The%20Sterile%20Loop', given: 'Strong%20smell%20of%20Listerine%2FGum', when: 'constantly%20present', then: 'signals%20%22Paranoia%22%20or%20%22Cover-up%22%20(The%20Masking%20Operator)', result: 'wondering%20what%20they%20are%20hiding%20(smoking%2Fdrinking)', operatorName: 'The%20Masking%20Operator', operatorMechanism: 'signals%20%22Paranoia%22%20or%20%22Cover-up%22', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20smell%20affects%20your%20judgment%20of%20someone', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_604_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_604_then_branch: BehaviorEmit { emission: 'then', text: 'signals%20%22Paranoia%22%20or%20%22Cover-up%22%20(The%20Masking%20Operator)' })
+(loop_604_verdict: BehaviorVerdict { loopId: 604, loopName: 'The%20Sterile%20Loop', then: 'signals%20%22Paranoia%22%20or%20%22Cover-up%22%20(The%20Masking%20Operator)', result: 'wondering%20what%20they%20are%20hiding%20(smoking%2Fdrinking)', operatorName: 'The%20Masking%20Operator', operatorMechanism: 'signals%20%22Paranoia%22%20or%20%22Cover-up%22', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_604_when_gate: BehaviorAssess { stage: 'when', text: 'constantly%20present' })
+
+// Topology
+(loop_604_start)-[:PROCESS]->(loop_604_given_gate)
+(loop_604_given_gate)-[:PROCESS { case: "ok" }]->(loop_604_when_gate)
+(loop_604_given_gate)-[:PROCESS { case: "err" }]->(loop_604_inactive)
+(loop_604_when_gate)-[:PROCESS { case: "ok" }]->(loop_604_context)
+(loop_604_when_gate)-[:PROCESS { case: "err" }]->(loop_604_inactive)
+(loop_604_context)-[:FORK { strategy: "behavior-branches" }]->(loop_604_context_branch | loop_604_then_branch | loop_604_operator_branch | loop_604_result_branch | loop_604_taxonomy_branch | loop_604_intervention_recognize | loop_604_intervention_interdict | loop_604_intervention_minimize)
+(loop_604_context_branch | loop_604_then_branch | loop_604_operator_branch | loop_604_result_branch | loop_604_taxonomy_branch | loop_604_intervention_recognize | loop_604_intervention_interdict | loop_604_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_604_verdict)
+(loop_604_inactive)-[:PROCESS]->(loop_604_sink)
+(loop_604_verdict)-[:PROCESS]->(loop_604_sink)
+(loop_604_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_604_then_branch)
+(loop_604_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_604_then_branch)
+(loop_604_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_604_then_branch)

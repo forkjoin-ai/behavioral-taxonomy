@@ -1,0 +1,33 @@
+// behavioral-loop-770.gg
+// Executable Gnosis projection for The Lantern Jaw Loop.
+
+// Nodes
+(loop_770_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_770_context_branch: BehaviorEmit { emission: 'context' })
+(loop_770_given_gate: BehaviorAssess { stage: 'given', text: 'Heavy%2C%20protruding%20lower%20jaw%20(Habsburg%20style)' })
+(loop_770_inactive: BehaviorTerminal { loopId: 770, loopName: 'The%20Lantern%20Jaw%20Loop' })
+(loop_770_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_770_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_770_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_770_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dynasty%20Operator', mechanism: 'the%20face%20signals%20%22Stubbornness%22%20or%20%22Inbreeding%22' })
+(loop_770_result_branch: BehaviorEmit { emission: 'result', text: 'people%20assuming%20the%20individual%20is%20difficult%20to%20persuade' })
+(loop_770_sink: BehaviorSink)
+(loop_770_start: BehaviorStart { loopId: 770, loopName: 'The%20Lantern%20Jaw%20Loop', given: 'Heavy%2C%20protruding%20lower%20jaw%20(Habsburg%20style)', when: 'remaining%20silent', then: 'the%20face%20signals%20%22Stubbornness%22%20or%20%22Inbreeding%22%20(The%20Dynasty%20Operator)', result: 'people%20assuming%20the%20individual%20is%20difficult%20to%20persuade', operatorName: 'The%20Dynasty%20Operator', operatorMechanism: 'the%20face%20signals%20%22Stubbornness%22%20or%20%22Inbreeding%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_770_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_770_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20signals%20%22Stubbornness%22%20or%20%22Inbreeding%22%20(The%20Dynasty%20Operator)' })
+(loop_770_verdict: BehaviorVerdict { loopId: 770, loopName: 'The%20Lantern%20Jaw%20Loop', then: 'the%20face%20signals%20%22Stubbornness%22%20or%20%22Inbreeding%22%20(The%20Dynasty%20Operator)', result: 'people%20assuming%20the%20individual%20is%20difficult%20to%20persuade', operatorName: 'The%20Dynasty%20Operator', operatorMechanism: 'the%20face%20signals%20%22Stubbornness%22%20or%20%22Inbreeding%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_770_when_gate: BehaviorAssess { stage: 'when', text: 'remaining%20silent' })
+
+// Topology
+(loop_770_start)-[:PROCESS]->(loop_770_given_gate)
+(loop_770_given_gate)-[:PROCESS { case: "ok" }]->(loop_770_when_gate)
+(loop_770_given_gate)-[:PROCESS { case: "err" }]->(loop_770_inactive)
+(loop_770_when_gate)-[:PROCESS { case: "ok" }]->(loop_770_context)
+(loop_770_when_gate)-[:PROCESS { case: "err" }]->(loop_770_inactive)
+(loop_770_context)-[:FORK { strategy: "behavior-branches" }]->(loop_770_context_branch | loop_770_then_branch | loop_770_operator_branch | loop_770_result_branch | loop_770_taxonomy_branch | loop_770_intervention_recognize | loop_770_intervention_interdict | loop_770_intervention_minimize)
+(loop_770_context_branch | loop_770_then_branch | loop_770_operator_branch | loop_770_result_branch | loop_770_taxonomy_branch | loop_770_intervention_recognize | loop_770_intervention_interdict | loop_770_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_770_verdict)
+(loop_770_inactive)-[:PROCESS]->(loop_770_sink)
+(loop_770_verdict)-[:PROCESS]->(loop_770_sink)
+(loop_770_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_770_then_branch)
+(loop_770_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_770_then_branch)
+(loop_770_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_770_then_branch)

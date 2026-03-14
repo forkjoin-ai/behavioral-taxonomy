@@ -1,0 +1,33 @@
+// behavioral-loop-553.gg
+// Executable Gnosis projection for The Lean In Loop.
+
+// Nodes
+(loop_553_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_553_context_branch: BehaviorEmit { emission: 'context' })
+(loop_553_given_gate: BehaviorAssess { stage: 'given', text: 'Hearing%20loss%20in%20one%20ear' })
+(loop_553_inactive: BehaviorTerminal { loopId: 553, loopName: 'The%20Lean%20In%20Loop' })
+(loop_553_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_553_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_553_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_553_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intimacy%20Operator', mechanism: 'the%20individual%20turns%20their%20%22Good%20Ear%22%20to%20the%20speaker' })
+(loop_553_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20feeling%20deeply%20heard%2Fvalued%2C%20accidentally%20creating%20**Rapport**' })
+(loop_553_sink: BehaviorSink)
+(loop_553_start: BehaviorStart { loopId: 553, loopName: 'The%20Lean%20In%20Loop', given: 'Hearing%20loss%20in%20one%20ear', when: 'in%20a%20noisy%20bar', then: 'the%20individual%20turns%20their%20%22Good%20Ear%22%20to%20the%20speaker%20(The%20Intimacy%20Operator)', result: 'the%20speaker%20feeling%20deeply%20heard%2Fvalued%2C%20accidentally%20creating%20**Rapport**', operatorName: 'The%20Intimacy%20Operator', operatorMechanism: 'the%20individual%20turns%20their%20%22Good%20Ear%22%20to%20the%20speaker', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_553_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_553_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20turns%20their%20%22Good%20Ear%22%20to%20the%20speaker%20(The%20Intimacy%20Operator)' })
+(loop_553_verdict: BehaviorVerdict { loopId: 553, loopName: 'The%20Lean%20In%20Loop', then: 'the%20individual%20turns%20their%20%22Good%20Ear%22%20to%20the%20speaker%20(The%20Intimacy%20Operator)', result: 'the%20speaker%20feeling%20deeply%20heard%2Fvalued%2C%20accidentally%20creating%20**Rapport**', operatorName: 'The%20Intimacy%20Operator', operatorMechanism: 'the%20individual%20turns%20their%20%22Good%20Ear%22%20to%20the%20speaker', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_553_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20noisy%20bar' })
+
+// Topology
+(loop_553_start)-[:PROCESS]->(loop_553_given_gate)
+(loop_553_given_gate)-[:PROCESS { case: "ok" }]->(loop_553_when_gate)
+(loop_553_given_gate)-[:PROCESS { case: "err" }]->(loop_553_inactive)
+(loop_553_when_gate)-[:PROCESS { case: "ok" }]->(loop_553_context)
+(loop_553_when_gate)-[:PROCESS { case: "err" }]->(loop_553_inactive)
+(loop_553_context)-[:FORK { strategy: "behavior-branches" }]->(loop_553_context_branch | loop_553_then_branch | loop_553_operator_branch | loop_553_result_branch | loop_553_taxonomy_branch | loop_553_intervention_recognize | loop_553_intervention_interdict | loop_553_intervention_minimize)
+(loop_553_context_branch | loop_553_then_branch | loop_553_operator_branch | loop_553_result_branch | loop_553_taxonomy_branch | loop_553_intervention_recognize | loop_553_intervention_interdict | loop_553_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_553_verdict)
+(loop_553_inactive)-[:PROCESS]->(loop_553_sink)
+(loop_553_verdict)-[:PROCESS]->(loop_553_sink)
+(loop_553_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_553_then_branch)
+(loop_553_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_553_then_branch)
+(loop_553_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_553_then_branch)

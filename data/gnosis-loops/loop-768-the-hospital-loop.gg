@@ -1,0 +1,33 @@
+// behavioral-loop-768.gg
+// Executable Gnosis projection for The Hospital Loop.
+
+// Nodes
+(loop_768_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_768_context_branch: BehaviorEmit { emission: 'context' })
+(loop_768_given_gate: BehaviorAssess { stage: 'given', text: 'Scent%20of%20iodine%2Frubbing%20alcohol' })
+(loop_768_inactive: BehaviorTerminal { loopId: 768, loopName: 'The%20Hospital%20Loop' })
+(loop_768_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_768_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_768_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_768_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Clinical%20Operator', mechanism: 'it%20signals%20%22Crisis%22%20or%20%22Tragedy%22' })
+(loop_768_result_branch: BehaviorEmit { emission: 'result', text: 'people%20asking%20%22Is%20everything%20okay%3F%22%20with%20concern' })
+(loop_768_sink: BehaviorSink)
+(loop_768_start: BehaviorStart { loopId: 768, loopName: 'The%20Hospital%20Loop', given: 'Scent%20of%20iodine%2Frubbing%20alcohol', when: 'arriving%20at%20a%20social%20event', then: 'it%20signals%20%22Crisis%22%20or%20%22Tragedy%22%20(The%20Clinical%20Operator)', result: 'people%20asking%20%22Is%20everything%20okay%3F%22%20with%20concern', operatorName: 'The%20Clinical%20Operator', operatorMechanism: 'it%20signals%20%22Crisis%22%20or%20%22Tragedy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_768_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_768_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Crisis%22%20or%20%22Tragedy%22%20(The%20Clinical%20Operator)' })
+(loop_768_verdict: BehaviorVerdict { loopId: 768, loopName: 'The%20Hospital%20Loop', then: 'it%20signals%20%22Crisis%22%20or%20%22Tragedy%22%20(The%20Clinical%20Operator)', result: 'people%20asking%20%22Is%20everything%20okay%3F%22%20with%20concern', operatorName: 'The%20Clinical%20Operator', operatorMechanism: 'it%20signals%20%22Crisis%22%20or%20%22Tragedy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_768_when_gate: BehaviorAssess { stage: 'when', text: 'arriving%20at%20a%20social%20event' })
+
+// Topology
+(loop_768_start)-[:PROCESS]->(loop_768_given_gate)
+(loop_768_given_gate)-[:PROCESS { case: "ok" }]->(loop_768_when_gate)
+(loop_768_given_gate)-[:PROCESS { case: "err" }]->(loop_768_inactive)
+(loop_768_when_gate)-[:PROCESS { case: "ok" }]->(loop_768_context)
+(loop_768_when_gate)-[:PROCESS { case: "err" }]->(loop_768_inactive)
+(loop_768_context)-[:FORK { strategy: "behavior-branches" }]->(loop_768_context_branch | loop_768_then_branch | loop_768_operator_branch | loop_768_result_branch | loop_768_taxonomy_branch | loop_768_intervention_recognize | loop_768_intervention_interdict | loop_768_intervention_minimize)
+(loop_768_context_branch | loop_768_then_branch | loop_768_operator_branch | loop_768_result_branch | loop_768_taxonomy_branch | loop_768_intervention_recognize | loop_768_intervention_interdict | loop_768_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_768_verdict)
+(loop_768_inactive)-[:PROCESS]->(loop_768_sink)
+(loop_768_verdict)-[:PROCESS]->(loop_768_sink)
+(loop_768_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_768_then_branch)
+(loop_768_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_768_then_branch)
+(loop_768_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_768_then_branch)

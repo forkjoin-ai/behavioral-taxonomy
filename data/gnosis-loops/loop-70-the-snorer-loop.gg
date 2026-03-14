@@ -1,0 +1,33 @@
+// behavioral-loop-70.gg
+// Executable Gnosis projection for The Snorer Loop.
+
+// Nodes
+(loop_70_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_70_context_branch: BehaviorEmit { emission: 'context' })
+(loop_70_given_gate: BehaviorAssess { stage: 'given', text: 'Obstructive%20Sleep%20Apnea' })
+(loop_70_inactive: BehaviorTerminal { loopId: 70, loopName: 'The%20Snorer%20Loop' })
+(loop_70_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_70_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_70_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_70_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Exclusion%20Operator', mechanism: 'they%20are%20shamed%20or%20exiled%20to%20the%20couch' })
+(loop_70_result_branch: BehaviorEmit { emission: 'result', text: 'deep%20**Anxiety%20regarding%20Intimacy**%20and%20avoidance%20of%20overnight%20social%20events' })
+(loop_70_sink: BehaviorSink)
+(loop_70_start: BehaviorStart { loopId: 70, loopName: 'The%20Snorer%20Loop', given: 'Obstructive%20Sleep%20Apnea', when: 'sharing%20sleeping%20quarters%20(dorms%2C%20partners%2C%20trips)', then: 'they%20are%20shamed%20or%20exiled%20to%20the%20couch%20(The%20Exclusion%20Operator)', result: 'deep%20**Anxiety%20regarding%20Intimacy**%20and%20avoidance%20of%20overnight%20social%20events', operatorName: 'The%20Exclusion%20Operator', operatorMechanism: 'they%20are%20shamed%20or%20exiled%20to%20the%20couch', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_70_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_70_then_branch: BehaviorEmit { emission: 'then', text: 'they%20are%20shamed%20or%20exiled%20to%20the%20couch%20(The%20Exclusion%20Operator)' })
+(loop_70_verdict: BehaviorVerdict { loopId: 70, loopName: 'The%20Snorer%20Loop', then: 'they%20are%20shamed%20or%20exiled%20to%20the%20couch%20(The%20Exclusion%20Operator)', result: 'deep%20**Anxiety%20regarding%20Intimacy**%20and%20avoidance%20of%20overnight%20social%20events', operatorName: 'The%20Exclusion%20Operator', operatorMechanism: 'they%20are%20shamed%20or%20exiled%20to%20the%20couch', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_70_when_gate: BehaviorAssess { stage: 'when', text: 'sharing%20sleeping%20quarters%20(dorms%2C%20partners%2C%20trips)' })
+
+// Topology
+(loop_70_start)-[:PROCESS]->(loop_70_given_gate)
+(loop_70_given_gate)-[:PROCESS { case: "ok" }]->(loop_70_when_gate)
+(loop_70_given_gate)-[:PROCESS { case: "err" }]->(loop_70_inactive)
+(loop_70_when_gate)-[:PROCESS { case: "ok" }]->(loop_70_context)
+(loop_70_when_gate)-[:PROCESS { case: "err" }]->(loop_70_inactive)
+(loop_70_context)-[:FORK { strategy: "behavior-branches" }]->(loop_70_context_branch | loop_70_then_branch | loop_70_operator_branch | loop_70_result_branch | loop_70_taxonomy_branch | loop_70_intervention_recognize | loop_70_intervention_interdict | loop_70_intervention_minimize)
+(loop_70_context_branch | loop_70_then_branch | loop_70_operator_branch | loop_70_result_branch | loop_70_taxonomy_branch | loop_70_intervention_recognize | loop_70_intervention_interdict | loop_70_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_70_verdict)
+(loop_70_inactive)-[:PROCESS]->(loop_70_sink)
+(loop_70_verdict)-[:PROCESS]->(loop_70_sink)
+(loop_70_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_70_then_branch)
+(loop_70_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_70_then_branch)
+(loop_70_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_70_then_branch)

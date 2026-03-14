@@ -1,0 +1,33 @@
+// behavioral-loop-171.gg
+// Executable Gnosis projection for The Double Crown Loop.
+
+// Nodes
+(loop_171_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_171_context_branch: BehaviorEmit { emission: 'context' })
+(loop_171_given_gate: BehaviorAssess { stage: 'given', text: 'Two%20spiral%20growth%20points%20on%20scalp' })
+(loop_171_inactive: BehaviorTerminal { loopId: 171, loopName: 'The%20Double%20Crown%20Loop' })
+(loop_171_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_171_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_171_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_171_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'styling%20is%20impossible%2C%20leading%20to%20a%20%22Wild%22%20look' })
+(loop_171_result_branch: BehaviorEmit { emission: 'result', text: "the%20individual%20adopting%20a%20%22Don't%20Care%22%20attitude%20toward%20appearance%20(**Anti-Fashion**)" })
+(loop_171_sink: BehaviorSink)
+(loop_171_start: BehaviorStart { loopId: 171, loopName: 'The%20Double%20Crown%20Loop', given: 'Two%20spiral%20growth%20points%20on%20scalp', when: 'hair%20is%20short', then: 'styling%20is%20impossible%2C%20leading%20to%20a%20%22Wild%22%20look%20(The%20Novelty%20Operator)', result: "the%20individual%20adopting%20a%20%22Don't%20Care%22%20attitude%20toward%20appearance%20(**Anti-Fashion**)", operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'styling%20is%20impossible%2C%20leading%20to%20a%20%22Wild%22%20look', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_171_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_171_then_branch: BehaviorEmit { emission: 'then', text: 'styling%20is%20impossible%2C%20leading%20to%20a%20%22Wild%22%20look%20(The%20Novelty%20Operator)' })
+(loop_171_verdict: BehaviorVerdict { loopId: 171, loopName: 'The%20Double%20Crown%20Loop', then: 'styling%20is%20impossible%2C%20leading%20to%20a%20%22Wild%22%20look%20(The%20Novelty%20Operator)', result: "the%20individual%20adopting%20a%20%22Don't%20Care%22%20attitude%20toward%20appearance%20(**Anti-Fashion**)", operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'styling%20is%20impossible%2C%20leading%20to%20a%20%22Wild%22%20look', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_171_when_gate: BehaviorAssess { stage: 'when', text: 'hair%20is%20short' })
+
+// Topology
+(loop_171_start)-[:PROCESS]->(loop_171_given_gate)
+(loop_171_given_gate)-[:PROCESS { case: "ok" }]->(loop_171_when_gate)
+(loop_171_given_gate)-[:PROCESS { case: "err" }]->(loop_171_inactive)
+(loop_171_when_gate)-[:PROCESS { case: "ok" }]->(loop_171_context)
+(loop_171_when_gate)-[:PROCESS { case: "err" }]->(loop_171_inactive)
+(loop_171_context)-[:FORK { strategy: "behavior-branches" }]->(loop_171_context_branch | loop_171_then_branch | loop_171_operator_branch | loop_171_result_branch | loop_171_taxonomy_branch | loop_171_intervention_recognize | loop_171_intervention_interdict | loop_171_intervention_minimize)
+(loop_171_context_branch | loop_171_then_branch | loop_171_operator_branch | loop_171_result_branch | loop_171_taxonomy_branch | loop_171_intervention_recognize | loop_171_intervention_interdict | loop_171_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_171_verdict)
+(loop_171_inactive)-[:PROCESS]->(loop_171_sink)
+(loop_171_verdict)-[:PROCESS]->(loop_171_sink)
+(loop_171_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_171_then_branch)
+(loop_171_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_171_then_branch)
+(loop_171_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_171_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-11001.gg
+// Executable Gnosis projection for The Variable Ratio Reinforcement Loop.
+
+// Nodes
+(loop_11001_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_11001_context_branch: BehaviorEmit { emission: 'context' })
+(loop_11001_given_gate: BehaviorAssess { stage: 'given', text: 'User%20initiates%20an%20action%20with%20an%20uncertain%20outcome%20(e.g.%2C%20pulling%20a%20lever%2C%20refreshing%20a%20feed)' })
+(loop_11001_inactive: BehaviorTerminal { loopId: 11001, loopName: 'The%20Variable%20Ratio%20Reinforcement%20Loop' })
+(loop_11001_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Remove%20variable%20reinforcement%20by%20making%20outcomes%20predictable%20or%20adding%20friction' })
+(loop_11001_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Set%20hard%20limits%20on%20engagement%20time%20before%20starting' })
+(loop_11001_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20the%20urge%20to%20'just%20check%20one%20more%20time'" })
+(loop_11001_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dopamine%20Prediction%20Error', mechanism: 'Variable%20ratio%20schedules%20exploit%20the%20mesolimbic%20pathway%20-%20because%20reward%20is%20not%20guaranteed%2C%20dopamine%20fires%20maximally%20during%20anticipation%2C%20not%20receipt.' })
+(loop_11001_result_branch: BehaviorEmit { emission: 'result', text: 'Subject%20increases%20frequency%20of%20action%20to%20resolve%20uncertainty%3B%20compulsive%20behavior' })
+(loop_11001_sink: BehaviorSink)
+(loop_11001_start: BehaviorStart { loopId: 11001, loopName: 'The%20Variable%20Ratio%20Reinforcement%20Loop', given: 'User%20initiates%20an%20action%20with%20an%20uncertain%20outcome%20(e.g.%2C%20pulling%20a%20lever%2C%20refreshing%20a%20feed)', when: 'The%20system%20provides%20a%20reward%20only%20intermittently%20and%20unpredictably', then: 'Dopamine%20spikes%20higher%20during%20anticipation%20than%20receipt%20phase', result: 'Subject%20increases%20frequency%20of%20action%20to%20resolve%20uncertainty%3B%20compulsive%20behavior', operatorName: 'The%20Dopamine%20Prediction%20Error', operatorMechanism: 'Variable%20ratio%20schedules%20exploit%20the%20mesolimbic%20pathway%20-%20because%20reward%20is%20not%20guaranteed%2C%20dopamine%20fires%20maximally%20during%20anticipation%2C%20not%20receipt.', origin: 'NEUROBIOLOGICAL', modality: 'DOPAMINERGIC', mutability: 'ADDICTIVE', valences: 'CONSUMPTION', interventionDifficulty: '8', intervention_recognize: "Notice%20the%20urge%20to%20'just%20check%20one%20more%20time'", intervention_interdict: 'Remove%20variable%20reinforcement%20by%20making%20outcomes%20predictable%20or%20adding%20friction', intervention_minimize: 'Set%20hard%20limits%20on%20engagement%20time%20before%20starting' })
+(loop_11001_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'NEUROBIOLOGICAL', modality: 'DOPAMINERGIC', mutability: 'ADDICTIVE', valences: 'CONSUMPTION' })
+(loop_11001_then_branch: BehaviorEmit { emission: 'then', text: 'Dopamine%20spikes%20higher%20during%20anticipation%20than%20receipt%20phase' })
+(loop_11001_verdict: BehaviorVerdict { loopId: 11001, loopName: 'The%20Variable%20Ratio%20Reinforcement%20Loop', then: 'Dopamine%20spikes%20higher%20during%20anticipation%20than%20receipt%20phase', result: 'Subject%20increases%20frequency%20of%20action%20to%20resolve%20uncertainty%3B%20compulsive%20behavior', operatorName: 'The%20Dopamine%20Prediction%20Error', operatorMechanism: 'Variable%20ratio%20schedules%20exploit%20the%20mesolimbic%20pathway%20-%20because%20reward%20is%20not%20guaranteed%2C%20dopamine%20fires%20maximally%20during%20anticipation%2C%20not%20receipt.', origin: 'NEUROBIOLOGICAL', modality: 'DOPAMINERGIC', mutability: 'ADDICTIVE', valences: 'CONSUMPTION' })
+(loop_11001_when_gate: BehaviorAssess { stage: 'when', text: 'The%20system%20provides%20a%20reward%20only%20intermittently%20and%20unpredictably' })
+
+// Topology
+(loop_11001_start)-[:PROCESS]->(loop_11001_given_gate)
+(loop_11001_given_gate)-[:PROCESS { case: "ok" }]->(loop_11001_when_gate)
+(loop_11001_given_gate)-[:PROCESS { case: "err" }]->(loop_11001_inactive)
+(loop_11001_when_gate)-[:PROCESS { case: "ok" }]->(loop_11001_context)
+(loop_11001_when_gate)-[:PROCESS { case: "err" }]->(loop_11001_inactive)
+(loop_11001_context)-[:FORK { strategy: "behavior-branches" }]->(loop_11001_context_branch | loop_11001_then_branch | loop_11001_operator_branch | loop_11001_result_branch | loop_11001_taxonomy_branch | loop_11001_intervention_recognize | loop_11001_intervention_interdict | loop_11001_intervention_minimize)
+(loop_11001_context_branch | loop_11001_then_branch | loop_11001_operator_branch | loop_11001_result_branch | loop_11001_taxonomy_branch | loop_11001_intervention_recognize | loop_11001_intervention_interdict | loop_11001_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_11001_verdict)
+(loop_11001_inactive)-[:PROCESS]->(loop_11001_sink)
+(loop_11001_verdict)-[:PROCESS]->(loop_11001_sink)
+(loop_11001_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_11001_then_branch)
+(loop_11001_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_11001_then_branch)
+(loop_11001_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_11001_then_branch)

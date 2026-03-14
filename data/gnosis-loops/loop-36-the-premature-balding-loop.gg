@@ -1,0 +1,33 @@
+// behavioral-loop-36.gg
+// Executable Gnosis projection for The Premature Balding Loop.
+
+// Nodes
+(loop_36_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_36_context_branch: BehaviorEmit { emission: 'context' })
+(loop_36_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20(Young%20Male)%20possesses%20Androgenic%20Alopecia' })
+(loop_36_inactive: BehaviorTerminal { loopId: 36, loopName: 'The%20Premature%20Balding%20Loop' })
+(loop_36_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20competence%20in%20areas%20that%20compensate' })
+(loop_36_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_36_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_36_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Pity%2FSeniority%20Operator', mechanism: 'they%20are%20perceived%20as%20%22Older%22%20or%20%22Unlucky%22' })
+(loop_36_result_branch: BehaviorEmit { emission: 'result', text: 'the%20development%20of%20**Defensive%20Humor**%20or%20**Compensatory%20Fitness**%20(getting%20extremely%20muscular)' })
+(loop_36_sink: BehaviorSink)
+(loop_36_start: BehaviorStart { loopId: 36, loopName: 'The%20Premature%20Balding%20Loop', given: 'an%20individual%20(Young%20Male)%20possesses%20Androgenic%20Alopecia', when: 'they%20interact%20with%20peers%20of%20the%20same%20age', then: 'they%20are%20perceived%20as%20%22Older%22%20or%20%22Unlucky%22%20(The%20Pity%2FSeniority%20Operator)', result: 'the%20development%20of%20**Defensive%20Humor**%20or%20**Compensatory%20Fitness**%20(getting%20extremely%20muscular)', operatorName: 'The%20Pity%2FSeniority%20Operator', operatorMechanism: 'they%20are%20perceived%20as%20%22Older%22%20or%20%22Unlucky%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20competence%20in%20areas%20that%20compensate', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_36_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_36_then_branch: BehaviorEmit { emission: 'then', text: 'they%20are%20perceived%20as%20%22Older%22%20or%20%22Unlucky%22%20(The%20Pity%2FSeniority%20Operator)' })
+(loop_36_verdict: BehaviorVerdict { loopId: 36, loopName: 'The%20Premature%20Balding%20Loop', then: 'they%20are%20perceived%20as%20%22Older%22%20or%20%22Unlucky%22%20(The%20Pity%2FSeniority%20Operator)', result: 'the%20development%20of%20**Defensive%20Humor**%20or%20**Compensatory%20Fitness**%20(getting%20extremely%20muscular)', operatorName: 'The%20Pity%2FSeniority%20Operator', operatorMechanism: 'they%20are%20perceived%20as%20%22Older%22%20or%20%22Unlucky%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_36_when_gate: BehaviorAssess { stage: 'when', text: 'they%20interact%20with%20peers%20of%20the%20same%20age' })
+
+// Topology
+(loop_36_start)-[:PROCESS]->(loop_36_given_gate)
+(loop_36_given_gate)-[:PROCESS { case: "ok" }]->(loop_36_when_gate)
+(loop_36_given_gate)-[:PROCESS { case: "err" }]->(loop_36_inactive)
+(loop_36_when_gate)-[:PROCESS { case: "ok" }]->(loop_36_context)
+(loop_36_when_gate)-[:PROCESS { case: "err" }]->(loop_36_inactive)
+(loop_36_context)-[:FORK { strategy: "behavior-branches" }]->(loop_36_context_branch | loop_36_then_branch | loop_36_operator_branch | loop_36_result_branch | loop_36_taxonomy_branch | loop_36_intervention_recognize | loop_36_intervention_interdict | loop_36_intervention_minimize)
+(loop_36_context_branch | loop_36_then_branch | loop_36_operator_branch | loop_36_result_branch | loop_36_taxonomy_branch | loop_36_intervention_recognize | loop_36_intervention_interdict | loop_36_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_36_verdict)
+(loop_36_inactive)-[:PROCESS]->(loop_36_sink)
+(loop_36_verdict)-[:PROCESS]->(loop_36_sink)
+(loop_36_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_36_then_branch)
+(loop_36_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_36_then_branch)
+(loop_36_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_36_then_branch)

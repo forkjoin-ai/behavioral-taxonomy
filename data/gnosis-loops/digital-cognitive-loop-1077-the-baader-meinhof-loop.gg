@@ -1,0 +1,33 @@
+// behavioral-loop-1077.gg
+// Executable Gnosis projection for The Baader-Meinhof Loop.
+
+// Nodes
+(loop_1077_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1077_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1077_given_gate: BehaviorAssess { stage: 'given', text: 'Learning%20a%20new%20word%20or%20concept' })
+(loop_1077_inactive: BehaviorTerminal { loopId: 1077, loopName: 'The%20Baader-Meinhof%20Loop' })
+(loop_1077_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Set%20intentional%20friction%20for%20problematic%20tech%20behaviors' })
+(loop_1077_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1077_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20internal%20narratives%20affect%20external%20behavior' })
+(loop_1077_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rendering%20Engine', mechanism: 'Selective%20attention%20filter%20is%20updated%2C%20allowing%20previously%20ignored%20data%20to%20pass.' })
+(loop_1077_result_branch: BehaviorEmit { emission: 'result', text: "The%20feeling%20that%20the%20simulation%20just%20'patched'%20the%20data%20in" })
+(loop_1077_sink: BehaviorSink)
+(loop_1077_start: BehaviorStart { loopId: 1077, loopName: 'The%20Baader-Meinhof%20Loop', given: 'Learning%20a%20new%20word%20or%20concept', when: 'Navigating%20the%20world%20the%20next%20day', then: 'It%20appears%20everywhere', result: "The%20feeling%20that%20the%20simulation%20just%20'patched'%20the%20data%20in", operatorName: 'The%20Rendering%20Engine', operatorMechanism: 'Selective%20attention%20filter%20is%20updated%2C%20allowing%20previously%20ignored%20data%20to%20pass.', origin: 'DIGITAL', modality: 'META', mutability: 'FLUID', valences: 'DISRUPTION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20internal%20narratives%20affect%20external%20behavior', intervention_interdict: 'Set%20intentional%20friction%20for%20problematic%20tech%20behaviors', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1077_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'DIGITAL', modality: 'META', mutability: 'FLUID', valences: 'DISRUPTION' })
+(loop_1077_then_branch: BehaviorEmit { emission: 'then', text: 'It%20appears%20everywhere' })
+(loop_1077_verdict: BehaviorVerdict { loopId: 1077, loopName: 'The%20Baader-Meinhof%20Loop', then: 'It%20appears%20everywhere', result: "The%20feeling%20that%20the%20simulation%20just%20'patched'%20the%20data%20in", operatorName: 'The%20Rendering%20Engine', operatorMechanism: 'Selective%20attention%20filter%20is%20updated%2C%20allowing%20previously%20ignored%20data%20to%20pass.', origin: 'DIGITAL', modality: 'META', mutability: 'FLUID', valences: 'DISRUPTION' })
+(loop_1077_when_gate: BehaviorAssess { stage: 'when', text: 'Navigating%20the%20world%20the%20next%20day' })
+
+// Topology
+(loop_1077_start)-[:PROCESS]->(loop_1077_given_gate)
+(loop_1077_given_gate)-[:PROCESS { case: "ok" }]->(loop_1077_when_gate)
+(loop_1077_given_gate)-[:PROCESS { case: "err" }]->(loop_1077_inactive)
+(loop_1077_when_gate)-[:PROCESS { case: "ok" }]->(loop_1077_context)
+(loop_1077_when_gate)-[:PROCESS { case: "err" }]->(loop_1077_inactive)
+(loop_1077_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1077_context_branch | loop_1077_then_branch | loop_1077_operator_branch | loop_1077_result_branch | loop_1077_taxonomy_branch | loop_1077_intervention_recognize | loop_1077_intervention_interdict | loop_1077_intervention_minimize)
+(loop_1077_context_branch | loop_1077_then_branch | loop_1077_operator_branch | loop_1077_result_branch | loop_1077_taxonomy_branch | loop_1077_intervention_recognize | loop_1077_intervention_interdict | loop_1077_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1077_verdict)
+(loop_1077_inactive)-[:PROCESS]->(loop_1077_sink)
+(loop_1077_verdict)-[:PROCESS]->(loop_1077_sink)
+(loop_1077_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1077_then_branch)
+(loop_1077_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1077_then_branch)
+(loop_1077_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1077_then_branch)

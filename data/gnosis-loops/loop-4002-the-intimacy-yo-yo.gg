@@ -1,0 +1,33 @@
+// behavioral-loop-4002.gg
+// Executable Gnosis projection for The Intimacy Yo-Yo.
+
+// Nodes
+(loop_4002_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_4002_context_branch: BehaviorEmit { emission: 'context' })
+(loop_4002_given_gate: BehaviorAssess { stage: 'given', text: 'Unknown%20condition' })
+(loop_4002_inactive: BehaviorTerminal { loopId: 4002, loopName: 'The%20Intimacy%20Yo-Yo' })
+(loop_4002_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_4002_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_4002_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_4002_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_4002_result_branch: BehaviorEmit { emission: 'result', text: 'Unknown%20outcome' })
+(loop_4002_sink: BehaviorSink)
+(loop_4002_start: BehaviorStart { loopId: 4002, loopName: 'The%20Intimacy%20Yo-Yo', given: 'Unknown%20condition', when: 'Unknown%20trigger', then: 'Unknown%20response', result: 'Unknown%20outcome', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_4002_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_4002_then_branch: BehaviorEmit { emission: 'then', text: 'Unknown%20response' })
+(loop_4002_verdict: BehaviorVerdict { loopId: 4002, loopName: 'The%20Intimacy%20Yo-Yo', then: 'Unknown%20response', result: 'Unknown%20outcome', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_4002_when_gate: BehaviorAssess { stage: 'when', text: 'Unknown%20trigger' })
+
+// Topology
+(loop_4002_start)-[:PROCESS]->(loop_4002_given_gate)
+(loop_4002_given_gate)-[:PROCESS { case: "ok" }]->(loop_4002_when_gate)
+(loop_4002_given_gate)-[:PROCESS { case: "err" }]->(loop_4002_inactive)
+(loop_4002_when_gate)-[:PROCESS { case: "ok" }]->(loop_4002_context)
+(loop_4002_when_gate)-[:PROCESS { case: "err" }]->(loop_4002_inactive)
+(loop_4002_context)-[:FORK { strategy: "behavior-branches" }]->(loop_4002_context_branch | loop_4002_then_branch | loop_4002_operator_branch | loop_4002_result_branch | loop_4002_taxonomy_branch | loop_4002_intervention_recognize | loop_4002_intervention_interdict | loop_4002_intervention_minimize)
+(loop_4002_context_branch | loop_4002_then_branch | loop_4002_operator_branch | loop_4002_result_branch | loop_4002_taxonomy_branch | loop_4002_intervention_recognize | loop_4002_intervention_interdict | loop_4002_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_4002_verdict)
+(loop_4002_inactive)-[:PROCESS]->(loop_4002_sink)
+(loop_4002_verdict)-[:PROCESS]->(loop_4002_sink)
+(loop_4002_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_4002_then_branch)
+(loop_4002_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_4002_then_branch)
+(loop_4002_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_4002_then_branch)

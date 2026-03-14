@@ -1,0 +1,33 @@
+// behavioral-loop-812.gg
+// Executable Gnosis projection for The Tailor Loop.
+
+// Nodes
+(loop_812_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_812_context_branch: BehaviorEmit { emission: 'context' })
+(loop_812_given_gate: BehaviorAssess { stage: 'given', text: 'Clothes%20perfectly%20contoured%20to%20the%20body' })
+(loop_812_inactive: BehaviorTerminal { loopId: 812, loopName: 'The%20Tailor%20Loop' })
+(loop_812_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_812_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_812_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_812_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Bespoke%20Operator', mechanism: 'it%20signals%20%22Power%22%20and%20%22Control%22' })
+(loop_812_result_branch: BehaviorEmit { emission: 'result', text: 'automatic%20assumption%20of%20seniority' })
+(loop_812_sink: BehaviorSink)
+(loop_812_start: BehaviorStart { loopId: 812, loopName: 'The%20Tailor%20Loop', given: 'Clothes%20perfectly%20contoured%20to%20the%20body', when: 'standing%20next%20to%20off-the-rack%20peers', then: 'it%20signals%20%22Power%22%20and%20%22Control%22%20(The%20Bespoke%20Operator)', result: 'automatic%20assumption%20of%20seniority', operatorName: 'The%20Bespoke%20Operator', operatorMechanism: 'it%20signals%20%22Power%22%20and%20%22Control%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_812_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_812_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Power%22%20and%20%22Control%22%20(The%20Bespoke%20Operator)' })
+(loop_812_verdict: BehaviorVerdict { loopId: 812, loopName: 'The%20Tailor%20Loop', then: 'it%20signals%20%22Power%22%20and%20%22Control%22%20(The%20Bespoke%20Operator)', result: 'automatic%20assumption%20of%20seniority', operatorName: 'The%20Bespoke%20Operator', operatorMechanism: 'it%20signals%20%22Power%22%20and%20%22Control%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_812_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20next%20to%20off-the-rack%20peers' })
+
+// Topology
+(loop_812_start)-[:PROCESS]->(loop_812_given_gate)
+(loop_812_given_gate)-[:PROCESS { case: "ok" }]->(loop_812_when_gate)
+(loop_812_given_gate)-[:PROCESS { case: "err" }]->(loop_812_inactive)
+(loop_812_when_gate)-[:PROCESS { case: "ok" }]->(loop_812_context)
+(loop_812_when_gate)-[:PROCESS { case: "err" }]->(loop_812_inactive)
+(loop_812_context)-[:FORK { strategy: "behavior-branches" }]->(loop_812_context_branch | loop_812_then_branch | loop_812_operator_branch | loop_812_result_branch | loop_812_taxonomy_branch | loop_812_intervention_recognize | loop_812_intervention_interdict | loop_812_intervention_minimize)
+(loop_812_context_branch | loop_812_then_branch | loop_812_operator_branch | loop_812_result_branch | loop_812_taxonomy_branch | loop_812_intervention_recognize | loop_812_intervention_interdict | loop_812_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_812_verdict)
+(loop_812_inactive)-[:PROCESS]->(loop_812_sink)
+(loop_812_verdict)-[:PROCESS]->(loop_812_sink)
+(loop_812_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_812_then_branch)
+(loop_812_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_812_then_branch)
+(loop_812_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_812_then_branch)

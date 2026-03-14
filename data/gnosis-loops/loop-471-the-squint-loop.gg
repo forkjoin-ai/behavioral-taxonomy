@@ -1,0 +1,33 @@
+// behavioral-loop-471.gg
+// Executable Gnosis projection for The Squint Loop.
+
+// Nodes
+(loop_471_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_471_context_branch: BehaviorEmit { emission: 'context' })
+(loop_471_given_gate: BehaviorAssess { stage: 'given', text: 'Narrowing%20eyelids%20to%20focus%20(Myopia%20or%20habit)' })
+(loop_471_inactive: BehaviorTerminal { loopId: 471, loopName: 'The%20Squint%20Loop' })
+(loop_471_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_471_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_471_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_471_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Critical%20Operator', mechanism: 'it%20looks%20like%20%22Disbelief%22%20or%20%22Judgment%22' })
+(loop_471_result_branch: BehaviorEmit { emission: 'result', text: "the%20speaker%20becoming%20defensive%20(%22Why%20don't%20you%20believe%20me%3F%22)" })
+(loop_471_sink: BehaviorSink)
+(loop_471_start: BehaviorStart { loopId: 471, loopName: 'The%20Squint%20Loop', given: 'Narrowing%20eyelids%20to%20focus%20(Myopia%20or%20habit)', when: 'listening%20to%20a%20new%20idea', then: 'it%20looks%20like%20%22Disbelief%22%20or%20%22Judgment%22%20(The%20Critical%20Operator)', result: "the%20speaker%20becoming%20defensive%20(%22Why%20don't%20you%20believe%20me%3F%22)", operatorName: 'The%20Critical%20Operator', operatorMechanism: 'it%20looks%20like%20%22Disbelief%22%20or%20%22Judgment%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_471_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_471_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Disbelief%22%20or%20%22Judgment%22%20(The%20Critical%20Operator)' })
+(loop_471_verdict: BehaviorVerdict { loopId: 471, loopName: 'The%20Squint%20Loop', then: 'it%20looks%20like%20%22Disbelief%22%20or%20%22Judgment%22%20(The%20Critical%20Operator)', result: "the%20speaker%20becoming%20defensive%20(%22Why%20don't%20you%20believe%20me%3F%22)", operatorName: 'The%20Critical%20Operator', operatorMechanism: 'it%20looks%20like%20%22Disbelief%22%20or%20%22Judgment%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_471_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20to%20a%20new%20idea' })
+
+// Topology
+(loop_471_start)-[:PROCESS]->(loop_471_given_gate)
+(loop_471_given_gate)-[:PROCESS { case: "ok" }]->(loop_471_when_gate)
+(loop_471_given_gate)-[:PROCESS { case: "err" }]->(loop_471_inactive)
+(loop_471_when_gate)-[:PROCESS { case: "ok" }]->(loop_471_context)
+(loop_471_when_gate)-[:PROCESS { case: "err" }]->(loop_471_inactive)
+(loop_471_context)-[:FORK { strategy: "behavior-branches" }]->(loop_471_context_branch | loop_471_then_branch | loop_471_operator_branch | loop_471_result_branch | loop_471_taxonomy_branch | loop_471_intervention_recognize | loop_471_intervention_interdict | loop_471_intervention_minimize)
+(loop_471_context_branch | loop_471_then_branch | loop_471_operator_branch | loop_471_result_branch | loop_471_taxonomy_branch | loop_471_intervention_recognize | loop_471_intervention_interdict | loop_471_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_471_verdict)
+(loop_471_inactive)-[:PROCESS]->(loop_471_sink)
+(loop_471_verdict)-[:PROCESS]->(loop_471_sink)
+(loop_471_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_471_then_branch)
+(loop_471_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_471_then_branch)
+(loop_471_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_471_then_branch)

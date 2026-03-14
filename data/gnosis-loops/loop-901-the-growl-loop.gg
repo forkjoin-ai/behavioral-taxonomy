@@ -1,0 +1,33 @@
+// behavioral-loop-901.gg
+// Executable Gnosis projection for The Growl Loop.
+
+// Nodes
+(loop_901_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_901_context_branch: BehaviorEmit { emission: 'context' })
+(loop_901_given_gate: BehaviorAssess { stage: 'given', text: 'Loud%20stomach%20churning%20during%20digestion%2Fhunger' })
+(loop_901_inactive: BehaviorTerminal { loopId: 901, loopName: 'The%20Growl%20Loop' })
+(loop_901_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_901_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_901_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_901_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Internal%20Operator', mechanism: 'the%20sound%20echoes' })
+(loop_901_result_branch: BehaviorEmit { emission: 'result', text: 'extreme%20embarrassment%20and%20the%20individual%20hunching%20over%20to%20muffle%20the%20sound' })
+(loop_901_sink: BehaviorSink)
+(loop_901_start: BehaviorStart { loopId: 901, loopName: 'The%20Growl%20Loop', given: 'Loud%20stomach%20churning%20during%20digestion%2Fhunger', when: 'in%20a%20silent%20meeting%20or%20exam', then: 'the%20sound%20echoes%20(The%20Internal%20Operator)', result: 'extreme%20embarrassment%20and%20the%20individual%20hunching%20over%20to%20muffle%20the%20sound', operatorName: 'The%20Internal%20Operator', operatorMechanism: 'the%20sound%20echoes', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_901_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_901_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20echoes%20(The%20Internal%20Operator)' })
+(loop_901_verdict: BehaviorVerdict { loopId: 901, loopName: 'The%20Growl%20Loop', then: 'the%20sound%20echoes%20(The%20Internal%20Operator)', result: 'extreme%20embarrassment%20and%20the%20individual%20hunching%20over%20to%20muffle%20the%20sound', operatorName: 'The%20Internal%20Operator', operatorMechanism: 'the%20sound%20echoes', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_901_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20silent%20meeting%20or%20exam' })
+
+// Topology
+(loop_901_start)-[:PROCESS]->(loop_901_given_gate)
+(loop_901_given_gate)-[:PROCESS { case: "ok" }]->(loop_901_when_gate)
+(loop_901_given_gate)-[:PROCESS { case: "err" }]->(loop_901_inactive)
+(loop_901_when_gate)-[:PROCESS { case: "ok" }]->(loop_901_context)
+(loop_901_when_gate)-[:PROCESS { case: "err" }]->(loop_901_inactive)
+(loop_901_context)-[:FORK { strategy: "behavior-branches" }]->(loop_901_context_branch | loop_901_then_branch | loop_901_operator_branch | loop_901_result_branch | loop_901_taxonomy_branch | loop_901_intervention_recognize | loop_901_intervention_interdict | loop_901_intervention_minimize)
+(loop_901_context_branch | loop_901_then_branch | loop_901_operator_branch | loop_901_result_branch | loop_901_taxonomy_branch | loop_901_intervention_recognize | loop_901_intervention_interdict | loop_901_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_901_verdict)
+(loop_901_inactive)-[:PROCESS]->(loop_901_sink)
+(loop_901_verdict)-[:PROCESS]->(loop_901_sink)
+(loop_901_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_901_then_branch)
+(loop_901_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_901_then_branch)
+(loop_901_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_901_then_branch)

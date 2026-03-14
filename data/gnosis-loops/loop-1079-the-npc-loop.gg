@@ -1,0 +1,33 @@
+// behavioral-loop-1079.gg
+// Executable Gnosis projection for The NPC Loop.
+
+// Nodes
+(loop_1079_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1079_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1079_given_gate: BehaviorAssess { stage: 'given', text: 'Walking%20through%20a%20crowded%20city' })
+(loop_1079_inactive: BehaviorTerminal { loopId: 1079, loopName: 'The%20NPC%20Loop' })
+(loop_1079_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1079_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1079_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_1079_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20brain%20renders%20them%20as%20%22Generic%22%20to%20save%20processing%20power%20(The%20Low%20Poly)' })
+(loop_1079_result_branch: BehaviorEmit { emission: 'result', text: 'shock%20when%20a%20stranger%20suddenly%20interacts%20with%20high%20specificity' })
+(loop_1079_sink: BehaviorSink)
+(loop_1079_start: BehaviorStart { loopId: 1079, loopName: 'The%20NPC%20Loop', given: 'Walking%20through%20a%20crowded%20city', when: 'looking%20at%20faces', then: 'the%20brain%20renders%20them%20as%20%22Generic%22%20to%20save%20processing%20power%20(The%20Low%20Poly)', result: 'shock%20when%20a%20stranger%20suddenly%20interacts%20with%20high%20specificity', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20brain%20renders%20them%20as%20%22Generic%22%20to%20save%20processing%20power%20(The%20Low%20Poly)', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1079_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1079_then_branch: BehaviorEmit { emission: 'then', text: 'the%20brain%20renders%20them%20as%20%22Generic%22%20to%20save%20processing%20power%20(The%20Low%20Poly)' })
+(loop_1079_verdict: BehaviorVerdict { loopId: 1079, loopName: 'The%20NPC%20Loop', then: 'the%20brain%20renders%20them%20as%20%22Generic%22%20to%20save%20processing%20power%20(The%20Low%20Poly)', result: 'shock%20when%20a%20stranger%20suddenly%20interacts%20with%20high%20specificity', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20brain%20renders%20them%20as%20%22Generic%22%20to%20save%20processing%20power%20(The%20Low%20Poly)', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1079_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20at%20faces' })
+
+// Topology
+(loop_1079_start)-[:PROCESS]->(loop_1079_given_gate)
+(loop_1079_given_gate)-[:PROCESS { case: "ok" }]->(loop_1079_when_gate)
+(loop_1079_given_gate)-[:PROCESS { case: "err" }]->(loop_1079_inactive)
+(loop_1079_when_gate)-[:PROCESS { case: "ok" }]->(loop_1079_context)
+(loop_1079_when_gate)-[:PROCESS { case: "err" }]->(loop_1079_inactive)
+(loop_1079_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1079_context_branch | loop_1079_then_branch | loop_1079_operator_branch | loop_1079_result_branch | loop_1079_taxonomy_branch | loop_1079_intervention_recognize | loop_1079_intervention_interdict | loop_1079_intervention_minimize)
+(loop_1079_context_branch | loop_1079_then_branch | loop_1079_operator_branch | loop_1079_result_branch | loop_1079_taxonomy_branch | loop_1079_intervention_recognize | loop_1079_intervention_interdict | loop_1079_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1079_verdict)
+(loop_1079_inactive)-[:PROCESS]->(loop_1079_sink)
+(loop_1079_verdict)-[:PROCESS]->(loop_1079_sink)
+(loop_1079_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1079_then_branch)
+(loop_1079_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1079_then_branch)
+(loop_1079_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1079_then_branch)

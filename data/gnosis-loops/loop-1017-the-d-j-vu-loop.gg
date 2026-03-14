@@ -1,0 +1,33 @@
+// behavioral-loop-1017.gg
+// Executable Gnosis projection for The Déjà Vu Loop.
+
+// Nodes
+(loop_1017_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1017_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1017_given_gate: BehaviorAssess { stage: 'given', text: 'Social%20anxiety%20causing%20short-term%20memory%20slip' })
+(loop_1017_inactive: BehaviorTerminal { loopId: 1017, loopName: 'The%20D%C3%A9j%C3%A0%20Vu%20Loop' })
+(loop_1017_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1017_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1017_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1017_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20RAM%20Failure%20Operator', mechanism: 'asking%20%22What%20was%20your%20name%3F%22%205%20seconds%20later' })
+(loop_1017_result_branch: BehaviorEmit { emission: 'result', text: 'the%20acquaintance%20feeling%20unimportant' })
+(loop_1017_sink: BehaviorSink)
+(loop_1017_start: BehaviorStart { loopId: 1017, loopName: 'The%20D%C3%A9j%C3%A0%20Vu%20Loop', given: 'Social%20anxiety%20causing%20short-term%20memory%20slip', when: 'introduced%20to%20someone', then: 'asking%20%22What%20was%20your%20name%3F%22%205%20seconds%20later%20(The%20RAM%20Failure%20Operator)', result: 'the%20acquaintance%20feeling%20unimportant', operatorName: 'The%20RAM%20Failure%20Operator', operatorMechanism: 'asking%20%22What%20was%20your%20name%3F%22%205%20seconds%20later', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1017_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1017_then_branch: BehaviorEmit { emission: 'then', text: 'asking%20%22What%20was%20your%20name%3F%22%205%20seconds%20later%20(The%20RAM%20Failure%20Operator)' })
+(loop_1017_verdict: BehaviorVerdict { loopId: 1017, loopName: 'The%20D%C3%A9j%C3%A0%20Vu%20Loop', then: 'asking%20%22What%20was%20your%20name%3F%22%205%20seconds%20later%20(The%20RAM%20Failure%20Operator)', result: 'the%20acquaintance%20feeling%20unimportant', operatorName: 'The%20RAM%20Failure%20Operator', operatorMechanism: 'asking%20%22What%20was%20your%20name%3F%22%205%20seconds%20later', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1017_when_gate: BehaviorAssess { stage: 'when', text: 'introduced%20to%20someone' })
+
+// Topology
+(loop_1017_start)-[:PROCESS]->(loop_1017_given_gate)
+(loop_1017_given_gate)-[:PROCESS { case: "ok" }]->(loop_1017_when_gate)
+(loop_1017_given_gate)-[:PROCESS { case: "err" }]->(loop_1017_inactive)
+(loop_1017_when_gate)-[:PROCESS { case: "ok" }]->(loop_1017_context)
+(loop_1017_when_gate)-[:PROCESS { case: "err" }]->(loop_1017_inactive)
+(loop_1017_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1017_context_branch | loop_1017_then_branch | loop_1017_operator_branch | loop_1017_result_branch | loop_1017_taxonomy_branch | loop_1017_intervention_recognize | loop_1017_intervention_interdict | loop_1017_intervention_minimize)
+(loop_1017_context_branch | loop_1017_then_branch | loop_1017_operator_branch | loop_1017_result_branch | loop_1017_taxonomy_branch | loop_1017_intervention_recognize | loop_1017_intervention_interdict | loop_1017_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1017_verdict)
+(loop_1017_inactive)-[:PROCESS]->(loop_1017_sink)
+(loop_1017_verdict)-[:PROCESS]->(loop_1017_sink)
+(loop_1017_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1017_then_branch)
+(loop_1017_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1017_then_branch)
+(loop_1017_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1017_then_branch)

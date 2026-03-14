@@ -1,0 +1,33 @@
+// behavioral-loop-293.gg
+// Executable Gnosis projection for The Manspread Loop.
+
+// Nodes
+(loop_293_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_293_context_branch: BehaviorEmit { emission: 'context' })
+(loop_293_given_gate: BehaviorAssess { stage: 'given', text: 'Structural%20hip%20socket%20angle%20favoring%20abduction' })
+(loop_293_inactive: BehaviorTerminal { loopId: 293, loopName: 'The%20Manspread%20Loop' })
+(loop_293_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_293_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_293_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_293_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dominance%2FRude%20Operator', mechanism: 'the%20individual%20consumes%20adjacent%20space' })
+(loop_293_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20physically%20shrinking%20away%2C%20reinforcing%20a%20**Territorial%20Self-Concept**' })
+(loop_293_sink: BehaviorSink)
+(loop_293_start: BehaviorStart { loopId: 293, loopName: 'The%20Manspread%20Loop', given: 'Structural%20hip%20socket%20angle%20favoring%20abduction', when: 'sitting%20on%20transit%20or%20benches', then: 'the%20individual%20consumes%20adjacent%20space%20(The%20Dominance%2FRude%20Operator)', result: 'peers%20physically%20shrinking%20away%2C%20reinforcing%20a%20**Territorial%20Self-Concept**', operatorName: 'The%20Dominance%2FRude%20Operator', operatorMechanism: 'the%20individual%20consumes%20adjacent%20space', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_293_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_293_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20consumes%20adjacent%20space%20(The%20Dominance%2FRude%20Operator)' })
+(loop_293_verdict: BehaviorVerdict { loopId: 293, loopName: 'The%20Manspread%20Loop', then: 'the%20individual%20consumes%20adjacent%20space%20(The%20Dominance%2FRude%20Operator)', result: 'peers%20physically%20shrinking%20away%2C%20reinforcing%20a%20**Territorial%20Self-Concept**', operatorName: 'The%20Dominance%2FRude%20Operator', operatorMechanism: 'the%20individual%20consumes%20adjacent%20space', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_293_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20on%20transit%20or%20benches' })
+
+// Topology
+(loop_293_start)-[:PROCESS]->(loop_293_given_gate)
+(loop_293_given_gate)-[:PROCESS { case: "ok" }]->(loop_293_when_gate)
+(loop_293_given_gate)-[:PROCESS { case: "err" }]->(loop_293_inactive)
+(loop_293_when_gate)-[:PROCESS { case: "ok" }]->(loop_293_context)
+(loop_293_when_gate)-[:PROCESS { case: "err" }]->(loop_293_inactive)
+(loop_293_context)-[:FORK { strategy: "behavior-branches" }]->(loop_293_context_branch | loop_293_then_branch | loop_293_operator_branch | loop_293_result_branch | loop_293_taxonomy_branch | loop_293_intervention_recognize | loop_293_intervention_interdict | loop_293_intervention_minimize)
+(loop_293_context_branch | loop_293_then_branch | loop_293_operator_branch | loop_293_result_branch | loop_293_taxonomy_branch | loop_293_intervention_recognize | loop_293_intervention_interdict | loop_293_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_293_verdict)
+(loop_293_inactive)-[:PROCESS]->(loop_293_sink)
+(loop_293_verdict)-[:PROCESS]->(loop_293_sink)
+(loop_293_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_293_then_branch)
+(loop_293_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_293_then_branch)
+(loop_293_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_293_then_branch)

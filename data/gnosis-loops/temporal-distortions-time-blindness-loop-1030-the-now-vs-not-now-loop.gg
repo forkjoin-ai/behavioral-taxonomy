@@ -1,0 +1,33 @@
+// behavioral-loop-1030.gg
+// Executable Gnosis projection for The Now vs. Not Now Loop.
+
+// Nodes
+(loop_1030_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1030_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1030_given_gate: BehaviorAssess { stage: 'given', text: 'Lack%20of%20internal%20clock' })
+(loop_1030_inactive: BehaviorTerminal { loopId: 1030, loopName: 'The%20Now%20vs.%20Not%20Now%20Loop' })
+(loop_1030_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1030_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1030_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20recursive%20self-doubt%20or%20self-fulfilling%20prophecies' })
+(loop_1030_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20event%20does%20not%20exist%20until%20T-minus%201%20hour%20(The%20Panic%20Horizon)' })
+(loop_1030_result_branch: BehaviorEmit { emission: 'result', text: 'a%20calm%20demeanor%20followed%20by%20explosive%2C%20manic%20productivity' })
+(loop_1030_sink: BehaviorSink)
+(loop_1030_start: BehaviorStart { loopId: 1030, loopName: 'The%20Now%20vs.%20Not%20Now%20Loop', given: 'Lack%20of%20internal%20clock', when: 'told%20an%20event%20is%20in%203%20weeks', then: 'the%20event%20does%20not%20exist%20until%20T-minus%201%20hour%20(The%20Panic%20Horizon)', result: 'a%20calm%20demeanor%20followed%20by%20explosive%2C%20manic%20productivity', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20event%20does%20not%20exist%20until%20T-minus%201%20hour%20(The%20Panic%20Horizon)', origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20recursive%20self-doubt%20or%20self-fulfilling%20prophecies', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_1030_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION' })
+(loop_1030_then_branch: BehaviorEmit { emission: 'then', text: 'the%20event%20does%20not%20exist%20until%20T-minus%201%20hour%20(The%20Panic%20Horizon)' })
+(loop_1030_verdict: BehaviorVerdict { loopId: 1030, loopName: 'The%20Now%20vs.%20Not%20Now%20Loop', then: 'the%20event%20does%20not%20exist%20until%20T-minus%201%20hour%20(The%20Panic%20Horizon)', result: 'a%20calm%20demeanor%20followed%20by%20explosive%2C%20manic%20productivity', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20event%20does%20not%20exist%20until%20T-minus%201%20hour%20(The%20Panic%20Horizon)', origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION' })
+(loop_1030_when_gate: BehaviorAssess { stage: 'when', text: 'told%20an%20event%20is%20in%203%20weeks' })
+
+// Topology
+(loop_1030_start)-[:PROCESS]->(loop_1030_given_gate)
+(loop_1030_given_gate)-[:PROCESS { case: "ok" }]->(loop_1030_when_gate)
+(loop_1030_given_gate)-[:PROCESS { case: "err" }]->(loop_1030_inactive)
+(loop_1030_when_gate)-[:PROCESS { case: "ok" }]->(loop_1030_context)
+(loop_1030_when_gate)-[:PROCESS { case: "err" }]->(loop_1030_inactive)
+(loop_1030_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1030_context_branch | loop_1030_then_branch | loop_1030_operator_branch | loop_1030_result_branch | loop_1030_taxonomy_branch | loop_1030_intervention_recognize | loop_1030_intervention_interdict | loop_1030_intervention_minimize)
+(loop_1030_context_branch | loop_1030_then_branch | loop_1030_operator_branch | loop_1030_result_branch | loop_1030_taxonomy_branch | loop_1030_intervention_recognize | loop_1030_intervention_interdict | loop_1030_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1030_verdict)
+(loop_1030_inactive)-[:PROCESS]->(loop_1030_sink)
+(loop_1030_verdict)-[:PROCESS]->(loop_1030_sink)
+(loop_1030_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1030_then_branch)
+(loop_1030_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1030_then_branch)
+(loop_1030_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1030_then_branch)

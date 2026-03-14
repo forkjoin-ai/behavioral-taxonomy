@@ -1,0 +1,33 @@
+// behavioral-loop-579.gg
+// Executable Gnosis projection for The Honk Loop.
+
+// Nodes
+(loop_579_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_579_context_branch: BehaviorEmit { emission: 'context' })
+(loop_579_given_gate: BehaviorAssess { stage: 'given', text: 'Deviated%20septum%20or%20severe%20allergies%20(Hyponasality)' })
+(loop_579_inactive: BehaviorTerminal { loopId: 579, loopName: 'The%20Honk%20Loop' })
+(loop_579_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_579_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_579_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_579_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Urkel%20Operator', mechanism: 'the%20voice%20sounds%20%22Stuffy%22%20or%20%22Comical%22' })
+(loop_579_result_branch: BehaviorEmit { emission: 'result', text: 'difficulty%20being%20cast%20in%20%22Seductive%22%20or%20%22Commanding%22%20roles' })
+(loop_579_sink: BehaviorSink)
+(loop_579_start: BehaviorStart { loopId: 579, loopName: 'The%20Honk%20Loop', given: 'Deviated%20septum%20or%20severe%20allergies%20(Hyponasality)', when: 'trying%20to%20sound%20romantic%20or%20serious', then: 'the%20voice%20sounds%20%22Stuffy%22%20or%20%22Comical%22%20(The%20Urkel%20Operator)', result: 'difficulty%20being%20cast%20in%20%22Seductive%22%20or%20%22Commanding%22%20roles', operatorName: 'The%20Urkel%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Stuffy%22%20or%20%22Comical%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_579_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_579_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20sounds%20%22Stuffy%22%20or%20%22Comical%22%20(The%20Urkel%20Operator)' })
+(loop_579_verdict: BehaviorVerdict { loopId: 579, loopName: 'The%20Honk%20Loop', then: 'the%20voice%20sounds%20%22Stuffy%22%20or%20%22Comical%22%20(The%20Urkel%20Operator)', result: 'difficulty%20being%20cast%20in%20%22Seductive%22%20or%20%22Commanding%22%20roles', operatorName: 'The%20Urkel%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Stuffy%22%20or%20%22Comical%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_579_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20to%20sound%20romantic%20or%20serious' })
+
+// Topology
+(loop_579_start)-[:PROCESS]->(loop_579_given_gate)
+(loop_579_given_gate)-[:PROCESS { case: "ok" }]->(loop_579_when_gate)
+(loop_579_given_gate)-[:PROCESS { case: "err" }]->(loop_579_inactive)
+(loop_579_when_gate)-[:PROCESS { case: "ok" }]->(loop_579_context)
+(loop_579_when_gate)-[:PROCESS { case: "err" }]->(loop_579_inactive)
+(loop_579_context)-[:FORK { strategy: "behavior-branches" }]->(loop_579_context_branch | loop_579_then_branch | loop_579_operator_branch | loop_579_result_branch | loop_579_taxonomy_branch | loop_579_intervention_recognize | loop_579_intervention_interdict | loop_579_intervention_minimize)
+(loop_579_context_branch | loop_579_then_branch | loop_579_operator_branch | loop_579_result_branch | loop_579_taxonomy_branch | loop_579_intervention_recognize | loop_579_intervention_interdict | loop_579_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_579_verdict)
+(loop_579_inactive)-[:PROCESS]->(loop_579_sink)
+(loop_579_verdict)-[:PROCESS]->(loop_579_sink)
+(loop_579_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_579_then_branch)
+(loop_579_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_579_then_branch)
+(loop_579_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_579_then_branch)

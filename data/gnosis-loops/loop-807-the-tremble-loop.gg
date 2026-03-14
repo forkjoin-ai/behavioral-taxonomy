@@ -1,0 +1,33 @@
+// behavioral-loop-807.gg
+// Executable Gnosis projection for The Tremble Loop.
+
+// Nodes
+(loop_807_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_807_context_branch: BehaviorEmit { emission: 'context' })
+(loop_807_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20shivering%20in%20a%20warm%20room' })
+(loop_807_inactive: BehaviorTerminal { loopId: 807, loopName: 'The%20Tremble%20Loop' })
+(loop_807_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Change%20or%20modify%20the%20triggering%20environment' })
+(loop_807_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_807_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_807_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Shake%20Operator', mechanism: 'it%20signals%20%22Systemic%20Shock%22%20or%20%22Withdrawal%22' })
+(loop_807_result_branch: BehaviorEmit { emission: 'result', text: 'concern%20or%20suspicion%20of%20drug%20dependency' })
+(loop_807_sink: BehaviorSink)
+(loop_807_start: BehaviorStart { loopId: 807, loopName: 'The%20Tremble%20Loop', given: 'Visible%20shivering%20in%20a%20warm%20room', when: 'sitting', then: 'it%20signals%20%22Systemic%20Shock%22%20or%20%22Withdrawal%22%20(The%20Shake%20Operator)', result: 'concern%20or%20suspicion%20of%20drug%20dependency', operatorName: 'The%20Shake%20Operator', operatorMechanism: 'it%20signals%20%22Systemic%20Shock%22%20or%20%22Withdrawal%22', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Change%20or%20modify%20the%20triggering%20environment', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_807_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION' })
+(loop_807_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Systemic%20Shock%22%20or%20%22Withdrawal%22%20(The%20Shake%20Operator)' })
+(loop_807_verdict: BehaviorVerdict { loopId: 807, loopName: 'The%20Tremble%20Loop', then: 'it%20signals%20%22Systemic%20Shock%22%20or%20%22Withdrawal%22%20(The%20Shake%20Operator)', result: 'concern%20or%20suspicion%20of%20drug%20dependency', operatorName: 'The%20Shake%20Operator', operatorMechanism: 'it%20signals%20%22Systemic%20Shock%22%20or%20%22Withdrawal%22', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DECEPTION' })
+(loop_807_when_gate: BehaviorAssess { stage: 'when', text: 'sitting' })
+
+// Topology
+(loop_807_start)-[:PROCESS]->(loop_807_given_gate)
+(loop_807_given_gate)-[:PROCESS { case: "ok" }]->(loop_807_when_gate)
+(loop_807_given_gate)-[:PROCESS { case: "err" }]->(loop_807_inactive)
+(loop_807_when_gate)-[:PROCESS { case: "ok" }]->(loop_807_context)
+(loop_807_when_gate)-[:PROCESS { case: "err" }]->(loop_807_inactive)
+(loop_807_context)-[:FORK { strategy: "behavior-branches" }]->(loop_807_context_branch | loop_807_then_branch | loop_807_operator_branch | loop_807_result_branch | loop_807_taxonomy_branch | loop_807_intervention_recognize | loop_807_intervention_interdict | loop_807_intervention_minimize)
+(loop_807_context_branch | loop_807_then_branch | loop_807_operator_branch | loop_807_result_branch | loop_807_taxonomy_branch | loop_807_intervention_recognize | loop_807_intervention_interdict | loop_807_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_807_verdict)
+(loop_807_inactive)-[:PROCESS]->(loop_807_sink)
+(loop_807_verdict)-[:PROCESS]->(loop_807_sink)
+(loop_807_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_807_then_branch)
+(loop_807_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_807_then_branch)
+(loop_807_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_807_then_branch)

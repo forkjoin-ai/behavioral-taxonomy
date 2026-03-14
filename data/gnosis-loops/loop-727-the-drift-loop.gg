@@ -1,0 +1,33 @@
+// behavioral-loop-727.gg
+// Executable Gnosis projection for The Drift Loop.
+
+// Nodes
+(loop_727_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_727_context_branch: BehaviorEmit { emission: 'context' })
+(loop_727_given_gate: BehaviorAssess { stage: 'given', text: 'Inability%20to%20walk%20in%20a%20straight%20line' })
+(loop_727_inactive: BehaviorTerminal { loopId: 727, loopName: 'The%20Drift%20Loop' })
+(loop_727_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_727_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_727_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_727_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Bumper%20Car%20Operator', mechanism: 'the%20individual%20bumps%20into%20others' })
+(loop_727_result_branch: BehaviorEmit { emission: 'result', text: 'the%20group%20physically%20distancing%20themselves%20to%20avoid%20collision' })
+(loop_727_sink: BehaviorSink)
+(loop_727_start: BehaviorStart { loopId: 727, loopName: 'The%20Drift%20Loop', given: 'Inability%20to%20walk%20in%20a%20straight%20line', when: 'walking%20with%20a%20group', then: 'the%20individual%20bumps%20into%20others%20(The%20Bumper%20Car%20Operator)', result: 'the%20group%20physically%20distancing%20themselves%20to%20avoid%20collision', operatorName: 'The%20Bumper%20Car%20Operator', operatorMechanism: 'the%20individual%20bumps%20into%20others', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_727_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'REPULSION' })
+(loop_727_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20bumps%20into%20others%20(The%20Bumper%20Car%20Operator)' })
+(loop_727_verdict: BehaviorVerdict { loopId: 727, loopName: 'The%20Drift%20Loop', then: 'the%20individual%20bumps%20into%20others%20(The%20Bumper%20Car%20Operator)', result: 'the%20group%20physically%20distancing%20themselves%20to%20avoid%20collision', operatorName: 'The%20Bumper%20Car%20Operator', operatorMechanism: 'the%20individual%20bumps%20into%20others', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'REPULSION' })
+(loop_727_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20with%20a%20group' })
+
+// Topology
+(loop_727_start)-[:PROCESS]->(loop_727_given_gate)
+(loop_727_given_gate)-[:PROCESS { case: "ok" }]->(loop_727_when_gate)
+(loop_727_given_gate)-[:PROCESS { case: "err" }]->(loop_727_inactive)
+(loop_727_when_gate)-[:PROCESS { case: "ok" }]->(loop_727_context)
+(loop_727_when_gate)-[:PROCESS { case: "err" }]->(loop_727_inactive)
+(loop_727_context)-[:FORK { strategy: "behavior-branches" }]->(loop_727_context_branch | loop_727_then_branch | loop_727_operator_branch | loop_727_result_branch | loop_727_taxonomy_branch | loop_727_intervention_recognize | loop_727_intervention_interdict | loop_727_intervention_minimize)
+(loop_727_context_branch | loop_727_then_branch | loop_727_operator_branch | loop_727_result_branch | loop_727_taxonomy_branch | loop_727_intervention_recognize | loop_727_intervention_interdict | loop_727_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_727_verdict)
+(loop_727_inactive)-[:PROCESS]->(loop_727_sink)
+(loop_727_verdict)-[:PROCESS]->(loop_727_sink)
+(loop_727_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_727_then_branch)
+(loop_727_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_727_then_branch)
+(loop_727_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_727_then_branch)

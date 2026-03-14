@@ -1,0 +1,33 @@
+// behavioral-loop-916.gg
+// Executable Gnosis projection for The Tongue Thrust Loop.
+
+// Nodes
+(loop_916_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_916_context_branch: BehaviorEmit { emission: 'context' })
+(loop_916_given_gate: BehaviorAssess { stage: 'given', text: 'Tongue%20pushing%20forward%20during%20swallow' })
+(loop_916_inactive: BehaviorTerminal { loopId: 916, loopName: 'The%20Tongue%20Thrust%20Loop' })
+(loop_916_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_916_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_916_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_916_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Effort%20Operator', mechanism: 'the%20face%20grimaces%20slightly' })
+(loop_916_result_branch: BehaviorEmit { emission: 'result', text: 'subtle%20%22Unpolished%22%20eating%20mechanics' })
+(loop_916_sink: BehaviorSink)
+(loop_916_start: BehaviorStart { loopId: 916, loopName: 'The%20Tongue%20Thrust%20Loop', given: 'Tongue%20pushing%20forward%20during%20swallow', when: 'eating%20or%20drinking', then: 'the%20face%20grimaces%20slightly%20(The%20Effort%20Operator)', result: 'subtle%20%22Unpolished%22%20eating%20mechanics', operatorName: 'The%20Effort%20Operator', operatorMechanism: 'the%20face%20grimaces%20slightly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_916_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_916_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20grimaces%20slightly%20(The%20Effort%20Operator)' })
+(loop_916_verdict: BehaviorVerdict { loopId: 916, loopName: 'The%20Tongue%20Thrust%20Loop', then: 'the%20face%20grimaces%20slightly%20(The%20Effort%20Operator)', result: 'subtle%20%22Unpolished%22%20eating%20mechanics', operatorName: 'The%20Effort%20Operator', operatorMechanism: 'the%20face%20grimaces%20slightly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_916_when_gate: BehaviorAssess { stage: 'when', text: 'eating%20or%20drinking' })
+
+// Topology
+(loop_916_start)-[:PROCESS]->(loop_916_given_gate)
+(loop_916_given_gate)-[:PROCESS { case: "ok" }]->(loop_916_when_gate)
+(loop_916_given_gate)-[:PROCESS { case: "err" }]->(loop_916_inactive)
+(loop_916_when_gate)-[:PROCESS { case: "ok" }]->(loop_916_context)
+(loop_916_when_gate)-[:PROCESS { case: "err" }]->(loop_916_inactive)
+(loop_916_context)-[:FORK { strategy: "behavior-branches" }]->(loop_916_context_branch | loop_916_then_branch | loop_916_operator_branch | loop_916_result_branch | loop_916_taxonomy_branch | loop_916_intervention_recognize | loop_916_intervention_interdict | loop_916_intervention_minimize)
+(loop_916_context_branch | loop_916_then_branch | loop_916_operator_branch | loop_916_result_branch | loop_916_taxonomy_branch | loop_916_intervention_recognize | loop_916_intervention_interdict | loop_916_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_916_verdict)
+(loop_916_inactive)-[:PROCESS]->(loop_916_sink)
+(loop_916_verdict)-[:PROCESS]->(loop_916_sink)
+(loop_916_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_916_then_branch)
+(loop_916_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_916_then_branch)
+(loop_916_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_916_then_branch)

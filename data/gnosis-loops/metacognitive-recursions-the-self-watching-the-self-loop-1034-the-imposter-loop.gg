@@ -1,0 +1,33 @@
+// behavioral-loop-1034.gg
+// Executable Gnosis projection for The Imposter Loop.
+
+// Nodes
+(loop_1034_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1034_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1034_given_gate: BehaviorAssess { stage: 'given', text: 'High%20skill%20but%20low%20internal%20validation' })
+(loop_1034_inactive: BehaviorTerminal { loopId: 1034, loopName: 'The%20Imposter%20Loop' })
+(loop_1034_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1034_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1034_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20recursive%20self-doubt%20or%20self-fulfilling%20prophecies' })
+(loop_1034_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20individual%20panics%2C%20thinking%20%22They%20have%20been%20tricked%22%20(The%20Con%20Artist)' })
+(loop_1034_result_branch: BehaviorEmit { emission: 'result', text: 'working%20harder%20to%20cover%20the%20%22crime%22%20of%20being%20competent' })
+(loop_1034_sink: BehaviorSink)
+(loop_1034_start: BehaviorStart { loopId: 1034, loopName: 'The%20Imposter%20Loop', given: 'High%20skill%20but%20low%20internal%20validation', when: 'praised', then: 'the%20individual%20panics%2C%20thinking%20%22They%20have%20been%20tricked%22%20(The%20Con%20Artist)', result: 'working%20harder%20to%20cover%20the%20%22crime%22%20of%20being%20competent', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20panics%2C%20thinking%20%22They%20have%20been%20tricked%22%20(The%20Con%20Artist)', origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20recursive%20self-doubt%20or%20self-fulfilling%20prophecies', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1034_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION' })
+(loop_1034_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20panics%2C%20thinking%20%22They%20have%20been%20tricked%22%20(The%20Con%20Artist)' })
+(loop_1034_verdict: BehaviorVerdict { loopId: 1034, loopName: 'The%20Imposter%20Loop', then: 'the%20individual%20panics%2C%20thinking%20%22They%20have%20been%20tricked%22%20(The%20Con%20Artist)', result: 'working%20harder%20to%20cover%20the%20%22crime%22%20of%20being%20competent', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20panics%2C%20thinking%20%22They%20have%20been%20tricked%22%20(The%20Con%20Artist)', origin: 'BEHAVIORAL', modality: 'META', mutability: '1', valences: 'SUBMISSION' })
+(loop_1034_when_gate: BehaviorAssess { stage: 'when', text: 'praised' })
+
+// Topology
+(loop_1034_start)-[:PROCESS]->(loop_1034_given_gate)
+(loop_1034_given_gate)-[:PROCESS { case: "ok" }]->(loop_1034_when_gate)
+(loop_1034_given_gate)-[:PROCESS { case: "err" }]->(loop_1034_inactive)
+(loop_1034_when_gate)-[:PROCESS { case: "ok" }]->(loop_1034_context)
+(loop_1034_when_gate)-[:PROCESS { case: "err" }]->(loop_1034_inactive)
+(loop_1034_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1034_context_branch | loop_1034_then_branch | loop_1034_operator_branch | loop_1034_result_branch | loop_1034_taxonomy_branch | loop_1034_intervention_recognize | loop_1034_intervention_interdict | loop_1034_intervention_minimize)
+(loop_1034_context_branch | loop_1034_then_branch | loop_1034_operator_branch | loop_1034_result_branch | loop_1034_taxonomy_branch | loop_1034_intervention_recognize | loop_1034_intervention_interdict | loop_1034_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1034_verdict)
+(loop_1034_inactive)-[:PROCESS]->(loop_1034_sink)
+(loop_1034_verdict)-[:PROCESS]->(loop_1034_sink)
+(loop_1034_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1034_then_branch)
+(loop_1034_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1034_then_branch)
+(loop_1034_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1034_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-142.gg
+// Executable Gnosis projection for The Pout Loop.
+
+// Nodes
+(loop_142_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_142_context_branch: BehaviorEmit { emission: 'context' })
+(loop_142_given_gate: BehaviorAssess { stage: 'given', text: 'Natural%20downward%20curve%20of%20mouth%20corners' })
+(loop_142_inactive: BehaviorTerminal { loopId: 142, loopName: 'The%20Pout%20Loop' })
+(loop_142_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_142_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Set%20hard%20boundaries%3B%20this%20loop%20will%20consume%20all%20available%20energy%20if%20unchecked.' })
+(loop_142_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_142_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nurture%2FAnnoyance%20Operator', mechanism: "observers%20ask%20%22What's%20wrong%3F%22%20or%20%22Are%20you%20sad%3F%22" })
+(loop_142_result_branch: BehaviorEmit { emission: 'result', text: '**Emotional%20Exhaustion**%20from%20constantly%20assuring%20people%20they%20are%20fine' })
+(loop_142_sink: BehaviorSink)
+(loop_142_start: BehaviorStart { loopId: 142, loopName: 'The%20Pout%20Loop', given: 'Natural%20downward%20curve%20of%20mouth%20corners', when: 'feeling%20neutral', then: "observers%20ask%20%22What's%20wrong%3F%22%20or%20%22Are%20you%20sad%3F%22%20(The%20Nurture%2FAnnoyance%20Operator)", result: '**Emotional%20Exhaustion**%20from%20constantly%20assuring%20people%20they%20are%20fine', operatorName: 'The%20Nurture%2FAnnoyance%20Operator', operatorMechanism: "observers%20ask%20%22What's%20wrong%3F%22%20or%20%22Are%20you%20sad%3F%22", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Set%20hard%20boundaries%3B%20this%20loop%20will%20consume%20all%20available%20energy%20if%20unchecked.' })
+(loop_142_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_142_then_branch: BehaviorEmit { emission: 'then', text: "observers%20ask%20%22What's%20wrong%3F%22%20or%20%22Are%20you%20sad%3F%22%20(The%20Nurture%2FAnnoyance%20Operator)" })
+(loop_142_verdict: BehaviorVerdict { loopId: 142, loopName: 'The%20Pout%20Loop', then: "observers%20ask%20%22What's%20wrong%3F%22%20or%20%22Are%20you%20sad%3F%22%20(The%20Nurture%2FAnnoyance%20Operator)", result: '**Emotional%20Exhaustion**%20from%20constantly%20assuring%20people%20they%20are%20fine', operatorName: 'The%20Nurture%2FAnnoyance%20Operator', operatorMechanism: "observers%20ask%20%22What's%20wrong%3F%22%20or%20%22Are%20you%20sad%3F%22", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_142_when_gate: BehaviorAssess { stage: 'when', text: 'feeling%20neutral' })
+
+// Topology
+(loop_142_start)-[:PROCESS]->(loop_142_given_gate)
+(loop_142_given_gate)-[:PROCESS { case: "ok" }]->(loop_142_when_gate)
+(loop_142_given_gate)-[:PROCESS { case: "err" }]->(loop_142_inactive)
+(loop_142_when_gate)-[:PROCESS { case: "ok" }]->(loop_142_context)
+(loop_142_when_gate)-[:PROCESS { case: "err" }]->(loop_142_inactive)
+(loop_142_context)-[:FORK { strategy: "behavior-branches" }]->(loop_142_context_branch | loop_142_then_branch | loop_142_operator_branch | loop_142_result_branch | loop_142_taxonomy_branch | loop_142_intervention_recognize | loop_142_intervention_interdict | loop_142_intervention_minimize)
+(loop_142_context_branch | loop_142_then_branch | loop_142_operator_branch | loop_142_result_branch | loop_142_taxonomy_branch | loop_142_intervention_recognize | loop_142_intervention_interdict | loop_142_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_142_verdict)
+(loop_142_inactive)-[:PROCESS]->(loop_142_sink)
+(loop_142_verdict)-[:PROCESS]->(loop_142_sink)
+(loop_142_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_142_then_branch)
+(loop_142_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_142_then_branch)
+(loop_142_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_142_then_branch)

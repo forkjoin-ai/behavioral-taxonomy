@@ -1,0 +1,33 @@
+// behavioral-loop-1000.gg
+// Executable Gnosis projection for The Hiccup Loop.
+
+// Nodes
+(loop_1000_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1000_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1000_given_gate: BehaviorAssess { stage: 'given', text: 'Involuntary%20spasms%20during%20a%20speech' })
+(loop_1000_inactive: BehaviorTerminal { loopId: 1000, loopName: 'The%20Hiccup%20Loop' })
+(loop_1000_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1000_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1000_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1000_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Glitch%20Operator', mechanism: 'the%20rhythm%20is%20destroyed' })
+(loop_1000_result_branch: BehaviorEmit { emission: 'result', text: 'the%20audience%20laughing%20*at*%20the%20speaker%2C%20not%20*with*%20them' })
+(loop_1000_sink: BehaviorSink)
+(loop_1000_start: BehaviorStart { loopId: 1000, loopName: 'The%20Hiccup%20Loop', given: 'Involuntary%20spasms%20during%20a%20speech', when: 'trying%20to%20be%20serious', then: 'the%20rhythm%20is%20destroyed%20(The%20Glitch%20Operator)', result: 'the%20audience%20laughing%20*at*%20the%20speaker%2C%20not%20*with*%20them', operatorName: 'The%20Glitch%20Operator', operatorMechanism: 'the%20rhythm%20is%20destroyed', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1000_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1000_then_branch: BehaviorEmit { emission: 'then', text: 'the%20rhythm%20is%20destroyed%20(The%20Glitch%20Operator)' })
+(loop_1000_verdict: BehaviorVerdict { loopId: 1000, loopName: 'The%20Hiccup%20Loop', then: 'the%20rhythm%20is%20destroyed%20(The%20Glitch%20Operator)', result: 'the%20audience%20laughing%20*at*%20the%20speaker%2C%20not%20*with*%20them', operatorName: 'The%20Glitch%20Operator', operatorMechanism: 'the%20rhythm%20is%20destroyed', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1000_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20to%20be%20serious' })
+
+// Topology
+(loop_1000_start)-[:PROCESS]->(loop_1000_given_gate)
+(loop_1000_given_gate)-[:PROCESS { case: "ok" }]->(loop_1000_when_gate)
+(loop_1000_given_gate)-[:PROCESS { case: "err" }]->(loop_1000_inactive)
+(loop_1000_when_gate)-[:PROCESS { case: "ok" }]->(loop_1000_context)
+(loop_1000_when_gate)-[:PROCESS { case: "err" }]->(loop_1000_inactive)
+(loop_1000_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1000_context_branch | loop_1000_then_branch | loop_1000_operator_branch | loop_1000_result_branch | loop_1000_taxonomy_branch | loop_1000_intervention_recognize | loop_1000_intervention_interdict | loop_1000_intervention_minimize)
+(loop_1000_context_branch | loop_1000_then_branch | loop_1000_operator_branch | loop_1000_result_branch | loop_1000_taxonomy_branch | loop_1000_intervention_recognize | loop_1000_intervention_interdict | loop_1000_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1000_verdict)
+(loop_1000_inactive)-[:PROCESS]->(loop_1000_sink)
+(loop_1000_verdict)-[:PROCESS]->(loop_1000_sink)
+(loop_1000_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1000_then_branch)
+(loop_1000_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1000_then_branch)
+(loop_1000_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1000_then_branch)

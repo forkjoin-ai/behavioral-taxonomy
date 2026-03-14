@@ -1,0 +1,33 @@
+// behavioral-loop-390.gg
+// Executable Gnosis projection for The Purple Rage Loop.
+
+// Nodes
+(loop_390_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_390_context_branch: BehaviorEmit { emission: 'context' })
+(loop_390_given_gate: BehaviorAssess { stage: 'given', text: 'High%20blood%20pressure%20%2B%20thin%20skin' })
+(loop_390_inactive: BehaviorTerminal { loopId: 390, loopName: 'The%20Purple%20Rage%20Loop' })
+(loop_390_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_390_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_390_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_390_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Explosion%20Operator', mechanism: 'the%20face%20turns%20violet%2Fdark%20red' })
+(loop_390_result_branch: BehaviorEmit { emission: 'result', text: "observers%20agreeing%20quickly%20just%20to%20lower%20the%20individual's%20blood%20pressure" })
+(loop_390_sink: BehaviorSink)
+(loop_390_start: BehaviorStart { loopId: 390, loopName: 'The%20Purple%20Rage%20Loop', given: 'High%20blood%20pressure%20%2B%20thin%20skin', when: 'arguing', then: 'the%20face%20turns%20violet%2Fdark%20red%20(The%20Explosion%20Operator)', result: "observers%20agreeing%20quickly%20just%20to%20lower%20the%20individual's%20blood%20pressure", operatorName: 'The%20Explosion%20Operator', operatorMechanism: 'the%20face%20turns%20violet%2Fdark%20red', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_390_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_390_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20turns%20violet%2Fdark%20red%20(The%20Explosion%20Operator)' })
+(loop_390_verdict: BehaviorVerdict { loopId: 390, loopName: 'The%20Purple%20Rage%20Loop', then: 'the%20face%20turns%20violet%2Fdark%20red%20(The%20Explosion%20Operator)', result: "observers%20agreeing%20quickly%20just%20to%20lower%20the%20individual's%20blood%20pressure", operatorName: 'The%20Explosion%20Operator', operatorMechanism: 'the%20face%20turns%20violet%2Fdark%20red', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_390_when_gate: BehaviorAssess { stage: 'when', text: 'arguing' })
+
+// Topology
+(loop_390_start)-[:PROCESS]->(loop_390_given_gate)
+(loop_390_given_gate)-[:PROCESS { case: "ok" }]->(loop_390_when_gate)
+(loop_390_given_gate)-[:PROCESS { case: "err" }]->(loop_390_inactive)
+(loop_390_when_gate)-[:PROCESS { case: "ok" }]->(loop_390_context)
+(loop_390_when_gate)-[:PROCESS { case: "err" }]->(loop_390_inactive)
+(loop_390_context)-[:FORK { strategy: "behavior-branches" }]->(loop_390_context_branch | loop_390_then_branch | loop_390_operator_branch | loop_390_result_branch | loop_390_taxonomy_branch | loop_390_intervention_recognize | loop_390_intervention_interdict | loop_390_intervention_minimize)
+(loop_390_context_branch | loop_390_then_branch | loop_390_operator_branch | loop_390_result_branch | loop_390_taxonomy_branch | loop_390_intervention_recognize | loop_390_intervention_interdict | loop_390_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_390_verdict)
+(loop_390_inactive)-[:PROCESS]->(loop_390_sink)
+(loop_390_verdict)-[:PROCESS]->(loop_390_sink)
+(loop_390_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_390_then_branch)
+(loop_390_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_390_then_branch)
+(loop_390_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_390_then_branch)

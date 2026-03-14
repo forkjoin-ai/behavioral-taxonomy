@@ -1,0 +1,33 @@
+// behavioral-loop-388.gg
+// Executable Gnosis projection for The Wide Hips Loop.
+
+// Nodes
+(loop_388_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_388_context_branch: BehaviorEmit { emission: 'context' })
+(loop_388_given_gate: BehaviorAssess { stage: 'given', text: 'Pelvic%20width%20exceeding%20shoulder%20width%20(Gynecoid%20pelvis%20in%20male)' })
+(loop_388_inactive: BehaviorTerminal { loopId: 388, loopName: 'The%20Wide%20Hips%20Loop' })
+(loop_388_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_388_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_388_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_388_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nurture%20Operator', mechanism: 'the%20silhouette%20signals%20%22Low%20Threat%22%20or%20%22Softness%22' })
+(loop_388_result_branch: BehaviorEmit { emission: 'result', text: 'frequent%20friend-zoning%20and%20being%20the%20**%22Confidant%22**%20rather%20than%20the%20leader' })
+(loop_388_sink: BehaviorSink)
+(loop_388_start: BehaviorStart { loopId: 388, loopName: 'The%20Wide%20Hips%20Loop', given: 'Pelvic%20width%20exceeding%20shoulder%20width%20(Gynecoid%20pelvis%20in%20male)', when: 'walking%20or%20standing', then: 'the%20silhouette%20signals%20%22Low%20Threat%22%20or%20%22Softness%22%20(The%20Nurture%20Operator)', result: 'frequent%20friend-zoning%20and%20being%20the%20**%22Confidant%22**%20rather%20than%20the%20leader', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'the%20silhouette%20signals%20%22Low%20Threat%22%20or%20%22Softness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_388_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_388_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20signals%20%22Low%20Threat%22%20or%20%22Softness%22%20(The%20Nurture%20Operator)' })
+(loop_388_verdict: BehaviorVerdict { loopId: 388, loopName: 'The%20Wide%20Hips%20Loop', then: 'the%20silhouette%20signals%20%22Low%20Threat%22%20or%20%22Softness%22%20(The%20Nurture%20Operator)', result: 'frequent%20friend-zoning%20and%20being%20the%20**%22Confidant%22**%20rather%20than%20the%20leader', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'the%20silhouette%20signals%20%22Low%20Threat%22%20or%20%22Softness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_388_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20or%20standing' })
+
+// Topology
+(loop_388_start)-[:PROCESS]->(loop_388_given_gate)
+(loop_388_given_gate)-[:PROCESS { case: "ok" }]->(loop_388_when_gate)
+(loop_388_given_gate)-[:PROCESS { case: "err" }]->(loop_388_inactive)
+(loop_388_when_gate)-[:PROCESS { case: "ok" }]->(loop_388_context)
+(loop_388_when_gate)-[:PROCESS { case: "err" }]->(loop_388_inactive)
+(loop_388_context)-[:FORK { strategy: "behavior-branches" }]->(loop_388_context_branch | loop_388_then_branch | loop_388_operator_branch | loop_388_result_branch | loop_388_taxonomy_branch | loop_388_intervention_recognize | loop_388_intervention_interdict | loop_388_intervention_minimize)
+(loop_388_context_branch | loop_388_then_branch | loop_388_operator_branch | loop_388_result_branch | loop_388_taxonomy_branch | loop_388_intervention_recognize | loop_388_intervention_interdict | loop_388_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_388_verdict)
+(loop_388_inactive)-[:PROCESS]->(loop_388_sink)
+(loop_388_verdict)-[:PROCESS]->(loop_388_sink)
+(loop_388_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_388_then_branch)
+(loop_388_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_388_then_branch)
+(loop_388_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_388_then_branch)

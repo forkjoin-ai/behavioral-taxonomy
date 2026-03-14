@@ -1,0 +1,31 @@
+// behavioral-loop-452.gg
+// Executable Gnosis projection for The Slumped Giant Loop.
+
+// Nodes
+(loop_452_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_452_context_branch: BehaviorEmit { emission: 'context' })
+(loop_452_given_gate: BehaviorAssess { stage: 'given', text: "Height%20%3E%206'4%22%20%2B%20rounded%20shoulders%20(hiding%20height)" })
+(loop_452_inactive: BehaviorTerminal { loopId: 452, loopName: 'The%20Slumped%20Giant%20Loop' })
+(loop_452_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_452_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_452_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Gentle%20Giant%20Operator', mechanism: 'the%20posture%20signals%20%22Apology%20for%20existing%22' })
+(loop_452_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20the%20natural%20leadership%20authority%20that%20comes%20with%20height' })
+(loop_452_sink: BehaviorSink)
+(loop_452_start: BehaviorStart { loopId: 452, loopName: 'The%20Slumped%20Giant%20Loop', given: "Height%20%3E%206'4%22%20%2B%20rounded%20shoulders%20(hiding%20height)", when: 'speaking%20to%20average-height%20peers', then: 'the%20posture%20signals%20%22Apology%20for%20existing%22%20(The%20Gentle%20Giant%20Operator)', result: 'loss%20of%20the%20natural%20leadership%20authority%20that%20comes%20with%20height', operatorName: 'The%20Gentle%20Giant%20Operator', operatorMechanism: 'the%20posture%20signals%20%22Apology%20for%20existing%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_452_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_452_then_branch: BehaviorEmit { emission: 'then', text: 'the%20posture%20signals%20%22Apology%20for%20existing%22%20(The%20Gentle%20Giant%20Operator)' })
+(loop_452_verdict: BehaviorVerdict { loopId: 452, loopName: 'The%20Slumped%20Giant%20Loop', then: 'the%20posture%20signals%20%22Apology%20for%20existing%22%20(The%20Gentle%20Giant%20Operator)', result: 'loss%20of%20the%20natural%20leadership%20authority%20that%20comes%20with%20height', operatorName: 'The%20Gentle%20Giant%20Operator', operatorMechanism: 'the%20posture%20signals%20%22Apology%20for%20existing%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_452_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20to%20average-height%20peers' })
+
+// Topology
+(loop_452_start)-[:PROCESS]->(loop_452_given_gate)
+(loop_452_given_gate)-[:PROCESS { case: "ok" }]->(loop_452_when_gate)
+(loop_452_given_gate)-[:PROCESS { case: "err" }]->(loop_452_inactive)
+(loop_452_when_gate)-[:PROCESS { case: "ok" }]->(loop_452_context)
+(loop_452_when_gate)-[:PROCESS { case: "err" }]->(loop_452_inactive)
+(loop_452_context)-[:FORK { strategy: "behavior-branches" }]->(loop_452_context_branch | loop_452_then_branch | loop_452_operator_branch | loop_452_result_branch | loop_452_taxonomy_branch | loop_452_intervention_recognize | loop_452_intervention_leverage)
+(loop_452_context_branch | loop_452_then_branch | loop_452_operator_branch | loop_452_result_branch | loop_452_taxonomy_branch | loop_452_intervention_recognize | loop_452_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_452_verdict)
+(loop_452_inactive)-[:PROCESS]->(loop_452_sink)
+(loop_452_verdict)-[:PROCESS]->(loop_452_sink)
+(loop_452_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_452_then_branch)
+(loop_452_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_452_result_branch)

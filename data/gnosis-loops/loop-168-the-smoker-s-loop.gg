@@ -1,0 +1,33 @@
+// behavioral-loop-168.gg
+// Executable Gnosis projection for The Smoker's Loop.
+
+// Nodes
+(loop_168_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_168_context_branch: BehaviorEmit { emission: 'context' })
+(loop_168_given_gate: BehaviorAssess { stage: 'given', text: 'Porous%20hair%2Fskin%20that%20retains%20particulates' })
+(loop_168_inactive: BehaviorTerminal { loopId: 168, loopName: "The%20Smoker's%20Loop" })
+(loop_168_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_168_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_168_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_168_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Judgment%20Operator', mechanism: 'the%20scent%20triggers%20%22Low%20Class%22%20or%20%22Lack%20of%20Control%22%20bias' })
+(loop_168_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20exclusion%20from%20health-conscious%20social%20circles' })
+(loop_168_sink: BehaviorSink)
+(loop_168_start: BehaviorStart { loopId: 168, loopName: "The%20Smoker's%20Loop", given: 'Porous%20hair%2Fskin%20that%20retains%20particulates', when: 'entering%20a%20non-smoking%20environment', then: 'the%20scent%20triggers%20%22Low%20Class%22%20or%20%22Lack%20of%20Control%22%20bias%20(The%20Judgment%20Operator)', result: 'immediate%20exclusion%20from%20health-conscious%20social%20circles', operatorName: 'The%20Judgment%20Operator', operatorMechanism: 'the%20scent%20triggers%20%22Low%20Class%22%20or%20%22Lack%20of%20Control%22%20bias', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_168_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_168_then_branch: BehaviorEmit { emission: 'then', text: 'the%20scent%20triggers%20%22Low%20Class%22%20or%20%22Lack%20of%20Control%22%20bias%20(The%20Judgment%20Operator)' })
+(loop_168_verdict: BehaviorVerdict { loopId: 168, loopName: "The%20Smoker's%20Loop", then: 'the%20scent%20triggers%20%22Low%20Class%22%20or%20%22Lack%20of%20Control%22%20bias%20(The%20Judgment%20Operator)', result: 'immediate%20exclusion%20from%20health-conscious%20social%20circles', operatorName: 'The%20Judgment%20Operator', operatorMechanism: 'the%20scent%20triggers%20%22Low%20Class%22%20or%20%22Lack%20of%20Control%22%20bias', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_168_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20non-smoking%20environment' })
+
+// Topology
+(loop_168_start)-[:PROCESS]->(loop_168_given_gate)
+(loop_168_given_gate)-[:PROCESS { case: "ok" }]->(loop_168_when_gate)
+(loop_168_given_gate)-[:PROCESS { case: "err" }]->(loop_168_inactive)
+(loop_168_when_gate)-[:PROCESS { case: "ok" }]->(loop_168_context)
+(loop_168_when_gate)-[:PROCESS { case: "err" }]->(loop_168_inactive)
+(loop_168_context)-[:FORK { strategy: "behavior-branches" }]->(loop_168_context_branch | loop_168_then_branch | loop_168_operator_branch | loop_168_result_branch | loop_168_taxonomy_branch | loop_168_intervention_recognize | loop_168_intervention_interdict | loop_168_intervention_minimize)
+(loop_168_context_branch | loop_168_then_branch | loop_168_operator_branch | loop_168_result_branch | loop_168_taxonomy_branch | loop_168_intervention_recognize | loop_168_intervention_interdict | loop_168_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_168_verdict)
+(loop_168_inactive)-[:PROCESS]->(loop_168_sink)
+(loop_168_verdict)-[:PROCESS]->(loop_168_sink)
+(loop_168_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_168_then_branch)
+(loop_168_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_168_then_branch)
+(loop_168_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_168_then_branch)

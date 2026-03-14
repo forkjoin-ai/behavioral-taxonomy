@@ -1,0 +1,33 @@
+// behavioral-loop-649.gg
+// Executable Gnosis projection for The Clicker Loop.
+
+// Nodes
+(loop_649_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_649_context_branch: BehaviorEmit { emission: 'context' })
+(loop_649_given_gate: BehaviorAssess { stage: 'given', text: 'Long%20artificial%20nails%20hitting%20screens%2Fkeyboards' })
+(loop_649_inactive: BehaviorTerminal { loopId: 649, loopName: 'The%20Clicker%20Loop' })
+(loop_649_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_649_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_649_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_649_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Claws%20Operator', mechanism: 'the%20sound%20signals%20%22Admin%2C%22%20%22Sass%2C%22%20or%20%22High%20Maintenance%22' })
+(loop_649_result_branch: BehaviorEmit { emission: 'result', text: 'distinct%20cultural%20coding%20(accepted%20in%20some%20circles%2C%20reviled%20in%20conservative%20ones)' })
+(loop_649_sink: BehaviorSink)
+(loop_649_start: BehaviorStart { loopId: 649, loopName: 'The%20Clicker%20Loop', given: 'Long%20artificial%20nails%20hitting%20screens%2Fkeyboards', when: 'typing%20or%20texting', then: 'the%20sound%20signals%20%22Admin%2C%22%20%22Sass%2C%22%20or%20%22High%20Maintenance%22%20(The%20Claws%20Operator)', result: 'distinct%20cultural%20coding%20(accepted%20in%20some%20circles%2C%20reviled%20in%20conservative%20ones)', operatorName: 'The%20Claws%20Operator', operatorMechanism: 'the%20sound%20signals%20%22Admin%2C%22%20%22Sass%2C%22%20or%20%22High%20Maintenance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_649_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_649_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20signals%20%22Admin%2C%22%20%22Sass%2C%22%20or%20%22High%20Maintenance%22%20(The%20Claws%20Operator)' })
+(loop_649_verdict: BehaviorVerdict { loopId: 649, loopName: 'The%20Clicker%20Loop', then: 'the%20sound%20signals%20%22Admin%2C%22%20%22Sass%2C%22%20or%20%22High%20Maintenance%22%20(The%20Claws%20Operator)', result: 'distinct%20cultural%20coding%20(accepted%20in%20some%20circles%2C%20reviled%20in%20conservative%20ones)', operatorName: 'The%20Claws%20Operator', operatorMechanism: 'the%20sound%20signals%20%22Admin%2C%22%20%22Sass%2C%22%20or%20%22High%20Maintenance%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_649_when_gate: BehaviorAssess { stage: 'when', text: 'typing%20or%20texting' })
+
+// Topology
+(loop_649_start)-[:PROCESS]->(loop_649_given_gate)
+(loop_649_given_gate)-[:PROCESS { case: "ok" }]->(loop_649_when_gate)
+(loop_649_given_gate)-[:PROCESS { case: "err" }]->(loop_649_inactive)
+(loop_649_when_gate)-[:PROCESS { case: "ok" }]->(loop_649_context)
+(loop_649_when_gate)-[:PROCESS { case: "err" }]->(loop_649_inactive)
+(loop_649_context)-[:FORK { strategy: "behavior-branches" }]->(loop_649_context_branch | loop_649_then_branch | loop_649_operator_branch | loop_649_result_branch | loop_649_taxonomy_branch | loop_649_intervention_recognize | loop_649_intervention_interdict | loop_649_intervention_minimize)
+(loop_649_context_branch | loop_649_then_branch | loop_649_operator_branch | loop_649_result_branch | loop_649_taxonomy_branch | loop_649_intervention_recognize | loop_649_intervention_interdict | loop_649_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_649_verdict)
+(loop_649_inactive)-[:PROCESS]->(loop_649_sink)
+(loop_649_verdict)-[:PROCESS]->(loop_649_sink)
+(loop_649_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_649_then_branch)
+(loop_649_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_649_then_branch)
+(loop_649_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_649_then_branch)

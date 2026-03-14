@@ -1,0 +1,35 @@
+// behavioral-loop-224.gg
+// Executable Gnosis projection for The Tremulous Voice Loop.
+
+// Nodes
+(loop_224_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_224_context_branch: BehaviorEmit { emission: 'context' })
+(loop_224_given_gate: BehaviorAssess { stage: 'given', text: 'Spasmodic%20Dysphonia' })
+(loop_224_inactive: BehaviorTerminal { loopId: 224, loopName: 'The%20Tremulous%20Voice%20Loop' })
+(loop_224_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_224_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_224_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_224_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_224_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%2FFear%20Operator', mechanism: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22' })
+(loop_224_result_branch: BehaviorEmit { emission: 'result', text: "the%20individual's%20actual%20confidence%20being%20completely%20**Discounted**" })
+(loop_224_sink: BehaviorSink)
+(loop_224_start: BehaviorStart { loopId: 224, loopName: 'The%20Tremulous%20Voice%20Loop', given: 'Spasmodic%20Dysphonia', when: 'speaking%20confidently', then: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22%20(The%20Deception%2FFear%20Operator)', result: "the%20individual's%20actual%20confidence%20being%20completely%20**Discounted**", operatorName: 'The%20Deception%2FFear%20Operator', operatorMechanism: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking', intervention_leverage: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_224_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_224_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22%20(The%20Deception%2FFear%20Operator)' })
+(loop_224_verdict: BehaviorVerdict { loopId: 224, loopName: 'The%20Tremulous%20Voice%20Loop', then: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22%20(The%20Deception%2FFear%20Operator)', result: "the%20individual's%20actual%20confidence%20being%20completely%20**Discounted**", operatorName: 'The%20Deception%2FFear%20Operator', operatorMechanism: 'the%20voice%20shakes%2C%20signaling%20%22Terror%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_224_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20confidently' })
+
+// Topology
+(loop_224_start)-[:PROCESS]->(loop_224_given_gate)
+(loop_224_given_gate)-[:PROCESS { case: "ok" }]->(loop_224_when_gate)
+(loop_224_given_gate)-[:PROCESS { case: "err" }]->(loop_224_inactive)
+(loop_224_when_gate)-[:PROCESS { case: "ok" }]->(loop_224_context)
+(loop_224_when_gate)-[:PROCESS { case: "err" }]->(loop_224_inactive)
+(loop_224_context)-[:FORK { strategy: "behavior-branches" }]->(loop_224_context_branch | loop_224_then_branch | loop_224_operator_branch | loop_224_result_branch | loop_224_taxonomy_branch | loop_224_intervention_recognize | loop_224_intervention_interdict | loop_224_intervention_minimize | loop_224_intervention_leverage)
+(loop_224_context_branch | loop_224_then_branch | loop_224_operator_branch | loop_224_result_branch | loop_224_taxonomy_branch | loop_224_intervention_recognize | loop_224_intervention_interdict | loop_224_intervention_minimize | loop_224_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_224_verdict)
+(loop_224_inactive)-[:PROCESS]->(loop_224_sink)
+(loop_224_verdict)-[:PROCESS]->(loop_224_sink)
+(loop_224_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_224_then_branch)
+(loop_224_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_224_then_branch)
+(loop_224_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_224_then_branch)
+(loop_224_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_224_result_branch)

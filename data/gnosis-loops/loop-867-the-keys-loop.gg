@@ -1,0 +1,33 @@
+// behavioral-loop-867.gg
+// Executable Gnosis projection for The Keys Loop.
+
+// Nodes
+(loop_867_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_867_context_branch: BehaviorEmit { emission: 'context' })
+(loop_867_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20cluster%20of%20keys%20jingling%20on%20the%20belt' })
+(loop_867_inactive: BehaviorTerminal { loopId: 867, loopName: 'The%20Keys%20Loop' })
+(loop_867_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_867_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_867_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_867_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Custodian%20Operator', mechanism: 'the%20sound%20signals%20%22Blue%20Collar%20Authority%22' })
+(loop_867_result_branch: BehaviorEmit { emission: 'result', text: 'people%20stepping%20aside%20but%20not%20engaging%20in%20conversation' })
+(loop_867_sink: BehaviorSink)
+(loop_867_start: BehaviorStart { loopId: 867, loopName: 'The%20Keys%20Loop', given: 'Large%20cluster%20of%20keys%20jingling%20on%20the%20belt', when: 'walking%20down%20a%20hallway', then: 'the%20sound%20signals%20%22Blue%20Collar%20Authority%22%20(The%20Custodian%20Operator)', result: 'people%20stepping%20aside%20but%20not%20engaging%20in%20conversation', operatorName: 'The%20Custodian%20Operator', operatorMechanism: 'the%20sound%20signals%20%22Blue%20Collar%20Authority%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_867_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_867_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20signals%20%22Blue%20Collar%20Authority%22%20(The%20Custodian%20Operator)' })
+(loop_867_verdict: BehaviorVerdict { loopId: 867, loopName: 'The%20Keys%20Loop', then: 'the%20sound%20signals%20%22Blue%20Collar%20Authority%22%20(The%20Custodian%20Operator)', result: 'people%20stepping%20aside%20but%20not%20engaging%20in%20conversation', operatorName: 'The%20Custodian%20Operator', operatorMechanism: 'the%20sound%20signals%20%22Blue%20Collar%20Authority%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_867_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20down%20a%20hallway' })
+
+// Topology
+(loop_867_start)-[:PROCESS]->(loop_867_given_gate)
+(loop_867_given_gate)-[:PROCESS { case: "ok" }]->(loop_867_when_gate)
+(loop_867_given_gate)-[:PROCESS { case: "err" }]->(loop_867_inactive)
+(loop_867_when_gate)-[:PROCESS { case: "ok" }]->(loop_867_context)
+(loop_867_when_gate)-[:PROCESS { case: "err" }]->(loop_867_inactive)
+(loop_867_context)-[:FORK { strategy: "behavior-branches" }]->(loop_867_context_branch | loop_867_then_branch | loop_867_operator_branch | loop_867_result_branch | loop_867_taxonomy_branch | loop_867_intervention_recognize | loop_867_intervention_interdict | loop_867_intervention_minimize)
+(loop_867_context_branch | loop_867_then_branch | loop_867_operator_branch | loop_867_result_branch | loop_867_taxonomy_branch | loop_867_intervention_recognize | loop_867_intervention_interdict | loop_867_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_867_verdict)
+(loop_867_inactive)-[:PROCESS]->(loop_867_sink)
+(loop_867_verdict)-[:PROCESS]->(loop_867_sink)
+(loop_867_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_867_then_branch)
+(loop_867_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_867_then_branch)
+(loop_867_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_867_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-330.gg
+// Executable Gnosis projection for The Eye Roll Loop.
+
+// Nodes
+(loop_330_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_330_context_branch: BehaviorEmit { emission: 'context' })
+(loop_330_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20upward%20rotation%20of%20globes' })
+(loop_330_inactive: BehaviorTerminal { loopId: 330, loopName: 'The%20Eye%20Roll%20Loop' })
+(loop_330_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_330_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_330_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_330_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Superiority%20Operator', mechanism: 'it%20signals%20%22Contempt%22' })
+(loop_330_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20**Conflict%20Escalation**%20or%20disciplinary%20action' })
+(loop_330_sink: BehaviorSink)
+(loop_330_start: BehaviorStart { loopId: 330, loopName: 'The%20Eye%20Roll%20Loop', given: 'Visible%20upward%20rotation%20of%20globes', when: 'receiving%20instruction', then: 'it%20signals%20%22Contempt%22%20(The%20Superiority%20Operator)', result: 'immediate%20**Conflict%20Escalation**%20or%20disciplinary%20action', operatorName: 'The%20Superiority%20Operator', operatorMechanism: 'it%20signals%20%22Contempt%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_330_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_330_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Contempt%22%20(The%20Superiority%20Operator)' })
+(loop_330_verdict: BehaviorVerdict { loopId: 330, loopName: 'The%20Eye%20Roll%20Loop', then: 'it%20signals%20%22Contempt%22%20(The%20Superiority%20Operator)', result: 'immediate%20**Conflict%20Escalation**%20or%20disciplinary%20action', operatorName: 'The%20Superiority%20Operator', operatorMechanism: 'it%20signals%20%22Contempt%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_330_when_gate: BehaviorAssess { stage: 'when', text: 'receiving%20instruction' })
+
+// Topology
+(loop_330_start)-[:PROCESS]->(loop_330_given_gate)
+(loop_330_given_gate)-[:PROCESS { case: "ok" }]->(loop_330_when_gate)
+(loop_330_given_gate)-[:PROCESS { case: "err" }]->(loop_330_inactive)
+(loop_330_when_gate)-[:PROCESS { case: "ok" }]->(loop_330_context)
+(loop_330_when_gate)-[:PROCESS { case: "err" }]->(loop_330_inactive)
+(loop_330_context)-[:FORK { strategy: "behavior-branches" }]->(loop_330_context_branch | loop_330_then_branch | loop_330_operator_branch | loop_330_result_branch | loop_330_taxonomy_branch | loop_330_intervention_recognize | loop_330_intervention_interdict | loop_330_intervention_minimize)
+(loop_330_context_branch | loop_330_then_branch | loop_330_operator_branch | loop_330_result_branch | loop_330_taxonomy_branch | loop_330_intervention_recognize | loop_330_intervention_interdict | loop_330_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_330_verdict)
+(loop_330_inactive)-[:PROCESS]->(loop_330_sink)
+(loop_330_verdict)-[:PROCESS]->(loop_330_sink)
+(loop_330_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_330_then_branch)
+(loop_330_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_330_then_branch)
+(loop_330_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_330_then_branch)

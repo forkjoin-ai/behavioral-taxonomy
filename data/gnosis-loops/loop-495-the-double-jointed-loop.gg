@@ -1,0 +1,33 @@
+// behavioral-loop-495.gg
+// Executable Gnosis projection for The Double Jointed Loop.
+
+// Nodes
+(loop_495_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_495_context_branch: BehaviorEmit { emission: 'context' })
+(loop_495_given_gate: BehaviorAssess { stage: 'given', text: 'Elbows%20that%20bend%20past%20180%20degrees' })
+(loop_495_inactive: BehaviorTerminal { loopId: 495, loopName: 'The%20Double%20Jointed%20Loop' })
+(loop_495_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_495_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_495_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_495_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Body%20Horror%20Operator', mechanism: 'the%20arm%20looks%20%22Broken%22' })
+(loop_495_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20wincing%20and%20asking%20%22Does%20that%20hurt%3F%22%2C%20distracting%20from%20the%20conversation' })
+(loop_495_sink: BehaviorSink)
+(loop_495_start: BehaviorStart { loopId: 495, loopName: 'The%20Double%20Jointed%20Loop', given: 'Elbows%20that%20bend%20past%20180%20degrees', when: 'leaning%20on%20a%20bar', then: 'the%20arm%20looks%20%22Broken%22%20(The%20Body%20Horror%20Operator)', result: 'peers%20wincing%20and%20asking%20%22Does%20that%20hurt%3F%22%2C%20distracting%20from%20the%20conversation', operatorName: 'The%20Body%20Horror%20Operator', operatorMechanism: 'the%20arm%20looks%20%22Broken%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_495_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_495_then_branch: BehaviorEmit { emission: 'then', text: 'the%20arm%20looks%20%22Broken%22%20(The%20Body%20Horror%20Operator)' })
+(loop_495_verdict: BehaviorVerdict { loopId: 495, loopName: 'The%20Double%20Jointed%20Loop', then: 'the%20arm%20looks%20%22Broken%22%20(The%20Body%20Horror%20Operator)', result: 'peers%20wincing%20and%20asking%20%22Does%20that%20hurt%3F%22%2C%20distracting%20from%20the%20conversation', operatorName: 'The%20Body%20Horror%20Operator', operatorMechanism: 'the%20arm%20looks%20%22Broken%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_495_when_gate: BehaviorAssess { stage: 'when', text: 'leaning%20on%20a%20bar' })
+
+// Topology
+(loop_495_start)-[:PROCESS]->(loop_495_given_gate)
+(loop_495_given_gate)-[:PROCESS { case: "ok" }]->(loop_495_when_gate)
+(loop_495_given_gate)-[:PROCESS { case: "err" }]->(loop_495_inactive)
+(loop_495_when_gate)-[:PROCESS { case: "ok" }]->(loop_495_context)
+(loop_495_when_gate)-[:PROCESS { case: "err" }]->(loop_495_inactive)
+(loop_495_context)-[:FORK { strategy: "behavior-branches" }]->(loop_495_context_branch | loop_495_then_branch | loop_495_operator_branch | loop_495_result_branch | loop_495_taxonomy_branch | loop_495_intervention_recognize | loop_495_intervention_interdict | loop_495_intervention_minimize)
+(loop_495_context_branch | loop_495_then_branch | loop_495_operator_branch | loop_495_result_branch | loop_495_taxonomy_branch | loop_495_intervention_recognize | loop_495_intervention_interdict | loop_495_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_495_verdict)
+(loop_495_inactive)-[:PROCESS]->(loop_495_sink)
+(loop_495_verdict)-[:PROCESS]->(loop_495_sink)
+(loop_495_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_495_then_branch)
+(loop_495_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_495_then_branch)
+(loop_495_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_495_then_branch)

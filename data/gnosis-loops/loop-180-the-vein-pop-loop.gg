@@ -1,0 +1,33 @@
+// behavioral-loop-180.gg
+// Executable Gnosis projection for The Vein Pop Loop.
+
+// Nodes
+(loop_180_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_180_context_branch: BehaviorEmit { emission: 'context' })
+(loop_180_given_gate: BehaviorAssess { stage: 'given', text: 'Prominent%20temporal%20vein%20during%20stress' })
+(loop_180_inactive: BehaviorTerminal { loopId: 180, loopName: 'The%20Vein%20Pop%20Loop' })
+(loop_180_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_180_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_180_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_180_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'the%20visual%20indicates%20%22Imminent%20Explosion%22' })
+(loop_180_result_branch: BehaviorEmit { emission: 'result', text: 'the%20other%20party%20de-escalating%20out%20of%20fear%2C%20teaching%20the%20individual%20that%20**Anger%20Wins**' })
+(loop_180_sink: BehaviorSink)
+(loop_180_start: BehaviorStart { loopId: 180, loopName: 'The%20Vein%20Pop%20Loop', given: 'Prominent%20temporal%20vein%20during%20stress', when: 'arguing%20or%20debating', then: 'the%20visual%20indicates%20%22Imminent%20Explosion%22%20(The%20Threat%20Operator)', result: 'the%20other%20party%20de-escalating%20out%20of%20fear%2C%20teaching%20the%20individual%20that%20**Anger%20Wins**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20visual%20indicates%20%22Imminent%20Explosion%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_180_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_180_then_branch: BehaviorEmit { emission: 'then', text: 'the%20visual%20indicates%20%22Imminent%20Explosion%22%20(The%20Threat%20Operator)' })
+(loop_180_verdict: BehaviorVerdict { loopId: 180, loopName: 'The%20Vein%20Pop%20Loop', then: 'the%20visual%20indicates%20%22Imminent%20Explosion%22%20(The%20Threat%20Operator)', result: 'the%20other%20party%20de-escalating%20out%20of%20fear%2C%20teaching%20the%20individual%20that%20**Anger%20Wins**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20visual%20indicates%20%22Imminent%20Explosion%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_180_when_gate: BehaviorAssess { stage: 'when', text: 'arguing%20or%20debating' })
+
+// Topology
+(loop_180_start)-[:PROCESS]->(loop_180_given_gate)
+(loop_180_given_gate)-[:PROCESS { case: "ok" }]->(loop_180_when_gate)
+(loop_180_given_gate)-[:PROCESS { case: "err" }]->(loop_180_inactive)
+(loop_180_when_gate)-[:PROCESS { case: "ok" }]->(loop_180_context)
+(loop_180_when_gate)-[:PROCESS { case: "err" }]->(loop_180_inactive)
+(loop_180_context)-[:FORK { strategy: "behavior-branches" }]->(loop_180_context_branch | loop_180_then_branch | loop_180_operator_branch | loop_180_result_branch | loop_180_taxonomy_branch | loop_180_intervention_recognize | loop_180_intervention_interdict | loop_180_intervention_minimize)
+(loop_180_context_branch | loop_180_then_branch | loop_180_operator_branch | loop_180_result_branch | loop_180_taxonomy_branch | loop_180_intervention_recognize | loop_180_intervention_interdict | loop_180_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_180_verdict)
+(loop_180_inactive)-[:PROCESS]->(loop_180_sink)
+(loop_180_verdict)-[:PROCESS]->(loop_180_sink)
+(loop_180_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_180_then_branch)
+(loop_180_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_180_then_branch)
+(loop_180_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_180_then_branch)

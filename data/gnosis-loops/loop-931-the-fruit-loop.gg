@@ -1,0 +1,33 @@
+// behavioral-loop-931.gg
+// Executable Gnosis projection for The Fruit Loop.
+
+// Nodes
+(loop_931_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_931_context_branch: BehaviorEmit { emission: 'context' })
+(loop_931_given_gate: BehaviorAssess { stage: 'given', text: 'High%20protein%2Flow%20carb%20diet%20producing%20acetone%20breath' })
+(loop_931_inactive: BehaviorTerminal { loopId: 931, loopName: 'The%20Fruit%20Loop' })
+(loop_931_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_931_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_931_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_931_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Starvation%20Operator', mechanism: 'the%20smell%20is%20%22Sweet%22%20like%20nail%20polish%20remover' })
+(loop_931_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20wondering%20if%20the%20individual%20is%20diabetic%20or%20dieting' })
+(loop_931_sink: BehaviorSink)
+(loop_931_start: BehaviorStart { loopId: 931, loopName: 'The%20Fruit%20Loop', given: 'High%20protein%2Flow%20carb%20diet%20producing%20acetone%20breath', when: 'exhaling%20near%20someone', then: 'the%20smell%20is%20%22Sweet%22%20like%20nail%20polish%20remover%20(The%20Starvation%20Operator)', result: 'observers%20wondering%20if%20the%20individual%20is%20diabetic%20or%20dieting', operatorName: 'The%20Starvation%20Operator', operatorMechanism: 'the%20smell%20is%20%22Sweet%22%20like%20nail%20polish%20remover', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_931_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_931_then_branch: BehaviorEmit { emission: 'then', text: 'the%20smell%20is%20%22Sweet%22%20like%20nail%20polish%20remover%20(The%20Starvation%20Operator)' })
+(loop_931_verdict: BehaviorVerdict { loopId: 931, loopName: 'The%20Fruit%20Loop', then: 'the%20smell%20is%20%22Sweet%22%20like%20nail%20polish%20remover%20(The%20Starvation%20Operator)', result: 'observers%20wondering%20if%20the%20individual%20is%20diabetic%20or%20dieting', operatorName: 'The%20Starvation%20Operator', operatorMechanism: 'the%20smell%20is%20%22Sweet%22%20like%20nail%20polish%20remover', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_931_when_gate: BehaviorAssess { stage: 'when', text: 'exhaling%20near%20someone' })
+
+// Topology
+(loop_931_start)-[:PROCESS]->(loop_931_given_gate)
+(loop_931_given_gate)-[:PROCESS { case: "ok" }]->(loop_931_when_gate)
+(loop_931_given_gate)-[:PROCESS { case: "err" }]->(loop_931_inactive)
+(loop_931_when_gate)-[:PROCESS { case: "ok" }]->(loop_931_context)
+(loop_931_when_gate)-[:PROCESS { case: "err" }]->(loop_931_inactive)
+(loop_931_context)-[:FORK { strategy: "behavior-branches" }]->(loop_931_context_branch | loop_931_then_branch | loop_931_operator_branch | loop_931_result_branch | loop_931_taxonomy_branch | loop_931_intervention_recognize | loop_931_intervention_interdict | loop_931_intervention_minimize)
+(loop_931_context_branch | loop_931_then_branch | loop_931_operator_branch | loop_931_result_branch | loop_931_taxonomy_branch | loop_931_intervention_recognize | loop_931_intervention_interdict | loop_931_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_931_verdict)
+(loop_931_inactive)-[:PROCESS]->(loop_931_sink)
+(loop_931_verdict)-[:PROCESS]->(loop_931_sink)
+(loop_931_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_931_then_branch)
+(loop_931_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_931_then_branch)
+(loop_931_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_931_then_branch)

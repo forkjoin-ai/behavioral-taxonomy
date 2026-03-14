@@ -1,0 +1,33 @@
+// behavioral-loop-91.gg
+// Executable Gnosis projection for The Gurgle Loop.
+
+// Nodes
+(loop_91_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_91_context_branch: BehaviorEmit { emission: 'context' })
+(loop_91_given_gate: BehaviorAssess { stage: 'given', text: 'Hyperactive%20Peristalsis%20(Loud%20stomach)' })
+(loop_91_inactive: BehaviorTerminal { loopId: 91, loopName: 'The%20Gurgle%20Loop' })
+(loop_91_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_91_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_91_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_91_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Humor%2FShame%20Operator', mechanism: 'the%20body%20makes%20uncontrolled%20sounds' })
+(loop_91_result_branch: BehaviorEmit { emission: 'result', text: 'avoidance%20of%20quiet%20spaces%20and%20**Anxiety**%20about%20silence' })
+(loop_91_sink: BehaviorSink)
+(loop_91_start: BehaviorStart { loopId: 91, loopName: 'The%20Gurgle%20Loop', given: 'Hyperactive%20Peristalsis%20(Loud%20stomach)', when: 'in%20a%20quiet%20room%20(test%2Flibrary)', then: 'the%20body%20makes%20uncontrolled%20sounds%20(The%20Humor%2FShame%20Operator)', result: 'avoidance%20of%20quiet%20spaces%20and%20**Anxiety**%20about%20silence', operatorName: 'The%20Humor%2FShame%20Operator', operatorMechanism: 'the%20body%20makes%20uncontrolled%20sounds', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Ground%20yourself%20with%20deep%20breathing%3B%20this%20is%20a%20perceptual%20distortion%2C%20not%20reality.' })
+(loop_91_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_91_then_branch: BehaviorEmit { emission: 'then', text: 'the%20body%20makes%20uncontrolled%20sounds%20(The%20Humor%2FShame%20Operator)' })
+(loop_91_verdict: BehaviorVerdict { loopId: 91, loopName: 'The%20Gurgle%20Loop', then: 'the%20body%20makes%20uncontrolled%20sounds%20(The%20Humor%2FShame%20Operator)', result: 'avoidance%20of%20quiet%20spaces%20and%20**Anxiety**%20about%20silence', operatorName: 'The%20Humor%2FShame%20Operator', operatorMechanism: 'the%20body%20makes%20uncontrolled%20sounds', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_91_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20quiet%20room%20(test%2Flibrary)' })
+
+// Topology
+(loop_91_start)-[:PROCESS]->(loop_91_given_gate)
+(loop_91_given_gate)-[:PROCESS { case: "ok" }]->(loop_91_when_gate)
+(loop_91_given_gate)-[:PROCESS { case: "err" }]->(loop_91_inactive)
+(loop_91_when_gate)-[:PROCESS { case: "ok" }]->(loop_91_context)
+(loop_91_when_gate)-[:PROCESS { case: "err" }]->(loop_91_inactive)
+(loop_91_context)-[:FORK { strategy: "behavior-branches" }]->(loop_91_context_branch | loop_91_then_branch | loop_91_operator_branch | loop_91_result_branch | loop_91_taxonomy_branch | loop_91_intervention_recognize | loop_91_intervention_interdict | loop_91_intervention_minimize)
+(loop_91_context_branch | loop_91_then_branch | loop_91_operator_branch | loop_91_result_branch | loop_91_taxonomy_branch | loop_91_intervention_recognize | loop_91_intervention_interdict | loop_91_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_91_verdict)
+(loop_91_inactive)-[:PROCESS]->(loop_91_sink)
+(loop_91_verdict)-[:PROCESS]->(loop_91_sink)
+(loop_91_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_91_then_branch)
+(loop_91_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_91_then_branch)
+(loop_91_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_91_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-374.gg
+// Executable Gnosis projection for The Jazz Hands Loop.
+
+// Nodes
+(loop_374_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_374_context_branch: BehaviorEmit { emission: 'context' })
+(loop_374_given_gate: BehaviorAssess { stage: 'given', text: 'Splayed%20fingers%20while%20speaking' })
+(loop_374_inactive: BehaviorTerminal { loopId: 374, loopName: 'The%20Jazz%20Hands%20Loop' })
+(loop_374_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_374_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Set%20hard%20boundaries%3B%20this%20loop%20will%20consume%20all%20available%20energy%20if%20unchecked.' })
+(loop_374_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_374_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Showman%20Operator', mechanism: 'the%20energy%20feels%20%22Performative%22%20or%20%22Desperate%22' })
+(loop_374_result_branch: BehaviorEmit { emission: 'result', text: 'exhaustion%20in%20the%20audience' })
+(loop_374_sink: BehaviorSink)
+(loop_374_start: BehaviorStart { loopId: 374, loopName: 'The%20Jazz%20Hands%20Loop', given: 'Splayed%20fingers%20while%20speaking', when: 'explaining%20simple%20tasks', then: 'the%20energy%20feels%20%22Performative%22%20or%20%22Desperate%22%20(The%20Showman%20Operator)', result: 'exhaustion%20in%20the%20audience', operatorName: 'The%20Showman%20Operator', operatorMechanism: 'the%20energy%20feels%20%22Performative%22%20or%20%22Desperate%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Set%20hard%20boundaries%3B%20this%20loop%20will%20consume%20all%20available%20energy%20if%20unchecked.' })
+(loop_374_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_374_then_branch: BehaviorEmit { emission: 'then', text: 'the%20energy%20feels%20%22Performative%22%20or%20%22Desperate%22%20(The%20Showman%20Operator)' })
+(loop_374_verdict: BehaviorVerdict { loopId: 374, loopName: 'The%20Jazz%20Hands%20Loop', then: 'the%20energy%20feels%20%22Performative%22%20or%20%22Desperate%22%20(The%20Showman%20Operator)', result: 'exhaustion%20in%20the%20audience', operatorName: 'The%20Showman%20Operator', operatorMechanism: 'the%20energy%20feels%20%22Performative%22%20or%20%22Desperate%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_374_when_gate: BehaviorAssess { stage: 'when', text: 'explaining%20simple%20tasks' })
+
+// Topology
+(loop_374_start)-[:PROCESS]->(loop_374_given_gate)
+(loop_374_given_gate)-[:PROCESS { case: "ok" }]->(loop_374_when_gate)
+(loop_374_given_gate)-[:PROCESS { case: "err" }]->(loop_374_inactive)
+(loop_374_when_gate)-[:PROCESS { case: "ok" }]->(loop_374_context)
+(loop_374_when_gate)-[:PROCESS { case: "err" }]->(loop_374_inactive)
+(loop_374_context)-[:FORK { strategy: "behavior-branches" }]->(loop_374_context_branch | loop_374_then_branch | loop_374_operator_branch | loop_374_result_branch | loop_374_taxonomy_branch | loop_374_intervention_recognize | loop_374_intervention_interdict | loop_374_intervention_minimize)
+(loop_374_context_branch | loop_374_then_branch | loop_374_operator_branch | loop_374_result_branch | loop_374_taxonomy_branch | loop_374_intervention_recognize | loop_374_intervention_interdict | loop_374_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_374_verdict)
+(loop_374_inactive)-[:PROCESS]->(loop_374_sink)
+(loop_374_verdict)-[:PROCESS]->(loop_374_sink)
+(loop_374_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_374_then_branch)
+(loop_374_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_374_then_branch)
+(loop_374_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_374_then_branch)

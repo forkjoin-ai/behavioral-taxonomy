@@ -1,0 +1,33 @@
+// behavioral-loop-40.gg
+// Executable Gnosis projection for The Broad Shoulder Loop.
+
+// Nodes
+(loop_40_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_40_context_branch: BehaviorEmit { emission: 'context' })
+(loop_40_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20a%20High%20Shoulder-to-Waist%20Ratio' })
+(loop_40_inactive: BehaviorTerminal { loopId: 40, loopName: 'The%20Broad%20Shoulder%20Loop' })
+(loop_40_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Reframe%20the%20narrative%20around%20this%20characteristic' })
+(loop_40_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_40_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_40_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Physical%20Labor%20Operator', mechanism: 'the%20burden%20is%20physically%20handed%20to%20them' })
+(loop_40_result_branch: BehaviorEmit { emission: 'result', text: 'the%20development%20of%20a%20**Burden-Bearing%20Personality**%20(feeling%20responsible%20for%20everyone)' })
+(loop_40_sink: BehaviorSink)
+(loop_40_start: BehaviorStart { loopId: 40, loopName: 'The%20Broad%20Shoulder%20Loop', given: 'an%20individual%20possesses%20a%20High%20Shoulder-to-Waist%20Ratio', when: 'a%20group%20requires%20responsibility%20to%20be%20taken', then: 'the%20burden%20is%20physically%20handed%20to%20them%20(The%20Physical%20Labor%20Operator)', result: 'the%20development%20of%20a%20**Burden-Bearing%20Personality**%20(feeling%20responsible%20for%20everyone)', operatorName: 'The%20Physical%20Labor%20Operator', operatorMechanism: 'the%20burden%20is%20physically%20handed%20to%20them', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Reframe%20the%20narrative%20around%20this%20characteristic', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_40_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_40_then_branch: BehaviorEmit { emission: 'then', text: 'the%20burden%20is%20physically%20handed%20to%20them%20(The%20Physical%20Labor%20Operator)' })
+(loop_40_verdict: BehaviorVerdict { loopId: 40, loopName: 'The%20Broad%20Shoulder%20Loop', then: 'the%20burden%20is%20physically%20handed%20to%20them%20(The%20Physical%20Labor%20Operator)', result: 'the%20development%20of%20a%20**Burden-Bearing%20Personality**%20(feeling%20responsible%20for%20everyone)', operatorName: 'The%20Physical%20Labor%20Operator', operatorMechanism: 'the%20burden%20is%20physically%20handed%20to%20them', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_40_when_gate: BehaviorAssess { stage: 'when', text: 'a%20group%20requires%20responsibility%20to%20be%20taken' })
+
+// Topology
+(loop_40_start)-[:PROCESS]->(loop_40_given_gate)
+(loop_40_given_gate)-[:PROCESS { case: "ok" }]->(loop_40_when_gate)
+(loop_40_given_gate)-[:PROCESS { case: "err" }]->(loop_40_inactive)
+(loop_40_when_gate)-[:PROCESS { case: "ok" }]->(loop_40_context)
+(loop_40_when_gate)-[:PROCESS { case: "err" }]->(loop_40_inactive)
+(loop_40_context)-[:FORK { strategy: "behavior-branches" }]->(loop_40_context_branch | loop_40_then_branch | loop_40_operator_branch | loop_40_result_branch | loop_40_taxonomy_branch | loop_40_intervention_recognize | loop_40_intervention_interdict | loop_40_intervention_minimize)
+(loop_40_context_branch | loop_40_then_branch | loop_40_operator_branch | loop_40_result_branch | loop_40_taxonomy_branch | loop_40_intervention_recognize | loop_40_intervention_interdict | loop_40_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_40_verdict)
+(loop_40_inactive)-[:PROCESS]->(loop_40_sink)
+(loop_40_verdict)-[:PROCESS]->(loop_40_sink)
+(loop_40_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_40_then_branch)
+(loop_40_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_40_then_branch)
+(loop_40_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_40_then_branch)

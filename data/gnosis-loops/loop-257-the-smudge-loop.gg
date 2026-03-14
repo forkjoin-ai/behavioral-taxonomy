@@ -1,0 +1,33 @@
+// behavioral-loop-257.gg
+// Executable Gnosis projection for The Smudge Loop.
+
+// Nodes
+(loop_257_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_257_context_branch: BehaviorEmit { emission: 'context' })
+(loop_257_given_gate: BehaviorAssess { stage: 'given', text: 'Left-handedness%20%2B%20writing%20with%20ink' })
+(loop_257_inactive: BehaviorTerminal { loopId: 257, loopName: 'The%20Smudge%20Loop' })
+(loop_257_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_257_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_257_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_257_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Aesthetics%20Operator', mechanism: 'the%20side%20of%20the%20hand%20smudges%20the%20text%2C%20creating%20a%20%22Messy%22%20visual' })
+(loop_257_result_branch: BehaviorEmit { emission: 'result', text: 'subconscious%20grading%20penalties%20and%20the%20internalization%20of%20being%20**%22Disorganized.%22**' })
+(loop_257_sink: BehaviorSink)
+(loop_257_start: BehaviorStart { loopId: 257, loopName: 'The%20Smudge%20Loop', given: 'Left-handedness%20%2B%20writing%20with%20ink', when: 'turning%20in%20handwritten%20work', then: 'the%20side%20of%20the%20hand%20smudges%20the%20text%2C%20creating%20a%20%22Messy%22%20visual%20(The%20Aesthetics%20Operator)', result: 'subconscious%20grading%20penalties%20and%20the%20internalization%20of%20being%20**%22Disorganized.%22**', operatorName: 'The%20Aesthetics%20Operator', operatorMechanism: 'the%20side%20of%20the%20hand%20smudges%20the%20text%2C%20creating%20a%20%22Messy%22%20visual', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_257_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_257_then_branch: BehaviorEmit { emission: 'then', text: 'the%20side%20of%20the%20hand%20smudges%20the%20text%2C%20creating%20a%20%22Messy%22%20visual%20(The%20Aesthetics%20Operator)' })
+(loop_257_verdict: BehaviorVerdict { loopId: 257, loopName: 'The%20Smudge%20Loop', then: 'the%20side%20of%20the%20hand%20smudges%20the%20text%2C%20creating%20a%20%22Messy%22%20visual%20(The%20Aesthetics%20Operator)', result: 'subconscious%20grading%20penalties%20and%20the%20internalization%20of%20being%20**%22Disorganized.%22**', operatorName: 'The%20Aesthetics%20Operator', operatorMechanism: 'the%20side%20of%20the%20hand%20smudges%20the%20text%2C%20creating%20a%20%22Messy%22%20visual', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_257_when_gate: BehaviorAssess { stage: 'when', text: 'turning%20in%20handwritten%20work' })
+
+// Topology
+(loop_257_start)-[:PROCESS]->(loop_257_given_gate)
+(loop_257_given_gate)-[:PROCESS { case: "ok" }]->(loop_257_when_gate)
+(loop_257_given_gate)-[:PROCESS { case: "err" }]->(loop_257_inactive)
+(loop_257_when_gate)-[:PROCESS { case: "ok" }]->(loop_257_context)
+(loop_257_when_gate)-[:PROCESS { case: "err" }]->(loop_257_inactive)
+(loop_257_context)-[:FORK { strategy: "behavior-branches" }]->(loop_257_context_branch | loop_257_then_branch | loop_257_operator_branch | loop_257_result_branch | loop_257_taxonomy_branch | loop_257_intervention_recognize | loop_257_intervention_interdict | loop_257_intervention_minimize)
+(loop_257_context_branch | loop_257_then_branch | loop_257_operator_branch | loop_257_result_branch | loop_257_taxonomy_branch | loop_257_intervention_recognize | loop_257_intervention_interdict | loop_257_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_257_verdict)
+(loop_257_inactive)-[:PROCESS]->(loop_257_sink)
+(loop_257_verdict)-[:PROCESS]->(loop_257_sink)
+(loop_257_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_257_then_branch)
+(loop_257_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_257_then_branch)
+(loop_257_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_257_then_branch)

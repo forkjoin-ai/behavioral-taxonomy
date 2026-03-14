@@ -1,0 +1,33 @@
+// behavioral-loop-767.gg
+// Executable Gnosis projection for The Fast Food Loop.
+
+// Nodes
+(loop_767_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_767_context_branch: BehaviorEmit { emission: 'context' })
+(loop_767_given_gate: BehaviorAssess { stage: 'given', text: 'Scent%20of%20grease%2Ffries%20clinging%20to%20clothes' })
+(loop_767_inactive: BehaviorTerminal { loopId: 767, loopName: 'The%20Fast%20Food%20Loop' })
+(loop_767_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_767_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_767_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_767_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fry%20Cook%20Operator', mechanism: 'it%20signals%20%22Bad%20Diet%22' })
+(loop_767_result_branch: BehaviorEmit { emission: 'result', text: 'judgment%20from%20health-conscious%20peers' })
+(loop_767_sink: BehaviorSink)
+(loop_767_start: BehaviorStart { loopId: 767, loopName: 'The%20Fast%20Food%20Loop', given: 'Scent%20of%20grease%2Ffries%20clinging%20to%20clothes', when: 'returning%20from%20lunch', then: 'it%20signals%20%22Bad%20Diet%22%20(The%20Fry%20Cook%20Operator)', result: 'judgment%20from%20health-conscious%20peers', operatorName: 'The%20Fry%20Cook%20Operator', operatorMechanism: 'it%20signals%20%22Bad%20Diet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_767_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_767_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Bad%20Diet%22%20(The%20Fry%20Cook%20Operator)' })
+(loop_767_verdict: BehaviorVerdict { loopId: 767, loopName: 'The%20Fast%20Food%20Loop', then: 'it%20signals%20%22Bad%20Diet%22%20(The%20Fry%20Cook%20Operator)', result: 'judgment%20from%20health-conscious%20peers', operatorName: 'The%20Fry%20Cook%20Operator', operatorMechanism: 'it%20signals%20%22Bad%20Diet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_767_when_gate: BehaviorAssess { stage: 'when', text: 'returning%20from%20lunch' })
+
+// Topology
+(loop_767_start)-[:PROCESS]->(loop_767_given_gate)
+(loop_767_given_gate)-[:PROCESS { case: "ok" }]->(loop_767_when_gate)
+(loop_767_given_gate)-[:PROCESS { case: "err" }]->(loop_767_inactive)
+(loop_767_when_gate)-[:PROCESS { case: "ok" }]->(loop_767_context)
+(loop_767_when_gate)-[:PROCESS { case: "err" }]->(loop_767_inactive)
+(loop_767_context)-[:FORK { strategy: "behavior-branches" }]->(loop_767_context_branch | loop_767_then_branch | loop_767_operator_branch | loop_767_result_branch | loop_767_taxonomy_branch | loop_767_intervention_recognize | loop_767_intervention_interdict | loop_767_intervention_minimize)
+(loop_767_context_branch | loop_767_then_branch | loop_767_operator_branch | loop_767_result_branch | loop_767_taxonomy_branch | loop_767_intervention_recognize | loop_767_intervention_interdict | loop_767_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_767_verdict)
+(loop_767_inactive)-[:PROCESS]->(loop_767_sink)
+(loop_767_verdict)-[:PROCESS]->(loop_767_sink)
+(loop_767_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_767_then_branch)
+(loop_767_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_767_then_branch)
+(loop_767_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_767_then_branch)

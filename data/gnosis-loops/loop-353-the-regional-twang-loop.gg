@@ -1,0 +1,33 @@
+// behavioral-loop-353.gg
+// Executable Gnosis projection for The Regional Twang Loop.
+
+// Nodes
+(loop_353_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_353_context_branch: BehaviorEmit { emission: 'context' })
+(loop_353_given_gate: BehaviorAssess { stage: 'given', text: 'Southern%20or%20rural%20vowel%20elongation' })
+(loop_353_inactive: BehaviorTerminal { loopId: 353, loopName: 'The%20Regional%20Twang%20Loop' })
+(loop_353_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_353_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_353_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_353_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Classist%20Operator', mechanism: 'listeners%20subconsciously%20deduct%20IQ%20points' })
+(loop_353_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20having%20to%20**Over-Credential**%20(mentioning%20degrees%2Ftitles)%20to%20establish%20baseline%20respect' })
+(loop_353_sink: BehaviorSink)
+(loop_353_start: BehaviorStart { loopId: 353, loopName: 'The%20Regional%20Twang%20Loop', given: 'Southern%20or%20rural%20vowel%20elongation', when: 'speaking%20on%20technical%2Fintellectual%20subjects', then: 'listeners%20subconsciously%20deduct%20IQ%20points%20(The%20Classist%20Operator)', result: 'the%20individual%20having%20to%20**Over-Credential**%20(mentioning%20degrees%2Ftitles)%20to%20establish%20baseline%20respect', operatorName: 'The%20Classist%20Operator', operatorMechanism: 'listeners%20subconsciously%20deduct%20IQ%20points', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_353_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_353_then_branch: BehaviorEmit { emission: 'then', text: 'listeners%20subconsciously%20deduct%20IQ%20points%20(The%20Classist%20Operator)' })
+(loop_353_verdict: BehaviorVerdict { loopId: 353, loopName: 'The%20Regional%20Twang%20Loop', then: 'listeners%20subconsciously%20deduct%20IQ%20points%20(The%20Classist%20Operator)', result: 'the%20individual%20having%20to%20**Over-Credential**%20(mentioning%20degrees%2Ftitles)%20to%20establish%20baseline%20respect', operatorName: 'The%20Classist%20Operator', operatorMechanism: 'listeners%20subconsciously%20deduct%20IQ%20points', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_353_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20on%20technical%2Fintellectual%20subjects' })
+
+// Topology
+(loop_353_start)-[:PROCESS]->(loop_353_given_gate)
+(loop_353_given_gate)-[:PROCESS { case: "ok" }]->(loop_353_when_gate)
+(loop_353_given_gate)-[:PROCESS { case: "err" }]->(loop_353_inactive)
+(loop_353_when_gate)-[:PROCESS { case: "ok" }]->(loop_353_context)
+(loop_353_when_gate)-[:PROCESS { case: "err" }]->(loop_353_inactive)
+(loop_353_context)-[:FORK { strategy: "behavior-branches" }]->(loop_353_context_branch | loop_353_then_branch | loop_353_operator_branch | loop_353_result_branch | loop_353_taxonomy_branch | loop_353_intervention_recognize | loop_353_intervention_interdict | loop_353_intervention_minimize)
+(loop_353_context_branch | loop_353_then_branch | loop_353_operator_branch | loop_353_result_branch | loop_353_taxonomy_branch | loop_353_intervention_recognize | loop_353_intervention_interdict | loop_353_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_353_verdict)
+(loop_353_inactive)-[:PROCESS]->(loop_353_sink)
+(loop_353_verdict)-[:PROCESS]->(loop_353_sink)
+(loop_353_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_353_then_branch)
+(loop_353_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_353_then_branch)
+(loop_353_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_353_then_branch)

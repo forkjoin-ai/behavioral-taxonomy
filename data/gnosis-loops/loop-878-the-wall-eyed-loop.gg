@@ -1,0 +1,33 @@
+// behavioral-loop-878.gg
+// Executable Gnosis projection for The Wall-Eyed Loop.
+
+// Nodes
+(loop_878_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_878_context_branch: BehaviorEmit { emission: 'context' })
+(loop_878_given_gate: BehaviorAssess { stage: 'given', text: 'One%20eye%20drifting%20outward' })
+(loop_878_inactive: BehaviorTerminal { loopId: 878, loopName: 'The%20Wall-Eyed%20Loop' })
+(loop_878_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_878_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_878_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_878_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Distraction%20Operator', mechanism: 'it%20looks%20like%20the%20individual%20is%20%22Looking%20at%20someone%20else%22' })
+(loop_878_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20turning%20their%20head%20to%20see%20who%20is%20behind%20them' })
+(loop_878_sink: BehaviorSink)
+(loop_878_start: BehaviorStart { loopId: 878, loopName: 'The%20Wall-Eyed%20Loop', given: 'One%20eye%20drifting%20outward', when: 'talking%20to%20someone', then: 'it%20looks%20like%20the%20individual%20is%20%22Looking%20at%20someone%20else%22%20(The%20Distraction%20Operator)', result: 'the%20speaker%20turning%20their%20head%20to%20see%20who%20is%20behind%20them', operatorName: 'The%20Distraction%20Operator', operatorMechanism: 'it%20looks%20like%20the%20individual%20is%20%22Looking%20at%20someone%20else%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_878_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_878_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20the%20individual%20is%20%22Looking%20at%20someone%20else%22%20(The%20Distraction%20Operator)' })
+(loop_878_verdict: BehaviorVerdict { loopId: 878, loopName: 'The%20Wall-Eyed%20Loop', then: 'it%20looks%20like%20the%20individual%20is%20%22Looking%20at%20someone%20else%22%20(The%20Distraction%20Operator)', result: 'the%20speaker%20turning%20their%20head%20to%20see%20who%20is%20behind%20them', operatorName: 'The%20Distraction%20Operator', operatorMechanism: 'it%20looks%20like%20the%20individual%20is%20%22Looking%20at%20someone%20else%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_878_when_gate: BehaviorAssess { stage: 'when', text: 'talking%20to%20someone' })
+
+// Topology
+(loop_878_start)-[:PROCESS]->(loop_878_given_gate)
+(loop_878_given_gate)-[:PROCESS { case: "ok" }]->(loop_878_when_gate)
+(loop_878_given_gate)-[:PROCESS { case: "err" }]->(loop_878_inactive)
+(loop_878_when_gate)-[:PROCESS { case: "ok" }]->(loop_878_context)
+(loop_878_when_gate)-[:PROCESS { case: "err" }]->(loop_878_inactive)
+(loop_878_context)-[:FORK { strategy: "behavior-branches" }]->(loop_878_context_branch | loop_878_then_branch | loop_878_operator_branch | loop_878_result_branch | loop_878_taxonomy_branch | loop_878_intervention_recognize | loop_878_intervention_interdict | loop_878_intervention_minimize)
+(loop_878_context_branch | loop_878_then_branch | loop_878_operator_branch | loop_878_result_branch | loop_878_taxonomy_branch | loop_878_intervention_recognize | loop_878_intervention_interdict | loop_878_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_878_verdict)
+(loop_878_inactive)-[:PROCESS]->(loop_878_sink)
+(loop_878_verdict)-[:PROCESS]->(loop_878_sink)
+(loop_878_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_878_then_branch)
+(loop_878_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_878_then_branch)
+(loop_878_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_878_then_branch)

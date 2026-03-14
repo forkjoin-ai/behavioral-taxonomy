@@ -1,0 +1,33 @@
+// behavioral-loop-464.gg
+// Executable Gnosis projection for The Wet Mouth Loop.
+
+// Nodes
+(loop_464_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_464_context_branch: BehaviorEmit { emission: 'context' })
+(loop_464_given_gate: BehaviorAssess { stage: 'given', text: 'Excess%20saliva%20during%20speech%20(sibilant%20spray)' })
+(loop_464_inactive: BehaviorTerminal { loopId: 464, loopName: 'The%20Wet%20Mouth%20Loop' })
+(loop_464_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_464_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_464_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_464_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Splash%20Zone%20Operator', mechanism: 'listeners%20physically%20back%20away%20to%20avoid%20spray' })
+(loop_464_result_branch: BehaviorEmit { emission: 'result', text: 'social%20distancing%20and%20low%20intimacy' })
+(loop_464_sink: BehaviorSink)
+(loop_464_start: BehaviorStart { loopId: 464, loopName: 'The%20Wet%20Mouth%20Loop', given: 'Excess%20saliva%20during%20speech%20(sibilant%20spray)', when: "pronouncing%20'S'%20or%20'T'", then: 'listeners%20physically%20back%20away%20to%20avoid%20spray%20(The%20Splash%20Zone%20Operator)', result: 'social%20distancing%20and%20low%20intimacy', operatorName: 'The%20Splash%20Zone%20Operator', operatorMechanism: 'listeners%20physically%20back%20away%20to%20avoid%20spray', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_464_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_464_then_branch: BehaviorEmit { emission: 'then', text: 'listeners%20physically%20back%20away%20to%20avoid%20spray%20(The%20Splash%20Zone%20Operator)' })
+(loop_464_verdict: BehaviorVerdict { loopId: 464, loopName: 'The%20Wet%20Mouth%20Loop', then: 'listeners%20physically%20back%20away%20to%20avoid%20spray%20(The%20Splash%20Zone%20Operator)', result: 'social%20distancing%20and%20low%20intimacy', operatorName: 'The%20Splash%20Zone%20Operator', operatorMechanism: 'listeners%20physically%20back%20away%20to%20avoid%20spray', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_464_when_gate: BehaviorAssess { stage: 'when', text: "pronouncing%20'S'%20or%20'T'" })
+
+// Topology
+(loop_464_start)-[:PROCESS]->(loop_464_given_gate)
+(loop_464_given_gate)-[:PROCESS { case: "ok" }]->(loop_464_when_gate)
+(loop_464_given_gate)-[:PROCESS { case: "err" }]->(loop_464_inactive)
+(loop_464_when_gate)-[:PROCESS { case: "ok" }]->(loop_464_context)
+(loop_464_when_gate)-[:PROCESS { case: "err" }]->(loop_464_inactive)
+(loop_464_context)-[:FORK { strategy: "behavior-branches" }]->(loop_464_context_branch | loop_464_then_branch | loop_464_operator_branch | loop_464_result_branch | loop_464_taxonomy_branch | loop_464_intervention_recognize | loop_464_intervention_interdict | loop_464_intervention_minimize)
+(loop_464_context_branch | loop_464_then_branch | loop_464_operator_branch | loop_464_result_branch | loop_464_taxonomy_branch | loop_464_intervention_recognize | loop_464_intervention_interdict | loop_464_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_464_verdict)
+(loop_464_inactive)-[:PROCESS]->(loop_464_sink)
+(loop_464_verdict)-[:PROCESS]->(loop_464_sink)
+(loop_464_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_464_then_branch)
+(loop_464_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_464_then_branch)
+(loop_464_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_464_then_branch)

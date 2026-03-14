@@ -1,0 +1,33 @@
+// behavioral-loop-246.gg
+// Executable Gnosis projection for The Helmet Hair Loop.
+
+// Nodes
+(loop_246_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_246_context_branch: BehaviorEmit { emission: 'context' })
+(loop_246_given_gate: BehaviorAssess { stage: 'given', text: 'Over-groomed%2C%20immobile%20hair' })
+(loop_246_inactive: BehaviorTerminal { loopId: 246, loopName: 'The%20Helmet%20Hair%20Loop' })
+(loop_246_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Create%20transition%20rituals%20between%20contexts' })
+(loop_246_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_246_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_246_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Uptight%20Operator', mechanism: 'observers%20perceive%20%22Inflexibility%22%20or%20%22Conservatism%22' })
+(loop_246_result_branch: BehaviorEmit { emission: 'result', text: 'exclusion%20from%20spontaneous%2Ffun%20events' })
+(loop_246_sink: BehaviorSink)
+(loop_246_start: BehaviorStart { loopId: 246, loopName: 'The%20Helmet%20Hair%20Loop', given: 'Over-groomed%2C%20immobile%20hair', when: 'in%20casual%20settings', then: 'observers%20perceive%20%22Inflexibility%22%20or%20%22Conservatism%22%20(The%20Uptight%20Operator)', result: 'exclusion%20from%20spontaneous%2Ffun%20events', operatorName: 'The%20Uptight%20Operator', operatorMechanism: 'observers%20perceive%20%22Inflexibility%22%20or%20%22Conservatism%22', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Create%20transition%20rituals%20between%20contexts', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_246_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_246_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Inflexibility%22%20or%20%22Conservatism%22%20(The%20Uptight%20Operator)' })
+(loop_246_verdict: BehaviorVerdict { loopId: 246, loopName: 'The%20Helmet%20Hair%20Loop', then: 'observers%20perceive%20%22Inflexibility%22%20or%20%22Conservatism%22%20(The%20Uptight%20Operator)', result: 'exclusion%20from%20spontaneous%2Ffun%20events', operatorName: 'The%20Uptight%20Operator', operatorMechanism: 'observers%20perceive%20%22Inflexibility%22%20or%20%22Conservatism%22', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_246_when_gate: BehaviorAssess { stage: 'when', text: 'in%20casual%20settings' })
+
+// Topology
+(loop_246_start)-[:PROCESS]->(loop_246_given_gate)
+(loop_246_given_gate)-[:PROCESS { case: "ok" }]->(loop_246_when_gate)
+(loop_246_given_gate)-[:PROCESS { case: "err" }]->(loop_246_inactive)
+(loop_246_when_gate)-[:PROCESS { case: "ok" }]->(loop_246_context)
+(loop_246_when_gate)-[:PROCESS { case: "err" }]->(loop_246_inactive)
+(loop_246_context)-[:FORK { strategy: "behavior-branches" }]->(loop_246_context_branch | loop_246_then_branch | loop_246_operator_branch | loop_246_result_branch | loop_246_taxonomy_branch | loop_246_intervention_recognize | loop_246_intervention_interdict | loop_246_intervention_minimize)
+(loop_246_context_branch | loop_246_then_branch | loop_246_operator_branch | loop_246_result_branch | loop_246_taxonomy_branch | loop_246_intervention_recognize | loop_246_intervention_interdict | loop_246_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_246_verdict)
+(loop_246_inactive)-[:PROCESS]->(loop_246_sink)
+(loop_246_verdict)-[:PROCESS]->(loop_246_sink)
+(loop_246_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_246_then_branch)
+(loop_246_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_246_then_branch)
+(loop_246_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_246_then_branch)

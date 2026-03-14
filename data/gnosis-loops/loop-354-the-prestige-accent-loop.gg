@@ -1,0 +1,33 @@
+// behavioral-loop-354.gg
+// Executable Gnosis projection for The Prestige Accent Loop.
+
+// Nodes
+(loop_354_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_354_context_branch: BehaviorEmit { emission: 'context' })
+(loop_354_given_gate: BehaviorAssess { stage: 'given', text: 'Received%20Pronunciation%20or%20%22Boarding%20School%22%20diction' })
+(loop_354_inactive: BehaviorTerminal { loopId: 354, loopName: 'The%20Prestige%20Accent%20Loop' })
+(loop_354_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_354_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_354_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_354_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Aristocrat%20Operator', mechanism: 'listeners%20assume%20%22Wisdom%22%20or%20%22Authority%22' })
+(loop_354_result_branch: BehaviorEmit { emission: 'result', text: 'failing%20upward%20into%20leadership%20roles%20despite%20mediocrity' })
+(loop_354_sink: BehaviorSink)
+(loop_354_start: BehaviorStart { loopId: 354, loopName: 'The%20Prestige%20Accent%20Loop', given: 'Received%20Pronunciation%20or%20%22Boarding%20School%22%20diction', when: 'speaking%20nonsense%20or%20platitudes', then: 'listeners%20assume%20%22Wisdom%22%20or%20%22Authority%22%20(The%20Aristocrat%20Operator)', result: 'failing%20upward%20into%20leadership%20roles%20despite%20mediocrity', operatorName: 'The%20Aristocrat%20Operator', operatorMechanism: 'listeners%20assume%20%22Wisdom%22%20or%20%22Authority%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_354_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_354_then_branch: BehaviorEmit { emission: 'then', text: 'listeners%20assume%20%22Wisdom%22%20or%20%22Authority%22%20(The%20Aristocrat%20Operator)' })
+(loop_354_verdict: BehaviorVerdict { loopId: 354, loopName: 'The%20Prestige%20Accent%20Loop', then: 'listeners%20assume%20%22Wisdom%22%20or%20%22Authority%22%20(The%20Aristocrat%20Operator)', result: 'failing%20upward%20into%20leadership%20roles%20despite%20mediocrity', operatorName: 'The%20Aristocrat%20Operator', operatorMechanism: 'listeners%20assume%20%22Wisdom%22%20or%20%22Authority%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_354_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20nonsense%20or%20platitudes' })
+
+// Topology
+(loop_354_start)-[:PROCESS]->(loop_354_given_gate)
+(loop_354_given_gate)-[:PROCESS { case: "ok" }]->(loop_354_when_gate)
+(loop_354_given_gate)-[:PROCESS { case: "err" }]->(loop_354_inactive)
+(loop_354_when_gate)-[:PROCESS { case: "ok" }]->(loop_354_context)
+(loop_354_when_gate)-[:PROCESS { case: "err" }]->(loop_354_inactive)
+(loop_354_context)-[:FORK { strategy: "behavior-branches" }]->(loop_354_context_branch | loop_354_then_branch | loop_354_operator_branch | loop_354_result_branch | loop_354_taxonomy_branch | loop_354_intervention_recognize | loop_354_intervention_interdict | loop_354_intervention_minimize)
+(loop_354_context_branch | loop_354_then_branch | loop_354_operator_branch | loop_354_result_branch | loop_354_taxonomy_branch | loop_354_intervention_recognize | loop_354_intervention_interdict | loop_354_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_354_verdict)
+(loop_354_inactive)-[:PROCESS]->(loop_354_sink)
+(loop_354_verdict)-[:PROCESS]->(loop_354_sink)
+(loop_354_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_354_then_branch)
+(loop_354_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_354_then_branch)
+(loop_354_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_354_then_branch)

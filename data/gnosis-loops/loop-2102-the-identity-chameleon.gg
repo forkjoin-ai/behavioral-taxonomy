@@ -1,0 +1,33 @@
+// behavioral-loop-2102.gg
+// Executable Gnosis projection for The Identity Chameleon.
+
+// Nodes
+(loop_2102_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_2102_context_branch: BehaviorEmit { emission: 'context' })
+(loop_2102_given_gate: BehaviorAssess { stage: 'given', text: 'Hyper-awareness%20of%20social%20expectations%20%2B%20Fear%20of%20rejection' })
+(loop_2102_inactive: BehaviorTerminal { loopId: 2102, loopName: 'The%20Identity%20Chameleon' })
+(loop_2102_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_2102_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2102_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_2102_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_2102_result_branch: BehaviorEmit { emission: 'result', text: 'Identity%20Diffusion%3A%20Subject%20no%20longer%20knows%20what%20they%20actually%20prefer%20or%20believe' })
+(loop_2102_sink: BehaviorSink)
+(loop_2102_start: BehaviorStart { loopId: 2102, loopName: 'The%20Identity%20Chameleon', given: 'Hyper-awareness%20of%20social%20expectations%20%2B%20Fear%20of%20rejection', when: 'Entering%20a%20new%20social%20group%20or%20interacting%20with%20a%20strong%20personality', then: 'Subconscious%20mirroring%20of%20the%20other', result: 'Identity%20Diffusion%3A%20Subject%20no%20longer%20knows%20what%20they%20actually%20prefer%20or%20believe', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2102_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2102_then_branch: BehaviorEmit { emission: 'then', text: 'Subconscious%20mirroring%20of%20the%20other' })
+(loop_2102_verdict: BehaviorVerdict { loopId: 2102, loopName: 'The%20Identity%20Chameleon', then: 'Subconscious%20mirroring%20of%20the%20other', result: 'Identity%20Diffusion%3A%20Subject%20no%20longer%20knows%20what%20they%20actually%20prefer%20or%20believe', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2102_when_gate: BehaviorAssess { stage: 'when', text: 'Entering%20a%20new%20social%20group%20or%20interacting%20with%20a%20strong%20personality' })
+
+// Topology
+(loop_2102_start)-[:PROCESS]->(loop_2102_given_gate)
+(loop_2102_given_gate)-[:PROCESS { case: "ok" }]->(loop_2102_when_gate)
+(loop_2102_given_gate)-[:PROCESS { case: "err" }]->(loop_2102_inactive)
+(loop_2102_when_gate)-[:PROCESS { case: "ok" }]->(loop_2102_context)
+(loop_2102_when_gate)-[:PROCESS { case: "err" }]->(loop_2102_inactive)
+(loop_2102_context)-[:FORK { strategy: "behavior-branches" }]->(loop_2102_context_branch | loop_2102_then_branch | loop_2102_operator_branch | loop_2102_result_branch | loop_2102_taxonomy_branch | loop_2102_intervention_recognize | loop_2102_intervention_interdict | loop_2102_intervention_minimize)
+(loop_2102_context_branch | loop_2102_then_branch | loop_2102_operator_branch | loop_2102_result_branch | loop_2102_taxonomy_branch | loop_2102_intervention_recognize | loop_2102_intervention_interdict | loop_2102_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_2102_verdict)
+(loop_2102_inactive)-[:PROCESS]->(loop_2102_sink)
+(loop_2102_verdict)-[:PROCESS]->(loop_2102_sink)
+(loop_2102_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_2102_then_branch)
+(loop_2102_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_2102_then_branch)
+(loop_2102_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_2102_then_branch)

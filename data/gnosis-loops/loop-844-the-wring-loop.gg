@@ -1,0 +1,31 @@
+// behavioral-loop-844.gg
+// Executable Gnosis projection for The Wring Loop.
+
+// Nodes
+(loop_844_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_844_context_branch: BehaviorEmit { emission: 'context' })
+(loop_844_given_gate: BehaviorAssess { stage: 'given', text: 'Rubbing%20hands%20together%20anxiously' })
+(loop_844_inactive: BehaviorTerminal { loopId: 844, loopName: 'The%20Wring%20Loop' })
+(loop_844_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20strategically%20without%20overexposure' })
+(loop_844_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_844_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Victim%20Operator', mechanism: 'it%20signals%20%22Desperation%22%20or%20%22Helplessness%22' })
+(loop_844_result_branch: BehaviorEmit { emission: 'result', text: 'attractors%20for%20%22Rescuers%22%20or%20%22Predators.%22' })
+(loop_844_sink: BehaviorSink)
+(loop_844_start: BehaviorStart { loopId: 844, loopName: 'The%20Wring%20Loop', given: 'Rubbing%20hands%20together%20anxiously', when: 'waiting%20for%20news', then: 'it%20signals%20%22Desperation%22%20or%20%22Helplessness%22%20(The%20Victim%20Operator)', result: 'attractors%20for%20%22Rescuers%22%20or%20%22Predators.%22', operatorName: 'The%20Victim%20Operator', operatorMechanism: 'it%20signals%20%22Desperation%22%20or%20%22Helplessness%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '6', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_leverage: 'Use%20strategically%20without%20overexposure' })
+(loop_844_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_844_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Desperation%22%20or%20%22Helplessness%22%20(The%20Victim%20Operator)' })
+(loop_844_verdict: BehaviorVerdict { loopId: 844, loopName: 'The%20Wring%20Loop', then: 'it%20signals%20%22Desperation%22%20or%20%22Helplessness%22%20(The%20Victim%20Operator)', result: 'attractors%20for%20%22Rescuers%22%20or%20%22Predators.%22', operatorName: 'The%20Victim%20Operator', operatorMechanism: 'it%20signals%20%22Desperation%22%20or%20%22Helplessness%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_844_when_gate: BehaviorAssess { stage: 'when', text: 'waiting%20for%20news' })
+
+// Topology
+(loop_844_start)-[:PROCESS]->(loop_844_given_gate)
+(loop_844_given_gate)-[:PROCESS { case: "ok" }]->(loop_844_when_gate)
+(loop_844_given_gate)-[:PROCESS { case: "err" }]->(loop_844_inactive)
+(loop_844_when_gate)-[:PROCESS { case: "ok" }]->(loop_844_context)
+(loop_844_when_gate)-[:PROCESS { case: "err" }]->(loop_844_inactive)
+(loop_844_context)-[:FORK { strategy: "behavior-branches" }]->(loop_844_context_branch | loop_844_then_branch | loop_844_operator_branch | loop_844_result_branch | loop_844_taxonomy_branch | loop_844_intervention_recognize | loop_844_intervention_leverage)
+(loop_844_context_branch | loop_844_then_branch | loop_844_operator_branch | loop_844_result_branch | loop_844_taxonomy_branch | loop_844_intervention_recognize | loop_844_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_844_verdict)
+(loop_844_inactive)-[:PROCESS]->(loop_844_sink)
+(loop_844_verdict)-[:PROCESS]->(loop_844_sink)
+(loop_844_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_844_then_branch)
+(loop_844_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_844_result_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-101.gg
+// Executable Gnosis projection for The Callused Hand Loop.
+
+// Nodes
+(loop_101_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_101_context_branch: BehaviorEmit { emission: 'context' })
+(loop_101_given_gate: BehaviorAssess { stage: 'given', text: 'Type%203%20or%204%20Curls%20(High%20volume%2Ftexture)' })
+(loop_101_inactive: BehaviorTerminal { loopId: 101, loopName: 'The%20Callused%20Hand%20Loop' })
+(loop_101_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_101_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_101_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_101_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Objectification%20Operator', mechanism: 'strangers%20attempt%20to%20touch%20the%20hair%20without%20permission' })
+(loop_101_result_branch: BehaviorEmit { emission: 'result', text: 'the%20development%20of%20**Rigid%20Personal%20Boundaries**%20and%20hyper-awareness%20of%20personal%20space' })
+(loop_101_sink: BehaviorSink)
+(loop_101_start: BehaviorStart { loopId: 101, loopName: 'The%20Callused%20Hand%20Loop', given: 'Type%203%20or%204%20Curls%20(High%20volume%2Ftexture)', when: 'in%20public%20spaces', then: 'strangers%20attempt%20to%20touch%20the%20hair%20without%20permission%20(The%20Objectification%20Operator)', result: 'the%20development%20of%20**Rigid%20Personal%20Boundaries**%20and%20hyper-awareness%20of%20personal%20space', operatorName: 'The%20Objectification%20Operator', operatorMechanism: 'strangers%20attempt%20to%20touch%20the%20hair%20without%20permission', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_101_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_101_then_branch: BehaviorEmit { emission: 'then', text: 'strangers%20attempt%20to%20touch%20the%20hair%20without%20permission%20(The%20Objectification%20Operator)' })
+(loop_101_verdict: BehaviorVerdict { loopId: 101, loopName: 'The%20Callused%20Hand%20Loop', then: 'strangers%20attempt%20to%20touch%20the%20hair%20without%20permission%20(The%20Objectification%20Operator)', result: 'the%20development%20of%20**Rigid%20Personal%20Boundaries**%20and%20hyper-awareness%20of%20personal%20space', operatorName: 'The%20Objectification%20Operator', operatorMechanism: 'strangers%20attempt%20to%20touch%20the%20hair%20without%20permission', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_101_when_gate: BehaviorAssess { stage: 'when', text: 'in%20public%20spaces' })
+
+// Topology
+(loop_101_start)-[:PROCESS]->(loop_101_given_gate)
+(loop_101_given_gate)-[:PROCESS { case: "ok" }]->(loop_101_when_gate)
+(loop_101_given_gate)-[:PROCESS { case: "err" }]->(loop_101_inactive)
+(loop_101_when_gate)-[:PROCESS { case: "ok" }]->(loop_101_context)
+(loop_101_when_gate)-[:PROCESS { case: "err" }]->(loop_101_inactive)
+(loop_101_context)-[:FORK { strategy: "behavior-branches" }]->(loop_101_context_branch | loop_101_then_branch | loop_101_operator_branch | loop_101_result_branch | loop_101_taxonomy_branch | loop_101_intervention_recognize | loop_101_intervention_interdict | loop_101_intervention_minimize)
+(loop_101_context_branch | loop_101_then_branch | loop_101_operator_branch | loop_101_result_branch | loop_101_taxonomy_branch | loop_101_intervention_recognize | loop_101_intervention_interdict | loop_101_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_101_verdict)
+(loop_101_inactive)-[:PROCESS]->(loop_101_sink)
+(loop_101_verdict)-[:PROCESS]->(loop_101_sink)
+(loop_101_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_101_then_branch)
+(loop_101_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_101_then_branch)
+(loop_101_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_101_then_branch)

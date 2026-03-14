@@ -1,0 +1,33 @@
+// behavioral-loop-121.gg
+// Executable Gnosis projection for The Unibrow Loop.
+
+// Nodes
+(loop_121_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_121_context_branch: BehaviorEmit { emission: 'context' })
+(loop_121_given_gate: BehaviorAssess { stage: 'given', text: 'Confluent%20Eyebrows' })
+(loop_121_inactive: BehaviorTerminal { loopId: 121, loopName: 'The%20Unibrow%20Loop' })
+(loop_121_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_121_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_121_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_121_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Exclusion%20Operator', mechanism: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Foreignness%22' })
+(loop_121_result_branch: BehaviorEmit { emission: 'result', text: 'either%20obsessive%20**Plucking%20Rituals**%20or%20a%20defiant%20**Naturalist%20Identity**' })
+(loop_121_sink: BehaviorSink)
+(loop_121_start: BehaviorStart { loopId: 121, loopName: 'The%20Unibrow%20Loop', given: 'Confluent%20Eyebrows', when: 'in%20a%20groomed%20society', then: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Foreignness%22%20(The%20Exclusion%20Operator)', result: 'either%20obsessive%20**Plucking%20Rituals**%20or%20a%20defiant%20**Naturalist%20Identity**', operatorName: 'The%20Exclusion%20Operator', operatorMechanism: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Foreignness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_121_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_121_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Foreignness%22%20(The%20Exclusion%20Operator)' })
+(loop_121_verdict: BehaviorVerdict { loopId: 121, loopName: 'The%20Unibrow%20Loop', then: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Foreignness%22%20(The%20Exclusion%20Operator)', result: 'either%20obsessive%20**Plucking%20Rituals**%20or%20a%20defiant%20**Naturalist%20Identity**', operatorName: 'The%20Exclusion%20Operator', operatorMechanism: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Foreignness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_121_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20groomed%20society' })
+
+// Topology
+(loop_121_start)-[:PROCESS]->(loop_121_given_gate)
+(loop_121_given_gate)-[:PROCESS { case: "ok" }]->(loop_121_when_gate)
+(loop_121_given_gate)-[:PROCESS { case: "err" }]->(loop_121_inactive)
+(loop_121_when_gate)-[:PROCESS { case: "ok" }]->(loop_121_context)
+(loop_121_when_gate)-[:PROCESS { case: "err" }]->(loop_121_inactive)
+(loop_121_context)-[:FORK { strategy: "behavior-branches" }]->(loop_121_context_branch | loop_121_then_branch | loop_121_operator_branch | loop_121_result_branch | loop_121_taxonomy_branch | loop_121_intervention_recognize | loop_121_intervention_interdict | loop_121_intervention_minimize)
+(loop_121_context_branch | loop_121_then_branch | loop_121_operator_branch | loop_121_result_branch | loop_121_taxonomy_branch | loop_121_intervention_recognize | loop_121_intervention_interdict | loop_121_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_121_verdict)
+(loop_121_inactive)-[:PROCESS]->(loop_121_sink)
+(loop_121_verdict)-[:PROCESS]->(loop_121_sink)
+(loop_121_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_121_then_branch)
+(loop_121_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_121_then_branch)
+(loop_121_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_121_then_branch)

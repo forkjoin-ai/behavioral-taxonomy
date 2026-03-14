@@ -1,0 +1,33 @@
+// behavioral-loop-766.gg
+// Executable Gnosis projection for The Gym Loop.
+
+// Nodes
+(loop_766_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_766_context_branch: BehaviorEmit { emission: 'context' })
+(loop_766_given_gate: BehaviorAssess { stage: 'given', text: 'Re-wearing%20workout%20clothes%20or%20gym%20bag%20proximity' })
+(loop_766_inactive: BehaviorTerminal { loopId: 766, loopName: 'The%20Gym%20Loop' })
+(loop_766_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Introduce%20counterbalancing%20signals' })
+(loop_766_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_766_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20spatial%20behaviors%20in%20group%20dynamics' })
+(loop_766_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Locker%20Room%20Operator', mechanism: 'it%20signals%20%22Effort%22%20but%20%22Low%20Hygiene%22' })
+(loop_766_result_branch: BehaviorEmit { emission: 'result', text: 'physical%20distancing' })
+(loop_766_sink: BehaviorSink)
+(loop_766_start: BehaviorStart { loopId: 766, loopName: 'The%20Gym%20Loop', given: 'Re-wearing%20workout%20clothes%20or%20gym%20bag%20proximity', when: 'in%20a%20clean%20space', then: 'it%20signals%20%22Effort%22%20but%20%22Low%20Hygiene%22%20(The%20Locker%20Room%20Operator)', result: 'physical%20distancing', operatorName: 'The%20Locker%20Room%20Operator', operatorMechanism: 'it%20signals%20%22Effort%22%20but%20%22Low%20Hygiene%22', origin: 'SARTORIAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20spatial%20behaviors%20in%20group%20dynamics', intervention_interdict: 'Introduce%20counterbalancing%20signals', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_766_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_766_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Effort%22%20but%20%22Low%20Hygiene%22%20(The%20Locker%20Room%20Operator)' })
+(loop_766_verdict: BehaviorVerdict { loopId: 766, loopName: 'The%20Gym%20Loop', then: 'it%20signals%20%22Effort%22%20but%20%22Low%20Hygiene%22%20(The%20Locker%20Room%20Operator)', result: 'physical%20distancing', operatorName: 'The%20Locker%20Room%20Operator', operatorMechanism: 'it%20signals%20%22Effort%22%20but%20%22Low%20Hygiene%22', origin: 'SARTORIAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_766_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20clean%20space' })
+
+// Topology
+(loop_766_start)-[:PROCESS]->(loop_766_given_gate)
+(loop_766_given_gate)-[:PROCESS { case: "ok" }]->(loop_766_when_gate)
+(loop_766_given_gate)-[:PROCESS { case: "err" }]->(loop_766_inactive)
+(loop_766_when_gate)-[:PROCESS { case: "ok" }]->(loop_766_context)
+(loop_766_when_gate)-[:PROCESS { case: "err" }]->(loop_766_inactive)
+(loop_766_context)-[:FORK { strategy: "behavior-branches" }]->(loop_766_context_branch | loop_766_then_branch | loop_766_operator_branch | loop_766_result_branch | loop_766_taxonomy_branch | loop_766_intervention_recognize | loop_766_intervention_interdict | loop_766_intervention_minimize)
+(loop_766_context_branch | loop_766_then_branch | loop_766_operator_branch | loop_766_result_branch | loop_766_taxonomy_branch | loop_766_intervention_recognize | loop_766_intervention_interdict | loop_766_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_766_verdict)
+(loop_766_inactive)-[:PROCESS]->(loop_766_sink)
+(loop_766_verdict)-[:PROCESS]->(loop_766_sink)
+(loop_766_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_766_then_branch)
+(loop_766_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_766_then_branch)
+(loop_766_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_766_then_branch)

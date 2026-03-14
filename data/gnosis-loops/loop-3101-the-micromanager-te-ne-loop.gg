@@ -1,0 +1,33 @@
+// behavioral-loop-3101.gg
+// Executable Gnosis projection for The Micromanager (Te-Ne Loop).
+
+// Nodes
+(loop_3101_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_3101_context_branch: BehaviorEmit { emission: 'context' })
+(loop_3101_given_gate: BehaviorAssess { stage: 'given', text: 'Dominant%20Extroverted%20Thinking%20(Te)%20%2B%20Extroverted%20Intuition%20(Ne)%20bypassing%20Introverted%20Sensing%20(Si)' })
+(loop_3101_inactive: BehaviorTerminal { loopId: 3101, loopName: 'The%20Micromanager%20(Te-Ne%20Loop)' })
+(loop_3101_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_3101_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3101_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_3101_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_3101_result_branch: BehaviorEmit { emission: 'result', text: 'Frenetic%20activity%20and%20authoritarianism%3B%20choking%20the%20system%20with%20red%20tape%20to%20soothe%20anxiety' })
+(loop_3101_sink: BehaviorSink)
+(loop_3101_start: BehaviorStart { loopId: 3101, loopName: 'The%20Micromanager%20(Te-Ne%20Loop)', given: 'Dominant%20Extroverted%20Thinking%20(Te)%20%2B%20Extroverted%20Intuition%20(Ne)%20bypassing%20Introverted%20Sensing%20(Si)', when: 'Losing%20control%20of%20a%20project%20or%20environment', then: 'Subject%20imagines%20every%20possible%20negative%20outcome%20and%20creates%20a%20rule%20to%20prevent%20each%20one%20immediately', result: 'Frenetic%20activity%20and%20authoritarianism%3B%20choking%20the%20system%20with%20red%20tape%20to%20soothe%20anxiety', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3101_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3101_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20imagines%20every%20possible%20negative%20outcome%20and%20creates%20a%20rule%20to%20prevent%20each%20one%20immediately' })
+(loop_3101_verdict: BehaviorVerdict { loopId: 3101, loopName: 'The%20Micromanager%20(Te-Ne%20Loop)', then: 'Subject%20imagines%20every%20possible%20negative%20outcome%20and%20creates%20a%20rule%20to%20prevent%20each%20one%20immediately', result: 'Frenetic%20activity%20and%20authoritarianism%3B%20choking%20the%20system%20with%20red%20tape%20to%20soothe%20anxiety', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3101_when_gate: BehaviorAssess { stage: 'when', text: 'Losing%20control%20of%20a%20project%20or%20environment' })
+
+// Topology
+(loop_3101_start)-[:PROCESS]->(loop_3101_given_gate)
+(loop_3101_given_gate)-[:PROCESS { case: "ok" }]->(loop_3101_when_gate)
+(loop_3101_given_gate)-[:PROCESS { case: "err" }]->(loop_3101_inactive)
+(loop_3101_when_gate)-[:PROCESS { case: "ok" }]->(loop_3101_context)
+(loop_3101_when_gate)-[:PROCESS { case: "err" }]->(loop_3101_inactive)
+(loop_3101_context)-[:FORK { strategy: "behavior-branches" }]->(loop_3101_context_branch | loop_3101_then_branch | loop_3101_operator_branch | loop_3101_result_branch | loop_3101_taxonomy_branch | loop_3101_intervention_recognize | loop_3101_intervention_interdict | loop_3101_intervention_minimize)
+(loop_3101_context_branch | loop_3101_then_branch | loop_3101_operator_branch | loop_3101_result_branch | loop_3101_taxonomy_branch | loop_3101_intervention_recognize | loop_3101_intervention_interdict | loop_3101_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_3101_verdict)
+(loop_3101_inactive)-[:PROCESS]->(loop_3101_sink)
+(loop_3101_verdict)-[:PROCESS]->(loop_3101_sink)
+(loop_3101_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_3101_then_branch)
+(loop_3101_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_3101_then_branch)
+(loop_3101_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_3101_then_branch)

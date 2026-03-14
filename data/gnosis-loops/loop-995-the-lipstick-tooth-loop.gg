@@ -1,0 +1,33 @@
+// behavioral-loop-995.gg
+// Executable Gnosis projection for The Lipstick Tooth Loop.
+
+// Nodes
+(loop_995_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_995_context_branch: BehaviorEmit { emission: 'context' })
+(loop_995_given_gate: BehaviorAssess { stage: 'given', text: 'Pigment%20transfer%20to%20the%20central%20incisor' })
+(loop_995_inactive: BehaviorTerminal { loopId: 995, loopName: 'The%20Lipstick%20Tooth%20Loop' })
+(loop_995_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_995_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_995_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_995_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Clown%20Operator', mechanism: 'the%20red%20mark%20creates%20a%20focal%20point' })
+(loop_995_result_branch: BehaviorEmit { emission: 'result', text: 'listeners%20debating%20whether%20to%20tell%20them%20(embarrassment)%20or%20let%20them%20look%20foolish%20(malice)' })
+(loop_995_sink: BehaviorSink)
+(loop_995_start: BehaviorStart { loopId: 995, loopName: 'The%20Lipstick%20Tooth%20Loop', given: 'Pigment%20transfer%20to%20the%20central%20incisor', when: 'smiling%20broadly', then: 'the%20red%20mark%20creates%20a%20focal%20point%20(The%20Clown%20Operator)', result: 'listeners%20debating%20whether%20to%20tell%20them%20(embarrassment)%20or%20let%20them%20look%20foolish%20(malice)', operatorName: 'The%20Clown%20Operator', operatorMechanism: 'the%20red%20mark%20creates%20a%20focal%20point', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_995_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_995_then_branch: BehaviorEmit { emission: 'then', text: 'the%20red%20mark%20creates%20a%20focal%20point%20(The%20Clown%20Operator)' })
+(loop_995_verdict: BehaviorVerdict { loopId: 995, loopName: 'The%20Lipstick%20Tooth%20Loop', then: 'the%20red%20mark%20creates%20a%20focal%20point%20(The%20Clown%20Operator)', result: 'listeners%20debating%20whether%20to%20tell%20them%20(embarrassment)%20or%20let%20them%20look%20foolish%20(malice)', operatorName: 'The%20Clown%20Operator', operatorMechanism: 'the%20red%20mark%20creates%20a%20focal%20point', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_995_when_gate: BehaviorAssess { stage: 'when', text: 'smiling%20broadly' })
+
+// Topology
+(loop_995_start)-[:PROCESS]->(loop_995_given_gate)
+(loop_995_given_gate)-[:PROCESS { case: "ok" }]->(loop_995_when_gate)
+(loop_995_given_gate)-[:PROCESS { case: "err" }]->(loop_995_inactive)
+(loop_995_when_gate)-[:PROCESS { case: "ok" }]->(loop_995_context)
+(loop_995_when_gate)-[:PROCESS { case: "err" }]->(loop_995_inactive)
+(loop_995_context)-[:FORK { strategy: "behavior-branches" }]->(loop_995_context_branch | loop_995_then_branch | loop_995_operator_branch | loop_995_result_branch | loop_995_taxonomy_branch | loop_995_intervention_recognize | loop_995_intervention_interdict | loop_995_intervention_minimize)
+(loop_995_context_branch | loop_995_then_branch | loop_995_operator_branch | loop_995_result_branch | loop_995_taxonomy_branch | loop_995_intervention_recognize | loop_995_intervention_interdict | loop_995_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_995_verdict)
+(loop_995_inactive)-[:PROCESS]->(loop_995_sink)
+(loop_995_verdict)-[:PROCESS]->(loop_995_sink)
+(loop_995_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_995_then_branch)
+(loop_995_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_995_then_branch)
+(loop_995_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_995_then_branch)

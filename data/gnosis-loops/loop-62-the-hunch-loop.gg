@@ -1,0 +1,33 @@
+// behavioral-loop-62.gg
+// Executable Gnosis projection for The Hunch Loop.
+
+// Nodes
+(loop_62_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_62_context_branch: BehaviorEmit { emission: 'context' })
+(loop_62_given_gate: BehaviorAssess { stage: 'given', text: 'Forward%20head%20posture%2Fcurvature' })
+(loop_62_inactive: BehaviorTerminal { loopId: 62, loopName: 'The%20Hunch%20Loop' })
+(loop_62_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_62_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_62_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_62_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Invisible%20Operator', mechanism: 'observers%20assume%20%22Submission%22%20or%20%22Low%20Energy%22' })
+(loop_62_result_branch: BehaviorEmit { emission: 'result', text: 'being%20bypassed%20for%20active%20tasks' })
+(loop_62_sink: BehaviorSink)
+(loop_62_start: BehaviorStart { loopId: 62, loopName: 'The%20Hunch%20Loop', given: 'Forward%20head%20posture%2Fcurvature', when: 'standing%20in%20a%20group', then: 'observers%20assume%20%22Submission%22%20or%20%22Low%20Energy%22%20(The%20Invisible%20Operator)', result: 'being%20bypassed%20for%20active%20tasks', operatorName: 'The%20Invisible%20Operator', operatorMechanism: 'observers%20assume%20%22Submission%22%20or%20%22Low%20Energy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_62_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_62_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Submission%22%20or%20%22Low%20Energy%22%20(The%20Invisible%20Operator)' })
+(loop_62_verdict: BehaviorVerdict { loopId: 62, loopName: 'The%20Hunch%20Loop', then: 'observers%20assume%20%22Submission%22%20or%20%22Low%20Energy%22%20(The%20Invisible%20Operator)', result: 'being%20bypassed%20for%20active%20tasks', operatorName: 'The%20Invisible%20Operator', operatorMechanism: 'observers%20assume%20%22Submission%22%20or%20%22Low%20Energy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_62_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20in%20a%20group' })
+
+// Topology
+(loop_62_start)-[:PROCESS]->(loop_62_given_gate)
+(loop_62_given_gate)-[:PROCESS { case: "ok" }]->(loop_62_when_gate)
+(loop_62_given_gate)-[:PROCESS { case: "err" }]->(loop_62_inactive)
+(loop_62_when_gate)-[:PROCESS { case: "ok" }]->(loop_62_context)
+(loop_62_when_gate)-[:PROCESS { case: "err" }]->(loop_62_inactive)
+(loop_62_context)-[:FORK { strategy: "behavior-branches" }]->(loop_62_context_branch | loop_62_then_branch | loop_62_operator_branch | loop_62_result_branch | loop_62_taxonomy_branch | loop_62_intervention_recognize | loop_62_intervention_interdict | loop_62_intervention_minimize)
+(loop_62_context_branch | loop_62_then_branch | loop_62_operator_branch | loop_62_result_branch | loop_62_taxonomy_branch | loop_62_intervention_recognize | loop_62_intervention_interdict | loop_62_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_62_verdict)
+(loop_62_inactive)-[:PROCESS]->(loop_62_sink)
+(loop_62_verdict)-[:PROCESS]->(loop_62_sink)
+(loop_62_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_62_then_branch)
+(loop_62_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_62_then_branch)
+(loop_62_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_62_then_branch)

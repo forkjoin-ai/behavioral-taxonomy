@@ -1,0 +1,33 @@
+// behavioral-loop-11004.gg
+// Executable Gnosis projection for The Habit Chunking Loop.
+
+// Nodes
+(loop_11004_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_11004_context_branch: BehaviorEmit { emission: 'context' })
+(loop_11004_given_gate: BehaviorAssess { stage: 'given', text: 'Sensory%20trigger%20activates%20a%20stored%20pattern%20(e.g.%2C%20walking%20into%20a%20dark%20room)' })
+(loop_11004_inactive: BehaviorTerminal { loopId: 11004, loopName: 'The%20Habit%20Chunking%20Loop' })
+(loop_11004_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Disrupt%20the%20cue-routine-reward%20loop%20by%20changing%20the%20environment' })
+(loop_11004_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Insert%20a%20pause%20between%20cue%20and%20routine%20to%20engage%20prefrontal%20cortex' })
+(loop_11004_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20actions%20you%20perform%20without%20conscious%20decision' })
+(loop_11004_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Basal%20Ganglia%20Shortcut', mechanism: 'Dopamine%20shifts%20from%20Reward-Phase%20to%20Cue-Phase%20(VTA%20%E2%86%92%20Striatum)%2C%20creating%20craving%20at%20the%20sight%20of%20the%20trigger.' })
+(loop_11004_result_branch: BehaviorEmit { emission: 'result', text: 'Automatic%20execution%20even%20when%20context%20changes%3B%20dopamine%20fires%20at%20Cue%2C%20not%20Reward' })
+(loop_11004_sink: BehaviorSink)
+(loop_11004_start: BehaviorStart { loopId: 11004, loopName: 'The%20Habit%20Chunking%20Loop', given: 'Sensory%20trigger%20activates%20a%20stored%20pattern%20(e.g.%2C%20walking%20into%20a%20dark%20room)', when: 'The%20brain%20executes%20a%20stored%20behavioral%20script%20(reaching%20for%20light%20switch)', then: 'Prefrontal%20Cortex%20activity%20drops%20significantly%20to%20save%20energy', result: 'Automatic%20execution%20even%20when%20context%20changes%3B%20dopamine%20fires%20at%20Cue%2C%20not%20Reward', operatorName: 'The%20Basal%20Ganglia%20Shortcut', operatorMechanism: 'Dopamine%20shifts%20from%20Reward-Phase%20to%20Cue-Phase%20(VTA%20%E2%86%92%20Striatum)%2C%20creating%20craving%20at%20the%20sight%20of%20the%20trigger.', origin: 'NEUROBIOLOGICAL', modality: 'BEHAVIORAL', mutability: 'RIGID', valences: 'AUTOMATION', interventionDifficulty: '7', intervention_recognize: 'Notice%20actions%20you%20perform%20without%20conscious%20decision', intervention_interdict: 'Disrupt%20the%20cue-routine-reward%20loop%20by%20changing%20the%20environment', intervention_minimize: 'Insert%20a%20pause%20between%20cue%20and%20routine%20to%20engage%20prefrontal%20cortex' })
+(loop_11004_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'NEUROBIOLOGICAL', modality: 'BEHAVIORAL', mutability: 'RIGID', valences: 'AUTOMATION' })
+(loop_11004_then_branch: BehaviorEmit { emission: 'then', text: 'Prefrontal%20Cortex%20activity%20drops%20significantly%20to%20save%20energy' })
+(loop_11004_verdict: BehaviorVerdict { loopId: 11004, loopName: 'The%20Habit%20Chunking%20Loop', then: 'Prefrontal%20Cortex%20activity%20drops%20significantly%20to%20save%20energy', result: 'Automatic%20execution%20even%20when%20context%20changes%3B%20dopamine%20fires%20at%20Cue%2C%20not%20Reward', operatorName: 'The%20Basal%20Ganglia%20Shortcut', operatorMechanism: 'Dopamine%20shifts%20from%20Reward-Phase%20to%20Cue-Phase%20(VTA%20%E2%86%92%20Striatum)%2C%20creating%20craving%20at%20the%20sight%20of%20the%20trigger.', origin: 'NEUROBIOLOGICAL', modality: 'BEHAVIORAL', mutability: 'RIGID', valences: 'AUTOMATION' })
+(loop_11004_when_gate: BehaviorAssess { stage: 'when', text: 'The%20brain%20executes%20a%20stored%20behavioral%20script%20(reaching%20for%20light%20switch)' })
+
+// Topology
+(loop_11004_start)-[:PROCESS]->(loop_11004_given_gate)
+(loop_11004_given_gate)-[:PROCESS { case: "ok" }]->(loop_11004_when_gate)
+(loop_11004_given_gate)-[:PROCESS { case: "err" }]->(loop_11004_inactive)
+(loop_11004_when_gate)-[:PROCESS { case: "ok" }]->(loop_11004_context)
+(loop_11004_when_gate)-[:PROCESS { case: "err" }]->(loop_11004_inactive)
+(loop_11004_context)-[:FORK { strategy: "behavior-branches" }]->(loop_11004_context_branch | loop_11004_then_branch | loop_11004_operator_branch | loop_11004_result_branch | loop_11004_taxonomy_branch | loop_11004_intervention_recognize | loop_11004_intervention_interdict | loop_11004_intervention_minimize)
+(loop_11004_context_branch | loop_11004_then_branch | loop_11004_operator_branch | loop_11004_result_branch | loop_11004_taxonomy_branch | loop_11004_intervention_recognize | loop_11004_intervention_interdict | loop_11004_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_11004_verdict)
+(loop_11004_inactive)-[:PROCESS]->(loop_11004_sink)
+(loop_11004_verdict)-[:PROCESS]->(loop_11004_sink)
+(loop_11004_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_11004_then_branch)
+(loop_11004_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_11004_then_branch)
+(loop_11004_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_11004_then_branch)

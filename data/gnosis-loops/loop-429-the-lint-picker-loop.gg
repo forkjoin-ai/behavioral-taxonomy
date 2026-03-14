@@ -1,0 +1,33 @@
+// behavioral-loop-429.gg
+// Executable Gnosis projection for The Lint Picker Loop.
+
+// Nodes
+(loop_429_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_429_context_branch: BehaviorEmit { emission: 'context' })
+(loop_429_given_gate: BehaviorAssess { stage: 'given', text: 'Picking%20invisible%20lint%20off%20clothes%20while%20talking' })
+(loop_429_inactive: BehaviorTerminal { loopId: 429, loopName: 'The%20Lint%20Picker%20Loop' })
+(loop_429_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_429_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_429_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_429_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Superiority%20Operator', mechanism: 'it%20signals%20%22Disinterest%22%20or%20%22Dismissal%22' })
+(loop_429_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20feeling%20ignored%20and%20escalating%20their%20volume' })
+(loop_429_sink: BehaviorSink)
+(loop_429_start: BehaviorStart { loopId: 429, loopName: 'The%20Lint%20Picker%20Loop', given: 'Picking%20invisible%20lint%20off%20clothes%20while%20talking', when: 'listening%20to%20a%20critique', then: 'it%20signals%20%22Disinterest%22%20or%20%22Dismissal%22%20(The%20Superiority%20Operator)', result: 'the%20speaker%20feeling%20ignored%20and%20escalating%20their%20volume', operatorName: 'The%20Superiority%20Operator', operatorMechanism: 'it%20signals%20%22Disinterest%22%20or%20%22Dismissal%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_429_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_429_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Disinterest%22%20or%20%22Dismissal%22%20(The%20Superiority%20Operator)' })
+(loop_429_verdict: BehaviorVerdict { loopId: 429, loopName: 'The%20Lint%20Picker%20Loop', then: 'it%20signals%20%22Disinterest%22%20or%20%22Dismissal%22%20(The%20Superiority%20Operator)', result: 'the%20speaker%20feeling%20ignored%20and%20escalating%20their%20volume', operatorName: 'The%20Superiority%20Operator', operatorMechanism: 'it%20signals%20%22Disinterest%22%20or%20%22Dismissal%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_429_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20to%20a%20critique' })
+
+// Topology
+(loop_429_start)-[:PROCESS]->(loop_429_given_gate)
+(loop_429_given_gate)-[:PROCESS { case: "ok" }]->(loop_429_when_gate)
+(loop_429_given_gate)-[:PROCESS { case: "err" }]->(loop_429_inactive)
+(loop_429_when_gate)-[:PROCESS { case: "ok" }]->(loop_429_context)
+(loop_429_when_gate)-[:PROCESS { case: "err" }]->(loop_429_inactive)
+(loop_429_context)-[:FORK { strategy: "behavior-branches" }]->(loop_429_context_branch | loop_429_then_branch | loop_429_operator_branch | loop_429_result_branch | loop_429_taxonomy_branch | loop_429_intervention_recognize | loop_429_intervention_interdict | loop_429_intervention_minimize)
+(loop_429_context_branch | loop_429_then_branch | loop_429_operator_branch | loop_429_result_branch | loop_429_taxonomy_branch | loop_429_intervention_recognize | loop_429_intervention_interdict | loop_429_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_429_verdict)
+(loop_429_inactive)-[:PROCESS]->(loop_429_sink)
+(loop_429_verdict)-[:PROCESS]->(loop_429_sink)
+(loop_429_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_429_then_branch)
+(loop_429_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_429_then_branch)
+(loop_429_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_429_then_branch)

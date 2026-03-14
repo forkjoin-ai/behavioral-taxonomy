@@ -1,0 +1,33 @@
+// behavioral-loop-1041.gg
+// Executable Gnosis projection for The Doorway Effect Loop.
+
+// Nodes
+(loop_1041_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1041_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1041_given_gate: BehaviorAssess { stage: 'given', text: 'Crossing%20a%20spatial%20threshold' })
+(loop_1041_inactive: BehaviorTerminal { loopId: 1041, loopName: 'The%20Doorway%20Effect%20Loop' })
+(loop_1041_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1041_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1041_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1041_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'memory%20is%20wiped%20(The%20Reset)' })
+(loop_1041_result_branch: BehaviorEmit { emission: 'result', text: 'standing%20in%20the%20center%20of%20the%20room%20asking%20%22Why%20am%20I%20here%3F%22' })
+(loop_1041_sink: BehaviorSink)
+(loop_1041_start: BehaviorStart { loopId: 1041, loopName: 'The%20Doorway%20Effect%20Loop', given: 'Crossing%20a%20spatial%20threshold', when: 'entering%20a%20new%20room', then: 'memory%20is%20wiped%20(The%20Reset)', result: 'standing%20in%20the%20center%20of%20the%20room%20asking%20%22Why%20am%20I%20here%3F%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'memory%20is%20wiped%20(The%20Reset)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1041_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1041_then_branch: BehaviorEmit { emission: 'then', text: 'memory%20is%20wiped%20(The%20Reset)' })
+(loop_1041_verdict: BehaviorVerdict { loopId: 1041, loopName: 'The%20Doorway%20Effect%20Loop', then: 'memory%20is%20wiped%20(The%20Reset)', result: 'standing%20in%20the%20center%20of%20the%20room%20asking%20%22Why%20am%20I%20here%3F%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'memory%20is%20wiped%20(The%20Reset)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1041_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20new%20room' })
+
+// Topology
+(loop_1041_start)-[:PROCESS]->(loop_1041_given_gate)
+(loop_1041_given_gate)-[:PROCESS { case: "ok" }]->(loop_1041_when_gate)
+(loop_1041_given_gate)-[:PROCESS { case: "err" }]->(loop_1041_inactive)
+(loop_1041_when_gate)-[:PROCESS { case: "ok" }]->(loop_1041_context)
+(loop_1041_when_gate)-[:PROCESS { case: "err" }]->(loop_1041_inactive)
+(loop_1041_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1041_context_branch | loop_1041_then_branch | loop_1041_operator_branch | loop_1041_result_branch | loop_1041_taxonomy_branch | loop_1041_intervention_recognize | loop_1041_intervention_interdict | loop_1041_intervention_minimize)
+(loop_1041_context_branch | loop_1041_then_branch | loop_1041_operator_branch | loop_1041_result_branch | loop_1041_taxonomy_branch | loop_1041_intervention_recognize | loop_1041_intervention_interdict | loop_1041_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1041_verdict)
+(loop_1041_inactive)-[:PROCESS]->(loop_1041_sink)
+(loop_1041_verdict)-[:PROCESS]->(loop_1041_sink)
+(loop_1041_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1041_then_branch)
+(loop_1041_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1041_then_branch)
+(loop_1041_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1041_then_branch)

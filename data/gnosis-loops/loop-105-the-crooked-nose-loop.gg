@@ -1,0 +1,33 @@
+// behavioral-loop-105.gg
+// Executable Gnosis projection for The Crooked Nose Loop.
+
+// Nodes
+(loop_105_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_105_context_branch: BehaviorEmit { emission: 'context' })
+(loop_105_given_gate: BehaviorAssess { stage: 'given', text: 'Nasal%20Deviation%20(Previously%20broken%20nose)' })
+(loop_105_inactive: BehaviorTerminal { loopId: 105, loopName: 'The%20Crooked%20Nose%20Loop' })
+(loop_105_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_105_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_105_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_105_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'the%20observer%20assumes%20%22Combat%20Experience%22%20or%20%22Toughness%22' })
+(loop_105_result_branch: BehaviorEmit { emission: 'result', text: 'high%20%22Street%20Respect%22%20and%20fewer%20physical%20challenges%20from%20others' })
+(loop_105_sink: BehaviorSink)
+(loop_105_start: BehaviorStart { loopId: 105, loopName: 'The%20Crooked%20Nose%20Loop', given: 'Nasal%20Deviation%20(Previously%20broken%20nose)', when: 'meeting%20new%20males', then: 'the%20observer%20assumes%20%22Combat%20Experience%22%20or%20%22Toughness%22%20(The%20Threat%20Operator)', result: 'high%20%22Street%20Respect%22%20and%20fewer%20physical%20challenges%20from%20others', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20observer%20assumes%20%22Combat%20Experience%22%20or%20%22Toughness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_105_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_105_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20assumes%20%22Combat%20Experience%22%20or%20%22Toughness%22%20(The%20Threat%20Operator)' })
+(loop_105_verdict: BehaviorVerdict { loopId: 105, loopName: 'The%20Crooked%20Nose%20Loop', then: 'the%20observer%20assumes%20%22Combat%20Experience%22%20or%20%22Toughness%22%20(The%20Threat%20Operator)', result: 'high%20%22Street%20Respect%22%20and%20fewer%20physical%20challenges%20from%20others', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20observer%20assumes%20%22Combat%20Experience%22%20or%20%22Toughness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_105_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20new%20males' })
+
+// Topology
+(loop_105_start)-[:PROCESS]->(loop_105_given_gate)
+(loop_105_given_gate)-[:PROCESS { case: "ok" }]->(loop_105_when_gate)
+(loop_105_given_gate)-[:PROCESS { case: "err" }]->(loop_105_inactive)
+(loop_105_when_gate)-[:PROCESS { case: "ok" }]->(loop_105_context)
+(loop_105_when_gate)-[:PROCESS { case: "err" }]->(loop_105_inactive)
+(loop_105_context)-[:FORK { strategy: "behavior-branches" }]->(loop_105_context_branch | loop_105_then_branch | loop_105_operator_branch | loop_105_result_branch | loop_105_taxonomy_branch | loop_105_intervention_recognize | loop_105_intervention_interdict | loop_105_intervention_minimize)
+(loop_105_context_branch | loop_105_then_branch | loop_105_operator_branch | loop_105_result_branch | loop_105_taxonomy_branch | loop_105_intervention_recognize | loop_105_intervention_interdict | loop_105_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_105_verdict)
+(loop_105_inactive)-[:PROCESS]->(loop_105_sink)
+(loop_105_verdict)-[:PROCESS]->(loop_105_sink)
+(loop_105_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_105_then_branch)
+(loop_105_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_105_then_branch)
+(loop_105_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_105_then_branch)

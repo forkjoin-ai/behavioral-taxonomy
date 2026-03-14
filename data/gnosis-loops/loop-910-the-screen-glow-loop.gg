@@ -1,0 +1,33 @@
+// behavioral-loop-910.gg
+// Executable Gnosis projection for The Screen Glow Loop.
+
+// Nodes
+(loop_910_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_910_context_branch: BehaviorEmit { emission: 'context' })
+(loop_910_given_gate: BehaviorAssess { stage: 'given', text: 'Wrist%20screen%20lighting%20up%20with%20notifications' })
+(loop_910_inactive: BehaviorTerminal { loopId: 910, loopName: 'The%20Screen%20Glow%20Loop' })
+(loop_910_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_910_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_910_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_910_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Beacon%20Operator', mechanism: 'the%20light%20distracts%20the%20eye' })
+(loop_910_result_branch: BehaviorEmit { emission: 'result', text: 'the%20wearer%20looking%20%22Distracted%22%20or%20%22Rude.%22' })
+(loop_910_sink: BehaviorSink)
+(loop_910_start: BehaviorStart { loopId: 910, loopName: 'The%20Screen%20Glow%20Loop', given: 'Wrist%20screen%20lighting%20up%20with%20notifications', when: 'in%20a%20dark%20theater%20or%20serious%20conversation', then: 'the%20light%20distracts%20the%20eye%20(The%20Beacon%20Operator)', result: 'the%20wearer%20looking%20%22Distracted%22%20or%20%22Rude.%22', operatorName: 'The%20Beacon%20Operator', operatorMechanism: 'the%20light%20distracts%20the%20eye', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_910_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_910_then_branch: BehaviorEmit { emission: 'then', text: 'the%20light%20distracts%20the%20eye%20(The%20Beacon%20Operator)' })
+(loop_910_verdict: BehaviorVerdict { loopId: 910, loopName: 'The%20Screen%20Glow%20Loop', then: 'the%20light%20distracts%20the%20eye%20(The%20Beacon%20Operator)', result: 'the%20wearer%20looking%20%22Distracted%22%20or%20%22Rude.%22', operatorName: 'The%20Beacon%20Operator', operatorMechanism: 'the%20light%20distracts%20the%20eye', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_910_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20dark%20theater%20or%20serious%20conversation' })
+
+// Topology
+(loop_910_start)-[:PROCESS]->(loop_910_given_gate)
+(loop_910_given_gate)-[:PROCESS { case: "ok" }]->(loop_910_when_gate)
+(loop_910_given_gate)-[:PROCESS { case: "err" }]->(loop_910_inactive)
+(loop_910_when_gate)-[:PROCESS { case: "ok" }]->(loop_910_context)
+(loop_910_when_gate)-[:PROCESS { case: "err" }]->(loop_910_inactive)
+(loop_910_context)-[:FORK { strategy: "behavior-branches" }]->(loop_910_context_branch | loop_910_then_branch | loop_910_operator_branch | loop_910_result_branch | loop_910_taxonomy_branch | loop_910_intervention_recognize | loop_910_intervention_interdict | loop_910_intervention_minimize)
+(loop_910_context_branch | loop_910_then_branch | loop_910_operator_branch | loop_910_result_branch | loop_910_taxonomy_branch | loop_910_intervention_recognize | loop_910_intervention_interdict | loop_910_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_910_verdict)
+(loop_910_inactive)-[:PROCESS]->(loop_910_sink)
+(loop_910_verdict)-[:PROCESS]->(loop_910_sink)
+(loop_910_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_910_then_branch)
+(loop_910_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_910_then_branch)
+(loop_910_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_910_then_branch)

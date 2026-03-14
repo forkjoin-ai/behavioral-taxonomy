@@ -1,0 +1,33 @@
+// behavioral-loop-436.gg
+// Executable Gnosis projection for The Sunburn Peel Loop.
+
+// Nodes
+(loop_436_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_436_context_branch: BehaviorEmit { emission: 'context' })
+(loop_436_given_gate: BehaviorAssess { stage: 'given', text: 'Sheets%20of%20skin%20shedding%20from%20shoulders%2Fface' })
+(loop_436_inactive: BehaviorTerminal { loopId: 436, loopName: 'The%20Sunburn%20Peel%20Loop' })
+(loop_436_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_436_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_436_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_436_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Molting%20Operator', mechanism: 'it%20signals%20%22Recklessness%22%20or%20%22Vacation%20Brain%22' })
+(loop_436_result_branch: BehaviorEmit { emission: 'result', text: 'temporary%20revulsion%20from%20others' })
+(loop_436_sink: BehaviorSink)
+(loop_436_start: BehaviorStart { loopId: 436, loopName: 'The%20Sunburn%20Peel%20Loop', given: 'Sheets%20of%20skin%20shedding%20from%20shoulders%2Fface', when: 'in%20public', then: 'it%20signals%20%22Recklessness%22%20or%20%22Vacation%20Brain%22%20(The%20Molting%20Operator)', result: 'temporary%20revulsion%20from%20others', operatorName: 'The%20Molting%20Operator', operatorMechanism: 'it%20signals%20%22Recklessness%22%20or%20%22Vacation%20Brain%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_436_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_436_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Recklessness%22%20or%20%22Vacation%20Brain%22%20(The%20Molting%20Operator)' })
+(loop_436_verdict: BehaviorVerdict { loopId: 436, loopName: 'The%20Sunburn%20Peel%20Loop', then: 'it%20signals%20%22Recklessness%22%20or%20%22Vacation%20Brain%22%20(The%20Molting%20Operator)', result: 'temporary%20revulsion%20from%20others', operatorName: 'The%20Molting%20Operator', operatorMechanism: 'it%20signals%20%22Recklessness%22%20or%20%22Vacation%20Brain%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_436_when_gate: BehaviorAssess { stage: 'when', text: 'in%20public' })
+
+// Topology
+(loop_436_start)-[:PROCESS]->(loop_436_given_gate)
+(loop_436_given_gate)-[:PROCESS { case: "ok" }]->(loop_436_when_gate)
+(loop_436_given_gate)-[:PROCESS { case: "err" }]->(loop_436_inactive)
+(loop_436_when_gate)-[:PROCESS { case: "ok" }]->(loop_436_context)
+(loop_436_when_gate)-[:PROCESS { case: "err" }]->(loop_436_inactive)
+(loop_436_context)-[:FORK { strategy: "behavior-branches" }]->(loop_436_context_branch | loop_436_then_branch | loop_436_operator_branch | loop_436_result_branch | loop_436_taxonomy_branch | loop_436_intervention_recognize | loop_436_intervention_interdict | loop_436_intervention_minimize)
+(loop_436_context_branch | loop_436_then_branch | loop_436_operator_branch | loop_436_result_branch | loop_436_taxonomy_branch | loop_436_intervention_recognize | loop_436_intervention_interdict | loop_436_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_436_verdict)
+(loop_436_inactive)-[:PROCESS]->(loop_436_sink)
+(loop_436_verdict)-[:PROCESS]->(loop_436_sink)
+(loop_436_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_436_then_branch)
+(loop_436_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_436_then_branch)
+(loop_436_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_436_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-525.gg
+// Executable Gnosis projection for The Long Torso Loop.
+
+// Nodes
+(loop_525_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_525_context_branch: BehaviorEmit { emission: 'context' })
+(loop_525_given_gate: BehaviorAssess { stage: 'given', text: 'Sitting%20height%20%3E%20Standing%20height%20ratio' })
+(loop_525_inactive: BehaviorTerminal { loopId: 525, loopName: 'The%20Long%20Torso%20Loop' })
+(loop_525_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_525_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_525_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_525_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Table%20Giant%20Operator', mechanism: 'the%20individual%20looks%20%22Huge%22' })
+(loop_525_result_branch: BehaviorEmit { emission: 'result', text: 'surprise%2Fdisappointment%20when%20they%20stand%20up%20and%20are%20average%20height' })
+(loop_525_sink: BehaviorSink)
+(loop_525_start: BehaviorStart { loopId: 525, loopName: 'The%20Long%20Torso%20Loop', given: 'Sitting%20height%20%3E%20Standing%20height%20ratio', when: 'sitting%20at%20a%20table', then: 'the%20individual%20looks%20%22Huge%22%20(The%20Table%20Giant%20Operator)', result: 'surprise%2Fdisappointment%20when%20they%20stand%20up%20and%20are%20average%20height', operatorName: 'The%20Table%20Giant%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Huge%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_525_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_525_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20looks%20%22Huge%22%20(The%20Table%20Giant%20Operator)' })
+(loop_525_verdict: BehaviorVerdict { loopId: 525, loopName: 'The%20Long%20Torso%20Loop', then: 'the%20individual%20looks%20%22Huge%22%20(The%20Table%20Giant%20Operator)', result: 'surprise%2Fdisappointment%20when%20they%20stand%20up%20and%20are%20average%20height', operatorName: 'The%20Table%20Giant%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Huge%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_525_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20at%20a%20table' })
+
+// Topology
+(loop_525_start)-[:PROCESS]->(loop_525_given_gate)
+(loop_525_given_gate)-[:PROCESS { case: "ok" }]->(loop_525_when_gate)
+(loop_525_given_gate)-[:PROCESS { case: "err" }]->(loop_525_inactive)
+(loop_525_when_gate)-[:PROCESS { case: "ok" }]->(loop_525_context)
+(loop_525_when_gate)-[:PROCESS { case: "err" }]->(loop_525_inactive)
+(loop_525_context)-[:FORK { strategy: "behavior-branches" }]->(loop_525_context_branch | loop_525_then_branch | loop_525_operator_branch | loop_525_result_branch | loop_525_taxonomy_branch | loop_525_intervention_recognize | loop_525_intervention_interdict | loop_525_intervention_minimize)
+(loop_525_context_branch | loop_525_then_branch | loop_525_operator_branch | loop_525_result_branch | loop_525_taxonomy_branch | loop_525_intervention_recognize | loop_525_intervention_interdict | loop_525_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_525_verdict)
+(loop_525_inactive)-[:PROCESS]->(loop_525_sink)
+(loop_525_verdict)-[:PROCESS]->(loop_525_sink)
+(loop_525_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_525_then_branch)
+(loop_525_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_525_then_branch)
+(loop_525_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_525_then_branch)

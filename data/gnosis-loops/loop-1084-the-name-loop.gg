@@ -1,0 +1,33 @@
+// behavioral-loop-1084.gg
+// Executable Gnosis projection for The Name Loop.
+
+// Nodes
+(loop_1084_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1084_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1084_given_gate: BehaviorAssess { stage: 'given', text: 'The%20last%20time%20a%20name%20is%20spoken' })
+(loop_1084_inactive: BehaviorTerminal { loopId: 1084, loopName: 'The%20Name%20Loop' })
+(loop_1084_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1084_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1084_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1084_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20Digital%20Twin%20becomes%20the%20only%20record%20(The%20Archive)' })
+(loop_1084_result_branch: BehaviorEmit { emission: 'result', text: 'a%20second%20death%20(The%20Final%20Deletion)' })
+(loop_1084_sink: BehaviorSink)
+(loop_1084_start: BehaviorStart { loopId: 1084, loopName: 'The%20Name%20Loop', given: 'The%20last%20time%20a%20name%20is%20spoken', when: 'living%20memory%20fades', then: 'the%20Digital%20Twin%20becomes%20the%20only%20record%20(The%20Archive)', result: 'a%20second%20death%20(The%20Final%20Deletion)', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20Digital%20Twin%20becomes%20the%20only%20record%20(The%20Archive)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1084_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1084_then_branch: BehaviorEmit { emission: 'then', text: 'the%20Digital%20Twin%20becomes%20the%20only%20record%20(The%20Archive)' })
+(loop_1084_verdict: BehaviorVerdict { loopId: 1084, loopName: 'The%20Name%20Loop', then: 'the%20Digital%20Twin%20becomes%20the%20only%20record%20(The%20Archive)', result: 'a%20second%20death%20(The%20Final%20Deletion)', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20Digital%20Twin%20becomes%20the%20only%20record%20(The%20Archive)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1084_when_gate: BehaviorAssess { stage: 'when', text: 'living%20memory%20fades' })
+
+// Topology
+(loop_1084_start)-[:PROCESS]->(loop_1084_given_gate)
+(loop_1084_given_gate)-[:PROCESS { case: "ok" }]->(loop_1084_when_gate)
+(loop_1084_given_gate)-[:PROCESS { case: "err" }]->(loop_1084_inactive)
+(loop_1084_when_gate)-[:PROCESS { case: "ok" }]->(loop_1084_context)
+(loop_1084_when_gate)-[:PROCESS { case: "err" }]->(loop_1084_inactive)
+(loop_1084_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1084_context_branch | loop_1084_then_branch | loop_1084_operator_branch | loop_1084_result_branch | loop_1084_taxonomy_branch | loop_1084_intervention_recognize | loop_1084_intervention_interdict | loop_1084_intervention_minimize)
+(loop_1084_context_branch | loop_1084_then_branch | loop_1084_operator_branch | loop_1084_result_branch | loop_1084_taxonomy_branch | loop_1084_intervention_recognize | loop_1084_intervention_interdict | loop_1084_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1084_verdict)
+(loop_1084_inactive)-[:PROCESS]->(loop_1084_sink)
+(loop_1084_verdict)-[:PROCESS]->(loop_1084_sink)
+(loop_1084_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1084_then_branch)
+(loop_1084_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1084_then_branch)
+(loop_1084_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1084_then_branch)

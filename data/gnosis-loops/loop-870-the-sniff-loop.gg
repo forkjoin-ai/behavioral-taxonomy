@@ -1,0 +1,33 @@
+// behavioral-loop-870.gg
+// Executable Gnosis projection for The Sniff Loop.
+
+// Nodes
+(loop_870_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_870_context_branch: BehaviorEmit { emission: 'context' })
+(loop_870_given_gate: BehaviorAssess { stage: 'given', text: 'Compulsive%20nasal%20inhalation%20every%2010%20seconds' })
+(loop_870_inactive: BehaviorTerminal { loopId: 870, loopName: 'The%20Sniff%20Loop' })
+(loop_870_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_870_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_870_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_870_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Metronome%20Operator', mechanism: 'the%20sound%20becomes%20the%20focal%20point' })
+(loop_870_result_branch: BehaviorEmit { emission: 'result', text: 'annoyance%20and%20assumptions%20of%20illness%2Fdrug%20use' })
+(loop_870_sink: BehaviorSink)
+(loop_870_start: BehaviorStart { loopId: 870, loopName: 'The%20Sniff%20Loop', given: 'Compulsive%20nasal%20inhalation%20every%2010%20seconds', when: 'in%20a%20quiet%20meeting', then: 'the%20sound%20becomes%20the%20focal%20point%20(The%20Metronome%20Operator)', result: 'annoyance%20and%20assumptions%20of%20illness%2Fdrug%20use', operatorName: 'The%20Metronome%20Operator', operatorMechanism: 'the%20sound%20becomes%20the%20focal%20point', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_870_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_870_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20becomes%20the%20focal%20point%20(The%20Metronome%20Operator)' })
+(loop_870_verdict: BehaviorVerdict { loopId: 870, loopName: 'The%20Sniff%20Loop', then: 'the%20sound%20becomes%20the%20focal%20point%20(The%20Metronome%20Operator)', result: 'annoyance%20and%20assumptions%20of%20illness%2Fdrug%20use', operatorName: 'The%20Metronome%20Operator', operatorMechanism: 'the%20sound%20becomes%20the%20focal%20point', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_870_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20quiet%20meeting' })
+
+// Topology
+(loop_870_start)-[:PROCESS]->(loop_870_given_gate)
+(loop_870_given_gate)-[:PROCESS { case: "ok" }]->(loop_870_when_gate)
+(loop_870_given_gate)-[:PROCESS { case: "err" }]->(loop_870_inactive)
+(loop_870_when_gate)-[:PROCESS { case: "ok" }]->(loop_870_context)
+(loop_870_when_gate)-[:PROCESS { case: "err" }]->(loop_870_inactive)
+(loop_870_context)-[:FORK { strategy: "behavior-branches" }]->(loop_870_context_branch | loop_870_then_branch | loop_870_operator_branch | loop_870_result_branch | loop_870_taxonomy_branch | loop_870_intervention_recognize | loop_870_intervention_interdict | loop_870_intervention_minimize)
+(loop_870_context_branch | loop_870_then_branch | loop_870_operator_branch | loop_870_result_branch | loop_870_taxonomy_branch | loop_870_intervention_recognize | loop_870_intervention_interdict | loop_870_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_870_verdict)
+(loop_870_inactive)-[:PROCESS]->(loop_870_sink)
+(loop_870_verdict)-[:PROCESS]->(loop_870_sink)
+(loop_870_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_870_then_branch)
+(loop_870_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_870_then_branch)
+(loop_870_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_870_then_branch)

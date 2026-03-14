@@ -1,0 +1,33 @@
+// behavioral-loop-321.gg
+// Executable Gnosis projection for The Close Talker Loop.
+
+// Nodes
+(loop_321_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_321_context_branch: BehaviorEmit { emission: 'context' })
+(loop_321_given_gate: BehaviorAssess { stage: 'given', text: 'Invasion%20of%20the%20%22Intimate%20Zone%22%20(%3C18%20inches)%20during%20conversation' })
+(loop_321_inactive: BehaviorTerminal { loopId: 321, loopName: 'The%20Close%20Talker%20Loop' })
+(loop_321_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_321_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_321_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_321_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Evasion%20Operator', mechanism: 'the%20recipient%20physically%20steps%20back' })
+(loop_321_result_branch: BehaviorEmit { emission: 'result', text: 'a%20%22Chasing%22%20dynamic%20where%20the%20individual%20pursues%20the%20retreating%20listener%2C%20causing%20**Social%20Panic**' })
+(loop_321_sink: BehaviorSink)
+(loop_321_start: BehaviorStart { loopId: 321, loopName: 'The%20Close%20Talker%20Loop', given: 'Invasion%20of%20the%20%22Intimate%20Zone%22%20(%3C18%20inches)%20during%20conversation', when: 'speaking%20to%20a%20casual%20acquaintance', then: 'the%20recipient%20physically%20steps%20back%20(The%20Evasion%20Operator)', result: 'a%20%22Chasing%22%20dynamic%20where%20the%20individual%20pursues%20the%20retreating%20listener%2C%20causing%20**Social%20Panic**', operatorName: 'The%20Evasion%20Operator', operatorMechanism: 'the%20recipient%20physically%20steps%20back', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_321_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_321_then_branch: BehaviorEmit { emission: 'then', text: 'the%20recipient%20physically%20steps%20back%20(The%20Evasion%20Operator)' })
+(loop_321_verdict: BehaviorVerdict { loopId: 321, loopName: 'The%20Close%20Talker%20Loop', then: 'the%20recipient%20physically%20steps%20back%20(The%20Evasion%20Operator)', result: 'a%20%22Chasing%22%20dynamic%20where%20the%20individual%20pursues%20the%20retreating%20listener%2C%20causing%20**Social%20Panic**', operatorName: 'The%20Evasion%20Operator', operatorMechanism: 'the%20recipient%20physically%20steps%20back', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_321_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20to%20a%20casual%20acquaintance' })
+
+// Topology
+(loop_321_start)-[:PROCESS]->(loop_321_given_gate)
+(loop_321_given_gate)-[:PROCESS { case: "ok" }]->(loop_321_when_gate)
+(loop_321_given_gate)-[:PROCESS { case: "err" }]->(loop_321_inactive)
+(loop_321_when_gate)-[:PROCESS { case: "ok" }]->(loop_321_context)
+(loop_321_when_gate)-[:PROCESS { case: "err" }]->(loop_321_inactive)
+(loop_321_context)-[:FORK { strategy: "behavior-branches" }]->(loop_321_context_branch | loop_321_then_branch | loop_321_operator_branch | loop_321_result_branch | loop_321_taxonomy_branch | loop_321_intervention_recognize | loop_321_intervention_interdict | loop_321_intervention_minimize)
+(loop_321_context_branch | loop_321_then_branch | loop_321_operator_branch | loop_321_result_branch | loop_321_taxonomy_branch | loop_321_intervention_recognize | loop_321_intervention_interdict | loop_321_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_321_verdict)
+(loop_321_inactive)-[:PROCESS]->(loop_321_sink)
+(loop_321_verdict)-[:PROCESS]->(loop_321_sink)
+(loop_321_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_321_then_branch)
+(loop_321_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_321_then_branch)
+(loop_321_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_321_then_branch)

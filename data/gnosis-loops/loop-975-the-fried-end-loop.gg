@@ -1,0 +1,33 @@
+// behavioral-loop-975.gg
+// Executable Gnosis projection for The Fried End Loop.
+
+// Nodes
+(loop_975_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_975_context_branch: BehaviorEmit { emission: 'context' })
+(loop_975_given_gate: BehaviorAssess { stage: 'given', text: 'Split%20ends%20traveling%20up%20the%20shaft%20(Bleach)' })
+(loop_975_inactive: BehaviorTerminal { loopId: 975, loopName: 'The%20Fried%20End%20Loop' })
+(loop_975_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_975_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_975_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_975_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Straw%20Operator', mechanism: 'the%20halo%20looks%20%22Fuzzy%22%20and%20%22Dead%22' })
+(loop_975_result_branch: BehaviorEmit { emission: 'result', text: 'judgment%20of%20%22Failed%20Vanity.%22' })
+(loop_975_sink: BehaviorSink)
+(loop_975_start: BehaviorStart { loopId: 975, loopName: 'The%20Fried%20End%20Loop', given: 'Split%20ends%20traveling%20up%20the%20shaft%20(Bleach)', when: 'backlit', then: 'the%20halo%20looks%20%22Fuzzy%22%20and%20%22Dead%22%20(The%20Straw%20Operator)', result: 'judgment%20of%20%22Failed%20Vanity.%22', operatorName: 'The%20Straw%20Operator', operatorMechanism: 'the%20halo%20looks%20%22Fuzzy%22%20and%20%22Dead%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_975_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_975_then_branch: BehaviorEmit { emission: 'then', text: 'the%20halo%20looks%20%22Fuzzy%22%20and%20%22Dead%22%20(The%20Straw%20Operator)' })
+(loop_975_verdict: BehaviorVerdict { loopId: 975, loopName: 'The%20Fried%20End%20Loop', then: 'the%20halo%20looks%20%22Fuzzy%22%20and%20%22Dead%22%20(The%20Straw%20Operator)', result: 'judgment%20of%20%22Failed%20Vanity.%22', operatorName: 'The%20Straw%20Operator', operatorMechanism: 'the%20halo%20looks%20%22Fuzzy%22%20and%20%22Dead%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_975_when_gate: BehaviorAssess { stage: 'when', text: 'backlit' })
+
+// Topology
+(loop_975_start)-[:PROCESS]->(loop_975_given_gate)
+(loop_975_given_gate)-[:PROCESS { case: "ok" }]->(loop_975_when_gate)
+(loop_975_given_gate)-[:PROCESS { case: "err" }]->(loop_975_inactive)
+(loop_975_when_gate)-[:PROCESS { case: "ok" }]->(loop_975_context)
+(loop_975_when_gate)-[:PROCESS { case: "err" }]->(loop_975_inactive)
+(loop_975_context)-[:FORK { strategy: "behavior-branches" }]->(loop_975_context_branch | loop_975_then_branch | loop_975_operator_branch | loop_975_result_branch | loop_975_taxonomy_branch | loop_975_intervention_recognize | loop_975_intervention_interdict | loop_975_intervention_minimize)
+(loop_975_context_branch | loop_975_then_branch | loop_975_operator_branch | loop_975_result_branch | loop_975_taxonomy_branch | loop_975_intervention_recognize | loop_975_intervention_interdict | loop_975_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_975_verdict)
+(loop_975_inactive)-[:PROCESS]->(loop_975_sink)
+(loop_975_verdict)-[:PROCESS]->(loop_975_sink)
+(loop_975_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_975_then_branch)
+(loop_975_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_975_then_branch)
+(loop_975_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_975_then_branch)

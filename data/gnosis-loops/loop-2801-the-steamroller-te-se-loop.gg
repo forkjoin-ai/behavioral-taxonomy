@@ -1,0 +1,33 @@
+// behavioral-loop-2801.gg
+// Executable Gnosis projection for The Steamroller (Te-Se Loop).
+
+// Nodes
+(loop_2801_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_2801_context_branch: BehaviorEmit { emission: 'context' })
+(loop_2801_given_gate: BehaviorAssess { stage: 'given', text: 'Dominant%20Extroverted%20Thinking%20(Te)%20%2B%20Extroverted%20Sensing%20(Se)%20bypassing%20Introverted%20Intuition%20(Ni)' })
+(loop_2801_inactive: BehaviorTerminal { loopId: 2801, loopName: 'The%20Steamroller%20(Te-Se%20Loop)' })
+(loop_2801_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_2801_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2801_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_2801_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_2801_result_branch: BehaviorEmit { emission: 'result', text: 'Tactical%20victories%20but%20strategic%20defeats%3B%20destroying%20relationships%20to%20win%20an%20argument' })
+(loop_2801_sink: BehaviorSink)
+(loop_2801_start: BehaviorStart { loopId: 2801, loopName: 'The%20Steamroller%20(Te-Se%20Loop)', given: 'Dominant%20Extroverted%20Thinking%20(Te)%20%2B%20Extroverted%20Sensing%20(Se)%20bypassing%20Introverted%20Intuition%20(Ni)', when: 'Impatient%20with%20theory%20or%20facing%20resistance', then: 'Subject%20becomes%20hyper-aggressive%2C%20focusing%20on%20immediate%2C%20brute-force%20results%20rather%20than%20long-term%20strategy', result: 'Tactical%20victories%20but%20strategic%20defeats%3B%20destroying%20relationships%20to%20win%20an%20argument', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2801_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2801_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20becomes%20hyper-aggressive%2C%20focusing%20on%20immediate%2C%20brute-force%20results%20rather%20than%20long-term%20strategy' })
+(loop_2801_verdict: BehaviorVerdict { loopId: 2801, loopName: 'The%20Steamroller%20(Te-Se%20Loop)', then: 'Subject%20becomes%20hyper-aggressive%2C%20focusing%20on%20immediate%2C%20brute-force%20results%20rather%20than%20long-term%20strategy', result: 'Tactical%20victories%20but%20strategic%20defeats%3B%20destroying%20relationships%20to%20win%20an%20argument', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2801_when_gate: BehaviorAssess { stage: 'when', text: 'Impatient%20with%20theory%20or%20facing%20resistance' })
+
+// Topology
+(loop_2801_start)-[:PROCESS]->(loop_2801_given_gate)
+(loop_2801_given_gate)-[:PROCESS { case: "ok" }]->(loop_2801_when_gate)
+(loop_2801_given_gate)-[:PROCESS { case: "err" }]->(loop_2801_inactive)
+(loop_2801_when_gate)-[:PROCESS { case: "ok" }]->(loop_2801_context)
+(loop_2801_when_gate)-[:PROCESS { case: "err" }]->(loop_2801_inactive)
+(loop_2801_context)-[:FORK { strategy: "behavior-branches" }]->(loop_2801_context_branch | loop_2801_then_branch | loop_2801_operator_branch | loop_2801_result_branch | loop_2801_taxonomy_branch | loop_2801_intervention_recognize | loop_2801_intervention_interdict | loop_2801_intervention_minimize)
+(loop_2801_context_branch | loop_2801_then_branch | loop_2801_operator_branch | loop_2801_result_branch | loop_2801_taxonomy_branch | loop_2801_intervention_recognize | loop_2801_intervention_interdict | loop_2801_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_2801_verdict)
+(loop_2801_inactive)-[:PROCESS]->(loop_2801_sink)
+(loop_2801_verdict)-[:PROCESS]->(loop_2801_sink)
+(loop_2801_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_2801_then_branch)
+(loop_2801_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_2801_then_branch)
+(loop_2801_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_2801_then_branch)

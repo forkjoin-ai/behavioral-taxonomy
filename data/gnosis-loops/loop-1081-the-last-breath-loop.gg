@@ -1,0 +1,33 @@
+// behavioral-loop-1081.gg
+// Executable Gnosis projection for The Last Breath Loop.
+
+// Nodes
+(loop_1081_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1081_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1081_given_gate: BehaviorAssess { stage: 'given', text: 'The%20cessation%20of%20the%20autonomic%20struggle' })
+(loop_1081_inactive: BehaviorTerminal { loopId: 1081, loopName: 'The%20Last%20Breath%20Loop' })
+(loop_1081_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1081_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1081_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1081_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20facial%20muscles%20completely%20slacken%20(The%20Peace)' })
+(loop_1081_result_branch: BehaviorEmit { emission: 'result', text: 'the%20%22looking%20asleep%22%20phenomenon' })
+(loop_1081_sink: BehaviorSink)
+(loop_1081_start: BehaviorStart { loopId: 1081, loopName: 'The%20Last%20Breath%20Loop', given: 'The%20cessation%20of%20the%20autonomic%20struggle', when: 'the%20final%20exhalation%20occurs', then: 'the%20facial%20muscles%20completely%20slacken%20(The%20Peace)', result: 'the%20%22looking%20asleep%22%20phenomenon', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20facial%20muscles%20completely%20slacken%20(The%20Peace)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1081_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1081_then_branch: BehaviorEmit { emission: 'then', text: 'the%20facial%20muscles%20completely%20slacken%20(The%20Peace)' })
+(loop_1081_verdict: BehaviorVerdict { loopId: 1081, loopName: 'The%20Last%20Breath%20Loop', then: 'the%20facial%20muscles%20completely%20slacken%20(The%20Peace)', result: 'the%20%22looking%20asleep%22%20phenomenon', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20facial%20muscles%20completely%20slacken%20(The%20Peace)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1081_when_gate: BehaviorAssess { stage: 'when', text: 'the%20final%20exhalation%20occurs' })
+
+// Topology
+(loop_1081_start)-[:PROCESS]->(loop_1081_given_gate)
+(loop_1081_given_gate)-[:PROCESS { case: "ok" }]->(loop_1081_when_gate)
+(loop_1081_given_gate)-[:PROCESS { case: "err" }]->(loop_1081_inactive)
+(loop_1081_when_gate)-[:PROCESS { case: "ok" }]->(loop_1081_context)
+(loop_1081_when_gate)-[:PROCESS { case: "err" }]->(loop_1081_inactive)
+(loop_1081_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1081_context_branch | loop_1081_then_branch | loop_1081_operator_branch | loop_1081_result_branch | loop_1081_taxonomy_branch | loop_1081_intervention_recognize | loop_1081_intervention_interdict | loop_1081_intervention_minimize)
+(loop_1081_context_branch | loop_1081_then_branch | loop_1081_operator_branch | loop_1081_result_branch | loop_1081_taxonomy_branch | loop_1081_intervention_recognize | loop_1081_intervention_interdict | loop_1081_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1081_verdict)
+(loop_1081_inactive)-[:PROCESS]->(loop_1081_sink)
+(loop_1081_verdict)-[:PROCESS]->(loop_1081_sink)
+(loop_1081_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1081_then_branch)
+(loop_1081_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1081_then_branch)
+(loop_1081_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1081_then_branch)

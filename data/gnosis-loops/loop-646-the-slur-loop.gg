@@ -1,0 +1,33 @@
+// behavioral-loop-646.gg
+// Executable Gnosis projection for The Slur Loop.
+
+// Nodes
+(loop_646_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_646_context_branch: BehaviorEmit { emission: 'context' })
+(loop_646_given_gate: BehaviorAssess { stage: 'given', text: 'Lazy%20articulation%20of%20consonants' })
+(loop_646_inactive: BehaviorTerminal { loopId: 646, loopName: 'The%20Slur%20Loop' })
+(loop_646_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_646_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_646_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_646_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Drunk%20Operator', mechanism: 'it%20sounds%20%22Intoxicated%22' })
+(loop_646_result_branch: BehaviorEmit { emission: 'result', text: 'rumors%20of%20substance%20abuse%20in%20professional%20settings' })
+(loop_646_sink: BehaviorSink)
+(loop_646_start: BehaviorStart { loopId: 646, loopName: 'The%20Slur%20Loop', given: 'Lazy%20articulation%20of%20consonants', when: 'tired%20or%20relaxed', then: 'it%20sounds%20%22Intoxicated%22%20(The%20Drunk%20Operator)', result: 'rumors%20of%20substance%20abuse%20in%20professional%20settings', operatorName: 'The%20Drunk%20Operator', operatorMechanism: 'it%20sounds%20%22Intoxicated%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_646_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_646_then_branch: BehaviorEmit { emission: 'then', text: 'it%20sounds%20%22Intoxicated%22%20(The%20Drunk%20Operator)' })
+(loop_646_verdict: BehaviorVerdict { loopId: 646, loopName: 'The%20Slur%20Loop', then: 'it%20sounds%20%22Intoxicated%22%20(The%20Drunk%20Operator)', result: 'rumors%20of%20substance%20abuse%20in%20professional%20settings', operatorName: 'The%20Drunk%20Operator', operatorMechanism: 'it%20sounds%20%22Intoxicated%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_646_when_gate: BehaviorAssess { stage: 'when', text: 'tired%20or%20relaxed' })
+
+// Topology
+(loop_646_start)-[:PROCESS]->(loop_646_given_gate)
+(loop_646_given_gate)-[:PROCESS { case: "ok" }]->(loop_646_when_gate)
+(loop_646_given_gate)-[:PROCESS { case: "err" }]->(loop_646_inactive)
+(loop_646_when_gate)-[:PROCESS { case: "ok" }]->(loop_646_context)
+(loop_646_when_gate)-[:PROCESS { case: "err" }]->(loop_646_inactive)
+(loop_646_context)-[:FORK { strategy: "behavior-branches" }]->(loop_646_context_branch | loop_646_then_branch | loop_646_operator_branch | loop_646_result_branch | loop_646_taxonomy_branch | loop_646_intervention_recognize | loop_646_intervention_interdict | loop_646_intervention_minimize)
+(loop_646_context_branch | loop_646_then_branch | loop_646_operator_branch | loop_646_result_branch | loop_646_taxonomy_branch | loop_646_intervention_recognize | loop_646_intervention_interdict | loop_646_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_646_verdict)
+(loop_646_inactive)-[:PROCESS]->(loop_646_sink)
+(loop_646_verdict)-[:PROCESS]->(loop_646_sink)
+(loop_646_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_646_then_branch)
+(loop_646_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_646_then_branch)
+(loop_646_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_646_then_branch)

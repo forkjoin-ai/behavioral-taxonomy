@@ -1,0 +1,33 @@
+// behavioral-loop-725.gg
+// Executable Gnosis projection for The Stomp Loop.
+
+// Nodes
+(loop_725_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_725_context_branch: BehaviorEmit { emission: 'context' })
+(loop_725_given_gate: BehaviorAssess { stage: 'given', text: 'Heavy%20footfalls' })
+(loop_725_inactive: BehaviorTerminal { loopId: 725, loopName: 'The%20Stomp%20Loop' })
+(loop_725_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_725_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_725_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_725_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Giant%20Operator', mechanism: 'everyone%20knows%20where%20they%20are' })
+(loop_725_result_branch: BehaviorEmit { emission: 'result', text: 'annoyance%20from%20neighbors%2Fcoworkers' })
+(loop_725_sink: BehaviorSink)
+(loop_725_start: BehaviorStart { loopId: 725, loopName: 'The%20Stomp%20Loop', given: 'Heavy%20footfalls', when: 'walking%20in%20an%20apartment%20or%20office', then: 'everyone%20knows%20where%20they%20are%20(The%20Giant%20Operator)', result: 'annoyance%20from%20neighbors%2Fcoworkers', operatorName: 'The%20Giant%20Operator', operatorMechanism: 'everyone%20knows%20where%20they%20are', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_725_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_725_then_branch: BehaviorEmit { emission: 'then', text: 'everyone%20knows%20where%20they%20are%20(The%20Giant%20Operator)' })
+(loop_725_verdict: BehaviorVerdict { loopId: 725, loopName: 'The%20Stomp%20Loop', then: 'everyone%20knows%20where%20they%20are%20(The%20Giant%20Operator)', result: 'annoyance%20from%20neighbors%2Fcoworkers', operatorName: 'The%20Giant%20Operator', operatorMechanism: 'everyone%20knows%20where%20they%20are', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_725_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20in%20an%20apartment%20or%20office' })
+
+// Topology
+(loop_725_start)-[:PROCESS]->(loop_725_given_gate)
+(loop_725_given_gate)-[:PROCESS { case: "ok" }]->(loop_725_when_gate)
+(loop_725_given_gate)-[:PROCESS { case: "err" }]->(loop_725_inactive)
+(loop_725_when_gate)-[:PROCESS { case: "ok" }]->(loop_725_context)
+(loop_725_when_gate)-[:PROCESS { case: "err" }]->(loop_725_inactive)
+(loop_725_context)-[:FORK { strategy: "behavior-branches" }]->(loop_725_context_branch | loop_725_then_branch | loop_725_operator_branch | loop_725_result_branch | loop_725_taxonomy_branch | loop_725_intervention_recognize | loop_725_intervention_interdict | loop_725_intervention_minimize)
+(loop_725_context_branch | loop_725_then_branch | loop_725_operator_branch | loop_725_result_branch | loop_725_taxonomy_branch | loop_725_intervention_recognize | loop_725_intervention_interdict | loop_725_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_725_verdict)
+(loop_725_inactive)-[:PROCESS]->(loop_725_sink)
+(loop_725_verdict)-[:PROCESS]->(loop_725_sink)
+(loop_725_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_725_then_branch)
+(loop_725_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_725_then_branch)
+(loop_725_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_725_then_branch)

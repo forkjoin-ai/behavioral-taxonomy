@@ -1,0 +1,33 @@
+// behavioral-loop-1058.gg
+// Executable Gnosis projection for The Scapegoat Loop.
+
+// Nodes
+(loop_1058_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1058_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1058_given_gate: BehaviorAssess { stage: 'given', text: 'Being%20the%20%22Outsider%22%20or%20most%20%22Unique%22%20in%20a%20homogeneous%20group' })
+(loop_1058_inactive: BehaviorTerminal { loopId: 1058, loopName: 'The%20Scapegoat%20Loop' })
+(loop_1058_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1058_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1058_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1058_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20group%20subconsciously%20unifies%20against%20this%20individual%20(The%20Sacrifice)' })
+(loop_1058_result_branch: BehaviorEmit { emission: 'result', text: 'expulsion%20of%20the%20innocent%20to%20restore%20group%20cohesion%20(Girardian%20Mimetic%20Desire)' })
+(loop_1058_sink: BehaviorSink)
+(loop_1058_start: BehaviorStart { loopId: 1058, loopName: 'The%20Scapegoat%20Loop', given: 'Being%20the%20%22Outsider%22%20or%20most%20%22Unique%22%20in%20a%20homogeneous%20group', when: 'a%20collective%20failure%20occurs', then: 'the%20group%20subconsciously%20unifies%20against%20this%20individual%20(The%20Sacrifice)', result: 'expulsion%20of%20the%20innocent%20to%20restore%20group%20cohesion%20(Girardian%20Mimetic%20Desire)', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20group%20subconsciously%20unifies%20against%20this%20individual%20(The%20Sacrifice)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1058_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1058_then_branch: BehaviorEmit { emission: 'then', text: 'the%20group%20subconsciously%20unifies%20against%20this%20individual%20(The%20Sacrifice)' })
+(loop_1058_verdict: BehaviorVerdict { loopId: 1058, loopName: 'The%20Scapegoat%20Loop', then: 'the%20group%20subconsciously%20unifies%20against%20this%20individual%20(The%20Sacrifice)', result: 'expulsion%20of%20the%20innocent%20to%20restore%20group%20cohesion%20(Girardian%20Mimetic%20Desire)', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20group%20subconsciously%20unifies%20against%20this%20individual%20(The%20Sacrifice)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1058_when_gate: BehaviorAssess { stage: 'when', text: 'a%20collective%20failure%20occurs' })
+
+// Topology
+(loop_1058_start)-[:PROCESS]->(loop_1058_given_gate)
+(loop_1058_given_gate)-[:PROCESS { case: "ok" }]->(loop_1058_when_gate)
+(loop_1058_given_gate)-[:PROCESS { case: "err" }]->(loop_1058_inactive)
+(loop_1058_when_gate)-[:PROCESS { case: "ok" }]->(loop_1058_context)
+(loop_1058_when_gate)-[:PROCESS { case: "err" }]->(loop_1058_inactive)
+(loop_1058_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1058_context_branch | loop_1058_then_branch | loop_1058_operator_branch | loop_1058_result_branch | loop_1058_taxonomy_branch | loop_1058_intervention_recognize | loop_1058_intervention_interdict | loop_1058_intervention_minimize)
+(loop_1058_context_branch | loop_1058_then_branch | loop_1058_operator_branch | loop_1058_result_branch | loop_1058_taxonomy_branch | loop_1058_intervention_recognize | loop_1058_intervention_interdict | loop_1058_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1058_verdict)
+(loop_1058_inactive)-[:PROCESS]->(loop_1058_sink)
+(loop_1058_verdict)-[:PROCESS]->(loop_1058_sink)
+(loop_1058_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1058_then_branch)
+(loop_1058_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1058_then_branch)
+(loop_1058_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1058_then_branch)

@@ -1,0 +1,31 @@
+// behavioral-loop-663.gg
+// Executable Gnosis projection for The Widow's Peak Loop.
+
+// Nodes
+(loop_663_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_663_context_branch: BehaviorEmit { emission: 'context' })
+(loop_663_given_gate: BehaviorAssess { stage: 'given', text: 'Distinct%20V-shape%20hairline' })
+(loop_663_inactive: BehaviorTerminal { loopId: 663, loopName: "The%20Widow's%20Peak%20Loop" })
+(loop_663_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_663_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_663_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Antagonist%20Operator', mechanism: 'it%20signals%20%22Villainy%22%20or%20%22Sharpness%22' })
+(loop_663_result_branch: BehaviorEmit { emission: 'result', text: 'distrust%20but%20high%20aesthetic%20interest' })
+(loop_663_sink: BehaviorSink)
+(loop_663_start: BehaviorStart { loopId: 663, loopName: "The%20Widow's%20Peak%20Loop", given: 'Distinct%20V-shape%20hairline', when: 'slicked%20back', then: 'it%20signals%20%22Villainy%22%20or%20%22Sharpness%22%20(The%20Antagonist%20Operator)', result: 'distrust%20but%20high%20aesthetic%20interest', operatorName: 'The%20Antagonist%20Operator', operatorMechanism: 'it%20signals%20%22Villainy%22%20or%20%22Sharpness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Consistently%20display%20this%20signal%20in%20professional%20contexts' })
+(loop_663_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_663_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Villainy%22%20or%20%22Sharpness%22%20(The%20Antagonist%20Operator)' })
+(loop_663_verdict: BehaviorVerdict { loopId: 663, loopName: "The%20Widow's%20Peak%20Loop", then: 'it%20signals%20%22Villainy%22%20or%20%22Sharpness%22%20(The%20Antagonist%20Operator)', result: 'distrust%20but%20high%20aesthetic%20interest', operatorName: 'The%20Antagonist%20Operator', operatorMechanism: 'it%20signals%20%22Villainy%22%20or%20%22Sharpness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_663_when_gate: BehaviorAssess { stage: 'when', text: 'slicked%20back' })
+
+// Topology
+(loop_663_start)-[:PROCESS]->(loop_663_given_gate)
+(loop_663_given_gate)-[:PROCESS { case: "ok" }]->(loop_663_when_gate)
+(loop_663_given_gate)-[:PROCESS { case: "err" }]->(loop_663_inactive)
+(loop_663_when_gate)-[:PROCESS { case: "ok" }]->(loop_663_context)
+(loop_663_when_gate)-[:PROCESS { case: "err" }]->(loop_663_inactive)
+(loop_663_context)-[:FORK { strategy: "behavior-branches" }]->(loop_663_context_branch | loop_663_then_branch | loop_663_operator_branch | loop_663_result_branch | loop_663_taxonomy_branch | loop_663_intervention_recognize | loop_663_intervention_leverage)
+(loop_663_context_branch | loop_663_then_branch | loop_663_operator_branch | loop_663_result_branch | loop_663_taxonomy_branch | loop_663_intervention_recognize | loop_663_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_663_verdict)
+(loop_663_inactive)-[:PROCESS]->(loop_663_sink)
+(loop_663_verdict)-[:PROCESS]->(loop_663_sink)
+(loop_663_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_663_then_branch)
+(loop_663_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_663_result_branch)

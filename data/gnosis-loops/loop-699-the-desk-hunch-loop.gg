@@ -1,0 +1,33 @@
+// behavioral-loop-699.gg
+// Executable Gnosis projection for The Desk Hunch Loop.
+
+// Nodes
+(loop_699_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_699_context_branch: BehaviorEmit { emission: 'context' })
+(loop_699_given_gate: BehaviorAssess { stage: 'given', text: 'Curling%20over%20workspace%20with%20arms' })
+(loop_699_inactive: BehaviorTerminal { loopId: 699, loopName: 'The%20Desk%20Hunch%20Loop' })
+(loop_699_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_699_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_699_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20spatial%20behaviors%20in%20group%20dynamics' })
+(loop_699_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Gollum%20Operator', mechanism: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Hoarding%22' })
+(loop_699_result_branch: BehaviorEmit { emission: 'result', text: 'isolation%20from%20team%20collaboration' })
+(loop_699_sink: BehaviorSink)
+(loop_699_start: BehaviorStart { loopId: 699, loopName: 'The%20Desk%20Hunch%20Loop', given: 'Curling%20over%20workspace%20with%20arms', when: 'working', then: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Hoarding%22%20(The%20Gollum%20Operator)', result: 'isolation%20from%20team%20collaboration', operatorName: 'The%20Gollum%20Operator', operatorMechanism: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Hoarding%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20spatial%20behaviors%20in%20group%20dynamics', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_699_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_699_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Hoarding%22%20(The%20Gollum%20Operator)' })
+(loop_699_verdict: BehaviorVerdict { loopId: 699, loopName: 'The%20Desk%20Hunch%20Loop', then: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Hoarding%22%20(The%20Gollum%20Operator)', result: 'isolation%20from%20team%20collaboration', operatorName: 'The%20Gollum%20Operator', operatorMechanism: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Hoarding%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_699_when_gate: BehaviorAssess { stage: 'when', text: 'working' })
+
+// Topology
+(loop_699_start)-[:PROCESS]->(loop_699_given_gate)
+(loop_699_given_gate)-[:PROCESS { case: "ok" }]->(loop_699_when_gate)
+(loop_699_given_gate)-[:PROCESS { case: "err" }]->(loop_699_inactive)
+(loop_699_when_gate)-[:PROCESS { case: "ok" }]->(loop_699_context)
+(loop_699_when_gate)-[:PROCESS { case: "err" }]->(loop_699_inactive)
+(loop_699_context)-[:FORK { strategy: "behavior-branches" }]->(loop_699_context_branch | loop_699_then_branch | loop_699_operator_branch | loop_699_result_branch | loop_699_taxonomy_branch | loop_699_intervention_recognize | loop_699_intervention_interdict | loop_699_intervention_minimize)
+(loop_699_context_branch | loop_699_then_branch | loop_699_operator_branch | loop_699_result_branch | loop_699_taxonomy_branch | loop_699_intervention_recognize | loop_699_intervention_interdict | loop_699_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_699_verdict)
+(loop_699_inactive)-[:PROCESS]->(loop_699_sink)
+(loop_699_verdict)-[:PROCESS]->(loop_699_sink)
+(loop_699_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_699_then_branch)
+(loop_699_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_699_then_branch)
+(loop_699_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_699_then_branch)

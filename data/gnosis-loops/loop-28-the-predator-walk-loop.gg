@@ -1,0 +1,33 @@
+// behavioral-loop-28.gg
+// Executable Gnosis projection for The Predator Walk Loop.
+
+// Nodes
+(loop_28_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_28_context_branch: BehaviorEmit { emission: 'context' })
+(loop_28_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20High%20Shoulder%20Stability%20%2B%20Silent%20Footfall' })
+(loop_28_inactive: BehaviorTerminal { loopId: 28, loopName: 'The%20Predator%20Walk%20Loop' })
+(loop_28_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Reframe%20the%20narrative%20around%20this%20characteristic' })
+(loop_28_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_28_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_28_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'the%20observer%20experiences%20a%20Startle%20Response' })
+(loop_28_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20keeping%20a%20respectful%20distance%2C%20reinforcing%20**Solitary%20Behavior**' })
+(loop_28_sink: BehaviorSink)
+(loop_28_start: BehaviorStart { loopId: 28, loopName: 'The%20Predator%20Walk%20Loop', given: 'an%20individual%20possesses%20High%20Shoulder%20Stability%20%2B%20Silent%20Footfall', when: 'approaching%20others%20from%20behind', then: 'the%20observer%20experiences%20a%20Startle%20Response%20(The%20Threat%20Operator)', result: 'peers%20keeping%20a%20respectful%20distance%2C%20reinforcing%20**Solitary%20Behavior**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20observer%20experiences%20a%20Startle%20Response', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Reframe%20the%20narrative%20around%20this%20characteristic', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_28_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_28_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20experiences%20a%20Startle%20Response%20(The%20Threat%20Operator)' })
+(loop_28_verdict: BehaviorVerdict { loopId: 28, loopName: 'The%20Predator%20Walk%20Loop', then: 'the%20observer%20experiences%20a%20Startle%20Response%20(The%20Threat%20Operator)', result: 'peers%20keeping%20a%20respectful%20distance%2C%20reinforcing%20**Solitary%20Behavior**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20observer%20experiences%20a%20Startle%20Response', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_28_when_gate: BehaviorAssess { stage: 'when', text: 'approaching%20others%20from%20behind' })
+
+// Topology
+(loop_28_start)-[:PROCESS]->(loop_28_given_gate)
+(loop_28_given_gate)-[:PROCESS { case: "ok" }]->(loop_28_when_gate)
+(loop_28_given_gate)-[:PROCESS { case: "err" }]->(loop_28_inactive)
+(loop_28_when_gate)-[:PROCESS { case: "ok" }]->(loop_28_context)
+(loop_28_when_gate)-[:PROCESS { case: "err" }]->(loop_28_inactive)
+(loop_28_context)-[:FORK { strategy: "behavior-branches" }]->(loop_28_context_branch | loop_28_then_branch | loop_28_operator_branch | loop_28_result_branch | loop_28_taxonomy_branch | loop_28_intervention_recognize | loop_28_intervention_interdict | loop_28_intervention_minimize)
+(loop_28_context_branch | loop_28_then_branch | loop_28_operator_branch | loop_28_result_branch | loop_28_taxonomy_branch | loop_28_intervention_recognize | loop_28_intervention_interdict | loop_28_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_28_verdict)
+(loop_28_inactive)-[:PROCESS]->(loop_28_sink)
+(loop_28_verdict)-[:PROCESS]->(loop_28_sink)
+(loop_28_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_28_then_branch)
+(loop_28_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_28_then_branch)
+(loop_28_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_28_then_branch)

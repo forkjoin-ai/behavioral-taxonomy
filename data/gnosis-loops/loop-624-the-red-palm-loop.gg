@@ -1,0 +1,33 @@
+// behavioral-loop-624.gg
+// Executable Gnosis projection for The Red Palm Loop.
+
+// Nodes
+(loop_624_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_624_context_branch: BehaviorEmit { emission: 'context' })
+(loop_624_given_gate: BehaviorAssess { stage: 'given', text: 'Bright%20red%20palms%20(high%20estrogen%2Fliver)' })
+(loop_624_inactive: BehaviorTerminal { loopId: 624, loopName: 'The%20Red%20Palm%20Loop' })
+(loop_624_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_624_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_624_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_624_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rash%20Operator', mechanism: 'hands%20look%20%22Inflamed%22%20or%20%22Angry%22' })
+(loop_624_result_branch: BehaviorEmit { emission: 'result', text: 'hesitation%20to%20touch%2Fhold%20hands' })
+(loop_624_sink: BehaviorSink)
+(loop_624_start: BehaviorStart { loopId: 624, loopName: 'The%20Red%20Palm%20Loop', given: 'Bright%20red%20palms%20(high%20estrogen%2Fliver)', when: 'showing%20palms%20(open%20gesture)', then: 'hands%20look%20%22Inflamed%22%20or%20%22Angry%22%20(The%20Rash%20Operator)', result: 'hesitation%20to%20touch%2Fhold%20hands', operatorName: 'The%20Rash%20Operator', operatorMechanism: 'hands%20look%20%22Inflamed%22%20or%20%22Angry%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_624_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_624_then_branch: BehaviorEmit { emission: 'then', text: 'hands%20look%20%22Inflamed%22%20or%20%22Angry%22%20(The%20Rash%20Operator)' })
+(loop_624_verdict: BehaviorVerdict { loopId: 624, loopName: 'The%20Red%20Palm%20Loop', then: 'hands%20look%20%22Inflamed%22%20or%20%22Angry%22%20(The%20Rash%20Operator)', result: 'hesitation%20to%20touch%2Fhold%20hands', operatorName: 'The%20Rash%20Operator', operatorMechanism: 'hands%20look%20%22Inflamed%22%20or%20%22Angry%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_624_when_gate: BehaviorAssess { stage: 'when', text: 'showing%20palms%20(open%20gesture)' })
+
+// Topology
+(loop_624_start)-[:PROCESS]->(loop_624_given_gate)
+(loop_624_given_gate)-[:PROCESS { case: "ok" }]->(loop_624_when_gate)
+(loop_624_given_gate)-[:PROCESS { case: "err" }]->(loop_624_inactive)
+(loop_624_when_gate)-[:PROCESS { case: "ok" }]->(loop_624_context)
+(loop_624_when_gate)-[:PROCESS { case: "err" }]->(loop_624_inactive)
+(loop_624_context)-[:FORK { strategy: "behavior-branches" }]->(loop_624_context_branch | loop_624_then_branch | loop_624_operator_branch | loop_624_result_branch | loop_624_taxonomy_branch | loop_624_intervention_recognize | loop_624_intervention_interdict | loop_624_intervention_minimize)
+(loop_624_context_branch | loop_624_then_branch | loop_624_operator_branch | loop_624_result_branch | loop_624_taxonomy_branch | loop_624_intervention_recognize | loop_624_intervention_interdict | loop_624_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_624_verdict)
+(loop_624_inactive)-[:PROCESS]->(loop_624_sink)
+(loop_624_verdict)-[:PROCESS]->(loop_624_sink)
+(loop_624_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_624_then_branch)
+(loop_624_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_624_then_branch)
+(loop_624_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_624_then_branch)

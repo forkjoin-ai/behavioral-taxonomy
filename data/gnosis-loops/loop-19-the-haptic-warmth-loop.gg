@@ -1,0 +1,35 @@
+// behavioral-loop-19.gg
+// Executable Gnosis projection for The Haptic Warmth Loop.
+
+// Nodes
+(loop_19_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_19_context_branch: BehaviorEmit { emission: 'context' })
+(loop_19_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20High%20Peripheral%20Perfusion%20(Warm%2C%20dry%20hands)' })
+(loop_19_inactive: BehaviorTerminal { loopId: 19, loopName: 'The%20Haptic%20Warmth%20Loop' })
+(loop_19_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20competence%20in%20areas%20that%20compensate' })
+(loop_19_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_19_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_19_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_19_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Trust%20Operator', mechanism: 'the%20recipient%20releases%20oxytocin%20and%20assigns%20%22Benevolence%22' })
+(loop_19_result_branch: BehaviorEmit { emission: 'result', text: 'higher%20success%20rates%20in%20negotiation%20and%20the%20development%20of%20**Persuasive%20Confidence**' })
+(loop_19_sink: BehaviorSink)
+(loop_19_start: BehaviorStart { loopId: 19, loopName: 'The%20Haptic%20Warmth%20Loop', given: 'an%20individual%20possesses%20High%20Peripheral%20Perfusion%20(Warm%2C%20dry%20hands)', when: 'they%20engage%20in%20a%20handshake%20or%20physical%20touch', then: 'the%20recipient%20releases%20oxytocin%20and%20assigns%20%22Benevolence%22%20(The%20Trust%20Operator)', result: 'higher%20success%20rates%20in%20negotiation%20and%20the%20development%20of%20**Persuasive%20Confidence**', operatorName: 'The%20Trust%20Operator', operatorMechanism: 'the%20recipient%20releases%20oxytocin%20and%20assigns%20%22Benevolence%22', origin: 'GENETIC', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Build%20competence%20in%20areas%20that%20compensate', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations', intervention_leverage: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_19_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_19_then_branch: BehaviorEmit { emission: 'then', text: 'the%20recipient%20releases%20oxytocin%20and%20assigns%20%22Benevolence%22%20(The%20Trust%20Operator)' })
+(loop_19_verdict: BehaviorVerdict { loopId: 19, loopName: 'The%20Haptic%20Warmth%20Loop', then: 'the%20recipient%20releases%20oxytocin%20and%20assigns%20%22Benevolence%22%20(The%20Trust%20Operator)', result: 'higher%20success%20rates%20in%20negotiation%20and%20the%20development%20of%20**Persuasive%20Confidence**', operatorName: 'The%20Trust%20Operator', operatorMechanism: 'the%20recipient%20releases%20oxytocin%20and%20assigns%20%22Benevolence%22', origin: 'GENETIC', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_19_when_gate: BehaviorAssess { stage: 'when', text: 'they%20engage%20in%20a%20handshake%20or%20physical%20touch' })
+
+// Topology
+(loop_19_start)-[:PROCESS]->(loop_19_given_gate)
+(loop_19_given_gate)-[:PROCESS { case: "ok" }]->(loop_19_when_gate)
+(loop_19_given_gate)-[:PROCESS { case: "err" }]->(loop_19_inactive)
+(loop_19_when_gate)-[:PROCESS { case: "ok" }]->(loop_19_context)
+(loop_19_when_gate)-[:PROCESS { case: "err" }]->(loop_19_inactive)
+(loop_19_context)-[:FORK { strategy: "behavior-branches" }]->(loop_19_context_branch | loop_19_then_branch | loop_19_operator_branch | loop_19_result_branch | loop_19_taxonomy_branch | loop_19_intervention_recognize | loop_19_intervention_interdict | loop_19_intervention_minimize | loop_19_intervention_leverage)
+(loop_19_context_branch | loop_19_then_branch | loop_19_operator_branch | loop_19_result_branch | loop_19_taxonomy_branch | loop_19_intervention_recognize | loop_19_intervention_interdict | loop_19_intervention_minimize | loop_19_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_19_verdict)
+(loop_19_inactive)-[:PROCESS]->(loop_19_sink)
+(loop_19_verdict)-[:PROCESS]->(loop_19_sink)
+(loop_19_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_19_then_branch)
+(loop_19_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_19_then_branch)
+(loop_19_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_19_then_branch)
+(loop_19_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_19_result_branch)

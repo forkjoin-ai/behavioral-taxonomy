@@ -1,0 +1,31 @@
+// behavioral-loop-243.gg
+// Executable Gnosis projection for The Chewer Loop.
+
+// Nodes
+(loop_243_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_243_context_branch: BehaviorEmit { emission: 'context' })
+(loop_243_given_gate: BehaviorAssess { stage: 'given', text: 'Constant%20jaw%20motion%20(gum%20or%20habit)' })
+(loop_243_inactive: BehaviorTerminal { loopId: 243, loopName: 'The%20Chewer%20Loop' })
+(loop_243_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_243_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_243_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Insolence%20Operator', mechanism: 'observers%20perceive%20%22Disrespect%22%20or%20%22Boredom%22' })
+(loop_243_result_branch: BehaviorEmit { emission: 'result', text: 'frequent%20reprimands%20from%20authority%20figures' })
+(loop_243_sink: BehaviorSink)
+(loop_243_start: BehaviorStart { loopId: 243, loopName: 'The%20Chewer%20Loop', given: 'Constant%20jaw%20motion%20(gum%20or%20habit)', when: 'listening', then: 'observers%20perceive%20%22Disrespect%22%20or%20%22Boredom%22%20(The%20Insolence%20Operator)', result: 'frequent%20reprimands%20from%20authority%20figures', operatorName: 'The%20Insolence%20Operator', operatorMechanism: 'observers%20perceive%20%22Disrespect%22%20or%20%22Boredom%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_243_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_243_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Disrespect%22%20or%20%22Boredom%22%20(The%20Insolence%20Operator)' })
+(loop_243_verdict: BehaviorVerdict { loopId: 243, loopName: 'The%20Chewer%20Loop', then: 'observers%20perceive%20%22Disrespect%22%20or%20%22Boredom%22%20(The%20Insolence%20Operator)', result: 'frequent%20reprimands%20from%20authority%20figures', operatorName: 'The%20Insolence%20Operator', operatorMechanism: 'observers%20perceive%20%22Disrespect%22%20or%20%22Boredom%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_243_when_gate: BehaviorAssess { stage: 'when', text: 'listening' })
+
+// Topology
+(loop_243_start)-[:PROCESS]->(loop_243_given_gate)
+(loop_243_given_gate)-[:PROCESS { case: "ok" }]->(loop_243_when_gate)
+(loop_243_given_gate)-[:PROCESS { case: "err" }]->(loop_243_inactive)
+(loop_243_when_gate)-[:PROCESS { case: "ok" }]->(loop_243_context)
+(loop_243_when_gate)-[:PROCESS { case: "err" }]->(loop_243_inactive)
+(loop_243_context)-[:FORK { strategy: "behavior-branches" }]->(loop_243_context_branch | loop_243_then_branch | loop_243_operator_branch | loop_243_result_branch | loop_243_taxonomy_branch | loop_243_intervention_recognize | loop_243_intervention_leverage)
+(loop_243_context_branch | loop_243_then_branch | loop_243_operator_branch | loop_243_result_branch | loop_243_taxonomy_branch | loop_243_intervention_recognize | loop_243_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_243_verdict)
+(loop_243_inactive)-[:PROCESS]->(loop_243_sink)
+(loop_243_verdict)-[:PROCESS]->(loop_243_sink)
+(loop_243_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_243_then_branch)
+(loop_243_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_243_result_branch)

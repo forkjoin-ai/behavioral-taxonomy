@@ -1,0 +1,33 @@
+// behavioral-loop-685.gg
+// Executable Gnosis projection for The Knee Bob Loop.
+
+// Nodes
+(loop_685_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_685_context_branch: BehaviorEmit { emission: 'context' })
+(loop_685_given_gate: BehaviorAssess { stage: 'given', text: 'High-frequency%20vertical%20leg%20movement' })
+(loop_685_inactive: BehaviorTerminal { loopId: 685, loopName: 'The%20Knee%20Bob%20Loop' })
+(loop_685_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_685_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_685_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20microexpressions%20and%20movement%20patterns' })
+(loop_685_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disruptor%20Operator', mechanism: "the%20vibration%20shakes%20everyone's%20monitors" })
+(loop_685_result_branch: BehaviorEmit { emission: 'result', text: 'open%20hostility%20from%20coworkers' })
+(loop_685_sink: BehaviorSink)
+(loop_685_start: BehaviorStart { loopId: 685, loopName: 'The%20Knee%20Bob%20Loop', given: 'High-frequency%20vertical%20leg%20movement', when: 'seated%20at%20a%20shared%20table', then: "the%20vibration%20shakes%20everyone's%20monitors%20(The%20Disruptor%20Operator)", result: 'open%20hostility%20from%20coworkers', operatorName: 'The%20Disruptor%20Operator', operatorMechanism: "the%20vibration%20shakes%20everyone's%20monitors", origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20microexpressions%20and%20movement%20patterns', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_685_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_685_then_branch: BehaviorEmit { emission: 'then', text: "the%20vibration%20shakes%20everyone's%20monitors%20(The%20Disruptor%20Operator)" })
+(loop_685_verdict: BehaviorVerdict { loopId: 685, loopName: 'The%20Knee%20Bob%20Loop', then: "the%20vibration%20shakes%20everyone's%20monitors%20(The%20Disruptor%20Operator)", result: 'open%20hostility%20from%20coworkers', operatorName: 'The%20Disruptor%20Operator', operatorMechanism: "the%20vibration%20shakes%20everyone's%20monitors", origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_685_when_gate: BehaviorAssess { stage: 'when', text: 'seated%20at%20a%20shared%20table' })
+
+// Topology
+(loop_685_start)-[:PROCESS]->(loop_685_given_gate)
+(loop_685_given_gate)-[:PROCESS { case: "ok" }]->(loop_685_when_gate)
+(loop_685_given_gate)-[:PROCESS { case: "err" }]->(loop_685_inactive)
+(loop_685_when_gate)-[:PROCESS { case: "ok" }]->(loop_685_context)
+(loop_685_when_gate)-[:PROCESS { case: "err" }]->(loop_685_inactive)
+(loop_685_context)-[:FORK { strategy: "behavior-branches" }]->(loop_685_context_branch | loop_685_then_branch | loop_685_operator_branch | loop_685_result_branch | loop_685_taxonomy_branch | loop_685_intervention_recognize | loop_685_intervention_interdict | loop_685_intervention_minimize)
+(loop_685_context_branch | loop_685_then_branch | loop_685_operator_branch | loop_685_result_branch | loop_685_taxonomy_branch | loop_685_intervention_recognize | loop_685_intervention_interdict | loop_685_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_685_verdict)
+(loop_685_inactive)-[:PROCESS]->(loop_685_sink)
+(loop_685_verdict)-[:PROCESS]->(loop_685_sink)
+(loop_685_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_685_then_branch)
+(loop_685_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_685_then_branch)
+(loop_685_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_685_then_branch)

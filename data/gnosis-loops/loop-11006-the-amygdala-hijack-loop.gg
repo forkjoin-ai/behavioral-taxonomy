@@ -1,0 +1,33 @@
+// behavioral-loop-11006.gg
+// Executable Gnosis projection for The Amygdala Hijack Loop.
+
+// Nodes
+(loop_11006_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_11006_context_branch: BehaviorEmit { emission: 'context' })
+(loop_11006_given_gate: BehaviorAssess { stage: 'given', text: 'Sensory%20input%20detects%20a%20crude%20threat%20marker%20(loud%20bang%2C%20snake-like%20shape)' })
+(loop_11006_inactive: BehaviorTerminal { loopId: 11006, loopName: 'The%20Amygdala%20Hijack%20Loop' })
+(loop_11006_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Avoid%20known%20triggers%20when%20possible%3B%20create%20environmental%20safety' })
+(loop_11006_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%206-second%20breathing%20to%20engage%20vagal%20brake%20before%20responding' })
+(loop_11006_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20physical%20symptoms%20(heart%20rate%2C%20muscle%20tension)%20before%20emotion%20label' })
+(loop_11006_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Low%20Road%20Trigger', mechanism: 'Thalamo-Amygdala%20pathway%20bypasses%20cortical%20processing%3B%20the%20cortex%20goes%20offline%20due%20to%20neurochemical%20flooding.' })
+(loop_11006_result_branch: BehaviorEmit { emission: 'result', text: 'Subject%20reacts%20emotionally%2Fphysically%20to%20stimulus%20before%20conscious%20identification' })
+(loop_11006_sink: BehaviorSink)
+(loop_11006_start: BehaviorStart { loopId: 11006, loopName: 'The%20Amygdala%20Hijack%20Loop', given: 'Sensory%20input%20detects%20a%20crude%20threat%20marker%20(loud%20bang%2C%20snake-like%20shape)', when: 'Signal%20goes%20directly%20to%20Amygdala%20via%20Thalamus%20(~12ms%20fast%20path)', then: 'HPA%20axis%20triggers%20before%20Cortex%20can%20provide%20context%20(~30-40ms%20slow%20path)', result: 'Subject%20reacts%20emotionally%2Fphysically%20to%20stimulus%20before%20conscious%20identification', operatorName: 'The%20Low%20Road%20Trigger', operatorMechanism: 'Thalamo-Amygdala%20pathway%20bypasses%20cortical%20processing%3B%20the%20cortex%20goes%20offline%20due%20to%20neurochemical%20flooding.', origin: 'NEUROBIOLOGICAL', modality: 'EMOTIONAL', mutability: 'VOLATILE', valences: 'ANXIETY|AGGRESSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20physical%20symptoms%20(heart%20rate%2C%20muscle%20tension)%20before%20emotion%20label', intervention_interdict: 'Avoid%20known%20triggers%20when%20possible%3B%20create%20environmental%20safety', intervention_minimize: 'Use%206-second%20breathing%20to%20engage%20vagal%20brake%20before%20responding' })
+(loop_11006_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'NEUROBIOLOGICAL', modality: 'EMOTIONAL', mutability: 'VOLATILE', valences: 'ANXIETY|AGGRESSION' })
+(loop_11006_then_branch: BehaviorEmit { emission: 'then', text: 'HPA%20axis%20triggers%20before%20Cortex%20can%20provide%20context%20(~30-40ms%20slow%20path)' })
+(loop_11006_verdict: BehaviorVerdict { loopId: 11006, loopName: 'The%20Amygdala%20Hijack%20Loop', then: 'HPA%20axis%20triggers%20before%20Cortex%20can%20provide%20context%20(~30-40ms%20slow%20path)', result: 'Subject%20reacts%20emotionally%2Fphysically%20to%20stimulus%20before%20conscious%20identification', operatorName: 'The%20Low%20Road%20Trigger', operatorMechanism: 'Thalamo-Amygdala%20pathway%20bypasses%20cortical%20processing%3B%20the%20cortex%20goes%20offline%20due%20to%20neurochemical%20flooding.', origin: 'NEUROBIOLOGICAL', modality: 'EMOTIONAL', mutability: 'VOLATILE', valences: 'ANXIETY|AGGRESSION' })
+(loop_11006_when_gate: BehaviorAssess { stage: 'when', text: 'Signal%20goes%20directly%20to%20Amygdala%20via%20Thalamus%20(~12ms%20fast%20path)' })
+
+// Topology
+(loop_11006_start)-[:PROCESS]->(loop_11006_given_gate)
+(loop_11006_given_gate)-[:PROCESS { case: "ok" }]->(loop_11006_when_gate)
+(loop_11006_given_gate)-[:PROCESS { case: "err" }]->(loop_11006_inactive)
+(loop_11006_when_gate)-[:PROCESS { case: "ok" }]->(loop_11006_context)
+(loop_11006_when_gate)-[:PROCESS { case: "err" }]->(loop_11006_inactive)
+(loop_11006_context)-[:FORK { strategy: "behavior-branches" }]->(loop_11006_context_branch | loop_11006_then_branch | loop_11006_operator_branch | loop_11006_result_branch | loop_11006_taxonomy_branch | loop_11006_intervention_recognize | loop_11006_intervention_interdict | loop_11006_intervention_minimize)
+(loop_11006_context_branch | loop_11006_then_branch | loop_11006_operator_branch | loop_11006_result_branch | loop_11006_taxonomy_branch | loop_11006_intervention_recognize | loop_11006_intervention_interdict | loop_11006_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_11006_verdict)
+(loop_11006_inactive)-[:PROCESS]->(loop_11006_sink)
+(loop_11006_verdict)-[:PROCESS]->(loop_11006_sink)
+(loop_11006_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_11006_then_branch)
+(loop_11006_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_11006_then_branch)
+(loop_11006_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_11006_then_branch)

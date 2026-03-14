@@ -1,0 +1,33 @@
+// behavioral-loop-830.gg
+// Executable Gnosis projection for The Baker Loop.
+
+// Nodes
+(loop_830_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_830_context_branch: BehaviorEmit { emission: 'context' })
+(loop_830_given_gate: BehaviorAssess { stage: 'given', text: 'Fruity%20or%20sweet%20breath%20smell' })
+(loop_830_inactive: BehaviorTerminal { loopId: 830, loopName: 'The%20Baker%20Loop' })
+(loop_830_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_830_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_830_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20smell%20affects%20your%20judgment%20of%20someone' })
+(loop_830_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Chemical%20Operator', mechanism: 'it%20signals%20%22Metabolic%20State%22' })
+(loop_830_result_branch: BehaviorEmit { emission: 'result', text: 'subconscious%20detection%20of%20biological%20difference' })
+(loop_830_sink: BehaviorSink)
+(loop_830_start: BehaviorStart { loopId: 830, loopName: 'The%20Baker%20Loop', given: 'Fruity%20or%20sweet%20breath%20smell', when: 'exhaling', then: 'it%20signals%20%22Metabolic%20State%22%20(The%20Chemical%20Operator)', result: 'subconscious%20detection%20of%20biological%20difference', operatorName: 'The%20Chemical%20Operator', operatorMechanism: 'it%20signals%20%22Metabolic%20State%22', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20smell%20affects%20your%20judgment%20of%20someone', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_830_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_830_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Metabolic%20State%22%20(The%20Chemical%20Operator)' })
+(loop_830_verdict: BehaviorVerdict { loopId: 830, loopName: 'The%20Baker%20Loop', then: 'it%20signals%20%22Metabolic%20State%22%20(The%20Chemical%20Operator)', result: 'subconscious%20detection%20of%20biological%20difference', operatorName: 'The%20Chemical%20Operator', operatorMechanism: 'it%20signals%20%22Metabolic%20State%22', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_830_when_gate: BehaviorAssess { stage: 'when', text: 'exhaling' })
+
+// Topology
+(loop_830_start)-[:PROCESS]->(loop_830_given_gate)
+(loop_830_given_gate)-[:PROCESS { case: "ok" }]->(loop_830_when_gate)
+(loop_830_given_gate)-[:PROCESS { case: "err" }]->(loop_830_inactive)
+(loop_830_when_gate)-[:PROCESS { case: "ok" }]->(loop_830_context)
+(loop_830_when_gate)-[:PROCESS { case: "err" }]->(loop_830_inactive)
+(loop_830_context)-[:FORK { strategy: "behavior-branches" }]->(loop_830_context_branch | loop_830_then_branch | loop_830_operator_branch | loop_830_result_branch | loop_830_taxonomy_branch | loop_830_intervention_recognize | loop_830_intervention_interdict | loop_830_intervention_minimize)
+(loop_830_context_branch | loop_830_then_branch | loop_830_operator_branch | loop_830_result_branch | loop_830_taxonomy_branch | loop_830_intervention_recognize | loop_830_intervention_interdict | loop_830_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_830_verdict)
+(loop_830_inactive)-[:PROCESS]->(loop_830_sink)
+(loop_830_verdict)-[:PROCESS]->(loop_830_sink)
+(loop_830_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_830_then_branch)
+(loop_830_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_830_then_branch)
+(loop_830_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_830_then_branch)

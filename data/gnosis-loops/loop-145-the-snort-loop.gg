@@ -1,0 +1,33 @@
+// behavioral-loop-145.gg
+// Executable Gnosis projection for The Snort Loop.
+
+// Nodes
+(loop_145_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_145_context_branch: BehaviorEmit { emission: 'context' })
+(loop_145_given_gate: BehaviorAssess { stage: 'given', text: 'Nasal%20resonance%20during%20laughter' })
+(loop_145_inactive: BehaviorTerminal { loopId: 145, loopName: 'The%20Snort%20Loop' })
+(loop_145_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_145_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_145_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_145_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Humor%2FNovelty%20Operator', mechanism: 'the%20sound%20breaks%20social%20polish%2C%20signaling%20%22Authenticity%22' })
+(loop_145_result_branch: BehaviorEmit { emission: 'result', text: 'high%20**Likability**%20and%20rapid%20bonding%20(the%20%22Best%20Friend%22%20vibe)' })
+(loop_145_sink: BehaviorSink)
+(loop_145_start: BehaviorStart { loopId: 145, loopName: 'The%20Snort%20Loop', given: 'Nasal%20resonance%20during%20laughter', when: 'laughing%20at%20a%20joke', then: 'the%20sound%20breaks%20social%20polish%2C%20signaling%20%22Authenticity%22%20(The%20Humor%2FNovelty%20Operator)', result: 'high%20**Likability**%20and%20rapid%20bonding%20(the%20%22Best%20Friend%22%20vibe)', operatorName: 'The%20Humor%2FNovelty%20Operator', operatorMechanism: 'the%20sound%20breaks%20social%20polish%2C%20signaling%20%22Authenticity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_145_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_145_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20breaks%20social%20polish%2C%20signaling%20%22Authenticity%22%20(The%20Humor%2FNovelty%20Operator)' })
+(loop_145_verdict: BehaviorVerdict { loopId: 145, loopName: 'The%20Snort%20Loop', then: 'the%20sound%20breaks%20social%20polish%2C%20signaling%20%22Authenticity%22%20(The%20Humor%2FNovelty%20Operator)', result: 'high%20**Likability**%20and%20rapid%20bonding%20(the%20%22Best%20Friend%22%20vibe)', operatorName: 'The%20Humor%2FNovelty%20Operator', operatorMechanism: 'the%20sound%20breaks%20social%20polish%2C%20signaling%20%22Authenticity%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_145_when_gate: BehaviorAssess { stage: 'when', text: 'laughing%20at%20a%20joke' })
+
+// Topology
+(loop_145_start)-[:PROCESS]->(loop_145_given_gate)
+(loop_145_given_gate)-[:PROCESS { case: "ok" }]->(loop_145_when_gate)
+(loop_145_given_gate)-[:PROCESS { case: "err" }]->(loop_145_inactive)
+(loop_145_when_gate)-[:PROCESS { case: "ok" }]->(loop_145_context)
+(loop_145_when_gate)-[:PROCESS { case: "err" }]->(loop_145_inactive)
+(loop_145_context)-[:FORK { strategy: "behavior-branches" }]->(loop_145_context_branch | loop_145_then_branch | loop_145_operator_branch | loop_145_result_branch | loop_145_taxonomy_branch | loop_145_intervention_recognize | loop_145_intervention_interdict | loop_145_intervention_minimize)
+(loop_145_context_branch | loop_145_then_branch | loop_145_operator_branch | loop_145_result_branch | loop_145_taxonomy_branch | loop_145_intervention_recognize | loop_145_intervention_interdict | loop_145_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_145_verdict)
+(loop_145_inactive)-[:PROCESS]->(loop_145_sink)
+(loop_145_verdict)-[:PROCESS]->(loop_145_sink)
+(loop_145_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_145_then_branch)
+(loop_145_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_145_then_branch)
+(loop_145_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_145_then_branch)

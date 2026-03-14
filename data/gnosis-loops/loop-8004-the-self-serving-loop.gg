@@ -1,0 +1,33 @@
+// behavioral-loop-8004.gg
+// Executable Gnosis projection for The Self-Serving Loop.
+
+// Nodes
+(loop_8004_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_8004_context_branch: BehaviorEmit { emission: 'context' })
+(loop_8004_given_gate: BehaviorAssess { stage: 'given', text: 'A%20negative%20event%20happens%20to%20The%20Subject%20(Me)' })
+(loop_8004_inactive: BehaviorTerminal { loopId: 8004, loopName: 'The%20Self-Serving%20Loop' })
+(loop_8004_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_8004_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_8004_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_8004_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_8004_result_branch: BehaviorEmit { emission: 'result', text: 'Ego%20preservation%3B%20failure%20to%20learn%20from%20mistakes' })
+(loop_8004_sink: BehaviorSink)
+(loop_8004_start: BehaviorStart { loopId: 8004, loopName: 'The%20Self-Serving%20Loop', given: 'A%20negative%20event%20happens%20to%20The%20Subject%20(Me)', when: 'Subject%20explains%20the%20cause', then: 'Subject%20attributes%20it%20to%20Context%20(', result: 'Ego%20preservation%3B%20failure%20to%20learn%20from%20mistakes', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_8004_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_8004_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20attributes%20it%20to%20Context%20(' })
+(loop_8004_verdict: BehaviorVerdict { loopId: 8004, loopName: 'The%20Self-Serving%20Loop', then: 'Subject%20attributes%20it%20to%20Context%20(', result: 'Ego%20preservation%3B%20failure%20to%20learn%20from%20mistakes', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_8004_when_gate: BehaviorAssess { stage: 'when', text: 'Subject%20explains%20the%20cause' })
+
+// Topology
+(loop_8004_start)-[:PROCESS]->(loop_8004_given_gate)
+(loop_8004_given_gate)-[:PROCESS { case: "ok" }]->(loop_8004_when_gate)
+(loop_8004_given_gate)-[:PROCESS { case: "err" }]->(loop_8004_inactive)
+(loop_8004_when_gate)-[:PROCESS { case: "ok" }]->(loop_8004_context)
+(loop_8004_when_gate)-[:PROCESS { case: "err" }]->(loop_8004_inactive)
+(loop_8004_context)-[:FORK { strategy: "behavior-branches" }]->(loop_8004_context_branch | loop_8004_then_branch | loop_8004_operator_branch | loop_8004_result_branch | loop_8004_taxonomy_branch | loop_8004_intervention_recognize | loop_8004_intervention_interdict | loop_8004_intervention_minimize)
+(loop_8004_context_branch | loop_8004_then_branch | loop_8004_operator_branch | loop_8004_result_branch | loop_8004_taxonomy_branch | loop_8004_intervention_recognize | loop_8004_intervention_interdict | loop_8004_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_8004_verdict)
+(loop_8004_inactive)-[:PROCESS]->(loop_8004_sink)
+(loop_8004_verdict)-[:PROCESS]->(loop_8004_sink)
+(loop_8004_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_8004_then_branch)
+(loop_8004_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_8004_then_branch)
+(loop_8004_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_8004_then_branch)

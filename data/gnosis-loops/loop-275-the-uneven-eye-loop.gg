@@ -1,0 +1,33 @@
+// behavioral-loop-275.gg
+// Executable Gnosis projection for The Uneven Eye Loop.
+
+// Nodes
+(loop_275_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_275_context_branch: BehaviorEmit { emission: 'context' })
+(loop_275_given_gate: BehaviorAssess { stage: 'given', text: 'One%20eye%20smaller%2Flower%20than%20the%20other' })
+(loop_275_inactive: BehaviorTerminal { loopId: 275, loopName: 'The%20Uneven%20Eye%20Loop' })
+(loop_275_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_275_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_275_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_275_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Uncanny%20Operator', mechanism: 'the%20observer%20feels%20unsettled' })
+(loop_275_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20wearing%20glasses%20or%20bangs%20to%20**Break%20the%20Gaze**' })
+(loop_275_sink: BehaviorSink)
+(loop_275_start: BehaviorStart { loopId: 275, loopName: 'The%20Uneven%20Eye%20Loop', given: 'One%20eye%20smaller%2Flower%20than%20the%20other', when: 'making%20intense%20eye%20contact', then: 'the%20observer%20feels%20unsettled%20(The%20Uncanny%20Operator)', result: 'the%20individual%20wearing%20glasses%20or%20bangs%20to%20**Break%20the%20Gaze**', operatorName: 'The%20Uncanny%20Operator', operatorMechanism: 'the%20observer%20feels%20unsettled', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_275_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_275_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20feels%20unsettled%20(The%20Uncanny%20Operator)' })
+(loop_275_verdict: BehaviorVerdict { loopId: 275, loopName: 'The%20Uneven%20Eye%20Loop', then: 'the%20observer%20feels%20unsettled%20(The%20Uncanny%20Operator)', result: 'the%20individual%20wearing%20glasses%20or%20bangs%20to%20**Break%20the%20Gaze**', operatorName: 'The%20Uncanny%20Operator', operatorMechanism: 'the%20observer%20feels%20unsettled', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_275_when_gate: BehaviorAssess { stage: 'when', text: 'making%20intense%20eye%20contact' })
+
+// Topology
+(loop_275_start)-[:PROCESS]->(loop_275_given_gate)
+(loop_275_given_gate)-[:PROCESS { case: "ok" }]->(loop_275_when_gate)
+(loop_275_given_gate)-[:PROCESS { case: "err" }]->(loop_275_inactive)
+(loop_275_when_gate)-[:PROCESS { case: "ok" }]->(loop_275_context)
+(loop_275_when_gate)-[:PROCESS { case: "err" }]->(loop_275_inactive)
+(loop_275_context)-[:FORK { strategy: "behavior-branches" }]->(loop_275_context_branch | loop_275_then_branch | loop_275_operator_branch | loop_275_result_branch | loop_275_taxonomy_branch | loop_275_intervention_recognize | loop_275_intervention_interdict | loop_275_intervention_minimize)
+(loop_275_context_branch | loop_275_then_branch | loop_275_operator_branch | loop_275_result_branch | loop_275_taxonomy_branch | loop_275_intervention_recognize | loop_275_intervention_interdict | loop_275_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_275_verdict)
+(loop_275_inactive)-[:PROCESS]->(loop_275_sink)
+(loop_275_verdict)-[:PROCESS]->(loop_275_sink)
+(loop_275_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_275_then_branch)
+(loop_275_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_275_then_branch)
+(loop_275_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_275_then_branch)

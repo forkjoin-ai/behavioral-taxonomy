@@ -1,0 +1,31 @@
+// behavioral-loop-161.gg
+// Executable Gnosis projection for The Dilated Loop.
+
+// Nodes
+(loop_161_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_161_context_branch: BehaviorEmit { emission: 'context' })
+(loop_161_given_gate: BehaviorAssess { stage: 'given', text: 'Naturally%20large%20pupils%20or%20high%20sympathetic%20arousal' })
+(loop_161_inactive: BehaviorTerminal { loopId: 161, loopName: 'The%20Dilated%20Loop' })
+(loop_161_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_161_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_161_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Seduction%20Operator', mechanism: 'the%20observer%E2%80%99s%20brain%20registers%20%22Attraction%22%20or%20%22Interest%22' })
+(loop_161_result_branch: BehaviorEmit { emission: 'result', text: 'reciprocal%20liking%20and%20the%20individual%20being%20told%20they%20are%20**%22Charming%22**%20without%20saying%20much' })
+(loop_161_sink: BehaviorSink)
+(loop_161_start: BehaviorStart { loopId: 161, loopName: 'The%20Dilated%20Loop', given: 'Naturally%20large%20pupils%20or%20high%20sympathetic%20arousal', when: 'engaging%20in%20conversation', then: 'the%20observer%E2%80%99s%20brain%20registers%20%22Attraction%22%20or%20%22Interest%22%20(The%20Seduction%20Operator)', result: 'reciprocal%20liking%20and%20the%20individual%20being%20told%20they%20are%20**%22Charming%22**%20without%20saying%20much', operatorName: 'The%20Seduction%20Operator', operatorMechanism: 'the%20observer%E2%80%99s%20brain%20registers%20%22Attraction%22%20or%20%22Interest%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Amplify%20in%20social%20or%20romantic%20contexts' })
+(loop_161_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_161_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%E2%80%99s%20brain%20registers%20%22Attraction%22%20or%20%22Interest%22%20(The%20Seduction%20Operator)' })
+(loop_161_verdict: BehaviorVerdict { loopId: 161, loopName: 'The%20Dilated%20Loop', then: 'the%20observer%E2%80%99s%20brain%20registers%20%22Attraction%22%20or%20%22Interest%22%20(The%20Seduction%20Operator)', result: 'reciprocal%20liking%20and%20the%20individual%20being%20told%20they%20are%20**%22Charming%22**%20without%20saying%20much', operatorName: 'The%20Seduction%20Operator', operatorMechanism: 'the%20observer%E2%80%99s%20brain%20registers%20%22Attraction%22%20or%20%22Interest%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_161_when_gate: BehaviorAssess { stage: 'when', text: 'engaging%20in%20conversation' })
+
+// Topology
+(loop_161_start)-[:PROCESS]->(loop_161_given_gate)
+(loop_161_given_gate)-[:PROCESS { case: "ok" }]->(loop_161_when_gate)
+(loop_161_given_gate)-[:PROCESS { case: "err" }]->(loop_161_inactive)
+(loop_161_when_gate)-[:PROCESS { case: "ok" }]->(loop_161_context)
+(loop_161_when_gate)-[:PROCESS { case: "err" }]->(loop_161_inactive)
+(loop_161_context)-[:FORK { strategy: "behavior-branches" }]->(loop_161_context_branch | loop_161_then_branch | loop_161_operator_branch | loop_161_result_branch | loop_161_taxonomy_branch | loop_161_intervention_recognize | loop_161_intervention_leverage)
+(loop_161_context_branch | loop_161_then_branch | loop_161_operator_branch | loop_161_result_branch | loop_161_taxonomy_branch | loop_161_intervention_recognize | loop_161_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_161_verdict)
+(loop_161_inactive)-[:PROCESS]->(loop_161_sink)
+(loop_161_verdict)-[:PROCESS]->(loop_161_sink)
+(loop_161_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_161_then_branch)
+(loop_161_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_161_result_branch)

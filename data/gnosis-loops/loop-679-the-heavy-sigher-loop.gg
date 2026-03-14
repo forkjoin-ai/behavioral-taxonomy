@@ -1,0 +1,33 @@
+// behavioral-loop-679.gg
+// Executable Gnosis projection for The Heavy Sigher Loop.
+
+// Nodes
+(loop_679_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_679_context_branch: BehaviorEmit { emission: 'context' })
+(loop_679_given_gate: BehaviorAssess { stage: 'given', text: 'Shallow%20breathing%20requiring%20deep%20resets' })
+(loop_679_inactive: BehaviorTerminal { loopId: 679, loopName: 'The%20Heavy%20Sigher%20Loop' })
+(loop_679_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_679_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_679_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_679_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Passive-Aggressive%20Operator', mechanism: 'the%20sighs%20sound%20like%20%22Frustration%22%20or%20%22Boredom%22' })
+(loop_679_result_branch: BehaviorEmit { emission: 'result', text: "colleagues%20asking%20%22What's%20wrong%3F%22%20constantly" })
+(loop_679_sink: BehaviorSink)
+(loop_679_start: BehaviorStart { loopId: 679, loopName: 'The%20Heavy%20Sigher%20Loop', given: 'Shallow%20breathing%20requiring%20deep%20resets', when: 'working%20next%20to%20others', then: 'the%20sighs%20sound%20like%20%22Frustration%22%20or%20%22Boredom%22%20(The%20Passive-Aggressive%20Operator)', result: "colleagues%20asking%20%22What's%20wrong%3F%22%20constantly", operatorName: 'The%20Passive-Aggressive%20Operator', operatorMechanism: 'the%20sighs%20sound%20like%20%22Frustration%22%20or%20%22Boredom%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_679_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_679_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sighs%20sound%20like%20%22Frustration%22%20or%20%22Boredom%22%20(The%20Passive-Aggressive%20Operator)' })
+(loop_679_verdict: BehaviorVerdict { loopId: 679, loopName: 'The%20Heavy%20Sigher%20Loop', then: 'the%20sighs%20sound%20like%20%22Frustration%22%20or%20%22Boredom%22%20(The%20Passive-Aggressive%20Operator)', result: "colleagues%20asking%20%22What's%20wrong%3F%22%20constantly", operatorName: 'The%20Passive-Aggressive%20Operator', operatorMechanism: 'the%20sighs%20sound%20like%20%22Frustration%22%20or%20%22Boredom%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_679_when_gate: BehaviorAssess { stage: 'when', text: 'working%20next%20to%20others' })
+
+// Topology
+(loop_679_start)-[:PROCESS]->(loop_679_given_gate)
+(loop_679_given_gate)-[:PROCESS { case: "ok" }]->(loop_679_when_gate)
+(loop_679_given_gate)-[:PROCESS { case: "err" }]->(loop_679_inactive)
+(loop_679_when_gate)-[:PROCESS { case: "ok" }]->(loop_679_context)
+(loop_679_when_gate)-[:PROCESS { case: "err" }]->(loop_679_inactive)
+(loop_679_context)-[:FORK { strategy: "behavior-branches" }]->(loop_679_context_branch | loop_679_then_branch | loop_679_operator_branch | loop_679_result_branch | loop_679_taxonomy_branch | loop_679_intervention_recognize | loop_679_intervention_interdict | loop_679_intervention_minimize)
+(loop_679_context_branch | loop_679_then_branch | loop_679_operator_branch | loop_679_result_branch | loop_679_taxonomy_branch | loop_679_intervention_recognize | loop_679_intervention_interdict | loop_679_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_679_verdict)
+(loop_679_inactive)-[:PROCESS]->(loop_679_sink)
+(loop_679_verdict)-[:PROCESS]->(loop_679_sink)
+(loop_679_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_679_then_branch)
+(loop_679_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_679_then_branch)
+(loop_679_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_679_then_branch)

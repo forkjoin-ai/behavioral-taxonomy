@@ -1,0 +1,33 @@
+// behavioral-loop-745.gg
+// Executable Gnosis projection for The Shoulder-Ear Loop.
+
+// Nodes
+(loop_745_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_745_context_branch: BehaviorEmit { emission: 'context' })
+(loop_745_given_gate: BehaviorAssess { stage: 'given', text: 'Shoulders%20permanently%20elevated%20toward%20ears' })
+(loop_745_inactive: BehaviorTerminal { loopId: 745, loopName: 'The%20Shoulder-Ear%20Loop' })
+(loop_745_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_745_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_745_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_745_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Turtle%20Operator', mechanism: 'it%20signals%20%22High%20Stress%22%20or%20%22Defense%22' })
+(loop_745_result_branch: BehaviorEmit { emission: 'result', text: 'colleagues%20avoiding%20the%20individual%20to%20escape%20the%20%22Stress%20Contagion.%22' })
+(loop_745_sink: BehaviorSink)
+(loop_745_start: BehaviorStart { loopId: 745, loopName: 'The%20Shoulder-Ear%20Loop', given: 'Shoulders%20permanently%20elevated%20toward%20ears', when: 'sitting%20at%20a%20desk', then: 'it%20signals%20%22High%20Stress%22%20or%20%22Defense%22%20(The%20Turtle%20Operator)', result: 'colleagues%20avoiding%20the%20individual%20to%20escape%20the%20%22Stress%20Contagion.%22', operatorName: 'The%20Turtle%20Operator', operatorMechanism: 'it%20signals%20%22High%20Stress%22%20or%20%22Defense%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_745_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_745_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22High%20Stress%22%20or%20%22Defense%22%20(The%20Turtle%20Operator)' })
+(loop_745_verdict: BehaviorVerdict { loopId: 745, loopName: 'The%20Shoulder-Ear%20Loop', then: 'it%20signals%20%22High%20Stress%22%20or%20%22Defense%22%20(The%20Turtle%20Operator)', result: 'colleagues%20avoiding%20the%20individual%20to%20escape%20the%20%22Stress%20Contagion.%22', operatorName: 'The%20Turtle%20Operator', operatorMechanism: 'it%20signals%20%22High%20Stress%22%20or%20%22Defense%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_745_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20at%20a%20desk' })
+
+// Topology
+(loop_745_start)-[:PROCESS]->(loop_745_given_gate)
+(loop_745_given_gate)-[:PROCESS { case: "ok" }]->(loop_745_when_gate)
+(loop_745_given_gate)-[:PROCESS { case: "err" }]->(loop_745_inactive)
+(loop_745_when_gate)-[:PROCESS { case: "ok" }]->(loop_745_context)
+(loop_745_when_gate)-[:PROCESS { case: "err" }]->(loop_745_inactive)
+(loop_745_context)-[:FORK { strategy: "behavior-branches" }]->(loop_745_context_branch | loop_745_then_branch | loop_745_operator_branch | loop_745_result_branch | loop_745_taxonomy_branch | loop_745_intervention_recognize | loop_745_intervention_interdict | loop_745_intervention_minimize)
+(loop_745_context_branch | loop_745_then_branch | loop_745_operator_branch | loop_745_result_branch | loop_745_taxonomy_branch | loop_745_intervention_recognize | loop_745_intervention_interdict | loop_745_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_745_verdict)
+(loop_745_inactive)-[:PROCESS]->(loop_745_sink)
+(loop_745_verdict)-[:PROCESS]->(loop_745_sink)
+(loop_745_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_745_then_branch)
+(loop_745_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_745_then_branch)
+(loop_745_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_745_then_branch)

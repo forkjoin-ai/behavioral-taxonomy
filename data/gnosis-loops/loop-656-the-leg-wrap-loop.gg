@@ -1,0 +1,33 @@
+// behavioral-loop-656.gg
+// Executable Gnosis projection for The Leg Wrap Loop.
+
+// Nodes
+(loop_656_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_656_context_branch: BehaviorEmit { emission: 'context' })
+(loop_656_given_gate: BehaviorAssess { stage: 'given', text: 'Wrapping%20legs%20around%20chair%20legs%20or%20each%20other' })
+(loop_656_inactive: BehaviorTerminal { loopId: 656, loopName: 'The%20Leg%20Wrap%20Loop' })
+(loop_656_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_656_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_656_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_656_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Bind%20Operator', mechanism: 'it%20signals%20%22Insecurity%22%20or%20%22Restraint%22' })
+(loop_656_result_branch: BehaviorEmit { emission: 'result', text: 'looking%20%22Tied%20up%22%20in%20knots%2C%20creating%20tension%20in%20the%20room' })
+(loop_656_sink: BehaviorSink)
+(loop_656_start: BehaviorStart { loopId: 656, loopName: 'The%20Leg%20Wrap%20Loop', given: 'Wrapping%20legs%20around%20chair%20legs%20or%20each%20other', when: 'seated', then: 'it%20signals%20%22Insecurity%22%20or%20%22Restraint%22%20(The%20Bind%20Operator)', result: 'looking%20%22Tied%20up%22%20in%20knots%2C%20creating%20tension%20in%20the%20room', operatorName: 'The%20Bind%20Operator', operatorMechanism: 'it%20signals%20%22Insecurity%22%20or%20%22Restraint%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_656_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_656_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Insecurity%22%20or%20%22Restraint%22%20(The%20Bind%20Operator)' })
+(loop_656_verdict: BehaviorVerdict { loopId: 656, loopName: 'The%20Leg%20Wrap%20Loop', then: 'it%20signals%20%22Insecurity%22%20or%20%22Restraint%22%20(The%20Bind%20Operator)', result: 'looking%20%22Tied%20up%22%20in%20knots%2C%20creating%20tension%20in%20the%20room', operatorName: 'The%20Bind%20Operator', operatorMechanism: 'it%20signals%20%22Insecurity%22%20or%20%22Restraint%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_656_when_gate: BehaviorAssess { stage: 'when', text: 'seated' })
+
+// Topology
+(loop_656_start)-[:PROCESS]->(loop_656_given_gate)
+(loop_656_given_gate)-[:PROCESS { case: "ok" }]->(loop_656_when_gate)
+(loop_656_given_gate)-[:PROCESS { case: "err" }]->(loop_656_inactive)
+(loop_656_when_gate)-[:PROCESS { case: "ok" }]->(loop_656_context)
+(loop_656_when_gate)-[:PROCESS { case: "err" }]->(loop_656_inactive)
+(loop_656_context)-[:FORK { strategy: "behavior-branches" }]->(loop_656_context_branch | loop_656_then_branch | loop_656_operator_branch | loop_656_result_branch | loop_656_taxonomy_branch | loop_656_intervention_recognize | loop_656_intervention_interdict | loop_656_intervention_minimize)
+(loop_656_context_branch | loop_656_then_branch | loop_656_operator_branch | loop_656_result_branch | loop_656_taxonomy_branch | loop_656_intervention_recognize | loop_656_intervention_interdict | loop_656_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_656_verdict)
+(loop_656_inactive)-[:PROCESS]->(loop_656_sink)
+(loop_656_verdict)-[:PROCESS]->(loop_656_sink)
+(loop_656_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_656_then_branch)
+(loop_656_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_656_then_branch)
+(loop_656_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_656_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-97.gg
+// Executable Gnosis projection for The Bust-Hunch Loop.
+
+// Nodes
+(loop_97_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_97_context_branch: BehaviorEmit { emission: 'context' })
+(loop_97_given_gate: BehaviorAssess { stage: 'given', text: 'Early%20onset%2FLarge%20Breast%20Hypertrophy%20in%20adolescence' })
+(loop_97_inactive: BehaviorTerminal { loopId: 97, loopName: 'The%20Bust-Hunch%20Loop' })
+(loop_97_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_97_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_97_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_97_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sexual%20Opportunity%2FScrutiny%20Operator', mechanism: 'the%20individual%20receives%20unwanted%20male%20gaze%20and%20female%20scrutiny' })
+(loop_97_result_branch: BehaviorEmit { emission: 'result', text: 'the%20development%20of%20**Kyphosis**%20(hunching%20to%20hide)%20and%20**Introversion**%20to%20avoid%20attention' })
+(loop_97_sink: BehaviorSink)
+(loop_97_start: BehaviorStart { loopId: 97, loopName: 'The%20Bust-Hunch%20Loop', given: 'Early%20onset%2FLarge%20Breast%20Hypertrophy%20in%20adolescence', when: 'entering%20a%20classroom%20or%20gym', then: 'the%20individual%20receives%20unwanted%20male%20gaze%20and%20female%20scrutiny%20(The%20Sexual%20Opportunity%2FScrutiny%20Operator)', result: 'the%20development%20of%20**Kyphosis**%20(hunching%20to%20hide)%20and%20**Introversion**%20to%20avoid%20attention', operatorName: 'The%20Sexual%20Opportunity%2FScrutiny%20Operator', operatorMechanism: 'the%20individual%20receives%20unwanted%20male%20gaze%20and%20female%20scrutiny', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_97_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_97_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20receives%20unwanted%20male%20gaze%20and%20female%20scrutiny%20(The%20Sexual%20Opportunity%2FScrutiny%20Operator)' })
+(loop_97_verdict: BehaviorVerdict { loopId: 97, loopName: 'The%20Bust-Hunch%20Loop', then: 'the%20individual%20receives%20unwanted%20male%20gaze%20and%20female%20scrutiny%20(The%20Sexual%20Opportunity%2FScrutiny%20Operator)', result: 'the%20development%20of%20**Kyphosis**%20(hunching%20to%20hide)%20and%20**Introversion**%20to%20avoid%20attention', operatorName: 'The%20Sexual%20Opportunity%2FScrutiny%20Operator', operatorMechanism: 'the%20individual%20receives%20unwanted%20male%20gaze%20and%20female%20scrutiny', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_97_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20classroom%20or%20gym' })
+
+// Topology
+(loop_97_start)-[:PROCESS]->(loop_97_given_gate)
+(loop_97_given_gate)-[:PROCESS { case: "ok" }]->(loop_97_when_gate)
+(loop_97_given_gate)-[:PROCESS { case: "err" }]->(loop_97_inactive)
+(loop_97_when_gate)-[:PROCESS { case: "ok" }]->(loop_97_context)
+(loop_97_when_gate)-[:PROCESS { case: "err" }]->(loop_97_inactive)
+(loop_97_context)-[:FORK { strategy: "behavior-branches" }]->(loop_97_context_branch | loop_97_then_branch | loop_97_operator_branch | loop_97_result_branch | loop_97_taxonomy_branch | loop_97_intervention_recognize | loop_97_intervention_interdict | loop_97_intervention_minimize)
+(loop_97_context_branch | loop_97_then_branch | loop_97_operator_branch | loop_97_result_branch | loop_97_taxonomy_branch | loop_97_intervention_recognize | loop_97_intervention_interdict | loop_97_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_97_verdict)
+(loop_97_inactive)-[:PROCESS]->(loop_97_sink)
+(loop_97_verdict)-[:PROCESS]->(loop_97_sink)
+(loop_97_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_97_then_branch)
+(loop_97_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_97_then_branch)
+(loop_97_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_97_then_branch)

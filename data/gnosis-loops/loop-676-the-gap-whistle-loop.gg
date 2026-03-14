@@ -1,0 +1,33 @@
+// behavioral-loop-676.gg
+// Executable Gnosis projection for The Gap Whistle Loop.
+
+// Nodes
+(loop_676_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_676_context_branch: BehaviorEmit { emission: 'context' })
+(loop_676_given_gate: BehaviorAssess { stage: 'given', text: 'Air%20escaping%20through%20front%20teeth' })
+(loop_676_inactive: BehaviorTerminal { loopId: 676, loopName: 'The%20Gap%20Whistle%20Loop' })
+(loop_676_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_676_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_676_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_676_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Teapot%20Operator', mechanism: 'a%20high-frequency%20whistle%20occurs' })
+(loop_676_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20being%20interrupted%20by%20smiles%2Fgiggles%2C%20lowering%20gravitas' })
+(loop_676_sink: BehaviorSink)
+(loop_676_start: BehaviorStart { loopId: 676, loopName: 'The%20Gap%20Whistle%20Loop', given: 'Air%20escaping%20through%20front%20teeth', when: "pronouncing%20'S'%20sounds", then: 'a%20high-frequency%20whistle%20occurs%20(The%20Teapot%20Operator)', result: 'the%20speaker%20being%20interrupted%20by%20smiles%2Fgiggles%2C%20lowering%20gravitas', operatorName: 'The%20Teapot%20Operator', operatorMechanism: 'a%20high-frequency%20whistle%20occurs', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_676_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_676_then_branch: BehaviorEmit { emission: 'then', text: 'a%20high-frequency%20whistle%20occurs%20(The%20Teapot%20Operator)' })
+(loop_676_verdict: BehaviorVerdict { loopId: 676, loopName: 'The%20Gap%20Whistle%20Loop', then: 'a%20high-frequency%20whistle%20occurs%20(The%20Teapot%20Operator)', result: 'the%20speaker%20being%20interrupted%20by%20smiles%2Fgiggles%2C%20lowering%20gravitas', operatorName: 'The%20Teapot%20Operator', operatorMechanism: 'a%20high-frequency%20whistle%20occurs', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_676_when_gate: BehaviorAssess { stage: 'when', text: "pronouncing%20'S'%20sounds" })
+
+// Topology
+(loop_676_start)-[:PROCESS]->(loop_676_given_gate)
+(loop_676_given_gate)-[:PROCESS { case: "ok" }]->(loop_676_when_gate)
+(loop_676_given_gate)-[:PROCESS { case: "err" }]->(loop_676_inactive)
+(loop_676_when_gate)-[:PROCESS { case: "ok" }]->(loop_676_context)
+(loop_676_when_gate)-[:PROCESS { case: "err" }]->(loop_676_inactive)
+(loop_676_context)-[:FORK { strategy: "behavior-branches" }]->(loop_676_context_branch | loop_676_then_branch | loop_676_operator_branch | loop_676_result_branch | loop_676_taxonomy_branch | loop_676_intervention_recognize | loop_676_intervention_interdict | loop_676_intervention_minimize)
+(loop_676_context_branch | loop_676_then_branch | loop_676_operator_branch | loop_676_result_branch | loop_676_taxonomy_branch | loop_676_intervention_recognize | loop_676_intervention_interdict | loop_676_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_676_verdict)
+(loop_676_inactive)-[:PROCESS]->(loop_676_sink)
+(loop_676_verdict)-[:PROCESS]->(loop_676_sink)
+(loop_676_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_676_then_branch)
+(loop_676_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_676_then_branch)
+(loop_676_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_676_then_branch)

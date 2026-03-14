@@ -1,0 +1,33 @@
+// behavioral-loop-258.gg
+// Executable Gnosis projection for The Elbow Bump Loop.
+
+// Nodes
+(loop_258_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_258_context_branch: BehaviorEmit { emission: 'context' })
+(loop_258_given_gate: BehaviorAssess { stage: 'given', text: 'Left-handedness%20at%20a%20round%20dinner%20table' })
+(loop_258_inactive: BehaviorTerminal { loopId: 258, loopName: 'The%20Elbow%20Bump%20Loop' })
+(loop_258_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_258_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_258_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_258_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Obstruction%20Operator', mechanism: 'constant%20physical%20collision%20occurs' })
+(loop_258_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20apologizing%20constantly%20or%20seeking%20the%20**%22End%20of%20the%20Table%22**%20(marginalized%20position)' })
+(loop_258_sink: BehaviorSink)
+(loop_258_start: BehaviorStart { loopId: 258, loopName: 'The%20Elbow%20Bump%20Loop', given: 'Left-handedness%20at%20a%20round%20dinner%20table', when: 'eating%20next%20to%20a%20right-handed%20person', then: 'constant%20physical%20collision%20occurs%20(The%20Obstruction%20Operator)', result: 'the%20individual%20apologizing%20constantly%20or%20seeking%20the%20**%22End%20of%20the%20Table%22**%20(marginalized%20position)', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'constant%20physical%20collision%20occurs', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_258_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_258_then_branch: BehaviorEmit { emission: 'then', text: 'constant%20physical%20collision%20occurs%20(The%20Obstruction%20Operator)' })
+(loop_258_verdict: BehaviorVerdict { loopId: 258, loopName: 'The%20Elbow%20Bump%20Loop', then: 'constant%20physical%20collision%20occurs%20(The%20Obstruction%20Operator)', result: 'the%20individual%20apologizing%20constantly%20or%20seeking%20the%20**%22End%20of%20the%20Table%22**%20(marginalized%20position)', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'constant%20physical%20collision%20occurs', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_258_when_gate: BehaviorAssess { stage: 'when', text: 'eating%20next%20to%20a%20right-handed%20person' })
+
+// Topology
+(loop_258_start)-[:PROCESS]->(loop_258_given_gate)
+(loop_258_given_gate)-[:PROCESS { case: "ok" }]->(loop_258_when_gate)
+(loop_258_given_gate)-[:PROCESS { case: "err" }]->(loop_258_inactive)
+(loop_258_when_gate)-[:PROCESS { case: "ok" }]->(loop_258_context)
+(loop_258_when_gate)-[:PROCESS { case: "err" }]->(loop_258_inactive)
+(loop_258_context)-[:FORK { strategy: "behavior-branches" }]->(loop_258_context_branch | loop_258_then_branch | loop_258_operator_branch | loop_258_result_branch | loop_258_taxonomy_branch | loop_258_intervention_recognize | loop_258_intervention_interdict | loop_258_intervention_minimize)
+(loop_258_context_branch | loop_258_then_branch | loop_258_operator_branch | loop_258_result_branch | loop_258_taxonomy_branch | loop_258_intervention_recognize | loop_258_intervention_interdict | loop_258_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_258_verdict)
+(loop_258_inactive)-[:PROCESS]->(loop_258_sink)
+(loop_258_verdict)-[:PROCESS]->(loop_258_sink)
+(loop_258_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_258_then_branch)
+(loop_258_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_258_then_branch)
+(loop_258_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_258_then_branch)

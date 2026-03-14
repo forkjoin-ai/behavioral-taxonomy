@@ -1,0 +1,33 @@
+// behavioral-loop-2901.gg
+// Executable Gnosis projection for The Silent Grudge (Si-Fi Loop).
+
+// Nodes
+(loop_2901_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_2901_context_branch: BehaviorEmit { emission: 'context' })
+(loop_2901_given_gate: BehaviorAssess { stage: 'given', text: 'Dominant%20Introverted%20Sensing%20(Si)%20%2B%20Introverted%20Feeling%20(Fi)%20bypassing%20Extroverted%20Thinking%20(Te)' })
+(loop_2901_inactive: BehaviorTerminal { loopId: 2901, loopName: 'The%20Silent%20Grudge%20(Si-Fi%20Loop)' })
+(loop_2901_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_2901_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2901_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_2901_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_2901_result_branch: BehaviorEmit { emission: 'result', text: 'Rigid%20judgment%20and%20silent%20withdrawal%3B%20the%20subject%20becomes%20unmovable%20and%20internally%20resentful' })
+(loop_2901_sink: BehaviorSink)
+(loop_2901_start: BehaviorStart { loopId: 2901, loopName: 'The%20Silent%20Grudge%20(Si-Fi%20Loop)', given: 'Dominant%20Introverted%20Sensing%20(Si)%20%2B%20Introverted%20Feeling%20(Fi)%20bypassing%20Extroverted%20Thinking%20(Te)', when: 'Routine%20is%20disrupted%20or%20principles%20are%20violated', then: 'Subject%20replays%20the%20violation%20internally%2C%20reinforcing%20how%20it%20', result: 'Rigid%20judgment%20and%20silent%20withdrawal%3B%20the%20subject%20becomes%20unmovable%20and%20internally%20resentful', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2901_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2901_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20replays%20the%20violation%20internally%2C%20reinforcing%20how%20it%20' })
+(loop_2901_verdict: BehaviorVerdict { loopId: 2901, loopName: 'The%20Silent%20Grudge%20(Si-Fi%20Loop)', then: 'Subject%20replays%20the%20violation%20internally%2C%20reinforcing%20how%20it%20', result: 'Rigid%20judgment%20and%20silent%20withdrawal%3B%20the%20subject%20becomes%20unmovable%20and%20internally%20resentful', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2901_when_gate: BehaviorAssess { stage: 'when', text: 'Routine%20is%20disrupted%20or%20principles%20are%20violated' })
+
+// Topology
+(loop_2901_start)-[:PROCESS]->(loop_2901_given_gate)
+(loop_2901_given_gate)-[:PROCESS { case: "ok" }]->(loop_2901_when_gate)
+(loop_2901_given_gate)-[:PROCESS { case: "err" }]->(loop_2901_inactive)
+(loop_2901_when_gate)-[:PROCESS { case: "ok" }]->(loop_2901_context)
+(loop_2901_when_gate)-[:PROCESS { case: "err" }]->(loop_2901_inactive)
+(loop_2901_context)-[:FORK { strategy: "behavior-branches" }]->(loop_2901_context_branch | loop_2901_then_branch | loop_2901_operator_branch | loop_2901_result_branch | loop_2901_taxonomy_branch | loop_2901_intervention_recognize | loop_2901_intervention_interdict | loop_2901_intervention_minimize)
+(loop_2901_context_branch | loop_2901_then_branch | loop_2901_operator_branch | loop_2901_result_branch | loop_2901_taxonomy_branch | loop_2901_intervention_recognize | loop_2901_intervention_interdict | loop_2901_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_2901_verdict)
+(loop_2901_inactive)-[:PROCESS]->(loop_2901_sink)
+(loop_2901_verdict)-[:PROCESS]->(loop_2901_sink)
+(loop_2901_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_2901_then_branch)
+(loop_2901_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_2901_then_branch)
+(loop_2901_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_2901_then_branch)

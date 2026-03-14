@@ -1,0 +1,33 @@
+// behavioral-loop-420.gg
+// Executable Gnosis projection for The Liver Spot Loop.
+
+// Nodes
+(loop_420_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_420_context_branch: BehaviorEmit { emission: 'context' })
+(loop_420_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20pigment%20clusters%20on%20the%20face' })
+(loop_420_inactive: BehaviorTerminal { loopId: 420, loopName: 'The%20Liver%20Spot%20Loop' })
+(loop_420_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_420_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_420_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_420_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hygiene%2FAge%20Operator', mechanism: 'the%20spots%20look%20like%20%22Dirt%22%20or%20%22Decay%22' })
+(loop_420_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20treated%20as%20a%20%22Senior%20Advisor%22%20rather%20than%20an%20active%20player' })
+(loop_420_sink: BehaviorSink)
+(loop_420_start: BehaviorStart { loopId: 420, loopName: 'The%20Liver%20Spot%20Loop', given: 'Large%20pigment%20clusters%20on%20the%20face', when: 'in%20high-definition%20video%20calls', then: 'the%20spots%20look%20like%20%22Dirt%22%20or%20%22Decay%22%20(The%20Hygiene%2FAge%20Operator)', result: 'the%20individual%20being%20treated%20as%20a%20%22Senior%20Advisor%22%20rather%20than%20an%20active%20player', operatorName: 'The%20Hygiene%2FAge%20Operator', operatorMechanism: 'the%20spots%20look%20like%20%22Dirt%22%20or%20%22Decay%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_420_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_420_then_branch: BehaviorEmit { emission: 'then', text: 'the%20spots%20look%20like%20%22Dirt%22%20or%20%22Decay%22%20(The%20Hygiene%2FAge%20Operator)' })
+(loop_420_verdict: BehaviorVerdict { loopId: 420, loopName: 'The%20Liver%20Spot%20Loop', then: 'the%20spots%20look%20like%20%22Dirt%22%20or%20%22Decay%22%20(The%20Hygiene%2FAge%20Operator)', result: 'the%20individual%20being%20treated%20as%20a%20%22Senior%20Advisor%22%20rather%20than%20an%20active%20player', operatorName: 'The%20Hygiene%2FAge%20Operator', operatorMechanism: 'the%20spots%20look%20like%20%22Dirt%22%20or%20%22Decay%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_420_when_gate: BehaviorAssess { stage: 'when', text: 'in%20high-definition%20video%20calls' })
+
+// Topology
+(loop_420_start)-[:PROCESS]->(loop_420_given_gate)
+(loop_420_given_gate)-[:PROCESS { case: "ok" }]->(loop_420_when_gate)
+(loop_420_given_gate)-[:PROCESS { case: "err" }]->(loop_420_inactive)
+(loop_420_when_gate)-[:PROCESS { case: "ok" }]->(loop_420_context)
+(loop_420_when_gate)-[:PROCESS { case: "err" }]->(loop_420_inactive)
+(loop_420_context)-[:FORK { strategy: "behavior-branches" }]->(loop_420_context_branch | loop_420_then_branch | loop_420_operator_branch | loop_420_result_branch | loop_420_taxonomy_branch | loop_420_intervention_recognize | loop_420_intervention_interdict | loop_420_intervention_minimize)
+(loop_420_context_branch | loop_420_then_branch | loop_420_operator_branch | loop_420_result_branch | loop_420_taxonomy_branch | loop_420_intervention_recognize | loop_420_intervention_interdict | loop_420_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_420_verdict)
+(loop_420_inactive)-[:PROCESS]->(loop_420_sink)
+(loop_420_verdict)-[:PROCESS]->(loop_420_sink)
+(loop_420_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_420_then_branch)
+(loop_420_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_420_then_branch)
+(loop_420_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_420_then_branch)

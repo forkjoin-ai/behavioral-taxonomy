@@ -1,0 +1,33 @@
+// behavioral-loop-463.gg
+// Executable Gnosis projection for The Drone Loop.
+
+// Nodes
+(loop_463_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_463_context_branch: BehaviorEmit { emission: 'context' })
+(loop_463_given_gate: BehaviorAssess { stage: 'given', text: 'Lack%20of%20prosodic%20variation' })
+(loop_463_inactive: BehaviorTerminal { loopId: 463, loopName: 'The%20Drone%20Loop' })
+(loop_463_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_463_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_463_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_463_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Boredom%20Operator', mechanism: 'the%20audience%20zones%20out%20within%2015%20seconds' })
+(loop_463_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20interrupted%20or%20talked%20over%20constantly' })
+(loop_463_sink: BehaviorSink)
+(loop_463_start: BehaviorStart { loopId: 463, loopName: 'The%20Drone%20Loop', given: 'Lack%20of%20prosodic%20variation', when: 'telling%20a%20story', then: 'the%20audience%20zones%20out%20within%2015%20seconds%20(The%20Boredom%20Operator)', result: 'the%20individual%20being%20interrupted%20or%20talked%20over%20constantly', operatorName: 'The%20Boredom%20Operator', operatorMechanism: 'the%20audience%20zones%20out%20within%2015%20seconds', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_463_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_463_then_branch: BehaviorEmit { emission: 'then', text: 'the%20audience%20zones%20out%20within%2015%20seconds%20(The%20Boredom%20Operator)' })
+(loop_463_verdict: BehaviorVerdict { loopId: 463, loopName: 'The%20Drone%20Loop', then: 'the%20audience%20zones%20out%20within%2015%20seconds%20(The%20Boredom%20Operator)', result: 'the%20individual%20being%20interrupted%20or%20talked%20over%20constantly', operatorName: 'The%20Boredom%20Operator', operatorMechanism: 'the%20audience%20zones%20out%20within%2015%20seconds', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_463_when_gate: BehaviorAssess { stage: 'when', text: 'telling%20a%20story' })
+
+// Topology
+(loop_463_start)-[:PROCESS]->(loop_463_given_gate)
+(loop_463_given_gate)-[:PROCESS { case: "ok" }]->(loop_463_when_gate)
+(loop_463_given_gate)-[:PROCESS { case: "err" }]->(loop_463_inactive)
+(loop_463_when_gate)-[:PROCESS { case: "ok" }]->(loop_463_context)
+(loop_463_when_gate)-[:PROCESS { case: "err" }]->(loop_463_inactive)
+(loop_463_context)-[:FORK { strategy: "behavior-branches" }]->(loop_463_context_branch | loop_463_then_branch | loop_463_operator_branch | loop_463_result_branch | loop_463_taxonomy_branch | loop_463_intervention_recognize | loop_463_intervention_interdict | loop_463_intervention_minimize)
+(loop_463_context_branch | loop_463_then_branch | loop_463_operator_branch | loop_463_result_branch | loop_463_taxonomy_branch | loop_463_intervention_recognize | loop_463_intervention_interdict | loop_463_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_463_verdict)
+(loop_463_inactive)-[:PROCESS]->(loop_463_sink)
+(loop_463_verdict)-[:PROCESS]->(loop_463_sink)
+(loop_463_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_463_then_branch)
+(loop_463_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_463_then_branch)
+(loop_463_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_463_then_branch)

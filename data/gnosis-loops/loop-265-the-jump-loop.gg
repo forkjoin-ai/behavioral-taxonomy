@@ -1,0 +1,33 @@
+// behavioral-loop-265.gg
+// Executable Gnosis projection for The Jump Loop.
+
+// Nodes
+(loop_265_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_265_context_branch: BehaviorEmit { emission: 'context' })
+(loop_265_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20threshold%20for%20acoustic%20startle%20(Hyper-reactive%20amygdala)' })
+(loop_265_inactive: BehaviorTerminal { loopId: 265, loopName: 'The%20Jump%20Loop' })
+(loop_265_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_265_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_265_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_265_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fear%20Operator', mechanism: 'the%20individual%20physically%20jumps' })
+(loop_265_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20enjoying%20%22scaring%22%20them%20(The%20Prankster%20Dynamic)%2C%20leading%20to%20**Hyper-Vigilance**' })
+(loop_265_sink: BehaviorSink)
+(loop_265_start: BehaviorStart { loopId: 265, loopName: 'The%20Jump%20Loop', given: 'Low%20threshold%20for%20acoustic%20startle%20(Hyper-reactive%20amygdala)', when: 'a%20door%20slams%20or%20phone%20rings', then: 'the%20individual%20physically%20jumps%20(The%20Fear%20Operator)', result: 'peers%20enjoying%20%22scaring%22%20them%20(The%20Prankster%20Dynamic)%2C%20leading%20to%20**Hyper-Vigilance**', operatorName: 'The%20Fear%20Operator', operatorMechanism: 'the%20individual%20physically%20jumps', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_265_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_265_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20physically%20jumps%20(The%20Fear%20Operator)' })
+(loop_265_verdict: BehaviorVerdict { loopId: 265, loopName: 'The%20Jump%20Loop', then: 'the%20individual%20physically%20jumps%20(The%20Fear%20Operator)', result: 'peers%20enjoying%20%22scaring%22%20them%20(The%20Prankster%20Dynamic)%2C%20leading%20to%20**Hyper-Vigilance**', operatorName: 'The%20Fear%20Operator', operatorMechanism: 'the%20individual%20physically%20jumps', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_265_when_gate: BehaviorAssess { stage: 'when', text: 'a%20door%20slams%20or%20phone%20rings' })
+
+// Topology
+(loop_265_start)-[:PROCESS]->(loop_265_given_gate)
+(loop_265_given_gate)-[:PROCESS { case: "ok" }]->(loop_265_when_gate)
+(loop_265_given_gate)-[:PROCESS { case: "err" }]->(loop_265_inactive)
+(loop_265_when_gate)-[:PROCESS { case: "ok" }]->(loop_265_context)
+(loop_265_when_gate)-[:PROCESS { case: "err" }]->(loop_265_inactive)
+(loop_265_context)-[:FORK { strategy: "behavior-branches" }]->(loop_265_context_branch | loop_265_then_branch | loop_265_operator_branch | loop_265_result_branch | loop_265_taxonomy_branch | loop_265_intervention_recognize | loop_265_intervention_interdict | loop_265_intervention_minimize)
+(loop_265_context_branch | loop_265_then_branch | loop_265_operator_branch | loop_265_result_branch | loop_265_taxonomy_branch | loop_265_intervention_recognize | loop_265_intervention_interdict | loop_265_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_265_verdict)
+(loop_265_inactive)-[:PROCESS]->(loop_265_sink)
+(loop_265_verdict)-[:PROCESS]->(loop_265_sink)
+(loop_265_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_265_then_branch)
+(loop_265_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_265_then_branch)
+(loop_265_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_265_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-228.gg
+// Executable Gnosis projection for The Bedroom Eye Loop.
+
+// Nodes
+(loop_228_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_228_context_branch: BehaviorEmit { emission: 'context' })
+(loop_228_given_gate: BehaviorAssess { stage: 'given', text: 'Drooping%20upper%20eyelid%20(sleepy%20look)' })
+(loop_228_inactive: BehaviorTerminal { loopId: 228, loopName: 'The%20Bedroom%20Eye%20Loop' })
+(loop_228_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_228_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_228_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_228_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Low-Energy%20Operator', mechanism: 'observers%20perceive%20%22Boredom%2C%22%20%22Seduction%2C%22%20or%20%22Fatigue%22' })
+(loop_228_result_branch: BehaviorEmit { emission: 'result', text: 'teachers%2Fbosses%20assuming%20the%20individual%20is%20lazy%2C%20forcing%20them%20to%20**Over-Perform**%20to%20prove%20alertness' })
+(loop_228_sink: BehaviorSink)
+(loop_228_start: BehaviorStart { loopId: 228, loopName: 'The%20Bedroom%20Eye%20Loop', given: 'Drooping%20upper%20eyelid%20(sleepy%20look)', when: 'listening%20attentively', then: 'observers%20perceive%20%22Boredom%2C%22%20%22Seduction%2C%22%20or%20%22Fatigue%22%20(The%20Low-Energy%20Operator)', result: 'teachers%2Fbosses%20assuming%20the%20individual%20is%20lazy%2C%20forcing%20them%20to%20**Over-Perform**%20to%20prove%20alertness', operatorName: 'The%20Low-Energy%20Operator', operatorMechanism: 'observers%20perceive%20%22Boredom%2C%22%20%22Seduction%2C%22%20or%20%22Fatigue%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_228_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_228_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Boredom%2C%22%20%22Seduction%2C%22%20or%20%22Fatigue%22%20(The%20Low-Energy%20Operator)' })
+(loop_228_verdict: BehaviorVerdict { loopId: 228, loopName: 'The%20Bedroom%20Eye%20Loop', then: 'observers%20perceive%20%22Boredom%2C%22%20%22Seduction%2C%22%20or%20%22Fatigue%22%20(The%20Low-Energy%20Operator)', result: 'teachers%2Fbosses%20assuming%20the%20individual%20is%20lazy%2C%20forcing%20them%20to%20**Over-Perform**%20to%20prove%20alertness', operatorName: 'The%20Low-Energy%20Operator', operatorMechanism: 'observers%20perceive%20%22Boredom%2C%22%20%22Seduction%2C%22%20or%20%22Fatigue%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_228_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20attentively' })
+
+// Topology
+(loop_228_start)-[:PROCESS]->(loop_228_given_gate)
+(loop_228_given_gate)-[:PROCESS { case: "ok" }]->(loop_228_when_gate)
+(loop_228_given_gate)-[:PROCESS { case: "err" }]->(loop_228_inactive)
+(loop_228_when_gate)-[:PROCESS { case: "ok" }]->(loop_228_context)
+(loop_228_when_gate)-[:PROCESS { case: "err" }]->(loop_228_inactive)
+(loop_228_context)-[:FORK { strategy: "behavior-branches" }]->(loop_228_context_branch | loop_228_then_branch | loop_228_operator_branch | loop_228_result_branch | loop_228_taxonomy_branch | loop_228_intervention_recognize | loop_228_intervention_interdict | loop_228_intervention_minimize)
+(loop_228_context_branch | loop_228_then_branch | loop_228_operator_branch | loop_228_result_branch | loop_228_taxonomy_branch | loop_228_intervention_recognize | loop_228_intervention_interdict | loop_228_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_228_verdict)
+(loop_228_inactive)-[:PROCESS]->(loop_228_sink)
+(loop_228_verdict)-[:PROCESS]->(loop_228_sink)
+(loop_228_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_228_then_branch)
+(loop_228_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_228_then_branch)
+(loop_228_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_228_then_branch)

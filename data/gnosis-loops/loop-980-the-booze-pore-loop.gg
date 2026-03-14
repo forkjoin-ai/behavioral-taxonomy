@@ -1,0 +1,33 @@
+// behavioral-loop-980.gg
+// Executable Gnosis projection for The Booze Pore Loop.
+
+// Nodes
+(loop_980_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_980_context_branch: BehaviorEmit { emission: 'context' })
+(loop_980_given_gate: BehaviorAssess { stage: 'given', text: 'Body%20metabolizing%20alcohol%20from%20the%20night%20before' })
+(loop_980_inactive: BehaviorTerminal { loopId: 980, loopName: 'The%20Booze%20Pore%20Loop' })
+(loop_980_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_980_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_980_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_980_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hangover%20Operator', mechanism: 'the%20scent%20is%20%22Sweet%2FRotting%22' })
+(loop_980_result_branch: BehaviorEmit { emission: 'result', text: 'judgment%20of%20professionalism' })
+(loop_980_sink: BehaviorSink)
+(loop_980_start: BehaviorStart { loopId: 980, loopName: 'The%20Booze%20Pore%20Loop', given: 'Body%20metabolizing%20alcohol%20from%20the%20night%20before', when: 'sweating', then: 'the%20scent%20is%20%22Sweet%2FRotting%22%20(The%20Hangover%20Operator)', result: 'judgment%20of%20professionalism', operatorName: 'The%20Hangover%20Operator', operatorMechanism: 'the%20scent%20is%20%22Sweet%2FRotting%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_980_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_980_then_branch: BehaviorEmit { emission: 'then', text: 'the%20scent%20is%20%22Sweet%2FRotting%22%20(The%20Hangover%20Operator)' })
+(loop_980_verdict: BehaviorVerdict { loopId: 980, loopName: 'The%20Booze%20Pore%20Loop', then: 'the%20scent%20is%20%22Sweet%2FRotting%22%20(The%20Hangover%20Operator)', result: 'judgment%20of%20professionalism', operatorName: 'The%20Hangover%20Operator', operatorMechanism: 'the%20scent%20is%20%22Sweet%2FRotting%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_980_when_gate: BehaviorAssess { stage: 'when', text: 'sweating' })
+
+// Topology
+(loop_980_start)-[:PROCESS]->(loop_980_given_gate)
+(loop_980_given_gate)-[:PROCESS { case: "ok" }]->(loop_980_when_gate)
+(loop_980_given_gate)-[:PROCESS { case: "err" }]->(loop_980_inactive)
+(loop_980_when_gate)-[:PROCESS { case: "ok" }]->(loop_980_context)
+(loop_980_when_gate)-[:PROCESS { case: "err" }]->(loop_980_inactive)
+(loop_980_context)-[:FORK { strategy: "behavior-branches" }]->(loop_980_context_branch | loop_980_then_branch | loop_980_operator_branch | loop_980_result_branch | loop_980_taxonomy_branch | loop_980_intervention_recognize | loop_980_intervention_interdict | loop_980_intervention_minimize)
+(loop_980_context_branch | loop_980_then_branch | loop_980_operator_branch | loop_980_result_branch | loop_980_taxonomy_branch | loop_980_intervention_recognize | loop_980_intervention_interdict | loop_980_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_980_verdict)
+(loop_980_inactive)-[:PROCESS]->(loop_980_sink)
+(loop_980_verdict)-[:PROCESS]->(loop_980_sink)
+(loop_980_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_980_then_branch)
+(loop_980_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_980_then_branch)
+(loop_980_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_980_then_branch)

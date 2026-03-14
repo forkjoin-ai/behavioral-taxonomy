@@ -1,0 +1,33 @@
+// behavioral-loop-600.gg
+// Executable Gnosis projection for The Lion's Mane Loop.
+
+// Nodes
+(loop_600_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_600_context_branch: BehaviorEmit { emission: 'context' })
+(loop_600_given_gate: BehaviorAssess { stage: 'given', text: 'Thick%2C%20expansive%20hair%20genetics' })
+(loop_600_inactive: BehaviorTerminal { loopId: 600, loopName: "The%20Lion's%20Mane%20Loop" })
+(loop_600_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20competence%20in%20areas%20that%20compensate' })
+(loop_600_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_600_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_600_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Alpha%20Operator', mechanism: 'the%20hair%20takes%20up%20visual%20space' })
+(loop_600_result_branch: BehaviorEmit { emission: 'result', text: 'being%20remembered%20easily%20(High%20distinctiveness)' })
+(loop_600_sink: BehaviorSink)
+(loop_600_start: BehaviorStart { loopId: 600, loopName: "The%20Lion's%20Mane%20Loop", given: 'Thick%2C%20expansive%20hair%20genetics', when: 'entering%20a%20room', then: 'the%20hair%20takes%20up%20visual%20space%20(The%20Alpha%20Operator)', result: 'being%20remembered%20easily%20(High%20distinctiveness)', operatorName: 'The%20Alpha%20Operator', operatorMechanism: 'the%20hair%20takes%20up%20visual%20space', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20competence%20in%20areas%20that%20compensate', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_600_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_600_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hair%20takes%20up%20visual%20space%20(The%20Alpha%20Operator)' })
+(loop_600_verdict: BehaviorVerdict { loopId: 600, loopName: "The%20Lion's%20Mane%20Loop", then: 'the%20hair%20takes%20up%20visual%20space%20(The%20Alpha%20Operator)', result: 'being%20remembered%20easily%20(High%20distinctiveness)', operatorName: 'The%20Alpha%20Operator', operatorMechanism: 'the%20hair%20takes%20up%20visual%20space', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_600_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20room' })
+
+// Topology
+(loop_600_start)-[:PROCESS]->(loop_600_given_gate)
+(loop_600_given_gate)-[:PROCESS { case: "ok" }]->(loop_600_when_gate)
+(loop_600_given_gate)-[:PROCESS { case: "err" }]->(loop_600_inactive)
+(loop_600_when_gate)-[:PROCESS { case: "ok" }]->(loop_600_context)
+(loop_600_when_gate)-[:PROCESS { case: "err" }]->(loop_600_inactive)
+(loop_600_context)-[:FORK { strategy: "behavior-branches" }]->(loop_600_context_branch | loop_600_then_branch | loop_600_operator_branch | loop_600_result_branch | loop_600_taxonomy_branch | loop_600_intervention_recognize | loop_600_intervention_interdict | loop_600_intervention_minimize)
+(loop_600_context_branch | loop_600_then_branch | loop_600_operator_branch | loop_600_result_branch | loop_600_taxonomy_branch | loop_600_intervention_recognize | loop_600_intervention_interdict | loop_600_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_600_verdict)
+(loop_600_inactive)-[:PROCESS]->(loop_600_sink)
+(loop_600_verdict)-[:PROCESS]->(loop_600_sink)
+(loop_600_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_600_then_branch)
+(loop_600_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_600_then_branch)
+(loop_600_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_600_then_branch)

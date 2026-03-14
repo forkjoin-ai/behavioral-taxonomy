@@ -1,0 +1,33 @@
+// behavioral-loop-455.gg
+// Executable Gnosis projection for The Spare Tire Loop.
+
+// Nodes
+(loop_455_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_455_context_branch: BehaviorEmit { emission: 'context' })
+(loop_455_given_gate: BehaviorAssess { stage: 'given', text: 'Visceral%20fat%20accumulation%20around%20the%20midsection%20(skinny%20legs)' })
+(loop_455_inactive: BehaviorTerminal { loopId: 455, loopName: 'The%20Spare%20Tire%20Loop' })
+(loop_455_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_455_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_455_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_455_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Apple%20Shape%20Operator', mechanism: 'the%20silhouette%20signals%20%22High%20Stress%2FPoor%20Diet%22' })
+(loop_455_result_branch: BehaviorEmit { emission: 'result', text: 'higher%20risk%20of%20cardiovascular%20bias%20(people%20assuming%20a%20heart%20attack%20is%20imminent)' })
+(loop_455_sink: BehaviorSink)
+(loop_455_start: BehaviorStart { loopId: 455, loopName: 'The%20Spare%20Tire%20Loop', given: 'Visceral%20fat%20accumulation%20around%20the%20midsection%20(skinny%20legs)', when: 'stressed', then: 'the%20silhouette%20signals%20%22High%20Stress%2FPoor%20Diet%22%20(The%20Apple%20Shape%20Operator)', result: 'higher%20risk%20of%20cardiovascular%20bias%20(people%20assuming%20a%20heart%20attack%20is%20imminent)', operatorName: 'The%20Apple%20Shape%20Operator', operatorMechanism: 'the%20silhouette%20signals%20%22High%20Stress%2FPoor%20Diet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_455_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_455_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20signals%20%22High%20Stress%2FPoor%20Diet%22%20(The%20Apple%20Shape%20Operator)' })
+(loop_455_verdict: BehaviorVerdict { loopId: 455, loopName: 'The%20Spare%20Tire%20Loop', then: 'the%20silhouette%20signals%20%22High%20Stress%2FPoor%20Diet%22%20(The%20Apple%20Shape%20Operator)', result: 'higher%20risk%20of%20cardiovascular%20bias%20(people%20assuming%20a%20heart%20attack%20is%20imminent)', operatorName: 'The%20Apple%20Shape%20Operator', operatorMechanism: 'the%20silhouette%20signals%20%22High%20Stress%2FPoor%20Diet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_455_when_gate: BehaviorAssess { stage: 'when', text: 'stressed' })
+
+// Topology
+(loop_455_start)-[:PROCESS]->(loop_455_given_gate)
+(loop_455_given_gate)-[:PROCESS { case: "ok" }]->(loop_455_when_gate)
+(loop_455_given_gate)-[:PROCESS { case: "err" }]->(loop_455_inactive)
+(loop_455_when_gate)-[:PROCESS { case: "ok" }]->(loop_455_context)
+(loop_455_when_gate)-[:PROCESS { case: "err" }]->(loop_455_inactive)
+(loop_455_context)-[:FORK { strategy: "behavior-branches" }]->(loop_455_context_branch | loop_455_then_branch | loop_455_operator_branch | loop_455_result_branch | loop_455_taxonomy_branch | loop_455_intervention_recognize | loop_455_intervention_interdict | loop_455_intervention_minimize)
+(loop_455_context_branch | loop_455_then_branch | loop_455_operator_branch | loop_455_result_branch | loop_455_taxonomy_branch | loop_455_intervention_recognize | loop_455_intervention_interdict | loop_455_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_455_verdict)
+(loop_455_inactive)-[:PROCESS]->(loop_455_sink)
+(loop_455_verdict)-[:PROCESS]->(loop_455_sink)
+(loop_455_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_455_then_branch)
+(loop_455_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_455_then_branch)
+(loop_455_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_455_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-94.gg
+// Executable Gnosis projection for The Button Nose Loop.
+
+// Nodes
+(loop_94_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_94_context_branch: BehaviorEmit { emission: 'context' })
+(loop_94_given_gate: BehaviorAssess { stage: 'given', text: 'Small%2C%20upturned%20nasal%20tip' })
+(loop_94_inactive: BehaviorTerminal { loopId: 94, loopName: 'The%20Button%20Nose%20Loop' })
+(loop_94_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_94_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_94_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_94_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Humor%20Operator', mechanism: 'the%20aggression%20is%20perceived%20as%20%22Cute%22%20rather%20than%20threatening' })
+(loop_94_result_branch: BehaviorEmit { emission: 'result', text: 'extreme%20frustration%20and%20**Escalated%20Aggression**%20to%20prove%20intent' })
+(loop_94_sink: BehaviorSink)
+(loop_94_start: BehaviorStart { loopId: 94, loopName: 'The%20Button%20Nose%20Loop', given: 'Small%2C%20upturned%20nasal%20tip', when: 'being%20angry%20or%20assertive', then: 'the%20aggression%20is%20perceived%20as%20%22Cute%22%20rather%20than%20threatening%20(The%20Humor%20Operator)', result: 'extreme%20frustration%20and%20**Escalated%20Aggression**%20to%20prove%20intent', operatorName: 'The%20Humor%20Operator', operatorMechanism: 'the%20aggression%20is%20perceived%20as%20%22Cute%22%20rather%20than%20threatening', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_94_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_94_then_branch: BehaviorEmit { emission: 'then', text: 'the%20aggression%20is%20perceived%20as%20%22Cute%22%20rather%20than%20threatening%20(The%20Humor%20Operator)' })
+(loop_94_verdict: BehaviorVerdict { loopId: 94, loopName: 'The%20Button%20Nose%20Loop', then: 'the%20aggression%20is%20perceived%20as%20%22Cute%22%20rather%20than%20threatening%20(The%20Humor%20Operator)', result: 'extreme%20frustration%20and%20**Escalated%20Aggression**%20to%20prove%20intent', operatorName: 'The%20Humor%20Operator', operatorMechanism: 'the%20aggression%20is%20perceived%20as%20%22Cute%22%20rather%20than%20threatening', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_94_when_gate: BehaviorAssess { stage: 'when', text: 'being%20angry%20or%20assertive' })
+
+// Topology
+(loop_94_start)-[:PROCESS]->(loop_94_given_gate)
+(loop_94_given_gate)-[:PROCESS { case: "ok" }]->(loop_94_when_gate)
+(loop_94_given_gate)-[:PROCESS { case: "err" }]->(loop_94_inactive)
+(loop_94_when_gate)-[:PROCESS { case: "ok" }]->(loop_94_context)
+(loop_94_when_gate)-[:PROCESS { case: "err" }]->(loop_94_inactive)
+(loop_94_context)-[:FORK { strategy: "behavior-branches" }]->(loop_94_context_branch | loop_94_then_branch | loop_94_operator_branch | loop_94_result_branch | loop_94_taxonomy_branch | loop_94_intervention_recognize | loop_94_intervention_interdict | loop_94_intervention_minimize)
+(loop_94_context_branch | loop_94_then_branch | loop_94_operator_branch | loop_94_result_branch | loop_94_taxonomy_branch | loop_94_intervention_recognize | loop_94_intervention_interdict | loop_94_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_94_verdict)
+(loop_94_inactive)-[:PROCESS]->(loop_94_sink)
+(loop_94_verdict)-[:PROCESS]->(loop_94_sink)
+(loop_94_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_94_then_branch)
+(loop_94_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_94_then_branch)
+(loop_94_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_94_then_branch)

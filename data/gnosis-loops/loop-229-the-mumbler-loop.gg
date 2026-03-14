@@ -1,0 +1,33 @@
+// behavioral-loop-229.gg
+// Executable Gnosis projection for The Mumbler Loop.
+
+// Nodes
+(loop_229_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_229_context_branch: BehaviorEmit { emission: 'context' })
+(loop_229_given_gate: BehaviorAssess { stage: 'given', text: 'Minimal%20jaw%20excursion%20during%20speech' })
+(loop_229_inactive: BehaviorTerminal { loopId: 229, loopName: 'The%20Mumbler%20Loop' })
+(loop_229_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_229_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_229_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_229_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Friction%20Operator', mechanism: 'the%20listener%20asks%20%22What%3F%22%20repeatedly' })
+(loop_229_result_branch: BehaviorEmit { emission: 'result', text: "the%20individual%20deciding%20it's%20%22not%20worth%20the%20effort%22%20to%20speak%2C%20leading%20to%20**Silence%2FWithdrawal**" })
+(loop_229_sink: BehaviorSink)
+(loop_229_start: BehaviorStart { loopId: 229, loopName: 'The%20Mumbler%20Loop', given: 'Minimal%20jaw%20excursion%20during%20speech', when: 'sharing%20an%20idea', then: 'the%20listener%20asks%20%22What%3F%22%20repeatedly%20(The%20Friction%20Operator)', result: "the%20individual%20deciding%20it's%20%22not%20worth%20the%20effort%22%20to%20speak%2C%20leading%20to%20**Silence%2FWithdrawal**", operatorName: 'The%20Friction%20Operator', operatorMechanism: 'the%20listener%20asks%20%22What%3F%22%20repeatedly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_229_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_229_then_branch: BehaviorEmit { emission: 'then', text: 'the%20listener%20asks%20%22What%3F%22%20repeatedly%20(The%20Friction%20Operator)' })
+(loop_229_verdict: BehaviorVerdict { loopId: 229, loopName: 'The%20Mumbler%20Loop', then: 'the%20listener%20asks%20%22What%3F%22%20repeatedly%20(The%20Friction%20Operator)', result: "the%20individual%20deciding%20it's%20%22not%20worth%20the%20effort%22%20to%20speak%2C%20leading%20to%20**Silence%2FWithdrawal**", operatorName: 'The%20Friction%20Operator', operatorMechanism: 'the%20listener%20asks%20%22What%3F%22%20repeatedly', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_229_when_gate: BehaviorAssess { stage: 'when', text: 'sharing%20an%20idea' })
+
+// Topology
+(loop_229_start)-[:PROCESS]->(loop_229_given_gate)
+(loop_229_given_gate)-[:PROCESS { case: "ok" }]->(loop_229_when_gate)
+(loop_229_given_gate)-[:PROCESS { case: "err" }]->(loop_229_inactive)
+(loop_229_when_gate)-[:PROCESS { case: "ok" }]->(loop_229_context)
+(loop_229_when_gate)-[:PROCESS { case: "err" }]->(loop_229_inactive)
+(loop_229_context)-[:FORK { strategy: "behavior-branches" }]->(loop_229_context_branch | loop_229_then_branch | loop_229_operator_branch | loop_229_result_branch | loop_229_taxonomy_branch | loop_229_intervention_recognize | loop_229_intervention_interdict | loop_229_intervention_minimize)
+(loop_229_context_branch | loop_229_then_branch | loop_229_operator_branch | loop_229_result_branch | loop_229_taxonomy_branch | loop_229_intervention_recognize | loop_229_intervention_interdict | loop_229_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_229_verdict)
+(loop_229_inactive)-[:PROCESS]->(loop_229_sink)
+(loop_229_verdict)-[:PROCESS]->(loop_229_sink)
+(loop_229_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_229_then_branch)
+(loop_229_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_229_then_branch)
+(loop_229_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_229_then_branch)

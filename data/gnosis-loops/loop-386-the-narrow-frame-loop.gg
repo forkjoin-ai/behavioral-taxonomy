@@ -1,0 +1,31 @@
+// behavioral-loop-386.gg
+// Executable Gnosis projection for The Narrow Frame Loop.
+
+// Nodes
+(loop_386_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_386_context_branch: BehaviorEmit { emission: 'context' })
+(loop_386_given_gate: BehaviorAssess { stage: 'given', text: 'Shoulders%20narrower%20than%20hips%20or%20head%20width' })
+(loop_386_inactive: BehaviorTerminal { loopId: 386, loopName: 'The%20Narrow%20Frame%20Loop' })
+(loop_386_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_386_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_386_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Compensation%20Operator', mechanism: 'observers%20perceive%20%22Pettiness%22%20or%20%22Napoleonic%22%20effort' })
+(loop_386_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20relying%20on%20**Intellectual%2FVerbal%20Dominance**%20instead' })
+(loop_386_sink: BehaviorSink)
+(loop_386_start: BehaviorStart { loopId: 386, loopName: 'The%20Narrow%20Frame%20Loop', given: 'Shoulders%20narrower%20than%20hips%20or%20head%20width', when: 'attempting%20to%20project%20physical%20dominance', then: 'observers%20perceive%20%22Pettiness%22%20or%20%22Napoleonic%22%20effort%20(The%20Compensation%20Operator)', result: 'the%20individual%20relying%20on%20**Intellectual%2FVerbal%20Dominance**%20instead', operatorName: 'The%20Compensation%20Operator', operatorMechanism: 'observers%20perceive%20%22Pettiness%22%20or%20%22Napoleonic%22%20effort', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_386_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_386_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Pettiness%22%20or%20%22Napoleonic%22%20effort%20(The%20Compensation%20Operator)' })
+(loop_386_verdict: BehaviorVerdict { loopId: 386, loopName: 'The%20Narrow%20Frame%20Loop', then: 'observers%20perceive%20%22Pettiness%22%20or%20%22Napoleonic%22%20effort%20(The%20Compensation%20Operator)', result: 'the%20individual%20relying%20on%20**Intellectual%2FVerbal%20Dominance**%20instead', operatorName: 'The%20Compensation%20Operator', operatorMechanism: 'observers%20perceive%20%22Pettiness%22%20or%20%22Napoleonic%22%20effort', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_386_when_gate: BehaviorAssess { stage: 'when', text: 'attempting%20to%20project%20physical%20dominance' })
+
+// Topology
+(loop_386_start)-[:PROCESS]->(loop_386_given_gate)
+(loop_386_given_gate)-[:PROCESS { case: "ok" }]->(loop_386_when_gate)
+(loop_386_given_gate)-[:PROCESS { case: "err" }]->(loop_386_inactive)
+(loop_386_when_gate)-[:PROCESS { case: "ok" }]->(loop_386_context)
+(loop_386_when_gate)-[:PROCESS { case: "err" }]->(loop_386_inactive)
+(loop_386_context)-[:FORK { strategy: "behavior-branches" }]->(loop_386_context_branch | loop_386_then_branch | loop_386_operator_branch | loop_386_result_branch | loop_386_taxonomy_branch | loop_386_intervention_recognize | loop_386_intervention_leverage)
+(loop_386_context_branch | loop_386_then_branch | loop_386_operator_branch | loop_386_result_branch | loop_386_taxonomy_branch | loop_386_intervention_recognize | loop_386_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_386_verdict)
+(loop_386_inactive)-[:PROCESS]->(loop_386_sink)
+(loop_386_verdict)-[:PROCESS]->(loop_386_sink)
+(loop_386_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_386_then_branch)
+(loop_386_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_386_result_branch)

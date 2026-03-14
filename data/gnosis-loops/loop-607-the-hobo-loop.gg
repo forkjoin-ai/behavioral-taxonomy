@@ -1,0 +1,33 @@
+// behavioral-loop-607.gg
+// Executable Gnosis projection for The Hobo Loop.
+
+// Nodes
+(loop_607_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_607_context_branch: BehaviorEmit { emission: 'context' })
+(loop_607_given_gate: BehaviorAssess { stage: 'given', text: 'Walking%20in%20expensive%20shoes%20without%20polish' })
+(loop_607_inactive: BehaviorTerminal { loopId: 607, loopName: 'The%20Hobo%20Loop' })
+(loop_607_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_607_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_607_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_607_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Careless%20Operator', mechanism: 'signals%20%22New%20Money%22%20or%20%22Slob%22' })
+(loop_607_result_branch: BehaviorEmit { emission: 'result', text: 'judgment%20of%20character' })
+(loop_607_sink: BehaviorSink)
+(loop_607_start: BehaviorStart { loopId: 607, loopName: 'The%20Hobo%20Loop', given: 'Walking%20in%20expensive%20shoes%20without%20polish', when: 'looked%20at%20by%20detail-oriented%20people', then: 'signals%20%22New%20Money%22%20or%20%22Slob%22%20(The%20Careless%20Operator)', result: 'judgment%20of%20character', operatorName: 'The%20Careless%20Operator', operatorMechanism: 'signals%20%22New%20Money%22%20or%20%22Slob%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_607_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_607_then_branch: BehaviorEmit { emission: 'then', text: 'signals%20%22New%20Money%22%20or%20%22Slob%22%20(The%20Careless%20Operator)' })
+(loop_607_verdict: BehaviorVerdict { loopId: 607, loopName: 'The%20Hobo%20Loop', then: 'signals%20%22New%20Money%22%20or%20%22Slob%22%20(The%20Careless%20Operator)', result: 'judgment%20of%20character', operatorName: 'The%20Careless%20Operator', operatorMechanism: 'signals%20%22New%20Money%22%20or%20%22Slob%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_607_when_gate: BehaviorAssess { stage: 'when', text: 'looked%20at%20by%20detail-oriented%20people' })
+
+// Topology
+(loop_607_start)-[:PROCESS]->(loop_607_given_gate)
+(loop_607_given_gate)-[:PROCESS { case: "ok" }]->(loop_607_when_gate)
+(loop_607_given_gate)-[:PROCESS { case: "err" }]->(loop_607_inactive)
+(loop_607_when_gate)-[:PROCESS { case: "ok" }]->(loop_607_context)
+(loop_607_when_gate)-[:PROCESS { case: "err" }]->(loop_607_inactive)
+(loop_607_context)-[:FORK { strategy: "behavior-branches" }]->(loop_607_context_branch | loop_607_then_branch | loop_607_operator_branch | loop_607_result_branch | loop_607_taxonomy_branch | loop_607_intervention_recognize | loop_607_intervention_interdict | loop_607_intervention_minimize)
+(loop_607_context_branch | loop_607_then_branch | loop_607_operator_branch | loop_607_result_branch | loop_607_taxonomy_branch | loop_607_intervention_recognize | loop_607_intervention_interdict | loop_607_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_607_verdict)
+(loop_607_inactive)-[:PROCESS]->(loop_607_sink)
+(loop_607_verdict)-[:PROCESS]->(loop_607_sink)
+(loop_607_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_607_then_branch)
+(loop_607_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_607_then_branch)
+(loop_607_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_607_then_branch)

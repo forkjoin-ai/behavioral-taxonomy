@@ -1,0 +1,33 @@
+// behavioral-loop-35.gg
+// Executable Gnosis projection for The Paleotype Loop.
+
+// Nodes
+(loop_35_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_35_context_branch: BehaviorEmit { emission: 'context' })
+(loop_35_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20Fitzpatrick%20Type%20I%20Skin%20(Burns%20instantly)' })
+(loop_35_inactive: BehaviorTerminal { loopId: 35, loopName: 'The%20Paleotype%20Loop' })
+(loop_35_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20competence%20in%20areas%20that%20compensate' })
+(loop_35_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_35_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_35_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20group%20accommodates%20or%20restricts%20movement%20to%20shade' })
+(loop_35_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20adopting%20an%20**Indoor%2FCerebral%20Locus%20of%20Control**' })
+(loop_35_sink: BehaviorSink)
+(loop_35_start: BehaviorStart { loopId: 35, loopName: 'The%20Paleotype%20Loop', given: 'an%20individual%20possesses%20Fitzpatrick%20Type%20I%20Skin%20(Burns%20instantly)', when: 'outdoor%20group%20activities%20are%20planned', then: 'the%20group%20accommodates%20or%20restricts%20movement%20to%20shade%20(The%20Fragility%20Operator)', result: 'the%20individual%20adopting%20an%20**Indoor%2FCerebral%20Locus%20of%20Control**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20group%20accommodates%20or%20restricts%20movement%20to%20shade', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20competence%20in%20areas%20that%20compensate', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_35_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_35_then_branch: BehaviorEmit { emission: 'then', text: 'the%20group%20accommodates%20or%20restricts%20movement%20to%20shade%20(The%20Fragility%20Operator)' })
+(loop_35_verdict: BehaviorVerdict { loopId: 35, loopName: 'The%20Paleotype%20Loop', then: 'the%20group%20accommodates%20or%20restricts%20movement%20to%20shade%20(The%20Fragility%20Operator)', result: 'the%20individual%20adopting%20an%20**Indoor%2FCerebral%20Locus%20of%20Control**', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20group%20accommodates%20or%20restricts%20movement%20to%20shade', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_35_when_gate: BehaviorAssess { stage: 'when', text: 'outdoor%20group%20activities%20are%20planned' })
+
+// Topology
+(loop_35_start)-[:PROCESS]->(loop_35_given_gate)
+(loop_35_given_gate)-[:PROCESS { case: "ok" }]->(loop_35_when_gate)
+(loop_35_given_gate)-[:PROCESS { case: "err" }]->(loop_35_inactive)
+(loop_35_when_gate)-[:PROCESS { case: "ok" }]->(loop_35_context)
+(loop_35_when_gate)-[:PROCESS { case: "err" }]->(loop_35_inactive)
+(loop_35_context)-[:FORK { strategy: "behavior-branches" }]->(loop_35_context_branch | loop_35_then_branch | loop_35_operator_branch | loop_35_result_branch | loop_35_taxonomy_branch | loop_35_intervention_recognize | loop_35_intervention_interdict | loop_35_intervention_minimize)
+(loop_35_context_branch | loop_35_then_branch | loop_35_operator_branch | loop_35_result_branch | loop_35_taxonomy_branch | loop_35_intervention_recognize | loop_35_intervention_interdict | loop_35_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_35_verdict)
+(loop_35_inactive)-[:PROCESS]->(loop_35_sink)
+(loop_35_verdict)-[:PROCESS]->(loop_35_sink)
+(loop_35_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_35_then_branch)
+(loop_35_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_35_then_branch)
+(loop_35_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_35_then_branch)

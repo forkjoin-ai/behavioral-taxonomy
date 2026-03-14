@@ -1,0 +1,33 @@
+// behavioral-loop-397.gg
+// Executable Gnosis projection for The Coke Bottle Loop.
+
+// Nodes
+(loop_397_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_397_context_branch: BehaviorEmit { emission: 'context' })
+(loop_397_given_gate: BehaviorAssess { stage: 'given', text: 'Thick%20lenses%20that%20shrink%20the%20eyes%20visually' })
+(loop_397_inactive: BehaviorTerminal { loopId: 397, loopName: 'The%20Coke%20Bottle%20Loop' })
+(loop_397_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_397_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_397_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_397_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nerd%2FMole%20Operator', mechanism: 'the%20eyes%20look%20%22Beady%22%20or%20%22Distant%22' })
+(loop_397_result_branch: BehaviorEmit { emission: 'result', text: 'assumption%20of%20high%20technical%20skill%20but%20low%20social%20skill' })
+(loop_397_sink: BehaviorSink)
+(loop_397_start: BehaviorStart { loopId: 397, loopName: 'The%20Coke%20Bottle%20Loop', given: 'Thick%20lenses%20that%20shrink%20the%20eyes%20visually', when: 'making%20eye%20contact', then: 'the%20eyes%20look%20%22Beady%22%20or%20%22Distant%22%20(The%20Nerd%2FMole%20Operator)', result: 'assumption%20of%20high%20technical%20skill%20but%20low%20social%20skill', operatorName: 'The%20Nerd%2FMole%20Operator', operatorMechanism: 'the%20eyes%20look%20%22Beady%22%20or%20%22Distant%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_397_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_397_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20look%20%22Beady%22%20or%20%22Distant%22%20(The%20Nerd%2FMole%20Operator)' })
+(loop_397_verdict: BehaviorVerdict { loopId: 397, loopName: 'The%20Coke%20Bottle%20Loop', then: 'the%20eyes%20look%20%22Beady%22%20or%20%22Distant%22%20(The%20Nerd%2FMole%20Operator)', result: 'assumption%20of%20high%20technical%20skill%20but%20low%20social%20skill', operatorName: 'The%20Nerd%2FMole%20Operator', operatorMechanism: 'the%20eyes%20look%20%22Beady%22%20or%20%22Distant%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_397_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_397_start)-[:PROCESS]->(loop_397_given_gate)
+(loop_397_given_gate)-[:PROCESS { case: "ok" }]->(loop_397_when_gate)
+(loop_397_given_gate)-[:PROCESS { case: "err" }]->(loop_397_inactive)
+(loop_397_when_gate)-[:PROCESS { case: "ok" }]->(loop_397_context)
+(loop_397_when_gate)-[:PROCESS { case: "err" }]->(loop_397_inactive)
+(loop_397_context)-[:FORK { strategy: "behavior-branches" }]->(loop_397_context_branch | loop_397_then_branch | loop_397_operator_branch | loop_397_result_branch | loop_397_taxonomy_branch | loop_397_intervention_recognize | loop_397_intervention_interdict | loop_397_intervention_minimize)
+(loop_397_context_branch | loop_397_then_branch | loop_397_operator_branch | loop_397_result_branch | loop_397_taxonomy_branch | loop_397_intervention_recognize | loop_397_intervention_interdict | loop_397_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_397_verdict)
+(loop_397_inactive)-[:PROCESS]->(loop_397_sink)
+(loop_397_verdict)-[:PROCESS]->(loop_397_sink)
+(loop_397_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_397_then_branch)
+(loop_397_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_397_then_branch)
+(loop_397_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_397_then_branch)

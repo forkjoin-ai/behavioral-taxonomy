@@ -1,0 +1,31 @@
+// behavioral-loop-73.gg
+// Executable Gnosis projection for The Slow Blinker Loop.
+
+// Nodes
+(loop_73_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_73_context_branch: BehaviorEmit { emission: 'context' })
+(loop_73_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20Spontaneous%20Blink%20Rate%20(High%20Dopamine%20signature)' })
+(loop_73_inactive: BehaviorTerminal { loopId: 73, loopName: 'The%20Slow%20Blinker%20Loop' })
+(loop_73_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_73_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_73_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'the%20stare%20feels%20%22Predatory%22%20or%20%22Intense%22' })
+(loop_73_result_branch: BehaviorEmit { emission: 'result', text: 'others%20submitting%20in%20conversation%2C%20reinforcing%20**Dominance%20Behaviors**' })
+(loop_73_sink: BehaviorSink)
+(loop_73_start: BehaviorStart { loopId: 73, loopName: 'The%20Slow%20Blinker%20Loop', given: 'Low%20Spontaneous%20Blink%20Rate%20(High%20Dopamine%20signature)', when: 'maintaining%20eye%20contact', then: 'the%20stare%20feels%20%22Predatory%22%20or%20%22Intense%22%20(The%20Threat%20Operator)', result: 'others%20submitting%20in%20conversation%2C%20reinforcing%20**Dominance%20Behaviors**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20stare%20feels%20%22Predatory%22%20or%20%22Intense%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_73_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_73_then_branch: BehaviorEmit { emission: 'then', text: 'the%20stare%20feels%20%22Predatory%22%20or%20%22Intense%22%20(The%20Threat%20Operator)' })
+(loop_73_verdict: BehaviorVerdict { loopId: 73, loopName: 'The%20Slow%20Blinker%20Loop', then: 'the%20stare%20feels%20%22Predatory%22%20or%20%22Intense%22%20(The%20Threat%20Operator)', result: 'others%20submitting%20in%20conversation%2C%20reinforcing%20**Dominance%20Behaviors**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'the%20stare%20feels%20%22Predatory%22%20or%20%22Intense%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_73_when_gate: BehaviorAssess { stage: 'when', text: 'maintaining%20eye%20contact' })
+
+// Topology
+(loop_73_start)-[:PROCESS]->(loop_73_given_gate)
+(loop_73_given_gate)-[:PROCESS { case: "ok" }]->(loop_73_when_gate)
+(loop_73_given_gate)-[:PROCESS { case: "err" }]->(loop_73_inactive)
+(loop_73_when_gate)-[:PROCESS { case: "ok" }]->(loop_73_context)
+(loop_73_when_gate)-[:PROCESS { case: "err" }]->(loop_73_inactive)
+(loop_73_context)-[:FORK { strategy: "behavior-branches" }]->(loop_73_context_branch | loop_73_then_branch | loop_73_operator_branch | loop_73_result_branch | loop_73_taxonomy_branch | loop_73_intervention_recognize | loop_73_intervention_leverage)
+(loop_73_context_branch | loop_73_then_branch | loop_73_operator_branch | loop_73_result_branch | loop_73_taxonomy_branch | loop_73_intervention_recognize | loop_73_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_73_verdict)
+(loop_73_inactive)-[:PROCESS]->(loop_73_sink)
+(loop_73_verdict)-[:PROCESS]->(loop_73_sink)
+(loop_73_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_73_then_branch)
+(loop_73_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_73_result_branch)

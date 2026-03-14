@@ -1,0 +1,33 @@
+// behavioral-loop-461.gg
+// Executable Gnosis projection for The Throat Fry Loop.
+
+// Nodes
+(loop_461_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_461_context_branch: BehaviorEmit { emission: 'context' })
+(loop_461_given_gate: BehaviorAssess { stage: 'given', text: 'Hoarseness%20from%20smoking%20or%20overuse' })
+(loop_461_inactive: BehaviorTerminal { loopId: 461, loopName: 'The%20Throat%20Fry%20Loop' })
+(loop_461_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_461_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_461_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_461_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Silence%20Operator', mechanism: 'the%20voice%20cracks%20or%20disappears' })
+(loop_461_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20unable%20to%20command%20a%20room%2C%20forcing%20reliance%20on%20**Visual%20Aids**' })
+(loop_461_sink: BehaviorSink)
+(loop_461_start: BehaviorStart { loopId: 461, loopName: 'The%20Throat%20Fry%20Loop', given: 'Hoarseness%20from%20smoking%20or%20overuse', when: 'trying%20to%20project%20volume', then: 'the%20voice%20cracks%20or%20disappears%20(The%20Silence%20Operator)', result: 'the%20individual%20being%20unable%20to%20command%20a%20room%2C%20forcing%20reliance%20on%20**Visual%20Aids**', operatorName: 'The%20Silence%20Operator', operatorMechanism: 'the%20voice%20cracks%20or%20disappears', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_461_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_461_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20cracks%20or%20disappears%20(The%20Silence%20Operator)' })
+(loop_461_verdict: BehaviorVerdict { loopId: 461, loopName: 'The%20Throat%20Fry%20Loop', then: 'the%20voice%20cracks%20or%20disappears%20(The%20Silence%20Operator)', result: 'the%20individual%20being%20unable%20to%20command%20a%20room%2C%20forcing%20reliance%20on%20**Visual%20Aids**', operatorName: 'The%20Silence%20Operator', operatorMechanism: 'the%20voice%20cracks%20or%20disappears', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_461_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20to%20project%20volume' })
+
+// Topology
+(loop_461_start)-[:PROCESS]->(loop_461_given_gate)
+(loop_461_given_gate)-[:PROCESS { case: "ok" }]->(loop_461_when_gate)
+(loop_461_given_gate)-[:PROCESS { case: "err" }]->(loop_461_inactive)
+(loop_461_when_gate)-[:PROCESS { case: "ok" }]->(loop_461_context)
+(loop_461_when_gate)-[:PROCESS { case: "err" }]->(loop_461_inactive)
+(loop_461_context)-[:FORK { strategy: "behavior-branches" }]->(loop_461_context_branch | loop_461_then_branch | loop_461_operator_branch | loop_461_result_branch | loop_461_taxonomy_branch | loop_461_intervention_recognize | loop_461_intervention_interdict | loop_461_intervention_minimize)
+(loop_461_context_branch | loop_461_then_branch | loop_461_operator_branch | loop_461_result_branch | loop_461_taxonomy_branch | loop_461_intervention_recognize | loop_461_intervention_interdict | loop_461_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_461_verdict)
+(loop_461_inactive)-[:PROCESS]->(loop_461_sink)
+(loop_461_verdict)-[:PROCESS]->(loop_461_sink)
+(loop_461_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_461_then_branch)
+(loop_461_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_461_then_branch)
+(loop_461_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_461_then_branch)

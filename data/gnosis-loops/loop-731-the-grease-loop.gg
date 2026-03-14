@@ -1,0 +1,33 @@
+// behavioral-loop-731.gg
+// Executable Gnosis projection for The Grease Loop.
+
+// Nodes
+(loop_731_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_731_context_branch: BehaviorEmit { emission: 'context' })
+(loop_731_given_gate: BehaviorAssess { stage: 'given', text: 'Stringy%2C%20oily%20roots' })
+(loop_731_inactive: BehaviorTerminal { loopId: 731, loopName: 'The%20Grease%20Loop' })
+(loop_731_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_731_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_731_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_731_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hygiene%20Operator', mechanism: 'it%20signals%20%22Dirty%22' })
+(loop_731_result_branch: BehaviorEmit { emission: 'result', text: 'physical%20distance%20from%20peers' })
+(loop_731_sink: BehaviorSink)
+(loop_731_start: BehaviorStart { loopId: 731, loopName: 'The%20Grease%20Loop', given: 'Stringy%2C%20oily%20roots', when: 'under%20office%20lights', then: 'it%20signals%20%22Dirty%22%20(The%20Hygiene%20Operator)', result: 'physical%20distance%20from%20peers', operatorName: 'The%20Hygiene%20Operator', operatorMechanism: 'it%20signals%20%22Dirty%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_731_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_731_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Dirty%22%20(The%20Hygiene%20Operator)' })
+(loop_731_verdict: BehaviorVerdict { loopId: 731, loopName: 'The%20Grease%20Loop', then: 'it%20signals%20%22Dirty%22%20(The%20Hygiene%20Operator)', result: 'physical%20distance%20from%20peers', operatorName: 'The%20Hygiene%20Operator', operatorMechanism: 'it%20signals%20%22Dirty%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_731_when_gate: BehaviorAssess { stage: 'when', text: 'under%20office%20lights' })
+
+// Topology
+(loop_731_start)-[:PROCESS]->(loop_731_given_gate)
+(loop_731_given_gate)-[:PROCESS { case: "ok" }]->(loop_731_when_gate)
+(loop_731_given_gate)-[:PROCESS { case: "err" }]->(loop_731_inactive)
+(loop_731_when_gate)-[:PROCESS { case: "ok" }]->(loop_731_context)
+(loop_731_when_gate)-[:PROCESS { case: "err" }]->(loop_731_inactive)
+(loop_731_context)-[:FORK { strategy: "behavior-branches" }]->(loop_731_context_branch | loop_731_then_branch | loop_731_operator_branch | loop_731_result_branch | loop_731_taxonomy_branch | loop_731_intervention_recognize | loop_731_intervention_interdict | loop_731_intervention_minimize)
+(loop_731_context_branch | loop_731_then_branch | loop_731_operator_branch | loop_731_result_branch | loop_731_taxonomy_branch | loop_731_intervention_recognize | loop_731_intervention_interdict | loop_731_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_731_verdict)
+(loop_731_inactive)-[:PROCESS]->(loop_731_sink)
+(loop_731_verdict)-[:PROCESS]->(loop_731_sink)
+(loop_731_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_731_then_branch)
+(loop_731_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_731_then_branch)
+(loop_731_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_731_then_branch)

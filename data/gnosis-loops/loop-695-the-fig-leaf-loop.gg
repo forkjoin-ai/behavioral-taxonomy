@@ -1,0 +1,33 @@
+// behavioral-loop-695.gg
+// Executable Gnosis projection for The Fig Leaf Loop.
+
+// Nodes
+(loop_695_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_695_context_branch: BehaviorEmit { emission: 'context' })
+(loop_695_given_gate: BehaviorAssess { stage: 'given', text: 'Hands%20clasped%20over%20the%20groin' })
+(loop_695_inactive: BehaviorTerminal { loopId: 695, loopName: 'The%20Fig%20Leaf%20Loop' })
+(loop_695_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_695_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_695_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_695_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Beta%20Operator', mechanism: 'it%20signals%20%22Submission%22%20and%20%22vulnerability%22' })
+(loop_695_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20command%20presence' })
+(loop_695_sink: BehaviorSink)
+(loop_695_start: BehaviorStart { loopId: 695, loopName: 'The%20Fig%20Leaf%20Loop', given: 'Hands%20clasped%20over%20the%20groin', when: 'standing', then: 'it%20signals%20%22Submission%22%20and%20%22vulnerability%22%20(The%20Beta%20Operator)', result: 'loss%20of%20command%20presence', operatorName: 'The%20Beta%20Operator', operatorMechanism: 'it%20signals%20%22Submission%22%20and%20%22vulnerability%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_695_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_695_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Submission%22%20and%20%22vulnerability%22%20(The%20Beta%20Operator)' })
+(loop_695_verdict: BehaviorVerdict { loopId: 695, loopName: 'The%20Fig%20Leaf%20Loop', then: 'it%20signals%20%22Submission%22%20and%20%22vulnerability%22%20(The%20Beta%20Operator)', result: 'loss%20of%20command%20presence', operatorName: 'The%20Beta%20Operator', operatorMechanism: 'it%20signals%20%22Submission%22%20and%20%22vulnerability%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_695_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_695_start)-[:PROCESS]->(loop_695_given_gate)
+(loop_695_given_gate)-[:PROCESS { case: "ok" }]->(loop_695_when_gate)
+(loop_695_given_gate)-[:PROCESS { case: "err" }]->(loop_695_inactive)
+(loop_695_when_gate)-[:PROCESS { case: "ok" }]->(loop_695_context)
+(loop_695_when_gate)-[:PROCESS { case: "err" }]->(loop_695_inactive)
+(loop_695_context)-[:FORK { strategy: "behavior-branches" }]->(loop_695_context_branch | loop_695_then_branch | loop_695_operator_branch | loop_695_result_branch | loop_695_taxonomy_branch | loop_695_intervention_recognize | loop_695_intervention_interdict | loop_695_intervention_minimize)
+(loop_695_context_branch | loop_695_then_branch | loop_695_operator_branch | loop_695_result_branch | loop_695_taxonomy_branch | loop_695_intervention_recognize | loop_695_intervention_interdict | loop_695_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_695_verdict)
+(loop_695_inactive)-[:PROCESS]->(loop_695_sink)
+(loop_695_verdict)-[:PROCESS]->(loop_695_sink)
+(loop_695_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_695_then_branch)
+(loop_695_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_695_then_branch)
+(loop_695_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_695_then_branch)

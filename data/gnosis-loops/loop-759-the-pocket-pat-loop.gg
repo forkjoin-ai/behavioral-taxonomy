@@ -1,0 +1,33 @@
+// behavioral-loop-759.gg
+// Executable Gnosis projection for The Pocket-Pat Loop.
+
+// Nodes
+(loop_759_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_759_context_branch: BehaviorEmit { emission: 'context' })
+(loop_759_given_gate: BehaviorAssess { stage: 'given', text: 'Compulsive%20checking%20for%20wallet%2Fkeys' })
+(loop_759_inactive: BehaviorTerminal { loopId: 759, loopName: 'The%20Pocket-Pat%20Loop' })
+(loop_759_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_759_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_759_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_759_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20OCD%20Operator', mechanism: 'it%20signals%20%22Anxiety%22%20or%20%22Distrust%22' })
+(loop_759_result_branch: BehaviorEmit { emission: 'result', text: 'looking%20scattered%20and%20uncool' })
+(loop_759_sink: BehaviorSink)
+(loop_759_start: BehaviorStart { loopId: 759, loopName: 'The%20Pocket-Pat%20Loop', given: 'Compulsive%20checking%20for%20wallet%2Fkeys', when: 'leaving%20a%20room', then: 'it%20signals%20%22Anxiety%22%20or%20%22Distrust%22%20(The%20OCD%20Operator)', result: 'looking%20scattered%20and%20uncool', operatorName: 'The%20OCD%20Operator', operatorMechanism: 'it%20signals%20%22Anxiety%22%20or%20%22Distrust%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_759_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_759_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Anxiety%22%20or%20%22Distrust%22%20(The%20OCD%20Operator)' })
+(loop_759_verdict: BehaviorVerdict { loopId: 759, loopName: 'The%20Pocket-Pat%20Loop', then: 'it%20signals%20%22Anxiety%22%20or%20%22Distrust%22%20(The%20OCD%20Operator)', result: 'looking%20scattered%20and%20uncool', operatorName: 'The%20OCD%20Operator', operatorMechanism: 'it%20signals%20%22Anxiety%22%20or%20%22Distrust%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_759_when_gate: BehaviorAssess { stage: 'when', text: 'leaving%20a%20room' })
+
+// Topology
+(loop_759_start)-[:PROCESS]->(loop_759_given_gate)
+(loop_759_given_gate)-[:PROCESS { case: "ok" }]->(loop_759_when_gate)
+(loop_759_given_gate)-[:PROCESS { case: "err" }]->(loop_759_inactive)
+(loop_759_when_gate)-[:PROCESS { case: "ok" }]->(loop_759_context)
+(loop_759_when_gate)-[:PROCESS { case: "err" }]->(loop_759_inactive)
+(loop_759_context)-[:FORK { strategy: "behavior-branches" }]->(loop_759_context_branch | loop_759_then_branch | loop_759_operator_branch | loop_759_result_branch | loop_759_taxonomy_branch | loop_759_intervention_recognize | loop_759_intervention_interdict | loop_759_intervention_minimize)
+(loop_759_context_branch | loop_759_then_branch | loop_759_operator_branch | loop_759_result_branch | loop_759_taxonomy_branch | loop_759_intervention_recognize | loop_759_intervention_interdict | loop_759_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_759_verdict)
+(loop_759_inactive)-[:PROCESS]->(loop_759_sink)
+(loop_759_verdict)-[:PROCESS]->(loop_759_sink)
+(loop_759_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_759_then_branch)
+(loop_759_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_759_then_branch)
+(loop_759_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_759_then_branch)

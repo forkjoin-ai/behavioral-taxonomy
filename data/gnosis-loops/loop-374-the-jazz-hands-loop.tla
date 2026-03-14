@@ -1,0 +1,131 @@
+------------------------------ MODULE BehaviorLoop_374_the_jazz_hands_loop ------------------------------
+EXTENDS Naturals, FiniteSets, Sequences
+
+NODES == {"loop_374_context", "loop_374_context_branch", "loop_374_given_gate", "loop_374_inactive", "loop_374_intervention_interdict", "loop_374_intervention_minimize", "loop_374_intervention_recognize", "loop_374_operator_branch", "loop_374_result_branch", "loop_374_sink", "loop_374_start", "loop_374_taxonomy_branch", "loop_374_then_branch", "loop_374_verdict", "loop_374_when_gate"}
+ROOTS == {"loop_374_start"}
+TERMINALS == {"loop_374_sink"}
+FOLD_TARGETS == {"loop_374_verdict"}
+EFFECTS == {}
+DECLARED_EFFECTS == {}
+INFERRED_EFFECTS == {}
+
+VARIABLES active, beta1, payloadPresent, consensusReached
+vars == <<active, beta1, payloadPresent, consensusReached>>
+
+Max2(a, b) == IF a > b THEN a ELSE b
+CanFire(sourceSet) == sourceSet \subseteq active
+UpdateActive(sourceSet, targetSet) == (active \ sourceSet) \cup targetSet
+
+Init ==
+  /\ active = ROOTS
+  /\ beta1 = 0
+  /\ payloadPresent = TRUE
+  /\ consensusReached = FALSE
+
+Edge_01_PROCESS ==
+  /\ CanFire({"loop_374_start"})
+  /\ active' = UpdateActive({"loop_374_start"}, {"loop_374_given_gate"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_given_gate"} \cap FOLD_TARGETS # {})
+Edge_02_PROCESS ==
+  /\ CanFire({"loop_374_given_gate"})
+  /\ active' = UpdateActive({"loop_374_given_gate"}, {"loop_374_when_gate"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_when_gate"} \cap FOLD_TARGETS # {})
+Edge_03_PROCESS ==
+  /\ CanFire({"loop_374_given_gate"})
+  /\ active' = UpdateActive({"loop_374_given_gate"}, {"loop_374_inactive"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_inactive"} \cap FOLD_TARGETS # {})
+Edge_04_PROCESS ==
+  /\ CanFire({"loop_374_when_gate"})
+  /\ active' = UpdateActive({"loop_374_when_gate"}, {"loop_374_context"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_context"} \cap FOLD_TARGETS # {})
+Edge_05_PROCESS ==
+  /\ CanFire({"loop_374_when_gate"})
+  /\ active' = UpdateActive({"loop_374_when_gate"}, {"loop_374_inactive"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_inactive"} \cap FOLD_TARGETS # {})
+Edge_06_FORK ==
+  /\ CanFire({"loop_374_context"})
+  /\ active' = UpdateActive({"loop_374_context"}, {"loop_374_context_branch", "loop_374_then_branch", "loop_374_operator_branch", "loop_374_result_branch", "loop_374_taxonomy_branch", "loop_374_intervention_recognize", "loop_374_intervention_interdict", "loop_374_intervention_minimize"})
+  /\ beta1' = beta1 + (Cardinality({"loop_374_context_branch", "loop_374_then_branch", "loop_374_operator_branch", "loop_374_result_branch", "loop_374_taxonomy_branch", "loop_374_intervention_recognize", "loop_374_intervention_interdict", "loop_374_intervention_minimize"}) - 1)
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_context_branch", "loop_374_then_branch", "loop_374_operator_branch", "loop_374_result_branch", "loop_374_taxonomy_branch", "loop_374_intervention_recognize", "loop_374_intervention_interdict", "loop_374_intervention_minimize"} \cap FOLD_TARGETS # {})
+Edge_07_FOLD ==
+  /\ CanFire({"loop_374_context_branch", "loop_374_then_branch", "loop_374_operator_branch", "loop_374_result_branch", "loop_374_taxonomy_branch", "loop_374_intervention_recognize", "loop_374_intervention_interdict", "loop_374_intervention_minimize"})
+  /\ active' = UpdateActive({"loop_374_context_branch", "loop_374_then_branch", "loop_374_operator_branch", "loop_374_result_branch", "loop_374_taxonomy_branch", "loop_374_intervention_recognize", "loop_374_intervention_interdict", "loop_374_intervention_minimize"}, {"loop_374_verdict"})
+  /\ beta1' = 0
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_verdict"} \cap FOLD_TARGETS # {})
+Edge_08_PROCESS ==
+  /\ CanFire({"loop_374_inactive"})
+  /\ active' = UpdateActive({"loop_374_inactive"}, {"loop_374_sink"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_sink"} \cap FOLD_TARGETS # {})
+Edge_09_PROCESS ==
+  /\ CanFire({"loop_374_verdict"})
+  /\ active' = UpdateActive({"loop_374_verdict"}, {"loop_374_sink"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_sink"} \cap FOLD_TARGETS # {})
+Edge_10_INTERFERE ==
+  /\ CanFire({"loop_374_intervention_recognize"})
+  /\ active' = UpdateActive({"loop_374_intervention_recognize"}, {"loop_374_then_branch"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_then_branch"} \cap FOLD_TARGETS # {})
+Edge_11_INTERFERE ==
+  /\ CanFire({"loop_374_intervention_interdict"})
+  /\ active' = UpdateActive({"loop_374_intervention_interdict"}, {"loop_374_then_branch"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_then_branch"} \cap FOLD_TARGETS # {})
+Edge_12_INTERFERE ==
+  /\ CanFire({"loop_374_intervention_minimize"})
+  /\ active' = UpdateActive({"loop_374_intervention_minimize"}, {"loop_374_then_branch"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_374_then_branch"} \cap FOLD_TARGETS # {})
+
+Next ==
+  \/ Edge_01_PROCESS
+  \/ Edge_02_PROCESS
+  \/ Edge_03_PROCESS
+  \/ Edge_04_PROCESS
+  \/ Edge_05_PROCESS
+  \/ Edge_06_FORK
+  \/ Edge_07_FOLD
+  \/ Edge_08_PROCESS
+  \/ Edge_09_PROCESS
+  \/ Edge_10_INTERFERE
+  \/ Edge_11_INTERFERE
+  \/ Edge_12_INTERFERE
+
+TypeInvariant ==
+  /\ active \subseteq NODES
+  /\ beta1 \in Nat
+  /\ payloadPresent \in BOOLEAN
+  /\ consensusReached \in BOOLEAN
+
+NoLostPayloadInvariant == payloadPresent = TRUE
+HasFoldTargets == FOLD_TARGETS # {}
+EventuallyTerminal == <> (active \cap TERMINALS # {})
+EventuallyConsensus == IF HasFoldTargets THEN <> consensusReached ELSE TRUE
+DeadlockFree == []<>(ENABLED Next)
+
+Spec ==
+  /\ Init
+  /\ [][Next]_vars
+  /\ WF_vars(Next)
+
+THEOREM Spec => []NoLostPayloadInvariant
+
+=============================================================================

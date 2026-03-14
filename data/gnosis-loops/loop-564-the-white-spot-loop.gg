@@ -1,0 +1,33 @@
+// behavioral-loop-564.gg
+// Executable Gnosis projection for The White Spot Loop.
+
+// Nodes
+(loop_564_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_564_context_branch: BehaviorEmit { emission: 'context' })
+(loop_564_given_gate: BehaviorAssess { stage: 'given', text: 'Chalky%20white%20spots%20on%20enamel' })
+(loop_564_inactive: BehaviorTerminal { loopId: 564, loopName: 'The%20White%20Spot%20Loop' })
+(loop_564_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_564_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_564_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_564_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rural%20Operator', mechanism: 'observers%20assume%20%22Poor%20Diet%22%20or%20%22Water%20Issues%22' })
+(loop_564_result_branch: BehaviorEmit { emission: 'result', text: 'subtle%20class%20signaling' })
+(loop_564_sink: BehaviorSink)
+(loop_564_start: BehaviorStart { loopId: 564, loopName: 'The%20White%20Spot%20Loop', given: 'Chalky%20white%20spots%20on%20enamel', when: 'smiling', then: 'observers%20assume%20%22Poor%20Diet%22%20or%20%22Water%20Issues%22%20(The%20Rural%20Operator)', result: 'subtle%20class%20signaling', operatorName: 'The%20Rural%20Operator', operatorMechanism: 'observers%20assume%20%22Poor%20Diet%22%20or%20%22Water%20Issues%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_564_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_564_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Poor%20Diet%22%20or%20%22Water%20Issues%22%20(The%20Rural%20Operator)' })
+(loop_564_verdict: BehaviorVerdict { loopId: 564, loopName: 'The%20White%20Spot%20Loop', then: 'observers%20assume%20%22Poor%20Diet%22%20or%20%22Water%20Issues%22%20(The%20Rural%20Operator)', result: 'subtle%20class%20signaling', operatorName: 'The%20Rural%20Operator', operatorMechanism: 'observers%20assume%20%22Poor%20Diet%22%20or%20%22Water%20Issues%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_564_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_564_start)-[:PROCESS]->(loop_564_given_gate)
+(loop_564_given_gate)-[:PROCESS { case: "ok" }]->(loop_564_when_gate)
+(loop_564_given_gate)-[:PROCESS { case: "err" }]->(loop_564_inactive)
+(loop_564_when_gate)-[:PROCESS { case: "ok" }]->(loop_564_context)
+(loop_564_when_gate)-[:PROCESS { case: "err" }]->(loop_564_inactive)
+(loop_564_context)-[:FORK { strategy: "behavior-branches" }]->(loop_564_context_branch | loop_564_then_branch | loop_564_operator_branch | loop_564_result_branch | loop_564_taxonomy_branch | loop_564_intervention_recognize | loop_564_intervention_interdict | loop_564_intervention_minimize)
+(loop_564_context_branch | loop_564_then_branch | loop_564_operator_branch | loop_564_result_branch | loop_564_taxonomy_branch | loop_564_intervention_recognize | loop_564_intervention_interdict | loop_564_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_564_verdict)
+(loop_564_inactive)-[:PROCESS]->(loop_564_sink)
+(loop_564_verdict)-[:PROCESS]->(loop_564_sink)
+(loop_564_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_564_then_branch)
+(loop_564_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_564_then_branch)
+(loop_564_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_564_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-39.gg
+// Executable Gnosis projection for The Thick Neck Loop.
+
+// Nodes
+(loop_39_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_39_context_branch: BehaviorEmit { emission: 'context' })
+(loop_39_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20a%20High%20Neck%20Circumference%20(17%22%2B)' })
+(loop_39_inactive: BehaviorTerminal { loopId: 39, loopName: 'The%20Thick%20Neck%20Loop' })
+(loop_39_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Reframe%20the%20narrative%20around%20this%20characteristic' })
+(loop_39_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_39_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_39_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Intimidation%20Operator', mechanism: 'potential%20aggressors%20de-escalate%20or%20submit' })
+(loop_39_result_branch: BehaviorEmit { emission: 'result', text: 'a%20**Calm%20Demeanor**%20(rarely%20having%20to%20prove%20oneself%20physically)' })
+(loop_39_sink: BehaviorSink)
+(loop_39_start: BehaviorStart { loopId: 39, loopName: 'The%20Thick%20Neck%20Loop', given: 'an%20individual%20possesses%20a%20High%20Neck%20Circumference%20(17%22%2B)', when: 'a%20physical%20confrontation%20seems%20imminent', then: 'potential%20aggressors%20de-escalate%20or%20submit%20(The%20Intimidation%20Operator)', result: 'a%20**Calm%20Demeanor**%20(rarely%20having%20to%20prove%20oneself%20physically)', operatorName: 'The%20Intimidation%20Operator', operatorMechanism: 'potential%20aggressors%20de-escalate%20or%20submit', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Reframe%20the%20narrative%20around%20this%20characteristic', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_39_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_39_then_branch: BehaviorEmit { emission: 'then', text: 'potential%20aggressors%20de-escalate%20or%20submit%20(The%20Intimidation%20Operator)' })
+(loop_39_verdict: BehaviorVerdict { loopId: 39, loopName: 'The%20Thick%20Neck%20Loop', then: 'potential%20aggressors%20de-escalate%20or%20submit%20(The%20Intimidation%20Operator)', result: 'a%20**Calm%20Demeanor**%20(rarely%20having%20to%20prove%20oneself%20physically)', operatorName: 'The%20Intimidation%20Operator', operatorMechanism: 'potential%20aggressors%20de-escalate%20or%20submit', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_39_when_gate: BehaviorAssess { stage: 'when', text: 'a%20physical%20confrontation%20seems%20imminent' })
+
+// Topology
+(loop_39_start)-[:PROCESS]->(loop_39_given_gate)
+(loop_39_given_gate)-[:PROCESS { case: "ok" }]->(loop_39_when_gate)
+(loop_39_given_gate)-[:PROCESS { case: "err" }]->(loop_39_inactive)
+(loop_39_when_gate)-[:PROCESS { case: "ok" }]->(loop_39_context)
+(loop_39_when_gate)-[:PROCESS { case: "err" }]->(loop_39_inactive)
+(loop_39_context)-[:FORK { strategy: "behavior-branches" }]->(loop_39_context_branch | loop_39_then_branch | loop_39_operator_branch | loop_39_result_branch | loop_39_taxonomy_branch | loop_39_intervention_recognize | loop_39_intervention_interdict | loop_39_intervention_minimize)
+(loop_39_context_branch | loop_39_then_branch | loop_39_operator_branch | loop_39_result_branch | loop_39_taxonomy_branch | loop_39_intervention_recognize | loop_39_intervention_interdict | loop_39_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_39_verdict)
+(loop_39_inactive)-[:PROCESS]->(loop_39_sink)
+(loop_39_verdict)-[:PROCESS]->(loop_39_sink)
+(loop_39_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_39_then_branch)
+(loop_39_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_39_then_branch)
+(loop_39_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_39_then_branch)

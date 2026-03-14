@@ -1,0 +1,33 @@
+// behavioral-loop-164.gg
+// Executable Gnosis projection for The Yellow Loop.
+
+// Nodes
+(loop_164_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_164_context_branch: BehaviorEmit { emission: 'context' })
+(loop_164_given_gate: BehaviorAssess { stage: 'given', text: 'Muddy%20or%20yellowed%20sclera%20(not%20bright%20white)' })
+(loop_164_inactive: BehaviorTerminal { loopId: 164, loopName: 'The%20Yellow%20Loop' })
+(loop_164_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_164_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_164_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_164_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vitality%20Discount%20Operator', mechanism: 'observers%20perceive%20%22Unhealth%22%20or%20%22Old%20Age%22' })
+(loop_164_result_branch: BehaviorEmit { emission: 'result', text: 'being%20passed%20over%20for%20energetic%20roles%2Fmating%2C%20leading%20to%20**Premature%20Retirement**' })
+(loop_164_sink: BehaviorSink)
+(loop_164_start: BehaviorStart { loopId: 164, loopName: 'The%20Yellow%20Loop', given: 'Muddy%20or%20yellowed%20sclera%20(not%20bright%20white)', when: 'making%20eye%20contact', then: 'observers%20perceive%20%22Unhealth%22%20or%20%22Old%20Age%22%20(The%20Vitality%20Discount%20Operator)', result: 'being%20passed%20over%20for%20energetic%20roles%2Fmating%2C%20leading%20to%20**Premature%20Retirement**', operatorName: 'The%20Vitality%20Discount%20Operator', operatorMechanism: 'observers%20perceive%20%22Unhealth%22%20or%20%22Old%20Age%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_164_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_164_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Unhealth%22%20or%20%22Old%20Age%22%20(The%20Vitality%20Discount%20Operator)' })
+(loop_164_verdict: BehaviorVerdict { loopId: 164, loopName: 'The%20Yellow%20Loop', then: 'observers%20perceive%20%22Unhealth%22%20or%20%22Old%20Age%22%20(The%20Vitality%20Discount%20Operator)', result: 'being%20passed%20over%20for%20energetic%20roles%2Fmating%2C%20leading%20to%20**Premature%20Retirement**', operatorName: 'The%20Vitality%20Discount%20Operator', operatorMechanism: 'observers%20perceive%20%22Unhealth%22%20or%20%22Old%20Age%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_164_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_164_start)-[:PROCESS]->(loop_164_given_gate)
+(loop_164_given_gate)-[:PROCESS { case: "ok" }]->(loop_164_when_gate)
+(loop_164_given_gate)-[:PROCESS { case: "err" }]->(loop_164_inactive)
+(loop_164_when_gate)-[:PROCESS { case: "ok" }]->(loop_164_context)
+(loop_164_when_gate)-[:PROCESS { case: "err" }]->(loop_164_inactive)
+(loop_164_context)-[:FORK { strategy: "behavior-branches" }]->(loop_164_context_branch | loop_164_then_branch | loop_164_operator_branch | loop_164_result_branch | loop_164_taxonomy_branch | loop_164_intervention_recognize | loop_164_intervention_interdict | loop_164_intervention_minimize)
+(loop_164_context_branch | loop_164_then_branch | loop_164_operator_branch | loop_164_result_branch | loop_164_taxonomy_branch | loop_164_intervention_recognize | loop_164_intervention_interdict | loop_164_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_164_verdict)
+(loop_164_inactive)-[:PROCESS]->(loop_164_sink)
+(loop_164_verdict)-[:PROCESS]->(loop_164_sink)
+(loop_164_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_164_then_branch)
+(loop_164_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_164_then_branch)
+(loop_164_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_164_then_branch)

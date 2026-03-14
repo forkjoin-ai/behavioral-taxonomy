@@ -1,0 +1,33 @@
+// behavioral-loop-323.gg
+// Executable Gnosis projection for The Door Blocker Loop.
+
+// Nodes
+(loop_323_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_323_context_branch: BehaviorEmit { emission: 'context' })
+(loop_323_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20frame%20%2B%20low%20proprioception' })
+(loop_323_inactive: BehaviorTerminal { loopId: 323, loopName: 'The%20Door%20Blocker%20Loop' })
+(loop_323_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_323_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_323_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_323_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Obstruction%20Operator', mechanism: 'the%20individual%20blocks%20the%20flow%20of%20traffic' })
+(loop_323_result_branch: BehaviorEmit { emission: 'result', text: 'getting%20bumped%2Fshoved%2C%20reinforcing%20a%20feeling%20of%20being%20**%22Under%20Attack%22**%20by%20the%20world' })
+(loop_323_sink: BehaviorSink)
+(loop_323_start: BehaviorStart { loopId: 323, loopName: 'The%20Door%20Blocker%20Loop', given: 'Large%20frame%20%2B%20low%20proprioception', when: 'stopping%20to%20check%20a%20phone', then: 'the%20individual%20blocks%20the%20flow%20of%20traffic%20(The%20Obstruction%20Operator)', result: 'getting%20bumped%2Fshoved%2C%20reinforcing%20a%20feeling%20of%20being%20**%22Under%20Attack%22**%20by%20the%20world', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'the%20individual%20blocks%20the%20flow%20of%20traffic', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_323_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_323_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20blocks%20the%20flow%20of%20traffic%20(The%20Obstruction%20Operator)' })
+(loop_323_verdict: BehaviorVerdict { loopId: 323, loopName: 'The%20Door%20Blocker%20Loop', then: 'the%20individual%20blocks%20the%20flow%20of%20traffic%20(The%20Obstruction%20Operator)', result: 'getting%20bumped%2Fshoved%2C%20reinforcing%20a%20feeling%20of%20being%20**%22Under%20Attack%22**%20by%20the%20world', operatorName: 'The%20Obstruction%20Operator', operatorMechanism: 'the%20individual%20blocks%20the%20flow%20of%20traffic', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_323_when_gate: BehaviorAssess { stage: 'when', text: 'stopping%20to%20check%20a%20phone' })
+
+// Topology
+(loop_323_start)-[:PROCESS]->(loop_323_given_gate)
+(loop_323_given_gate)-[:PROCESS { case: "ok" }]->(loop_323_when_gate)
+(loop_323_given_gate)-[:PROCESS { case: "err" }]->(loop_323_inactive)
+(loop_323_when_gate)-[:PROCESS { case: "ok" }]->(loop_323_context)
+(loop_323_when_gate)-[:PROCESS { case: "err" }]->(loop_323_inactive)
+(loop_323_context)-[:FORK { strategy: "behavior-branches" }]->(loop_323_context_branch | loop_323_then_branch | loop_323_operator_branch | loop_323_result_branch | loop_323_taxonomy_branch | loop_323_intervention_recognize | loop_323_intervention_interdict | loop_323_intervention_minimize)
+(loop_323_context_branch | loop_323_then_branch | loop_323_operator_branch | loop_323_result_branch | loop_323_taxonomy_branch | loop_323_intervention_recognize | loop_323_intervention_interdict | loop_323_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_323_verdict)
+(loop_323_inactive)-[:PROCESS]->(loop_323_sink)
+(loop_323_verdict)-[:PROCESS]->(loop_323_sink)
+(loop_323_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_323_then_branch)
+(loop_323_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_323_then_branch)
+(loop_323_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_323_then_branch)

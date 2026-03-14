@@ -1,0 +1,33 @@
+// behavioral-loop-150.gg
+// Executable Gnosis projection for The High Cheekbone Loop.
+
+// Nodes
+(loop_150_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_150_context_branch: BehaviorEmit { emission: 'context' })
+(loop_150_given_gate: BehaviorAssess { stage: 'given', text: 'Defined%20skeletal%20structure' })
+(loop_150_inactive: BehaviorTerminal { loopId: 150, loopName: 'The%20High%20Cheekbone%20Loop' })
+(loop_150_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_150_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_150_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_150_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Authority%2FBeauty%20Operator', mechanism: 'it%20mimics%20%22predatory%20gaze%22%20or%20%22high%20status%22' })
+(loop_150_result_branch: BehaviorEmit { emission: 'result', text: '**Social%20Privilege**%20and%20assumption%20of%20competence' })
+(loop_150_sink: BehaviorSink)
+(loop_150_start: BehaviorStart { loopId: 150, loopName: 'The%20High%20Cheekbone%20Loop', given: 'Defined%20skeletal%20structure', when: 'light%20hits%20the%20face', then: 'it%20mimics%20%22predatory%20gaze%22%20or%20%22high%20status%22%20(The%20Authority%2FBeauty%20Operator)', result: '**Social%20Privilege**%20and%20assumption%20of%20competence', operatorName: 'The%20Authority%2FBeauty%20Operator', operatorMechanism: 'it%20mimics%20%22predatory%20gaze%22%20or%20%22high%20status%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_150_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_150_then_branch: BehaviorEmit { emission: 'then', text: 'it%20mimics%20%22predatory%20gaze%22%20or%20%22high%20status%22%20(The%20Authority%2FBeauty%20Operator)' })
+(loop_150_verdict: BehaviorVerdict { loopId: 150, loopName: 'The%20High%20Cheekbone%20Loop', then: 'it%20mimics%20%22predatory%20gaze%22%20or%20%22high%20status%22%20(The%20Authority%2FBeauty%20Operator)', result: '**Social%20Privilege**%20and%20assumption%20of%20competence', operatorName: 'The%20Authority%2FBeauty%20Operator', operatorMechanism: 'it%20mimics%20%22predatory%20gaze%22%20or%20%22high%20status%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_150_when_gate: BehaviorAssess { stage: 'when', text: 'light%20hits%20the%20face' })
+
+// Topology
+(loop_150_start)-[:PROCESS]->(loop_150_given_gate)
+(loop_150_given_gate)-[:PROCESS { case: "ok" }]->(loop_150_when_gate)
+(loop_150_given_gate)-[:PROCESS { case: "err" }]->(loop_150_inactive)
+(loop_150_when_gate)-[:PROCESS { case: "ok" }]->(loop_150_context)
+(loop_150_when_gate)-[:PROCESS { case: "err" }]->(loop_150_inactive)
+(loop_150_context)-[:FORK { strategy: "behavior-branches" }]->(loop_150_context_branch | loop_150_then_branch | loop_150_operator_branch | loop_150_result_branch | loop_150_taxonomy_branch | loop_150_intervention_recognize | loop_150_intervention_interdict | loop_150_intervention_minimize)
+(loop_150_context_branch | loop_150_then_branch | loop_150_operator_branch | loop_150_result_branch | loop_150_taxonomy_branch | loop_150_intervention_recognize | loop_150_intervention_interdict | loop_150_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_150_verdict)
+(loop_150_inactive)-[:PROCESS]->(loop_150_sink)
+(loop_150_verdict)-[:PROCESS]->(loop_150_sink)
+(loop_150_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_150_then_branch)
+(loop_150_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_150_then_branch)
+(loop_150_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_150_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-381.gg
+// Executable Gnosis projection for The Loud Sneeze Loop.
+
+// Nodes
+(loop_381_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_381_context_branch: BehaviorEmit { emission: 'context' })
+(loop_381_given_gate: BehaviorAssess { stage: 'given', text: 'Vocalized%2C%20shouting%20sneeze%20style' })
+(loop_381_inactive: BehaviorTerminal { loopId: 381, loopName: 'The%20Loud%20Sneeze%20Loop' })
+(loop_381_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_381_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_381_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_381_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Dominance%2FDisruption%20Operator', mechanism: 'it%20causes%20a%20physical%20%22Jump%20Scare%22' })
+(loop_381_result_branch: BehaviorEmit { emission: 'result', text: 'being%20viewed%20as%20%22Obnoxious%22%20or%20%22Unaware.%22' })
+(loop_381_sink: BehaviorSink)
+(loop_381_start: BehaviorStart { loopId: 381, loopName: 'The%20Loud%20Sneeze%20Loop', given: 'Vocalized%2C%20shouting%20sneeze%20style', when: 'in%20a%20library%20or%20office', then: 'it%20causes%20a%20physical%20%22Jump%20Scare%22%20(The%20Dominance%2FDisruption%20Operator)', result: 'being%20viewed%20as%20%22Obnoxious%22%20or%20%22Unaware.%22', operatorName: 'The%20Dominance%2FDisruption%20Operator', operatorMechanism: 'it%20causes%20a%20physical%20%22Jump%20Scare%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_381_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_381_then_branch: BehaviorEmit { emission: 'then', text: 'it%20causes%20a%20physical%20%22Jump%20Scare%22%20(The%20Dominance%2FDisruption%20Operator)' })
+(loop_381_verdict: BehaviorVerdict { loopId: 381, loopName: 'The%20Loud%20Sneeze%20Loop', then: 'it%20causes%20a%20physical%20%22Jump%20Scare%22%20(The%20Dominance%2FDisruption%20Operator)', result: 'being%20viewed%20as%20%22Obnoxious%22%20or%20%22Unaware.%22', operatorName: 'The%20Dominance%2FDisruption%20Operator', operatorMechanism: 'it%20causes%20a%20physical%20%22Jump%20Scare%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_381_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20library%20or%20office' })
+
+// Topology
+(loop_381_start)-[:PROCESS]->(loop_381_given_gate)
+(loop_381_given_gate)-[:PROCESS { case: "ok" }]->(loop_381_when_gate)
+(loop_381_given_gate)-[:PROCESS { case: "err" }]->(loop_381_inactive)
+(loop_381_when_gate)-[:PROCESS { case: "ok" }]->(loop_381_context)
+(loop_381_when_gate)-[:PROCESS { case: "err" }]->(loop_381_inactive)
+(loop_381_context)-[:FORK { strategy: "behavior-branches" }]->(loop_381_context_branch | loop_381_then_branch | loop_381_operator_branch | loop_381_result_branch | loop_381_taxonomy_branch | loop_381_intervention_recognize | loop_381_intervention_interdict | loop_381_intervention_minimize)
+(loop_381_context_branch | loop_381_then_branch | loop_381_operator_branch | loop_381_result_branch | loop_381_taxonomy_branch | loop_381_intervention_recognize | loop_381_intervention_interdict | loop_381_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_381_verdict)
+(loop_381_inactive)-[:PROCESS]->(loop_381_sink)
+(loop_381_verdict)-[:PROCESS]->(loop_381_sink)
+(loop_381_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_381_then_branch)
+(loop_381_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_381_then_branch)
+(loop_381_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_381_then_branch)

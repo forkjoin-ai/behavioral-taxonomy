@@ -1,0 +1,35 @@
+// behavioral-loop-803.gg
+// Executable Gnosis projection for The Heavy Breather Loop.
+
+// Nodes
+(loop_803_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_803_context_branch: BehaviorEmit { emission: 'context' })
+(loop_803_given_gate: BehaviorAssess { stage: 'given', text: 'Audible%20gasping%20after%20one%20flight%20of%20stairs' })
+(loop_803_inactive: BehaviorTerminal { loopId: 803, loopName: 'The%20Heavy%20Breather%20Loop' })
+(loop_803_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_803_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_803_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_803_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_803_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Out-of-Shape%20Operator', mechanism: 'it%20signals%20%22Poor%20Conditioning%22' })
+(loop_803_result_branch: BehaviorEmit { emission: 'result', text: "lowered%20confidence%20in%20the%20individual's%20stamina%20for%20long%20projects" })
+(loop_803_sink: BehaviorSink)
+(loop_803_start: BehaviorStart { loopId: 803, loopName: 'The%20Heavy%20Breather%20Loop', given: 'Audible%20gasping%20after%20one%20flight%20of%20stairs', when: 'arriving%20at%20a%20meeting%20on%20the%202nd%20floor', then: 'it%20signals%20%22Poor%20Conditioning%22%20(The%20Out-of-Shape%20Operator)', result: "lowered%20confidence%20in%20the%20individual's%20stamina%20for%20long%20projects", operatorName: 'The%20Out-of-Shape%20Operator', operatorMechanism: 'it%20signals%20%22Poor%20Conditioning%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking', intervention_leverage: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_803_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_803_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Poor%20Conditioning%22%20(The%20Out-of-Shape%20Operator)' })
+(loop_803_verdict: BehaviorVerdict { loopId: 803, loopName: 'The%20Heavy%20Breather%20Loop', then: 'it%20signals%20%22Poor%20Conditioning%22%20(The%20Out-of-Shape%20Operator)', result: "lowered%20confidence%20in%20the%20individual's%20stamina%20for%20long%20projects", operatorName: 'The%20Out-of-Shape%20Operator', operatorMechanism: 'it%20signals%20%22Poor%20Conditioning%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_803_when_gate: BehaviorAssess { stage: 'when', text: 'arriving%20at%20a%20meeting%20on%20the%202nd%20floor' })
+
+// Topology
+(loop_803_start)-[:PROCESS]->(loop_803_given_gate)
+(loop_803_given_gate)-[:PROCESS { case: "ok" }]->(loop_803_when_gate)
+(loop_803_given_gate)-[:PROCESS { case: "err" }]->(loop_803_inactive)
+(loop_803_when_gate)-[:PROCESS { case: "ok" }]->(loop_803_context)
+(loop_803_when_gate)-[:PROCESS { case: "err" }]->(loop_803_inactive)
+(loop_803_context)-[:FORK { strategy: "behavior-branches" }]->(loop_803_context_branch | loop_803_then_branch | loop_803_operator_branch | loop_803_result_branch | loop_803_taxonomy_branch | loop_803_intervention_recognize | loop_803_intervention_interdict | loop_803_intervention_minimize | loop_803_intervention_leverage)
+(loop_803_context_branch | loop_803_then_branch | loop_803_operator_branch | loop_803_result_branch | loop_803_taxonomy_branch | loop_803_intervention_recognize | loop_803_intervention_interdict | loop_803_intervention_minimize | loop_803_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_803_verdict)
+(loop_803_inactive)-[:PROCESS]->(loop_803_sink)
+(loop_803_verdict)-[:PROCESS]->(loop_803_sink)
+(loop_803_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_803_then_branch)
+(loop_803_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_803_then_branch)
+(loop_803_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_803_then_branch)
+(loop_803_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_803_result_branch)

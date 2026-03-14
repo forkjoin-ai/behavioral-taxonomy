@@ -1,0 +1,31 @@
+// behavioral-loop-210.gg
+// Executable Gnosis projection for The Palms Up Loop.
+
+// Nodes
+(loop_210_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_210_context_branch: BehaviorEmit { emission: 'context' })
+(loop_210_given_gate: BehaviorAssess { stage: 'given', text: 'Natural%20external%20rotation%20of%20arms' })
+(loop_210_inactive: BehaviorTerminal { loopId: 210, loopName: 'The%20Palms%20Up%20Loop' })
+(loop_210_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_210_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_210_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Trust%20Operator', mechanism: 'observers%20perceive%20%22Honesty%2C%22%20%22Openness%2C%22%20and%20%22Harmlessness%22' })
+(loop_210_result_branch: BehaviorEmit { emission: 'result', text: 'high%20forgiveness%20rates%20for%20errors%20but%20low%20**Respect%20for%20Authority**' })
+(loop_210_sink: BehaviorSink)
+(loop_210_start: BehaviorStart { loopId: 210, loopName: 'The%20Palms%20Up%20Loop', given: 'Natural%20external%20rotation%20of%20arms', when: 'explaining', then: 'observers%20perceive%20%22Honesty%2C%22%20%22Openness%2C%22%20and%20%22Harmlessness%22%20(The%20Trust%20Operator)', result: 'high%20forgiveness%20rates%20for%20errors%20but%20low%20**Respect%20for%20Authority**', operatorName: 'The%20Trust%20Operator', operatorMechanism: 'observers%20perceive%20%22Honesty%2C%22%20%22Openness%2C%22%20and%20%22Harmlessness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_210_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_210_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Honesty%2C%22%20%22Openness%2C%22%20and%20%22Harmlessness%22%20(The%20Trust%20Operator)' })
+(loop_210_verdict: BehaviorVerdict { loopId: 210, loopName: 'The%20Palms%20Up%20Loop', then: 'observers%20perceive%20%22Honesty%2C%22%20%22Openness%2C%22%20and%20%22Harmlessness%22%20(The%20Trust%20Operator)', result: 'high%20forgiveness%20rates%20for%20errors%20but%20low%20**Respect%20for%20Authority**', operatorName: 'The%20Trust%20Operator', operatorMechanism: 'observers%20perceive%20%22Honesty%2C%22%20%22Openness%2C%22%20and%20%22Harmlessness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_210_when_gate: BehaviorAssess { stage: 'when', text: 'explaining' })
+
+// Topology
+(loop_210_start)-[:PROCESS]->(loop_210_given_gate)
+(loop_210_given_gate)-[:PROCESS { case: "ok" }]->(loop_210_when_gate)
+(loop_210_given_gate)-[:PROCESS { case: "err" }]->(loop_210_inactive)
+(loop_210_when_gate)-[:PROCESS { case: "ok" }]->(loop_210_context)
+(loop_210_when_gate)-[:PROCESS { case: "err" }]->(loop_210_inactive)
+(loop_210_context)-[:FORK { strategy: "behavior-branches" }]->(loop_210_context_branch | loop_210_then_branch | loop_210_operator_branch | loop_210_result_branch | loop_210_taxonomy_branch | loop_210_intervention_recognize | loop_210_intervention_leverage)
+(loop_210_context_branch | loop_210_then_branch | loop_210_operator_branch | loop_210_result_branch | loop_210_taxonomy_branch | loop_210_intervention_recognize | loop_210_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_210_verdict)
+(loop_210_inactive)-[:PROCESS]->(loop_210_sink)
+(loop_210_verdict)-[:PROCESS]->(loop_210_sink)
+(loop_210_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_210_then_branch)
+(loop_210_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_210_result_branch)

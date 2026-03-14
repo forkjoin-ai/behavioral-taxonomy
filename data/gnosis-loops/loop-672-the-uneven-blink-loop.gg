@@ -1,0 +1,33 @@
+// behavioral-loop-672.gg
+// Executable Gnosis projection for The Uneven Blink Loop.
+
+// Nodes
+(loop_672_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_672_context_branch: BehaviorEmit { emission: 'context' })
+(loop_672_given_gate: BehaviorAssess { stage: 'given', text: 'One%20eye%20closing%20slightly%20faster' })
+(loop_672_inactive: BehaviorTerminal { loopId: 672, loopName: 'The%20Uneven%20Blink%20Loop' })
+(loop_672_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_672_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_672_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_672_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Glitch%20Operator', mechanism: 'it%20looks%20like%20a%20%22Tic%22%20or%20%22Signal%22' })
+(loop_672_result_branch: BehaviorEmit { emission: 'result', text: 'confusion%20(%22Did%20they%20just%20wink%20at%20me%3F%22)' })
+(loop_672_sink: BehaviorSink)
+(loop_672_start: BehaviorStart { loopId: 672, loopName: 'The%20Uneven%20Blink%20Loop', given: 'One%20eye%20closing%20slightly%20faster', when: 'blinking%20normally', then: 'it%20looks%20like%20a%20%22Tic%22%20or%20%22Signal%22%20(The%20Glitch%20Operator)', result: 'confusion%20(%22Did%20they%20just%20wink%20at%20me%3F%22)', operatorName: 'The%20Glitch%20Operator', operatorMechanism: 'it%20looks%20like%20a%20%22Tic%22%20or%20%22Signal%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_672_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_672_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20a%20%22Tic%22%20or%20%22Signal%22%20(The%20Glitch%20Operator)' })
+(loop_672_verdict: BehaviorVerdict { loopId: 672, loopName: 'The%20Uneven%20Blink%20Loop', then: 'it%20looks%20like%20a%20%22Tic%22%20or%20%22Signal%22%20(The%20Glitch%20Operator)', result: 'confusion%20(%22Did%20they%20just%20wink%20at%20me%3F%22)', operatorName: 'The%20Glitch%20Operator', operatorMechanism: 'it%20looks%20like%20a%20%22Tic%22%20or%20%22Signal%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_672_when_gate: BehaviorAssess { stage: 'when', text: 'blinking%20normally' })
+
+// Topology
+(loop_672_start)-[:PROCESS]->(loop_672_given_gate)
+(loop_672_given_gate)-[:PROCESS { case: "ok" }]->(loop_672_when_gate)
+(loop_672_given_gate)-[:PROCESS { case: "err" }]->(loop_672_inactive)
+(loop_672_when_gate)-[:PROCESS { case: "ok" }]->(loop_672_context)
+(loop_672_when_gate)-[:PROCESS { case: "err" }]->(loop_672_inactive)
+(loop_672_context)-[:FORK { strategy: "behavior-branches" }]->(loop_672_context_branch | loop_672_then_branch | loop_672_operator_branch | loop_672_result_branch | loop_672_taxonomy_branch | loop_672_intervention_recognize | loop_672_intervention_interdict | loop_672_intervention_minimize)
+(loop_672_context_branch | loop_672_then_branch | loop_672_operator_branch | loop_672_result_branch | loop_672_taxonomy_branch | loop_672_intervention_recognize | loop_672_intervention_interdict | loop_672_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_672_verdict)
+(loop_672_inactive)-[:PROCESS]->(loop_672_sink)
+(loop_672_verdict)-[:PROCESS]->(loop_672_sink)
+(loop_672_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_672_then_branch)
+(loop_672_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_672_then_branch)
+(loop_672_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_672_then_branch)

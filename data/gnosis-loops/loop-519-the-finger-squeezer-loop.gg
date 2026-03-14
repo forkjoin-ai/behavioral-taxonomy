@@ -1,0 +1,33 @@
+// behavioral-loop-519.gg
+// Executable Gnosis projection for The Finger Squeezer Loop.
+
+// Nodes
+(loop_519_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_519_context_branch: BehaviorEmit { emission: 'context' })
+(loop_519_given_gate: BehaviorAssess { stage: 'given', text: 'Gripping%20the%20fingers%20instead%20of%20the%20palm%20(premature%20squeeze)' })
+(loop_519_inactive: BehaviorTerminal { loopId: 519, loopName: 'The%20Finger%20Squeezer%20Loop' })
+(loop_519_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_519_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_519_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_519_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Clumsy%2FCruel%20Operator', mechanism: "it%20crushes%20the%20recipient's%20knuckles" })
+(loop_519_result_branch: BehaviorEmit { emission: 'result', text: 'the%20recipient%20pulling%20away%20in%20pain%2C%20killing%20rapport' })
+(loop_519_sink: BehaviorSink)
+(loop_519_start: BehaviorStart { loopId: 519, loopName: 'The%20Finger%20Squeezer%20Loop', given: 'Gripping%20the%20fingers%20instead%20of%20the%20palm%20(premature%20squeeze)', when: 'shaking%20hands', then: "it%20crushes%20the%20recipient's%20knuckles%20(The%20Clumsy%2FCruel%20Operator)", result: 'the%20recipient%20pulling%20away%20in%20pain%2C%20killing%20rapport', operatorName: 'The%20Clumsy%2FCruel%20Operator', operatorMechanism: "it%20crushes%20the%20recipient's%20knuckles", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_519_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_519_then_branch: BehaviorEmit { emission: 'then', text: "it%20crushes%20the%20recipient's%20knuckles%20(The%20Clumsy%2FCruel%20Operator)" })
+(loop_519_verdict: BehaviorVerdict { loopId: 519, loopName: 'The%20Finger%20Squeezer%20Loop', then: "it%20crushes%20the%20recipient's%20knuckles%20(The%20Clumsy%2FCruel%20Operator)", result: 'the%20recipient%20pulling%20away%20in%20pain%2C%20killing%20rapport', operatorName: 'The%20Clumsy%2FCruel%20Operator', operatorMechanism: "it%20crushes%20the%20recipient's%20knuckles", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_519_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_519_start)-[:PROCESS]->(loop_519_given_gate)
+(loop_519_given_gate)-[:PROCESS { case: "ok" }]->(loop_519_when_gate)
+(loop_519_given_gate)-[:PROCESS { case: "err" }]->(loop_519_inactive)
+(loop_519_when_gate)-[:PROCESS { case: "ok" }]->(loop_519_context)
+(loop_519_when_gate)-[:PROCESS { case: "err" }]->(loop_519_inactive)
+(loop_519_context)-[:FORK { strategy: "behavior-branches" }]->(loop_519_context_branch | loop_519_then_branch | loop_519_operator_branch | loop_519_result_branch | loop_519_taxonomy_branch | loop_519_intervention_recognize | loop_519_intervention_interdict | loop_519_intervention_minimize)
+(loop_519_context_branch | loop_519_then_branch | loop_519_operator_branch | loop_519_result_branch | loop_519_taxonomy_branch | loop_519_intervention_recognize | loop_519_intervention_interdict | loop_519_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_519_verdict)
+(loop_519_inactive)-[:PROCESS]->(loop_519_sink)
+(loop_519_verdict)-[:PROCESS]->(loop_519_sink)
+(loop_519_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_519_then_branch)
+(loop_519_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_519_then_branch)
+(loop_519_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_519_then_branch)

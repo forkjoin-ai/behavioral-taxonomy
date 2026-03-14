@@ -1,0 +1,33 @@
+// behavioral-loop-797.gg
+// Executable Gnosis projection for The Scuffed Heel Loop.
+
+// Nodes
+(loop_797_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_797_context_branch: BehaviorEmit { emission: 'context' })
+(loop_797_given_gate: BehaviorAssess { stage: 'given', text: 'Worn-down%20heels%20on%20dress%20shoes' })
+(loop_797_inactive: BehaviorTerminal { loopId: 797, loopName: 'The%20Scuffed%20Heel%20Loop' })
+(loop_797_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_797_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_797_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_797_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cobbler%20Operator', mechanism: 'it%20signals%20%22Poverty%22%20or%20%22Negligence%22' })
+(loop_797_result_branch: BehaviorEmit { emission: 'result', text: 'judgment%20from%20detail-oriented%20elites' })
+(loop_797_sink: BehaviorSink)
+(loop_797_start: BehaviorStart { loopId: 797, loopName: 'The%20Scuffed%20Heel%20Loop', given: 'Worn-down%20heels%20on%20dress%20shoes', when: 'walking%20away', then: 'it%20signals%20%22Poverty%22%20or%20%22Negligence%22%20(The%20Cobbler%20Operator)', result: 'judgment%20from%20detail-oriented%20elites', operatorName: 'The%20Cobbler%20Operator', operatorMechanism: 'it%20signals%20%22Poverty%22%20or%20%22Negligence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_797_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_797_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Poverty%22%20or%20%22Negligence%22%20(The%20Cobbler%20Operator)' })
+(loop_797_verdict: BehaviorVerdict { loopId: 797, loopName: 'The%20Scuffed%20Heel%20Loop', then: 'it%20signals%20%22Poverty%22%20or%20%22Negligence%22%20(The%20Cobbler%20Operator)', result: 'judgment%20from%20detail-oriented%20elites', operatorName: 'The%20Cobbler%20Operator', operatorMechanism: 'it%20signals%20%22Poverty%22%20or%20%22Negligence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_797_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20away' })
+
+// Topology
+(loop_797_start)-[:PROCESS]->(loop_797_given_gate)
+(loop_797_given_gate)-[:PROCESS { case: "ok" }]->(loop_797_when_gate)
+(loop_797_given_gate)-[:PROCESS { case: "err" }]->(loop_797_inactive)
+(loop_797_when_gate)-[:PROCESS { case: "ok" }]->(loop_797_context)
+(loop_797_when_gate)-[:PROCESS { case: "err" }]->(loop_797_inactive)
+(loop_797_context)-[:FORK { strategy: "behavior-branches" }]->(loop_797_context_branch | loop_797_then_branch | loop_797_operator_branch | loop_797_result_branch | loop_797_taxonomy_branch | loop_797_intervention_recognize | loop_797_intervention_interdict | loop_797_intervention_minimize)
+(loop_797_context_branch | loop_797_then_branch | loop_797_operator_branch | loop_797_result_branch | loop_797_taxonomy_branch | loop_797_intervention_recognize | loop_797_intervention_interdict | loop_797_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_797_verdict)
+(loop_797_inactive)-[:PROCESS]->(loop_797_sink)
+(loop_797_verdict)-[:PROCESS]->(loop_797_sink)
+(loop_797_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_797_then_branch)
+(loop_797_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_797_then_branch)
+(loop_797_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_797_then_branch)

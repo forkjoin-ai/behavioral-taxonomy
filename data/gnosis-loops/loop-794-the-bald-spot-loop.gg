@@ -1,0 +1,33 @@
+// behavioral-loop-794.gg
+// Executable Gnosis projection for The Bald Spot Loop.
+
+// Nodes
+(loop_794_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_794_context_branch: BehaviorEmit { emission: 'context' })
+(loop_794_given_gate: BehaviorAssess { stage: 'given', text: 'Circular%20hair%20loss%20on%20the%20crown' })
+(loop_794_inactive: BehaviorTerminal { loopId: 794, loopName: 'The%20Bald%20Spot%20Loop' })
+(loop_794_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_794_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_794_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_794_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Target%20Operator', mechanism: 'it%20becomes%20the%20focal%20point' })
+(loop_794_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20avoiding%20low%20seats%20or%20bowing' })
+(loop_794_sink: BehaviorSink)
+(loop_794_start: BehaviorStart { loopId: 794, loopName: 'The%20Bald%20Spot%20Loop', given: 'Circular%20hair%20loss%20on%20the%20crown', when: 'bowing%20or%20sitting', then: 'it%20becomes%20the%20focal%20point%20(The%20Target%20Operator)', result: 'the%20individual%20avoiding%20low%20seats%20or%20bowing', operatorName: 'The%20Target%20Operator', operatorMechanism: 'it%20becomes%20the%20focal%20point', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_794_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_794_then_branch: BehaviorEmit { emission: 'then', text: 'it%20becomes%20the%20focal%20point%20(The%20Target%20Operator)' })
+(loop_794_verdict: BehaviorVerdict { loopId: 794, loopName: 'The%20Bald%20Spot%20Loop', then: 'it%20becomes%20the%20focal%20point%20(The%20Target%20Operator)', result: 'the%20individual%20avoiding%20low%20seats%20or%20bowing', operatorName: 'The%20Target%20Operator', operatorMechanism: 'it%20becomes%20the%20focal%20point', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_794_when_gate: BehaviorAssess { stage: 'when', text: 'bowing%20or%20sitting' })
+
+// Topology
+(loop_794_start)-[:PROCESS]->(loop_794_given_gate)
+(loop_794_given_gate)-[:PROCESS { case: "ok" }]->(loop_794_when_gate)
+(loop_794_given_gate)-[:PROCESS { case: "err" }]->(loop_794_inactive)
+(loop_794_when_gate)-[:PROCESS { case: "ok" }]->(loop_794_context)
+(loop_794_when_gate)-[:PROCESS { case: "err" }]->(loop_794_inactive)
+(loop_794_context)-[:FORK { strategy: "behavior-branches" }]->(loop_794_context_branch | loop_794_then_branch | loop_794_operator_branch | loop_794_result_branch | loop_794_taxonomy_branch | loop_794_intervention_recognize | loop_794_intervention_interdict | loop_794_intervention_minimize)
+(loop_794_context_branch | loop_794_then_branch | loop_794_operator_branch | loop_794_result_branch | loop_794_taxonomy_branch | loop_794_intervention_recognize | loop_794_intervention_interdict | loop_794_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_794_verdict)
+(loop_794_inactive)-[:PROCESS]->(loop_794_sink)
+(loop_794_verdict)-[:PROCESS]->(loop_794_sink)
+(loop_794_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_794_then_branch)
+(loop_794_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_794_then_branch)
+(loop_794_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_794_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-2002.gg
+// Executable Gnosis projection for The Artificial Scarcity Loop.
+
+// Nodes
+(loop_2002_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_2002_context_branch: BehaviorEmit { emission: 'context' })
+(loop_2002_given_gate: BehaviorAssess { stage: 'given', text: 'A%20digital%20item%20with%20infinite%20reproducibility' })
+(loop_2002_inactive: BehaviorTerminal { loopId: 2002, loopName: 'The%20Artificial%20Scarcity%20Loop' })
+(loop_2002_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_2002_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2002_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_2002_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_2002_result_branch: BehaviorEmit { emission: 'result', text: 'Panic-buying%20bypasses%20rational%20price%20evaluation' })
+(loop_2002_sink: BehaviorSink)
+(loop_2002_start: BehaviorStart { loopId: 2002, loopName: 'The%20Artificial%20Scarcity%20Loop', given: 'A%20digital%20item%20with%20infinite%20reproducibility', when: 'User%20views%20the%20item%20(e.g.%2C%20booking%20a%20flight%2C%20buying%20a%20skin)', then: 'System%20displays%20', result: 'Panic-buying%20bypasses%20rational%20price%20evaluation', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2002_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2002_then_branch: BehaviorEmit { emission: 'then', text: 'System%20displays%20' })
+(loop_2002_verdict: BehaviorVerdict { loopId: 2002, loopName: 'The%20Artificial%20Scarcity%20Loop', then: 'System%20displays%20', result: 'Panic-buying%20bypasses%20rational%20price%20evaluation', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2002_when_gate: BehaviorAssess { stage: 'when', text: 'User%20views%20the%20item%20(e.g.%2C%20booking%20a%20flight%2C%20buying%20a%20skin)' })
+
+// Topology
+(loop_2002_start)-[:PROCESS]->(loop_2002_given_gate)
+(loop_2002_given_gate)-[:PROCESS { case: "ok" }]->(loop_2002_when_gate)
+(loop_2002_given_gate)-[:PROCESS { case: "err" }]->(loop_2002_inactive)
+(loop_2002_when_gate)-[:PROCESS { case: "ok" }]->(loop_2002_context)
+(loop_2002_when_gate)-[:PROCESS { case: "err" }]->(loop_2002_inactive)
+(loop_2002_context)-[:FORK { strategy: "behavior-branches" }]->(loop_2002_context_branch | loop_2002_then_branch | loop_2002_operator_branch | loop_2002_result_branch | loop_2002_taxonomy_branch | loop_2002_intervention_recognize | loop_2002_intervention_interdict | loop_2002_intervention_minimize)
+(loop_2002_context_branch | loop_2002_then_branch | loop_2002_operator_branch | loop_2002_result_branch | loop_2002_taxonomy_branch | loop_2002_intervention_recognize | loop_2002_intervention_interdict | loop_2002_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_2002_verdict)
+(loop_2002_inactive)-[:PROCESS]->(loop_2002_sink)
+(loop_2002_verdict)-[:PROCESS]->(loop_2002_sink)
+(loop_2002_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_2002_then_branch)
+(loop_2002_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_2002_then_branch)
+(loop_2002_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_2002_then_branch)

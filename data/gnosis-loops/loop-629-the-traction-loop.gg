@@ -1,0 +1,33 @@
+// behavioral-loop-629.gg
+// Executable Gnosis projection for The Traction Loop.
+
+// Nodes
+(loop_629_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_629_context_branch: BehaviorEmit { emission: 'context' })
+(loop_629_given_gate: BehaviorAssess { stage: 'given', text: 'Hair%20loss%20from%20tight%20styling%20(braids%2Fponytails)' })
+(loop_629_inactive: BehaviorTerminal { loopId: 629, loopName: 'The%20Traction%20Loop' })
+(loop_629_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_629_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_629_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_629_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tension%20Operator', mechanism: 'the%20forehead%20looks%20%22Expanded%22' })
+(loop_629_result_branch: BehaviorEmit { emission: 'result', text: 'regret%20and%20limitation%20to%20certain%20hairstyles%20to%20hide%20the%20damage' })
+(loop_629_sink: BehaviorSink)
+(loop_629_start: BehaviorStart { loopId: 629, loopName: 'The%20Traction%20Loop', given: 'Hair%20loss%20from%20tight%20styling%20(braids%2Fponytails)', when: 'style%20is%20removed', then: 'the%20forehead%20looks%20%22Expanded%22%20(The%20Tension%20Operator)', result: 'regret%20and%20limitation%20to%20certain%20hairstyles%20to%20hide%20the%20damage', operatorName: 'The%20Tension%20Operator', operatorMechanism: 'the%20forehead%20looks%20%22Expanded%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_629_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_629_then_branch: BehaviorEmit { emission: 'then', text: 'the%20forehead%20looks%20%22Expanded%22%20(The%20Tension%20Operator)' })
+(loop_629_verdict: BehaviorVerdict { loopId: 629, loopName: 'The%20Traction%20Loop', then: 'the%20forehead%20looks%20%22Expanded%22%20(The%20Tension%20Operator)', result: 'regret%20and%20limitation%20to%20certain%20hairstyles%20to%20hide%20the%20damage', operatorName: 'The%20Tension%20Operator', operatorMechanism: 'the%20forehead%20looks%20%22Expanded%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_629_when_gate: BehaviorAssess { stage: 'when', text: 'style%20is%20removed' })
+
+// Topology
+(loop_629_start)-[:PROCESS]->(loop_629_given_gate)
+(loop_629_given_gate)-[:PROCESS { case: "ok" }]->(loop_629_when_gate)
+(loop_629_given_gate)-[:PROCESS { case: "err" }]->(loop_629_inactive)
+(loop_629_when_gate)-[:PROCESS { case: "ok" }]->(loop_629_context)
+(loop_629_when_gate)-[:PROCESS { case: "err" }]->(loop_629_inactive)
+(loop_629_context)-[:FORK { strategy: "behavior-branches" }]->(loop_629_context_branch | loop_629_then_branch | loop_629_operator_branch | loop_629_result_branch | loop_629_taxonomy_branch | loop_629_intervention_recognize | loop_629_intervention_interdict | loop_629_intervention_minimize)
+(loop_629_context_branch | loop_629_then_branch | loop_629_operator_branch | loop_629_result_branch | loop_629_taxonomy_branch | loop_629_intervention_recognize | loop_629_intervention_interdict | loop_629_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_629_verdict)
+(loop_629_inactive)-[:PROCESS]->(loop_629_sink)
+(loop_629_verdict)-[:PROCESS]->(loop_629_sink)
+(loop_629_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_629_then_branch)
+(loop_629_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_629_then_branch)
+(loop_629_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_629_then_branch)

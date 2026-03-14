@@ -1,0 +1,33 @@
+// behavioral-loop-884.gg
+// Executable Gnosis projection for The Mumble Loop.
+
+// Nodes
+(loop_884_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_884_context_branch: BehaviorEmit { emission: 'context' })
+(loop_884_given_gate: BehaviorAssess { stage: 'given', text: 'Speaking%20through%20closed%20teeth' })
+(loop_884_inactive: BehaviorTerminal { loopId: 884, loopName: 'The%20Mumble%20Loop' })
+(loop_884_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_884_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_884_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_884_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Secret%20Operator', mechanism: 'the%20voice%20has%20no%20projection' })
+(loop_884_result_branch: BehaviorEmit { emission: 'result', text: 'being%20ignored' })
+(loop_884_sink: BehaviorSink)
+(loop_884_start: BehaviorStart { loopId: 884, loopName: 'The%20Mumble%20Loop', given: 'Speaking%20through%20closed%20teeth', when: 'in%20a%20noisy%20room', then: 'the%20voice%20has%20no%20projection%20(The%20Secret%20Operator)', result: 'being%20ignored', operatorName: 'The%20Secret%20Operator', operatorMechanism: 'the%20voice%20has%20no%20projection', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_884_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_884_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20has%20no%20projection%20(The%20Secret%20Operator)' })
+(loop_884_verdict: BehaviorVerdict { loopId: 884, loopName: 'The%20Mumble%20Loop', then: 'the%20voice%20has%20no%20projection%20(The%20Secret%20Operator)', result: 'being%20ignored', operatorName: 'The%20Secret%20Operator', operatorMechanism: 'the%20voice%20has%20no%20projection', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_884_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20noisy%20room' })
+
+// Topology
+(loop_884_start)-[:PROCESS]->(loop_884_given_gate)
+(loop_884_given_gate)-[:PROCESS { case: "ok" }]->(loop_884_when_gate)
+(loop_884_given_gate)-[:PROCESS { case: "err" }]->(loop_884_inactive)
+(loop_884_when_gate)-[:PROCESS { case: "ok" }]->(loop_884_context)
+(loop_884_when_gate)-[:PROCESS { case: "err" }]->(loop_884_inactive)
+(loop_884_context)-[:FORK { strategy: "behavior-branches" }]->(loop_884_context_branch | loop_884_then_branch | loop_884_operator_branch | loop_884_result_branch | loop_884_taxonomy_branch | loop_884_intervention_recognize | loop_884_intervention_interdict | loop_884_intervention_minimize)
+(loop_884_context_branch | loop_884_then_branch | loop_884_operator_branch | loop_884_result_branch | loop_884_taxonomy_branch | loop_884_intervention_recognize | loop_884_intervention_interdict | loop_884_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_884_verdict)
+(loop_884_inactive)-[:PROCESS]->(loop_884_sink)
+(loop_884_verdict)-[:PROCESS]->(loop_884_sink)
+(loop_884_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_884_then_branch)
+(loop_884_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_884_then_branch)
+(loop_884_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_884_then_branch)

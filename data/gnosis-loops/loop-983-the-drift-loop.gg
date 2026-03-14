@@ -1,0 +1,33 @@
+// behavioral-loop-983.gg
+// Executable Gnosis projection for The Drift Loop.
+
+// Nodes
+(loop_983_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_983_context_branch: BehaviorEmit { emission: 'context' })
+(loop_983_given_gate: BehaviorAssess { stage: 'given', text: 'Inability%20to%20walk%20a%20straight%20line' })
+(loop_983_inactive: BehaviorTerminal { loopId: 983, loopName: 'The%20Drift%20Loop' })
+(loop_983_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_983_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_983_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_983_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Bumper%20Car%20Operator', mechanism: 'the%20individual%20constantly%20bumps%20into%20them' })
+(loop_983_result_branch: BehaviorEmit { emission: 'result', text: 'the%20friend%20physically%20pushing%20them%20away' })
+(loop_983_sink: BehaviorSink)
+(loop_983_start: BehaviorStart { loopId: 983, loopName: 'The%20Drift%20Loop', given: 'Inability%20to%20walk%20a%20straight%20line', when: 'walking%20with%20a%20friend', then: 'the%20individual%20constantly%20bumps%20into%20them%20(The%20Bumper%20Car%20Operator)', result: 'the%20friend%20physically%20pushing%20them%20away', operatorName: 'The%20Bumper%20Car%20Operator', operatorMechanism: 'the%20individual%20constantly%20bumps%20into%20them', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_983_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_983_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20constantly%20bumps%20into%20them%20(The%20Bumper%20Car%20Operator)' })
+(loop_983_verdict: BehaviorVerdict { loopId: 983, loopName: 'The%20Drift%20Loop', then: 'the%20individual%20constantly%20bumps%20into%20them%20(The%20Bumper%20Car%20Operator)', result: 'the%20friend%20physically%20pushing%20them%20away', operatorName: 'The%20Bumper%20Car%20Operator', operatorMechanism: 'the%20individual%20constantly%20bumps%20into%20them', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_983_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20with%20a%20friend' })
+
+// Topology
+(loop_983_start)-[:PROCESS]->(loop_983_given_gate)
+(loop_983_given_gate)-[:PROCESS { case: "ok" }]->(loop_983_when_gate)
+(loop_983_given_gate)-[:PROCESS { case: "err" }]->(loop_983_inactive)
+(loop_983_when_gate)-[:PROCESS { case: "ok" }]->(loop_983_context)
+(loop_983_when_gate)-[:PROCESS { case: "err" }]->(loop_983_inactive)
+(loop_983_context)-[:FORK { strategy: "behavior-branches" }]->(loop_983_context_branch | loop_983_then_branch | loop_983_operator_branch | loop_983_result_branch | loop_983_taxonomy_branch | loop_983_intervention_recognize | loop_983_intervention_interdict | loop_983_intervention_minimize)
+(loop_983_context_branch | loop_983_then_branch | loop_983_operator_branch | loop_983_result_branch | loop_983_taxonomy_branch | loop_983_intervention_recognize | loop_983_intervention_interdict | loop_983_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_983_verdict)
+(loop_983_inactive)-[:PROCESS]->(loop_983_sink)
+(loop_983_verdict)-[:PROCESS]->(loop_983_sink)
+(loop_983_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_983_then_branch)
+(loop_983_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_983_then_branch)
+(loop_983_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_983_then_branch)

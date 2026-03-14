@@ -1,0 +1,33 @@
+// behavioral-loop-212.gg
+// Executable Gnosis projection for The Hidden Thumb Loop.
+
+// Nodes
+(loop_212_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_212_context_branch: BehaviorEmit { emission: 'context' })
+(loop_212_given_gate: BehaviorAssess { stage: 'given', text: 'Fisting%20thumb%20inside%20fingers%20(cortical%20sign)' })
+(loop_212_inactive: BehaviorTerminal { loopId: 212, loopName: 'The%20Hidden%20Thumb%20Loop' })
+(loop_212_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_212_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_212_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_212_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'it%20signals%20%22Insecurity%22%20or%20%22Infantilism%22' })
+(loop_212_result_branch: BehaviorEmit { emission: 'result', text: 'being%20overlooked%20for%20high-stakes%20tasks' })
+(loop_212_sink: BehaviorSink)
+(loop_212_start: BehaviorStart { loopId: 212, loopName: 'The%20Hidden%20Thumb%20Loop', given: 'Fisting%20thumb%20inside%20fingers%20(cortical%20sign)', when: 'resting%20hands', then: 'it%20signals%20%22Insecurity%22%20or%20%22Infantilism%22%20(The%20Fragility%20Operator)', result: 'being%20overlooked%20for%20high-stakes%20tasks', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'it%20signals%20%22Insecurity%22%20or%20%22Infantilism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_212_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_212_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Insecurity%22%20or%20%22Infantilism%22%20(The%20Fragility%20Operator)' })
+(loop_212_verdict: BehaviorVerdict { loopId: 212, loopName: 'The%20Hidden%20Thumb%20Loop', then: 'it%20signals%20%22Insecurity%22%20or%20%22Infantilism%22%20(The%20Fragility%20Operator)', result: 'being%20overlooked%20for%20high-stakes%20tasks', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'it%20signals%20%22Insecurity%22%20or%20%22Infantilism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_212_when_gate: BehaviorAssess { stage: 'when', text: 'resting%20hands' })
+
+// Topology
+(loop_212_start)-[:PROCESS]->(loop_212_given_gate)
+(loop_212_given_gate)-[:PROCESS { case: "ok" }]->(loop_212_when_gate)
+(loop_212_given_gate)-[:PROCESS { case: "err" }]->(loop_212_inactive)
+(loop_212_when_gate)-[:PROCESS { case: "ok" }]->(loop_212_context)
+(loop_212_when_gate)-[:PROCESS { case: "err" }]->(loop_212_inactive)
+(loop_212_context)-[:FORK { strategy: "behavior-branches" }]->(loop_212_context_branch | loop_212_then_branch | loop_212_operator_branch | loop_212_result_branch | loop_212_taxonomy_branch | loop_212_intervention_recognize | loop_212_intervention_interdict | loop_212_intervention_minimize)
+(loop_212_context_branch | loop_212_then_branch | loop_212_operator_branch | loop_212_result_branch | loop_212_taxonomy_branch | loop_212_intervention_recognize | loop_212_intervention_interdict | loop_212_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_212_verdict)
+(loop_212_inactive)-[:PROCESS]->(loop_212_sink)
+(loop_212_verdict)-[:PROCESS]->(loop_212_sink)
+(loop_212_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_212_then_branch)
+(loop_212_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_212_then_branch)
+(loop_212_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_212_then_branch)

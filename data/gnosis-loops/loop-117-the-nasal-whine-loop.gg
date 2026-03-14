@@ -1,0 +1,33 @@
+// behavioral-loop-117.gg
+// Executable Gnosis projection for The Nasal Whine Loop.
+
+// Nodes
+(loop_117_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_117_context_branch: BehaviorEmit { emission: 'context' })
+(loop_117_given_gate: BehaviorAssess { stage: 'given', text: 'Hyponasality%20(Blocked%20nose%20sound)' })
+(loop_117_inactive: BehaviorTerminal { loopId: 117, loopName: 'The%20Nasal%20Whine%20Loop' })
+(loop_117_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_117_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_117_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_117_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Annoyance%20Operator', mechanism: 'the%20voice%20sounds%20%22Annoying%22%20or%20%22Petulant%22' })
+(loop_117_result_branch: BehaviorEmit { emission: 'result', text: 'dismissal%20of%20valid%20concerns%2C%20leading%20to%20**Chronic%20Frustration**' })
+(loop_117_sink: BehaviorSink)
+(loop_117_start: BehaviorStart { loopId: 117, loopName: 'The%20Nasal%20Whine%20Loop', given: 'Hyponasality%20(Blocked%20nose%20sound)', when: 'complaining%20or%20debating', then: 'the%20voice%20sounds%20%22Annoying%22%20or%20%22Petulant%22%20(The%20Annoyance%20Operator)', result: 'dismissal%20of%20valid%20concerns%2C%20leading%20to%20**Chronic%20Frustration**', operatorName: 'The%20Annoyance%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Annoying%22%20or%20%22Petulant%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_117_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_117_then_branch: BehaviorEmit { emission: 'then', text: 'the%20voice%20sounds%20%22Annoying%22%20or%20%22Petulant%22%20(The%20Annoyance%20Operator)' })
+(loop_117_verdict: BehaviorVerdict { loopId: 117, loopName: 'The%20Nasal%20Whine%20Loop', then: 'the%20voice%20sounds%20%22Annoying%22%20or%20%22Petulant%22%20(The%20Annoyance%20Operator)', result: 'dismissal%20of%20valid%20concerns%2C%20leading%20to%20**Chronic%20Frustration**', operatorName: 'The%20Annoyance%20Operator', operatorMechanism: 'the%20voice%20sounds%20%22Annoying%22%20or%20%22Petulant%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_117_when_gate: BehaviorAssess { stage: 'when', text: 'complaining%20or%20debating' })
+
+// Topology
+(loop_117_start)-[:PROCESS]->(loop_117_given_gate)
+(loop_117_given_gate)-[:PROCESS { case: "ok" }]->(loop_117_when_gate)
+(loop_117_given_gate)-[:PROCESS { case: "err" }]->(loop_117_inactive)
+(loop_117_when_gate)-[:PROCESS { case: "ok" }]->(loop_117_context)
+(loop_117_when_gate)-[:PROCESS { case: "err" }]->(loop_117_inactive)
+(loop_117_context)-[:FORK { strategy: "behavior-branches" }]->(loop_117_context_branch | loop_117_then_branch | loop_117_operator_branch | loop_117_result_branch | loop_117_taxonomy_branch | loop_117_intervention_recognize | loop_117_intervention_interdict | loop_117_intervention_minimize)
+(loop_117_context_branch | loop_117_then_branch | loop_117_operator_branch | loop_117_result_branch | loop_117_taxonomy_branch | loop_117_intervention_recognize | loop_117_intervention_interdict | loop_117_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_117_verdict)
+(loop_117_inactive)-[:PROCESS]->(loop_117_sink)
+(loop_117_verdict)-[:PROCESS]->(loop_117_sink)
+(loop_117_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_117_then_branch)
+(loop_117_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_117_then_branch)
+(loop_117_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_117_then_branch)

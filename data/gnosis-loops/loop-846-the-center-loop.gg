@@ -1,0 +1,33 @@
+// behavioral-loop-846.gg
+// Executable Gnosis projection for The Center Loop.
+
+// Nodes
+(loop_846_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_846_context_branch: BehaviorEmit { emission: 'context' })
+(loop_846_given_gate: BehaviorAssess { stage: 'given', text: 'Positioning%20in%20the%20geometric%20center%20of%20a%20room' })
+(loop_846_inactive: BehaviorTerminal { loopId: 846, loopName: 'The%20Center%20Loop' })
+(loop_846_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Change%20or%20modify%20the%20triggering%20environment' })
+(loop_846_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_846_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_846_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nucleus%20Operator', mechanism: 'the%20individual%20becomes%20the%20%22Hub%22' })
+(loop_846_result_branch: BehaviorEmit { emission: 'result', text: 'high%20social%20throughput%20and%20control%20of%20the%20vibe' })
+(loop_846_sink: BehaviorSink)
+(loop_846_start: BehaviorStart { loopId: 846, loopName: 'The%20Center%20Loop', given: 'Positioning%20in%20the%20geometric%20center%20of%20a%20room', when: 'a%20group%20forms', then: 'the%20individual%20becomes%20the%20%22Hub%22%20(The%20Nucleus%20Operator)', result: 'high%20social%20throughput%20and%20control%20of%20the%20vibe', operatorName: 'The%20Nucleus%20Operator', operatorMechanism: 'the%20individual%20becomes%20the%20%22Hub%22', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Change%20or%20modify%20the%20triggering%20environment', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_846_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_846_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20becomes%20the%20%22Hub%22%20(The%20Nucleus%20Operator)' })
+(loop_846_verdict: BehaviorVerdict { loopId: 846, loopName: 'The%20Center%20Loop', then: 'the%20individual%20becomes%20the%20%22Hub%22%20(The%20Nucleus%20Operator)', result: 'high%20social%20throughput%20and%20control%20of%20the%20vibe', operatorName: 'The%20Nucleus%20Operator', operatorMechanism: 'the%20individual%20becomes%20the%20%22Hub%22', origin: 'ENVIRONMENTAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_846_when_gate: BehaviorAssess { stage: 'when', text: 'a%20group%20forms' })
+
+// Topology
+(loop_846_start)-[:PROCESS]->(loop_846_given_gate)
+(loop_846_given_gate)-[:PROCESS { case: "ok" }]->(loop_846_when_gate)
+(loop_846_given_gate)-[:PROCESS { case: "err" }]->(loop_846_inactive)
+(loop_846_when_gate)-[:PROCESS { case: "ok" }]->(loop_846_context)
+(loop_846_when_gate)-[:PROCESS { case: "err" }]->(loop_846_inactive)
+(loop_846_context)-[:FORK { strategy: "behavior-branches" }]->(loop_846_context_branch | loop_846_then_branch | loop_846_operator_branch | loop_846_result_branch | loop_846_taxonomy_branch | loop_846_intervention_recognize | loop_846_intervention_interdict | loop_846_intervention_minimize)
+(loop_846_context_branch | loop_846_then_branch | loop_846_operator_branch | loop_846_result_branch | loop_846_taxonomy_branch | loop_846_intervention_recognize | loop_846_intervention_interdict | loop_846_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_846_verdict)
+(loop_846_inactive)-[:PROCESS]->(loop_846_sink)
+(loop_846_verdict)-[:PROCESS]->(loop_846_sink)
+(loop_846_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_846_then_branch)
+(loop_846_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_846_then_branch)
+(loop_846_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_846_then_branch)

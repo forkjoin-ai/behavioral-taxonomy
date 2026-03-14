@@ -1,0 +1,33 @@
+// behavioral-loop-214.gg
+// Executable Gnosis projection for The Flat Back Loop.
+
+// Nodes
+(loop_214_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_214_context_branch: BehaviorEmit { emission: 'context' })
+(loop_214_given_gate: BehaviorAssess { stage: 'given', text: 'Loss%20of%20natural%20spinal%20curves' })
+(loop_214_inactive: BehaviorTerminal { loopId: 214, loopName: 'The%20Flat%20Back%20Loop' })
+(loop_214_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_214_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_214_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_214_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rigidity%20Operator', mechanism: 'the%20gait%20is%20%22Robotic%22%20and%20%22Stiff%22' })
+(loop_214_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20perceived%20as%20**Inflexible**%20in%20personality%20as%20well' })
+(loop_214_sink: BehaviorSink)
+(loop_214_start: BehaviorStart { loopId: 214, loopName: 'The%20Flat%20Back%20Loop', given: 'Loss%20of%20natural%20spinal%20curves', when: 'moving', then: 'the%20gait%20is%20%22Robotic%22%20and%20%22Stiff%22%20(The%20Rigidity%20Operator)', result: 'the%20individual%20being%20perceived%20as%20**Inflexible**%20in%20personality%20as%20well', operatorName: 'The%20Rigidity%20Operator', operatorMechanism: 'the%20gait%20is%20%22Robotic%22%20and%20%22Stiff%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_214_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_214_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gait%20is%20%22Robotic%22%20and%20%22Stiff%22%20(The%20Rigidity%20Operator)' })
+(loop_214_verdict: BehaviorVerdict { loopId: 214, loopName: 'The%20Flat%20Back%20Loop', then: 'the%20gait%20is%20%22Robotic%22%20and%20%22Stiff%22%20(The%20Rigidity%20Operator)', result: 'the%20individual%20being%20perceived%20as%20**Inflexible**%20in%20personality%20as%20well', operatorName: 'The%20Rigidity%20Operator', operatorMechanism: 'the%20gait%20is%20%22Robotic%22%20and%20%22Stiff%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_214_when_gate: BehaviorAssess { stage: 'when', text: 'moving' })
+
+// Topology
+(loop_214_start)-[:PROCESS]->(loop_214_given_gate)
+(loop_214_given_gate)-[:PROCESS { case: "ok" }]->(loop_214_when_gate)
+(loop_214_given_gate)-[:PROCESS { case: "err" }]->(loop_214_inactive)
+(loop_214_when_gate)-[:PROCESS { case: "ok" }]->(loop_214_context)
+(loop_214_when_gate)-[:PROCESS { case: "err" }]->(loop_214_inactive)
+(loop_214_context)-[:FORK { strategy: "behavior-branches" }]->(loop_214_context_branch | loop_214_then_branch | loop_214_operator_branch | loop_214_result_branch | loop_214_taxonomy_branch | loop_214_intervention_recognize | loop_214_intervention_interdict | loop_214_intervention_minimize)
+(loop_214_context_branch | loop_214_then_branch | loop_214_operator_branch | loop_214_result_branch | loop_214_taxonomy_branch | loop_214_intervention_recognize | loop_214_intervention_interdict | loop_214_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_214_verdict)
+(loop_214_inactive)-[:PROCESS]->(loop_214_sink)
+(loop_214_verdict)-[:PROCESS]->(loop_214_sink)
+(loop_214_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_214_then_branch)
+(loop_214_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_214_then_branch)
+(loop_214_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_214_then_branch)

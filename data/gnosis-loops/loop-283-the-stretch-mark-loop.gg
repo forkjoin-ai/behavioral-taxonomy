@@ -1,0 +1,33 @@
+// behavioral-loop-283.gg
+// Executable Gnosis projection for The Stretch Mark Loop.
+
+// Nodes
+(loop_283_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_283_context_branch: BehaviorEmit { emission: 'context' })
+(loop_283_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20lines%20on%20arms%2Flegs%20(growth%20spurts%20or%20weight)' })
+(loop_283_inactive: BehaviorTerminal { loopId: 283, loopName: 'The%20Stretch%20Mark%20Loop' })
+(loop_283_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_283_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_283_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_283_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Gluttony%20Operator', mechanism: 'observers%20assume%20%22Weight%20History%22' })
+(loop_283_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20avoiding%20swimming%2C%20missing%20out%20on%20**Social%20Bonding**' })
+(loop_283_sink: BehaviorSink)
+(loop_283_start: BehaviorStart { loopId: 283, loopName: 'The%20Stretch%20Mark%20Loop', given: 'Visible%20lines%20on%20arms%2Flegs%20(growth%20spurts%20or%20weight)', when: 'wearing%20swimwear', then: 'observers%20assume%20%22Weight%20History%22%20(The%20Gluttony%20Operator)', result: 'the%20individual%20avoiding%20swimming%2C%20missing%20out%20on%20**Social%20Bonding**', operatorName: 'The%20Gluttony%20Operator', operatorMechanism: 'observers%20assume%20%22Weight%20History%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_283_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_283_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Weight%20History%22%20(The%20Gluttony%20Operator)' })
+(loop_283_verdict: BehaviorVerdict { loopId: 283, loopName: 'The%20Stretch%20Mark%20Loop', then: 'observers%20assume%20%22Weight%20History%22%20(The%20Gluttony%20Operator)', result: 'the%20individual%20avoiding%20swimming%2C%20missing%20out%20on%20**Social%20Bonding**', operatorName: 'The%20Gluttony%20Operator', operatorMechanism: 'observers%20assume%20%22Weight%20History%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_283_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20swimwear' })
+
+// Topology
+(loop_283_start)-[:PROCESS]->(loop_283_given_gate)
+(loop_283_given_gate)-[:PROCESS { case: "ok" }]->(loop_283_when_gate)
+(loop_283_given_gate)-[:PROCESS { case: "err" }]->(loop_283_inactive)
+(loop_283_when_gate)-[:PROCESS { case: "ok" }]->(loop_283_context)
+(loop_283_when_gate)-[:PROCESS { case: "err" }]->(loop_283_inactive)
+(loop_283_context)-[:FORK { strategy: "behavior-branches" }]->(loop_283_context_branch | loop_283_then_branch | loop_283_operator_branch | loop_283_result_branch | loop_283_taxonomy_branch | loop_283_intervention_recognize | loop_283_intervention_interdict | loop_283_intervention_minimize)
+(loop_283_context_branch | loop_283_then_branch | loop_283_operator_branch | loop_283_result_branch | loop_283_taxonomy_branch | loop_283_intervention_recognize | loop_283_intervention_interdict | loop_283_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_283_verdict)
+(loop_283_inactive)-[:PROCESS]->(loop_283_sink)
+(loop_283_verdict)-[:PROCESS]->(loop_283_sink)
+(loop_283_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_283_then_branch)
+(loop_283_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_283_then_branch)
+(loop_283_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_283_then_branch)

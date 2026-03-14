@@ -1,0 +1,33 @@
+// behavioral-loop-248.gg
+// Executable Gnosis projection for The Flow Loop.
+
+// Nodes
+(loop_248_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_248_context_branch: BehaviorEmit { emission: 'context' })
+(loop_248_given_gate: BehaviorAssess { stage: 'given', text: 'Hair%20past%20shoulders%20(Male)' })
+(loop_248_inactive: BehaviorTerminal { loopId: 248, loopName: 'The%20Flow%20Loop' })
+(loop_248_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_248_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_248_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_248_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stereotype%20Operator', mechanism: 'observers%20assume%20%22Rebellion%2C%22%20%22Drug%20Use%2C%22%20or%20%22Artistic%20Temperament%22' })
+(loop_248_result_branch: BehaviorEmit { emission: 'result', text: 'being%20steered%20toward%20Creative%2FGig%20economy%20roles' })
+(loop_248_sink: BehaviorSink)
+(loop_248_start: BehaviorStart { loopId: 248, loopName: 'The%20Flow%20Loop', given: 'Hair%20past%20shoulders%20(Male)', when: 'in%20professional%20settings', then: 'observers%20assume%20%22Rebellion%2C%22%20%22Drug%20Use%2C%22%20or%20%22Artistic%20Temperament%22%20(The%20Stereotype%20Operator)', result: 'being%20steered%20toward%20Creative%2FGig%20economy%20roles', operatorName: 'The%20Stereotype%20Operator', operatorMechanism: 'observers%20assume%20%22Rebellion%2C%22%20%22Drug%20Use%2C%22%20or%20%22Artistic%20Temperament%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_248_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_248_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Rebellion%2C%22%20%22Drug%20Use%2C%22%20or%20%22Artistic%20Temperament%22%20(The%20Stereotype%20Operator)' })
+(loop_248_verdict: BehaviorVerdict { loopId: 248, loopName: 'The%20Flow%20Loop', then: 'observers%20assume%20%22Rebellion%2C%22%20%22Drug%20Use%2C%22%20or%20%22Artistic%20Temperament%22%20(The%20Stereotype%20Operator)', result: 'being%20steered%20toward%20Creative%2FGig%20economy%20roles', operatorName: 'The%20Stereotype%20Operator', operatorMechanism: 'observers%20assume%20%22Rebellion%2C%22%20%22Drug%20Use%2C%22%20or%20%22Artistic%20Temperament%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_248_when_gate: BehaviorAssess { stage: 'when', text: 'in%20professional%20settings' })
+
+// Topology
+(loop_248_start)-[:PROCESS]->(loop_248_given_gate)
+(loop_248_given_gate)-[:PROCESS { case: "ok" }]->(loop_248_when_gate)
+(loop_248_given_gate)-[:PROCESS { case: "err" }]->(loop_248_inactive)
+(loop_248_when_gate)-[:PROCESS { case: "ok" }]->(loop_248_context)
+(loop_248_when_gate)-[:PROCESS { case: "err" }]->(loop_248_inactive)
+(loop_248_context)-[:FORK { strategy: "behavior-branches" }]->(loop_248_context_branch | loop_248_then_branch | loop_248_operator_branch | loop_248_result_branch | loop_248_taxonomy_branch | loop_248_intervention_recognize | loop_248_intervention_interdict | loop_248_intervention_minimize)
+(loop_248_context_branch | loop_248_then_branch | loop_248_operator_branch | loop_248_result_branch | loop_248_taxonomy_branch | loop_248_intervention_recognize | loop_248_intervention_interdict | loop_248_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_248_verdict)
+(loop_248_inactive)-[:PROCESS]->(loop_248_sink)
+(loop_248_verdict)-[:PROCESS]->(loop_248_sink)
+(loop_248_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_248_then_branch)
+(loop_248_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_248_then_branch)
+(loop_248_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_248_then_branch)

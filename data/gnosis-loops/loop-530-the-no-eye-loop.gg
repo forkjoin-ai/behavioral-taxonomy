@@ -1,0 +1,31 @@
+// behavioral-loop-530.gg
+// Executable Gnosis projection for The No Eye Loop.
+
+// Nodes
+(loop_530_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_530_context_branch: BehaviorEmit { emission: 'context' })
+(loop_530_given_gate: BehaviorAssess { stage: 'given', text: 'Zygomatic%20major%20activation%20without%20Orbicularis%20oculi' })
+(loop_530_inactive: BehaviorTerminal { loopId: 530, loopName: 'The%20No%20Eye%20Loop' })
+(loop_530_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_530_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_530_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Customer%20Service%20Operator', mechanism: 'the%20smile%20looks%20%22Fake%22%20or%20%22Psychopathic%22' })
+(loop_530_result_branch: BehaviorEmit { emission: 'result', text: 'low%20trust%20and%20customers%20feeling%20%22processed.%22' })
+(loop_530_sink: BehaviorSink)
+(loop_530_start: BehaviorStart { loopId: 530, loopName: 'The%20No%20Eye%20Loop', given: 'Zygomatic%20major%20activation%20without%20Orbicularis%20oculi', when: 'greeting%20customers', then: 'the%20smile%20looks%20%22Fake%22%20or%20%22Psychopathic%22%20(The%20Customer%20Service%20Operator)', result: 'low%20trust%20and%20customers%20feeling%20%22processed.%22', operatorName: 'The%20Customer%20Service%20Operator', operatorMechanism: 'the%20smile%20looks%20%22Fake%22%20or%20%22Psychopathic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_530_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_530_then_branch: BehaviorEmit { emission: 'then', text: 'the%20smile%20looks%20%22Fake%22%20or%20%22Psychopathic%22%20(The%20Customer%20Service%20Operator)' })
+(loop_530_verdict: BehaviorVerdict { loopId: 530, loopName: 'The%20No%20Eye%20Loop', then: 'the%20smile%20looks%20%22Fake%22%20or%20%22Psychopathic%22%20(The%20Customer%20Service%20Operator)', result: 'low%20trust%20and%20customers%20feeling%20%22processed.%22', operatorName: 'The%20Customer%20Service%20Operator', operatorMechanism: 'the%20smile%20looks%20%22Fake%22%20or%20%22Psychopathic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_530_when_gate: BehaviorAssess { stage: 'when', text: 'greeting%20customers' })
+
+// Topology
+(loop_530_start)-[:PROCESS]->(loop_530_given_gate)
+(loop_530_given_gate)-[:PROCESS { case: "ok" }]->(loop_530_when_gate)
+(loop_530_given_gate)-[:PROCESS { case: "err" }]->(loop_530_inactive)
+(loop_530_when_gate)-[:PROCESS { case: "ok" }]->(loop_530_context)
+(loop_530_when_gate)-[:PROCESS { case: "err" }]->(loop_530_inactive)
+(loop_530_context)-[:FORK { strategy: "behavior-branches" }]->(loop_530_context_branch | loop_530_then_branch | loop_530_operator_branch | loop_530_result_branch | loop_530_taxonomy_branch | loop_530_intervention_recognize | loop_530_intervention_leverage)
+(loop_530_context_branch | loop_530_then_branch | loop_530_operator_branch | loop_530_result_branch | loop_530_taxonomy_branch | loop_530_intervention_recognize | loop_530_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_530_verdict)
+(loop_530_inactive)-[:PROCESS]->(loop_530_sink)
+(loop_530_verdict)-[:PROCESS]->(loop_530_sink)
+(loop_530_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_530_then_branch)
+(loop_530_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_530_result_branch)

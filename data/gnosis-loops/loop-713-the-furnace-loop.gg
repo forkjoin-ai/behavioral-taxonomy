@@ -1,0 +1,33 @@
+// behavioral-loop-713.gg
+// Executable Gnosis projection for The Furnace Loop.
+
+// Nodes
+(loop_713_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_713_context_branch: BehaviorEmit { emission: 'context' })
+(loop_713_given_gate: BehaviorAssess { stage: 'given', text: 'Radiating%20heat%20from%20palms' })
+(loop_713_inactive: BehaviorTerminal { loopId: 713, loopName: 'The%20Furnace%20Loop' })
+(loop_713_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_713_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_713_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_713_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Infection%20Operator', mechanism: 'the%20recipient%20feels%20%22Feverish%22%20or%20%22Intense%22' })
+(loop_713_result_branch: BehaviorEmit { emission: 'result', text: 'a%20quick%20release%20of%20the%20grip' })
+(loop_713_sink: BehaviorSink)
+(loop_713_start: BehaviorStart { loopId: 713, loopName: 'The%20Furnace%20Loop', given: 'Radiating%20heat%20from%20palms', when: 'shaking%20hands', then: 'the%20recipient%20feels%20%22Feverish%22%20or%20%22Intense%22%20(The%20Infection%20Operator)', result: 'a%20quick%20release%20of%20the%20grip', operatorName: 'The%20Infection%20Operator', operatorMechanism: 'the%20recipient%20feels%20%22Feverish%22%20or%20%22Intense%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_713_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_713_then_branch: BehaviorEmit { emission: 'then', text: 'the%20recipient%20feels%20%22Feverish%22%20or%20%22Intense%22%20(The%20Infection%20Operator)' })
+(loop_713_verdict: BehaviorVerdict { loopId: 713, loopName: 'The%20Furnace%20Loop', then: 'the%20recipient%20feels%20%22Feverish%22%20or%20%22Intense%22%20(The%20Infection%20Operator)', result: 'a%20quick%20release%20of%20the%20grip', operatorName: 'The%20Infection%20Operator', operatorMechanism: 'the%20recipient%20feels%20%22Feverish%22%20or%20%22Intense%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_713_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_713_start)-[:PROCESS]->(loop_713_given_gate)
+(loop_713_given_gate)-[:PROCESS { case: "ok" }]->(loop_713_when_gate)
+(loop_713_given_gate)-[:PROCESS { case: "err" }]->(loop_713_inactive)
+(loop_713_when_gate)-[:PROCESS { case: "ok" }]->(loop_713_context)
+(loop_713_when_gate)-[:PROCESS { case: "err" }]->(loop_713_inactive)
+(loop_713_context)-[:FORK { strategy: "behavior-branches" }]->(loop_713_context_branch | loop_713_then_branch | loop_713_operator_branch | loop_713_result_branch | loop_713_taxonomy_branch | loop_713_intervention_recognize | loop_713_intervention_interdict | loop_713_intervention_minimize)
+(loop_713_context_branch | loop_713_then_branch | loop_713_operator_branch | loop_713_result_branch | loop_713_taxonomy_branch | loop_713_intervention_recognize | loop_713_intervention_interdict | loop_713_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_713_verdict)
+(loop_713_inactive)-[:PROCESS]->(loop_713_sink)
+(loop_713_verdict)-[:PROCESS]->(loop_713_sink)
+(loop_713_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_713_then_branch)
+(loop_713_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_713_then_branch)
+(loop_713_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_713_then_branch)

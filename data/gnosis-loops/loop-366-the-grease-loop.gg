@@ -1,0 +1,33 @@
+// behavioral-loop-366.gg
+// Executable Gnosis projection for The Grease Loop.
+
+// Nodes
+(loop_366_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_366_context_branch: BehaviorEmit { emission: 'context' })
+(loop_366_given_gate: BehaviorAssess { stage: 'given', text: 'Oily%20hair%20clumps' })
+(loop_366_inactive: BehaviorTerminal { loopId: 366, loopName: 'The%20Grease%20Loop' })
+(loop_366_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_366_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_366_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_366_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sloth%20Operator', mechanism: 'interviewers%20assume%20%22Depression%22%20or%20%22Lazy%22' })
+(loop_366_result_branch: BehaviorEmit { emission: 'result', text: 'passing%20over%20the%20candidate%20for%20client-facing%20roles' })
+(loop_366_sink: BehaviorSink)
+(loop_366_start: BehaviorStart { loopId: 366, loopName: 'The%20Grease%20Loop', given: 'Oily%20hair%20clumps', when: 'interviewing', then: 'interviewers%20assume%20%22Depression%22%20or%20%22Lazy%22%20(The%20Sloth%20Operator)', result: 'passing%20over%20the%20candidate%20for%20client-facing%20roles', operatorName: 'The%20Sloth%20Operator', operatorMechanism: 'interviewers%20assume%20%22Depression%22%20or%20%22Lazy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_366_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_366_then_branch: BehaviorEmit { emission: 'then', text: 'interviewers%20assume%20%22Depression%22%20or%20%22Lazy%22%20(The%20Sloth%20Operator)' })
+(loop_366_verdict: BehaviorVerdict { loopId: 366, loopName: 'The%20Grease%20Loop', then: 'interviewers%20assume%20%22Depression%22%20or%20%22Lazy%22%20(The%20Sloth%20Operator)', result: 'passing%20over%20the%20candidate%20for%20client-facing%20roles', operatorName: 'The%20Sloth%20Operator', operatorMechanism: 'interviewers%20assume%20%22Depression%22%20or%20%22Lazy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_366_when_gate: BehaviorAssess { stage: 'when', text: 'interviewing' })
+
+// Topology
+(loop_366_start)-[:PROCESS]->(loop_366_given_gate)
+(loop_366_given_gate)-[:PROCESS { case: "ok" }]->(loop_366_when_gate)
+(loop_366_given_gate)-[:PROCESS { case: "err" }]->(loop_366_inactive)
+(loop_366_when_gate)-[:PROCESS { case: "ok" }]->(loop_366_context)
+(loop_366_when_gate)-[:PROCESS { case: "err" }]->(loop_366_inactive)
+(loop_366_context)-[:FORK { strategy: "behavior-branches" }]->(loop_366_context_branch | loop_366_then_branch | loop_366_operator_branch | loop_366_result_branch | loop_366_taxonomy_branch | loop_366_intervention_recognize | loop_366_intervention_interdict | loop_366_intervention_minimize)
+(loop_366_context_branch | loop_366_then_branch | loop_366_operator_branch | loop_366_result_branch | loop_366_taxonomy_branch | loop_366_intervention_recognize | loop_366_intervention_interdict | loop_366_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_366_verdict)
+(loop_366_inactive)-[:PROCESS]->(loop_366_sink)
+(loop_366_verdict)-[:PROCESS]->(loop_366_sink)
+(loop_366_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_366_then_branch)
+(loop_366_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_366_then_branch)
+(loop_366_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_366_then_branch)

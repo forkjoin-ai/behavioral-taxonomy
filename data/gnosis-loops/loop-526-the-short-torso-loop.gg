@@ -1,0 +1,33 @@
+// behavioral-loop-526.gg
+// Executable Gnosis projection for The Short Torso Loop.
+
+// Nodes
+(loop_526_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_526_context_branch: BehaviorEmit { emission: 'context' })
+(loop_526_given_gate: BehaviorAssess { stage: 'given', text: 'High%20waist%20%2B%20long%20femurs' })
+(loop_526_inactive: BehaviorTerminal { loopId: 526, loopName: 'The%20Short%20Torso%20Loop' })
+(loop_526_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_526_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_526_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_526_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Model%20Operator', mechanism: 'the%20body%20looks%20%22All%20Legs%22' })
+(loop_526_result_branch: BehaviorEmit { emission: 'result', text: 'assumptions%20of%20elegance%20or%20athleticism' })
+(loop_526_sink: BehaviorSink)
+(loop_526_start: BehaviorStart { loopId: 526, loopName: 'The%20Short%20Torso%20Loop', given: 'High%20waist%20%2B%20long%20femurs', when: 'wearing%20high-waisted%20pants', then: 'the%20body%20looks%20%22All%20Legs%22%20(The%20Model%20Operator)', result: 'assumptions%20of%20elegance%20or%20athleticism', operatorName: 'The%20Model%20Operator', operatorMechanism: 'the%20body%20looks%20%22All%20Legs%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_526_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_526_then_branch: BehaviorEmit { emission: 'then', text: 'the%20body%20looks%20%22All%20Legs%22%20(The%20Model%20Operator)' })
+(loop_526_verdict: BehaviorVerdict { loopId: 526, loopName: 'The%20Short%20Torso%20Loop', then: 'the%20body%20looks%20%22All%20Legs%22%20(The%20Model%20Operator)', result: 'assumptions%20of%20elegance%20or%20athleticism', operatorName: 'The%20Model%20Operator', operatorMechanism: 'the%20body%20looks%20%22All%20Legs%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_526_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20high-waisted%20pants' })
+
+// Topology
+(loop_526_start)-[:PROCESS]->(loop_526_given_gate)
+(loop_526_given_gate)-[:PROCESS { case: "ok" }]->(loop_526_when_gate)
+(loop_526_given_gate)-[:PROCESS { case: "err" }]->(loop_526_inactive)
+(loop_526_when_gate)-[:PROCESS { case: "ok" }]->(loop_526_context)
+(loop_526_when_gate)-[:PROCESS { case: "err" }]->(loop_526_inactive)
+(loop_526_context)-[:FORK { strategy: "behavior-branches" }]->(loop_526_context_branch | loop_526_then_branch | loop_526_operator_branch | loop_526_result_branch | loop_526_taxonomy_branch | loop_526_intervention_recognize | loop_526_intervention_interdict | loop_526_intervention_minimize)
+(loop_526_context_branch | loop_526_then_branch | loop_526_operator_branch | loop_526_result_branch | loop_526_taxonomy_branch | loop_526_intervention_recognize | loop_526_intervention_interdict | loop_526_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_526_verdict)
+(loop_526_inactive)-[:PROCESS]->(loop_526_sink)
+(loop_526_verdict)-[:PROCESS]->(loop_526_sink)
+(loop_526_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_526_then_branch)
+(loop_526_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_526_then_branch)
+(loop_526_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_526_then_branch)

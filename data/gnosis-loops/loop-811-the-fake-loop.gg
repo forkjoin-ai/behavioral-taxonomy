@@ -1,0 +1,31 @@
+// behavioral-loop-811.gg
+// Executable Gnosis projection for The Fake Loop.
+
+// Nodes
+(loop_811_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_811_context_branch: BehaviorEmit { emission: 'context' })
+(loop_811_given_gate: BehaviorAssess { stage: 'given', text: 'Misaligned%20stitching%20on%20a%20%22luxury%22%20bag' })
+(loop_811_inactive: BehaviorTerminal { loopId: 811, loopName: 'The%20Fake%20Loop' })
+(loop_811_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_811_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_811_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Poser%20Operator', mechanism: 'it%20signals%20%22Deception%22%20and%20%22Aspiring%22%20status' })
+(loop_811_result_branch: BehaviorEmit { emission: 'result', text: 'total%20loss%20of%20credibility%20if%20discovered' })
+(loop_811_sink: BehaviorSink)
+(loop_811_start: BehaviorStart { loopId: 811, loopName: 'The%20Fake%20Loop', given: 'Misaligned%20stitching%20on%20a%20%22luxury%22%20bag', when: 'scrutinized%20by%20an%20expert', then: 'it%20signals%20%22Deception%22%20and%20%22Aspiring%22%20status%20(The%20Poser%20Operator)', result: 'total%20loss%20of%20credibility%20if%20discovered', operatorName: 'The%20Poser%20Operator', operatorMechanism: 'it%20signals%20%22Deception%22%20and%20%22Aspiring%22%20status', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_811_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_811_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Deception%22%20and%20%22Aspiring%22%20status%20(The%20Poser%20Operator)' })
+(loop_811_verdict: BehaviorVerdict { loopId: 811, loopName: 'The%20Fake%20Loop', then: 'it%20signals%20%22Deception%22%20and%20%22Aspiring%22%20status%20(The%20Poser%20Operator)', result: 'total%20loss%20of%20credibility%20if%20discovered', operatorName: 'The%20Poser%20Operator', operatorMechanism: 'it%20signals%20%22Deception%22%20and%20%22Aspiring%22%20status', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_811_when_gate: BehaviorAssess { stage: 'when', text: 'scrutinized%20by%20an%20expert' })
+
+// Topology
+(loop_811_start)-[:PROCESS]->(loop_811_given_gate)
+(loop_811_given_gate)-[:PROCESS { case: "ok" }]->(loop_811_when_gate)
+(loop_811_given_gate)-[:PROCESS { case: "err" }]->(loop_811_inactive)
+(loop_811_when_gate)-[:PROCESS { case: "ok" }]->(loop_811_context)
+(loop_811_when_gate)-[:PROCESS { case: "err" }]->(loop_811_inactive)
+(loop_811_context)-[:FORK { strategy: "behavior-branches" }]->(loop_811_context_branch | loop_811_then_branch | loop_811_operator_branch | loop_811_result_branch | loop_811_taxonomy_branch | loop_811_intervention_recognize | loop_811_intervention_leverage)
+(loop_811_context_branch | loop_811_then_branch | loop_811_operator_branch | loop_811_result_branch | loop_811_taxonomy_branch | loop_811_intervention_recognize | loop_811_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_811_verdict)
+(loop_811_inactive)-[:PROCESS]->(loop_811_sink)
+(loop_811_verdict)-[:PROCESS]->(loop_811_sink)
+(loop_811_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_811_then_branch)
+(loop_811_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_811_result_branch)

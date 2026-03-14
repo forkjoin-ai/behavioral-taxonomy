@@ -1,0 +1,33 @@
+// behavioral-loop-793.gg
+// Executable Gnosis projection for The Helmet Loop.
+
+// Nodes
+(loop_793_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_793_context_branch: BehaviorEmit { emission: 'context' })
+(loop_793_given_gate: BehaviorAssess { stage: 'given', text: 'Hair%20that%20does%20not%20move%20in%20the%20wind' })
+(loop_793_inactive: BehaviorTerminal { loopId: 793, loopName: 'The%20Helmet%20Loop' })
+(loop_793_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_793_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_793_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_793_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Lego%20Hair%20Operator', mechanism: 'it%20feels%20%22Crunchy%22' })
+(loop_793_result_branch: BehaviorEmit { emission: 'result', text: 'ridicule%20and%20assumptions%20of%20%22Rigidity.%22' })
+(loop_793_sink: BehaviorSink)
+(loop_793_start: BehaviorStart { loopId: 793, loopName: 'The%20Helmet%20Loop', given: 'Hair%20that%20does%20not%20move%20in%20the%20wind', when: 'touched', then: 'it%20feels%20%22Crunchy%22%20(The%20Lego%20Hair%20Operator)', result: 'ridicule%20and%20assumptions%20of%20%22Rigidity.%22', operatorName: 'The%20Lego%20Hair%20Operator', operatorMechanism: 'it%20feels%20%22Crunchy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_793_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_793_then_branch: BehaviorEmit { emission: 'then', text: 'it%20feels%20%22Crunchy%22%20(The%20Lego%20Hair%20Operator)' })
+(loop_793_verdict: BehaviorVerdict { loopId: 793, loopName: 'The%20Helmet%20Loop', then: 'it%20feels%20%22Crunchy%22%20(The%20Lego%20Hair%20Operator)', result: 'ridicule%20and%20assumptions%20of%20%22Rigidity.%22', operatorName: 'The%20Lego%20Hair%20Operator', operatorMechanism: 'it%20feels%20%22Crunchy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_793_when_gate: BehaviorAssess { stage: 'when', text: 'touched' })
+
+// Topology
+(loop_793_start)-[:PROCESS]->(loop_793_given_gate)
+(loop_793_given_gate)-[:PROCESS { case: "ok" }]->(loop_793_when_gate)
+(loop_793_given_gate)-[:PROCESS { case: "err" }]->(loop_793_inactive)
+(loop_793_when_gate)-[:PROCESS { case: "ok" }]->(loop_793_context)
+(loop_793_when_gate)-[:PROCESS { case: "err" }]->(loop_793_inactive)
+(loop_793_context)-[:FORK { strategy: "behavior-branches" }]->(loop_793_context_branch | loop_793_then_branch | loop_793_operator_branch | loop_793_result_branch | loop_793_taxonomy_branch | loop_793_intervention_recognize | loop_793_intervention_interdict | loop_793_intervention_minimize)
+(loop_793_context_branch | loop_793_then_branch | loop_793_operator_branch | loop_793_result_branch | loop_793_taxonomy_branch | loop_793_intervention_recognize | loop_793_intervention_interdict | loop_793_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_793_verdict)
+(loop_793_inactive)-[:PROCESS]->(loop_793_sink)
+(loop_793_verdict)-[:PROCESS]->(loop_793_sink)
+(loop_793_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_793_then_branch)
+(loop_793_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_793_then_branch)
+(loop_793_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_793_then_branch)

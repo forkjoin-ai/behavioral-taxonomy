@@ -1,0 +1,31 @@
+// behavioral-loop-829.gg
+// Executable Gnosis projection for The Smoker Loop.
+
+// Nodes
+(loop_829_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_829_context_branch: BehaviorEmit { emission: 'context' })
+(loop_829_given_gate: BehaviorAssess { stage: 'given', text: 'Scent%20of%20old%20smoke%20in%20hair%2Fclothes' })
+(loop_829_inactive: BehaviorTerminal { loopId: 829, loopName: 'The%20Smoker%20Loop' })
+(loop_829_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_829_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_829_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Ashtray%20Operator', mechanism: 'it%20triggers%20%22Disgust%22%20in%20non-smokers' })
+(loop_829_result_branch: BehaviorEmit { emission: 'result', text: 'physical%20recoil%20and%20judgment%20of%20willpower' })
+(loop_829_sink: BehaviorSink)
+(loop_829_start: BehaviorStart { loopId: 829, loopName: 'The%20Smoker%20Loop', given: 'Scent%20of%20old%20smoke%20in%20hair%2Fclothes', when: 'in%20a%20small%20elevator', then: 'it%20triggers%20%22Disgust%22%20in%20non-smokers%20(The%20Ashtray%20Operator)', result: 'physical%20recoil%20and%20judgment%20of%20willpower', operatorName: 'The%20Ashtray%20Operator', operatorMechanism: 'it%20triggers%20%22Disgust%22%20in%20non-smokers', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_829_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_829_then_branch: BehaviorEmit { emission: 'then', text: 'it%20triggers%20%22Disgust%22%20in%20non-smokers%20(The%20Ashtray%20Operator)' })
+(loop_829_verdict: BehaviorVerdict { loopId: 829, loopName: 'The%20Smoker%20Loop', then: 'it%20triggers%20%22Disgust%22%20in%20non-smokers%20(The%20Ashtray%20Operator)', result: 'physical%20recoil%20and%20judgment%20of%20willpower', operatorName: 'The%20Ashtray%20Operator', operatorMechanism: 'it%20triggers%20%22Disgust%22%20in%20non-smokers', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_829_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20small%20elevator' })
+
+// Topology
+(loop_829_start)-[:PROCESS]->(loop_829_given_gate)
+(loop_829_given_gate)-[:PROCESS { case: "ok" }]->(loop_829_when_gate)
+(loop_829_given_gate)-[:PROCESS { case: "err" }]->(loop_829_inactive)
+(loop_829_when_gate)-[:PROCESS { case: "ok" }]->(loop_829_context)
+(loop_829_when_gate)-[:PROCESS { case: "err" }]->(loop_829_inactive)
+(loop_829_context)-[:FORK { strategy: "behavior-branches" }]->(loop_829_context_branch | loop_829_then_branch | loop_829_operator_branch | loop_829_result_branch | loop_829_taxonomy_branch | loop_829_intervention_recognize | loop_829_intervention_leverage)
+(loop_829_context_branch | loop_829_then_branch | loop_829_operator_branch | loop_829_result_branch | loop_829_taxonomy_branch | loop_829_intervention_recognize | loop_829_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_829_verdict)
+(loop_829_inactive)-[:PROCESS]->(loop_829_sink)
+(loop_829_verdict)-[:PROCESS]->(loop_829_sink)
+(loop_829_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_829_then_branch)
+(loop_829_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_829_result_branch)

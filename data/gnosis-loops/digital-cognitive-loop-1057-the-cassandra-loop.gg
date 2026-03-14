@@ -1,0 +1,33 @@
+// behavioral-loop-1057.gg
+// Executable Gnosis projection for The Cassandra Loop.
+
+// Nodes
+(loop_1057_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1057_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1057_given_gate: BehaviorAssess { stage: 'given', text: 'High%20pattern%20recognition%20%2B%20Low%20charisma' })
+(loop_1057_inactive: BehaviorTerminal { loopId: 1057, loopName: 'The%20Cassandra%20Loop' })
+(loop_1057_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20relationships%20that%20reinforce%20the%20desired%20identity' })
+(loop_1057_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1057_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_1057_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Curse', mechanism: 'Cognitive%20dissonance%20causes%20group%20to%20shoot%20the%20messenger%20rather%20than%20accept%20bad%20news.' })
+(loop_1057_result_branch: BehaviorEmit { emission: 'result', text: "The%20disaster%20happens%2C%20and%20the%20group%20blames%20the%20subject%20for%20'jinxing'%20it" })
+(loop_1057_sink: BehaviorSink)
+(loop_1057_start: BehaviorStart { loopId: 1057, loopName: 'The%20Cassandra%20Loop', given: 'High%20pattern%20recognition%20%2B%20Low%20charisma', when: 'Warning%20the%20group%20of%20a%20future%20disaster', then: 'The%20group%20laughs%20or%20ignores%20the%20warning', result: "The%20disaster%20happens%2C%20and%20the%20group%20blames%20the%20subject%20for%20'jinxing'%20it", operatorName: 'The%20Curse', operatorMechanism: 'Cognitive%20dissonance%20causes%20group%20to%20shoot%20the%20messenger%20rather%20than%20accept%20bad%20news.', origin: 'NARRATIVE', modality: 'AUDITORY', mutability: 'STUBBORN', valences: 'REPULSION|DECEPTION', interventionDifficulty: '6', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Build%20relationships%20that%20reinforce%20the%20desired%20identity', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1057_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'NARRATIVE', modality: 'AUDITORY', mutability: 'STUBBORN', valences: 'REPULSION|DECEPTION' })
+(loop_1057_then_branch: BehaviorEmit { emission: 'then', text: 'The%20group%20laughs%20or%20ignores%20the%20warning' })
+(loop_1057_verdict: BehaviorVerdict { loopId: 1057, loopName: 'The%20Cassandra%20Loop', then: 'The%20group%20laughs%20or%20ignores%20the%20warning', result: "The%20disaster%20happens%2C%20and%20the%20group%20blames%20the%20subject%20for%20'jinxing'%20it", operatorName: 'The%20Curse', operatorMechanism: 'Cognitive%20dissonance%20causes%20group%20to%20shoot%20the%20messenger%20rather%20than%20accept%20bad%20news.', origin: 'NARRATIVE', modality: 'AUDITORY', mutability: 'STUBBORN', valences: 'REPULSION|DECEPTION' })
+(loop_1057_when_gate: BehaviorAssess { stage: 'when', text: 'Warning%20the%20group%20of%20a%20future%20disaster' })
+
+// Topology
+(loop_1057_start)-[:PROCESS]->(loop_1057_given_gate)
+(loop_1057_given_gate)-[:PROCESS { case: "ok" }]->(loop_1057_when_gate)
+(loop_1057_given_gate)-[:PROCESS { case: "err" }]->(loop_1057_inactive)
+(loop_1057_when_gate)-[:PROCESS { case: "ok" }]->(loop_1057_context)
+(loop_1057_when_gate)-[:PROCESS { case: "err" }]->(loop_1057_inactive)
+(loop_1057_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1057_context_branch | loop_1057_then_branch | loop_1057_operator_branch | loop_1057_result_branch | loop_1057_taxonomy_branch | loop_1057_intervention_recognize | loop_1057_intervention_interdict | loop_1057_intervention_minimize)
+(loop_1057_context_branch | loop_1057_then_branch | loop_1057_operator_branch | loop_1057_result_branch | loop_1057_taxonomy_branch | loop_1057_intervention_recognize | loop_1057_intervention_interdict | loop_1057_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1057_verdict)
+(loop_1057_inactive)-[:PROCESS]->(loop_1057_sink)
+(loop_1057_verdict)-[:PROCESS]->(loop_1057_sink)
+(loop_1057_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1057_then_branch)
+(loop_1057_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1057_then_branch)
+(loop_1057_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1057_then_branch)

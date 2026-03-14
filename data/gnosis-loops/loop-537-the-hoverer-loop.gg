@@ -1,0 +1,33 @@
+// behavioral-loop-537.gg
+// Executable Gnosis projection for The Hoverer Loop.
+
+// Nodes
+(loop_537_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_537_context_branch: BehaviorEmit { emission: 'context' })
+(loop_537_given_gate: BehaviorAssess { stage: 'given', text: 'Standing%20while%20everyone%20else%20is%20sitting' })
+(loop_537_inactive: BehaviorTerminal { loopId: 537, loopName: 'The%20Hoverer%20Loop' })
+(loop_537_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_537_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_537_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_537_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Looming%20Operator', mechanism: 'it%20signals%20%22Threat%2C%22%20%22Exclusion%2C%22%20or%20%22Servant%22%20status' })
+(loop_537_result_branch: BehaviorEmit { emission: 'result', text: 'seated%20people%20feeling%20anxious%20and%20unable%20to%20relax' })
+(loop_537_sink: BehaviorSink)
+(loop_537_start: BehaviorStart { loopId: 537, loopName: 'The%20Hoverer%20Loop', given: 'Standing%20while%20everyone%20else%20is%20sitting', when: 'in%20a%20meeting%20or%20party', then: 'it%20signals%20%22Threat%2C%22%20%22Exclusion%2C%22%20or%20%22Servant%22%20status%20(The%20Looming%20Operator)', result: 'seated%20people%20feeling%20anxious%20and%20unable%20to%20relax', operatorName: 'The%20Looming%20Operator', operatorMechanism: 'it%20signals%20%22Threat%2C%22%20%22Exclusion%2C%22%20or%20%22Servant%22%20status', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_537_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_537_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Threat%2C%22%20%22Exclusion%2C%22%20or%20%22Servant%22%20status%20(The%20Looming%20Operator)' })
+(loop_537_verdict: BehaviorVerdict { loopId: 537, loopName: 'The%20Hoverer%20Loop', then: 'it%20signals%20%22Threat%2C%22%20%22Exclusion%2C%22%20or%20%22Servant%22%20status%20(The%20Looming%20Operator)', result: 'seated%20people%20feeling%20anxious%20and%20unable%20to%20relax', operatorName: 'The%20Looming%20Operator', operatorMechanism: 'it%20signals%20%22Threat%2C%22%20%22Exclusion%2C%22%20or%20%22Servant%22%20status', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_537_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20meeting%20or%20party' })
+
+// Topology
+(loop_537_start)-[:PROCESS]->(loop_537_given_gate)
+(loop_537_given_gate)-[:PROCESS { case: "ok" }]->(loop_537_when_gate)
+(loop_537_given_gate)-[:PROCESS { case: "err" }]->(loop_537_inactive)
+(loop_537_when_gate)-[:PROCESS { case: "ok" }]->(loop_537_context)
+(loop_537_when_gate)-[:PROCESS { case: "err" }]->(loop_537_inactive)
+(loop_537_context)-[:FORK { strategy: "behavior-branches" }]->(loop_537_context_branch | loop_537_then_branch | loop_537_operator_branch | loop_537_result_branch | loop_537_taxonomy_branch | loop_537_intervention_recognize | loop_537_intervention_interdict | loop_537_intervention_minimize)
+(loop_537_context_branch | loop_537_then_branch | loop_537_operator_branch | loop_537_result_branch | loop_537_taxonomy_branch | loop_537_intervention_recognize | loop_537_intervention_interdict | loop_537_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_537_verdict)
+(loop_537_inactive)-[:PROCESS]->(loop_537_sink)
+(loop_537_verdict)-[:PROCESS]->(loop_537_sink)
+(loop_537_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_537_then_branch)
+(loop_537_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_537_then_branch)
+(loop_537_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_537_then_branch)

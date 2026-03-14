@@ -1,0 +1,33 @@
+// behavioral-loop-34.gg
+// Executable Gnosis projection for The Thick Skin Loop.
+
+// Nodes
+(loop_34_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_34_context_branch: BehaviorEmit { emission: 'context' })
+(loop_34_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20post-acne%20scarring%20or%20rough%20skin%20texture' })
+(loop_34_inactive: BehaviorTerminal { loopId: 34, loopName: 'The%20Thick%20Skin%20Loop' })
+(loop_34_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Reframe%20the%20narrative%20around%20this%20characteristic' })
+(loop_34_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_34_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_34_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stoic%20Operator', mechanism: 'the%20observer%20subconsciously%20assumes%20%22Toughness%22%20or%20%22Lower%20Sensitivity%22' })
+(loop_34_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20offering%20less%20emotional%20comfort%2C%20forcing%20the%20individual%20to%20develop%20**Emotional%20Self-Reliance**' })
+(loop_34_sink: BehaviorSink)
+(loop_34_start: BehaviorStart { loopId: 34, loopName: 'The%20Thick%20Skin%20Loop', given: 'an%20individual%20possesses%20post-acne%20scarring%20or%20rough%20skin%20texture', when: 'they%20are%20in%20a%20first-impression%20scenario', then: 'the%20observer%20subconsciously%20assumes%20%22Toughness%22%20or%20%22Lower%20Sensitivity%22%20(The%20Stoic%20Operator)', result: 'peers%20offering%20less%20emotional%20comfort%2C%20forcing%20the%20individual%20to%20develop%20**Emotional%20Self-Reliance**', operatorName: 'The%20Stoic%20Operator', operatorMechanism: 'the%20observer%20subconsciously%20assumes%20%22Toughness%22%20or%20%22Lower%20Sensitivity%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Reframe%20the%20narrative%20around%20this%20characteristic', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_34_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_34_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20subconsciously%20assumes%20%22Toughness%22%20or%20%22Lower%20Sensitivity%22%20(The%20Stoic%20Operator)' })
+(loop_34_verdict: BehaviorVerdict { loopId: 34, loopName: 'The%20Thick%20Skin%20Loop', then: 'the%20observer%20subconsciously%20assumes%20%22Toughness%22%20or%20%22Lower%20Sensitivity%22%20(The%20Stoic%20Operator)', result: 'peers%20offering%20less%20emotional%20comfort%2C%20forcing%20the%20individual%20to%20develop%20**Emotional%20Self-Reliance**', operatorName: 'The%20Stoic%20Operator', operatorMechanism: 'the%20observer%20subconsciously%20assumes%20%22Toughness%22%20or%20%22Lower%20Sensitivity%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_34_when_gate: BehaviorAssess { stage: 'when', text: 'they%20are%20in%20a%20first-impression%20scenario' })
+
+// Topology
+(loop_34_start)-[:PROCESS]->(loop_34_given_gate)
+(loop_34_given_gate)-[:PROCESS { case: "ok" }]->(loop_34_when_gate)
+(loop_34_given_gate)-[:PROCESS { case: "err" }]->(loop_34_inactive)
+(loop_34_when_gate)-[:PROCESS { case: "ok" }]->(loop_34_context)
+(loop_34_when_gate)-[:PROCESS { case: "err" }]->(loop_34_inactive)
+(loop_34_context)-[:FORK { strategy: "behavior-branches" }]->(loop_34_context_branch | loop_34_then_branch | loop_34_operator_branch | loop_34_result_branch | loop_34_taxonomy_branch | loop_34_intervention_recognize | loop_34_intervention_interdict | loop_34_intervention_minimize)
+(loop_34_context_branch | loop_34_then_branch | loop_34_operator_branch | loop_34_result_branch | loop_34_taxonomy_branch | loop_34_intervention_recognize | loop_34_intervention_interdict | loop_34_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_34_verdict)
+(loop_34_inactive)-[:PROCESS]->(loop_34_sink)
+(loop_34_verdict)-[:PROCESS]->(loop_34_sink)
+(loop_34_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_34_then_branch)
+(loop_34_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_34_then_branch)
+(loop_34_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_34_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-828.gg
+// Executable Gnosis projection for The Fry Loop.
+
+// Nodes
+(loop_828_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_828_context_branch: BehaviorEmit { emission: 'context' })
+(loop_828_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20energy%20creaky%20voice' })
+(loop_828_inactive: BehaviorTerminal { loopId: 828, loopName: 'The%20Fry%20Loop' })
+(loop_828_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_828_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_828_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_828_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Eeyore%20Operator', mechanism: 'it%20sounds%20%22Bored%22%20or%20%22Depressed%22' })
+(loop_828_result_branch: BehaviorEmit { emission: 'result', text: 'the%20caller%20feeling%20like%20a%20burden' })
+(loop_828_sink: BehaviorSink)
+(loop_828_start: BehaviorStart { loopId: 828, loopName: 'The%20Fry%20Loop', given: 'Low%20energy%20creaky%20voice', when: 'answering%20the%20phone', then: 'it%20sounds%20%22Bored%22%20or%20%22Depressed%22%20(The%20Eeyore%20Operator)', result: 'the%20caller%20feeling%20like%20a%20burden', operatorName: 'The%20Eeyore%20Operator', operatorMechanism: 'it%20sounds%20%22Bored%22%20or%20%22Depressed%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_828_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_828_then_branch: BehaviorEmit { emission: 'then', text: 'it%20sounds%20%22Bored%22%20or%20%22Depressed%22%20(The%20Eeyore%20Operator)' })
+(loop_828_verdict: BehaviorVerdict { loopId: 828, loopName: 'The%20Fry%20Loop', then: 'it%20sounds%20%22Bored%22%20or%20%22Depressed%22%20(The%20Eeyore%20Operator)', result: 'the%20caller%20feeling%20like%20a%20burden', operatorName: 'The%20Eeyore%20Operator', operatorMechanism: 'it%20sounds%20%22Bored%22%20or%20%22Depressed%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_828_when_gate: BehaviorAssess { stage: 'when', text: 'answering%20the%20phone' })
+
+// Topology
+(loop_828_start)-[:PROCESS]->(loop_828_given_gate)
+(loop_828_given_gate)-[:PROCESS { case: "ok" }]->(loop_828_when_gate)
+(loop_828_given_gate)-[:PROCESS { case: "err" }]->(loop_828_inactive)
+(loop_828_when_gate)-[:PROCESS { case: "ok" }]->(loop_828_context)
+(loop_828_when_gate)-[:PROCESS { case: "err" }]->(loop_828_inactive)
+(loop_828_context)-[:FORK { strategy: "behavior-branches" }]->(loop_828_context_branch | loop_828_then_branch | loop_828_operator_branch | loop_828_result_branch | loop_828_taxonomy_branch | loop_828_intervention_recognize | loop_828_intervention_interdict | loop_828_intervention_minimize)
+(loop_828_context_branch | loop_828_then_branch | loop_828_operator_branch | loop_828_result_branch | loop_828_taxonomy_branch | loop_828_intervention_recognize | loop_828_intervention_interdict | loop_828_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_828_verdict)
+(loop_828_inactive)-[:PROCESS]->(loop_828_sink)
+(loop_828_verdict)-[:PROCESS]->(loop_828_sink)
+(loop_828_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_828_then_branch)
+(loop_828_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_828_then_branch)
+(loop_828_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_828_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-50.gg
+// Executable Gnosis projection for The Pretty-Mean Loop.
+
+// Nodes
+(loop_50_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_50_context_branch: BehaviorEmit { emission: 'context' })
+(loop_50_given_gate: BehaviorAssess { stage: 'given', text: 'High%20Craniofacial%20Symmetry%20%2B%20Negative%20Resting%20Face' })
+(loop_50_inactive: BehaviorTerminal { loopId: 50, loopName: 'The%20Pretty-Mean%20Loop' })
+(loop_50_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_50_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_50_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_50_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Status%20Operator', mechanism: 'observers%20assume%20%22Snobbery%22%20or%20%22Elitism%22' })
+(loop_50_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20isolated%20by%20peers%20who%20feel%20%22not%20good%20enough%22%20to%20approach%2C%20leading%20to%20**Loneliness%20despite%20Popularity**' })
+(loop_50_sink: BehaviorSink)
+(loop_50_start: BehaviorStart { loopId: 50, loopName: 'The%20Pretty-Mean%20Loop', given: 'High%20Craniofacial%20Symmetry%20%2B%20Negative%20Resting%20Face', when: 'silent', then: 'observers%20assume%20%22Snobbery%22%20or%20%22Elitism%22%20(The%20Status%20Operator)', result: 'the%20individual%20being%20isolated%20by%20peers%20who%20feel%20%22not%20good%20enough%22%20to%20approach%2C%20leading%20to%20**Loneliness%20despite%20Popularity**', operatorName: 'The%20Status%20Operator', operatorMechanism: 'observers%20assume%20%22Snobbery%22%20or%20%22Elitism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_50_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_50_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Snobbery%22%20or%20%22Elitism%22%20(The%20Status%20Operator)' })
+(loop_50_verdict: BehaviorVerdict { loopId: 50, loopName: 'The%20Pretty-Mean%20Loop', then: 'observers%20assume%20%22Snobbery%22%20or%20%22Elitism%22%20(The%20Status%20Operator)', result: 'the%20individual%20being%20isolated%20by%20peers%20who%20feel%20%22not%20good%20enough%22%20to%20approach%2C%20leading%20to%20**Loneliness%20despite%20Popularity**', operatorName: 'The%20Status%20Operator', operatorMechanism: 'observers%20assume%20%22Snobbery%22%20or%20%22Elitism%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_50_when_gate: BehaviorAssess { stage: 'when', text: 'silent' })
+
+// Topology
+(loop_50_start)-[:PROCESS]->(loop_50_given_gate)
+(loop_50_given_gate)-[:PROCESS { case: "ok" }]->(loop_50_when_gate)
+(loop_50_given_gate)-[:PROCESS { case: "err" }]->(loop_50_inactive)
+(loop_50_when_gate)-[:PROCESS { case: "ok" }]->(loop_50_context)
+(loop_50_when_gate)-[:PROCESS { case: "err" }]->(loop_50_inactive)
+(loop_50_context)-[:FORK { strategy: "behavior-branches" }]->(loop_50_context_branch | loop_50_then_branch | loop_50_operator_branch | loop_50_result_branch | loop_50_taxonomy_branch | loop_50_intervention_recognize | loop_50_intervention_interdict | loop_50_intervention_minimize)
+(loop_50_context_branch | loop_50_then_branch | loop_50_operator_branch | loop_50_result_branch | loop_50_taxonomy_branch | loop_50_intervention_recognize | loop_50_intervention_interdict | loop_50_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_50_verdict)
+(loop_50_inactive)-[:PROCESS]->(loop_50_sink)
+(loop_50_verdict)-[:PROCESS]->(loop_50_sink)
+(loop_50_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_50_then_branch)
+(loop_50_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_50_then_branch)
+(loop_50_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_50_then_branch)

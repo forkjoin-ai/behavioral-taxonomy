@@ -1,0 +1,33 @@
+// behavioral-loop-529.gg
+// Executable Gnosis projection for The Lower Teeth Loop.
+
+// Nodes
+(loop_529_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_529_context_branch: BehaviorEmit { emission: 'context' })
+(loop_529_given_gate: BehaviorAssess { stage: 'given', text: 'Smile%20engaging%20the%20depressor%20labii%20inferioris%20(showing%20bottom%20teeth)' })
+(loop_529_inactive: BehaviorTerminal { loopId: 529, loopName: 'The%20Lower%20Teeth%20Loop' })
+(loop_529_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_529_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_529_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_529_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Grimace%20Operator', mechanism: 'it%20looks%20%22Aggressive%2C%22%20%22Pained%2C%22%20or%20%22Simian%22' })
+(loop_529_result_branch: BehaviorEmit { emission: 'result', text: 'the%20smile%20being%20misinterpreted%20as%20a%20threat%20or%20stress%20signal' })
+(loop_529_sink: BehaviorSink)
+(loop_529_start: BehaviorStart { loopId: 529, loopName: 'The%20Lower%20Teeth%20Loop', given: 'Smile%20engaging%20the%20depressor%20labii%20inferioris%20(showing%20bottom%20teeth)', when: 'smiling', then: 'it%20looks%20%22Aggressive%2C%22%20%22Pained%2C%22%20or%20%22Simian%22%20(The%20Grimace%20Operator)', result: 'the%20smile%20being%20misinterpreted%20as%20a%20threat%20or%20stress%20signal', operatorName: 'The%20Grimace%20Operator', operatorMechanism: 'it%20looks%20%22Aggressive%2C%22%20%22Pained%2C%22%20or%20%22Simian%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_529_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_529_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20%22Aggressive%2C%22%20%22Pained%2C%22%20or%20%22Simian%22%20(The%20Grimace%20Operator)' })
+(loop_529_verdict: BehaviorVerdict { loopId: 529, loopName: 'The%20Lower%20Teeth%20Loop', then: 'it%20looks%20%22Aggressive%2C%22%20%22Pained%2C%22%20or%20%22Simian%22%20(The%20Grimace%20Operator)', result: 'the%20smile%20being%20misinterpreted%20as%20a%20threat%20or%20stress%20signal', operatorName: 'The%20Grimace%20Operator', operatorMechanism: 'it%20looks%20%22Aggressive%2C%22%20%22Pained%2C%22%20or%20%22Simian%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_529_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_529_start)-[:PROCESS]->(loop_529_given_gate)
+(loop_529_given_gate)-[:PROCESS { case: "ok" }]->(loop_529_when_gate)
+(loop_529_given_gate)-[:PROCESS { case: "err" }]->(loop_529_inactive)
+(loop_529_when_gate)-[:PROCESS { case: "ok" }]->(loop_529_context)
+(loop_529_when_gate)-[:PROCESS { case: "err" }]->(loop_529_inactive)
+(loop_529_context)-[:FORK { strategy: "behavior-branches" }]->(loop_529_context_branch | loop_529_then_branch | loop_529_operator_branch | loop_529_result_branch | loop_529_taxonomy_branch | loop_529_intervention_recognize | loop_529_intervention_interdict | loop_529_intervention_minimize)
+(loop_529_context_branch | loop_529_then_branch | loop_529_operator_branch | loop_529_result_branch | loop_529_taxonomy_branch | loop_529_intervention_recognize | loop_529_intervention_interdict | loop_529_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_529_verdict)
+(loop_529_inactive)-[:PROCESS]->(loop_529_sink)
+(loop_529_verdict)-[:PROCESS]->(loop_529_sink)
+(loop_529_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_529_then_branch)
+(loop_529_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_529_then_branch)
+(loop_529_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_529_then_branch)

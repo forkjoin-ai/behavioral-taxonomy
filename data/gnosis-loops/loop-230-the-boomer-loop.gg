@@ -1,0 +1,33 @@
+// behavioral-loop-230.gg
+// Executable Gnosis projection for The Boomer Loop.
+
+// Nodes
+(loop_230_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_230_context_branch: BehaviorEmit { emission: 'context' })
+(loop_230_given_gate: BehaviorAssess { stage: 'given', text: 'Sensorineural%20hearing%20loss%20or%20poor%20feedback%20loop' })
+(loop_230_inactive: BehaviorTerminal { loopId: 230, loopName: 'The%20Boomer%20Loop' })
+(loop_230_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_230_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_230_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_230_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Aggression%2FDisruption%20Operator', mechanism: 'the%20volume%20is%20startlingly%20loud' })
+(loop_230_result_branch: BehaviorEmit { emission: 'result', text: 'being%20constantly%20shushed%2C%20leading%20to%20**Resentment**%20toward%20social%20norms' })
+(loop_230_sink: BehaviorSink)
+(loop_230_start: BehaviorStart { loopId: 230, loopName: 'The%20Boomer%20Loop', given: 'Sensorineural%20hearing%20loss%20or%20poor%20feedback%20loop', when: 'speaking%20in%20a%20quiet%20library%2Foffice', then: 'the%20volume%20is%20startlingly%20loud%20(The%20Aggression%2FDisruption%20Operator)', result: 'being%20constantly%20shushed%2C%20leading%20to%20**Resentment**%20toward%20social%20norms', operatorName: 'The%20Aggression%2FDisruption%20Operator', operatorMechanism: 'the%20volume%20is%20startlingly%20loud', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_230_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_230_then_branch: BehaviorEmit { emission: 'then', text: 'the%20volume%20is%20startlingly%20loud%20(The%20Aggression%2FDisruption%20Operator)' })
+(loop_230_verdict: BehaviorVerdict { loopId: 230, loopName: 'The%20Boomer%20Loop', then: 'the%20volume%20is%20startlingly%20loud%20(The%20Aggression%2FDisruption%20Operator)', result: 'being%20constantly%20shushed%2C%20leading%20to%20**Resentment**%20toward%20social%20norms', operatorName: 'The%20Aggression%2FDisruption%20Operator', operatorMechanism: 'the%20volume%20is%20startlingly%20loud', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_230_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20in%20a%20quiet%20library%2Foffice' })
+
+// Topology
+(loop_230_start)-[:PROCESS]->(loop_230_given_gate)
+(loop_230_given_gate)-[:PROCESS { case: "ok" }]->(loop_230_when_gate)
+(loop_230_given_gate)-[:PROCESS { case: "err" }]->(loop_230_inactive)
+(loop_230_when_gate)-[:PROCESS { case: "ok" }]->(loop_230_context)
+(loop_230_when_gate)-[:PROCESS { case: "err" }]->(loop_230_inactive)
+(loop_230_context)-[:FORK { strategy: "behavior-branches" }]->(loop_230_context_branch | loop_230_then_branch | loop_230_operator_branch | loop_230_result_branch | loop_230_taxonomy_branch | loop_230_intervention_recognize | loop_230_intervention_interdict | loop_230_intervention_minimize)
+(loop_230_context_branch | loop_230_then_branch | loop_230_operator_branch | loop_230_result_branch | loop_230_taxonomy_branch | loop_230_intervention_recognize | loop_230_intervention_interdict | loop_230_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_230_verdict)
+(loop_230_inactive)-[:PROCESS]->(loop_230_sink)
+(loop_230_verdict)-[:PROCESS]->(loop_230_sink)
+(loop_230_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_230_then_branch)
+(loop_230_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_230_then_branch)
+(loop_230_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_230_then_branch)

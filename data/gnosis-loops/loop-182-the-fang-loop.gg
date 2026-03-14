@@ -1,0 +1,31 @@
+// behavioral-loop-182.gg
+// Executable Gnosis projection for The Fang Loop.
+
+// Nodes
+(loop_182_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_182_context_branch: BehaviorEmit { emission: 'context' })
+(loop_182_given_gate: BehaviorAssess { stage: 'given', text: 'Sharp%2C%20elongated%20canine%20teeth' })
+(loop_182_inactive: BehaviorTerminal { loopId: 182, loopName: 'The%20Fang%20Loop' })
+(loop_182_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Combine%20with%20approachability%20signals' })
+(loop_182_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_182_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%2FThreat%20Operator', mechanism: 'the%20look%20is%20%22Predatory%22%20or%20%22Mischievous%22' })
+(loop_182_result_branch: BehaviorEmit { emission: 'result', text: 'a%20**%22Bad%20Boy%2FGirl%22%20Persona**%20that%20attracts%20thrill-seekers' })
+(loop_182_sink: BehaviorSink)
+(loop_182_start: BehaviorStart { loopId: 182, loopName: 'The%20Fang%20Loop', given: 'Sharp%2C%20elongated%20canine%20teeth', when: 'smiling', then: 'the%20look%20is%20%22Predatory%22%20or%20%22Mischievous%22%20(The%20Novelty%2FThreat%20Operator)', result: 'a%20**%22Bad%20Boy%2FGirl%22%20Persona**%20that%20attracts%20thrill-seekers', operatorName: 'The%20Novelty%2FThreat%20Operator', operatorMechanism: 'the%20look%20is%20%22Predatory%22%20or%20%22Mischievous%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Combine%20with%20approachability%20signals' })
+(loop_182_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_182_then_branch: BehaviorEmit { emission: 'then', text: 'the%20look%20is%20%22Predatory%22%20or%20%22Mischievous%22%20(The%20Novelty%2FThreat%20Operator)' })
+(loop_182_verdict: BehaviorVerdict { loopId: 182, loopName: 'The%20Fang%20Loop', then: 'the%20look%20is%20%22Predatory%22%20or%20%22Mischievous%22%20(The%20Novelty%2FThreat%20Operator)', result: 'a%20**%22Bad%20Boy%2FGirl%22%20Persona**%20that%20attracts%20thrill-seekers', operatorName: 'The%20Novelty%2FThreat%20Operator', operatorMechanism: 'the%20look%20is%20%22Predatory%22%20or%20%22Mischievous%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'ATTRACTION' })
+(loop_182_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_182_start)-[:PROCESS]->(loop_182_given_gate)
+(loop_182_given_gate)-[:PROCESS { case: "ok" }]->(loop_182_when_gate)
+(loop_182_given_gate)-[:PROCESS { case: "err" }]->(loop_182_inactive)
+(loop_182_when_gate)-[:PROCESS { case: "ok" }]->(loop_182_context)
+(loop_182_when_gate)-[:PROCESS { case: "err" }]->(loop_182_inactive)
+(loop_182_context)-[:FORK { strategy: "behavior-branches" }]->(loop_182_context_branch | loop_182_then_branch | loop_182_operator_branch | loop_182_result_branch | loop_182_taxonomy_branch | loop_182_intervention_recognize | loop_182_intervention_leverage)
+(loop_182_context_branch | loop_182_then_branch | loop_182_operator_branch | loop_182_result_branch | loop_182_taxonomy_branch | loop_182_intervention_recognize | loop_182_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_182_verdict)
+(loop_182_inactive)-[:PROCESS]->(loop_182_sink)
+(loop_182_verdict)-[:PROCESS]->(loop_182_sink)
+(loop_182_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_182_then_branch)
+(loop_182_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_182_result_branch)

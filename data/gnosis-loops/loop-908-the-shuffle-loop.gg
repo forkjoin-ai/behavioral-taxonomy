@@ -1,0 +1,33 @@
+// behavioral-loop-908.gg
+// Executable Gnosis projection for The Shuffle Loop.
+
+// Nodes
+(loop_908_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_908_context_branch: BehaviorEmit { emission: 'context' })
+(loop_908_given_gate: BehaviorAssess { stage: 'given', text: 'Short%2C%20scraping%20steps%20with%20stooped%20posture' })
+(loop_908_inactive: BehaviorTerminal { loopId: 908, loopName: 'The%20Shuffle%20Loop' })
+(loop_908_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_908_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_908_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_908_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Shuffle%20Operator', mechanism: 'it%20signals%20%22Frailty%22%20and%20%22Slowness%22' })
+(loop_908_result_branch: BehaviorEmit { emission: 'result', text: 'people%20holding%20doors%20open%20and%20speaking%20louder%20(infantilization)' })
+(loop_908_sink: BehaviorSink)
+(loop_908_start: BehaviorStart { loopId: 908, loopName: 'The%20Shuffle%20Loop', given: 'Short%2C%20scraping%20steps%20with%20stooped%20posture', when: 'moving%20down%20a%20hall', then: 'it%20signals%20%22Frailty%22%20and%20%22Slowness%22%20(The%20Shuffle%20Operator)', result: 'people%20holding%20doors%20open%20and%20speaking%20louder%20(infantilization)', operatorName: 'The%20Shuffle%20Operator', operatorMechanism: 'it%20signals%20%22Frailty%22%20and%20%22Slowness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_908_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_908_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Frailty%22%20and%20%22Slowness%22%20(The%20Shuffle%20Operator)' })
+(loop_908_verdict: BehaviorVerdict { loopId: 908, loopName: 'The%20Shuffle%20Loop', then: 'it%20signals%20%22Frailty%22%20and%20%22Slowness%22%20(The%20Shuffle%20Operator)', result: 'people%20holding%20doors%20open%20and%20speaking%20louder%20(infantilization)', operatorName: 'The%20Shuffle%20Operator', operatorMechanism: 'it%20signals%20%22Frailty%22%20and%20%22Slowness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_908_when_gate: BehaviorAssess { stage: 'when', text: 'moving%20down%20a%20hall' })
+
+// Topology
+(loop_908_start)-[:PROCESS]->(loop_908_given_gate)
+(loop_908_given_gate)-[:PROCESS { case: "ok" }]->(loop_908_when_gate)
+(loop_908_given_gate)-[:PROCESS { case: "err" }]->(loop_908_inactive)
+(loop_908_when_gate)-[:PROCESS { case: "ok" }]->(loop_908_context)
+(loop_908_when_gate)-[:PROCESS { case: "err" }]->(loop_908_inactive)
+(loop_908_context)-[:FORK { strategy: "behavior-branches" }]->(loop_908_context_branch | loop_908_then_branch | loop_908_operator_branch | loop_908_result_branch | loop_908_taxonomy_branch | loop_908_intervention_recognize | loop_908_intervention_interdict | loop_908_intervention_minimize)
+(loop_908_context_branch | loop_908_then_branch | loop_908_operator_branch | loop_908_result_branch | loop_908_taxonomy_branch | loop_908_intervention_recognize | loop_908_intervention_interdict | loop_908_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_908_verdict)
+(loop_908_inactive)-[:PROCESS]->(loop_908_sink)
+(loop_908_verdict)-[:PROCESS]->(loop_908_sink)
+(loop_908_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_908_then_branch)
+(loop_908_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_908_then_branch)
+(loop_908_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_908_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-952.gg
+// Executable Gnosis projection for The Peel Loop.
+
+// Nodes
+(loop_952_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_952_context_branch: BehaviorEmit { emission: 'context' })
+(loop_952_given_gate: BehaviorAssess { stage: 'given', text: 'Post-sunburn%20skin%20shedding' })
+(loop_952_inactive: BehaviorTerminal { loopId: 952, loopName: 'The%20Peel%20Loop' })
+(loop_952_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_952_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_952_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_952_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Lizard%20Operator', mechanism: 'skin%20flakes%20off' })
+(loop_952_result_branch: BehaviorEmit { emission: 'result', text: 'physical%20repulsion%20from%20others' })
+(loop_952_sink: BehaviorSink)
+(loop_952_start: BehaviorStart { loopId: 952, loopName: 'The%20Peel%20Loop', given: 'Post-sunburn%20skin%20shedding', when: 'scratching%20an%20itch', then: 'skin%20flakes%20off%20(The%20Lizard%20Operator)', result: 'physical%20repulsion%20from%20others', operatorName: 'The%20Lizard%20Operator', operatorMechanism: 'skin%20flakes%20off', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_952_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_952_then_branch: BehaviorEmit { emission: 'then', text: 'skin%20flakes%20off%20(The%20Lizard%20Operator)' })
+(loop_952_verdict: BehaviorVerdict { loopId: 952, loopName: 'The%20Peel%20Loop', then: 'skin%20flakes%20off%20(The%20Lizard%20Operator)', result: 'physical%20repulsion%20from%20others', operatorName: 'The%20Lizard%20Operator', operatorMechanism: 'skin%20flakes%20off', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_952_when_gate: BehaviorAssess { stage: 'when', text: 'scratching%20an%20itch' })
+
+// Topology
+(loop_952_start)-[:PROCESS]->(loop_952_given_gate)
+(loop_952_given_gate)-[:PROCESS { case: "ok" }]->(loop_952_when_gate)
+(loop_952_given_gate)-[:PROCESS { case: "err" }]->(loop_952_inactive)
+(loop_952_when_gate)-[:PROCESS { case: "ok" }]->(loop_952_context)
+(loop_952_when_gate)-[:PROCESS { case: "err" }]->(loop_952_inactive)
+(loop_952_context)-[:FORK { strategy: "behavior-branches" }]->(loop_952_context_branch | loop_952_then_branch | loop_952_operator_branch | loop_952_result_branch | loop_952_taxonomy_branch | loop_952_intervention_recognize | loop_952_intervention_interdict | loop_952_intervention_minimize)
+(loop_952_context_branch | loop_952_then_branch | loop_952_operator_branch | loop_952_result_branch | loop_952_taxonomy_branch | loop_952_intervention_recognize | loop_952_intervention_interdict | loop_952_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_952_verdict)
+(loop_952_inactive)-[:PROCESS]->(loop_952_sink)
+(loop_952_verdict)-[:PROCESS]->(loop_952_sink)
+(loop_952_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_952_then_branch)
+(loop_952_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_952_then_branch)
+(loop_952_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_952_then_branch)

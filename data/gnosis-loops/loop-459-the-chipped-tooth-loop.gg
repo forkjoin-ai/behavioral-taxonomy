@@ -1,0 +1,33 @@
+// behavioral-loop-459.gg
+// Executable Gnosis projection for The Chipped Tooth Loop.
+
+// Nodes
+(loop_459_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_459_context_branch: BehaviorEmit { emission: 'context' })
+(loop_459_given_gate: BehaviorAssess { stage: 'given', text: 'Fractured%20incisor%20(untreated)' })
+(loop_459_inactive: BehaviorTerminal { loopId: 459, loopName: 'The%20Chipped%20Tooth%20Loop' })
+(loop_459_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_459_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_459_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_459_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Broken%20Window%20Operator', mechanism: 'it%20signals%20%22Roughness%2C%22%20%22Poverty%2C%22%20or%20%22Carelessness%22' })
+(loop_459_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20loss%20of%20%22Premium%22%20status' })
+(loop_459_sink: BehaviorSink)
+(loop_459_start: BehaviorStart { loopId: 459, loopName: 'The%20Chipped%20Tooth%20Loop', given: 'Fractured%20incisor%20(untreated)', when: 'meeting%20a%20new%20client', then: 'it%20signals%20%22Roughness%2C%22%20%22Poverty%2C%22%20or%20%22Carelessness%22%20(The%20Broken%20Window%20Operator)', result: 'immediate%20loss%20of%20%22Premium%22%20status', operatorName: 'The%20Broken%20Window%20Operator', operatorMechanism: 'it%20signals%20%22Roughness%2C%22%20%22Poverty%2C%22%20or%20%22Carelessness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_459_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_459_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Roughness%2C%22%20%22Poverty%2C%22%20or%20%22Carelessness%22%20(The%20Broken%20Window%20Operator)' })
+(loop_459_verdict: BehaviorVerdict { loopId: 459, loopName: 'The%20Chipped%20Tooth%20Loop', then: 'it%20signals%20%22Roughness%2C%22%20%22Poverty%2C%22%20or%20%22Carelessness%22%20(The%20Broken%20Window%20Operator)', result: 'immediate%20loss%20of%20%22Premium%22%20status', operatorName: 'The%20Broken%20Window%20Operator', operatorMechanism: 'it%20signals%20%22Roughness%2C%22%20%22Poverty%2C%22%20or%20%22Carelessness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_459_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20a%20new%20client' })
+
+// Topology
+(loop_459_start)-[:PROCESS]->(loop_459_given_gate)
+(loop_459_given_gate)-[:PROCESS { case: "ok" }]->(loop_459_when_gate)
+(loop_459_given_gate)-[:PROCESS { case: "err" }]->(loop_459_inactive)
+(loop_459_when_gate)-[:PROCESS { case: "ok" }]->(loop_459_context)
+(loop_459_when_gate)-[:PROCESS { case: "err" }]->(loop_459_inactive)
+(loop_459_context)-[:FORK { strategy: "behavior-branches" }]->(loop_459_context_branch | loop_459_then_branch | loop_459_operator_branch | loop_459_result_branch | loop_459_taxonomy_branch | loop_459_intervention_recognize | loop_459_intervention_interdict | loop_459_intervention_minimize)
+(loop_459_context_branch | loop_459_then_branch | loop_459_operator_branch | loop_459_result_branch | loop_459_taxonomy_branch | loop_459_intervention_recognize | loop_459_intervention_interdict | loop_459_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_459_verdict)
+(loop_459_inactive)-[:PROCESS]->(loop_459_sink)
+(loop_459_verdict)-[:PROCESS]->(loop_459_sink)
+(loop_459_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_459_then_branch)
+(loop_459_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_459_then_branch)
+(loop_459_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_459_then_branch)

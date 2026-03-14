@@ -1,0 +1,33 @@
+// behavioral-loop-835.gg
+// Executable Gnosis projection for The Blank Loop.
+
+// Nodes
+(loop_835_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_835_context_branch: BehaviorEmit { emission: 'context' })
+(loop_835_given_gate: BehaviorAssess { stage: 'given', text: 'Eyes%20focused%20at%20infinity%20(1000-yard%20stare)' })
+(loop_835_inactive: BehaviorTerminal { loopId: 835, loopName: 'The%20Blank%20Loop' })
+(loop_835_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_835_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_835_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_835_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Shell%20Operator', mechanism: 'it%20signals%20%22Trauma%22%20or%20%22Absence%22' })
+(loop_835_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20waving%20a%20hand%20in%20front%20of%20the%20face%20to%20%22reboot%22%20the%20interaction' })
+(loop_835_sink: BehaviorSink)
+(loop_835_start: BehaviorStart { loopId: 835, loopName: 'The%20Blank%20Loop', given: 'Eyes%20focused%20at%20infinity%20(1000-yard%20stare)', when: 'being%20spoken%20to%20directly', then: 'it%20signals%20%22Trauma%22%20or%20%22Absence%22%20(The%20Shell%20Operator)', result: 'the%20speaker%20waving%20a%20hand%20in%20front%20of%20the%20face%20to%20%22reboot%22%20the%20interaction', operatorName: 'The%20Shell%20Operator', operatorMechanism: 'it%20signals%20%22Trauma%22%20or%20%22Absence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_835_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_835_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Trauma%22%20or%20%22Absence%22%20(The%20Shell%20Operator)' })
+(loop_835_verdict: BehaviorVerdict { loopId: 835, loopName: 'The%20Blank%20Loop', then: 'it%20signals%20%22Trauma%22%20or%20%22Absence%22%20(The%20Shell%20Operator)', result: 'the%20speaker%20waving%20a%20hand%20in%20front%20of%20the%20face%20to%20%22reboot%22%20the%20interaction', operatorName: 'The%20Shell%20Operator', operatorMechanism: 'it%20signals%20%22Trauma%22%20or%20%22Absence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_835_when_gate: BehaviorAssess { stage: 'when', text: 'being%20spoken%20to%20directly' })
+
+// Topology
+(loop_835_start)-[:PROCESS]->(loop_835_given_gate)
+(loop_835_given_gate)-[:PROCESS { case: "ok" }]->(loop_835_when_gate)
+(loop_835_given_gate)-[:PROCESS { case: "err" }]->(loop_835_inactive)
+(loop_835_when_gate)-[:PROCESS { case: "ok" }]->(loop_835_context)
+(loop_835_when_gate)-[:PROCESS { case: "err" }]->(loop_835_inactive)
+(loop_835_context)-[:FORK { strategy: "behavior-branches" }]->(loop_835_context_branch | loop_835_then_branch | loop_835_operator_branch | loop_835_result_branch | loop_835_taxonomy_branch | loop_835_intervention_recognize | loop_835_intervention_interdict | loop_835_intervention_minimize)
+(loop_835_context_branch | loop_835_then_branch | loop_835_operator_branch | loop_835_result_branch | loop_835_taxonomy_branch | loop_835_intervention_recognize | loop_835_intervention_interdict | loop_835_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_835_verdict)
+(loop_835_inactive)-[:PROCESS]->(loop_835_sink)
+(loop_835_verdict)-[:PROCESS]->(loop_835_sink)
+(loop_835_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_835_then_branch)
+(loop_835_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_835_then_branch)
+(loop_835_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_835_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-77.gg
+// Executable Gnosis projection for The Iron Skin Loop.
+
+// Nodes
+(loop_77_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_77_context_branch: BehaviorEmit { emission: 'context' })
+(loop_77_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20Nociceptive%20Sensitivity' })
+(loop_77_inactive: BehaviorTerminal { loopId: 77, loopName: 'The%20Iron%20Skin%20Loop' })
+(loop_77_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_77_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_77_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_77_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stoic%20Operator', mechanism: 'the%20individual%20shows%20no%20distress' })
+(loop_77_result_branch: BehaviorEmit { emission: 'result', text: 'being%20designated%20the%20%22Protector%22%20or%20%22Tough%20Guy%2C%22%20but%20also%20**Emotional%20Neglect**%20(nobody%20asks%20if%20they%20are%20okay)' })
+(loop_77_sink: BehaviorSink)
+(loop_77_start: BehaviorStart { loopId: 77, loopName: 'The%20Iron%20Skin%20Loop', given: 'Low%20Nociceptive%20Sensitivity', when: 'injured%20physically%20in%20a%20group%20setting', then: 'the%20individual%20shows%20no%20distress%20(The%20Stoic%20Operator)', result: 'being%20designated%20the%20%22Protector%22%20or%20%22Tough%20Guy%2C%22%20but%20also%20**Emotional%20Neglect**%20(nobody%20asks%20if%20they%20are%20okay)', operatorName: 'The%20Stoic%20Operator', operatorMechanism: 'the%20individual%20shows%20no%20distress', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_77_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_77_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20shows%20no%20distress%20(The%20Stoic%20Operator)' })
+(loop_77_verdict: BehaviorVerdict { loopId: 77, loopName: 'The%20Iron%20Skin%20Loop', then: 'the%20individual%20shows%20no%20distress%20(The%20Stoic%20Operator)', result: 'being%20designated%20the%20%22Protector%22%20or%20%22Tough%20Guy%2C%22%20but%20also%20**Emotional%20Neglect**%20(nobody%20asks%20if%20they%20are%20okay)', operatorName: 'The%20Stoic%20Operator', operatorMechanism: 'the%20individual%20shows%20no%20distress', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_77_when_gate: BehaviorAssess { stage: 'when', text: 'injured%20physically%20in%20a%20group%20setting' })
+
+// Topology
+(loop_77_start)-[:PROCESS]->(loop_77_given_gate)
+(loop_77_given_gate)-[:PROCESS { case: "ok" }]->(loop_77_when_gate)
+(loop_77_given_gate)-[:PROCESS { case: "err" }]->(loop_77_inactive)
+(loop_77_when_gate)-[:PROCESS { case: "ok" }]->(loop_77_context)
+(loop_77_when_gate)-[:PROCESS { case: "err" }]->(loop_77_inactive)
+(loop_77_context)-[:FORK { strategy: "behavior-branches" }]->(loop_77_context_branch | loop_77_then_branch | loop_77_operator_branch | loop_77_result_branch | loop_77_taxonomy_branch | loop_77_intervention_recognize | loop_77_intervention_interdict | loop_77_intervention_minimize)
+(loop_77_context_branch | loop_77_then_branch | loop_77_operator_branch | loop_77_result_branch | loop_77_taxonomy_branch | loop_77_intervention_recognize | loop_77_intervention_interdict | loop_77_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_77_verdict)
+(loop_77_inactive)-[:PROCESS]->(loop_77_sink)
+(loop_77_verdict)-[:PROCESS]->(loop_77_sink)
+(loop_77_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_77_then_branch)
+(loop_77_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_77_then_branch)
+(loop_77_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_77_then_branch)

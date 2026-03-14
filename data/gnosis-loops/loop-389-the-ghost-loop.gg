@@ -1,0 +1,33 @@
+// behavioral-loop-389.gg
+// Executable Gnosis projection for The Ghost Loop.
+
+// Nodes
+(loop_389_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_389_context_branch: BehaviorEmit { emission: 'context' })
+(loop_389_given_gate: BehaviorAssess { stage: 'given', text: 'Blood%20draining%20from%20face%20under%20mild%20stress' })
+(loop_389_inactive: BehaviorTerminal { loopId: 389, loopName: 'The%20Ghost%20Loop' })
+(loop_389_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_389_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_389_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_389_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Faint%20Operator', mechanism: 'the%20face%20turns%20sheet%20white' })
+(loop_389_result_branch: BehaviorEmit { emission: 'result', text: 'others%20protecting%20the%20individual%20from%20hard%20truths%20to%20avoid%20a%20medical%20event' })
+(loop_389_sink: BehaviorSink)
+(loop_389_start: BehaviorStart { loopId: 389, loopName: 'The%20Ghost%20Loop', given: 'Blood%20draining%20from%20face%20under%20mild%20stress', when: 'hearing%20bad%20news', then: 'the%20face%20turns%20sheet%20white%20(The%20Faint%20Operator)', result: 'others%20protecting%20the%20individual%20from%20hard%20truths%20to%20avoid%20a%20medical%20event', operatorName: 'The%20Faint%20Operator', operatorMechanism: 'the%20face%20turns%20sheet%20white', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_389_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_389_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20turns%20sheet%20white%20(The%20Faint%20Operator)' })
+(loop_389_verdict: BehaviorVerdict { loopId: 389, loopName: 'The%20Ghost%20Loop', then: 'the%20face%20turns%20sheet%20white%20(The%20Faint%20Operator)', result: 'others%20protecting%20the%20individual%20from%20hard%20truths%20to%20avoid%20a%20medical%20event', operatorName: 'The%20Faint%20Operator', operatorMechanism: 'the%20face%20turns%20sheet%20white', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_389_when_gate: BehaviorAssess { stage: 'when', text: 'hearing%20bad%20news' })
+
+// Topology
+(loop_389_start)-[:PROCESS]->(loop_389_given_gate)
+(loop_389_given_gate)-[:PROCESS { case: "ok" }]->(loop_389_when_gate)
+(loop_389_given_gate)-[:PROCESS { case: "err" }]->(loop_389_inactive)
+(loop_389_when_gate)-[:PROCESS { case: "ok" }]->(loop_389_context)
+(loop_389_when_gate)-[:PROCESS { case: "err" }]->(loop_389_inactive)
+(loop_389_context)-[:FORK { strategy: "behavior-branches" }]->(loop_389_context_branch | loop_389_then_branch | loop_389_operator_branch | loop_389_result_branch | loop_389_taxonomy_branch | loop_389_intervention_recognize | loop_389_intervention_interdict | loop_389_intervention_minimize)
+(loop_389_context_branch | loop_389_then_branch | loop_389_operator_branch | loop_389_result_branch | loop_389_taxonomy_branch | loop_389_intervention_recognize | loop_389_intervention_interdict | loop_389_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_389_verdict)
+(loop_389_inactive)-[:PROCESS]->(loop_389_sink)
+(loop_389_verdict)-[:PROCESS]->(loop_389_sink)
+(loop_389_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_389_then_branch)
+(loop_389_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_389_then_branch)
+(loop_389_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_389_then_branch)

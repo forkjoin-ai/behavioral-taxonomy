@@ -1,0 +1,33 @@
+// behavioral-loop-859.gg
+// Executable Gnosis projection for The Bright White Loop.
+
+// Nodes
+(loop_859_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_859_context_branch: BehaviorEmit { emission: 'context' })
+(loop_859_given_gate: BehaviorAssess { stage: 'given', text: 'Bleached%20teeth%20(A1%20shade%20or%20lighter)' })
+(loop_859_inactive: BehaviorTerminal { loopId: 859, loopName: 'The%20Bright%20White%20Loop' })
+(loop_859_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_859_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_859_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_859_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hollywood%20Operator', mechanism: 'the%20teeth%20look%20%22Fake%22' })
+(loop_859_result_branch: BehaviorEmit { emission: 'result', text: 'assumption%20of%20vanity%20or%20%22New%20Money.%22' })
+(loop_859_sink: BehaviorSink)
+(loop_859_start: BehaviorStart { loopId: 859, loopName: 'The%20Bright%20White%20Loop', given: 'Bleached%20teeth%20(A1%20shade%20or%20lighter)', when: 'in%20natural%20light', then: 'the%20teeth%20look%20%22Fake%22%20(The%20Hollywood%20Operator)', result: 'assumption%20of%20vanity%20or%20%22New%20Money.%22', operatorName: 'The%20Hollywood%20Operator', operatorMechanism: 'the%20teeth%20look%20%22Fake%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_859_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_859_then_branch: BehaviorEmit { emission: 'then', text: 'the%20teeth%20look%20%22Fake%22%20(The%20Hollywood%20Operator)' })
+(loop_859_verdict: BehaviorVerdict { loopId: 859, loopName: 'The%20Bright%20White%20Loop', then: 'the%20teeth%20look%20%22Fake%22%20(The%20Hollywood%20Operator)', result: 'assumption%20of%20vanity%20or%20%22New%20Money.%22', operatorName: 'The%20Hollywood%20Operator', operatorMechanism: 'the%20teeth%20look%20%22Fake%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_859_when_gate: BehaviorAssess { stage: 'when', text: 'in%20natural%20light' })
+
+// Topology
+(loop_859_start)-[:PROCESS]->(loop_859_given_gate)
+(loop_859_given_gate)-[:PROCESS { case: "ok" }]->(loop_859_when_gate)
+(loop_859_given_gate)-[:PROCESS { case: "err" }]->(loop_859_inactive)
+(loop_859_when_gate)-[:PROCESS { case: "ok" }]->(loop_859_context)
+(loop_859_when_gate)-[:PROCESS { case: "err" }]->(loop_859_inactive)
+(loop_859_context)-[:FORK { strategy: "behavior-branches" }]->(loop_859_context_branch | loop_859_then_branch | loop_859_operator_branch | loop_859_result_branch | loop_859_taxonomy_branch | loop_859_intervention_recognize | loop_859_intervention_interdict | loop_859_intervention_minimize)
+(loop_859_context_branch | loop_859_then_branch | loop_859_operator_branch | loop_859_result_branch | loop_859_taxonomy_branch | loop_859_intervention_recognize | loop_859_intervention_interdict | loop_859_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_859_verdict)
+(loop_859_inactive)-[:PROCESS]->(loop_859_sink)
+(loop_859_verdict)-[:PROCESS]->(loop_859_sink)
+(loop_859_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_859_then_branch)
+(loop_859_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_859_then_branch)
+(loop_859_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_859_then_branch)

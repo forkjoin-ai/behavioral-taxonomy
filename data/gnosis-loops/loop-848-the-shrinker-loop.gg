@@ -1,0 +1,33 @@
+// behavioral-loop-848.gg
+// Executable Gnosis projection for The Shrinker Loop.
+
+// Nodes
+(loop_848_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_848_context_branch: BehaviorEmit { emission: 'context' })
+(loop_848_given_gate: BehaviorAssess { stage: 'given', text: 'Rounding%20shoulders%20and%20lowering%20head' })
+(loop_848_inactive: BehaviorTerminal { loopId: 848, loopName: 'The%20Shrinker%20Loop' })
+(loop_848_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_848_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_848_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_848_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Apology%20Operator', mechanism: 'the%20individual%20appears%20%22Smaller%22%20than%20they%20are' })
+(loop_848_result_branch: BehaviorEmit { emission: 'result', text: 'being%20bumped%20into%20or%20ignored' })
+(loop_848_sink: BehaviorSink)
+(loop_848_start: BehaviorStart { loopId: 848, loopName: 'The%20Shrinker%20Loop', given: 'Rounding%20shoulders%20and%20lowering%20head', when: 'entering%20a%20room', then: 'the%20individual%20appears%20%22Smaller%22%20than%20they%20are%20(The%20Apology%20Operator)', result: 'being%20bumped%20into%20or%20ignored', operatorName: 'The%20Apology%20Operator', operatorMechanism: 'the%20individual%20appears%20%22Smaller%22%20than%20they%20are', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_848_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_848_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20appears%20%22Smaller%22%20than%20they%20are%20(The%20Apology%20Operator)' })
+(loop_848_verdict: BehaviorVerdict { loopId: 848, loopName: 'The%20Shrinker%20Loop', then: 'the%20individual%20appears%20%22Smaller%22%20than%20they%20are%20(The%20Apology%20Operator)', result: 'being%20bumped%20into%20or%20ignored', operatorName: 'The%20Apology%20Operator', operatorMechanism: 'the%20individual%20appears%20%22Smaller%22%20than%20they%20are', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_848_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20room' })
+
+// Topology
+(loop_848_start)-[:PROCESS]->(loop_848_given_gate)
+(loop_848_given_gate)-[:PROCESS { case: "ok" }]->(loop_848_when_gate)
+(loop_848_given_gate)-[:PROCESS { case: "err" }]->(loop_848_inactive)
+(loop_848_when_gate)-[:PROCESS { case: "ok" }]->(loop_848_context)
+(loop_848_when_gate)-[:PROCESS { case: "err" }]->(loop_848_inactive)
+(loop_848_context)-[:FORK { strategy: "behavior-branches" }]->(loop_848_context_branch | loop_848_then_branch | loop_848_operator_branch | loop_848_result_branch | loop_848_taxonomy_branch | loop_848_intervention_recognize | loop_848_intervention_interdict | loop_848_intervention_minimize)
+(loop_848_context_branch | loop_848_then_branch | loop_848_operator_branch | loop_848_result_branch | loop_848_taxonomy_branch | loop_848_intervention_recognize | loop_848_intervention_interdict | loop_848_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_848_verdict)
+(loop_848_inactive)-[:PROCESS]->(loop_848_sink)
+(loop_848_verdict)-[:PROCESS]->(loop_848_sink)
+(loop_848_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_848_then_branch)
+(loop_848_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_848_then_branch)
+(loop_848_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_848_then_branch)

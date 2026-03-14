@@ -1,0 +1,33 @@
+// behavioral-loop-746.gg
+// Executable Gnosis projection for The Knee-Lock Loop.
+
+// Nodes
+(loop_746_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_746_context_branch: BehaviorEmit { emission: 'context' })
+(loop_746_given_gate: BehaviorAssess { stage: 'given', text: 'Snapping%20knees%20back%20while%20standing' })
+(loop_746_inactive: BehaviorTerminal { loopId: 746, loopName: 'The%20Knee-Lock%20Loop' })
+(loop_746_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_746_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_746_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_746_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Faint%20Risk%20Operator', mechanism: 'it%20signals%20%22Rigidity%22%20and%20restricts%20blood%20flow' })
+(loop_746_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20looking%20stiff%20and%20unathletic' })
+(loop_746_sink: BehaviorSink)
+(loop_746_start: BehaviorStart { loopId: 746, loopName: 'The%20Knee-Lock%20Loop', given: 'Snapping%20knees%20back%20while%20standing', when: 'in%20a%20formation%20or%20choir', then: 'it%20signals%20%22Rigidity%22%20and%20restricts%20blood%20flow%20(The%20Faint%20Risk%20Operator)', result: 'the%20individual%20looking%20stiff%20and%20unathletic', operatorName: 'The%20Faint%20Risk%20Operator', operatorMechanism: 'it%20signals%20%22Rigidity%22%20and%20restricts%20blood%20flow', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_746_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_746_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Rigidity%22%20and%20restricts%20blood%20flow%20(The%20Faint%20Risk%20Operator)' })
+(loop_746_verdict: BehaviorVerdict { loopId: 746, loopName: 'The%20Knee-Lock%20Loop', then: 'it%20signals%20%22Rigidity%22%20and%20restricts%20blood%20flow%20(The%20Faint%20Risk%20Operator)', result: 'the%20individual%20looking%20stiff%20and%20unathletic', operatorName: 'The%20Faint%20Risk%20Operator', operatorMechanism: 'it%20signals%20%22Rigidity%22%20and%20restricts%20blood%20flow', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_746_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20formation%20or%20choir' })
+
+// Topology
+(loop_746_start)-[:PROCESS]->(loop_746_given_gate)
+(loop_746_given_gate)-[:PROCESS { case: "ok" }]->(loop_746_when_gate)
+(loop_746_given_gate)-[:PROCESS { case: "err" }]->(loop_746_inactive)
+(loop_746_when_gate)-[:PROCESS { case: "ok" }]->(loop_746_context)
+(loop_746_when_gate)-[:PROCESS { case: "err" }]->(loop_746_inactive)
+(loop_746_context)-[:FORK { strategy: "behavior-branches" }]->(loop_746_context_branch | loop_746_then_branch | loop_746_operator_branch | loop_746_result_branch | loop_746_taxonomy_branch | loop_746_intervention_recognize | loop_746_intervention_interdict | loop_746_intervention_minimize)
+(loop_746_context_branch | loop_746_then_branch | loop_746_operator_branch | loop_746_result_branch | loop_746_taxonomy_branch | loop_746_intervention_recognize | loop_746_intervention_interdict | loop_746_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_746_verdict)
+(loop_746_inactive)-[:PROCESS]->(loop_746_sink)
+(loop_746_verdict)-[:PROCESS]->(loop_746_sink)
+(loop_746_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_746_then_branch)
+(loop_746_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_746_then_branch)
+(loop_746_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_746_then_branch)

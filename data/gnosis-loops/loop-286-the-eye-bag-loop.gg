@@ -1,0 +1,31 @@
+// behavioral-loop-286.gg
+// Executable Gnosis projection for The Eye Bag Loop.
+
+// Nodes
+(loop_286_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_286_context_branch: BehaviorEmit { emission: 'context' })
+(loop_286_given_gate: BehaviorAssess { stage: 'given', text: 'Prominent%20brow%20bone%20casting%20shadows' })
+(loop_286_inactive: BehaviorTerminal { loopId: 286, loopName: 'The%20Eye%20Bag%20Loop' })
+(loop_286_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_286_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_286_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%2FVillain%20Operator', mechanism: 'the%20eyes%20disappear%20into%20darkness' })
+(loop_286_result_branch: BehaviorEmit { emission: 'result', text: "observers%20feeling%20unable%20to%20read%20the%20individual's%20intent%2C%20leading%20to%20**Mistrust**" })
+(loop_286_sink: BehaviorSink)
+(loop_286_start: BehaviorStart { loopId: 286, loopName: 'The%20Eye%20Bag%20Loop', given: 'Prominent%20brow%20bone%20casting%20shadows', when: 'in%20overhead%20lighting', then: 'the%20eyes%20disappear%20into%20darkness%20(The%20Threat%2FVillain%20Operator)', result: "observers%20feeling%20unable%20to%20read%20the%20individual's%20intent%2C%20leading%20to%20**Mistrust**", operatorName: 'The%20Threat%2FVillain%20Operator', operatorMechanism: 'the%20eyes%20disappear%20into%20darkness', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_286_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_286_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20disappear%20into%20darkness%20(The%20Threat%2FVillain%20Operator)' })
+(loop_286_verdict: BehaviorVerdict { loopId: 286, loopName: 'The%20Eye%20Bag%20Loop', then: 'the%20eyes%20disappear%20into%20darkness%20(The%20Threat%2FVillain%20Operator)', result: "observers%20feeling%20unable%20to%20read%20the%20individual's%20intent%2C%20leading%20to%20**Mistrust**", operatorName: 'The%20Threat%2FVillain%20Operator', operatorMechanism: 'the%20eyes%20disappear%20into%20darkness', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_286_when_gate: BehaviorAssess { stage: 'when', text: 'in%20overhead%20lighting' })
+
+// Topology
+(loop_286_start)-[:PROCESS]->(loop_286_given_gate)
+(loop_286_given_gate)-[:PROCESS { case: "ok" }]->(loop_286_when_gate)
+(loop_286_given_gate)-[:PROCESS { case: "err" }]->(loop_286_inactive)
+(loop_286_when_gate)-[:PROCESS { case: "ok" }]->(loop_286_context)
+(loop_286_when_gate)-[:PROCESS { case: "err" }]->(loop_286_inactive)
+(loop_286_context)-[:FORK { strategy: "behavior-branches" }]->(loop_286_context_branch | loop_286_then_branch | loop_286_operator_branch | loop_286_result_branch | loop_286_taxonomy_branch | loop_286_intervention_recognize | loop_286_intervention_leverage)
+(loop_286_context_branch | loop_286_then_branch | loop_286_operator_branch | loop_286_result_branch | loop_286_taxonomy_branch | loop_286_intervention_recognize | loop_286_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_286_verdict)
+(loop_286_inactive)-[:PROCESS]->(loop_286_sink)
+(loop_286_verdict)-[:PROCESS]->(loop_286_sink)
+(loop_286_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_286_then_branch)
+(loop_286_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_286_result_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-528.gg
+// Executable Gnosis projection for The High Waist Loop.
+
+// Nodes
+(loop_528_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_528_context_branch: BehaviorEmit { emission: 'context' })
+(loop_528_given_gate: BehaviorAssess { stage: 'given', text: 'Short%20rib-to-crest%20distance' })
+(loop_528_inactive: BehaviorTerminal { loopId: 528, loopName: 'The%20High%20Waist%20Loop' })
+(loop_528_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_528_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_528_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20spatial%20behaviors%20in%20group%20dynamics' })
+(loop_528_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Urkel%20Operator', mechanism: 'the%20torso%20looks%20%22Stumpy%22' })
+(loop_528_result_branch: BehaviorEmit { emission: 'result', text: 'difficulty%20looking%20%22Cool%22%20or%20relaxed%20in%20formal%20wear' })
+(loop_528_sink: BehaviorSink)
+(loop_528_start: BehaviorStart { loopId: 528, loopName: 'The%20High%20Waist%20Loop', given: 'Short%20rib-to-crest%20distance', when: 'wearing%20belts', then: 'the%20torso%20looks%20%22Stumpy%22%20(The%20Urkel%20Operator)', result: 'difficulty%20looking%20%22Cool%22%20or%20relaxed%20in%20formal%20wear', operatorName: 'The%20Urkel%20Operator', operatorMechanism: 'the%20torso%20looks%20%22Stumpy%22', origin: 'BEHAVIORAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20spatial%20behaviors%20in%20group%20dynamics', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_528_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_528_then_branch: BehaviorEmit { emission: 'then', text: 'the%20torso%20looks%20%22Stumpy%22%20(The%20Urkel%20Operator)' })
+(loop_528_verdict: BehaviorVerdict { loopId: 528, loopName: 'The%20High%20Waist%20Loop', then: 'the%20torso%20looks%20%22Stumpy%22%20(The%20Urkel%20Operator)', result: 'difficulty%20looking%20%22Cool%22%20or%20relaxed%20in%20formal%20wear', operatorName: 'The%20Urkel%20Operator', operatorMechanism: 'the%20torso%20looks%20%22Stumpy%22', origin: 'BEHAVIORAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_528_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20belts' })
+
+// Topology
+(loop_528_start)-[:PROCESS]->(loop_528_given_gate)
+(loop_528_given_gate)-[:PROCESS { case: "ok" }]->(loop_528_when_gate)
+(loop_528_given_gate)-[:PROCESS { case: "err" }]->(loop_528_inactive)
+(loop_528_when_gate)-[:PROCESS { case: "ok" }]->(loop_528_context)
+(loop_528_when_gate)-[:PROCESS { case: "err" }]->(loop_528_inactive)
+(loop_528_context)-[:FORK { strategy: "behavior-branches" }]->(loop_528_context_branch | loop_528_then_branch | loop_528_operator_branch | loop_528_result_branch | loop_528_taxonomy_branch | loop_528_intervention_recognize | loop_528_intervention_interdict | loop_528_intervention_minimize)
+(loop_528_context_branch | loop_528_then_branch | loop_528_operator_branch | loop_528_result_branch | loop_528_taxonomy_branch | loop_528_intervention_recognize | loop_528_intervention_interdict | loop_528_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_528_verdict)
+(loop_528_inactive)-[:PROCESS]->(loop_528_sink)
+(loop_528_verdict)-[:PROCESS]->(loop_528_sink)
+(loop_528_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_528_then_branch)
+(loop_528_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_528_then_branch)
+(loop_528_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_528_then_branch)

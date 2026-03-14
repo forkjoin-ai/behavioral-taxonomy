@@ -1,0 +1,31 @@
+// behavioral-loop-122.gg
+// Executable Gnosis projection for The Invisible Brow Loop.
+
+// Nodes
+(loop_122_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_122_context_branch: BehaviorEmit { emission: 'context' })
+(loop_122_given_gate: BehaviorAssess { stage: 'given', text: 'Alopecia%20or%20extremely%20pale%20brows' })
+(loop_122_inactive: BehaviorTerminal { loopId: 122, loopName: 'The%20Invisible%20Brow%20Loop' })
+(loop_122_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_122_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_122_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%20Operator', mechanism: 'the%20face%20remains%20%22Unreadable%22%20to%20others' })
+(loop_122_result_branch: BehaviorEmit { emission: 'result', text: 'mistrust%20from%20others%2C%20forcing%20the%20individual%20to%20use%20**Exaggerated%20Hand%20Gestures**' })
+(loop_122_sink: BehaviorSink)
+(loop_122_start: BehaviorStart { loopId: 122, loopName: 'The%20Invisible%20Brow%20Loop', given: 'Alopecia%20or%20extremely%20pale%20brows', when: 'expressing%20emotion', then: 'the%20face%20remains%20%22Unreadable%22%20to%20others%20(The%20Deception%20Operator)', result: 'mistrust%20from%20others%2C%20forcing%20the%20individual%20to%20use%20**Exaggerated%20Hand%20Gestures**', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'the%20face%20remains%20%22Unreadable%22%20to%20others', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_122_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_122_then_branch: BehaviorEmit { emission: 'then', text: 'the%20face%20remains%20%22Unreadable%22%20to%20others%20(The%20Deception%20Operator)' })
+(loop_122_verdict: BehaviorVerdict { loopId: 122, loopName: 'The%20Invisible%20Brow%20Loop', then: 'the%20face%20remains%20%22Unreadable%22%20to%20others%20(The%20Deception%20Operator)', result: 'mistrust%20from%20others%2C%20forcing%20the%20individual%20to%20use%20**Exaggerated%20Hand%20Gestures**', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'the%20face%20remains%20%22Unreadable%22%20to%20others', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_122_when_gate: BehaviorAssess { stage: 'when', text: 'expressing%20emotion' })
+
+// Topology
+(loop_122_start)-[:PROCESS]->(loop_122_given_gate)
+(loop_122_given_gate)-[:PROCESS { case: "ok" }]->(loop_122_when_gate)
+(loop_122_given_gate)-[:PROCESS { case: "err" }]->(loop_122_inactive)
+(loop_122_when_gate)-[:PROCESS { case: "ok" }]->(loop_122_context)
+(loop_122_when_gate)-[:PROCESS { case: "err" }]->(loop_122_inactive)
+(loop_122_context)-[:FORK { strategy: "behavior-branches" }]->(loop_122_context_branch | loop_122_then_branch | loop_122_operator_branch | loop_122_result_branch | loop_122_taxonomy_branch | loop_122_intervention_recognize | loop_122_intervention_leverage)
+(loop_122_context_branch | loop_122_then_branch | loop_122_operator_branch | loop_122_result_branch | loop_122_taxonomy_branch | loop_122_intervention_recognize | loop_122_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_122_verdict)
+(loop_122_inactive)-[:PROCESS]->(loop_122_sink)
+(loop_122_verdict)-[:PROCESS]->(loop_122_sink)
+(loop_122_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_122_then_branch)
+(loop_122_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_122_result_branch)

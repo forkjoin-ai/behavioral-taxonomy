@@ -1,0 +1,35 @@
+// behavioral-loop-114.gg
+// Executable Gnosis projection for The Ape Index Loop.
+
+// Nodes
+(loop_114_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_114_context_branch: BehaviorEmit { emission: 'context' })
+(loop_114_given_gate: BehaviorAssess { stage: 'given', text: 'Arm%20span%20significantly%20greater%20than%20height' })
+(loop_114_inactive: BehaviorTerminal { loopId: 114, loopName: 'The%20Ape%20Index%20Loop' })
+(loop_114_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_114_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_114_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_114_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_114_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Physical%20Utility%20Operator', mechanism: 'the%20individual%20dominates' })
+(loop_114_result_branch: BehaviorEmit { emission: 'result', text: 'high%20confidence%20in%20**Spatial%2FPhysical%20Tasks**' })
+(loop_114_sink: BehaviorSink)
+(loop_114_start: BehaviorStart { loopId: 114, loopName: 'The%20Ape%20Index%20Loop', given: 'Arm%20span%20significantly%20greater%20than%20height', when: 'playing%20sports%20or%20reaching', then: 'the%20individual%20dominates%20(The%20Physical%20Utility%20Operator)', result: 'high%20confidence%20in%20**Spatial%2FPhysical%20Tasks**', operatorName: 'The%20Physical%20Utility%20Operator', operatorMechanism: 'the%20individual%20dominates', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting', intervention_leverage: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_114_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_114_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20dominates%20(The%20Physical%20Utility%20Operator)' })
+(loop_114_verdict: BehaviorVerdict { loopId: 114, loopName: 'The%20Ape%20Index%20Loop', then: 'the%20individual%20dominates%20(The%20Physical%20Utility%20Operator)', result: 'high%20confidence%20in%20**Spatial%2FPhysical%20Tasks**', operatorName: 'The%20Physical%20Utility%20Operator', operatorMechanism: 'the%20individual%20dominates', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_114_when_gate: BehaviorAssess { stage: 'when', text: 'playing%20sports%20or%20reaching' })
+
+// Topology
+(loop_114_start)-[:PROCESS]->(loop_114_given_gate)
+(loop_114_given_gate)-[:PROCESS { case: "ok" }]->(loop_114_when_gate)
+(loop_114_given_gate)-[:PROCESS { case: "err" }]->(loop_114_inactive)
+(loop_114_when_gate)-[:PROCESS { case: "ok" }]->(loop_114_context)
+(loop_114_when_gate)-[:PROCESS { case: "err" }]->(loop_114_inactive)
+(loop_114_context)-[:FORK { strategy: "behavior-branches" }]->(loop_114_context_branch | loop_114_then_branch | loop_114_operator_branch | loop_114_result_branch | loop_114_taxonomy_branch | loop_114_intervention_recognize | loop_114_intervention_interdict | loop_114_intervention_minimize | loop_114_intervention_leverage)
+(loop_114_context_branch | loop_114_then_branch | loop_114_operator_branch | loop_114_result_branch | loop_114_taxonomy_branch | loop_114_intervention_recognize | loop_114_intervention_interdict | loop_114_intervention_minimize | loop_114_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_114_verdict)
+(loop_114_inactive)-[:PROCESS]->(loop_114_sink)
+(loop_114_verdict)-[:PROCESS]->(loop_114_sink)
+(loop_114_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_114_then_branch)
+(loop_114_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_114_then_branch)
+(loop_114_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_114_then_branch)
+(loop_114_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_114_result_branch)

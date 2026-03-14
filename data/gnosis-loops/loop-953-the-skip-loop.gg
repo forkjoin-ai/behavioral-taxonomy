@@ -1,0 +1,33 @@
+// behavioral-loop-953.gg
+// Executable Gnosis projection for The Skip Loop.
+
+// Nodes
+(loop_953_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_953_context_branch: BehaviorEmit { emission: 'context' })
+(loop_953_given_gate: BehaviorAssess { stage: 'given', text: 'Repetition%20of%20initial%20syllables' })
+(loop_953_inactive: BehaviorTerminal { loopId: 953, loopName: 'The%20Skip%20Loop' })
+(loop_953_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_953_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_953_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_953_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20CD%20Skip%20Operator', mechanism: 'rhythm%20is%20broken' })
+(loop_953_result_branch: BehaviorEmit { emission: 'result', text: 'listeners%20finishing%20sentences%20(Theft%20of%20Agency)' })
+(loop_953_sink: BehaviorSink)
+(loop_953_start: BehaviorStart { loopId: 953, loopName: 'The%20Skip%20Loop', given: 'Repetition%20of%20initial%20syllables', when: 'stressed', then: 'rhythm%20is%20broken%20(The%20CD%20Skip%20Operator)', result: 'listeners%20finishing%20sentences%20(Theft%20of%20Agency)', operatorName: 'The%20CD%20Skip%20Operator', operatorMechanism: 'rhythm%20is%20broken', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_953_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_953_then_branch: BehaviorEmit { emission: 'then', text: 'rhythm%20is%20broken%20(The%20CD%20Skip%20Operator)' })
+(loop_953_verdict: BehaviorVerdict { loopId: 953, loopName: 'The%20Skip%20Loop', then: 'rhythm%20is%20broken%20(The%20CD%20Skip%20Operator)', result: 'listeners%20finishing%20sentences%20(Theft%20of%20Agency)', operatorName: 'The%20CD%20Skip%20Operator', operatorMechanism: 'rhythm%20is%20broken', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_953_when_gate: BehaviorAssess { stage: 'when', text: 'stressed' })
+
+// Topology
+(loop_953_start)-[:PROCESS]->(loop_953_given_gate)
+(loop_953_given_gate)-[:PROCESS { case: "ok" }]->(loop_953_when_gate)
+(loop_953_given_gate)-[:PROCESS { case: "err" }]->(loop_953_inactive)
+(loop_953_when_gate)-[:PROCESS { case: "ok" }]->(loop_953_context)
+(loop_953_when_gate)-[:PROCESS { case: "err" }]->(loop_953_inactive)
+(loop_953_context)-[:FORK { strategy: "behavior-branches" }]->(loop_953_context_branch | loop_953_then_branch | loop_953_operator_branch | loop_953_result_branch | loop_953_taxonomy_branch | loop_953_intervention_recognize | loop_953_intervention_interdict | loop_953_intervention_minimize)
+(loop_953_context_branch | loop_953_then_branch | loop_953_operator_branch | loop_953_result_branch | loop_953_taxonomy_branch | loop_953_intervention_recognize | loop_953_intervention_interdict | loop_953_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_953_verdict)
+(loop_953_inactive)-[:PROCESS]->(loop_953_sink)
+(loop_953_verdict)-[:PROCESS]->(loop_953_sink)
+(loop_953_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_953_then_branch)
+(loop_953_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_953_then_branch)
+(loop_953_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_953_then_branch)

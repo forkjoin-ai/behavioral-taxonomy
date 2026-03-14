@@ -1,0 +1,33 @@
+// behavioral-loop-284.gg
+// Executable Gnosis projection for The Callused Knuckle Loop.
+
+// Nodes
+(loop_284_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_284_context_branch: BehaviorEmit { emission: 'context' })
+(loop_284_given_gate: BehaviorAssess { stage: 'given', text: 'Rough%20skin%20on%20dorsal%20hands' })
+(loop_284_inactive: BehaviorTerminal { loopId: 284, loopName: 'The%20Callused%20Knuckle%20Loop' })
+(loop_284_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_284_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_284_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_284_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Toughness%20Operator', mechanism: 'the%20texture%20signals%20%22Manual%20Labor%22%20or%20%22Fighting%22' })
+(loop_284_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20**Respect**%20in%20blue-collar%20settings' })
+(loop_284_sink: BehaviorSink)
+(loop_284_start: BehaviorStart { loopId: 284, loopName: 'The%20Callused%20Knuckle%20Loop', given: 'Rough%20skin%20on%20dorsal%20hands', when: 'shaking%20hands', then: 'the%20texture%20signals%20%22Manual%20Labor%22%20or%20%22Fighting%22%20(The%20Toughness%20Operator)', result: 'immediate%20**Respect**%20in%20blue-collar%20settings', operatorName: 'The%20Toughness%20Operator', operatorMechanism: 'the%20texture%20signals%20%22Manual%20Labor%22%20or%20%22Fighting%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_284_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_284_then_branch: BehaviorEmit { emission: 'then', text: 'the%20texture%20signals%20%22Manual%20Labor%22%20or%20%22Fighting%22%20(The%20Toughness%20Operator)' })
+(loop_284_verdict: BehaviorVerdict { loopId: 284, loopName: 'The%20Callused%20Knuckle%20Loop', then: 'the%20texture%20signals%20%22Manual%20Labor%22%20or%20%22Fighting%22%20(The%20Toughness%20Operator)', result: 'immediate%20**Respect**%20in%20blue-collar%20settings', operatorName: 'The%20Toughness%20Operator', operatorMechanism: 'the%20texture%20signals%20%22Manual%20Labor%22%20or%20%22Fighting%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_284_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_284_start)-[:PROCESS]->(loop_284_given_gate)
+(loop_284_given_gate)-[:PROCESS { case: "ok" }]->(loop_284_when_gate)
+(loop_284_given_gate)-[:PROCESS { case: "err" }]->(loop_284_inactive)
+(loop_284_when_gate)-[:PROCESS { case: "ok" }]->(loop_284_context)
+(loop_284_when_gate)-[:PROCESS { case: "err" }]->(loop_284_inactive)
+(loop_284_context)-[:FORK { strategy: "behavior-branches" }]->(loop_284_context_branch | loop_284_then_branch | loop_284_operator_branch | loop_284_result_branch | loop_284_taxonomy_branch | loop_284_intervention_recognize | loop_284_intervention_interdict | loop_284_intervention_minimize)
+(loop_284_context_branch | loop_284_then_branch | loop_284_operator_branch | loop_284_result_branch | loop_284_taxonomy_branch | loop_284_intervention_recognize | loop_284_intervention_interdict | loop_284_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_284_verdict)
+(loop_284_inactive)-[:PROCESS]->(loop_284_sink)
+(loop_284_verdict)-[:PROCESS]->(loop_284_sink)
+(loop_284_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_284_then_branch)
+(loop_284_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_284_then_branch)
+(loop_284_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_284_then_branch)

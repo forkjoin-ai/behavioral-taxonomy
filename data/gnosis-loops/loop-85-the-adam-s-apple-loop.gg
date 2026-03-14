@@ -1,0 +1,33 @@
+// behavioral-loop-85.gg
+// Executable Gnosis projection for The Adam's Apple Loop.
+
+// Nodes
+(loop_85_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_85_context_branch: BehaviorEmit { emission: 'context' })
+(loop_85_given_gate: BehaviorAssess { stage: 'given', text: 'Prominent%20Laryngeal%20Prominence' })
+(loop_85_inactive: BehaviorTerminal { loopId: 85, loopName: "The%20Adam's%20Apple%20Loop" })
+(loop_85_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_85_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_85_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_85_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%20Operator', mechanism: 'the%20movement%20is%20highly%20visible' })
+(loop_85_result_branch: BehaviorEmit { emission: 'result', text: 'a%20%22Tell%22%20that%20makes%20lying%20impossible%2C%20forcing%20**Radical%20Honesty**' })
+(loop_85_sink: BehaviorSink)
+(loop_85_start: BehaviorStart { loopId: 85, loopName: "The%20Adam's%20Apple%20Loop", given: 'Prominent%20Laryngeal%20Prominence', when: 'swallowing%20nervously', then: 'the%20movement%20is%20highly%20visible%20(The%20Deception%20Operator)', result: 'a%20%22Tell%22%20that%20makes%20lying%20impossible%2C%20forcing%20**Radical%20Honesty**', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'the%20movement%20is%20highly%20visible', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_85_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_85_then_branch: BehaviorEmit { emission: 'then', text: 'the%20movement%20is%20highly%20visible%20(The%20Deception%20Operator)' })
+(loop_85_verdict: BehaviorVerdict { loopId: 85, loopName: "The%20Adam's%20Apple%20Loop", then: 'the%20movement%20is%20highly%20visible%20(The%20Deception%20Operator)', result: 'a%20%22Tell%22%20that%20makes%20lying%20impossible%2C%20forcing%20**Radical%20Honesty**', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'the%20movement%20is%20highly%20visible', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_85_when_gate: BehaviorAssess { stage: 'when', text: 'swallowing%20nervously' })
+
+// Topology
+(loop_85_start)-[:PROCESS]->(loop_85_given_gate)
+(loop_85_given_gate)-[:PROCESS { case: "ok" }]->(loop_85_when_gate)
+(loop_85_given_gate)-[:PROCESS { case: "err" }]->(loop_85_inactive)
+(loop_85_when_gate)-[:PROCESS { case: "ok" }]->(loop_85_context)
+(loop_85_when_gate)-[:PROCESS { case: "err" }]->(loop_85_inactive)
+(loop_85_context)-[:FORK { strategy: "behavior-branches" }]->(loop_85_context_branch | loop_85_then_branch | loop_85_operator_branch | loop_85_result_branch | loop_85_taxonomy_branch | loop_85_intervention_recognize | loop_85_intervention_interdict | loop_85_intervention_minimize)
+(loop_85_context_branch | loop_85_then_branch | loop_85_operator_branch | loop_85_result_branch | loop_85_taxonomy_branch | loop_85_intervention_recognize | loop_85_intervention_interdict | loop_85_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_85_verdict)
+(loop_85_inactive)-[:PROCESS]->(loop_85_sink)
+(loop_85_verdict)-[:PROCESS]->(loop_85_sink)
+(loop_85_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_85_then_branch)
+(loop_85_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_85_then_branch)
+(loop_85_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_85_then_branch)

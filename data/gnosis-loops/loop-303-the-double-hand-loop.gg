@@ -1,0 +1,31 @@
+// behavioral-loop-303.gg
+// Executable Gnosis projection for The Double Hand Loop.
+
+// Nodes
+(loop_303_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_303_context_branch: BehaviorEmit { emission: 'context' })
+(loop_303_given_gate: BehaviorAssess { stage: 'given', text: 'Habit%20of%20using%20two%20hands%20to%20shake' })
+(loop_303_inactive: BehaviorTerminal { loopId: 303, loopName: 'The%20Double%20Hand%20Loop' })
+(loop_303_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_303_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_303_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Manipulation%20Operator', mechanism: 'the%20gesture%20feels%20%22Over-familiar%22%20or%20%22Fake%22' })
+(loop_303_result_branch: BehaviorEmit { emission: 'result', text: 'the%20recipient%20checking%20for%20their%20wallet%20(distrust)' })
+(loop_303_sink: BehaviorSink)
+(loop_303_start: BehaviorStart { loopId: 303, loopName: 'The%20Double%20Hand%20Loop', given: 'Habit%20of%20using%20two%20hands%20to%20shake', when: 'meeting%20a%20peer', then: 'the%20gesture%20feels%20%22Over-familiar%22%20or%20%22Fake%22%20(The%20Manipulation%20Operator)', result: 'the%20recipient%20checking%20for%20their%20wallet%20(distrust)', operatorName: 'The%20Manipulation%20Operator', operatorMechanism: 'the%20gesture%20feels%20%22Over-familiar%22%20or%20%22Fake%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_303_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'TRUST' })
+(loop_303_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gesture%20feels%20%22Over-familiar%22%20or%20%22Fake%22%20(The%20Manipulation%20Operator)' })
+(loop_303_verdict: BehaviorVerdict { loopId: 303, loopName: 'The%20Double%20Hand%20Loop', then: 'the%20gesture%20feels%20%22Over-familiar%22%20or%20%22Fake%22%20(The%20Manipulation%20Operator)', result: 'the%20recipient%20checking%20for%20their%20wallet%20(distrust)', operatorName: 'The%20Manipulation%20Operator', operatorMechanism: 'the%20gesture%20feels%20%22Over-familiar%22%20or%20%22Fake%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'TRUST' })
+(loop_303_when_gate: BehaviorAssess { stage: 'when', text: 'meeting%20a%20peer' })
+
+// Topology
+(loop_303_start)-[:PROCESS]->(loop_303_given_gate)
+(loop_303_given_gate)-[:PROCESS { case: "ok" }]->(loop_303_when_gate)
+(loop_303_given_gate)-[:PROCESS { case: "err" }]->(loop_303_inactive)
+(loop_303_when_gate)-[:PROCESS { case: "ok" }]->(loop_303_context)
+(loop_303_when_gate)-[:PROCESS { case: "err" }]->(loop_303_inactive)
+(loop_303_context)-[:FORK { strategy: "behavior-branches" }]->(loop_303_context_branch | loop_303_then_branch | loop_303_operator_branch | loop_303_result_branch | loop_303_taxonomy_branch | loop_303_intervention_recognize | loop_303_intervention_leverage)
+(loop_303_context_branch | loop_303_then_branch | loop_303_operator_branch | loop_303_result_branch | loop_303_taxonomy_branch | loop_303_intervention_recognize | loop_303_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_303_verdict)
+(loop_303_inactive)-[:PROCESS]->(loop_303_sink)
+(loop_303_verdict)-[:PROCESS]->(loop_303_sink)
+(loop_303_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_303_then_branch)
+(loop_303_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_303_result_branch)

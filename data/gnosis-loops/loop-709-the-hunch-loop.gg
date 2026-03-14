@@ -1,0 +1,33 @@
+// behavioral-loop-709.gg
+// Executable Gnosis projection for The Hunch Loop.
+
+// Nodes
+(loop_709_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_709_context_branch: BehaviorEmit { emission: 'context' })
+(loop_709_given_gate: BehaviorAssess { stage: 'given', text: 'Fatty%20deposit%20at%20C7%20vertebrae' })
+(loop_709_inactive: BehaviorTerminal { loopId: 709, loopName: 'The%20Hunch%20Loop' })
+(loop_709_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_709_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_709_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_709_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Burden%20Operator', mechanism: 'the%20silhouette%20looks%20%22Aged%22%20or%20%22Sedentary%22' })
+(loop_709_result_branch: BehaviorEmit { emission: 'result', text: 'being%20bypassed%20for%20physically%20demanding%20or%20high-energy%20roles' })
+(loop_709_sink: BehaviorSink)
+(loop_709_start: BehaviorStart { loopId: 709, loopName: 'The%20Hunch%20Loop', given: 'Fatty%20deposit%20at%20C7%20vertebrae', when: 'wearing%20a%20t-shirt', then: 'the%20silhouette%20looks%20%22Aged%22%20or%20%22Sedentary%22%20(The%20Burden%20Operator)', result: 'being%20bypassed%20for%20physically%20demanding%20or%20high-energy%20roles', operatorName: 'The%20Burden%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Aged%22%20or%20%22Sedentary%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_709_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_709_then_branch: BehaviorEmit { emission: 'then', text: 'the%20silhouette%20looks%20%22Aged%22%20or%20%22Sedentary%22%20(The%20Burden%20Operator)' })
+(loop_709_verdict: BehaviorVerdict { loopId: 709, loopName: 'The%20Hunch%20Loop', then: 'the%20silhouette%20looks%20%22Aged%22%20or%20%22Sedentary%22%20(The%20Burden%20Operator)', result: 'being%20bypassed%20for%20physically%20demanding%20or%20high-energy%20roles', operatorName: 'The%20Burden%20Operator', operatorMechanism: 'the%20silhouette%20looks%20%22Aged%22%20or%20%22Sedentary%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_709_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20a%20t-shirt' })
+
+// Topology
+(loop_709_start)-[:PROCESS]->(loop_709_given_gate)
+(loop_709_given_gate)-[:PROCESS { case: "ok" }]->(loop_709_when_gate)
+(loop_709_given_gate)-[:PROCESS { case: "err" }]->(loop_709_inactive)
+(loop_709_when_gate)-[:PROCESS { case: "ok" }]->(loop_709_context)
+(loop_709_when_gate)-[:PROCESS { case: "err" }]->(loop_709_inactive)
+(loop_709_context)-[:FORK { strategy: "behavior-branches" }]->(loop_709_context_branch | loop_709_then_branch | loop_709_operator_branch | loop_709_result_branch | loop_709_taxonomy_branch | loop_709_intervention_recognize | loop_709_intervention_interdict | loop_709_intervention_minimize)
+(loop_709_context_branch | loop_709_then_branch | loop_709_operator_branch | loop_709_result_branch | loop_709_taxonomy_branch | loop_709_intervention_recognize | loop_709_intervention_interdict | loop_709_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_709_verdict)
+(loop_709_inactive)-[:PROCESS]->(loop_709_sink)
+(loop_709_verdict)-[:PROCESS]->(loop_709_sink)
+(loop_709_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_709_then_branch)
+(loop_709_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_709_then_branch)
+(loop_709_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_709_then_branch)

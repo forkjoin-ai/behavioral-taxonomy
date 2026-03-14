@@ -1,0 +1,33 @@
+// behavioral-loop-225.gg
+// Executable Gnosis projection for The Lazy Eye Loop.
+
+// Nodes
+(loop_225_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_225_context_branch: BehaviorEmit { emission: 'context' })
+(loop_225_given_gate: BehaviorAssess { stage: 'given', text: 'Misalignment%20of%20visual%20axes%20(one%20eye%20drifts)' })
+(loop_225_inactive: BehaviorTerminal { loopId: 225, loopName: 'The%20Lazy%20Eye%20Loop' })
+(loop_225_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_225_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_225_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_225_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Confusion%20Operator', mechanism: 'the%20observer%20constantly%20shifts%20focus%2C%20unsure%20which%20eye%20to%20look%20at' })
+(loop_225_result_branch: BehaviorEmit { emission: 'result', text: 'awkward%20pauses%20and%20the%20individual%20developing%20**Avoidant%20Eye%20Contact**%20to%20spare%20others%20the%20discomfort' })
+(loop_225_sink: BehaviorSink)
+(loop_225_start: BehaviorStart { loopId: 225, loopName: 'The%20Lazy%20Eye%20Loop', given: 'Misalignment%20of%20visual%20axes%20(one%20eye%20drifts)', when: 'engaging%20in%20face-to-face%20conversation', then: 'the%20observer%20constantly%20shifts%20focus%2C%20unsure%20which%20eye%20to%20look%20at%20(The%20Confusion%20Operator)', result: 'awkward%20pauses%20and%20the%20individual%20developing%20**Avoidant%20Eye%20Contact**%20to%20spare%20others%20the%20discomfort', operatorName: 'The%20Confusion%20Operator', operatorMechanism: 'the%20observer%20constantly%20shifts%20focus%2C%20unsure%20which%20eye%20to%20look%20at', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_225_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_225_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20constantly%20shifts%20focus%2C%20unsure%20which%20eye%20to%20look%20at%20(The%20Confusion%20Operator)' })
+(loop_225_verdict: BehaviorVerdict { loopId: 225, loopName: 'The%20Lazy%20Eye%20Loop', then: 'the%20observer%20constantly%20shifts%20focus%2C%20unsure%20which%20eye%20to%20look%20at%20(The%20Confusion%20Operator)', result: 'awkward%20pauses%20and%20the%20individual%20developing%20**Avoidant%20Eye%20Contact**%20to%20spare%20others%20the%20discomfort', operatorName: 'The%20Confusion%20Operator', operatorMechanism: 'the%20observer%20constantly%20shifts%20focus%2C%20unsure%20which%20eye%20to%20look%20at', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_225_when_gate: BehaviorAssess { stage: 'when', text: 'engaging%20in%20face-to-face%20conversation' })
+
+// Topology
+(loop_225_start)-[:PROCESS]->(loop_225_given_gate)
+(loop_225_given_gate)-[:PROCESS { case: "ok" }]->(loop_225_when_gate)
+(loop_225_given_gate)-[:PROCESS { case: "err" }]->(loop_225_inactive)
+(loop_225_when_gate)-[:PROCESS { case: "ok" }]->(loop_225_context)
+(loop_225_when_gate)-[:PROCESS { case: "err" }]->(loop_225_inactive)
+(loop_225_context)-[:FORK { strategy: "behavior-branches" }]->(loop_225_context_branch | loop_225_then_branch | loop_225_operator_branch | loop_225_result_branch | loop_225_taxonomy_branch | loop_225_intervention_recognize | loop_225_intervention_interdict | loop_225_intervention_minimize)
+(loop_225_context_branch | loop_225_then_branch | loop_225_operator_branch | loop_225_result_branch | loop_225_taxonomy_branch | loop_225_intervention_recognize | loop_225_intervention_interdict | loop_225_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_225_verdict)
+(loop_225_inactive)-[:PROCESS]->(loop_225_sink)
+(loop_225_verdict)-[:PROCESS]->(loop_225_sink)
+(loop_225_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_225_then_branch)
+(loop_225_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_225_then_branch)
+(loop_225_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_225_then_branch)

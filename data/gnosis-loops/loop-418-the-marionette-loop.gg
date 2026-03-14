@@ -1,0 +1,33 @@
+// behavioral-loop-418.gg
+// Executable Gnosis projection for The Marionette Loop.
+
+// Nodes
+(loop_418_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_418_context_branch: BehaviorEmit { emission: 'context' })
+(loop_418_given_gate: BehaviorAssess { stage: 'given', text: 'Deep%20vertical%20lines%20from%20mouth%20to%20chin' })
+(loop_418_inactive: BehaviorTerminal { loopId: 418, loopName: 'The%20Marionette%20Loop' })
+(loop_418_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_418_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_418_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_418_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tragedy%20Operator', mechanism: 'the%20individual%20looks%20like%20a%20%22Sad%20Puppet%22' })
+(loop_418_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20hesitating%20to%20share%20good%20news%2C%20fearing%20it%20will%20be%20dampened' })
+(loop_418_sink: BehaviorSink)
+(loop_418_start: BehaviorStart { loopId: 418, loopName: 'The%20Marionette%20Loop', given: 'Deep%20vertical%20lines%20from%20mouth%20to%20chin', when: 'the%20face%20is%20neutral', then: 'the%20individual%20looks%20like%20a%20%22Sad%20Puppet%22%20(The%20Tragedy%20Operator)', result: 'peers%20hesitating%20to%20share%20good%20news%2C%20fearing%20it%20will%20be%20dampened', operatorName: 'The%20Tragedy%20Operator', operatorMechanism: 'the%20individual%20looks%20like%20a%20%22Sad%20Puppet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_418_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_418_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20looks%20like%20a%20%22Sad%20Puppet%22%20(The%20Tragedy%20Operator)' })
+(loop_418_verdict: BehaviorVerdict { loopId: 418, loopName: 'The%20Marionette%20Loop', then: 'the%20individual%20looks%20like%20a%20%22Sad%20Puppet%22%20(The%20Tragedy%20Operator)', result: 'peers%20hesitating%20to%20share%20good%20news%2C%20fearing%20it%20will%20be%20dampened', operatorName: 'The%20Tragedy%20Operator', operatorMechanism: 'the%20individual%20looks%20like%20a%20%22Sad%20Puppet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_418_when_gate: BehaviorAssess { stage: 'when', text: 'the%20face%20is%20neutral' })
+
+// Topology
+(loop_418_start)-[:PROCESS]->(loop_418_given_gate)
+(loop_418_given_gate)-[:PROCESS { case: "ok" }]->(loop_418_when_gate)
+(loop_418_given_gate)-[:PROCESS { case: "err" }]->(loop_418_inactive)
+(loop_418_when_gate)-[:PROCESS { case: "ok" }]->(loop_418_context)
+(loop_418_when_gate)-[:PROCESS { case: "err" }]->(loop_418_inactive)
+(loop_418_context)-[:FORK { strategy: "behavior-branches" }]->(loop_418_context_branch | loop_418_then_branch | loop_418_operator_branch | loop_418_result_branch | loop_418_taxonomy_branch | loop_418_intervention_recognize | loop_418_intervention_interdict | loop_418_intervention_minimize)
+(loop_418_context_branch | loop_418_then_branch | loop_418_operator_branch | loop_418_result_branch | loop_418_taxonomy_branch | loop_418_intervention_recognize | loop_418_intervention_interdict | loop_418_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_418_verdict)
+(loop_418_inactive)-[:PROCESS]->(loop_418_sink)
+(loop_418_verdict)-[:PROCESS]->(loop_418_sink)
+(loop_418_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_418_then_branch)
+(loop_418_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_418_then_branch)
+(loop_418_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_418_then_branch)

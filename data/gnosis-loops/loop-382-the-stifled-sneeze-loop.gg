@@ -1,0 +1,33 @@
+// behavioral-loop-382.gg
+// Executable Gnosis projection for The Stifled Sneeze Loop.
+
+// Nodes
+(loop_382_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_382_context_branch: BehaviorEmit { emission: 'context' })
+(loop_382_given_gate: BehaviorAssess { stage: 'given', text: 'Holding%20nose%2Fmouth%20to%20silence%20the%20noise' })
+(loop_382_inactive: BehaviorTerminal { loopId: 382, loopName: 'The%20Stifled%20Sneeze%20Loop' })
+(loop_382_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_382_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_382_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_382_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Politeness%2FConstraint%20Operator', mechanism: 'the%20body%20convulses%20silently' })
+(loop_382_result_branch: BehaviorEmit { emission: 'result', text: 'being%20viewed%20as%20%22Timid%22%20or%20%22Controlled.%22' })
+(loop_382_sink: BehaviorSink)
+(loop_382_start: BehaviorStart { loopId: 382, loopName: 'The%20Stifled%20Sneeze%20Loop', given: 'Holding%20nose%2Fmouth%20to%20silence%20the%20noise', when: 'sneezing', then: 'the%20body%20convulses%20silently%20(The%20Politeness%2FConstraint%20Operator)', result: 'being%20viewed%20as%20%22Timid%22%20or%20%22Controlled.%22', operatorName: 'The%20Politeness%2FConstraint%20Operator', operatorMechanism: 'the%20body%20convulses%20silently', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_382_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_382_then_branch: BehaviorEmit { emission: 'then', text: 'the%20body%20convulses%20silently%20(The%20Politeness%2FConstraint%20Operator)' })
+(loop_382_verdict: BehaviorVerdict { loopId: 382, loopName: 'The%20Stifled%20Sneeze%20Loop', then: 'the%20body%20convulses%20silently%20(The%20Politeness%2FConstraint%20Operator)', result: 'being%20viewed%20as%20%22Timid%22%20or%20%22Controlled.%22', operatorName: 'The%20Politeness%2FConstraint%20Operator', operatorMechanism: 'the%20body%20convulses%20silently', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_382_when_gate: BehaviorAssess { stage: 'when', text: 'sneezing' })
+
+// Topology
+(loop_382_start)-[:PROCESS]->(loop_382_given_gate)
+(loop_382_given_gate)-[:PROCESS { case: "ok" }]->(loop_382_when_gate)
+(loop_382_given_gate)-[:PROCESS { case: "err" }]->(loop_382_inactive)
+(loop_382_when_gate)-[:PROCESS { case: "ok" }]->(loop_382_context)
+(loop_382_when_gate)-[:PROCESS { case: "err" }]->(loop_382_inactive)
+(loop_382_context)-[:FORK { strategy: "behavior-branches" }]->(loop_382_context_branch | loop_382_then_branch | loop_382_operator_branch | loop_382_result_branch | loop_382_taxonomy_branch | loop_382_intervention_recognize | loop_382_intervention_interdict | loop_382_intervention_minimize)
+(loop_382_context_branch | loop_382_then_branch | loop_382_operator_branch | loop_382_result_branch | loop_382_taxonomy_branch | loop_382_intervention_recognize | loop_382_intervention_interdict | loop_382_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_382_verdict)
+(loop_382_inactive)-[:PROCESS]->(loop_382_sink)
+(loop_382_verdict)-[:PROCESS]->(loop_382_sink)
+(loop_382_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_382_then_branch)
+(loop_382_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_382_then_branch)
+(loop_382_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_382_then_branch)

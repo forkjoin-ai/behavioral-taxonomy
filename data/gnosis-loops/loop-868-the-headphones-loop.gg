@@ -1,0 +1,33 @@
+// behavioral-loop-868.gg
+// Executable Gnosis projection for The Headphones Loop.
+
+// Nodes
+(loop_868_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_868_context_branch: BehaviorEmit { emission: 'context' })
+(loop_868_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20over-ear%20cans%20worn%20around%20the%20neck' })
+(loop_868_inactive: BehaviorTerminal { loopId: 868, loopName: 'The%20Headphones%20Loop' })
+(loop_868_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_868_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_868_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_868_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Bubble%20Operator', mechanism: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Audio%20Professional%22' })
+(loop_868_result_branch: BehaviorEmit { emission: 'result', text: 'successful%20isolation%20from%20unwanted%20small%20talk' })
+(loop_868_sink: BehaviorSink)
+(loop_868_start: BehaviorStart { loopId: 868, loopName: 'The%20Headphones%20Loop', given: 'Large%20over-ear%20cans%20worn%20around%20the%20neck', when: 'in%20a%20social%20space', then: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Audio%20Professional%22%20(The%20Bubble%20Operator)', result: 'successful%20isolation%20from%20unwanted%20small%20talk', operatorName: 'The%20Bubble%20Operator', operatorMechanism: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Audio%20Professional%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_868_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_868_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Audio%20Professional%22%20(The%20Bubble%20Operator)' })
+(loop_868_verdict: BehaviorVerdict { loopId: 868, loopName: 'The%20Headphones%20Loop', then: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Audio%20Professional%22%20(The%20Bubble%20Operator)', result: 'successful%20isolation%20from%20unwanted%20small%20talk', operatorName: 'The%20Bubble%20Operator', operatorMechanism: 'it%20signals%20%22Do%20Not%20Disturb%22%20or%20%22Audio%20Professional%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_868_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20social%20space' })
+
+// Topology
+(loop_868_start)-[:PROCESS]->(loop_868_given_gate)
+(loop_868_given_gate)-[:PROCESS { case: "ok" }]->(loop_868_when_gate)
+(loop_868_given_gate)-[:PROCESS { case: "err" }]->(loop_868_inactive)
+(loop_868_when_gate)-[:PROCESS { case: "ok" }]->(loop_868_context)
+(loop_868_when_gate)-[:PROCESS { case: "err" }]->(loop_868_inactive)
+(loop_868_context)-[:FORK { strategy: "behavior-branches" }]->(loop_868_context_branch | loop_868_then_branch | loop_868_operator_branch | loop_868_result_branch | loop_868_taxonomy_branch | loop_868_intervention_recognize | loop_868_intervention_interdict | loop_868_intervention_minimize)
+(loop_868_context_branch | loop_868_then_branch | loop_868_operator_branch | loop_868_result_branch | loop_868_taxonomy_branch | loop_868_intervention_recognize | loop_868_intervention_interdict | loop_868_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_868_verdict)
+(loop_868_inactive)-[:PROCESS]->(loop_868_sink)
+(loop_868_verdict)-[:PROCESS]->(loop_868_sink)
+(loop_868_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_868_then_branch)
+(loop_868_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_868_then_branch)
+(loop_868_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_868_then_branch)

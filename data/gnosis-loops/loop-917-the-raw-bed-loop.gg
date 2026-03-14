@@ -1,0 +1,33 @@
+// behavioral-loop-917.gg
+// Executable Gnosis projection for The Raw Bed Loop.
+
+// Nodes
+(loop_917_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_917_context_branch: BehaviorEmit { emission: 'context' })
+(loop_917_given_gate: BehaviorAssess { stage: 'given', text: 'Nails%20bitten%20down%20to%20the%20bleeding%20point' })
+(loop_917_inactive: BehaviorTerminal { loopId: 917, loopName: 'The%20Raw%20Bed%20Loop' })
+(loop_917_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_917_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_917_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_917_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Self-Harm%20Operator', mechanism: 'fingers%20look%20%22Mangled%22%20and%20%22Painful%22' })
+(loop_917_result_branch: BehaviorEmit { emission: 'result', text: 'instant%20signaling%20of%20%22Neurosis%22%20or%20%22Lack%20of%20Control.%22' })
+(loop_917_sink: BehaviorSink)
+(loop_917_start: BehaviorStart { loopId: 917, loopName: 'The%20Raw%20Bed%20Loop', given: 'Nails%20bitten%20down%20to%20the%20bleeding%20point', when: 'gesturing', then: 'fingers%20look%20%22Mangled%22%20and%20%22Painful%22%20(The%20Self-Harm%20Operator)', result: 'instant%20signaling%20of%20%22Neurosis%22%20or%20%22Lack%20of%20Control.%22', operatorName: 'The%20Self-Harm%20Operator', operatorMechanism: 'fingers%20look%20%22Mangled%22%20and%20%22Painful%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_917_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_917_then_branch: BehaviorEmit { emission: 'then', text: 'fingers%20look%20%22Mangled%22%20and%20%22Painful%22%20(The%20Self-Harm%20Operator)' })
+(loop_917_verdict: BehaviorVerdict { loopId: 917, loopName: 'The%20Raw%20Bed%20Loop', then: 'fingers%20look%20%22Mangled%22%20and%20%22Painful%22%20(The%20Self-Harm%20Operator)', result: 'instant%20signaling%20of%20%22Neurosis%22%20or%20%22Lack%20of%20Control.%22', operatorName: 'The%20Self-Harm%20Operator', operatorMechanism: 'fingers%20look%20%22Mangled%22%20and%20%22Painful%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_917_when_gate: BehaviorAssess { stage: 'when', text: 'gesturing' })
+
+// Topology
+(loop_917_start)-[:PROCESS]->(loop_917_given_gate)
+(loop_917_given_gate)-[:PROCESS { case: "ok" }]->(loop_917_when_gate)
+(loop_917_given_gate)-[:PROCESS { case: "err" }]->(loop_917_inactive)
+(loop_917_when_gate)-[:PROCESS { case: "ok" }]->(loop_917_context)
+(loop_917_when_gate)-[:PROCESS { case: "err" }]->(loop_917_inactive)
+(loop_917_context)-[:FORK { strategy: "behavior-branches" }]->(loop_917_context_branch | loop_917_then_branch | loop_917_operator_branch | loop_917_result_branch | loop_917_taxonomy_branch | loop_917_intervention_recognize | loop_917_intervention_interdict | loop_917_intervention_minimize)
+(loop_917_context_branch | loop_917_then_branch | loop_917_operator_branch | loop_917_result_branch | loop_917_taxonomy_branch | loop_917_intervention_recognize | loop_917_intervention_interdict | loop_917_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_917_verdict)
+(loop_917_inactive)-[:PROCESS]->(loop_917_sink)
+(loop_917_verdict)-[:PROCESS]->(loop_917_sink)
+(loop_917_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_917_then_branch)
+(loop_917_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_917_then_branch)
+(loop_917_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_917_then_branch)

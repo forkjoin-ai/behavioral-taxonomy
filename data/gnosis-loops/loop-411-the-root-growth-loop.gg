@@ -1,0 +1,33 @@
+// behavioral-loop-411.gg
+// Executable Gnosis projection for The Root Growth Loop.
+
+// Nodes
+(loop_411_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_411_context_branch: BehaviorEmit { emission: 'context' })
+(loop_411_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20contrast%20between%20dye%20and%20natural%20root' })
+(loop_411_inactive: BehaviorTerminal { loopId: 411, loopName: 'The%20Root%20Growth%20Loop' })
+(loop_411_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_411_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_411_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_411_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Upkeep%20Operator', mechanism: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%20Crisis%22' })
+(loop_411_result_branch: BehaviorEmit { emission: 'result', text: 'a%20subtle%20loss%20of%20status%20in%20image-conscious%20circles' })
+(loop_411_sink: BehaviorSink)
+(loop_411_start: BehaviorStart { loopId: 411, loopName: 'The%20Root%20Growth%20Loop', given: 'Visible%20contrast%20between%20dye%20and%20natural%20root', when: 'seen%20from%20above', then: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%20Crisis%22%20(The%20Upkeep%20Operator)', result: 'a%20subtle%20loss%20of%20status%20in%20image-conscious%20circles', operatorName: 'The%20Upkeep%20Operator', operatorMechanism: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%20Crisis%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_411_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_411_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%20Crisis%22%20(The%20Upkeep%20Operator)' })
+(loop_411_verdict: BehaviorVerdict { loopId: 411, loopName: 'The%20Root%20Growth%20Loop', then: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%20Crisis%22%20(The%20Upkeep%20Operator)', result: 'a%20subtle%20loss%20of%20status%20in%20image-conscious%20circles', operatorName: 'The%20Upkeep%20Operator', operatorMechanism: 'it%20signals%20%22Maintenance%20Failure%22%20or%20%22Budget%20Crisis%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_411_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20from%20above' })
+
+// Topology
+(loop_411_start)-[:PROCESS]->(loop_411_given_gate)
+(loop_411_given_gate)-[:PROCESS { case: "ok" }]->(loop_411_when_gate)
+(loop_411_given_gate)-[:PROCESS { case: "err" }]->(loop_411_inactive)
+(loop_411_when_gate)-[:PROCESS { case: "ok" }]->(loop_411_context)
+(loop_411_when_gate)-[:PROCESS { case: "err" }]->(loop_411_inactive)
+(loop_411_context)-[:FORK { strategy: "behavior-branches" }]->(loop_411_context_branch | loop_411_then_branch | loop_411_operator_branch | loop_411_result_branch | loop_411_taxonomy_branch | loop_411_intervention_recognize | loop_411_intervention_interdict | loop_411_intervention_minimize)
+(loop_411_context_branch | loop_411_then_branch | loop_411_operator_branch | loop_411_result_branch | loop_411_taxonomy_branch | loop_411_intervention_recognize | loop_411_intervention_interdict | loop_411_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_411_verdict)
+(loop_411_inactive)-[:PROCESS]->(loop_411_sink)
+(loop_411_verdict)-[:PROCESS]->(loop_411_sink)
+(loop_411_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_411_then_branch)
+(loop_411_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_411_then_branch)
+(loop_411_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_411_then_branch)

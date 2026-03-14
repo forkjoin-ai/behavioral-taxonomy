@@ -1,0 +1,33 @@
+// behavioral-loop-888.gg
+// Executable Gnosis projection for The Paper Loop.
+
+// Nodes
+(loop_888_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_888_context_branch: BehaviorEmit { emission: 'context' })
+(loop_888_given_gate: BehaviorAssess { stage: 'given', text: 'Translucent%20skin%20on%20hands%20(Age%2FSteroids)' })
+(loop_888_inactive: BehaviorTerminal { loopId: 888, loopName: 'The%20Paper%20Loop' })
+(loop_888_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_888_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_888_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_888_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20skin%20tears%20or%20bruises%20instantly' })
+(loop_888_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20being%20afraid%20to%20touch%20or%20play%20rough' })
+(loop_888_sink: BehaviorSink)
+(loop_888_start: BehaviorStart { loopId: 888, loopName: 'The%20Paper%20Loop', given: 'Translucent%20skin%20on%20hands%20(Age%2FSteroids)', when: 'bumped', then: 'the%20skin%20tears%20or%20bruises%20instantly%20(The%20Fragility%20Operator)', result: 'peers%20being%20afraid%20to%20touch%20or%20play%20rough', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20skin%20tears%20or%20bruises%20instantly', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_888_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_888_then_branch: BehaviorEmit { emission: 'then', text: 'the%20skin%20tears%20or%20bruises%20instantly%20(The%20Fragility%20Operator)' })
+(loop_888_verdict: BehaviorVerdict { loopId: 888, loopName: 'The%20Paper%20Loop', then: 'the%20skin%20tears%20or%20bruises%20instantly%20(The%20Fragility%20Operator)', result: 'peers%20being%20afraid%20to%20touch%20or%20play%20rough', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20skin%20tears%20or%20bruises%20instantly', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_888_when_gate: BehaviorAssess { stage: 'when', text: 'bumped' })
+
+// Topology
+(loop_888_start)-[:PROCESS]->(loop_888_given_gate)
+(loop_888_given_gate)-[:PROCESS { case: "ok" }]->(loop_888_when_gate)
+(loop_888_given_gate)-[:PROCESS { case: "err" }]->(loop_888_inactive)
+(loop_888_when_gate)-[:PROCESS { case: "ok" }]->(loop_888_context)
+(loop_888_when_gate)-[:PROCESS { case: "err" }]->(loop_888_inactive)
+(loop_888_context)-[:FORK { strategy: "behavior-branches" }]->(loop_888_context_branch | loop_888_then_branch | loop_888_operator_branch | loop_888_result_branch | loop_888_taxonomy_branch | loop_888_intervention_recognize | loop_888_intervention_interdict | loop_888_intervention_minimize)
+(loop_888_context_branch | loop_888_then_branch | loop_888_operator_branch | loop_888_result_branch | loop_888_taxonomy_branch | loop_888_intervention_recognize | loop_888_intervention_interdict | loop_888_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_888_verdict)
+(loop_888_inactive)-[:PROCESS]->(loop_888_sink)
+(loop_888_verdict)-[:PROCESS]->(loop_888_sink)
+(loop_888_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_888_then_branch)
+(loop_888_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_888_then_branch)
+(loop_888_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_888_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-826.gg
+// Executable Gnosis projection for The Drawl Loop.
+
+// Nodes
+(loop_826_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_826_context_branch: BehaviorEmit { emission: 'context' })
+(loop_826_given_gate: BehaviorAssess { stage: 'given', text: 'Elongated%20vowels%20and%20slow%20tempo' })
+(loop_826_inactive: BehaviorTerminal { loopId: 826, loopName: 'The%20Drawl%20Loop' })
+(loop_826_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_826_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_826_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_826_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Slow%20Operator', mechanism: 'it%20sounds%20%22Simple%22%20or%20%22Lazy%22' })
+(loop_826_result_branch: BehaviorEmit { emission: 'result', text: 'constant%20interruptions%20by%20faster%20speakers' })
+(loop_826_sink: BehaviorSink)
+(loop_826_start: BehaviorStart { loopId: 826, loopName: 'The%20Drawl%20Loop', given: 'Elongated%20vowels%20and%20slow%20tempo', when: 'in%20a%20fast-paced%20city', then: 'it%20sounds%20%22Simple%22%20or%20%22Lazy%22%20(The%20Slow%20Operator)', result: 'constant%20interruptions%20by%20faster%20speakers', operatorName: 'The%20Slow%20Operator', operatorMechanism: 'it%20sounds%20%22Simple%22%20or%20%22Lazy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_826_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_826_then_branch: BehaviorEmit { emission: 'then', text: 'it%20sounds%20%22Simple%22%20or%20%22Lazy%22%20(The%20Slow%20Operator)' })
+(loop_826_verdict: BehaviorVerdict { loopId: 826, loopName: 'The%20Drawl%20Loop', then: 'it%20sounds%20%22Simple%22%20or%20%22Lazy%22%20(The%20Slow%20Operator)', result: 'constant%20interruptions%20by%20faster%20speakers', operatorName: 'The%20Slow%20Operator', operatorMechanism: 'it%20sounds%20%22Simple%22%20or%20%22Lazy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_826_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20fast-paced%20city' })
+
+// Topology
+(loop_826_start)-[:PROCESS]->(loop_826_given_gate)
+(loop_826_given_gate)-[:PROCESS { case: "ok" }]->(loop_826_when_gate)
+(loop_826_given_gate)-[:PROCESS { case: "err" }]->(loop_826_inactive)
+(loop_826_when_gate)-[:PROCESS { case: "ok" }]->(loop_826_context)
+(loop_826_when_gate)-[:PROCESS { case: "err" }]->(loop_826_inactive)
+(loop_826_context)-[:FORK { strategy: "behavior-branches" }]->(loop_826_context_branch | loop_826_then_branch | loop_826_operator_branch | loop_826_result_branch | loop_826_taxonomy_branch | loop_826_intervention_recognize | loop_826_intervention_interdict | loop_826_intervention_minimize)
+(loop_826_context_branch | loop_826_then_branch | loop_826_operator_branch | loop_826_result_branch | loop_826_taxonomy_branch | loop_826_intervention_recognize | loop_826_intervention_interdict | loop_826_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_826_verdict)
+(loop_826_inactive)-[:PROCESS]->(loop_826_sink)
+(loop_826_verdict)-[:PROCESS]->(loop_826_sink)
+(loop_826_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_826_then_branch)
+(loop_826_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_826_then_branch)
+(loop_826_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_826_then_branch)

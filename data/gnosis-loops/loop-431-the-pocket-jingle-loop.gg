@@ -1,0 +1,33 @@
+// behavioral-loop-431.gg
+// Executable Gnosis projection for The Pocket Jingle Loop.
+
+// Nodes
+(loop_431_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_431_context_branch: BehaviorEmit { emission: 'context' })
+(loop_431_given_gate: BehaviorAssess { stage: 'given', text: 'Playing%20with%20keys%2Fchange%20in%20pocket' })
+(loop_431_inactive: BehaviorTerminal { loopId: 431, loopName: 'The%20Pocket%20Jingle%20Loop' })
+(loop_431_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_431_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_431_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_431_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Ambiguous%20Operator', mechanism: 'the%20sound%20suggests%20%22Boredom%22%20or%20%22Erection%20Hiding%22' })
+(loop_431_result_branch: BehaviorEmit { emission: 'result', text: "awkward%20glances%20at%20the%20individual's%20crotch%20area" })
+(loop_431_sink: BehaviorSink)
+(loop_431_start: BehaviorStart { loopId: 431, loopName: 'The%20Pocket%20Jingle%20Loop', given: 'Playing%20with%20keys%2Fchange%20in%20pocket', when: 'standing%20and%20talking', then: 'the%20sound%20suggests%20%22Boredom%22%20or%20%22Erection%20Hiding%22%20(The%20Ambiguous%20Operator)', result: "awkward%20glances%20at%20the%20individual's%20crotch%20area", operatorName: 'The%20Ambiguous%20Operator', operatorMechanism: 'the%20sound%20suggests%20%22Boredom%22%20or%20%22Erection%20Hiding%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_431_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_431_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20suggests%20%22Boredom%22%20or%20%22Erection%20Hiding%22%20(The%20Ambiguous%20Operator)' })
+(loop_431_verdict: BehaviorVerdict { loopId: 431, loopName: 'The%20Pocket%20Jingle%20Loop', then: 'the%20sound%20suggests%20%22Boredom%22%20or%20%22Erection%20Hiding%22%20(The%20Ambiguous%20Operator)', result: "awkward%20glances%20at%20the%20individual's%20crotch%20area", operatorName: 'The%20Ambiguous%20Operator', operatorMechanism: 'the%20sound%20suggests%20%22Boredom%22%20or%20%22Erection%20Hiding%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_431_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20and%20talking' })
+
+// Topology
+(loop_431_start)-[:PROCESS]->(loop_431_given_gate)
+(loop_431_given_gate)-[:PROCESS { case: "ok" }]->(loop_431_when_gate)
+(loop_431_given_gate)-[:PROCESS { case: "err" }]->(loop_431_inactive)
+(loop_431_when_gate)-[:PROCESS { case: "ok" }]->(loop_431_context)
+(loop_431_when_gate)-[:PROCESS { case: "err" }]->(loop_431_inactive)
+(loop_431_context)-[:FORK { strategy: "behavior-branches" }]->(loop_431_context_branch | loop_431_then_branch | loop_431_operator_branch | loop_431_result_branch | loop_431_taxonomy_branch | loop_431_intervention_recognize | loop_431_intervention_interdict | loop_431_intervention_minimize)
+(loop_431_context_branch | loop_431_then_branch | loop_431_operator_branch | loop_431_result_branch | loop_431_taxonomy_branch | loop_431_intervention_recognize | loop_431_intervention_interdict | loop_431_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_431_verdict)
+(loop_431_inactive)-[:PROCESS]->(loop_431_sink)
+(loop_431_verdict)-[:PROCESS]->(loop_431_sink)
+(loop_431_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_431_then_branch)
+(loop_431_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_431_then_branch)
+(loop_431_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_431_then_branch)

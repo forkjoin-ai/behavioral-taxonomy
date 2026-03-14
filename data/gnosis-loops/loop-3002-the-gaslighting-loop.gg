@@ -1,0 +1,33 @@
+// behavioral-loop-3002.gg
+// Executable Gnosis projection for The Gaslighting Loop.
+
+// Nodes
+(loop_3002_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_3002_context_branch: BehaviorEmit { emission: 'context' })
+(loop_3002_given_gate: BehaviorAssess { stage: 'given', text: 'A%20power%20imbalance%20%2B%20One%20manipulator' })
+(loop_3002_inactive: BehaviorTerminal { loopId: 3002, loopName: 'The%20Gaslighting%20Loop' })
+(loop_3002_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_3002_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3002_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_3002_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_3002_result_branch: BehaviorEmit { emission: 'result', text: 'Subject%20doubts%20their%20own%20sensory%20perception%20and%20relies%20on%20the%20manipulator%20for%20reality%20testing' })
+(loop_3002_sink: BehaviorSink)
+(loop_3002_start: BehaviorStart { loopId: 3002, loopName: 'The%20Gaslighting%20Loop', given: 'A%20power%20imbalance%20%2B%20One%20manipulator', when: 'Subject%20notices%20a%20discrepancy%20or%20wrongdoing', then: 'Manipulator%20denies%20reality%3A%20', result: 'Subject%20doubts%20their%20own%20sensory%20perception%20and%20relies%20on%20the%20manipulator%20for%20reality%20testing', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3002_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3002_then_branch: BehaviorEmit { emission: 'then', text: 'Manipulator%20denies%20reality%3A%20' })
+(loop_3002_verdict: BehaviorVerdict { loopId: 3002, loopName: 'The%20Gaslighting%20Loop', then: 'Manipulator%20denies%20reality%3A%20', result: 'Subject%20doubts%20their%20own%20sensory%20perception%20and%20relies%20on%20the%20manipulator%20for%20reality%20testing', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3002_when_gate: BehaviorAssess { stage: 'when', text: 'Subject%20notices%20a%20discrepancy%20or%20wrongdoing' })
+
+// Topology
+(loop_3002_start)-[:PROCESS]->(loop_3002_given_gate)
+(loop_3002_given_gate)-[:PROCESS { case: "ok" }]->(loop_3002_when_gate)
+(loop_3002_given_gate)-[:PROCESS { case: "err" }]->(loop_3002_inactive)
+(loop_3002_when_gate)-[:PROCESS { case: "ok" }]->(loop_3002_context)
+(loop_3002_when_gate)-[:PROCESS { case: "err" }]->(loop_3002_inactive)
+(loop_3002_context)-[:FORK { strategy: "behavior-branches" }]->(loop_3002_context_branch | loop_3002_then_branch | loop_3002_operator_branch | loop_3002_result_branch | loop_3002_taxonomy_branch | loop_3002_intervention_recognize | loop_3002_intervention_interdict | loop_3002_intervention_minimize)
+(loop_3002_context_branch | loop_3002_then_branch | loop_3002_operator_branch | loop_3002_result_branch | loop_3002_taxonomy_branch | loop_3002_intervention_recognize | loop_3002_intervention_interdict | loop_3002_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_3002_verdict)
+(loop_3002_inactive)-[:PROCESS]->(loop_3002_sink)
+(loop_3002_verdict)-[:PROCESS]->(loop_3002_sink)
+(loop_3002_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_3002_then_branch)
+(loop_3002_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_3002_then_branch)
+(loop_3002_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_3002_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-769.gg
+// Executable Gnosis projection for The Glass Jaw Loop.
+
+// Nodes
+(loop_769_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_769_context_branch: BehaviorEmit { emission: 'context' })
+(loop_769_given_gate: BehaviorAssess { stage: 'given', text: 'A%20mandible%20that%20is%20recessed%20relative%20to%20the%20maxilla' })
+(loop_769_inactive: BehaviorTerminal { loopId: 769, loopName: 'The%20Glass%20Jaw%20Loop' })
+(loop_769_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_769_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_769_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_769_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Prey%20Operator', mechanism: 'observers%20perceive%20%22Physical%20Vulnerability%22%20or%20%22Weak%20Will%22' })
+(loop_769_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20targeted%20for%20bullying%2C%20forcing%20the%20development%20of%20**Verbal%20Defense%20Mechanisms**' })
+(loop_769_sink: BehaviorSink)
+(loop_769_start: BehaviorStart { loopId: 769, loopName: 'The%20Glass%20Jaw%20Loop', given: 'A%20mandible%20that%20is%20recessed%20relative%20to%20the%20maxilla', when: 'in%20a%20confrontation', then: 'observers%20perceive%20%22Physical%20Vulnerability%22%20or%20%22Weak%20Will%22%20(The%20Prey%20Operator)', result: 'the%20individual%20being%20targeted%20for%20bullying%2C%20forcing%20the%20development%20of%20**Verbal%20Defense%20Mechanisms**', operatorName: 'The%20Prey%20Operator', operatorMechanism: 'observers%20perceive%20%22Physical%20Vulnerability%22%20or%20%22Weak%20Will%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_769_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_769_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Physical%20Vulnerability%22%20or%20%22Weak%20Will%22%20(The%20Prey%20Operator)' })
+(loop_769_verdict: BehaviorVerdict { loopId: 769, loopName: 'The%20Glass%20Jaw%20Loop', then: 'observers%20perceive%20%22Physical%20Vulnerability%22%20or%20%22Weak%20Will%22%20(The%20Prey%20Operator)', result: 'the%20individual%20being%20targeted%20for%20bullying%2C%20forcing%20the%20development%20of%20**Verbal%20Defense%20Mechanisms**', operatorName: 'The%20Prey%20Operator', operatorMechanism: 'observers%20perceive%20%22Physical%20Vulnerability%22%20or%20%22Weak%20Will%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_769_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20confrontation' })
+
+// Topology
+(loop_769_start)-[:PROCESS]->(loop_769_given_gate)
+(loop_769_given_gate)-[:PROCESS { case: "ok" }]->(loop_769_when_gate)
+(loop_769_given_gate)-[:PROCESS { case: "err" }]->(loop_769_inactive)
+(loop_769_when_gate)-[:PROCESS { case: "ok" }]->(loop_769_context)
+(loop_769_when_gate)-[:PROCESS { case: "err" }]->(loop_769_inactive)
+(loop_769_context)-[:FORK { strategy: "behavior-branches" }]->(loop_769_context_branch | loop_769_then_branch | loop_769_operator_branch | loop_769_result_branch | loop_769_taxonomy_branch | loop_769_intervention_recognize | loop_769_intervention_interdict | loop_769_intervention_minimize)
+(loop_769_context_branch | loop_769_then_branch | loop_769_operator_branch | loop_769_result_branch | loop_769_taxonomy_branch | loop_769_intervention_recognize | loop_769_intervention_interdict | loop_769_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_769_verdict)
+(loop_769_inactive)-[:PROCESS]->(loop_769_sink)
+(loop_769_verdict)-[:PROCESS]->(loop_769_sink)
+(loop_769_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_769_then_branch)
+(loop_769_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_769_then_branch)
+(loop_769_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_769_then_branch)

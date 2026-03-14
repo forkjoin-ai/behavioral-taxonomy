@@ -1,0 +1,33 @@
+// behavioral-loop-1043.gg
+// Executable Gnosis projection for The Tip of Tongue Loop.
+
+// Nodes
+(loop_1043_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1043_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1043_given_gate: BehaviorAssess { stage: 'given', text: 'Access%20failure%20in%20semantic%20memory' })
+(loop_1043_inactive: BehaviorTerminal { loopId: 1043, loopName: 'The%20Tip%20of%20Tongue%20Loop' })
+(loop_1043_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1043_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1043_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1043_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20brain%20freezes%20all%20other%20processes%20to%20find%20it%20(The%20Buffering)' })
+(loop_1043_result_branch: BehaviorEmit { emission: 'result', text: 'snapping%20fingers%20aggressively%20while%20saying%20%22You%20know%2C%20the%20guy!%20The%20guy!%22' })
+(loop_1043_sink: BehaviorSink)
+(loop_1043_start: BehaviorStart { loopId: 1043, loopName: 'The%20Tip%20of%20Tongue%20Loop', given: 'Access%20failure%20in%20semantic%20memory', when: 'trying%20to%20name%20a%20celebrity%2Fobject', then: 'the%20brain%20freezes%20all%20other%20processes%20to%20find%20it%20(The%20Buffering)', result: 'snapping%20fingers%20aggressively%20while%20saying%20%22You%20know%2C%20the%20guy!%20The%20guy!%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20brain%20freezes%20all%20other%20processes%20to%20find%20it%20(The%20Buffering)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1043_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1043_then_branch: BehaviorEmit { emission: 'then', text: 'the%20brain%20freezes%20all%20other%20processes%20to%20find%20it%20(The%20Buffering)' })
+(loop_1043_verdict: BehaviorVerdict { loopId: 1043, loopName: 'The%20Tip%20of%20Tongue%20Loop', then: 'the%20brain%20freezes%20all%20other%20processes%20to%20find%20it%20(The%20Buffering)', result: 'snapping%20fingers%20aggressively%20while%20saying%20%22You%20know%2C%20the%20guy!%20The%20guy!%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20brain%20freezes%20all%20other%20processes%20to%20find%20it%20(The%20Buffering)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1043_when_gate: BehaviorAssess { stage: 'when', text: 'trying%20to%20name%20a%20celebrity%2Fobject' })
+
+// Topology
+(loop_1043_start)-[:PROCESS]->(loop_1043_given_gate)
+(loop_1043_given_gate)-[:PROCESS { case: "ok" }]->(loop_1043_when_gate)
+(loop_1043_given_gate)-[:PROCESS { case: "err" }]->(loop_1043_inactive)
+(loop_1043_when_gate)-[:PROCESS { case: "ok" }]->(loop_1043_context)
+(loop_1043_when_gate)-[:PROCESS { case: "err" }]->(loop_1043_inactive)
+(loop_1043_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1043_context_branch | loop_1043_then_branch | loop_1043_operator_branch | loop_1043_result_branch | loop_1043_taxonomy_branch | loop_1043_intervention_recognize | loop_1043_intervention_interdict | loop_1043_intervention_minimize)
+(loop_1043_context_branch | loop_1043_then_branch | loop_1043_operator_branch | loop_1043_result_branch | loop_1043_taxonomy_branch | loop_1043_intervention_recognize | loop_1043_intervention_interdict | loop_1043_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1043_verdict)
+(loop_1043_inactive)-[:PROCESS]->(loop_1043_sink)
+(loop_1043_verdict)-[:PROCESS]->(loop_1043_sink)
+(loop_1043_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1043_then_branch)
+(loop_1043_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1043_then_branch)
+(loop_1043_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1043_then_branch)

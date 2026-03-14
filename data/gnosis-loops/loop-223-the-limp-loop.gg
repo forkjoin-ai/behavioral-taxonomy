@@ -1,0 +1,33 @@
+// behavioral-loop-223.gg
+// Executable Gnosis projection for The Limp Loop.
+
+// Nodes
+(loop_223_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_223_context_branch: BehaviorEmit { emission: 'context' })
+(loop_223_given_gate: BehaviorAssess { stage: 'given', text: 'Antalgic%20Gait' })
+(loop_223_inactive: BehaviorTerminal { loopId: 223, loopName: 'The%20Limp%20Loop' })
+(loop_223_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_223_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_223_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_223_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Burden%20Operator', mechanism: 'the%20group%20slows%20down%20visibly' })
+(loop_223_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20feeling%20like%20a%20%22Drag%2C%22%20leading%20to%20**Self-Exclusion**%20from%20trips' })
+(loop_223_sink: BehaviorSink)
+(loop_223_start: BehaviorStart { loopId: 223, loopName: 'The%20Limp%20Loop', given: 'Antalgic%20Gait', when: 'walking%20with%20a%20group', then: 'the%20group%20slows%20down%20visibly%20(The%20Burden%20Operator)', result: 'the%20individual%20feeling%20like%20a%20%22Drag%2C%22%20leading%20to%20**Self-Exclusion**%20from%20trips', operatorName: 'The%20Burden%20Operator', operatorMechanism: 'the%20group%20slows%20down%20visibly', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_223_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_223_then_branch: BehaviorEmit { emission: 'then', text: 'the%20group%20slows%20down%20visibly%20(The%20Burden%20Operator)' })
+(loop_223_verdict: BehaviorVerdict { loopId: 223, loopName: 'The%20Limp%20Loop', then: 'the%20group%20slows%20down%20visibly%20(The%20Burden%20Operator)', result: 'the%20individual%20feeling%20like%20a%20%22Drag%2C%22%20leading%20to%20**Self-Exclusion**%20from%20trips', operatorName: 'The%20Burden%20Operator', operatorMechanism: 'the%20group%20slows%20down%20visibly', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_223_when_gate: BehaviorAssess { stage: 'when', text: 'walking%20with%20a%20group' })
+
+// Topology
+(loop_223_start)-[:PROCESS]->(loop_223_given_gate)
+(loop_223_given_gate)-[:PROCESS { case: "ok" }]->(loop_223_when_gate)
+(loop_223_given_gate)-[:PROCESS { case: "err" }]->(loop_223_inactive)
+(loop_223_when_gate)-[:PROCESS { case: "ok" }]->(loop_223_context)
+(loop_223_when_gate)-[:PROCESS { case: "err" }]->(loop_223_inactive)
+(loop_223_context)-[:FORK { strategy: "behavior-branches" }]->(loop_223_context_branch | loop_223_then_branch | loop_223_operator_branch | loop_223_result_branch | loop_223_taxonomy_branch | loop_223_intervention_recognize | loop_223_intervention_interdict | loop_223_intervention_minimize)
+(loop_223_context_branch | loop_223_then_branch | loop_223_operator_branch | loop_223_result_branch | loop_223_taxonomy_branch | loop_223_intervention_recognize | loop_223_intervention_interdict | loop_223_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_223_verdict)
+(loop_223_inactive)-[:PROCESS]->(loop_223_sink)
+(loop_223_verdict)-[:PROCESS]->(loop_223_sink)
+(loop_223_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_223_then_branch)
+(loop_223_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_223_then_branch)
+(loop_223_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_223_then_branch)

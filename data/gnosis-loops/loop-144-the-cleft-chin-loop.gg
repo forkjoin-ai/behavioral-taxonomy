@@ -1,0 +1,33 @@
+// behavioral-loop-144.gg
+// Executable Gnosis projection for The Cleft Chin Loop.
+
+// Nodes
+(loop_144_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_144_context_branch: BehaviorEmit { emission: 'context' })
+(loop_144_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20indentation%20on%20the%20chin' })
+(loop_144_inactive: BehaviorTerminal { loopId: 144, loopName: 'The%20Cleft%20Chin%20Loop' })
+(loop_144_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_144_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_144_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_144_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Halo%20Operator', mechanism: 'observers%20associate%20it%20with%20%22classic%20heroes%22%20or%20%22ruggedness%22' })
+(loop_144_result_branch: BehaviorEmit { emission: 'result', text: 'an%20unearned%20assumption%20of%20**Leadership%20Ability**' })
+(loop_144_sink: BehaviorSink)
+(loop_144_start: BehaviorStart { loopId: 144, loopName: 'The%20Cleft%20Chin%20Loop', given: 'Visible%20indentation%20on%20the%20chin', when: 'viewed%20in%20harsh%20lighting', then: 'observers%20associate%20it%20with%20%22classic%20heroes%22%20or%20%22ruggedness%22%20(The%20Halo%20Operator%20-%20Masculine)', result: 'an%20unearned%20assumption%20of%20**Leadership%20Ability**', operatorName: 'The%20Halo%20Operator', operatorMechanism: 'observers%20associate%20it%20with%20%22classic%20heroes%22%20or%20%22ruggedness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_144_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_144_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20associate%20it%20with%20%22classic%20heroes%22%20or%20%22ruggedness%22%20(The%20Halo%20Operator%20-%20Masculine)' })
+(loop_144_verdict: BehaviorVerdict { loopId: 144, loopName: 'The%20Cleft%20Chin%20Loop', then: 'observers%20associate%20it%20with%20%22classic%20heroes%22%20or%20%22ruggedness%22%20(The%20Halo%20Operator%20-%20Masculine)', result: 'an%20unearned%20assumption%20of%20**Leadership%20Ability**', operatorName: 'The%20Halo%20Operator', operatorMechanism: 'observers%20associate%20it%20with%20%22classic%20heroes%22%20or%20%22ruggedness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_144_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20in%20harsh%20lighting' })
+
+// Topology
+(loop_144_start)-[:PROCESS]->(loop_144_given_gate)
+(loop_144_given_gate)-[:PROCESS { case: "ok" }]->(loop_144_when_gate)
+(loop_144_given_gate)-[:PROCESS { case: "err" }]->(loop_144_inactive)
+(loop_144_when_gate)-[:PROCESS { case: "ok" }]->(loop_144_context)
+(loop_144_when_gate)-[:PROCESS { case: "err" }]->(loop_144_inactive)
+(loop_144_context)-[:FORK { strategy: "behavior-branches" }]->(loop_144_context_branch | loop_144_then_branch | loop_144_operator_branch | loop_144_result_branch | loop_144_taxonomy_branch | loop_144_intervention_recognize | loop_144_intervention_interdict | loop_144_intervention_minimize)
+(loop_144_context_branch | loop_144_then_branch | loop_144_operator_branch | loop_144_result_branch | loop_144_taxonomy_branch | loop_144_intervention_recognize | loop_144_intervention_interdict | loop_144_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_144_verdict)
+(loop_144_inactive)-[:PROCESS]->(loop_144_sink)
+(loop_144_verdict)-[:PROCESS]->(loop_144_sink)
+(loop_144_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_144_then_branch)
+(loop_144_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_144_then_branch)
+(loop_144_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_144_then_branch)

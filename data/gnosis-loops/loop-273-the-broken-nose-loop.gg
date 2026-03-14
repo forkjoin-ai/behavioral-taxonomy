@@ -1,0 +1,33 @@
+// behavioral-loop-273.gg
+// Executable Gnosis projection for The Broken Nose Loop.
+
+// Nodes
+(loop_273_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_273_context_branch: BehaviorEmit { emission: 'context' })
+(loop_273_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20nasal%20asymmetry' })
+(loop_273_inactive: BehaviorTerminal { loopId: 273, loopName: 'The%20Broken%20Nose%20Loop' })
+(loop_273_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_273_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_273_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_273_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%20Operator', mechanism: 'observers%20assume%20%22Toughness%22%20or%20%22Past%20Violence%22' })
+(loop_273_result_branch: BehaviorEmit { emission: 'result', text: 'fewer%20people%20picking%20fights%2C%20but%20also%20fewer%20**Gentle%20Interactions**' })
+(loop_273_sink: BehaviorSink)
+(loop_273_start: BehaviorStart { loopId: 273, loopName: 'The%20Broken%20Nose%20Loop', given: 'Visible%20nasal%20asymmetry', when: 'viewed%20straight%20on', then: 'observers%20assume%20%22Toughness%22%20or%20%22Past%20Violence%22%20(The%20Threat%20Operator)', result: 'fewer%20people%20picking%20fights%2C%20but%20also%20fewer%20**Gentle%20Interactions**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'observers%20assume%20%22Toughness%22%20or%20%22Past%20Violence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_273_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_273_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Toughness%22%20or%20%22Past%20Violence%22%20(The%20Threat%20Operator)' })
+(loop_273_verdict: BehaviorVerdict { loopId: 273, loopName: 'The%20Broken%20Nose%20Loop', then: 'observers%20assume%20%22Toughness%22%20or%20%22Past%20Violence%22%20(The%20Threat%20Operator)', result: 'fewer%20people%20picking%20fights%2C%20but%20also%20fewer%20**Gentle%20Interactions**', operatorName: 'The%20Threat%20Operator', operatorMechanism: 'observers%20assume%20%22Toughness%22%20or%20%22Past%20Violence%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_273_when_gate: BehaviorAssess { stage: 'when', text: 'viewed%20straight%20on' })
+
+// Topology
+(loop_273_start)-[:PROCESS]->(loop_273_given_gate)
+(loop_273_given_gate)-[:PROCESS { case: "ok" }]->(loop_273_when_gate)
+(loop_273_given_gate)-[:PROCESS { case: "err" }]->(loop_273_inactive)
+(loop_273_when_gate)-[:PROCESS { case: "ok" }]->(loop_273_context)
+(loop_273_when_gate)-[:PROCESS { case: "err" }]->(loop_273_inactive)
+(loop_273_context)-[:FORK { strategy: "behavior-branches" }]->(loop_273_context_branch | loop_273_then_branch | loop_273_operator_branch | loop_273_result_branch | loop_273_taxonomy_branch | loop_273_intervention_recognize | loop_273_intervention_interdict | loop_273_intervention_minimize)
+(loop_273_context_branch | loop_273_then_branch | loop_273_operator_branch | loop_273_result_branch | loop_273_taxonomy_branch | loop_273_intervention_recognize | loop_273_intervention_interdict | loop_273_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_273_verdict)
+(loop_273_inactive)-[:PROCESS]->(loop_273_sink)
+(loop_273_verdict)-[:PROCESS]->(loop_273_sink)
+(loop_273_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_273_then_branch)
+(loop_273_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_273_then_branch)
+(loop_273_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_273_then_branch)

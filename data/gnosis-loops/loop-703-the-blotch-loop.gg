@@ -1,0 +1,33 @@
+// behavioral-loop-703.gg
+// Executable Gnosis projection for The Blotch Loop.
+
+// Nodes
+(loop_703_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_703_context_branch: BehaviorEmit { emission: 'context' })
+(loop_703_given_gate: BehaviorAssess { stage: 'given', text: 'Red%20patches%20appearing%20on%20neck%20during%20speaking' })
+(loop_703_inactive: BehaviorTerminal { loopId: 703, loopName: 'The%20Blotch%20Loop' })
+(loop_703_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_703_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_703_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_703_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Panic%20Map%20Operator', mechanism: 'the%20audience%20watches%20the%20rash%20spread' })
+(loop_703_result_branch: BehaviorEmit { emission: 'result', text: 'the%20message%20being%20drowned%20out%20by%20the%20visual%20stress%20signal' })
+(loop_703_sink: BehaviorSink)
+(loop_703_start: BehaviorStart { loopId: 703, loopName: 'The%20Blotch%20Loop', given: 'Red%20patches%20appearing%20on%20neck%20during%20speaking', when: 'presenting', then: 'the%20audience%20watches%20the%20rash%20spread%20(The%20Panic%20Map%20Operator)', result: 'the%20message%20being%20drowned%20out%20by%20the%20visual%20stress%20signal', operatorName: 'The%20Panic%20Map%20Operator', operatorMechanism: 'the%20audience%20watches%20the%20rash%20spread', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_703_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_703_then_branch: BehaviorEmit { emission: 'then', text: 'the%20audience%20watches%20the%20rash%20spread%20(The%20Panic%20Map%20Operator)' })
+(loop_703_verdict: BehaviorVerdict { loopId: 703, loopName: 'The%20Blotch%20Loop', then: 'the%20audience%20watches%20the%20rash%20spread%20(The%20Panic%20Map%20Operator)', result: 'the%20message%20being%20drowned%20out%20by%20the%20visual%20stress%20signal', operatorName: 'The%20Panic%20Map%20Operator', operatorMechanism: 'the%20audience%20watches%20the%20rash%20spread', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_703_when_gate: BehaviorAssess { stage: 'when', text: 'presenting' })
+
+// Topology
+(loop_703_start)-[:PROCESS]->(loop_703_given_gate)
+(loop_703_given_gate)-[:PROCESS { case: "ok" }]->(loop_703_when_gate)
+(loop_703_given_gate)-[:PROCESS { case: "err" }]->(loop_703_inactive)
+(loop_703_when_gate)-[:PROCESS { case: "ok" }]->(loop_703_context)
+(loop_703_when_gate)-[:PROCESS { case: "err" }]->(loop_703_inactive)
+(loop_703_context)-[:FORK { strategy: "behavior-branches" }]->(loop_703_context_branch | loop_703_then_branch | loop_703_operator_branch | loop_703_result_branch | loop_703_taxonomy_branch | loop_703_intervention_recognize | loop_703_intervention_interdict | loop_703_intervention_minimize)
+(loop_703_context_branch | loop_703_then_branch | loop_703_operator_branch | loop_703_result_branch | loop_703_taxonomy_branch | loop_703_intervention_recognize | loop_703_intervention_interdict | loop_703_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_703_verdict)
+(loop_703_inactive)-[:PROCESS]->(loop_703_sink)
+(loop_703_verdict)-[:PROCESS]->(loop_703_sink)
+(loop_703_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_703_then_branch)
+(loop_703_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_703_then_branch)
+(loop_703_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_703_then_branch)

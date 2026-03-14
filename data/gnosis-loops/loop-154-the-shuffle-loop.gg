@@ -1,0 +1,33 @@
+// behavioral-loop-154.gg
+// Executable Gnosis projection for The Shuffle Loop.
+
+// Nodes
+(loop_154_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_154_context_branch: BehaviorEmit { emission: 'context' })
+(loop_154_given_gate: BehaviorAssess { stage: 'given', text: 'Feet%20barely%20leaving%20the%20ground' })
+(loop_154_inactive: BehaviorTerminal { loopId: 154, loopName: 'The%20Shuffle%20Loop' })
+(loop_154_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_154_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_154_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_154_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Invisibility%20Operator', mechanism: 'the%20sound%20implies%20%22Fatigue%22%20or%20%22Depression%22' })
+(loop_154_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20ignored%20or%20talked%20over' })
+(loop_154_sink: BehaviorSink)
+(loop_154_start: BehaviorStart { loopId: 154, loopName: 'The%20Shuffle%20Loop', given: 'Feet%20barely%20leaving%20the%20ground', when: 'approaching%20a%20group', then: 'the%20sound%20implies%20%22Fatigue%22%20or%20%22Depression%22%20(The%20Invisibility%20Operator)', result: 'the%20individual%20being%20ignored%20or%20talked%20over', operatorName: 'The%20Invisibility%20Operator', operatorMechanism: 'the%20sound%20implies%20%22Fatigue%22%20or%20%22Depression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_154_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_154_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20implies%20%22Fatigue%22%20or%20%22Depression%22%20(The%20Invisibility%20Operator)' })
+(loop_154_verdict: BehaviorVerdict { loopId: 154, loopName: 'The%20Shuffle%20Loop', then: 'the%20sound%20implies%20%22Fatigue%22%20or%20%22Depression%22%20(The%20Invisibility%20Operator)', result: 'the%20individual%20being%20ignored%20or%20talked%20over', operatorName: 'The%20Invisibility%20Operator', operatorMechanism: 'the%20sound%20implies%20%22Fatigue%22%20or%20%22Depression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_154_when_gate: BehaviorAssess { stage: 'when', text: 'approaching%20a%20group' })
+
+// Topology
+(loop_154_start)-[:PROCESS]->(loop_154_given_gate)
+(loop_154_given_gate)-[:PROCESS { case: "ok" }]->(loop_154_when_gate)
+(loop_154_given_gate)-[:PROCESS { case: "err" }]->(loop_154_inactive)
+(loop_154_when_gate)-[:PROCESS { case: "ok" }]->(loop_154_context)
+(loop_154_when_gate)-[:PROCESS { case: "err" }]->(loop_154_inactive)
+(loop_154_context)-[:FORK { strategy: "behavior-branches" }]->(loop_154_context_branch | loop_154_then_branch | loop_154_operator_branch | loop_154_result_branch | loop_154_taxonomy_branch | loop_154_intervention_recognize | loop_154_intervention_interdict | loop_154_intervention_minimize)
+(loop_154_context_branch | loop_154_then_branch | loop_154_operator_branch | loop_154_result_branch | loop_154_taxonomy_branch | loop_154_intervention_recognize | loop_154_intervention_interdict | loop_154_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_154_verdict)
+(loop_154_inactive)-[:PROCESS]->(loop_154_sink)
+(loop_154_verdict)-[:PROCESS]->(loop_154_sink)
+(loop_154_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_154_then_branch)
+(loop_154_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_154_then_branch)
+(loop_154_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_154_then_branch)

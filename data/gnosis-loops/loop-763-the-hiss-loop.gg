@@ -1,0 +1,33 @@
+// behavioral-loop-763.gg
+// Executable Gnosis projection for The Hiss Loop.
+
+// Nodes
+(loop_763_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_763_context_branch: BehaviorEmit { emission: 'context' })
+(loop_763_given_gate: BehaviorAssess { stage: 'given', text: 'Sharp%20intake%20of%20breath%20through%20teeth' })
+(loop_763_inactive: BehaviorTerminal { loopId: 763, loopName: 'The%20Hiss%20Loop' })
+(loop_763_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_763_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_763_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_763_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mechanic%20Operator', mechanism: 'it%20signals%20%22Pain%22%20or%20%22Disapproval%22' })
+(loop_763_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20feeling%20stupid' })
+(loop_763_sink: BehaviorSink)
+(loop_763_start: BehaviorStart { loopId: 763, loopName: 'The%20Hiss%20Loop', given: 'Sharp%20intake%20of%20breath%20through%20teeth', when: 'hearing%20a%20bad%20idea', then: 'it%20signals%20%22Pain%22%20or%20%22Disapproval%22%20(The%20Mechanic%20Operator)', result: 'the%20speaker%20feeling%20stupid', operatorName: 'The%20Mechanic%20Operator', operatorMechanism: 'it%20signals%20%22Pain%22%20or%20%22Disapproval%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_763_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_763_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Pain%22%20or%20%22Disapproval%22%20(The%20Mechanic%20Operator)' })
+(loop_763_verdict: BehaviorVerdict { loopId: 763, loopName: 'The%20Hiss%20Loop', then: 'it%20signals%20%22Pain%22%20or%20%22Disapproval%22%20(The%20Mechanic%20Operator)', result: 'the%20speaker%20feeling%20stupid', operatorName: 'The%20Mechanic%20Operator', operatorMechanism: 'it%20signals%20%22Pain%22%20or%20%22Disapproval%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_763_when_gate: BehaviorAssess { stage: 'when', text: 'hearing%20a%20bad%20idea' })
+
+// Topology
+(loop_763_start)-[:PROCESS]->(loop_763_given_gate)
+(loop_763_given_gate)-[:PROCESS { case: "ok" }]->(loop_763_when_gate)
+(loop_763_given_gate)-[:PROCESS { case: "err" }]->(loop_763_inactive)
+(loop_763_when_gate)-[:PROCESS { case: "ok" }]->(loop_763_context)
+(loop_763_when_gate)-[:PROCESS { case: "err" }]->(loop_763_inactive)
+(loop_763_context)-[:FORK { strategy: "behavior-branches" }]->(loop_763_context_branch | loop_763_then_branch | loop_763_operator_branch | loop_763_result_branch | loop_763_taxonomy_branch | loop_763_intervention_recognize | loop_763_intervention_interdict | loop_763_intervention_minimize)
+(loop_763_context_branch | loop_763_then_branch | loop_763_operator_branch | loop_763_result_branch | loop_763_taxonomy_branch | loop_763_intervention_recognize | loop_763_intervention_interdict | loop_763_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_763_verdict)
+(loop_763_inactive)-[:PROCESS]->(loop_763_sink)
+(loop_763_verdict)-[:PROCESS]->(loop_763_sink)
+(loop_763_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_763_then_branch)
+(loop_763_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_763_then_branch)
+(loop_763_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_763_then_branch)

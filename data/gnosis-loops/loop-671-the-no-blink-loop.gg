@@ -1,0 +1,33 @@
+// behavioral-loop-671.gg
+// Executable Gnosis projection for The No Blink Loop.
+
+// Nodes
+(loop_671_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_671_context_branch: BehaviorEmit { emission: 'context' })
+(loop_671_given_gate: BehaviorAssess { stage: 'given', text: 'Extremely%20low%20blink%20rate' })
+(loop_671_inactive: BehaviorTerminal { loopId: 671, loopName: 'The%20No%20Blink%20Loop' })
+(loop_671_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_671_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_671_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_671_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Predator%20Operator', mechanism: 'it%20signals%20%22Intensity%22%20or%20%22Psychopathy%22' })
+(loop_671_result_branch: BehaviorEmit { emission: 'result', text: 'the%20listener%20looking%20away%20to%20break%20tension' })
+(loop_671_sink: BehaviorSink)
+(loop_671_start: BehaviorStart { loopId: 671, loopName: 'The%20No%20Blink%20Loop', given: 'Extremely%20low%20blink%20rate', when: 'talking', then: 'it%20signals%20%22Intensity%22%20or%20%22Psychopathy%22%20(The%20Predator%20Operator)', result: 'the%20listener%20looking%20away%20to%20break%20tension', operatorName: 'The%20Predator%20Operator', operatorMechanism: 'it%20signals%20%22Intensity%22%20or%20%22Psychopathy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_671_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_671_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Intensity%22%20or%20%22Psychopathy%22%20(The%20Predator%20Operator)' })
+(loop_671_verdict: BehaviorVerdict { loopId: 671, loopName: 'The%20No%20Blink%20Loop', then: 'it%20signals%20%22Intensity%22%20or%20%22Psychopathy%22%20(The%20Predator%20Operator)', result: 'the%20listener%20looking%20away%20to%20break%20tension', operatorName: 'The%20Predator%20Operator', operatorMechanism: 'it%20signals%20%22Intensity%22%20or%20%22Psychopathy%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_671_when_gate: BehaviorAssess { stage: 'when', text: 'talking' })
+
+// Topology
+(loop_671_start)-[:PROCESS]->(loop_671_given_gate)
+(loop_671_given_gate)-[:PROCESS { case: "ok" }]->(loop_671_when_gate)
+(loop_671_given_gate)-[:PROCESS { case: "err" }]->(loop_671_inactive)
+(loop_671_when_gate)-[:PROCESS { case: "ok" }]->(loop_671_context)
+(loop_671_when_gate)-[:PROCESS { case: "err" }]->(loop_671_inactive)
+(loop_671_context)-[:FORK { strategy: "behavior-branches" }]->(loop_671_context_branch | loop_671_then_branch | loop_671_operator_branch | loop_671_result_branch | loop_671_taxonomy_branch | loop_671_intervention_recognize | loop_671_intervention_interdict | loop_671_intervention_minimize)
+(loop_671_context_branch | loop_671_then_branch | loop_671_operator_branch | loop_671_result_branch | loop_671_taxonomy_branch | loop_671_intervention_recognize | loop_671_intervention_interdict | loop_671_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_671_verdict)
+(loop_671_inactive)-[:PROCESS]->(loop_671_sink)
+(loop_671_verdict)-[:PROCESS]->(loop_671_sink)
+(loop_671_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_671_then_branch)
+(loop_671_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_671_then_branch)
+(loop_671_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_671_then_branch)

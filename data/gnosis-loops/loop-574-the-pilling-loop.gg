@@ -1,0 +1,31 @@
+// behavioral-loop-574.gg
+// Executable Gnosis projection for The Pilling Loop.
+
+// Nodes
+(loop_574_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_574_context_branch: BehaviorEmit { emission: 'context' })
+(loop_574_given_gate: BehaviorAssess { stage: 'given', text: 'Wearing%20sweaters%20with%20fabric%20balls' })
+(loop_574_inactive: BehaviorTerminal { loopId: 574, loopName: 'The%20Pilling%20Loop' })
+(loop_574_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_574_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_574_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threadbare%20Operator', mechanism: 'it%20signals%20%22Poverty%22%20or%20%22attachment%20to%20old%20things%22' })
+(loop_574_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20%22crisp%22%20professional%20authority' })
+(loop_574_sink: BehaviorSink)
+(loop_574_start: BehaviorStart { loopId: 574, loopName: 'The%20Pilling%20Loop', given: 'Wearing%20sweaters%20with%20fabric%20balls', when: 'seen%20up%20close', then: 'it%20signals%20%22Poverty%22%20or%20%22attachment%20to%20old%20things%22%20(The%20Threadbare%20Operator)', result: 'loss%20of%20%22crisp%22%20professional%20authority', operatorName: 'The%20Threadbare%20Operator', operatorMechanism: 'it%20signals%20%22Poverty%22%20or%20%22attachment%20to%20old%20things%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_574_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_574_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Poverty%22%20or%20%22attachment%20to%20old%20things%22%20(The%20Threadbare%20Operator)' })
+(loop_574_verdict: BehaviorVerdict { loopId: 574, loopName: 'The%20Pilling%20Loop', then: 'it%20signals%20%22Poverty%22%20or%20%22attachment%20to%20old%20things%22%20(The%20Threadbare%20Operator)', result: 'loss%20of%20%22crisp%22%20professional%20authority', operatorName: 'The%20Threadbare%20Operator', operatorMechanism: 'it%20signals%20%22Poverty%22%20or%20%22attachment%20to%20old%20things%22', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_574_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20up%20close' })
+
+// Topology
+(loop_574_start)-[:PROCESS]->(loop_574_given_gate)
+(loop_574_given_gate)-[:PROCESS { case: "ok" }]->(loop_574_when_gate)
+(loop_574_given_gate)-[:PROCESS { case: "err" }]->(loop_574_inactive)
+(loop_574_when_gate)-[:PROCESS { case: "ok" }]->(loop_574_context)
+(loop_574_when_gate)-[:PROCESS { case: "err" }]->(loop_574_inactive)
+(loop_574_context)-[:FORK { strategy: "behavior-branches" }]->(loop_574_context_branch | loop_574_then_branch | loop_574_operator_branch | loop_574_result_branch | loop_574_taxonomy_branch | loop_574_intervention_recognize | loop_574_intervention_leverage)
+(loop_574_context_branch | loop_574_then_branch | loop_574_operator_branch | loop_574_result_branch | loop_574_taxonomy_branch | loop_574_intervention_recognize | loop_574_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_574_verdict)
+(loop_574_inactive)-[:PROCESS]->(loop_574_sink)
+(loop_574_verdict)-[:PROCESS]->(loop_574_sink)
+(loop_574_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_574_then_branch)
+(loop_574_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_574_result_branch)

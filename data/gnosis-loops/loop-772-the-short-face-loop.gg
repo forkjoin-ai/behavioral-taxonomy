@@ -1,0 +1,33 @@
+// behavioral-loop-772.gg
+// Executable Gnosis projection for The Short Face Loop.
+
+// Nodes
+(loop_772_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_772_context_branch: BehaviorEmit { emission: 'context' })
+(loop_772_given_gate: BehaviorAssess { stage: 'given', text: 'Wide%2C%20short%20skull%20shape%20with%20low%20facial%20height' })
+(loop_772_inactive: BehaviorTerminal { loopId: 772, loopName: 'The%20Short%20Face%20Loop' })
+(loop_772_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_772_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_772_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_772_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cherub%20Operator', mechanism: 'the%20fit%20is%20often%20poor%2C%20creating%20a%20%22Childlike%22%20proportion' })
+(loop_772_result_branch: BehaviorEmit { emission: 'result', text: 'difficulty%20appearing%20%22Rugged%22%20or%20%22Dangerous.%22' })
+(loop_772_sink: BehaviorSink)
+(loop_772_start: BehaviorStart { loopId: 772, loopName: 'The%20Short%20Face%20Loop', given: 'Wide%2C%20short%20skull%20shape%20with%20low%20facial%20height', when: 'wearing%20hats%20or%20glasses', then: 'the%20fit%20is%20often%20poor%2C%20creating%20a%20%22Childlike%22%20proportion%20(The%20Cherub%20Operator)', result: 'difficulty%20appearing%20%22Rugged%22%20or%20%22Dangerous.%22', operatorName: 'The%20Cherub%20Operator', operatorMechanism: 'the%20fit%20is%20often%20poor%2C%20creating%20a%20%22Childlike%22%20proportion', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_772_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_772_then_branch: BehaviorEmit { emission: 'then', text: 'the%20fit%20is%20often%20poor%2C%20creating%20a%20%22Childlike%22%20proportion%20(The%20Cherub%20Operator)' })
+(loop_772_verdict: BehaviorVerdict { loopId: 772, loopName: 'The%20Short%20Face%20Loop', then: 'the%20fit%20is%20often%20poor%2C%20creating%20a%20%22Childlike%22%20proportion%20(The%20Cherub%20Operator)', result: 'difficulty%20appearing%20%22Rugged%22%20or%20%22Dangerous.%22', operatorName: 'The%20Cherub%20Operator', operatorMechanism: 'the%20fit%20is%20often%20poor%2C%20creating%20a%20%22Childlike%22%20proportion', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_772_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20hats%20or%20glasses' })
+
+// Topology
+(loop_772_start)-[:PROCESS]->(loop_772_given_gate)
+(loop_772_given_gate)-[:PROCESS { case: "ok" }]->(loop_772_when_gate)
+(loop_772_given_gate)-[:PROCESS { case: "err" }]->(loop_772_inactive)
+(loop_772_when_gate)-[:PROCESS { case: "ok" }]->(loop_772_context)
+(loop_772_when_gate)-[:PROCESS { case: "err" }]->(loop_772_inactive)
+(loop_772_context)-[:FORK { strategy: "behavior-branches" }]->(loop_772_context_branch | loop_772_then_branch | loop_772_operator_branch | loop_772_result_branch | loop_772_taxonomy_branch | loop_772_intervention_recognize | loop_772_intervention_interdict | loop_772_intervention_minimize)
+(loop_772_context_branch | loop_772_then_branch | loop_772_operator_branch | loop_772_result_branch | loop_772_taxonomy_branch | loop_772_intervention_recognize | loop_772_intervention_interdict | loop_772_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_772_verdict)
+(loop_772_inactive)-[:PROCESS]->(loop_772_sink)
+(loop_772_verdict)-[:PROCESS]->(loop_772_sink)
+(loop_772_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_772_then_branch)
+(loop_772_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_772_then_branch)
+(loop_772_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_772_then_branch)

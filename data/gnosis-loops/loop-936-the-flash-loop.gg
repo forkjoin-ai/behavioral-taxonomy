@@ -1,0 +1,33 @@
+// behavioral-loop-936.gg
+// Executable Gnosis projection for The Flash Loop.
+
+// Nodes
+(loop_936_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_936_context_branch: BehaviorEmit { emission: 'context' })
+(loop_936_given_gate: BehaviorAssess { stage: 'given', text: 'Rapid%20lifting%20of%20brows%20(Frontalis)' })
+(loop_936_inactive: BehaviorTerminal { loopId: 936, loopName: 'The%20Flash%20Loop' })
+(loop_936_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_936_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_936_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_936_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hello%20Operator', mechanism: 'it%20signals%20%22Friend%22%20or%20%22Recognition%22' })
+(loop_936_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20rapport.%20*Absence*%20of%20this%20flash%20signals%20%22Stranger%2FThreat.%22' })
+(loop_936_sink: BehaviorSink)
+(loop_936_start: BehaviorStart { loopId: 936, loopName: 'The%20Flash%20Loop', given: 'Rapid%20lifting%20of%20brows%20(Frontalis)', when: 'seeing%20someone%20familiar', then: 'it%20signals%20%22Friend%22%20or%20%22Recognition%22%20(The%20Hello%20Operator)', result: 'immediate%20rapport.%20*Absence*%20of%20this%20flash%20signals%20%22Stranger%2FThreat.%22', operatorName: 'The%20Hello%20Operator', operatorMechanism: 'it%20signals%20%22Friend%22%20or%20%22Recognition%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_936_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_936_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Friend%22%20or%20%22Recognition%22%20(The%20Hello%20Operator)' })
+(loop_936_verdict: BehaviorVerdict { loopId: 936, loopName: 'The%20Flash%20Loop', then: 'it%20signals%20%22Friend%22%20or%20%22Recognition%22%20(The%20Hello%20Operator)', result: 'immediate%20rapport.%20*Absence*%20of%20this%20flash%20signals%20%22Stranger%2FThreat.%22', operatorName: 'The%20Hello%20Operator', operatorMechanism: 'it%20signals%20%22Friend%22%20or%20%22Recognition%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_936_when_gate: BehaviorAssess { stage: 'when', text: 'seeing%20someone%20familiar' })
+
+// Topology
+(loop_936_start)-[:PROCESS]->(loop_936_given_gate)
+(loop_936_given_gate)-[:PROCESS { case: "ok" }]->(loop_936_when_gate)
+(loop_936_given_gate)-[:PROCESS { case: "err" }]->(loop_936_inactive)
+(loop_936_when_gate)-[:PROCESS { case: "ok" }]->(loop_936_context)
+(loop_936_when_gate)-[:PROCESS { case: "err" }]->(loop_936_inactive)
+(loop_936_context)-[:FORK { strategy: "behavior-branches" }]->(loop_936_context_branch | loop_936_then_branch | loop_936_operator_branch | loop_936_result_branch | loop_936_taxonomy_branch | loop_936_intervention_recognize | loop_936_intervention_interdict | loop_936_intervention_minimize)
+(loop_936_context_branch | loop_936_then_branch | loop_936_operator_branch | loop_936_result_branch | loop_936_taxonomy_branch | loop_936_intervention_recognize | loop_936_intervention_interdict | loop_936_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_936_verdict)
+(loop_936_inactive)-[:PROCESS]->(loop_936_sink)
+(loop_936_verdict)-[:PROCESS]->(loop_936_sink)
+(loop_936_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_936_then_branch)
+(loop_936_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_936_then_branch)
+(loop_936_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_936_then_branch)

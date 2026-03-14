@@ -1,0 +1,33 @@
+// behavioral-loop-1025.gg
+// Executable Gnosis projection for The Phantom Vibration Loop.
+
+// Nodes
+(loop_1025_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1025_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1025_given_gate: BehaviorAssess { stage: 'given', text: 'Neurological%20conditioning%20to%20smartphone%20notifications' })
+(loop_1025_inactive: BehaviorTerminal { loopId: 1025, loopName: 'The%20Phantom%20Vibration%20Loop' })
+(loop_1025_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Create%20tech-free%20zones%20or%20time%20blocks' })
+(loop_1025_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1025_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1025_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: "the%20thigh%20muscles%20twitch%2C%20simulating%20a%20buzz%20that%20didn't%20happen%20(The%20Ghost%20Signal)" })
+(loop_1025_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20checking%20a%20blank%20screen%2C%20reinforcing%20the%20dopamine%20loop' })
+(loop_1025_sink: BehaviorSink)
+(loop_1025_start: BehaviorStart { loopId: 1025, loopName: 'The%20Phantom%20Vibration%20Loop', given: 'Neurological%20conditioning%20to%20smartphone%20notifications', when: 'sitting%20in%20silence', then: "the%20thigh%20muscles%20twitch%2C%20simulating%20a%20buzz%20that%20didn't%20happen%20(The%20Ghost%20Signal)", result: 'the%20individual%20checking%20a%20blank%20screen%2C%20reinforcing%20the%20dopamine%20loop', operatorName: 'Unknown%20Operator', operatorMechanism: "the%20thigh%20muscles%20twitch%2C%20simulating%20a%20buzz%20that%20didn't%20happen%20(The%20Ghost%20Signal)", origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Create%20tech-free%20zones%20or%20time%20blocks', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1025_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1025_then_branch: BehaviorEmit { emission: 'then', text: "the%20thigh%20muscles%20twitch%2C%20simulating%20a%20buzz%20that%20didn't%20happen%20(The%20Ghost%20Signal)" })
+(loop_1025_verdict: BehaviorVerdict { loopId: 1025, loopName: 'The%20Phantom%20Vibration%20Loop', then: "the%20thigh%20muscles%20twitch%2C%20simulating%20a%20buzz%20that%20didn't%20happen%20(The%20Ghost%20Signal)", result: 'the%20individual%20checking%20a%20blank%20screen%2C%20reinforcing%20the%20dopamine%20loop', operatorName: 'Unknown%20Operator', operatorMechanism: "the%20thigh%20muscles%20twitch%2C%20simulating%20a%20buzz%20that%20didn't%20happen%20(The%20Ghost%20Signal)", origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1025_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20in%20silence' })
+
+// Topology
+(loop_1025_start)-[:PROCESS]->(loop_1025_given_gate)
+(loop_1025_given_gate)-[:PROCESS { case: "ok" }]->(loop_1025_when_gate)
+(loop_1025_given_gate)-[:PROCESS { case: "err" }]->(loop_1025_inactive)
+(loop_1025_when_gate)-[:PROCESS { case: "ok" }]->(loop_1025_context)
+(loop_1025_when_gate)-[:PROCESS { case: "err" }]->(loop_1025_inactive)
+(loop_1025_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1025_context_branch | loop_1025_then_branch | loop_1025_operator_branch | loop_1025_result_branch | loop_1025_taxonomy_branch | loop_1025_intervention_recognize | loop_1025_intervention_interdict | loop_1025_intervention_minimize)
+(loop_1025_context_branch | loop_1025_then_branch | loop_1025_operator_branch | loop_1025_result_branch | loop_1025_taxonomy_branch | loop_1025_intervention_recognize | loop_1025_intervention_interdict | loop_1025_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1025_verdict)
+(loop_1025_inactive)-[:PROCESS]->(loop_1025_sink)
+(loop_1025_verdict)-[:PROCESS]->(loop_1025_sink)
+(loop_1025_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1025_then_branch)
+(loop_1025_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1025_then_branch)
+(loop_1025_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1025_then_branch)

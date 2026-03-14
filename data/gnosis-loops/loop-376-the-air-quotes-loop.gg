@@ -1,0 +1,33 @@
+// behavioral-loop-376.gg
+// Executable Gnosis projection for The Air Quotes Loop.
+
+// Nodes
+(loop_376_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_376_context_branch: BehaviorEmit { emission: 'context' })
+(loop_376_given_gate: BehaviorAssess { stage: 'given', text: 'Overuse%20of%20the%20finger%20flex%20gesture' })
+(loop_376_inactive: BehaviorTerminal { loopId: 376, loopName: 'The%20Air%20Quotes%20Loop' })
+(loop_376_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_376_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_376_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_376_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cynic%20Operator', mechanism: 'it%20signals%20%22Sarcasm%22%20or%20%22Superiority%22' })
+(loop_376_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20feeling%20mocked%20and%20withdrawing%20sincerity' })
+(loop_376_sink: BehaviorSink)
+(loop_376_start: BehaviorStart { loopId: 376, loopName: 'The%20Air%20Quotes%20Loop', given: 'Overuse%20of%20the%20finger%20flex%20gesture', when: 'speaking', then: 'it%20signals%20%22Sarcasm%22%20or%20%22Superiority%22%20(The%20Cynic%20Operator)', result: 'peers%20feeling%20mocked%20and%20withdrawing%20sincerity', operatorName: 'The%20Cynic%20Operator', operatorMechanism: 'it%20signals%20%22Sarcasm%22%20or%20%22Superiority%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_376_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_376_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Sarcasm%22%20or%20%22Superiority%22%20(The%20Cynic%20Operator)' })
+(loop_376_verdict: BehaviorVerdict { loopId: 376, loopName: 'The%20Air%20Quotes%20Loop', then: 'it%20signals%20%22Sarcasm%22%20or%20%22Superiority%22%20(The%20Cynic%20Operator)', result: 'peers%20feeling%20mocked%20and%20withdrawing%20sincerity', operatorName: 'The%20Cynic%20Operator', operatorMechanism: 'it%20signals%20%22Sarcasm%22%20or%20%22Superiority%22', origin: 'BEHAVIORAL', modality: 'VISUAL_DYNAMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_376_when_gate: BehaviorAssess { stage: 'when', text: 'speaking' })
+
+// Topology
+(loop_376_start)-[:PROCESS]->(loop_376_given_gate)
+(loop_376_given_gate)-[:PROCESS { case: "ok" }]->(loop_376_when_gate)
+(loop_376_given_gate)-[:PROCESS { case: "err" }]->(loop_376_inactive)
+(loop_376_when_gate)-[:PROCESS { case: "ok" }]->(loop_376_context)
+(loop_376_when_gate)-[:PROCESS { case: "err" }]->(loop_376_inactive)
+(loop_376_context)-[:FORK { strategy: "behavior-branches" }]->(loop_376_context_branch | loop_376_then_branch | loop_376_operator_branch | loop_376_result_branch | loop_376_taxonomy_branch | loop_376_intervention_recognize | loop_376_intervention_interdict | loop_376_intervention_minimize)
+(loop_376_context_branch | loop_376_then_branch | loop_376_operator_branch | loop_376_result_branch | loop_376_taxonomy_branch | loop_376_intervention_recognize | loop_376_intervention_interdict | loop_376_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_376_verdict)
+(loop_376_inactive)-[:PROCESS]->(loop_376_sink)
+(loop_376_verdict)-[:PROCESS]->(loop_376_sink)
+(loop_376_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_376_then_branch)
+(loop_376_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_376_then_branch)
+(loop_376_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_376_then_branch)

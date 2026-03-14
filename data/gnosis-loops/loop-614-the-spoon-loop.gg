@@ -1,0 +1,33 @@
+// behavioral-loop-614.gg
+// Executable Gnosis projection for The Spoon Loop.
+
+// Nodes
+(loop_614_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_614_context_branch: BehaviorEmit { emission: 'context' })
+(loop_614_given_gate: BehaviorAssess { stage: 'given', text: 'Concave%20nail%20beds%20that%20can%20hold%20water' })
+(loop_614_inactive: BehaviorTerminal { loopId: 614, loopName: 'The%20Spoon%20Loop' })
+(loop_614_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_614_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_614_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_614_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Frailty%20Operator', mechanism: 'it%20signals%20%22Malnutrition%22%20or%20%22Anemia%22' })
+(loop_614_result_branch: BehaviorEmit { emission: 'result', text: 'observers%20feeling%20pity%20or%20offering%20food' })
+(loop_614_sink: BehaviorSink)
+(loop_614_start: BehaviorStart { loopId: 614, loopName: 'The%20Spoon%20Loop', given: 'Concave%20nail%20beds%20that%20can%20hold%20water', when: 'looked%20at%20closely', then: 'it%20signals%20%22Malnutrition%22%20or%20%22Anemia%22%20(The%20Frailty%20Operator)', result: 'observers%20feeling%20pity%20or%20offering%20food', operatorName: 'The%20Frailty%20Operator', operatorMechanism: 'it%20signals%20%22Malnutrition%22%20or%20%22Anemia%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_614_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_614_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Malnutrition%22%20or%20%22Anemia%22%20(The%20Frailty%20Operator)' })
+(loop_614_verdict: BehaviorVerdict { loopId: 614, loopName: 'The%20Spoon%20Loop', then: 'it%20signals%20%22Malnutrition%22%20or%20%22Anemia%22%20(The%20Frailty%20Operator)', result: 'observers%20feeling%20pity%20or%20offering%20food', operatorName: 'The%20Frailty%20Operator', operatorMechanism: 'it%20signals%20%22Malnutrition%22%20or%20%22Anemia%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_614_when_gate: BehaviorAssess { stage: 'when', text: 'looked%20at%20closely' })
+
+// Topology
+(loop_614_start)-[:PROCESS]->(loop_614_given_gate)
+(loop_614_given_gate)-[:PROCESS { case: "ok" }]->(loop_614_when_gate)
+(loop_614_given_gate)-[:PROCESS { case: "err" }]->(loop_614_inactive)
+(loop_614_when_gate)-[:PROCESS { case: "ok" }]->(loop_614_context)
+(loop_614_when_gate)-[:PROCESS { case: "err" }]->(loop_614_inactive)
+(loop_614_context)-[:FORK { strategy: "behavior-branches" }]->(loop_614_context_branch | loop_614_then_branch | loop_614_operator_branch | loop_614_result_branch | loop_614_taxonomy_branch | loop_614_intervention_recognize | loop_614_intervention_interdict | loop_614_intervention_minimize)
+(loop_614_context_branch | loop_614_then_branch | loop_614_operator_branch | loop_614_result_branch | loop_614_taxonomy_branch | loop_614_intervention_recognize | loop_614_intervention_interdict | loop_614_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_614_verdict)
+(loop_614_inactive)-[:PROCESS]->(loop_614_sink)
+(loop_614_verdict)-[:PROCESS]->(loop_614_sink)
+(loop_614_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_614_then_branch)
+(loop_614_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_614_then_branch)
+(loop_614_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_614_then_branch)

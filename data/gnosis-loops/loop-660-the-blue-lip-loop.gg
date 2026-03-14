@@ -1,0 +1,33 @@
+// behavioral-loop-660.gg
+// Executable Gnosis projection for The Blue Lip Loop.
+
+// Nodes
+(loop_660_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_660_context_branch: BehaviorEmit { emission: 'context' })
+(loop_660_given_gate: BehaviorAssess { stage: 'given', text: 'Cold%20sensitivity%20or%20heart%20issue' })
+(loop_660_inactive: BehaviorTerminal { loopId: 660, loopName: 'The%20Blue%20Lip%20Loop' })
+(loop_660_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_660_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_660_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_660_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Hypothermia%20Operator', mechanism: 'lips%20turn%20purple' })
+(loop_660_result_branch: BehaviorEmit { emission: 'result', text: 'being%20pulled%20out%20of%20activities%20for%20safety' })
+(loop_660_sink: BehaviorSink)
+(loop_660_start: BehaviorStart { loopId: 660, loopName: 'The%20Blue%20Lip%20Loop', given: 'Cold%20sensitivity%20or%20heart%20issue', when: 'swimming%20or%20in%20AC', then: 'lips%20turn%20purple%20(The%20Hypothermia%20Operator)', result: 'being%20pulled%20out%20of%20activities%20for%20safety', operatorName: 'The%20Hypothermia%20Operator', operatorMechanism: 'lips%20turn%20purple', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_660_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_660_then_branch: BehaviorEmit { emission: 'then', text: 'lips%20turn%20purple%20(The%20Hypothermia%20Operator)' })
+(loop_660_verdict: BehaviorVerdict { loopId: 660, loopName: 'The%20Blue%20Lip%20Loop', then: 'lips%20turn%20purple%20(The%20Hypothermia%20Operator)', result: 'being%20pulled%20out%20of%20activities%20for%20safety', operatorName: 'The%20Hypothermia%20Operator', operatorMechanism: 'lips%20turn%20purple', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_660_when_gate: BehaviorAssess { stage: 'when', text: 'swimming%20or%20in%20AC' })
+
+// Topology
+(loop_660_start)-[:PROCESS]->(loop_660_given_gate)
+(loop_660_given_gate)-[:PROCESS { case: "ok" }]->(loop_660_when_gate)
+(loop_660_given_gate)-[:PROCESS { case: "err" }]->(loop_660_inactive)
+(loop_660_when_gate)-[:PROCESS { case: "ok" }]->(loop_660_context)
+(loop_660_when_gate)-[:PROCESS { case: "err" }]->(loop_660_inactive)
+(loop_660_context)-[:FORK { strategy: "behavior-branches" }]->(loop_660_context_branch | loop_660_then_branch | loop_660_operator_branch | loop_660_result_branch | loop_660_taxonomy_branch | loop_660_intervention_recognize | loop_660_intervention_interdict | loop_660_intervention_minimize)
+(loop_660_context_branch | loop_660_then_branch | loop_660_operator_branch | loop_660_result_branch | loop_660_taxonomy_branch | loop_660_intervention_recognize | loop_660_intervention_interdict | loop_660_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_660_verdict)
+(loop_660_inactive)-[:PROCESS]->(loop_660_sink)
+(loop_660_verdict)-[:PROCESS]->(loop_660_sink)
+(loop_660_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_660_then_branch)
+(loop_660_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_660_then_branch)
+(loop_660_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_660_then_branch)

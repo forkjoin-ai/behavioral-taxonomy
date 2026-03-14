@@ -1,0 +1,33 @@
+// behavioral-loop-466.gg
+// Executable Gnosis projection for The Neck Flush Loop.
+
+// Nodes
+(loop_466_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_466_context_branch: BehaviorEmit { emission: 'context' })
+(loop_466_given_gate: BehaviorAssess { stage: 'given', text: 'Red%20patches%20appearing%20on%20neck%2Fchest%20during%20speaking' })
+(loop_466_inactive: BehaviorTerminal { loopId: 466, loopName: 'The%20Neck%20Flush%20Loop' })
+(loop_466_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_466_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_466_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_466_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Panic%20Map%20Operator', mechanism: 'the%20audience%20watches%20the%20rash%20spread' })
+(loop_466_result_branch: BehaviorEmit { emission: 'result', text: 'the%20audience%20focusing%20on%20the%20*stress*%20rather%20than%20the%20*message*' })
+(loop_466_sink: BehaviorSink)
+(loop_466_start: BehaviorStart { loopId: 466, loopName: 'The%20Neck%20Flush%20Loop', given: 'Red%20patches%20appearing%20on%20neck%2Fchest%20during%20speaking', when: 'the%20spotlight%20is%20on%20them', then: 'the%20audience%20watches%20the%20rash%20spread%20(The%20Panic%20Map%20Operator)', result: 'the%20audience%20focusing%20on%20the%20*stress*%20rather%20than%20the%20*message*', operatorName: 'The%20Panic%20Map%20Operator', operatorMechanism: 'the%20audience%20watches%20the%20rash%20spread', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_466_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_466_then_branch: BehaviorEmit { emission: 'then', text: 'the%20audience%20watches%20the%20rash%20spread%20(The%20Panic%20Map%20Operator)' })
+(loop_466_verdict: BehaviorVerdict { loopId: 466, loopName: 'The%20Neck%20Flush%20Loop', then: 'the%20audience%20watches%20the%20rash%20spread%20(The%20Panic%20Map%20Operator)', result: 'the%20audience%20focusing%20on%20the%20*stress*%20rather%20than%20the%20*message*', operatorName: 'The%20Panic%20Map%20Operator', operatorMechanism: 'the%20audience%20watches%20the%20rash%20spread', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_466_when_gate: BehaviorAssess { stage: 'when', text: 'the%20spotlight%20is%20on%20them' })
+
+// Topology
+(loop_466_start)-[:PROCESS]->(loop_466_given_gate)
+(loop_466_given_gate)-[:PROCESS { case: "ok" }]->(loop_466_when_gate)
+(loop_466_given_gate)-[:PROCESS { case: "err" }]->(loop_466_inactive)
+(loop_466_when_gate)-[:PROCESS { case: "ok" }]->(loop_466_context)
+(loop_466_when_gate)-[:PROCESS { case: "err" }]->(loop_466_inactive)
+(loop_466_context)-[:FORK { strategy: "behavior-branches" }]->(loop_466_context_branch | loop_466_then_branch | loop_466_operator_branch | loop_466_result_branch | loop_466_taxonomy_branch | loop_466_intervention_recognize | loop_466_intervention_interdict | loop_466_intervention_minimize)
+(loop_466_context_branch | loop_466_then_branch | loop_466_operator_branch | loop_466_result_branch | loop_466_taxonomy_branch | loop_466_intervention_recognize | loop_466_intervention_interdict | loop_466_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_466_verdict)
+(loop_466_inactive)-[:PROCESS]->(loop_466_sink)
+(loop_466_verdict)-[:PROCESS]->(loop_466_sink)
+(loop_466_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_466_then_branch)
+(loop_466_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_466_then_branch)
+(loop_466_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_466_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-751.gg
+// Executable Gnosis projection for The Hive Loop.
+
+// Nodes
+(loop_751_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_751_context_branch: BehaviorEmit { emission: 'context' })
+(loop_751_given_gate: BehaviorAssess { stage: 'given', text: 'Sudden%20red%20welts%20appearing%20on%20the%20neck' })
+(loop_751_inactive: BehaviorTerminal { loopId: 751, loopName: 'The%20Hive%20Loop' })
+(loop_751_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_751_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_751_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_751_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Allergic%20Operator', mechanism: 'it%20looks%20like%20%22Infection%22%20or%20%22Panic%22' })
+(loop_751_result_branch: BehaviorEmit { emission: 'result', text: 'the%20meeting%20being%20derailed%20by%20health%20concerns' })
+(loop_751_sink: BehaviorSink)
+(loop_751_start: BehaviorStart { loopId: 751, loopName: 'The%20Hive%20Loop', given: 'Sudden%20red%20welts%20appearing%20on%20the%20neck', when: 'stressed', then: 'it%20looks%20like%20%22Infection%22%20or%20%22Panic%22%20(The%20Allergic%20Operator)', result: 'the%20meeting%20being%20derailed%20by%20health%20concerns', operatorName: 'The%20Allergic%20Operator', operatorMechanism: 'it%20looks%20like%20%22Infection%22%20or%20%22Panic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_751_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_751_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Infection%22%20or%20%22Panic%22%20(The%20Allergic%20Operator)' })
+(loop_751_verdict: BehaviorVerdict { loopId: 751, loopName: 'The%20Hive%20Loop', then: 'it%20looks%20like%20%22Infection%22%20or%20%22Panic%22%20(The%20Allergic%20Operator)', result: 'the%20meeting%20being%20derailed%20by%20health%20concerns', operatorName: 'The%20Allergic%20Operator', operatorMechanism: 'it%20looks%20like%20%22Infection%22%20or%20%22Panic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_751_when_gate: BehaviorAssess { stage: 'when', text: 'stressed' })
+
+// Topology
+(loop_751_start)-[:PROCESS]->(loop_751_given_gate)
+(loop_751_given_gate)-[:PROCESS { case: "ok" }]->(loop_751_when_gate)
+(loop_751_given_gate)-[:PROCESS { case: "err" }]->(loop_751_inactive)
+(loop_751_when_gate)-[:PROCESS { case: "ok" }]->(loop_751_context)
+(loop_751_when_gate)-[:PROCESS { case: "err" }]->(loop_751_inactive)
+(loop_751_context)-[:FORK { strategy: "behavior-branches" }]->(loop_751_context_branch | loop_751_then_branch | loop_751_operator_branch | loop_751_result_branch | loop_751_taxonomy_branch | loop_751_intervention_recognize | loop_751_intervention_interdict | loop_751_intervention_minimize)
+(loop_751_context_branch | loop_751_then_branch | loop_751_operator_branch | loop_751_result_branch | loop_751_taxonomy_branch | loop_751_intervention_recognize | loop_751_intervention_interdict | loop_751_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_751_verdict)
+(loop_751_inactive)-[:PROCESS]->(loop_751_sink)
+(loop_751_verdict)-[:PROCESS]->(loop_751_sink)
+(loop_751_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_751_then_branch)
+(loop_751_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_751_then_branch)
+(loop_751_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_751_then_branch)

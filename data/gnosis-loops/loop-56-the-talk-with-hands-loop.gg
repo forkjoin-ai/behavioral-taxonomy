@@ -1,0 +1,33 @@
+// behavioral-loop-56.gg
+// Executable Gnosis projection for The Talk-With-Hands Loop.
+
+// Nodes
+(loop_56_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_56_context_branch: BehaviorEmit { emission: 'context' })
+(loop_56_given_gate: BehaviorAssess { stage: 'given', text: 'High%20Gestural%20Frequency%20(using%20hands%20to%20speak)' })
+(loop_56_inactive: BehaviorTerminal { loopId: 56, loopName: 'The%20Talk-With-Hands%20Loop' })
+(loop_56_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_56_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_56_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_56_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: "the%20observer's%20attention%20is%20captured%20visually%20and%20audibly" })
+(loop_56_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20perceived%20as%20**Passionate**%20and%20**Energetic**' })
+(loop_56_sink: BehaviorSink)
+(loop_56_start: BehaviorStart { loopId: 56, loopName: 'The%20Talk-With-Hands%20Loop', given: 'High%20Gestural%20Frequency%20(using%20hands%20to%20speak)', when: 'communicating', then: "the%20observer's%20attention%20is%20captured%20visually%20and%20audibly%20(The%20Novelty%20Operator)", result: 'the%20individual%20being%20perceived%20as%20**Passionate**%20and%20**Energetic**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: "the%20observer's%20attention%20is%20captured%20visually%20and%20audibly", origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_56_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_56_then_branch: BehaviorEmit { emission: 'then', text: "the%20observer's%20attention%20is%20captured%20visually%20and%20audibly%20(The%20Novelty%20Operator)" })
+(loop_56_verdict: BehaviorVerdict { loopId: 56, loopName: 'The%20Talk-With-Hands%20Loop', then: "the%20observer's%20attention%20is%20captured%20visually%20and%20audibly%20(The%20Novelty%20Operator)", result: 'the%20individual%20being%20perceived%20as%20**Passionate**%20and%20**Energetic**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: "the%20observer's%20attention%20is%20captured%20visually%20and%20audibly", origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_56_when_gate: BehaviorAssess { stage: 'when', text: 'communicating' })
+
+// Topology
+(loop_56_start)-[:PROCESS]->(loop_56_given_gate)
+(loop_56_given_gate)-[:PROCESS { case: "ok" }]->(loop_56_when_gate)
+(loop_56_given_gate)-[:PROCESS { case: "err" }]->(loop_56_inactive)
+(loop_56_when_gate)-[:PROCESS { case: "ok" }]->(loop_56_context)
+(loop_56_when_gate)-[:PROCESS { case: "err" }]->(loop_56_inactive)
+(loop_56_context)-[:FORK { strategy: "behavior-branches" }]->(loop_56_context_branch | loop_56_then_branch | loop_56_operator_branch | loop_56_result_branch | loop_56_taxonomy_branch | loop_56_intervention_recognize | loop_56_intervention_interdict | loop_56_intervention_minimize)
+(loop_56_context_branch | loop_56_then_branch | loop_56_operator_branch | loop_56_result_branch | loop_56_taxonomy_branch | loop_56_intervention_recognize | loop_56_intervention_interdict | loop_56_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_56_verdict)
+(loop_56_inactive)-[:PROCESS]->(loop_56_sink)
+(loop_56_verdict)-[:PROCESS]->(loop_56_sink)
+(loop_56_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_56_then_branch)
+(loop_56_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_56_then_branch)
+(loop_56_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_56_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-295.gg
+// Executable Gnosis projection for The Leaner Loop.
+
+// Nodes
+(loop_295_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_295_context_branch: BehaviorEmit { emission: 'context' })
+(loop_295_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20core%20tone' })
+(loop_295_inactive: BehaviorTerminal { loopId: 295, loopName: 'The%20Leaner%20Loop' })
+(loop_295_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_295_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_295_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_295_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Casual%20Operator', mechanism: 'the%20individual%20leans%20against%20walls%2Fdoorframes' })
+(loop_295_result_branch: BehaviorEmit { emission: 'result', text: 'being%20perceived%20as%20%22Disrespectful%22%20or%20%22Bored%22%20in%20formal%20settings' })
+(loop_295_sink: BehaviorSink)
+(loop_295_start: BehaviorStart { loopId: 295, loopName: 'The%20Leaner%20Loop', given: 'Low%20core%20tone', when: 'standing%20in%20a%20group', then: 'the%20individual%20leans%20against%20walls%2Fdoorframes%20(The%20Casual%20Operator)', result: 'being%20perceived%20as%20%22Disrespectful%22%20or%20%22Bored%22%20in%20formal%20settings', operatorName: 'The%20Casual%20Operator', operatorMechanism: 'the%20individual%20leans%20against%20walls%2Fdoorframes', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_295_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_295_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20leans%20against%20walls%2Fdoorframes%20(The%20Casual%20Operator)' })
+(loop_295_verdict: BehaviorVerdict { loopId: 295, loopName: 'The%20Leaner%20Loop', then: 'the%20individual%20leans%20against%20walls%2Fdoorframes%20(The%20Casual%20Operator)', result: 'being%20perceived%20as%20%22Disrespectful%22%20or%20%22Bored%22%20in%20formal%20settings', operatorName: 'The%20Casual%20Operator', operatorMechanism: 'the%20individual%20leans%20against%20walls%2Fdoorframes', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_295_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20in%20a%20group' })
+
+// Topology
+(loop_295_start)-[:PROCESS]->(loop_295_given_gate)
+(loop_295_given_gate)-[:PROCESS { case: "ok" }]->(loop_295_when_gate)
+(loop_295_given_gate)-[:PROCESS { case: "err" }]->(loop_295_inactive)
+(loop_295_when_gate)-[:PROCESS { case: "ok" }]->(loop_295_context)
+(loop_295_when_gate)-[:PROCESS { case: "err" }]->(loop_295_inactive)
+(loop_295_context)-[:FORK { strategy: "behavior-branches" }]->(loop_295_context_branch | loop_295_then_branch | loop_295_operator_branch | loop_295_result_branch | loop_295_taxonomy_branch | loop_295_intervention_recognize | loop_295_intervention_interdict | loop_295_intervention_minimize)
+(loop_295_context_branch | loop_295_then_branch | loop_295_operator_branch | loop_295_result_branch | loop_295_taxonomy_branch | loop_295_intervention_recognize | loop_295_intervention_interdict | loop_295_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_295_verdict)
+(loop_295_inactive)-[:PROCESS]->(loop_295_sink)
+(loop_295_verdict)-[:PROCESS]->(loop_295_sink)
+(loop_295_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_295_then_branch)
+(loop_295_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_295_then_branch)
+(loop_295_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_295_then_branch)

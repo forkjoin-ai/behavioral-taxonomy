@@ -1,0 +1,33 @@
+// behavioral-loop-441.gg
+// Executable Gnosis projection for The Chop Loop.
+
+// Nodes
+(loop_441_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_441_context_branch: BehaviorEmit { emission: 'context' })
+(loop_441_given_gate: BehaviorAssess { stage: 'given', text: 'Chopping%20motion%20with%20hand%20while%20speaking' })
+(loop_441_inactive: BehaviorTerminal { loopId: 441, loopName: 'The%20Chop%20Loop' })
+(loop_441_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_441_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_441_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_441_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Executive%20Operator', mechanism: 'it%20signals%20%22Decisiveness%22%20and%20%22Cut-Through%22%20ability' })
+(loop_441_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20viewed%20as%20a%20%22Closer.%22' })
+(loop_441_sink: BehaviorSink)
+(loop_441_start: BehaviorStart { loopId: 441, loopName: 'The%20Chop%20Loop', given: 'Chopping%20motion%20with%20hand%20while%20speaking', when: 'emphasizing%20points', then: 'it%20signals%20%22Decisiveness%22%20and%20%22Cut-Through%22%20ability%20(The%20Executive%20Operator)', result: 'the%20individual%20being%20viewed%20as%20a%20%22Closer.%22', operatorName: 'The%20Executive%20Operator', operatorMechanism: 'it%20signals%20%22Decisiveness%22%20and%20%22Cut-Through%22%20ability', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_441_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_441_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Decisiveness%22%20and%20%22Cut-Through%22%20ability%20(The%20Executive%20Operator)' })
+(loop_441_verdict: BehaviorVerdict { loopId: 441, loopName: 'The%20Chop%20Loop', then: 'it%20signals%20%22Decisiveness%22%20and%20%22Cut-Through%22%20ability%20(The%20Executive%20Operator)', result: 'the%20individual%20being%20viewed%20as%20a%20%22Closer.%22', operatorName: 'The%20Executive%20Operator', operatorMechanism: 'it%20signals%20%22Decisiveness%22%20and%20%22Cut-Through%22%20ability', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_441_when_gate: BehaviorAssess { stage: 'when', text: 'emphasizing%20points' })
+
+// Topology
+(loop_441_start)-[:PROCESS]->(loop_441_given_gate)
+(loop_441_given_gate)-[:PROCESS { case: "ok" }]->(loop_441_when_gate)
+(loop_441_given_gate)-[:PROCESS { case: "err" }]->(loop_441_inactive)
+(loop_441_when_gate)-[:PROCESS { case: "ok" }]->(loop_441_context)
+(loop_441_when_gate)-[:PROCESS { case: "err" }]->(loop_441_inactive)
+(loop_441_context)-[:FORK { strategy: "behavior-branches" }]->(loop_441_context_branch | loop_441_then_branch | loop_441_operator_branch | loop_441_result_branch | loop_441_taxonomy_branch | loop_441_intervention_recognize | loop_441_intervention_interdict | loop_441_intervention_minimize)
+(loop_441_context_branch | loop_441_then_branch | loop_441_operator_branch | loop_441_result_branch | loop_441_taxonomy_branch | loop_441_intervention_recognize | loop_441_intervention_interdict | loop_441_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_441_verdict)
+(loop_441_inactive)-[:PROCESS]->(loop_441_sink)
+(loop_441_verdict)-[:PROCESS]->(loop_441_sink)
+(loop_441_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_441_then_branch)
+(loop_441_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_441_then_branch)
+(loop_441_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_441_then_branch)

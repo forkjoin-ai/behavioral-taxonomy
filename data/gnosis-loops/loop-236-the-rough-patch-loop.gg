@@ -1,0 +1,33 @@
+// behavioral-loop-236.gg
+// Executable Gnosis projection for The Rough Patch Loop.
+
+// Nodes
+(loop_236_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_236_context_branch: BehaviorEmit { emission: 'context' })
+(loop_236_given_gate: BehaviorAssess { stage: 'given', text: 'Scaly%20or%20rough%20texture%20on%20hands' })
+(loop_236_inactive: BehaviorTerminal { loopId: 236, loopName: 'The%20Rough%20Patch%20Loop' })
+(loop_236_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_236_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_236_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_236_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Discomfort%20Operator', mechanism: 'the%20touch%20feels%20%22Abrasive%22' })
+(loop_236_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20self-censoring%20affection%2C%20leading%20to%20**Touch%20Starvation**' })
+(loop_236_sink: BehaviorSink)
+(loop_236_start: BehaviorStart { loopId: 236, loopName: 'The%20Rough%20Patch%20Loop', given: 'Scaly%20or%20rough%20texture%20on%20hands', when: 'initiating%20intimacy', then: 'the%20touch%20feels%20%22Abrasive%22%20(The%20Discomfort%20Operator)', result: 'the%20individual%20self-censoring%20affection%2C%20leading%20to%20**Touch%20Starvation**', operatorName: 'The%20Discomfort%20Operator', operatorMechanism: 'the%20touch%20feels%20%22Abrasive%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_236_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_236_then_branch: BehaviorEmit { emission: 'then', text: 'the%20touch%20feels%20%22Abrasive%22%20(The%20Discomfort%20Operator)' })
+(loop_236_verdict: BehaviorVerdict { loopId: 236, loopName: 'The%20Rough%20Patch%20Loop', then: 'the%20touch%20feels%20%22Abrasive%22%20(The%20Discomfort%20Operator)', result: 'the%20individual%20self-censoring%20affection%2C%20leading%20to%20**Touch%20Starvation**', operatorName: 'The%20Discomfort%20Operator', operatorMechanism: 'the%20touch%20feels%20%22Abrasive%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_236_when_gate: BehaviorAssess { stage: 'when', text: 'initiating%20intimacy' })
+
+// Topology
+(loop_236_start)-[:PROCESS]->(loop_236_given_gate)
+(loop_236_given_gate)-[:PROCESS { case: "ok" }]->(loop_236_when_gate)
+(loop_236_given_gate)-[:PROCESS { case: "err" }]->(loop_236_inactive)
+(loop_236_when_gate)-[:PROCESS { case: "ok" }]->(loop_236_context)
+(loop_236_when_gate)-[:PROCESS { case: "err" }]->(loop_236_inactive)
+(loop_236_context)-[:FORK { strategy: "behavior-branches" }]->(loop_236_context_branch | loop_236_then_branch | loop_236_operator_branch | loop_236_result_branch | loop_236_taxonomy_branch | loop_236_intervention_recognize | loop_236_intervention_interdict | loop_236_intervention_minimize)
+(loop_236_context_branch | loop_236_then_branch | loop_236_operator_branch | loop_236_result_branch | loop_236_taxonomy_branch | loop_236_intervention_recognize | loop_236_intervention_interdict | loop_236_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_236_verdict)
+(loop_236_inactive)-[:PROCESS]->(loop_236_sink)
+(loop_236_verdict)-[:PROCESS]->(loop_236_sink)
+(loop_236_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_236_then_branch)
+(loop_236_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_236_then_branch)
+(loop_236_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_236_then_branch)

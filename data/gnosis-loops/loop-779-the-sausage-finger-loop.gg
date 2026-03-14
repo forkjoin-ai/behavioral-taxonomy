@@ -1,0 +1,33 @@
+// behavioral-loop-779.gg
+// Executable Gnosis projection for The Sausage Finger Loop.
+
+// Nodes
+(loop_779_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_779_context_branch: BehaviorEmit { emission: 'context' })
+(loop_779_given_gate: BehaviorAssess { stage: 'given', text: 'Swollen%2C%20uniform%20digits%20(no%20taper)' })
+(loop_779_inactive: BehaviorTerminal { loopId: 779, loopName: 'The%20Sausage%20Finger%20Loop' })
+(loop_779_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_779_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_779_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_779_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fumble%20Operator', mechanism: 'observers%20assume%20%22Clumsiness%22' })
+(loop_779_result_branch: BehaviorEmit { emission: 'result', text: 'surprise%20when%20the%20individual%20displays%20dexterity%20(e.g.%2C%20playing%20piano)' })
+(loop_779_sink: BehaviorSink)
+(loop_779_start: BehaviorStart { loopId: 779, loopName: 'The%20Sausage%20Finger%20Loop', given: 'Swollen%2C%20uniform%20digits%20(no%20taper)', when: 'performing%20fine%20motor%20tasks', then: 'observers%20assume%20%22Clumsiness%22%20(The%20Fumble%20Operator)', result: 'surprise%20when%20the%20individual%20displays%20dexterity%20(e.g.%2C%20playing%20piano)', operatorName: 'The%20Fumble%20Operator', operatorMechanism: 'observers%20assume%20%22Clumsiness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_779_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_779_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Clumsiness%22%20(The%20Fumble%20Operator)' })
+(loop_779_verdict: BehaviorVerdict { loopId: 779, loopName: 'The%20Sausage%20Finger%20Loop', then: 'observers%20assume%20%22Clumsiness%22%20(The%20Fumble%20Operator)', result: 'surprise%20when%20the%20individual%20displays%20dexterity%20(e.g.%2C%20playing%20piano)', operatorName: 'The%20Fumble%20Operator', operatorMechanism: 'observers%20assume%20%22Clumsiness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_779_when_gate: BehaviorAssess { stage: 'when', text: 'performing%20fine%20motor%20tasks' })
+
+// Topology
+(loop_779_start)-[:PROCESS]->(loop_779_given_gate)
+(loop_779_given_gate)-[:PROCESS { case: "ok" }]->(loop_779_when_gate)
+(loop_779_given_gate)-[:PROCESS { case: "err" }]->(loop_779_inactive)
+(loop_779_when_gate)-[:PROCESS { case: "ok" }]->(loop_779_context)
+(loop_779_when_gate)-[:PROCESS { case: "err" }]->(loop_779_inactive)
+(loop_779_context)-[:FORK { strategy: "behavior-branches" }]->(loop_779_context_branch | loop_779_then_branch | loop_779_operator_branch | loop_779_result_branch | loop_779_taxonomy_branch | loop_779_intervention_recognize | loop_779_intervention_interdict | loop_779_intervention_minimize)
+(loop_779_context_branch | loop_779_then_branch | loop_779_operator_branch | loop_779_result_branch | loop_779_taxonomy_branch | loop_779_intervention_recognize | loop_779_intervention_interdict | loop_779_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_779_verdict)
+(loop_779_inactive)-[:PROCESS]->(loop_779_sink)
+(loop_779_verdict)-[:PROCESS]->(loop_779_sink)
+(loop_779_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_779_then_branch)
+(loop_779_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_779_then_branch)
+(loop_779_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_779_then_branch)

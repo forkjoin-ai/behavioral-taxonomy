@@ -1,0 +1,33 @@
+// behavioral-loop-601.gg
+// Executable Gnosis projection for The Dragon Loop.
+
+// Nodes
+(loop_601_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_601_context_branch: BehaviorEmit { emission: 'context' })
+(loop_601_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20bacterial%20growth%20or%20tonsil%20stones' })
+(loop_601_inactive: BehaviorTerminal { loopId: 601, loopName: 'The%20Dragon%20Loop' })
+(loop_601_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_601_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_601_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_601_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Poison%20Gas%20Operator', mechanism: 'the%20listener%20flinches' })
+(loop_601_result_branch: BehaviorEmit { emission: 'result', text: 'social%20isolation%20and%20people%20handing%20them%20gum' })
+(loop_601_sink: BehaviorSink)
+(loop_601_start: BehaviorStart { loopId: 601, loopName: 'The%20Dragon%20Loop', given: 'Chronic%20bacterial%20growth%20or%20tonsil%20stones', when: 'whispering', then: 'the%20listener%20flinches%20(The%20Poison%20Gas%20Operator)', result: 'social%20isolation%20and%20people%20handing%20them%20gum', operatorName: 'The%20Poison%20Gas%20Operator', operatorMechanism: 'the%20listener%20flinches', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_601_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_601_then_branch: BehaviorEmit { emission: 'then', text: 'the%20listener%20flinches%20(The%20Poison%20Gas%20Operator)' })
+(loop_601_verdict: BehaviorVerdict { loopId: 601, loopName: 'The%20Dragon%20Loop', then: 'the%20listener%20flinches%20(The%20Poison%20Gas%20Operator)', result: 'social%20isolation%20and%20people%20handing%20them%20gum', operatorName: 'The%20Poison%20Gas%20Operator', operatorMechanism: 'the%20listener%20flinches', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_601_when_gate: BehaviorAssess { stage: 'when', text: 'whispering' })
+
+// Topology
+(loop_601_start)-[:PROCESS]->(loop_601_given_gate)
+(loop_601_given_gate)-[:PROCESS { case: "ok" }]->(loop_601_when_gate)
+(loop_601_given_gate)-[:PROCESS { case: "err" }]->(loop_601_inactive)
+(loop_601_when_gate)-[:PROCESS { case: "ok" }]->(loop_601_context)
+(loop_601_when_gate)-[:PROCESS { case: "err" }]->(loop_601_inactive)
+(loop_601_context)-[:FORK { strategy: "behavior-branches" }]->(loop_601_context_branch | loop_601_then_branch | loop_601_operator_branch | loop_601_result_branch | loop_601_taxonomy_branch | loop_601_intervention_recognize | loop_601_intervention_interdict | loop_601_intervention_minimize)
+(loop_601_context_branch | loop_601_then_branch | loop_601_operator_branch | loop_601_result_branch | loop_601_taxonomy_branch | loop_601_intervention_recognize | loop_601_intervention_interdict | loop_601_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_601_verdict)
+(loop_601_inactive)-[:PROCESS]->(loop_601_sink)
+(loop_601_verdict)-[:PROCESS]->(loop_601_sink)
+(loop_601_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_601_then_branch)
+(loop_601_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_601_then_branch)
+(loop_601_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_601_then_branch)

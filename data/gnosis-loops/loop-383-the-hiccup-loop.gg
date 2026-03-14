@@ -1,0 +1,33 @@
+// behavioral-loop-383.gg
+// Executable Gnosis projection for The Hiccup Loop.
+
+// Nodes
+(loop_383_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_383_context_branch: BehaviorEmit { emission: 'context' })
+(loop_383_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20or%20loud%20hiccups' })
+(loop_383_inactive: BehaviorTerminal { loopId: 383, loopName: 'The%20Hiccup%20Loop' })
+(loop_383_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_383_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_383_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_383_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Loss%20of%20Control%20Operator', mechanism: 'it%20signals%20%22Drunkenness%22%20or%20%22Childishness%22' })
+(loop_383_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20unable%20to%20maintain%20a%20serious%20tone' })
+(loop_383_sink: BehaviorSink)
+(loop_383_start: BehaviorStart { loopId: 383, loopName: 'The%20Hiccup%20Loop', given: 'Chronic%20or%20loud%20hiccups', when: 'in%20a%20serious%20meeting', then: 'it%20signals%20%22Drunkenness%22%20or%20%22Childishness%22%20(The%20Loss%20of%20Control%20Operator)', result: 'the%20individual%20being%20unable%20to%20maintain%20a%20serious%20tone', operatorName: 'The%20Loss%20of%20Control%20Operator', operatorMechanism: 'it%20signals%20%22Drunkenness%22%20or%20%22Childishness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_383_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_383_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Drunkenness%22%20or%20%22Childishness%22%20(The%20Loss%20of%20Control%20Operator)' })
+(loop_383_verdict: BehaviorVerdict { loopId: 383, loopName: 'The%20Hiccup%20Loop', then: 'it%20signals%20%22Drunkenness%22%20or%20%22Childishness%22%20(The%20Loss%20of%20Control%20Operator)', result: 'the%20individual%20being%20unable%20to%20maintain%20a%20serious%20tone', operatorName: 'The%20Loss%20of%20Control%20Operator', operatorMechanism: 'it%20signals%20%22Drunkenness%22%20or%20%22Childishness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_383_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20serious%20meeting' })
+
+// Topology
+(loop_383_start)-[:PROCESS]->(loop_383_given_gate)
+(loop_383_given_gate)-[:PROCESS { case: "ok" }]->(loop_383_when_gate)
+(loop_383_given_gate)-[:PROCESS { case: "err" }]->(loop_383_inactive)
+(loop_383_when_gate)-[:PROCESS { case: "ok" }]->(loop_383_context)
+(loop_383_when_gate)-[:PROCESS { case: "err" }]->(loop_383_inactive)
+(loop_383_context)-[:FORK { strategy: "behavior-branches" }]->(loop_383_context_branch | loop_383_then_branch | loop_383_operator_branch | loop_383_result_branch | loop_383_taxonomy_branch | loop_383_intervention_recognize | loop_383_intervention_interdict | loop_383_intervention_minimize)
+(loop_383_context_branch | loop_383_then_branch | loop_383_operator_branch | loop_383_result_branch | loop_383_taxonomy_branch | loop_383_intervention_recognize | loop_383_intervention_interdict | loop_383_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_383_verdict)
+(loop_383_inactive)-[:PROCESS]->(loop_383_sink)
+(loop_383_verdict)-[:PROCESS]->(loop_383_sink)
+(loop_383_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_383_then_branch)
+(loop_383_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_383_then_branch)
+(loop_383_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_383_then_branch)

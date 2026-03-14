@@ -1,0 +1,33 @@
+// behavioral-loop-438.gg
+// Executable Gnosis projection for The Red Rim Loop.
+
+// Nodes
+(loop_438_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_438_context_branch: BehaviorEmit { emission: 'context' })
+(loop_438_given_gate: BehaviorAssess { stage: 'given', text: 'Inflamed%20eyelid%20margins' })
+(loop_438_inactive: BehaviorTerminal { loopId: 438, loopName: 'The%20Red%20Rim%20Loop' })
+(loop_438_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_438_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_438_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_438_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Infection%20Operator', mechanism: 'the%20look%20is%20%22Sickly%22%20or%20%22Hangover%22' })
+(loop_438_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20sent%20home%20or%20avoided' })
+(loop_438_sink: BehaviorSink)
+(loop_438_start: BehaviorStart { loopId: 438, loopName: 'The%20Red%20Rim%20Loop', given: 'Inflamed%20eyelid%20margins', when: 'making%20eye%20contact', then: 'the%20look%20is%20%22Sickly%22%20or%20%22Hangover%22%20(The%20Infection%20Operator)', result: 'the%20individual%20being%20sent%20home%20or%20avoided', operatorName: 'The%20Infection%20Operator', operatorMechanism: 'the%20look%20is%20%22Sickly%22%20or%20%22Hangover%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_438_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_438_then_branch: BehaviorEmit { emission: 'then', text: 'the%20look%20is%20%22Sickly%22%20or%20%22Hangover%22%20(The%20Infection%20Operator)' })
+(loop_438_verdict: BehaviorVerdict { loopId: 438, loopName: 'The%20Red%20Rim%20Loop', then: 'the%20look%20is%20%22Sickly%22%20or%20%22Hangover%22%20(The%20Infection%20Operator)', result: 'the%20individual%20being%20sent%20home%20or%20avoided', operatorName: 'The%20Infection%20Operator', operatorMechanism: 'the%20look%20is%20%22Sickly%22%20or%20%22Hangover%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_438_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_438_start)-[:PROCESS]->(loop_438_given_gate)
+(loop_438_given_gate)-[:PROCESS { case: "ok" }]->(loop_438_when_gate)
+(loop_438_given_gate)-[:PROCESS { case: "err" }]->(loop_438_inactive)
+(loop_438_when_gate)-[:PROCESS { case: "ok" }]->(loop_438_context)
+(loop_438_when_gate)-[:PROCESS { case: "err" }]->(loop_438_inactive)
+(loop_438_context)-[:FORK { strategy: "behavior-branches" }]->(loop_438_context_branch | loop_438_then_branch | loop_438_operator_branch | loop_438_result_branch | loop_438_taxonomy_branch | loop_438_intervention_recognize | loop_438_intervention_interdict | loop_438_intervention_minimize)
+(loop_438_context_branch | loop_438_then_branch | loop_438_operator_branch | loop_438_result_branch | loop_438_taxonomy_branch | loop_438_intervention_recognize | loop_438_intervention_interdict | loop_438_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_438_verdict)
+(loop_438_inactive)-[:PROCESS]->(loop_438_sink)
+(loop_438_verdict)-[:PROCESS]->(loop_438_sink)
+(loop_438_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_438_then_branch)
+(loop_438_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_438_then_branch)
+(loop_438_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_438_then_branch)

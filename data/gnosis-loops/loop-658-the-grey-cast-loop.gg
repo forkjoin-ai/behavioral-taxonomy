@@ -1,0 +1,33 @@
+// behavioral-loop-658.gg
+// Executable Gnosis projection for The Grey Cast Loop.
+
+// Nodes
+(loop_658_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_658_context_branch: BehaviorEmit { emission: 'context' })
+(loop_658_given_gate: BehaviorAssess { stage: 'given', text: 'Poor%20circulation%20or%20smoking' })
+(loop_658_inactive: BehaviorTerminal { loopId: 658, loopName: 'The%20Grey%20Cast%20Loop' })
+(loop_658_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_658_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_658_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_658_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Zombie%20Operator', mechanism: 'skin%20looks%20%22Dead%22' })
+(loop_658_result_branch: BehaviorEmit { emission: 'result', text: 'coworkers%20asking%20if%20the%20individual%20is%20sick' })
+(loop_658_sink: BehaviorSink)
+(loop_658_start: BehaviorStart { loopId: 658, loopName: 'The%20Grey%20Cast%20Loop', given: 'Poor%20circulation%20or%20smoking', when: 'under%20fluorescent%20light', then: 'skin%20looks%20%22Dead%22%20(The%20Zombie%20Operator)', result: 'coworkers%20asking%20if%20the%20individual%20is%20sick', operatorName: 'The%20Zombie%20Operator', operatorMechanism: 'skin%20looks%20%22Dead%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_658_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_658_then_branch: BehaviorEmit { emission: 'then', text: 'skin%20looks%20%22Dead%22%20(The%20Zombie%20Operator)' })
+(loop_658_verdict: BehaviorVerdict { loopId: 658, loopName: 'The%20Grey%20Cast%20Loop', then: 'skin%20looks%20%22Dead%22%20(The%20Zombie%20Operator)', result: 'coworkers%20asking%20if%20the%20individual%20is%20sick', operatorName: 'The%20Zombie%20Operator', operatorMechanism: 'skin%20looks%20%22Dead%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_658_when_gate: BehaviorAssess { stage: 'when', text: 'under%20fluorescent%20light' })
+
+// Topology
+(loop_658_start)-[:PROCESS]->(loop_658_given_gate)
+(loop_658_given_gate)-[:PROCESS { case: "ok" }]->(loop_658_when_gate)
+(loop_658_given_gate)-[:PROCESS { case: "err" }]->(loop_658_inactive)
+(loop_658_when_gate)-[:PROCESS { case: "ok" }]->(loop_658_context)
+(loop_658_when_gate)-[:PROCESS { case: "err" }]->(loop_658_inactive)
+(loop_658_context)-[:FORK { strategy: "behavior-branches" }]->(loop_658_context_branch | loop_658_then_branch | loop_658_operator_branch | loop_658_result_branch | loop_658_taxonomy_branch | loop_658_intervention_recognize | loop_658_intervention_interdict | loop_658_intervention_minimize)
+(loop_658_context_branch | loop_658_then_branch | loop_658_operator_branch | loop_658_result_branch | loop_658_taxonomy_branch | loop_658_intervention_recognize | loop_658_intervention_interdict | loop_658_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_658_verdict)
+(loop_658_inactive)-[:PROCESS]->(loop_658_sink)
+(loop_658_verdict)-[:PROCESS]->(loop_658_sink)
+(loop_658_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_658_then_branch)
+(loop_658_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_658_then_branch)
+(loop_658_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_658_then_branch)

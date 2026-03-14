@@ -1,0 +1,33 @@
+// behavioral-loop-1029.gg
+// Executable Gnosis projection for The Parking Lot Loop.
+
+// Nodes
+(loop_1029_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1029_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1029_given_gate: BehaviorAssess { stage: 'given', text: 'Difficulty%20switching%20tasks%20(ADHD%2FAutism)' })
+(loop_1029_inactive: BehaviorTerminal { loopId: 1029, loopName: 'The%20Parking%20Lot%20Loop' })
+(loop_1029_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1029_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1029_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1029_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20individual%20sits%20in%20the%20driveway%20for%2045%20minutes%20(The%20Airlock)' })
+(loop_1029_result_branch: BehaviorEmit { emission: 'result', text: 'a%20distinct%20separation%20between%20%22Work%20Self%22%20and%20%22Home%20Self.%22' })
+(loop_1029_sink: BehaviorSink)
+(loop_1029_start: BehaviorStart { loopId: 1029, loopName: 'The%20Parking%20Lot%20Loop', given: 'Difficulty%20switching%20tasks%20(ADHD%2FAutism)', when: 'arriving%20home%20in%20a%20car', then: 'the%20individual%20sits%20in%20the%20driveway%20for%2045%20minutes%20(The%20Airlock)', result: 'a%20distinct%20separation%20between%20%22Work%20Self%22%20and%20%22Home%20Self.%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20sits%20in%20the%20driveway%20for%2045%20minutes%20(The%20Airlock)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_1029_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1029_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20sits%20in%20the%20driveway%20for%2045%20minutes%20(The%20Airlock)' })
+(loop_1029_verdict: BehaviorVerdict { loopId: 1029, loopName: 'The%20Parking%20Lot%20Loop', then: 'the%20individual%20sits%20in%20the%20driveway%20for%2045%20minutes%20(The%20Airlock)', result: 'a%20distinct%20separation%20between%20%22Work%20Self%22%20and%20%22Home%20Self.%22', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20individual%20sits%20in%20the%20driveway%20for%2045%20minutes%20(The%20Airlock)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1029_when_gate: BehaviorAssess { stage: 'when', text: 'arriving%20home%20in%20a%20car' })
+
+// Topology
+(loop_1029_start)-[:PROCESS]->(loop_1029_given_gate)
+(loop_1029_given_gate)-[:PROCESS { case: "ok" }]->(loop_1029_when_gate)
+(loop_1029_given_gate)-[:PROCESS { case: "err" }]->(loop_1029_inactive)
+(loop_1029_when_gate)-[:PROCESS { case: "ok" }]->(loop_1029_context)
+(loop_1029_when_gate)-[:PROCESS { case: "err" }]->(loop_1029_inactive)
+(loop_1029_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1029_context_branch | loop_1029_then_branch | loop_1029_operator_branch | loop_1029_result_branch | loop_1029_taxonomy_branch | loop_1029_intervention_recognize | loop_1029_intervention_interdict | loop_1029_intervention_minimize)
+(loop_1029_context_branch | loop_1029_then_branch | loop_1029_operator_branch | loop_1029_result_branch | loop_1029_taxonomy_branch | loop_1029_intervention_recognize | loop_1029_intervention_interdict | loop_1029_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1029_verdict)
+(loop_1029_inactive)-[:PROCESS]->(loop_1029_sink)
+(loop_1029_verdict)-[:PROCESS]->(loop_1029_sink)
+(loop_1029_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1029_then_branch)
+(loop_1029_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1029_then_branch)
+(loop_1029_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1029_then_branch)

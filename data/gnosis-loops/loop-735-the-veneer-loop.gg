@@ -1,0 +1,31 @@
+// behavioral-loop-735.gg
+// Executable Gnosis projection for The Veneer Loop.
+
+// Nodes
+(loop_735_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_735_context_branch: BehaviorEmit { emission: 'context' })
+(loop_735_given_gate: BehaviorAssess { stage: 'given', text: 'Teeth%20that%20are%20too%20white%2Fsquare' })
+(loop_735_inactive: BehaviorTerminal { loopId: 735, loopName: 'The%20Veneer%20Loop' })
+(loop_735_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_735_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_735_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Uncanny%20Operator', mechanism: 'it%20signals%20%22New%20Money%22%20or%20%22Media%22' })
+(loop_735_result_branch: BehaviorEmit { emission: 'result', text: 'distrust%20of%20sincerity' })
+(loop_735_sink: BehaviorSink)
+(loop_735_start: BehaviorStart { loopId: 735, loopName: 'The%20Veneer%20Loop', given: 'Teeth%20that%20are%20too%20white%2Fsquare', when: 'smiling', then: 'it%20signals%20%22New%20Money%22%20or%20%22Media%22%20(The%20Uncanny%20Operator)', result: 'distrust%20of%20sincerity', operatorName: 'The%20Uncanny%20Operator', operatorMechanism: 'it%20signals%20%22New%20Money%22%20or%20%22Media%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_735_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_735_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22New%20Money%22%20or%20%22Media%22%20(The%20Uncanny%20Operator)' })
+(loop_735_verdict: BehaviorVerdict { loopId: 735, loopName: 'The%20Veneer%20Loop', then: 'it%20signals%20%22New%20Money%22%20or%20%22Media%22%20(The%20Uncanny%20Operator)', result: 'distrust%20of%20sincerity', operatorName: 'The%20Uncanny%20Operator', operatorMechanism: 'it%20signals%20%22New%20Money%22%20or%20%22Media%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_735_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_735_start)-[:PROCESS]->(loop_735_given_gate)
+(loop_735_given_gate)-[:PROCESS { case: "ok" }]->(loop_735_when_gate)
+(loop_735_given_gate)-[:PROCESS { case: "err" }]->(loop_735_inactive)
+(loop_735_when_gate)-[:PROCESS { case: "ok" }]->(loop_735_context)
+(loop_735_when_gate)-[:PROCESS { case: "err" }]->(loop_735_inactive)
+(loop_735_context)-[:FORK { strategy: "behavior-branches" }]->(loop_735_context_branch | loop_735_then_branch | loop_735_operator_branch | loop_735_result_branch | loop_735_taxonomy_branch | loop_735_intervention_recognize | loop_735_intervention_leverage)
+(loop_735_context_branch | loop_735_then_branch | loop_735_operator_branch | loop_735_result_branch | loop_735_taxonomy_branch | loop_735_intervention_recognize | loop_735_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_735_verdict)
+(loop_735_inactive)-[:PROCESS]->(loop_735_sink)
+(loop_735_verdict)-[:PROCESS]->(loop_735_sink)
+(loop_735_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_735_then_branch)
+(loop_735_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_735_result_branch)

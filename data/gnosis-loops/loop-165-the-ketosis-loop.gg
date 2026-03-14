@@ -1,0 +1,33 @@
+// behavioral-loop-165.gg
+// Executable Gnosis projection for The Ketosis Loop.
+
+// Nodes
+(loop_165_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_165_context_branch: BehaviorEmit { emission: 'context' })
+(loop_165_given_gate: BehaviorAssess { stage: 'given', text: 'High%20fat%20metabolism%2Ffasting%20state' })
+(loop_165_inactive: BehaviorTerminal { loopId: 165, loopName: 'The%20Ketosis%20Loop' })
+(loop_165_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_165_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_165_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_165_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%2FScrutiny%20Operator', mechanism: 'the%20scent%20signals%20%22Biological%20Distinctness%22%20or%20%22Illness%22' })
+(loop_165_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20becoming%20hyper-aware%20of%20**Oral%20Hygiene**%20and%20avoiding%20close%20talk' })
+(loop_165_sink: BehaviorSink)
+(loop_165_start: BehaviorStart { loopId: 165, loopName: 'The%20Ketosis%20Loop', given: 'High%20fat%20metabolism%2Ffasting%20state', when: 'speaking%20close%20to%20others', then: 'the%20scent%20signals%20%22Biological%20Distinctness%22%20or%20%22Illness%22%20(The%20Novelty%2FScrutiny%20Operator)', result: 'the%20individual%20becoming%20hyper-aware%20of%20**Oral%20Hygiene**%20and%20avoiding%20close%20talk', operatorName: 'The%20Novelty%2FScrutiny%20Operator', operatorMechanism: 'the%20scent%20signals%20%22Biological%20Distinctness%22%20or%20%22Illness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_165_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_165_then_branch: BehaviorEmit { emission: 'then', text: 'the%20scent%20signals%20%22Biological%20Distinctness%22%20or%20%22Illness%22%20(The%20Novelty%2FScrutiny%20Operator)' })
+(loop_165_verdict: BehaviorVerdict { loopId: 165, loopName: 'The%20Ketosis%20Loop', then: 'the%20scent%20signals%20%22Biological%20Distinctness%22%20or%20%22Illness%22%20(The%20Novelty%2FScrutiny%20Operator)', result: 'the%20individual%20becoming%20hyper-aware%20of%20**Oral%20Hygiene**%20and%20avoiding%20close%20talk', operatorName: 'The%20Novelty%2FScrutiny%20Operator', operatorMechanism: 'the%20scent%20signals%20%22Biological%20Distinctness%22%20or%20%22Illness%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_165_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20close%20to%20others' })
+
+// Topology
+(loop_165_start)-[:PROCESS]->(loop_165_given_gate)
+(loop_165_given_gate)-[:PROCESS { case: "ok" }]->(loop_165_when_gate)
+(loop_165_given_gate)-[:PROCESS { case: "err" }]->(loop_165_inactive)
+(loop_165_when_gate)-[:PROCESS { case: "ok" }]->(loop_165_context)
+(loop_165_when_gate)-[:PROCESS { case: "err" }]->(loop_165_inactive)
+(loop_165_context)-[:FORK { strategy: "behavior-branches" }]->(loop_165_context_branch | loop_165_then_branch | loop_165_operator_branch | loop_165_result_branch | loop_165_taxonomy_branch | loop_165_intervention_recognize | loop_165_intervention_interdict | loop_165_intervention_minimize)
+(loop_165_context_branch | loop_165_then_branch | loop_165_operator_branch | loop_165_result_branch | loop_165_taxonomy_branch | loop_165_intervention_recognize | loop_165_intervention_interdict | loop_165_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_165_verdict)
+(loop_165_inactive)-[:PROCESS]->(loop_165_sink)
+(loop_165_verdict)-[:PROCESS]->(loop_165_sink)
+(loop_165_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_165_then_branch)
+(loop_165_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_165_then_branch)
+(loop_165_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_165_then_branch)

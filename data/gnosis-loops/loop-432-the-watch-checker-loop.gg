@@ -1,0 +1,33 @@
+// behavioral-loop-432.gg
+// Executable Gnosis projection for The Watch Checker Loop.
+
+// Nodes
+(loop_432_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_432_context_branch: BehaviorEmit { emission: 'context' })
+(loop_432_given_gate: BehaviorAssess { stage: 'given', text: 'Glancing%20at%20wrist%20frequently' })
+(loop_432_inactive: BehaviorTerminal { loopId: 432, loopName: 'The%20Watch%20Checker%20Loop' })
+(loop_432_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_432_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_432_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_432_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Rude%20Operator', mechanism: 'it%20signals%20%22I%20want%20to%20leave%22' })
+(loop_432_result_branch: BehaviorEmit { emission: 'result', text: 'the%20group%20abruptly%20ending%20the%20interaction%2C%20leaving%20the%20individual%20excluded' })
+(loop_432_sink: BehaviorSink)
+(loop_432_start: BehaviorStart { loopId: 432, loopName: 'The%20Watch%20Checker%20Loop', given: 'Glancing%20at%20wrist%20frequently', when: 'in%20a%20social%20gathering', then: 'it%20signals%20%22I%20want%20to%20leave%22%20(The%20Rude%20Operator)', result: 'the%20group%20abruptly%20ending%20the%20interaction%2C%20leaving%20the%20individual%20excluded', operatorName: 'The%20Rude%20Operator', operatorMechanism: 'it%20signals%20%22I%20want%20to%20leave%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_432_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_432_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22I%20want%20to%20leave%22%20(The%20Rude%20Operator)' })
+(loop_432_verdict: BehaviorVerdict { loopId: 432, loopName: 'The%20Watch%20Checker%20Loop', then: 'it%20signals%20%22I%20want%20to%20leave%22%20(The%20Rude%20Operator)', result: 'the%20group%20abruptly%20ending%20the%20interaction%2C%20leaving%20the%20individual%20excluded', operatorName: 'The%20Rude%20Operator', operatorMechanism: 'it%20signals%20%22I%20want%20to%20leave%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_432_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20social%20gathering' })
+
+// Topology
+(loop_432_start)-[:PROCESS]->(loop_432_given_gate)
+(loop_432_given_gate)-[:PROCESS { case: "ok" }]->(loop_432_when_gate)
+(loop_432_given_gate)-[:PROCESS { case: "err" }]->(loop_432_inactive)
+(loop_432_when_gate)-[:PROCESS { case: "ok" }]->(loop_432_context)
+(loop_432_when_gate)-[:PROCESS { case: "err" }]->(loop_432_inactive)
+(loop_432_context)-[:FORK { strategy: "behavior-branches" }]->(loop_432_context_branch | loop_432_then_branch | loop_432_operator_branch | loop_432_result_branch | loop_432_taxonomy_branch | loop_432_intervention_recognize | loop_432_intervention_interdict | loop_432_intervention_minimize)
+(loop_432_context_branch | loop_432_then_branch | loop_432_operator_branch | loop_432_result_branch | loop_432_taxonomy_branch | loop_432_intervention_recognize | loop_432_intervention_interdict | loop_432_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_432_verdict)
+(loop_432_inactive)-[:PROCESS]->(loop_432_sink)
+(loop_432_verdict)-[:PROCESS]->(loop_432_sink)
+(loop_432_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_432_then_branch)
+(loop_432_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_432_then_branch)
+(loop_432_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_432_then_branch)

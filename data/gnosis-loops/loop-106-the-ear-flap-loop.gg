@@ -1,0 +1,33 @@
+// behavioral-loop-106.gg
+// Executable Gnosis projection for The Ear Flap Loop.
+
+// Nodes
+(loop_106_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_106_context_branch: BehaviorEmit { emission: 'context' })
+(loop_106_given_gate: BehaviorAssess { stage: 'given', text: 'Protruding%20Auricles' })
+(loop_106_inactive: BehaviorTerminal { loopId: 106, loopName: 'The%20Ear%20Flap%20Loop' })
+(loop_106_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_106_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_106_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_106_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Humor%20Operator', mechanism: 'the%20visual%20creates%20a%20%22Comical%22%20or%20%22Boyish%22%20effect' })
+(loop_106_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20the%20target%20of%20jokes%2C%20leading%20to%20**Self-Deprecating%20Humor**%20as%20a%20defense' })
+(loop_106_sink: BehaviorSink)
+(loop_106_start: BehaviorStart { loopId: 106, loopName: 'The%20Ear%20Flap%20Loop', given: 'Protruding%20Auricles', when: 'being%20serious', then: 'the%20visual%20creates%20a%20%22Comical%22%20or%20%22Boyish%22%20effect%20(The%20Humor%20Operator)', result: 'the%20individual%20being%20the%20target%20of%20jokes%2C%20leading%20to%20**Self-Deprecating%20Humor**%20as%20a%20defense', operatorName: 'The%20Humor%20Operator', operatorMechanism: 'the%20visual%20creates%20a%20%22Comical%22%20or%20%22Boyish%22%20effect', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_106_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_106_then_branch: BehaviorEmit { emission: 'then', text: 'the%20visual%20creates%20a%20%22Comical%22%20or%20%22Boyish%22%20effect%20(The%20Humor%20Operator)' })
+(loop_106_verdict: BehaviorVerdict { loopId: 106, loopName: 'The%20Ear%20Flap%20Loop', then: 'the%20visual%20creates%20a%20%22Comical%22%20or%20%22Boyish%22%20effect%20(The%20Humor%20Operator)', result: 'the%20individual%20being%20the%20target%20of%20jokes%2C%20leading%20to%20**Self-Deprecating%20Humor**%20as%20a%20defense', operatorName: 'The%20Humor%20Operator', operatorMechanism: 'the%20visual%20creates%20a%20%22Comical%22%20or%20%22Boyish%22%20effect', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_106_when_gate: BehaviorAssess { stage: 'when', text: 'being%20serious' })
+
+// Topology
+(loop_106_start)-[:PROCESS]->(loop_106_given_gate)
+(loop_106_given_gate)-[:PROCESS { case: "ok" }]->(loop_106_when_gate)
+(loop_106_given_gate)-[:PROCESS { case: "err" }]->(loop_106_inactive)
+(loop_106_when_gate)-[:PROCESS { case: "ok" }]->(loop_106_context)
+(loop_106_when_gate)-[:PROCESS { case: "err" }]->(loop_106_inactive)
+(loop_106_context)-[:FORK { strategy: "behavior-branches" }]->(loop_106_context_branch | loop_106_then_branch | loop_106_operator_branch | loop_106_result_branch | loop_106_taxonomy_branch | loop_106_intervention_recognize | loop_106_intervention_interdict | loop_106_intervention_minimize)
+(loop_106_context_branch | loop_106_then_branch | loop_106_operator_branch | loop_106_result_branch | loop_106_taxonomy_branch | loop_106_intervention_recognize | loop_106_intervention_interdict | loop_106_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_106_verdict)
+(loop_106_inactive)-[:PROCESS]->(loop_106_sink)
+(loop_106_verdict)-[:PROCESS]->(loop_106_sink)
+(loop_106_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_106_then_branch)
+(loop_106_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_106_then_branch)
+(loop_106_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_106_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-863.gg
+// Executable Gnosis projection for The Shuffle Loop.
+
+// Nodes
+(loop_863_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_863_context_branch: BehaviorEmit { emission: 'context' })
+(loop_863_given_gate: BehaviorAssess { stage: 'given', text: 'Small%2C%20rapid%20steps%20without%20arm%20swing' })
+(loop_863_inactive: BehaviorTerminal { loopId: 863, loopName: 'The%20Shuffle%20Loop' })
+(loop_863_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_863_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_863_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_863_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Frail%20Operator', mechanism: 'it%20signals%20%22Age%22%20or%20%22Parkinsonian%22%20traits' })
+(loop_863_result_branch: BehaviorEmit { emission: 'result', text: 'people%20opening%20doors%20and%20offering%20help%20unprompted' })
+(loop_863_sink: BehaviorSink)
+(loop_863_start: BehaviorStart { loopId: 863, loopName: 'The%20Shuffle%20Loop', given: 'Small%2C%20rapid%20steps%20without%20arm%20swing', when: 'approaching', then: 'it%20signals%20%22Age%22%20or%20%22Parkinsonian%22%20traits%20(The%20Frail%20Operator)', result: 'people%20opening%20doors%20and%20offering%20help%20unprompted', operatorName: 'The%20Frail%20Operator', operatorMechanism: 'it%20signals%20%22Age%22%20or%20%22Parkinsonian%22%20traits', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_863_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_863_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Age%22%20or%20%22Parkinsonian%22%20traits%20(The%20Frail%20Operator)' })
+(loop_863_verdict: BehaviorVerdict { loopId: 863, loopName: 'The%20Shuffle%20Loop', then: 'it%20signals%20%22Age%22%20or%20%22Parkinsonian%22%20traits%20(The%20Frail%20Operator)', result: 'people%20opening%20doors%20and%20offering%20help%20unprompted', operatorName: 'The%20Frail%20Operator', operatorMechanism: 'it%20signals%20%22Age%22%20or%20%22Parkinsonian%22%20traits', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_863_when_gate: BehaviorAssess { stage: 'when', text: 'approaching' })
+
+// Topology
+(loop_863_start)-[:PROCESS]->(loop_863_given_gate)
+(loop_863_given_gate)-[:PROCESS { case: "ok" }]->(loop_863_when_gate)
+(loop_863_given_gate)-[:PROCESS { case: "err" }]->(loop_863_inactive)
+(loop_863_when_gate)-[:PROCESS { case: "ok" }]->(loop_863_context)
+(loop_863_when_gate)-[:PROCESS { case: "err" }]->(loop_863_inactive)
+(loop_863_context)-[:FORK { strategy: "behavior-branches" }]->(loop_863_context_branch | loop_863_then_branch | loop_863_operator_branch | loop_863_result_branch | loop_863_taxonomy_branch | loop_863_intervention_recognize | loop_863_intervention_interdict | loop_863_intervention_minimize)
+(loop_863_context_branch | loop_863_then_branch | loop_863_operator_branch | loop_863_result_branch | loop_863_taxonomy_branch | loop_863_intervention_recognize | loop_863_intervention_interdict | loop_863_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_863_verdict)
+(loop_863_inactive)-[:PROCESS]->(loop_863_sink)
+(loop_863_verdict)-[:PROCESS]->(loop_863_sink)
+(loop_863_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_863_then_branch)
+(loop_863_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_863_then_branch)
+(loop_863_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_863_then_branch)

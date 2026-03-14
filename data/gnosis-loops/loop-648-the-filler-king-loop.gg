@@ -1,0 +1,33 @@
+// behavioral-loop-648.gg
+// Executable Gnosis projection for The Filler King Loop.
+
+// Nodes
+(loop_648_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_648_context_branch: BehaviorEmit { emission: 'context' })
+(loop_648_given_gate: BehaviorAssess { stage: 'given', text: 'Excessive%20use%20of%20%22Um%2C%22%20%22Like%2C%22%20%22Uh%2C%22' })
+(loop_648_inactive: BehaviorTerminal { loopId: 648, loopName: 'The%20Filler%20King%20Loop' })
+(loop_648_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_648_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_648_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_648_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Valley%20Operator', mechanism: 'the%20signal-to-noise%20ratio%20drops' })
+(loop_648_result_branch: BehaviorEmit { emission: 'result', text: 'the%20intellectual%20content%20being%20discounted%20by%2020-30%25' })
+(loop_648_sink: BehaviorSink)
+(loop_648_start: BehaviorStart { loopId: 648, loopName: 'The%20Filler%20King%20Loop', given: 'Excessive%20use%20of%20%22Um%2C%22%20%22Like%2C%22%20%22Uh%2C%22', when: 'speaking%20intelligently', then: 'the%20signal-to-noise%20ratio%20drops%20(The%20Valley%20Operator)', result: 'the%20intellectual%20content%20being%20discounted%20by%2020-30%25', operatorName: 'The%20Valley%20Operator', operatorMechanism: 'the%20signal-to-noise%20ratio%20drops', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_648_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_648_then_branch: BehaviorEmit { emission: 'then', text: 'the%20signal-to-noise%20ratio%20drops%20(The%20Valley%20Operator)' })
+(loop_648_verdict: BehaviorVerdict { loopId: 648, loopName: 'The%20Filler%20King%20Loop', then: 'the%20signal-to-noise%20ratio%20drops%20(The%20Valley%20Operator)', result: 'the%20intellectual%20content%20being%20discounted%20by%2020-30%25', operatorName: 'The%20Valley%20Operator', operatorMechanism: 'the%20signal-to-noise%20ratio%20drops', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_648_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20intelligently' })
+
+// Topology
+(loop_648_start)-[:PROCESS]->(loop_648_given_gate)
+(loop_648_given_gate)-[:PROCESS { case: "ok" }]->(loop_648_when_gate)
+(loop_648_given_gate)-[:PROCESS { case: "err" }]->(loop_648_inactive)
+(loop_648_when_gate)-[:PROCESS { case: "ok" }]->(loop_648_context)
+(loop_648_when_gate)-[:PROCESS { case: "err" }]->(loop_648_inactive)
+(loop_648_context)-[:FORK { strategy: "behavior-branches" }]->(loop_648_context_branch | loop_648_then_branch | loop_648_operator_branch | loop_648_result_branch | loop_648_taxonomy_branch | loop_648_intervention_recognize | loop_648_intervention_interdict | loop_648_intervention_minimize)
+(loop_648_context_branch | loop_648_then_branch | loop_648_operator_branch | loop_648_result_branch | loop_648_taxonomy_branch | loop_648_intervention_recognize | loop_648_intervention_interdict | loop_648_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_648_verdict)
+(loop_648_inactive)-[:PROCESS]->(loop_648_sink)
+(loop_648_verdict)-[:PROCESS]->(loop_648_sink)
+(loop_648_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_648_then_branch)
+(loop_648_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_648_then_branch)
+(loop_648_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_648_then_branch)

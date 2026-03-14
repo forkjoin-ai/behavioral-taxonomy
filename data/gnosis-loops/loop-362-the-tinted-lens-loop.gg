@@ -1,0 +1,31 @@
+// behavioral-loop-362.gg
+// Executable Gnosis projection for The Tinted Lens Loop.
+
+// Nodes
+(loop_362_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_362_context_branch: BehaviorEmit { emission: 'context' })
+(loop_362_given_gate: BehaviorAssess { stage: 'given', text: "Photosensitive%20lenses%20that%20don't%20clear%20fully%20indoors" })
+(loop_362_inactive: BehaviorTerminal { loopId: 362, loopName: 'The%20Tinted%20Lens%20Loop' })
+(loop_362_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_362_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_362_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Criminal%20Operator', mechanism: 'the%20barrier%20creates%20%22Shadiness%22%20or%20%22Deception%22' })
+(loop_362_result_branch: BehaviorEmit { emission: 'result', text: 'low%20trust%20scores%20in%20negotiation' })
+(loop_362_sink: BehaviorSink)
+(loop_362_start: BehaviorStart { loopId: 362, loopName: 'The%20Tinted%20Lens%20Loop', given: "Photosensitive%20lenses%20that%20don't%20clear%20fully%20indoors", when: 'making%20eye%20contact', then: 'the%20barrier%20creates%20%22Shadiness%22%20or%20%22Deception%22%20(The%20Criminal%20Operator)', result: 'low%20trust%20scores%20in%20negotiation', operatorName: 'The%20Criminal%20Operator', operatorMechanism: 'the%20barrier%20creates%20%22Shadiness%22%20or%20%22Deception%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_362_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_362_then_branch: BehaviorEmit { emission: 'then', text: 'the%20barrier%20creates%20%22Shadiness%22%20or%20%22Deception%22%20(The%20Criminal%20Operator)' })
+(loop_362_verdict: BehaviorVerdict { loopId: 362, loopName: 'The%20Tinted%20Lens%20Loop', then: 'the%20barrier%20creates%20%22Shadiness%22%20or%20%22Deception%22%20(The%20Criminal%20Operator)', result: 'low%20trust%20scores%20in%20negotiation', operatorName: 'The%20Criminal%20Operator', operatorMechanism: 'the%20barrier%20creates%20%22Shadiness%22%20or%20%22Deception%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_362_when_gate: BehaviorAssess { stage: 'when', text: 'making%20eye%20contact' })
+
+// Topology
+(loop_362_start)-[:PROCESS]->(loop_362_given_gate)
+(loop_362_given_gate)-[:PROCESS { case: "ok" }]->(loop_362_when_gate)
+(loop_362_given_gate)-[:PROCESS { case: "err" }]->(loop_362_inactive)
+(loop_362_when_gate)-[:PROCESS { case: "ok" }]->(loop_362_context)
+(loop_362_when_gate)-[:PROCESS { case: "err" }]->(loop_362_inactive)
+(loop_362_context)-[:FORK { strategy: "behavior-branches" }]->(loop_362_context_branch | loop_362_then_branch | loop_362_operator_branch | loop_362_result_branch | loop_362_taxonomy_branch | loop_362_intervention_recognize | loop_362_intervention_leverage)
+(loop_362_context_branch | loop_362_then_branch | loop_362_operator_branch | loop_362_result_branch | loop_362_taxonomy_branch | loop_362_intervention_recognize | loop_362_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_362_verdict)
+(loop_362_inactive)-[:PROCESS]->(loop_362_sink)
+(loop_362_verdict)-[:PROCESS]->(loop_362_sink)
+(loop_362_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_362_then_branch)
+(loop_362_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_362_result_branch)

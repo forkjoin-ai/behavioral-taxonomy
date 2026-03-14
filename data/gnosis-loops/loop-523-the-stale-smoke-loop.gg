@@ -1,0 +1,33 @@
+// behavioral-loop-523.gg
+// Executable Gnosis projection for The Stale Smoke Loop.
+
+// Nodes
+(loop_523_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_523_context_branch: BehaviorEmit { emission: 'context' })
+(loop_523_given_gate: BehaviorAssess { stage: 'given', text: 'Third-hand%20smoke%20clinging%20to%20hair%2Fjacket' })
+(loop_523_inactive: BehaviorTerminal { loopId: 523, loopName: 'The%20Stale%20Smoke%20Loop' })
+(loop_523_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_523_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_523_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_523_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vice%20Operator', mechanism: 'it%20signals%20%22Lack%20of%20Control%22%20and%20%22Dirty%20Habit%22' })
+(loop_523_result_branch: BehaviorEmit { emission: 'result', text: 'exclusion%20from%20health-conscious%20cliques' })
+(loop_523_sink: BehaviorSink)
+(loop_523_start: BehaviorStart { loopId: 523, loopName: 'The%20Stale%20Smoke%20Loop', given: 'Third-hand%20smoke%20clinging%20to%20hair%2Fjacket', when: 'in%20a%20non-smoking%20office', then: 'it%20signals%20%22Lack%20of%20Control%22%20and%20%22Dirty%20Habit%22%20(The%20Vice%20Operator)', result: 'exclusion%20from%20health-conscious%20cliques', operatorName: 'The%20Vice%20Operator', operatorMechanism: 'it%20signals%20%22Lack%20of%20Control%22%20and%20%22Dirty%20Habit%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_523_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_523_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Lack%20of%20Control%22%20and%20%22Dirty%20Habit%22%20(The%20Vice%20Operator)' })
+(loop_523_verdict: BehaviorVerdict { loopId: 523, loopName: 'The%20Stale%20Smoke%20Loop', then: 'it%20signals%20%22Lack%20of%20Control%22%20and%20%22Dirty%20Habit%22%20(The%20Vice%20Operator)', result: 'exclusion%20from%20health-conscious%20cliques', operatorName: 'The%20Vice%20Operator', operatorMechanism: 'it%20signals%20%22Lack%20of%20Control%22%20and%20%22Dirty%20Habit%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_523_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20non-smoking%20office' })
+
+// Topology
+(loop_523_start)-[:PROCESS]->(loop_523_given_gate)
+(loop_523_given_gate)-[:PROCESS { case: "ok" }]->(loop_523_when_gate)
+(loop_523_given_gate)-[:PROCESS { case: "err" }]->(loop_523_inactive)
+(loop_523_when_gate)-[:PROCESS { case: "ok" }]->(loop_523_context)
+(loop_523_when_gate)-[:PROCESS { case: "err" }]->(loop_523_inactive)
+(loop_523_context)-[:FORK { strategy: "behavior-branches" }]->(loop_523_context_branch | loop_523_then_branch | loop_523_operator_branch | loop_523_result_branch | loop_523_taxonomy_branch | loop_523_intervention_recognize | loop_523_intervention_interdict | loop_523_intervention_minimize)
+(loop_523_context_branch | loop_523_then_branch | loop_523_operator_branch | loop_523_result_branch | loop_523_taxonomy_branch | loop_523_intervention_recognize | loop_523_intervention_interdict | loop_523_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_523_verdict)
+(loop_523_inactive)-[:PROCESS]->(loop_523_sink)
+(loop_523_verdict)-[:PROCESS]->(loop_523_sink)
+(loop_523_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_523_then_branch)
+(loop_523_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_523_then_branch)
+(loop_523_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_523_then_branch)

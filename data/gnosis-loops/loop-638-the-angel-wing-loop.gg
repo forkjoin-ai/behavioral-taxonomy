@@ -1,0 +1,33 @@
+// behavioral-loop-638.gg
+// Executable Gnosis projection for The Angel Wing Loop.
+
+// Nodes
+(loop_638_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_638_context_branch: BehaviorEmit { emission: 'context' })
+(loop_638_given_gate: BehaviorAssess { stage: 'given', text: 'Shoulder%20blades%20sticking%20out%20(muscle%20weakness)' })
+(loop_638_inactive: BehaviorTerminal { loopId: 638, loopName: 'The%20Angel%20Wing%20Loop' })
+(loop_638_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_638_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_638_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_638_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20back%20looks%20%22Broken%22%20or%20%22Skeletal%22' })
+(loop_638_result_branch: BehaviorEmit { emission: 'result', text: 'assumptions%20of%20weakness' })
+(loop_638_sink: BehaviorSink)
+(loop_638_start: BehaviorStart { loopId: 638, loopName: 'The%20Angel%20Wing%20Loop', given: 'Shoulder%20blades%20sticking%20out%20(muscle%20weakness)', when: 'shirtless', then: 'the%20back%20looks%20%22Broken%22%20or%20%22Skeletal%22%20(The%20Fragility%20Operator)', result: 'assumptions%20of%20weakness', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20back%20looks%20%22Broken%22%20or%20%22Skeletal%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_638_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_638_then_branch: BehaviorEmit { emission: 'then', text: 'the%20back%20looks%20%22Broken%22%20or%20%22Skeletal%22%20(The%20Fragility%20Operator)' })
+(loop_638_verdict: BehaviorVerdict { loopId: 638, loopName: 'The%20Angel%20Wing%20Loop', then: 'the%20back%20looks%20%22Broken%22%20or%20%22Skeletal%22%20(The%20Fragility%20Operator)', result: 'assumptions%20of%20weakness', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20back%20looks%20%22Broken%22%20or%20%22Skeletal%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_638_when_gate: BehaviorAssess { stage: 'when', text: 'shirtless' })
+
+// Topology
+(loop_638_start)-[:PROCESS]->(loop_638_given_gate)
+(loop_638_given_gate)-[:PROCESS { case: "ok" }]->(loop_638_when_gate)
+(loop_638_given_gate)-[:PROCESS { case: "err" }]->(loop_638_inactive)
+(loop_638_when_gate)-[:PROCESS { case: "ok" }]->(loop_638_context)
+(loop_638_when_gate)-[:PROCESS { case: "err" }]->(loop_638_inactive)
+(loop_638_context)-[:FORK { strategy: "behavior-branches" }]->(loop_638_context_branch | loop_638_then_branch | loop_638_operator_branch | loop_638_result_branch | loop_638_taxonomy_branch | loop_638_intervention_recognize | loop_638_intervention_interdict | loop_638_intervention_minimize)
+(loop_638_context_branch | loop_638_then_branch | loop_638_operator_branch | loop_638_result_branch | loop_638_taxonomy_branch | loop_638_intervention_recognize | loop_638_intervention_interdict | loop_638_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_638_verdict)
+(loop_638_inactive)-[:PROCESS]->(loop_638_sink)
+(loop_638_verdict)-[:PROCESS]->(loop_638_sink)
+(loop_638_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_638_then_branch)
+(loop_638_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_638_then_branch)
+(loop_638_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_638_then_branch)

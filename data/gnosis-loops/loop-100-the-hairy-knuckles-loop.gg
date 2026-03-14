@@ -1,0 +1,33 @@
+// behavioral-loop-100.gg
+// Executable Gnosis projection for The Hairy Knuckles Loop.
+
+// Nodes
+(loop_100_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_100_context_branch: BehaviorEmit { emission: 'context' })
+(loop_100_given_gate: BehaviorAssess { stage: 'given', text: 'Dense%20Terminal%20Hair%20on%20hands%2Ffingers' })
+(loop_100_inactive: BehaviorTerminal { loopId: 100, loopName: 'The%20Hairy%20Knuckles%20Loop' })
+(loop_100_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_100_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_100_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_100_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stereotype%20Threat%20Operator', mechanism: 'observers%20assume%20%22Clumsiness%22%20or%20%22Brutality%22' })
+(loop_100_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20avoiding%20fine%20arts%2Fcrafts%2C%20leaning%20into%20**Macro-Movements**%20(lifting%2C%20construction)' })
+(loop_100_sink: BehaviorSink)
+(loop_100_start: BehaviorStart { loopId: 100, loopName: 'The%20Hairy%20Knuckles%20Loop', given: 'Dense%20Terminal%20Hair%20on%20hands%2Ffingers', when: 'performing%20delicate%20tasks', then: 'observers%20assume%20%22Clumsiness%22%20or%20%22Brutality%22%20(The%20Stereotype%20Threat%20Operator)', result: 'the%20individual%20avoiding%20fine%20arts%2Fcrafts%2C%20leaning%20into%20**Macro-Movements**%20(lifting%2C%20construction)', operatorName: 'The%20Stereotype%20Threat%20Operator', operatorMechanism: 'observers%20assume%20%22Clumsiness%22%20or%20%22Brutality%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_100_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'REPULSION' })
+(loop_100_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Clumsiness%22%20or%20%22Brutality%22%20(The%20Stereotype%20Threat%20Operator)' })
+(loop_100_verdict: BehaviorVerdict { loopId: 100, loopName: 'The%20Hairy%20Knuckles%20Loop', then: 'observers%20assume%20%22Clumsiness%22%20or%20%22Brutality%22%20(The%20Stereotype%20Threat%20Operator)', result: 'the%20individual%20avoiding%20fine%20arts%2Fcrafts%2C%20leaning%20into%20**Macro-Movements**%20(lifting%2C%20construction)', operatorName: 'The%20Stereotype%20Threat%20Operator', operatorMechanism: 'observers%20assume%20%22Clumsiness%22%20or%20%22Brutality%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'REPULSION' })
+(loop_100_when_gate: BehaviorAssess { stage: 'when', text: 'performing%20delicate%20tasks' })
+
+// Topology
+(loop_100_start)-[:PROCESS]->(loop_100_given_gate)
+(loop_100_given_gate)-[:PROCESS { case: "ok" }]->(loop_100_when_gate)
+(loop_100_given_gate)-[:PROCESS { case: "err" }]->(loop_100_inactive)
+(loop_100_when_gate)-[:PROCESS { case: "ok" }]->(loop_100_context)
+(loop_100_when_gate)-[:PROCESS { case: "err" }]->(loop_100_inactive)
+(loop_100_context)-[:FORK { strategy: "behavior-branches" }]->(loop_100_context_branch | loop_100_then_branch | loop_100_operator_branch | loop_100_result_branch | loop_100_taxonomy_branch | loop_100_intervention_recognize | loop_100_intervention_interdict | loop_100_intervention_minimize)
+(loop_100_context_branch | loop_100_then_branch | loop_100_operator_branch | loop_100_result_branch | loop_100_taxonomy_branch | loop_100_intervention_recognize | loop_100_intervention_interdict | loop_100_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_100_verdict)
+(loop_100_inactive)-[:PROCESS]->(loop_100_sink)
+(loop_100_verdict)-[:PROCESS]->(loop_100_sink)
+(loop_100_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_100_then_branch)
+(loop_100_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_100_then_branch)
+(loop_100_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_100_then_branch)

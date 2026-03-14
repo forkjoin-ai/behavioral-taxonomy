@@ -1,0 +1,33 @@
+// behavioral-loop-187.gg
+// Executable Gnosis projection for The Flat Foot Loop.
+
+// Nodes
+(loop_187_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_187_context_branch: BehaviorEmit { emission: 'context' })
+(loop_187_given_gate: BehaviorAssess { stage: 'given', text: 'Collapsed%20arch' })
+(loop_187_inactive: BehaviorTerminal { loopId: 187, loopName: 'The%20Flat%20Foot%20Loop' })
+(loop_187_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_187_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_187_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_187_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Clumsiness%20Operator', mechanism: 'the%20gait%20is%20heavy%2Fslapping' })
+(loop_187_result_branch: BehaviorEmit { emission: 'result', text: 'avoidance%20of%20running%20sports%2C%20shifting%20focus%20to%20**Strength%20Sports**%20or%20**Academics**' })
+(loop_187_sink: BehaviorSink)
+(loop_187_start: BehaviorStart { loopId: 187, loopName: 'The%20Flat%20Foot%20Loop', given: 'Collapsed%20arch', when: 'running%20or%20marching', then: 'the%20gait%20is%20heavy%2Fslapping%20(The%20Clumsiness%20Operator)', result: 'avoidance%20of%20running%20sports%2C%20shifting%20focus%20to%20**Strength%20Sports**%20or%20**Academics**', operatorName: 'The%20Clumsiness%20Operator', operatorMechanism: 'the%20gait%20is%20heavy%2Fslapping', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_187_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_187_then_branch: BehaviorEmit { emission: 'then', text: 'the%20gait%20is%20heavy%2Fslapping%20(The%20Clumsiness%20Operator)' })
+(loop_187_verdict: BehaviorVerdict { loopId: 187, loopName: 'The%20Flat%20Foot%20Loop', then: 'the%20gait%20is%20heavy%2Fslapping%20(The%20Clumsiness%20Operator)', result: 'avoidance%20of%20running%20sports%2C%20shifting%20focus%20to%20**Strength%20Sports**%20or%20**Academics**', operatorName: 'The%20Clumsiness%20Operator', operatorMechanism: 'the%20gait%20is%20heavy%2Fslapping', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_187_when_gate: BehaviorAssess { stage: 'when', text: 'running%20or%20marching' })
+
+// Topology
+(loop_187_start)-[:PROCESS]->(loop_187_given_gate)
+(loop_187_given_gate)-[:PROCESS { case: "ok" }]->(loop_187_when_gate)
+(loop_187_given_gate)-[:PROCESS { case: "err" }]->(loop_187_inactive)
+(loop_187_when_gate)-[:PROCESS { case: "ok" }]->(loop_187_context)
+(loop_187_when_gate)-[:PROCESS { case: "err" }]->(loop_187_inactive)
+(loop_187_context)-[:FORK { strategy: "behavior-branches" }]->(loop_187_context_branch | loop_187_then_branch | loop_187_operator_branch | loop_187_result_branch | loop_187_taxonomy_branch | loop_187_intervention_recognize | loop_187_intervention_interdict | loop_187_intervention_minimize)
+(loop_187_context_branch | loop_187_then_branch | loop_187_operator_branch | loop_187_result_branch | loop_187_taxonomy_branch | loop_187_intervention_recognize | loop_187_intervention_interdict | loop_187_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_187_verdict)
+(loop_187_inactive)-[:PROCESS]->(loop_187_sink)
+(loop_187_verdict)-[:PROCESS]->(loop_187_sink)
+(loop_187_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_187_then_branch)
+(loop_187_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_187_then_branch)
+(loop_187_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_187_then_branch)

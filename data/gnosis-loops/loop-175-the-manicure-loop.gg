@@ -1,0 +1,33 @@
+// behavioral-loop-175.gg
+// Executable Gnosis projection for The Manicure Loop.
+
+// Nodes
+(loop_175_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_175_context_branch: BehaviorEmit { emission: 'context' })
+(loop_175_given_gate: BehaviorAssess { stage: 'given', text: 'Artificially%20lengthened%20nails%20(functional%20constraint)' })
+(loop_175_inactive: BehaviorTerminal { loopId: 175, loopName: 'The%20Manicure%20Loop' })
+(loop_175_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_175_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_175_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_175_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Status%2FFragility%20Operator', mechanism: 'the%20physical%20exemption%20is%20granted%20immediately' })
+(loop_175_result_branch: BehaviorEmit { emission: 'result', text: 'a%20**%22High%20Maintenance%22%20Identity**%20that%20precludes%20certain%20types%20of%20work' })
+(loop_175_sink: BehaviorSink)
+(loop_175_start: BehaviorStart { loopId: 175, loopName: 'The%20Manicure%20Loop', given: 'Artificially%20lengthened%20nails%20(functional%20constraint)', when: 'asked%20to%20do%20manual%20labor', then: 'the%20physical%20exemption%20is%20granted%20immediately%20(The%20Status%2FFragility%20Operator)', result: 'a%20**%22High%20Maintenance%22%20Identity**%20that%20precludes%20certain%20types%20of%20work', operatorName: 'The%20Status%2FFragility%20Operator', operatorMechanism: 'the%20physical%20exemption%20is%20granted%20immediately', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_175_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_175_then_branch: BehaviorEmit { emission: 'then', text: 'the%20physical%20exemption%20is%20granted%20immediately%20(The%20Status%2FFragility%20Operator)' })
+(loop_175_verdict: BehaviorVerdict { loopId: 175, loopName: 'The%20Manicure%20Loop', then: 'the%20physical%20exemption%20is%20granted%20immediately%20(The%20Status%2FFragility%20Operator)', result: 'a%20**%22High%20Maintenance%22%20Identity**%20that%20precludes%20certain%20types%20of%20work', operatorName: 'The%20Status%2FFragility%20Operator', operatorMechanism: 'the%20physical%20exemption%20is%20granted%20immediately', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_175_when_gate: BehaviorAssess { stage: 'when', text: 'asked%20to%20do%20manual%20labor' })
+
+// Topology
+(loop_175_start)-[:PROCESS]->(loop_175_given_gate)
+(loop_175_given_gate)-[:PROCESS { case: "ok" }]->(loop_175_when_gate)
+(loop_175_given_gate)-[:PROCESS { case: "err" }]->(loop_175_inactive)
+(loop_175_when_gate)-[:PROCESS { case: "ok" }]->(loop_175_context)
+(loop_175_when_gate)-[:PROCESS { case: "err" }]->(loop_175_inactive)
+(loop_175_context)-[:FORK { strategy: "behavior-branches" }]->(loop_175_context_branch | loop_175_then_branch | loop_175_operator_branch | loop_175_result_branch | loop_175_taxonomy_branch | loop_175_intervention_recognize | loop_175_intervention_interdict | loop_175_intervention_minimize)
+(loop_175_context_branch | loop_175_then_branch | loop_175_operator_branch | loop_175_result_branch | loop_175_taxonomy_branch | loop_175_intervention_recognize | loop_175_intervention_interdict | loop_175_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_175_verdict)
+(loop_175_inactive)-[:PROCESS]->(loop_175_sink)
+(loop_175_verdict)-[:PROCESS]->(loop_175_sink)
+(loop_175_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_175_then_branch)
+(loop_175_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_175_then_branch)
+(loop_175_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_175_then_branch)

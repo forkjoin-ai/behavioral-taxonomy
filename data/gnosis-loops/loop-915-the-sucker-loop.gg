@@ -1,0 +1,33 @@
+// behavioral-loop-915.gg
+// Executable Gnosis projection for The Sucker Loop.
+
+// Nodes
+(loop_915_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_915_context_branch: BehaviorEmit { emission: 'context' })
+(loop_915_given_gate: BehaviorAssess { stage: 'given', text: 'Loudly%20sucking%20food%20from%20teeth' })
+(loop_915_inactive: BehaviorTerminal { loopId: 915, loopName: 'The%20Sucker%20Loop' })
+(loop_915_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_915_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_915_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_915_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vacuum%20Operator', mechanism: 'the%20sound%20is%20%22Squishy%22%20and%20%22Wet%22' })
+(loop_915_result_branch: BehaviorEmit { emission: 'result', text: 'revulsion%20and%20loss%20of%20%22Refined%22%20status' })
+(loop_915_sink: BehaviorSink)
+(loop_915_start: BehaviorStart { loopId: 915, loopName: 'The%20Sucker%20Loop', given: 'Loudly%20sucking%20food%20from%20teeth', when: 'after%20a%20meal', then: 'the%20sound%20is%20%22Squishy%22%20and%20%22Wet%22%20(The%20Vacuum%20Operator)', result: 'revulsion%20and%20loss%20of%20%22Refined%22%20status', operatorName: 'The%20Vacuum%20Operator', operatorMechanism: 'the%20sound%20is%20%22Squishy%22%20and%20%22Wet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_915_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_915_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20is%20%22Squishy%22%20and%20%22Wet%22%20(The%20Vacuum%20Operator)' })
+(loop_915_verdict: BehaviorVerdict { loopId: 915, loopName: 'The%20Sucker%20Loop', then: 'the%20sound%20is%20%22Squishy%22%20and%20%22Wet%22%20(The%20Vacuum%20Operator)', result: 'revulsion%20and%20loss%20of%20%22Refined%22%20status', operatorName: 'The%20Vacuum%20Operator', operatorMechanism: 'the%20sound%20is%20%22Squishy%22%20and%20%22Wet%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_915_when_gate: BehaviorAssess { stage: 'when', text: 'after%20a%20meal' })
+
+// Topology
+(loop_915_start)-[:PROCESS]->(loop_915_given_gate)
+(loop_915_given_gate)-[:PROCESS { case: "ok" }]->(loop_915_when_gate)
+(loop_915_given_gate)-[:PROCESS { case: "err" }]->(loop_915_inactive)
+(loop_915_when_gate)-[:PROCESS { case: "ok" }]->(loop_915_context)
+(loop_915_when_gate)-[:PROCESS { case: "err" }]->(loop_915_inactive)
+(loop_915_context)-[:FORK { strategy: "behavior-branches" }]->(loop_915_context_branch | loop_915_then_branch | loop_915_operator_branch | loop_915_result_branch | loop_915_taxonomy_branch | loop_915_intervention_recognize | loop_915_intervention_interdict | loop_915_intervention_minimize)
+(loop_915_context_branch | loop_915_then_branch | loop_915_operator_branch | loop_915_result_branch | loop_915_taxonomy_branch | loop_915_intervention_recognize | loop_915_intervention_interdict | loop_915_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_915_verdict)
+(loop_915_inactive)-[:PROCESS]->(loop_915_sink)
+(loop_915_verdict)-[:PROCESS]->(loop_915_sink)
+(loop_915_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_915_then_branch)
+(loop_915_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_915_then_branch)
+(loop_915_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_915_then_branch)

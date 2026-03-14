@@ -1,0 +1,33 @@
+// behavioral-loop-325.gg
+// Executable Gnosis projection for The Heavy Breather Loop.
+
+// Nodes
+(loop_325_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_325_context_branch: BehaviorEmit { emission: 'context' })
+(loop_325_given_gate: BehaviorAssess { stage: 'given', text: 'Obesity%2C%20asthma%2C%20or%20deviated%20septum' })
+(loop_325_inactive: BehaviorTerminal { loopId: 325, loopName: 'The%20Heavy%20Breather%20Loop' })
+(loop_325_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_325_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_325_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_325_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Mortality%20Operator', mechanism: 'the%20audible%20respiration%20signals%20%22Exertion%22%20or%20%22Unhealth%22' })
+(loop_325_result_branch: BehaviorEmit { emission: 'result', text: 'colleagues%20perceiving%20the%20individual%20as%20%22Struggling%22%20to%20merely%20exist' })
+(loop_325_sink: BehaviorSink)
+(loop_325_start: BehaviorStart { loopId: 325, loopName: 'The%20Heavy%20Breather%20Loop', given: 'Obesity%2C%20asthma%2C%20or%20deviated%20septum', when: 'sitting%20in%20a%20quiet%20meeting', then: 'the%20audible%20respiration%20signals%20%22Exertion%22%20or%20%22Unhealth%22%20(The%20Mortality%20Operator)', result: 'colleagues%20perceiving%20the%20individual%20as%20%22Struggling%22%20to%20merely%20exist', operatorName: 'The%20Mortality%20Operator', operatorMechanism: 'the%20audible%20respiration%20signals%20%22Exertion%22%20or%20%22Unhealth%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_325_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_325_then_branch: BehaviorEmit { emission: 'then', text: 'the%20audible%20respiration%20signals%20%22Exertion%22%20or%20%22Unhealth%22%20(The%20Mortality%20Operator)' })
+(loop_325_verdict: BehaviorVerdict { loopId: 325, loopName: 'The%20Heavy%20Breather%20Loop', then: 'the%20audible%20respiration%20signals%20%22Exertion%22%20or%20%22Unhealth%22%20(The%20Mortality%20Operator)', result: 'colleagues%20perceiving%20the%20individual%20as%20%22Struggling%22%20to%20merely%20exist', operatorName: 'The%20Mortality%20Operator', operatorMechanism: 'the%20audible%20respiration%20signals%20%22Exertion%22%20or%20%22Unhealth%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_325_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20in%20a%20quiet%20meeting' })
+
+// Topology
+(loop_325_start)-[:PROCESS]->(loop_325_given_gate)
+(loop_325_given_gate)-[:PROCESS { case: "ok" }]->(loop_325_when_gate)
+(loop_325_given_gate)-[:PROCESS { case: "err" }]->(loop_325_inactive)
+(loop_325_when_gate)-[:PROCESS { case: "ok" }]->(loop_325_context)
+(loop_325_when_gate)-[:PROCESS { case: "err" }]->(loop_325_inactive)
+(loop_325_context)-[:FORK { strategy: "behavior-branches" }]->(loop_325_context_branch | loop_325_then_branch | loop_325_operator_branch | loop_325_result_branch | loop_325_taxonomy_branch | loop_325_intervention_recognize | loop_325_intervention_interdict | loop_325_intervention_minimize)
+(loop_325_context_branch | loop_325_then_branch | loop_325_operator_branch | loop_325_result_branch | loop_325_taxonomy_branch | loop_325_intervention_recognize | loop_325_intervention_interdict | loop_325_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_325_verdict)
+(loop_325_inactive)-[:PROCESS]->(loop_325_sink)
+(loop_325_verdict)-[:PROCESS]->(loop_325_sink)
+(loop_325_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_325_then_branch)
+(loop_325_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_325_then_branch)
+(loop_325_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_325_then_branch)

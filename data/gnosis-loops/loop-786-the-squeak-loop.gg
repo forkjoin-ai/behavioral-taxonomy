@@ -1,0 +1,31 @@
+// behavioral-loop-786.gg
+// Executable Gnosis projection for The Squeak Loop.
+
+// Nodes
+(loop_786_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_786_context_branch: BehaviorEmit { emission: 'context' })
+(loop_786_given_gate: BehaviorAssess { stage: 'given', text: 'High%20pitch%20escape%20during%20stress' })
+(loop_786_inactive: BehaviorTerminal { loopId: 786, loopName: 'The%20Squeak%20Loop' })
+(loop_786_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_786_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_786_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Deception%20Operator', mechanism: 'it%20acts%20as%20a%20%22Tell%22' })
+(loop_786_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20loss%20of%20credibility' })
+(loop_786_sink: BehaviorSink)
+(loop_786_start: BehaviorStart { loopId: 786, loopName: 'The%20Squeak%20Loop', given: 'High%20pitch%20escape%20during%20stress', when: 'lying', then: 'it%20acts%20as%20a%20%22Tell%22%20(The%20Deception%20Operator)', result: 'immediate%20loss%20of%20credibility', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'it%20acts%20as%20a%20%22Tell%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_786_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_786_then_branch: BehaviorEmit { emission: 'then', text: 'it%20acts%20as%20a%20%22Tell%22%20(The%20Deception%20Operator)' })
+(loop_786_verdict: BehaviorVerdict { loopId: 786, loopName: 'The%20Squeak%20Loop', then: 'it%20acts%20as%20a%20%22Tell%22%20(The%20Deception%20Operator)', result: 'immediate%20loss%20of%20credibility', operatorName: 'The%20Deception%20Operator', operatorMechanism: 'it%20acts%20as%20a%20%22Tell%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_786_when_gate: BehaviorAssess { stage: 'when', text: 'lying' })
+
+// Topology
+(loop_786_start)-[:PROCESS]->(loop_786_given_gate)
+(loop_786_given_gate)-[:PROCESS { case: "ok" }]->(loop_786_when_gate)
+(loop_786_given_gate)-[:PROCESS { case: "err" }]->(loop_786_inactive)
+(loop_786_when_gate)-[:PROCESS { case: "ok" }]->(loop_786_context)
+(loop_786_when_gate)-[:PROCESS { case: "err" }]->(loop_786_inactive)
+(loop_786_context)-[:FORK { strategy: "behavior-branches" }]->(loop_786_context_branch | loop_786_then_branch | loop_786_operator_branch | loop_786_result_branch | loop_786_taxonomy_branch | loop_786_intervention_recognize | loop_786_intervention_leverage)
+(loop_786_context_branch | loop_786_then_branch | loop_786_operator_branch | loop_786_result_branch | loop_786_taxonomy_branch | loop_786_intervention_recognize | loop_786_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_786_verdict)
+(loop_786_inactive)-[:PROCESS]->(loop_786_sink)
+(loop_786_verdict)-[:PROCESS]->(loop_786_sink)
+(loop_786_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_786_then_branch)
+(loop_786_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_786_result_branch)

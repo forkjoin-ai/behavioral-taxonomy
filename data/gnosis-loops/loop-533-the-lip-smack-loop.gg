@@ -1,0 +1,33 @@
+// behavioral-loop-533.gg
+// Executable Gnosis projection for The Lip Smack Loop.
+
+// Nodes
+(loop_533_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_533_context_branch: BehaviorEmit { emission: 'context' })
+(loop_533_given_gate: BehaviorAssess { stage: 'given', text: 'Wet%20noise%20when%20opening%20mouth%20to%20speak' })
+(loop_533_inactive: BehaviorTerminal { loopId: 533, loopName: 'The%20Lip%20Smack%20Loop' })
+(loop_533_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_533_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_533_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_533_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Saliva%20Operator', mechanism: 'it%20sounds%20%22Gross%22%20or%20%22Hungry%22' })
+(loop_533_result_branch: BehaviorEmit { emission: 'result', text: 'listener%20irritation%20(Misophonia%20trigger)' })
+(loop_533_sink: BehaviorSink)
+(loop_533_start: BehaviorStart { loopId: 533, loopName: 'The%20Lip%20Smack%20Loop', given: 'Wet%20noise%20when%20opening%20mouth%20to%20speak', when: 'starting%20a%20sentence', then: 'it%20sounds%20%22Gross%22%20or%20%22Hungry%22%20(The%20Saliva%20Operator)', result: 'listener%20irritation%20(Misophonia%20trigger)', operatorName: 'The%20Saliva%20Operator', operatorMechanism: 'it%20sounds%20%22Gross%22%20or%20%22Hungry%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_533_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_533_then_branch: BehaviorEmit { emission: 'then', text: 'it%20sounds%20%22Gross%22%20or%20%22Hungry%22%20(The%20Saliva%20Operator)' })
+(loop_533_verdict: BehaviorVerdict { loopId: 533, loopName: 'The%20Lip%20Smack%20Loop', then: 'it%20sounds%20%22Gross%22%20or%20%22Hungry%22%20(The%20Saliva%20Operator)', result: 'listener%20irritation%20(Misophonia%20trigger)', operatorName: 'The%20Saliva%20Operator', operatorMechanism: 'it%20sounds%20%22Gross%22%20or%20%22Hungry%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_533_when_gate: BehaviorAssess { stage: 'when', text: 'starting%20a%20sentence' })
+
+// Topology
+(loop_533_start)-[:PROCESS]->(loop_533_given_gate)
+(loop_533_given_gate)-[:PROCESS { case: "ok" }]->(loop_533_when_gate)
+(loop_533_given_gate)-[:PROCESS { case: "err" }]->(loop_533_inactive)
+(loop_533_when_gate)-[:PROCESS { case: "ok" }]->(loop_533_context)
+(loop_533_when_gate)-[:PROCESS { case: "err" }]->(loop_533_inactive)
+(loop_533_context)-[:FORK { strategy: "behavior-branches" }]->(loop_533_context_branch | loop_533_then_branch | loop_533_operator_branch | loop_533_result_branch | loop_533_taxonomy_branch | loop_533_intervention_recognize | loop_533_intervention_interdict | loop_533_intervention_minimize)
+(loop_533_context_branch | loop_533_then_branch | loop_533_operator_branch | loop_533_result_branch | loop_533_taxonomy_branch | loop_533_intervention_recognize | loop_533_intervention_interdict | loop_533_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_533_verdict)
+(loop_533_inactive)-[:PROCESS]->(loop_533_sink)
+(loop_533_verdict)-[:PROCESS]->(loop_533_sink)
+(loop_533_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_533_then_branch)
+(loop_533_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_533_then_branch)
+(loop_533_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_533_then_branch)

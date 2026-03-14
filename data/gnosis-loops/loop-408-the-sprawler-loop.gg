@@ -1,0 +1,31 @@
+// behavioral-loop-408.gg
+// Executable Gnosis projection for The Sprawler Loop.
+
+// Nodes
+(loop_408_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_408_context_branch: BehaviorEmit { emission: 'context' })
+(loop_408_given_gate: BehaviorAssess { stage: 'given', text: 'Limbs%20extended%20in%20all%20directions' })
+(loop_408_inactive: BehaviorTerminal { loopId: 408, loopName: 'The%20Sprawler%20Loop' })
+(loop_408_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_408_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_408_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Space%20Hog%20Operator', mechanism: 'they%20occupy%203%20seats' })
+(loop_408_result_branch: BehaviorEmit { emission: 'result', text: 'dominance%20displays%20but%20also%20social%20resentment' })
+(loop_408_sink: BehaviorSink)
+(loop_408_start: BehaviorStart { loopId: 408, loopName: 'The%20Sprawler%20Loop', given: 'Limbs%20extended%20in%20all%20directions', when: 'on%20a%20couch%20or%20chair', then: 'they%20occupy%203%20seats%20(The%20Space%20Hog%20Operator)', result: 'dominance%20displays%20but%20also%20social%20resentment', operatorName: 'The%20Space%20Hog%20Operator', operatorMechanism: 'they%20occupy%203%20seats', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_408_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_408_then_branch: BehaviorEmit { emission: 'then', text: 'they%20occupy%203%20seats%20(The%20Space%20Hog%20Operator)' })
+(loop_408_verdict: BehaviorVerdict { loopId: 408, loopName: 'The%20Sprawler%20Loop', then: 'they%20occupy%203%20seats%20(The%20Space%20Hog%20Operator)', result: 'dominance%20displays%20but%20also%20social%20resentment', operatorName: 'The%20Space%20Hog%20Operator', operatorMechanism: 'they%20occupy%203%20seats', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_408_when_gate: BehaviorAssess { stage: 'when', text: 'on%20a%20couch%20or%20chair' })
+
+// Topology
+(loop_408_start)-[:PROCESS]->(loop_408_given_gate)
+(loop_408_given_gate)-[:PROCESS { case: "ok" }]->(loop_408_when_gate)
+(loop_408_given_gate)-[:PROCESS { case: "err" }]->(loop_408_inactive)
+(loop_408_when_gate)-[:PROCESS { case: "ok" }]->(loop_408_context)
+(loop_408_when_gate)-[:PROCESS { case: "err" }]->(loop_408_inactive)
+(loop_408_context)-[:FORK { strategy: "behavior-branches" }]->(loop_408_context_branch | loop_408_then_branch | loop_408_operator_branch | loop_408_result_branch | loop_408_taxonomy_branch | loop_408_intervention_recognize | loop_408_intervention_leverage)
+(loop_408_context_branch | loop_408_then_branch | loop_408_operator_branch | loop_408_result_branch | loop_408_taxonomy_branch | loop_408_intervention_recognize | loop_408_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_408_verdict)
+(loop_408_inactive)-[:PROCESS]->(loop_408_sink)
+(loop_408_verdict)-[:PROCESS]->(loop_408_sink)
+(loop_408_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_408_then_branch)
+(loop_408_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_408_result_branch)

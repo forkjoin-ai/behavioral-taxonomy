@@ -1,0 +1,33 @@
+// behavioral-loop-2101.gg
+// Executable Gnosis projection for The Savior Complex (ENFJ).
+
+// Nodes
+(loop_2101_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_2101_context_branch: BehaviorEmit { emission: 'context' })
+(loop_2101_given_gate: BehaviorAssess { stage: 'given', text: 'High%20external%20empathy%20%2B%20Self-worth%20tied%20to%20utility%20to%20others' })
+(loop_2101_inactive: BehaviorTerminal { loopId: 2101, loopName: 'The%20Savior%20Complex%20(ENFJ)' })
+(loop_2101_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_2101_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2101_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_2101_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_2101_result_branch: BehaviorEmit { emission: 'result', text: 'Compassion%20fatigue%20and%20covert%20resentment%20(' })
+(loop_2101_sink: BehaviorSink)
+(loop_2101_start: BehaviorStart { loopId: 2101, loopName: 'The%20Savior%20Complex%20(ENFJ)', given: 'High%20external%20empathy%20%2B%20Self-worth%20tied%20to%20utility%20to%20others', when: 'Detecting%20social%20friction%20or%20an%20individual%20in%20distress', then: 'Subject%20forcefully%20intervenes%20to%20', result: 'Compassion%20fatigue%20and%20covert%20resentment%20(', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_2101_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2101_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20forcefully%20intervenes%20to%20' })
+(loop_2101_verdict: BehaviorVerdict { loopId: 2101, loopName: 'The%20Savior%20Complex%20(ENFJ)', then: 'Subject%20forcefully%20intervenes%20to%20', result: 'Compassion%20fatigue%20and%20covert%20resentment%20(', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_2101_when_gate: BehaviorAssess { stage: 'when', text: 'Detecting%20social%20friction%20or%20an%20individual%20in%20distress' })
+
+// Topology
+(loop_2101_start)-[:PROCESS]->(loop_2101_given_gate)
+(loop_2101_given_gate)-[:PROCESS { case: "ok" }]->(loop_2101_when_gate)
+(loop_2101_given_gate)-[:PROCESS { case: "err" }]->(loop_2101_inactive)
+(loop_2101_when_gate)-[:PROCESS { case: "ok" }]->(loop_2101_context)
+(loop_2101_when_gate)-[:PROCESS { case: "err" }]->(loop_2101_inactive)
+(loop_2101_context)-[:FORK { strategy: "behavior-branches" }]->(loop_2101_context_branch | loop_2101_then_branch | loop_2101_operator_branch | loop_2101_result_branch | loop_2101_taxonomy_branch | loop_2101_intervention_recognize | loop_2101_intervention_interdict | loop_2101_intervention_minimize)
+(loop_2101_context_branch | loop_2101_then_branch | loop_2101_operator_branch | loop_2101_result_branch | loop_2101_taxonomy_branch | loop_2101_intervention_recognize | loop_2101_intervention_interdict | loop_2101_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_2101_verdict)
+(loop_2101_inactive)-[:PROCESS]->(loop_2101_sink)
+(loop_2101_verdict)-[:PROCESS]->(loop_2101_sink)
+(loop_2101_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_2101_then_branch)
+(loop_2101_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_2101_then_branch)
+(loop_2101_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_2101_then_branch)

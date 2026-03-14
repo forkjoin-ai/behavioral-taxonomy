@@ -1,0 +1,33 @@
+// behavioral-loop-591.gg
+// Executable Gnosis projection for The Vulture Loop.
+
+// Nodes
+(loop_591_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_591_context_branch: BehaviorEmit { emission: 'context' })
+(loop_591_given_gate: BehaviorAssess { stage: 'given', text: 'Neck%20extending%20forward%20to%20see%2Fhear' })
+(loop_591_inactive: BehaviorTerminal { loopId: 591, loopName: 'The%20Vulture%20Loop' })
+(loop_591_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_591_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_591_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_591_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Scavenger%20Operator', mechanism: 'the%20posture%20looks%20%22Predatory%22%20or%20%22Intense%22' })
+(loop_591_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20feeling%20scrutinized' })
+(loop_591_sink: BehaviorSink)
+(loop_591_start: BehaviorStart { loopId: 591, loopName: 'The%20Vulture%20Loop', given: 'Neck%20extending%20forward%20to%20see%2Fhear', when: 'listening%20intently', then: 'the%20posture%20looks%20%22Predatory%22%20or%20%22Intense%22%20(The%20Scavenger%20Operator)', result: 'the%20speaker%20feeling%20scrutinized', operatorName: 'The%20Scavenger%20Operator', operatorMechanism: 'the%20posture%20looks%20%22Predatory%22%20or%20%22Intense%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_591_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_591_then_branch: BehaviorEmit { emission: 'then', text: 'the%20posture%20looks%20%22Predatory%22%20or%20%22Intense%22%20(The%20Scavenger%20Operator)' })
+(loop_591_verdict: BehaviorVerdict { loopId: 591, loopName: 'The%20Vulture%20Loop', then: 'the%20posture%20looks%20%22Predatory%22%20or%20%22Intense%22%20(The%20Scavenger%20Operator)', result: 'the%20speaker%20feeling%20scrutinized', operatorName: 'The%20Scavenger%20Operator', operatorMechanism: 'the%20posture%20looks%20%22Predatory%22%20or%20%22Intense%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_591_when_gate: BehaviorAssess { stage: 'when', text: 'listening%20intently' })
+
+// Topology
+(loop_591_start)-[:PROCESS]->(loop_591_given_gate)
+(loop_591_given_gate)-[:PROCESS { case: "ok" }]->(loop_591_when_gate)
+(loop_591_given_gate)-[:PROCESS { case: "err" }]->(loop_591_inactive)
+(loop_591_when_gate)-[:PROCESS { case: "ok" }]->(loop_591_context)
+(loop_591_when_gate)-[:PROCESS { case: "err" }]->(loop_591_inactive)
+(loop_591_context)-[:FORK { strategy: "behavior-branches" }]->(loop_591_context_branch | loop_591_then_branch | loop_591_operator_branch | loop_591_result_branch | loop_591_taxonomy_branch | loop_591_intervention_recognize | loop_591_intervention_interdict | loop_591_intervention_minimize)
+(loop_591_context_branch | loop_591_then_branch | loop_591_operator_branch | loop_591_result_branch | loop_591_taxonomy_branch | loop_591_intervention_recognize | loop_591_intervention_interdict | loop_591_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_591_verdict)
+(loop_591_inactive)-[:PROCESS]->(loop_591_sink)
+(loop_591_verdict)-[:PROCESS]->(loop_591_sink)
+(loop_591_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_591_then_branch)
+(loop_591_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_591_then_branch)
+(loop_591_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_591_then_branch)

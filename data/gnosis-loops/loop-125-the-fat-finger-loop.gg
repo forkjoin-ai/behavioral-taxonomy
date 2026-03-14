@@ -1,0 +1,33 @@
+// behavioral-loop-125.gg
+// Executable Gnosis projection for The Fat Finger Loop.
+
+// Nodes
+(loop_125_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_125_context_branch: BehaviorEmit { emission: 'context' })
+(loop_125_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20finger%20circumference' })
+(loop_125_inactive: BehaviorTerminal { loopId: 125, loopName: 'The%20Fat%20Finger%20Loop' })
+(loop_125_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_125_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_125_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_125_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Frustration%20Operator', mechanism: 'the%20individual%20makes%20frequent%20typos' })
+(loop_125_result_branch: BehaviorEmit { emission: 'result', text: '%22Short%2FGruff%22%20texts%20or%20a%20preference%20for%20**Voice%20Calls**%2C%20appearing%20%22Old%20School.%22' })
+(loop_125_sink: BehaviorSink)
+(loop_125_start: BehaviorStart { loopId: 125, loopName: 'The%20Fat%20Finger%20Loop', given: 'Large%20finger%20circumference', when: 'typing%20on%20smartphones', then: 'the%20individual%20makes%20frequent%20typos%20(The%20Frustration%20Operator)', result: '%22Short%2FGruff%22%20texts%20or%20a%20preference%20for%20**Voice%20Calls**%2C%20appearing%20%22Old%20School.%22', operatorName: 'The%20Frustration%20Operator', operatorMechanism: 'the%20individual%20makes%20frequent%20typos', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_125_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_125_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20makes%20frequent%20typos%20(The%20Frustration%20Operator)' })
+(loop_125_verdict: BehaviorVerdict { loopId: 125, loopName: 'The%20Fat%20Finger%20Loop', then: 'the%20individual%20makes%20frequent%20typos%20(The%20Frustration%20Operator)', result: '%22Short%2FGruff%22%20texts%20or%20a%20preference%20for%20**Voice%20Calls**%2C%20appearing%20%22Old%20School.%22', operatorName: 'The%20Frustration%20Operator', operatorMechanism: 'the%20individual%20makes%20frequent%20typos', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_125_when_gate: BehaviorAssess { stage: 'when', text: 'typing%20on%20smartphones' })
+
+// Topology
+(loop_125_start)-[:PROCESS]->(loop_125_given_gate)
+(loop_125_given_gate)-[:PROCESS { case: "ok" }]->(loop_125_when_gate)
+(loop_125_given_gate)-[:PROCESS { case: "err" }]->(loop_125_inactive)
+(loop_125_when_gate)-[:PROCESS { case: "ok" }]->(loop_125_context)
+(loop_125_when_gate)-[:PROCESS { case: "err" }]->(loop_125_inactive)
+(loop_125_context)-[:FORK { strategy: "behavior-branches" }]->(loop_125_context_branch | loop_125_then_branch | loop_125_operator_branch | loop_125_result_branch | loop_125_taxonomy_branch | loop_125_intervention_recognize | loop_125_intervention_interdict | loop_125_intervention_minimize)
+(loop_125_context_branch | loop_125_then_branch | loop_125_operator_branch | loop_125_result_branch | loop_125_taxonomy_branch | loop_125_intervention_recognize | loop_125_intervention_interdict | loop_125_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_125_verdict)
+(loop_125_inactive)-[:PROCESS]->(loop_125_sink)
+(loop_125_verdict)-[:PROCESS]->(loop_125_sink)
+(loop_125_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_125_then_branch)
+(loop_125_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_125_then_branch)
+(loop_125_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_125_then_branch)

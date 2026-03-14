@@ -1,0 +1,31 @@
+// behavioral-loop-302.gg
+// Executable Gnosis projection for The Wet Fish Loop.
+
+// Nodes
+(loop_302_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_302_context_branch: BehaviorEmit { emission: 'context' })
+(loop_302_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20muscle%20tone%20or%20hesitation' })
+(loop_302_inactive: BehaviorTerminal { loopId: 302, loopName: 'The%20Wet%20Fish%20Loop' })
+(loop_302_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_302_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_302_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Weakness%2FDisgust%20Operator', mechanism: 'the%20hand%20feels%20lifeless' })
+(loop_302_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20loss%20of%20professional%20credibility' })
+(loop_302_sink: BehaviorSink)
+(loop_302_start: BehaviorStart { loopId: 302, loopName: 'The%20Wet%20Fish%20Loop', given: 'Low%20muscle%20tone%20or%20hesitation', when: 'shaking%20hands', then: 'the%20hand%20feels%20lifeless%20(The%20Weakness%2FDisgust%20Operator)', result: 'immediate%20loss%20of%20professional%20credibility', operatorName: 'The%20Weakness%2FDisgust%20Operator', operatorMechanism: 'the%20hand%20feels%20lifeless', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_302_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'TRUST' })
+(loop_302_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hand%20feels%20lifeless%20(The%20Weakness%2FDisgust%20Operator)' })
+(loop_302_verdict: BehaviorVerdict { loopId: 302, loopName: 'The%20Wet%20Fish%20Loop', then: 'the%20hand%20feels%20lifeless%20(The%20Weakness%2FDisgust%20Operator)', result: 'immediate%20loss%20of%20professional%20credibility', operatorName: 'The%20Weakness%2FDisgust%20Operator', operatorMechanism: 'the%20hand%20feels%20lifeless', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'TRUST' })
+(loop_302_when_gate: BehaviorAssess { stage: 'when', text: 'shaking%20hands' })
+
+// Topology
+(loop_302_start)-[:PROCESS]->(loop_302_given_gate)
+(loop_302_given_gate)-[:PROCESS { case: "ok" }]->(loop_302_when_gate)
+(loop_302_given_gate)-[:PROCESS { case: "err" }]->(loop_302_inactive)
+(loop_302_when_gate)-[:PROCESS { case: "ok" }]->(loop_302_context)
+(loop_302_when_gate)-[:PROCESS { case: "err" }]->(loop_302_inactive)
+(loop_302_context)-[:FORK { strategy: "behavior-branches" }]->(loop_302_context_branch | loop_302_then_branch | loop_302_operator_branch | loop_302_result_branch | loop_302_taxonomy_branch | loop_302_intervention_recognize | loop_302_intervention_leverage)
+(loop_302_context_branch | loop_302_then_branch | loop_302_operator_branch | loop_302_result_branch | loop_302_taxonomy_branch | loop_302_intervention_recognize | loop_302_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_302_verdict)
+(loop_302_inactive)-[:PROCESS]->(loop_302_sink)
+(loop_302_verdict)-[:PROCESS]->(loop_302_sink)
+(loop_302_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_302_then_branch)
+(loop_302_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_302_result_branch)

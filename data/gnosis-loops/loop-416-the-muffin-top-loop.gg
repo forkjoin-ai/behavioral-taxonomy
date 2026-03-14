@@ -1,0 +1,33 @@
+// behavioral-loop-416.gg
+// Executable Gnosis projection for The Muffin Top Loop.
+
+// Nodes
+(loop_416_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_416_context_branch: BehaviorEmit { emission: 'context' })
+(loop_416_given_gate: BehaviorAssess { stage: 'given', text: 'Low-rise%20pants%20%2B%20soft%20flank%20tissue' })
+(loop_416_inactive: BehaviorTerminal { loopId: 416, loopName: 'The%20Muffin%20Top%20Loop' })
+(loop_416_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_416_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_416_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_416_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Spillover%20Operator', mechanism: 'the%20flesh%20spills%20over%20the%20waistband' })
+(loop_416_result_branch: BehaviorEmit { emission: 'result', text: 'signals%20of%20%22ill-fitting%20life%22%20or%20poor%20sizing%20choices' })
+(loop_416_sink: BehaviorSink)
+(loop_416_start: BehaviorStart { loopId: 416, loopName: 'The%20Muffin%20Top%20Loop', given: 'Low-rise%20pants%20%2B%20soft%20flank%20tissue', when: 'standing', then: 'the%20flesh%20spills%20over%20the%20waistband%20(The%20Spillover%20Operator)', result: 'signals%20of%20%22ill-fitting%20life%22%20or%20poor%20sizing%20choices', operatorName: 'The%20Spillover%20Operator', operatorMechanism: 'the%20flesh%20spills%20over%20the%20waistband', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_416_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_416_then_branch: BehaviorEmit { emission: 'then', text: 'the%20flesh%20spills%20over%20the%20waistband%20(The%20Spillover%20Operator)' })
+(loop_416_verdict: BehaviorVerdict { loopId: 416, loopName: 'The%20Muffin%20Top%20Loop', then: 'the%20flesh%20spills%20over%20the%20waistband%20(The%20Spillover%20Operator)', result: 'signals%20of%20%22ill-fitting%20life%22%20or%20poor%20sizing%20choices', operatorName: 'The%20Spillover%20Operator', operatorMechanism: 'the%20flesh%20spills%20over%20the%20waistband', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_416_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_416_start)-[:PROCESS]->(loop_416_given_gate)
+(loop_416_given_gate)-[:PROCESS { case: "ok" }]->(loop_416_when_gate)
+(loop_416_given_gate)-[:PROCESS { case: "err" }]->(loop_416_inactive)
+(loop_416_when_gate)-[:PROCESS { case: "ok" }]->(loop_416_context)
+(loop_416_when_gate)-[:PROCESS { case: "err" }]->(loop_416_inactive)
+(loop_416_context)-[:FORK { strategy: "behavior-branches" }]->(loop_416_context_branch | loop_416_then_branch | loop_416_operator_branch | loop_416_result_branch | loop_416_taxonomy_branch | loop_416_intervention_recognize | loop_416_intervention_interdict | loop_416_intervention_minimize)
+(loop_416_context_branch | loop_416_then_branch | loop_416_operator_branch | loop_416_result_branch | loop_416_taxonomy_branch | loop_416_intervention_recognize | loop_416_intervention_interdict | loop_416_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_416_verdict)
+(loop_416_inactive)-[:PROCESS]->(loop_416_sink)
+(loop_416_verdict)-[:PROCESS]->(loop_416_sink)
+(loop_416_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_416_then_branch)
+(loop_416_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_416_then_branch)
+(loop_416_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_416_then_branch)

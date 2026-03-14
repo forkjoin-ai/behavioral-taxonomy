@@ -1,0 +1,31 @@
+// behavioral-loop-813.gg
+// Executable Gnosis projection for The Crinkle Loop.
+
+// Nodes
+(loop_813_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_813_context_branch: BehaviorEmit { emission: 'context' })
+(loop_813_given_gate: BehaviorAssess { stage: 'given', text: "Activation%20of%20Orbicularis%20Oculi%20(crow's%20feet)%20when%20smiling" })
+(loop_813_inactive: BehaviorTerminal { loopId: 813, loopName: 'The%20Crinkle%20Loop' })
+(loop_813_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_813_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_813_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Joy%20Operator', mechanism: 'the%20smile%20registers%20as%20%22Authentic%22' })
+(loop_813_result_branch: BehaviorEmit { emission: 'result', text: 'immediate%20trust%20and%20reciprocal%20smiling' })
+(loop_813_sink: BehaviorSink)
+(loop_813_start: BehaviorStart { loopId: 813, loopName: 'The%20Crinkle%20Loop', given: "Activation%20of%20Orbicularis%20Oculi%20(crow's%20feet)%20when%20smiling", when: 'greeting', then: 'the%20smile%20registers%20as%20%22Authentic%22%20(The%20Joy%20Operator)', result: 'immediate%20trust%20and%20reciprocal%20smiling', operatorName: 'The%20Joy%20Operator', operatorMechanism: 'the%20smile%20registers%20as%20%22Authentic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20in%20high-stakes%20negotiations%20and%20first%20impressions' })
+(loop_813_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_813_then_branch: BehaviorEmit { emission: 'then', text: 'the%20smile%20registers%20as%20%22Authentic%22%20(The%20Joy%20Operator)' })
+(loop_813_verdict: BehaviorVerdict { loopId: 813, loopName: 'The%20Crinkle%20Loop', then: 'the%20smile%20registers%20as%20%22Authentic%22%20(The%20Joy%20Operator)', result: 'immediate%20trust%20and%20reciprocal%20smiling', operatorName: 'The%20Joy%20Operator', operatorMechanism: 'the%20smile%20registers%20as%20%22Authentic%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_813_when_gate: BehaviorAssess { stage: 'when', text: 'greeting' })
+
+// Topology
+(loop_813_start)-[:PROCESS]->(loop_813_given_gate)
+(loop_813_given_gate)-[:PROCESS { case: "ok" }]->(loop_813_when_gate)
+(loop_813_given_gate)-[:PROCESS { case: "err" }]->(loop_813_inactive)
+(loop_813_when_gate)-[:PROCESS { case: "ok" }]->(loop_813_context)
+(loop_813_when_gate)-[:PROCESS { case: "err" }]->(loop_813_inactive)
+(loop_813_context)-[:FORK { strategy: "behavior-branches" }]->(loop_813_context_branch | loop_813_then_branch | loop_813_operator_branch | loop_813_result_branch | loop_813_taxonomy_branch | loop_813_intervention_recognize | loop_813_intervention_leverage)
+(loop_813_context_branch | loop_813_then_branch | loop_813_operator_branch | loop_813_result_branch | loop_813_taxonomy_branch | loop_813_intervention_recognize | loop_813_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_813_verdict)
+(loop_813_inactive)-[:PROCESS]->(loop_813_sink)
+(loop_813_verdict)-[:PROCESS]->(loop_813_sink)
+(loop_813_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_813_then_branch)
+(loop_813_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_813_result_branch)

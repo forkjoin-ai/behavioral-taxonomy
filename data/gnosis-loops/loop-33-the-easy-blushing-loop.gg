@@ -1,0 +1,31 @@
+// behavioral-loop-33.gg
+// Executable Gnosis projection for The Easy Blushing Loop.
+
+// Nodes
+(loop_33_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_33_context_branch: BehaviorEmit { emission: 'context' })
+(loop_33_given_gate: BehaviorAssess { stage: 'given', text: 'an%20individual%20possesses%20High%20Vasomotor%20Reactivity%20(turns%20red%20easily)' })
+(loop_33_inactive: BehaviorTerminal { loopId: 33, loopName: 'The%20Easy%20Blushing%20Loop' })
+(loop_33_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_33_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_33_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Trust%20Operator', mechanism: 'the%20observer%20perceives%20%22Innocence%22%20or%20%22Lack%20of%20Guile%22' })
+(loop_33_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20trusted%20with%20secrets%20but%20excluded%20from%20%22ruthless%22%20decisions%2C%20fostering%20a%20**Peacemaker%20Identity**' })
+(loop_33_sink: BehaviorSink)
+(loop_33_start: BehaviorStart { loopId: 33, loopName: 'The%20Easy%20Blushing%20Loop', given: 'an%20individual%20possesses%20High%20Vasomotor%20Reactivity%20(turns%20red%20easily)', when: 'they%20are%20challenged%20or%20complimented', then: 'the%20observer%20perceives%20%22Innocence%22%20or%20%22Lack%20of%20Guile%22%20(The%20Trust%20Operator)', result: 'the%20individual%20being%20trusted%20with%20secrets%20but%20excluded%20from%20%22ruthless%22%20decisions%2C%20fostering%20a%20**Peacemaker%20Identity**', operatorName: 'The%20Trust%20Operator', operatorMechanism: 'the%20observer%20perceives%20%22Innocence%22%20or%20%22Lack%20of%20Guile%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Pair%20with%20competence%20demonstrations%20for%20maximum%20effect' })
+(loop_33_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_33_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20perceives%20%22Innocence%22%20or%20%22Lack%20of%20Guile%22%20(The%20Trust%20Operator)' })
+(loop_33_verdict: BehaviorVerdict { loopId: 33, loopName: 'The%20Easy%20Blushing%20Loop', then: 'the%20observer%20perceives%20%22Innocence%22%20or%20%22Lack%20of%20Guile%22%20(The%20Trust%20Operator)', result: 'the%20individual%20being%20trusted%20with%20secrets%20but%20excluded%20from%20%22ruthless%22%20decisions%2C%20fostering%20a%20**Peacemaker%20Identity**', operatorName: 'The%20Trust%20Operator', operatorMechanism: 'the%20observer%20perceives%20%22Innocence%22%20or%20%22Lack%20of%20Guile%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'TRUST' })
+(loop_33_when_gate: BehaviorAssess { stage: 'when', text: 'they%20are%20challenged%20or%20complimented' })
+
+// Topology
+(loop_33_start)-[:PROCESS]->(loop_33_given_gate)
+(loop_33_given_gate)-[:PROCESS { case: "ok" }]->(loop_33_when_gate)
+(loop_33_given_gate)-[:PROCESS { case: "err" }]->(loop_33_inactive)
+(loop_33_when_gate)-[:PROCESS { case: "ok" }]->(loop_33_context)
+(loop_33_when_gate)-[:PROCESS { case: "err" }]->(loop_33_inactive)
+(loop_33_context)-[:FORK { strategy: "behavior-branches" }]->(loop_33_context_branch | loop_33_then_branch | loop_33_operator_branch | loop_33_result_branch | loop_33_taxonomy_branch | loop_33_intervention_recognize | loop_33_intervention_leverage)
+(loop_33_context_branch | loop_33_then_branch | loop_33_operator_branch | loop_33_result_branch | loop_33_taxonomy_branch | loop_33_intervention_recognize | loop_33_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_33_verdict)
+(loop_33_inactive)-[:PROCESS]->(loop_33_sink)
+(loop_33_verdict)-[:PROCESS]->(loop_33_sink)
+(loop_33_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_33_then_branch)
+(loop_33_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_33_result_branch)

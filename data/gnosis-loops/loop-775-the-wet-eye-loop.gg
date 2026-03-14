@@ -1,0 +1,33 @@
+// behavioral-loop-775.gg
+// Executable Gnosis projection for The Wet Eye Loop.
+
+// Nodes
+(loop_775_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_775_context_branch: BehaviorEmit { emission: 'context' })
+(loop_775_given_gate: BehaviorAssess { stage: 'given', text: 'Chronic%20tearing%20due%20to%20blocked%20ducts%20or%20allergies' })
+(loop_775_inactive: BehaviorTerminal { loopId: 775, loopName: 'The%20Wet%20Eye%20Loop' })
+(loop_775_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_775_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_775_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_775_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tragic%20Operator', mechanism: 'the%20eyes%20look%20%22Sad%22%20or%20%22Overwhelmed%22' })
+(loop_775_result_branch: BehaviorEmit { emission: 'result', text: "constant%20misinterpretation%20of%20the%20individual's%20emotional%20state%20(%22Why%20are%20you%20crying%3F%22)" })
+(loop_775_sink: BehaviorSink)
+(loop_775_start: BehaviorStart { loopId: 775, loopName: 'The%20Wet%20Eye%20Loop', given: 'Chronic%20tearing%20due%20to%20blocked%20ducts%20or%20allergies', when: 'smiling', then: 'the%20eyes%20look%20%22Sad%22%20or%20%22Overwhelmed%22%20(The%20Tragic%20Operator)', result: "constant%20misinterpretation%20of%20the%20individual's%20emotional%20state%20(%22Why%20are%20you%20crying%3F%22)", operatorName: 'The%20Tragic%20Operator', operatorMechanism: 'the%20eyes%20look%20%22Sad%22%20or%20%22Overwhelmed%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_775_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_775_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20look%20%22Sad%22%20or%20%22Overwhelmed%22%20(The%20Tragic%20Operator)' })
+(loop_775_verdict: BehaviorVerdict { loopId: 775, loopName: 'The%20Wet%20Eye%20Loop', then: 'the%20eyes%20look%20%22Sad%22%20or%20%22Overwhelmed%22%20(The%20Tragic%20Operator)', result: "constant%20misinterpretation%20of%20the%20individual's%20emotional%20state%20(%22Why%20are%20you%20crying%3F%22)", operatorName: 'The%20Tragic%20Operator', operatorMechanism: 'the%20eyes%20look%20%22Sad%22%20or%20%22Overwhelmed%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_775_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_775_start)-[:PROCESS]->(loop_775_given_gate)
+(loop_775_given_gate)-[:PROCESS { case: "ok" }]->(loop_775_when_gate)
+(loop_775_given_gate)-[:PROCESS { case: "err" }]->(loop_775_inactive)
+(loop_775_when_gate)-[:PROCESS { case: "ok" }]->(loop_775_context)
+(loop_775_when_gate)-[:PROCESS { case: "err" }]->(loop_775_inactive)
+(loop_775_context)-[:FORK { strategy: "behavior-branches" }]->(loop_775_context_branch | loop_775_then_branch | loop_775_operator_branch | loop_775_result_branch | loop_775_taxonomy_branch | loop_775_intervention_recognize | loop_775_intervention_interdict | loop_775_intervention_minimize)
+(loop_775_context_branch | loop_775_then_branch | loop_775_operator_branch | loop_775_result_branch | loop_775_taxonomy_branch | loop_775_intervention_recognize | loop_775_intervention_interdict | loop_775_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_775_verdict)
+(loop_775_inactive)-[:PROCESS]->(loop_775_sink)
+(loop_775_verdict)-[:PROCESS]->(loop_775_sink)
+(loop_775_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_775_then_branch)
+(loop_775_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_775_then_branch)
+(loop_775_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_775_then_branch)

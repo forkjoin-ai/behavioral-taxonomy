@@ -1,0 +1,33 @@
+// behavioral-loop-792.gg
+// Executable Gnosis projection for The Flake Loop.
+
+// Nodes
+(loop_792_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_792_context_branch: BehaviorEmit { emission: 'context' })
+(loop_792_given_gate: BehaviorAssess { stage: 'given', text: 'Dead%20skin%20visible%20in%20eyebrows%2Fbeard' })
+(loop_792_inactive: BehaviorTerminal { loopId: 792, loopName: 'The%20Flake%20Loop' })
+(loop_792_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_792_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_792_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_792_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Snow%20Operator', mechanism: 'it%20signals%20%22Neglect%22' })
+(loop_792_result_branch: BehaviorEmit { emission: 'result', text: 'loss%20of%20%22Polished%22%20status' })
+(loop_792_sink: BehaviorSink)
+(loop_792_start: BehaviorStart { loopId: 792, loopName: 'The%20Flake%20Loop', given: 'Dead%20skin%20visible%20in%20eyebrows%2Fbeard', when: 'wearing%20dark%20glasses', then: 'it%20signals%20%22Neglect%22%20(The%20Snow%20Operator)', result: 'loss%20of%20%22Polished%22%20status', operatorName: 'The%20Snow%20Operator', operatorMechanism: 'it%20signals%20%22Neglect%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_792_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_792_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Neglect%22%20(The%20Snow%20Operator)' })
+(loop_792_verdict: BehaviorVerdict { loopId: 792, loopName: 'The%20Flake%20Loop', then: 'it%20signals%20%22Neglect%22%20(The%20Snow%20Operator)', result: 'loss%20of%20%22Polished%22%20status', operatorName: 'The%20Snow%20Operator', operatorMechanism: 'it%20signals%20%22Neglect%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_792_when_gate: BehaviorAssess { stage: 'when', text: 'wearing%20dark%20glasses' })
+
+// Topology
+(loop_792_start)-[:PROCESS]->(loop_792_given_gate)
+(loop_792_given_gate)-[:PROCESS { case: "ok" }]->(loop_792_when_gate)
+(loop_792_given_gate)-[:PROCESS { case: "err" }]->(loop_792_inactive)
+(loop_792_when_gate)-[:PROCESS { case: "ok" }]->(loop_792_context)
+(loop_792_when_gate)-[:PROCESS { case: "err" }]->(loop_792_inactive)
+(loop_792_context)-[:FORK { strategy: "behavior-branches" }]->(loop_792_context_branch | loop_792_then_branch | loop_792_operator_branch | loop_792_result_branch | loop_792_taxonomy_branch | loop_792_intervention_recognize | loop_792_intervention_interdict | loop_792_intervention_minimize)
+(loop_792_context_branch | loop_792_then_branch | loop_792_operator_branch | loop_792_result_branch | loop_792_taxonomy_branch | loop_792_intervention_recognize | loop_792_intervention_interdict | loop_792_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_792_verdict)
+(loop_792_inactive)-[:PROCESS]->(loop_792_sink)
+(loop_792_verdict)-[:PROCESS]->(loop_792_sink)
+(loop_792_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_792_then_branch)
+(loop_792_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_792_then_branch)
+(loop_792_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_792_then_branch)

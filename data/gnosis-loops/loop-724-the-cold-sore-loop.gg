@@ -1,0 +1,33 @@
+// behavioral-loop-724.gg
+// Executable Gnosis projection for The Cold Sore Loop.
+
+// Nodes
+(loop_724_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_724_context_branch: BehaviorEmit { emission: 'context' })
+(loop_724_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20vesicle%20on%20the%20lip' })
+(loop_724_inactive: BehaviorTerminal { loopId: 724, loopName: 'The%20Cold%20Sore%20Loop' })
+(loop_724_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_724_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_724_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_724_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Contagion%20Operator', mechanism: 'observers%20physically%20recoil' })
+(loop_724_result_branch: BehaviorEmit { emission: 'result', text: 'extreme%20social%20isolation%20for%207-10%20days' })
+(loop_724_sink: BehaviorSink)
+(loop_724_start: BehaviorStart { loopId: 724, loopName: 'The%20Cold%20Sore%20Loop', given: 'Visible%20vesicle%20on%20the%20lip', when: 'socializing', then: 'observers%20physically%20recoil%20(The%20Contagion%20Operator)', result: 'extreme%20social%20isolation%20for%207-10%20days', operatorName: 'The%20Contagion%20Operator', operatorMechanism: 'observers%20physically%20recoil', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_724_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_724_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20physically%20recoil%20(The%20Contagion%20Operator)' })
+(loop_724_verdict: BehaviorVerdict { loopId: 724, loopName: 'The%20Cold%20Sore%20Loop', then: 'observers%20physically%20recoil%20(The%20Contagion%20Operator)', result: 'extreme%20social%20isolation%20for%207-10%20days', operatorName: 'The%20Contagion%20Operator', operatorMechanism: 'observers%20physically%20recoil', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_724_when_gate: BehaviorAssess { stage: 'when', text: 'socializing' })
+
+// Topology
+(loop_724_start)-[:PROCESS]->(loop_724_given_gate)
+(loop_724_given_gate)-[:PROCESS { case: "ok" }]->(loop_724_when_gate)
+(loop_724_given_gate)-[:PROCESS { case: "err" }]->(loop_724_inactive)
+(loop_724_when_gate)-[:PROCESS { case: "ok" }]->(loop_724_context)
+(loop_724_when_gate)-[:PROCESS { case: "err" }]->(loop_724_inactive)
+(loop_724_context)-[:FORK { strategy: "behavior-branches" }]->(loop_724_context_branch | loop_724_then_branch | loop_724_operator_branch | loop_724_result_branch | loop_724_taxonomy_branch | loop_724_intervention_recognize | loop_724_intervention_interdict | loop_724_intervention_minimize)
+(loop_724_context_branch | loop_724_then_branch | loop_724_operator_branch | loop_724_result_branch | loop_724_taxonomy_branch | loop_724_intervention_recognize | loop_724_intervention_interdict | loop_724_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_724_verdict)
+(loop_724_inactive)-[:PROCESS]->(loop_724_sink)
+(loop_724_verdict)-[:PROCESS]->(loop_724_sink)
+(loop_724_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_724_then_branch)
+(loop_724_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_724_then_branch)
+(loop_724_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_724_then_branch)

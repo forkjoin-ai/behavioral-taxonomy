@@ -1,0 +1,33 @@
+// behavioral-loop-912.gg
+// Executable Gnosis projection for The Dirty Lens Loop.
+
+// Nodes
+(loop_912_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_912_context_branch: BehaviorEmit { emission: 'context' })
+(loop_912_given_gate: BehaviorAssess { stage: 'given', text: 'Fingerprints%2Foil%20on%20glasses' })
+(loop_912_inactive: BehaviorTerminal { loopId: 912, loopName: 'The%20Dirty%20Lens%20Loop' })
+(loop_912_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Introduce%20counterbalancing%20signals' })
+(loop_912_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_912_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_912_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fog%20Operator', mechanism: 'observers%20focus%20on%20the%20grime%2C%20not%20the%20eyes' })
+(loop_912_result_branch: BehaviorEmit { emission: 'result', text: 'judgments%20of%20%22Sloppiness%22%20and%20%22Poor%20Vision.%22' })
+(loop_912_sink: BehaviorSink)
+(loop_912_start: BehaviorStart { loopId: 912, loopName: 'The%20Dirty%20Lens%20Loop', given: 'Fingerprints%2Foil%20on%20glasses', when: 'looking%20at%20the%20wearer', then: 'observers%20focus%20on%20the%20grime%2C%20not%20the%20eyes%20(The%20Fog%20Operator)', result: 'judgments%20of%20%22Sloppiness%22%20and%20%22Poor%20Vision.%22', operatorName: 'The%20Fog%20Operator', operatorMechanism: 'observers%20focus%20on%20the%20grime%2C%20not%20the%20eyes', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Introduce%20counterbalancing%20signals', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_912_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_912_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20focus%20on%20the%20grime%2C%20not%20the%20eyes%20(The%20Fog%20Operator)' })
+(loop_912_verdict: BehaviorVerdict { loopId: 912, loopName: 'The%20Dirty%20Lens%20Loop', then: 'observers%20focus%20on%20the%20grime%2C%20not%20the%20eyes%20(The%20Fog%20Operator)', result: 'judgments%20of%20%22Sloppiness%22%20and%20%22Poor%20Vision.%22', operatorName: 'The%20Fog%20Operator', operatorMechanism: 'observers%20focus%20on%20the%20grime%2C%20not%20the%20eyes', origin: 'SARTORIAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_912_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20at%20the%20wearer' })
+
+// Topology
+(loop_912_start)-[:PROCESS]->(loop_912_given_gate)
+(loop_912_given_gate)-[:PROCESS { case: "ok" }]->(loop_912_when_gate)
+(loop_912_given_gate)-[:PROCESS { case: "err" }]->(loop_912_inactive)
+(loop_912_when_gate)-[:PROCESS { case: "ok" }]->(loop_912_context)
+(loop_912_when_gate)-[:PROCESS { case: "err" }]->(loop_912_inactive)
+(loop_912_context)-[:FORK { strategy: "behavior-branches" }]->(loop_912_context_branch | loop_912_then_branch | loop_912_operator_branch | loop_912_result_branch | loop_912_taxonomy_branch | loop_912_intervention_recognize | loop_912_intervention_interdict | loop_912_intervention_minimize)
+(loop_912_context_branch | loop_912_then_branch | loop_912_operator_branch | loop_912_result_branch | loop_912_taxonomy_branch | loop_912_intervention_recognize | loop_912_intervention_interdict | loop_912_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_912_verdict)
+(loop_912_inactive)-[:PROCESS]->(loop_912_sink)
+(loop_912_verdict)-[:PROCESS]->(loop_912_sink)
+(loop_912_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_912_then_branch)
+(loop_912_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_912_then_branch)
+(loop_912_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_912_then_branch)

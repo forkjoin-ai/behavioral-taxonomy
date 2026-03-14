@@ -1,0 +1,33 @@
+// behavioral-loop-7003.gg
+// Executable Gnosis projection for The Winner-Take-All Cycle.
+
+// Nodes
+(loop_7003_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_7003_context_branch: BehaviorEmit { emission: 'context' })
+(loop_7003_given_gate: BehaviorAssess { stage: 'given', text: 'Unknown%20condition' })
+(loop_7003_inactive: BehaviorTerminal { loopId: 7003, loopName: 'The%20Winner-Take-All%20Cycle' })
+(loop_7003_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_7003_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_7003_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_7003_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_7003_result_branch: BehaviorEmit { emission: 'result', text: 'Agent%20A%20ends%20up%20with%2080%25%20of%20the%20rewards%3B%20Agent%20B%20(who%20was%20only%201%25%20worse%20initially)%20gets%20nothing.' })
+(loop_7003_sink: BehaviorSink)
+(loop_7003_start: BehaviorStart { loopId: 7003, loopName: 'The%20Winner-Take-All%20Cycle', given: 'Unknown%20condition', when: 'Unknown%20trigger', then: 'Unknown%20response', result: 'Agent%20A%20ends%20up%20with%2080%25%20of%20the%20rewards%3B%20Agent%20B%20(who%20was%20only%201%25%20worse%20initially)%20gets%20nothing.', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_7003_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_7003_then_branch: BehaviorEmit { emission: 'then', text: 'Unknown%20response' })
+(loop_7003_verdict: BehaviorVerdict { loopId: 7003, loopName: 'The%20Winner-Take-All%20Cycle', then: 'Unknown%20response', result: 'Agent%20A%20ends%20up%20with%2080%25%20of%20the%20rewards%3B%20Agent%20B%20(who%20was%20only%201%25%20worse%20initially)%20gets%20nothing.', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_7003_when_gate: BehaviorAssess { stage: 'when', text: 'Unknown%20trigger' })
+
+// Topology
+(loop_7003_start)-[:PROCESS]->(loop_7003_given_gate)
+(loop_7003_given_gate)-[:PROCESS { case: "ok" }]->(loop_7003_when_gate)
+(loop_7003_given_gate)-[:PROCESS { case: "err" }]->(loop_7003_inactive)
+(loop_7003_when_gate)-[:PROCESS { case: "ok" }]->(loop_7003_context)
+(loop_7003_when_gate)-[:PROCESS { case: "err" }]->(loop_7003_inactive)
+(loop_7003_context)-[:FORK { strategy: "behavior-branches" }]->(loop_7003_context_branch | loop_7003_then_branch | loop_7003_operator_branch | loop_7003_result_branch | loop_7003_taxonomy_branch | loop_7003_intervention_recognize | loop_7003_intervention_interdict | loop_7003_intervention_minimize)
+(loop_7003_context_branch | loop_7003_then_branch | loop_7003_operator_branch | loop_7003_result_branch | loop_7003_taxonomy_branch | loop_7003_intervention_recognize | loop_7003_intervention_interdict | loop_7003_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_7003_verdict)
+(loop_7003_inactive)-[:PROCESS]->(loop_7003_sink)
+(loop_7003_verdict)-[:PROCESS]->(loop_7003_sink)
+(loop_7003_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_7003_then_branch)
+(loop_7003_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_7003_then_branch)
+(loop_7003_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_7003_then_branch)

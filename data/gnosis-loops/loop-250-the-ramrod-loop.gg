@@ -1,0 +1,33 @@
+// behavioral-loop-250.gg
+// Executable Gnosis projection for The Ramrod Loop.
+
+// Nodes
+(loop_250_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_250_context_branch: BehaviorEmit { emission: 'context' })
+(loop_250_given_gate: BehaviorAssess { stage: 'given', text: 'Fusion%20or%20military%20habit' })
+(loop_250_inactive: BehaviorTerminal { loopId: 250, loopName: 'The%20Ramrod%20Loop' })
+(loop_250_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_250_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_250_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_250_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Threat%2FCop%20Operator', mechanism: 'the%20posture%20looks%20%22Alert%22%20and%20%22Guard-like%22' })
+(loop_250_result_branch: BehaviorEmit { emission: 'result', text: 'people%20unable%20to%20relax%20around%20the%20individual' })
+(loop_250_sink: BehaviorSink)
+(loop_250_start: BehaviorStart { loopId: 250, loopName: 'The%20Ramrod%20Loop', given: 'Fusion%20or%20military%20habit', when: 'relaxing%20at%20a%20bar', then: 'the%20posture%20looks%20%22Alert%22%20and%20%22Guard-like%22%20(The%20Threat%2FCop%20Operator)', result: 'people%20unable%20to%20relax%20around%20the%20individual', operatorName: 'The%20Threat%2FCop%20Operator', operatorMechanism: 'the%20posture%20looks%20%22Alert%22%20and%20%22Guard-like%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_250_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_250_then_branch: BehaviorEmit { emission: 'then', text: 'the%20posture%20looks%20%22Alert%22%20and%20%22Guard-like%22%20(The%20Threat%2FCop%20Operator)' })
+(loop_250_verdict: BehaviorVerdict { loopId: 250, loopName: 'The%20Ramrod%20Loop', then: 'the%20posture%20looks%20%22Alert%22%20and%20%22Guard-like%22%20(The%20Threat%2FCop%20Operator)', result: 'people%20unable%20to%20relax%20around%20the%20individual', operatorName: 'The%20Threat%2FCop%20Operator', operatorMechanism: 'the%20posture%20looks%20%22Alert%22%20and%20%22Guard-like%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_250_when_gate: BehaviorAssess { stage: 'when', text: 'relaxing%20at%20a%20bar' })
+
+// Topology
+(loop_250_start)-[:PROCESS]->(loop_250_given_gate)
+(loop_250_given_gate)-[:PROCESS { case: "ok" }]->(loop_250_when_gate)
+(loop_250_given_gate)-[:PROCESS { case: "err" }]->(loop_250_inactive)
+(loop_250_when_gate)-[:PROCESS { case: "ok" }]->(loop_250_context)
+(loop_250_when_gate)-[:PROCESS { case: "err" }]->(loop_250_inactive)
+(loop_250_context)-[:FORK { strategy: "behavior-branches" }]->(loop_250_context_branch | loop_250_then_branch | loop_250_operator_branch | loop_250_result_branch | loop_250_taxonomy_branch | loop_250_intervention_recognize | loop_250_intervention_interdict | loop_250_intervention_minimize)
+(loop_250_context_branch | loop_250_then_branch | loop_250_operator_branch | loop_250_result_branch | loop_250_taxonomy_branch | loop_250_intervention_recognize | loop_250_intervention_interdict | loop_250_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_250_verdict)
+(loop_250_inactive)-[:PROCESS]->(loop_250_sink)
+(loop_250_verdict)-[:PROCESS]->(loop_250_sink)
+(loop_250_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_250_then_branch)
+(loop_250_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_250_then_branch)
+(loop_250_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_250_then_branch)

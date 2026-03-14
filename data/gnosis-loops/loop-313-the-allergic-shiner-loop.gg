@@ -1,0 +1,33 @@
+// behavioral-loop-313.gg
+// Executable Gnosis projection for The Allergic Shiner Loop.
+
+// Nodes
+(loop_313_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_313_context_branch: BehaviorEmit { emission: 'context' })
+(loop_313_given_gate: BehaviorAssess { stage: 'given', text: 'Venous%20congestion%20under%20eyes%20(Allergies)' })
+(loop_313_inactive: BehaviorTerminal { loopId: 313, loopName: 'The%20Allergic%20Shiner%20Loop' })
+(loop_313_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_313_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_313_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_313_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Plague%20Operator', mechanism: 'observers%20ask%20%22Are%20you%20sick%3F%22' })
+(loop_313_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20being%20sent%20home%20or%20excluded' })
+(loop_313_sink: BehaviorSink)
+(loop_313_start: BehaviorStart { loopId: 313, loopName: 'The%20Allergic%20Shiner%20Loop', given: 'Venous%20congestion%20under%20eyes%20(Allergies)', when: 'healthy%2Frested', then: 'observers%20ask%20%22Are%20you%20sick%3F%22%20(The%20Plague%20Operator)', result: 'the%20individual%20being%20sent%20home%20or%20excluded', operatorName: 'The%20Plague%20Operator', operatorMechanism: 'observers%20ask%20%22Are%20you%20sick%3F%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_313_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_313_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20ask%20%22Are%20you%20sick%3F%22%20(The%20Plague%20Operator)' })
+(loop_313_verdict: BehaviorVerdict { loopId: 313, loopName: 'The%20Allergic%20Shiner%20Loop', then: 'observers%20ask%20%22Are%20you%20sick%3F%22%20(The%20Plague%20Operator)', result: 'the%20individual%20being%20sent%20home%20or%20excluded', operatorName: 'The%20Plague%20Operator', operatorMechanism: 'observers%20ask%20%22Are%20you%20sick%3F%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_313_when_gate: BehaviorAssess { stage: 'when', text: 'healthy%2Frested' })
+
+// Topology
+(loop_313_start)-[:PROCESS]->(loop_313_given_gate)
+(loop_313_given_gate)-[:PROCESS { case: "ok" }]->(loop_313_when_gate)
+(loop_313_given_gate)-[:PROCESS { case: "err" }]->(loop_313_inactive)
+(loop_313_when_gate)-[:PROCESS { case: "ok" }]->(loop_313_context)
+(loop_313_when_gate)-[:PROCESS { case: "err" }]->(loop_313_inactive)
+(loop_313_context)-[:FORK { strategy: "behavior-branches" }]->(loop_313_context_branch | loop_313_then_branch | loop_313_operator_branch | loop_313_result_branch | loop_313_taxonomy_branch | loop_313_intervention_recognize | loop_313_intervention_interdict | loop_313_intervention_minimize)
+(loop_313_context_branch | loop_313_then_branch | loop_313_operator_branch | loop_313_result_branch | loop_313_taxonomy_branch | loop_313_intervention_recognize | loop_313_intervention_interdict | loop_313_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_313_verdict)
+(loop_313_inactive)-[:PROCESS]->(loop_313_sink)
+(loop_313_verdict)-[:PROCESS]->(loop_313_sink)
+(loop_313_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_313_then_branch)
+(loop_313_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_313_then_branch)
+(loop_313_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_313_then_branch)

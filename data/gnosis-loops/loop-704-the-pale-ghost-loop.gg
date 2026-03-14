@@ -1,0 +1,33 @@
+// behavioral-loop-704.gg
+// Executable Gnosis projection for The Pale Ghost Loop.
+
+// Nodes
+(loop_704_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_704_context_branch: BehaviorEmit { emission: 'context' })
+(loop_704_given_gate: BehaviorAssess { stage: 'given', text: 'Translucent%20skin%20with%20blue%20veins%20visible' })
+(loop_704_inactive: BehaviorTerminal { loopId: 704, loopName: 'The%20Pale%20Ghost%20Loop' })
+(loop_704_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_704_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_704_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_704_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Vampire%20Operator', mechanism: 'the%20individual%20looks%20%22Fragile%22%20or%20%22Ethereal%22' })
+(loop_704_result_branch: BehaviorEmit { emission: 'result', text: 'people%20offering%20shade%2Fprotection' })
+(loop_704_sink: BehaviorSink)
+(loop_704_start: BehaviorStart { loopId: 704, loopName: 'The%20Pale%20Ghost%20Loop', given: 'Translucent%20skin%20with%20blue%20veins%20visible', when: 'in%20sunlight', then: 'the%20individual%20looks%20%22Fragile%22%20or%20%22Ethereal%22%20(The%20Vampire%20Operator)', result: 'people%20offering%20shade%2Fprotection', operatorName: 'The%20Vampire%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Fragile%22%20or%20%22Ethereal%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_704_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_704_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20looks%20%22Fragile%22%20or%20%22Ethereal%22%20(The%20Vampire%20Operator)' })
+(loop_704_verdict: BehaviorVerdict { loopId: 704, loopName: 'The%20Pale%20Ghost%20Loop', then: 'the%20individual%20looks%20%22Fragile%22%20or%20%22Ethereal%22%20(The%20Vampire%20Operator)', result: 'people%20offering%20shade%2Fprotection', operatorName: 'The%20Vampire%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Fragile%22%20or%20%22Ethereal%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_704_when_gate: BehaviorAssess { stage: 'when', text: 'in%20sunlight' })
+
+// Topology
+(loop_704_start)-[:PROCESS]->(loop_704_given_gate)
+(loop_704_given_gate)-[:PROCESS { case: "ok" }]->(loop_704_when_gate)
+(loop_704_given_gate)-[:PROCESS { case: "err" }]->(loop_704_inactive)
+(loop_704_when_gate)-[:PROCESS { case: "ok" }]->(loop_704_context)
+(loop_704_when_gate)-[:PROCESS { case: "err" }]->(loop_704_inactive)
+(loop_704_context)-[:FORK { strategy: "behavior-branches" }]->(loop_704_context_branch | loop_704_then_branch | loop_704_operator_branch | loop_704_result_branch | loop_704_taxonomy_branch | loop_704_intervention_recognize | loop_704_intervention_interdict | loop_704_intervention_minimize)
+(loop_704_context_branch | loop_704_then_branch | loop_704_operator_branch | loop_704_result_branch | loop_704_taxonomy_branch | loop_704_intervention_recognize | loop_704_intervention_interdict | loop_704_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_704_verdict)
+(loop_704_inactive)-[:PROCESS]->(loop_704_sink)
+(loop_704_verdict)-[:PROCESS]->(loop_704_sink)
+(loop_704_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_704_then_branch)
+(loop_704_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_704_then_branch)
+(loop_704_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_704_then_branch)

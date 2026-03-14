@@ -1,0 +1,35 @@
+// behavioral-loop-118.gg
+// Executable Gnosis projection for The Raspy Loop.
+
+// Nodes
+(loop_118_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_118_context_branch: BehaviorEmit { emission: 'context' })
+(loop_118_given_gate: BehaviorAssess { stage: 'given', text: 'Hoarse%2FGravelly%20Voice' })
+(loop_118_inactive: BehaviorTerminal { loopId: 118, loopName: 'The%20Raspy%20Loop' })
+(loop_118_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_118_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_118_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_118_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT" })
+(loop_118_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'the%20sound%20conveys%20%22Experience%2C%22%20%22Weariness%2C%22%20or%20%22Sex%20Appeal%22' })
+(loop_118_result_branch: BehaviorEmit { emission: 'result', text: 'high%20engagement%20from%20listeners%2C%20fostering%20**Storytelling%20Confidence**' })
+(loop_118_sink: BehaviorSink)
+(loop_118_start: BehaviorStart { loopId: 118, loopName: 'The%20Raspy%20Loop', given: 'Hoarse%2FGravelly%20Voice', when: 'speaking', then: 'the%20sound%20conveys%20%22Experience%2C%22%20%22Weariness%2C%22%20or%20%22Sex%20Appeal%22%20(The%20Novelty%20Operator)', result: 'high%20engagement%20from%20listeners%2C%20fostering%20**Storytelling%20Confidence**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20sound%20conveys%20%22Experience%2C%22%20%22Weariness%2C%22%20or%20%22Sex%20Appeal%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: "Notice%20when%20you're%20reacting%20to%20HOW%20something%20is%20said%20vs%20WHAT", intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations', intervention_leverage: 'Enter%20high-stakes%20situations%20with%20this%20signal%20active%20to%20establish%20presence.' })
+(loop_118_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_118_then_branch: BehaviorEmit { emission: 'then', text: 'the%20sound%20conveys%20%22Experience%2C%22%20%22Weariness%2C%22%20or%20%22Sex%20Appeal%22%20(The%20Novelty%20Operator)' })
+(loop_118_verdict: BehaviorVerdict { loopId: 118, loopName: 'The%20Raspy%20Loop', then: 'the%20sound%20conveys%20%22Experience%2C%22%20%22Weariness%2C%22%20or%20%22Sex%20Appeal%22%20(The%20Novelty%20Operator)', result: 'high%20engagement%20from%20listeners%2C%20fostering%20**Storytelling%20Confidence**', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20sound%20conveys%20%22Experience%2C%22%20%22Weariness%2C%22%20or%20%22Sex%20Appeal%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_118_when_gate: BehaviorAssess { stage: 'when', text: 'speaking' })
+
+// Topology
+(loop_118_start)-[:PROCESS]->(loop_118_given_gate)
+(loop_118_given_gate)-[:PROCESS { case: "ok" }]->(loop_118_when_gate)
+(loop_118_given_gate)-[:PROCESS { case: "err" }]->(loop_118_inactive)
+(loop_118_when_gate)-[:PROCESS { case: "ok" }]->(loop_118_context)
+(loop_118_when_gate)-[:PROCESS { case: "err" }]->(loop_118_inactive)
+(loop_118_context)-[:FORK { strategy: "behavior-branches" }]->(loop_118_context_branch | loop_118_then_branch | loop_118_operator_branch | loop_118_result_branch | loop_118_taxonomy_branch | loop_118_intervention_recognize | loop_118_intervention_interdict | loop_118_intervention_minimize | loop_118_intervention_leverage)
+(loop_118_context_branch | loop_118_then_branch | loop_118_operator_branch | loop_118_result_branch | loop_118_taxonomy_branch | loop_118_intervention_recognize | loop_118_intervention_interdict | loop_118_intervention_minimize | loop_118_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_118_verdict)
+(loop_118_inactive)-[:PROCESS]->(loop_118_sink)
+(loop_118_verdict)-[:PROCESS]->(loop_118_sink)
+(loop_118_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_118_then_branch)
+(loop_118_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_118_then_branch)
+(loop_118_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_118_then_branch)
+(loop_118_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_118_result_branch)

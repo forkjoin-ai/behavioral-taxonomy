@@ -1,0 +1,33 @@
+// behavioral-loop-651.gg
+// Executable Gnosis projection for The Death Grip Loop.
+
+// Nodes
+(loop_651_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_651_context_branch: BehaviorEmit { emission: 'context' })
+(loop_651_given_gate: BehaviorAssess { stage: 'given', text: 'Holding%20objects%20(steering%20wheel%2Fpen)%20with%20maximum%20force' })
+(loop_651_inactive: BehaviorTerminal { loopId: 651, loopName: 'The%20Death%20Grip%20Loop' })
+(loop_651_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_651_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_651_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_651_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Tension%20Operator', mechanism: 'knuckles%20are%20white' })
+(loop_651_result_branch: BehaviorEmit { emission: 'result', text: 'passengers%2Fpeers%20feeling%20%22Unsafe%22%20or%20stressed' })
+(loop_651_sink: BehaviorSink)
+(loop_651_start: BehaviorStart { loopId: 651, loopName: 'The%20Death%20Grip%20Loop', given: 'Holding%20objects%20(steering%20wheel%2Fpen)%20with%20maximum%20force', when: 'observed', then: 'knuckles%20are%20white%20(The%20Tension%20Operator)', result: 'passengers%2Fpeers%20feeling%20%22Unsafe%22%20or%20stressed', operatorName: 'The%20Tension%20Operator', operatorMechanism: 'knuckles%20are%20white', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_651_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_651_then_branch: BehaviorEmit { emission: 'then', text: 'knuckles%20are%20white%20(The%20Tension%20Operator)' })
+(loop_651_verdict: BehaviorVerdict { loopId: 651, loopName: 'The%20Death%20Grip%20Loop', then: 'knuckles%20are%20white%20(The%20Tension%20Operator)', result: 'passengers%2Fpeers%20feeling%20%22Unsafe%22%20or%20stressed', operatorName: 'The%20Tension%20Operator', operatorMechanism: 'knuckles%20are%20white', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_651_when_gate: BehaviorAssess { stage: 'when', text: 'observed' })
+
+// Topology
+(loop_651_start)-[:PROCESS]->(loop_651_given_gate)
+(loop_651_given_gate)-[:PROCESS { case: "ok" }]->(loop_651_when_gate)
+(loop_651_given_gate)-[:PROCESS { case: "err" }]->(loop_651_inactive)
+(loop_651_when_gate)-[:PROCESS { case: "ok" }]->(loop_651_context)
+(loop_651_when_gate)-[:PROCESS { case: "err" }]->(loop_651_inactive)
+(loop_651_context)-[:FORK { strategy: "behavior-branches" }]->(loop_651_context_branch | loop_651_then_branch | loop_651_operator_branch | loop_651_result_branch | loop_651_taxonomy_branch | loop_651_intervention_recognize | loop_651_intervention_interdict | loop_651_intervention_minimize)
+(loop_651_context_branch | loop_651_then_branch | loop_651_operator_branch | loop_651_result_branch | loop_651_taxonomy_branch | loop_651_intervention_recognize | loop_651_intervention_interdict | loop_651_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_651_verdict)
+(loop_651_inactive)-[:PROCESS]->(loop_651_sink)
+(loop_651_verdict)-[:PROCESS]->(loop_651_sink)
+(loop_651_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_651_then_branch)
+(loop_651_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_651_then_branch)
+(loop_651_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_651_then_branch)

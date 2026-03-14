@@ -1,0 +1,33 @@
+// behavioral-loop-332.gg
+// Executable Gnosis projection for The Staring Contest Loop.
+
+// Nodes
+(loop_332_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_332_context_branch: BehaviorEmit { emission: 'context' })
+(loop_332_given_gate: BehaviorAssess { stage: 'given', text: 'Refusal%20to%20break%20eye%20contact%20first' })
+(loop_332_inactive: BehaviorTerminal { loopId: 332, loopName: 'The%20Staring%20Contest%20Loop' })
+(loop_332_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_332_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_332_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_332_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Alpha%20Operator', mechanism: 'the%20interaction%20becomes%20a%20%22Willpower%20Battle%22' })
+(loop_332_result_branch: BehaviorEmit { emission: 'result', text: 'the%20loser%20submitting%2C%20establishing%20a%20clear%20**Hierarchy**' })
+(loop_332_sink: BehaviorSink)
+(loop_332_start: BehaviorStart { loopId: 332, loopName: 'The%20Staring%20Contest%20Loop', given: 'Refusal%20to%20break%20eye%20contact%20first', when: 'challenged', then: 'the%20interaction%20becomes%20a%20%22Willpower%20Battle%22%20(The%20Alpha%20Operator)', result: 'the%20loser%20submitting%2C%20establishing%20a%20clear%20**Hierarchy**', operatorName: 'The%20Alpha%20Operator', operatorMechanism: 'the%20interaction%20becomes%20a%20%22Willpower%20Battle%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_332_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_332_then_branch: BehaviorEmit { emission: 'then', text: 'the%20interaction%20becomes%20a%20%22Willpower%20Battle%22%20(The%20Alpha%20Operator)' })
+(loop_332_verdict: BehaviorVerdict { loopId: 332, loopName: 'The%20Staring%20Contest%20Loop', then: 'the%20interaction%20becomes%20a%20%22Willpower%20Battle%22%20(The%20Alpha%20Operator)', result: 'the%20loser%20submitting%2C%20establishing%20a%20clear%20**Hierarchy**', operatorName: 'The%20Alpha%20Operator', operatorMechanism: 'the%20interaction%20becomes%20a%20%22Willpower%20Battle%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_332_when_gate: BehaviorAssess { stage: 'when', text: 'challenged' })
+
+// Topology
+(loop_332_start)-[:PROCESS]->(loop_332_given_gate)
+(loop_332_given_gate)-[:PROCESS { case: "ok" }]->(loop_332_when_gate)
+(loop_332_given_gate)-[:PROCESS { case: "err" }]->(loop_332_inactive)
+(loop_332_when_gate)-[:PROCESS { case: "ok" }]->(loop_332_context)
+(loop_332_when_gate)-[:PROCESS { case: "err" }]->(loop_332_inactive)
+(loop_332_context)-[:FORK { strategy: "behavior-branches" }]->(loop_332_context_branch | loop_332_then_branch | loop_332_operator_branch | loop_332_result_branch | loop_332_taxonomy_branch | loop_332_intervention_recognize | loop_332_intervention_interdict | loop_332_intervention_minimize)
+(loop_332_context_branch | loop_332_then_branch | loop_332_operator_branch | loop_332_result_branch | loop_332_taxonomy_branch | loop_332_intervention_recognize | loop_332_intervention_interdict | loop_332_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_332_verdict)
+(loop_332_inactive)-[:PROCESS]->(loop_332_sink)
+(loop_332_verdict)-[:PROCESS]->(loop_332_sink)
+(loop_332_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_332_then_branch)
+(loop_332_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_332_then_branch)
+(loop_332_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_332_then_branch)

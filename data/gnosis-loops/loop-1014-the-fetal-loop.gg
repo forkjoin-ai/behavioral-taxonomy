@@ -1,0 +1,33 @@
+// behavioral-loop-1014.gg
+// Executable Gnosis projection for The Fetal Loop.
+
+// Nodes
+(loop_1014_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1014_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1014_given_gate: BehaviorAssess { stage: 'given', text: 'Curling%20knees%20to%20chest' })
+(loop_1014_inactive: BehaviorTerminal { loopId: 1014, loopName: 'The%20Fetal%20Loop' })
+(loop_1014_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1014_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1014_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1014_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Seed%20Operator', mechanism: 'the%20body%20occupies%20the%20smallest%20volume%20possible' })
+(loop_1014_result_branch: BehaviorEmit { emission: 'result', text: 'signaling%20%22I%20am%20not%20a%20threat%22%20or%20%22I%20am%20cold%2Flonely.%22' })
+(loop_1014_sink: BehaviorSink)
+(loop_1014_start: BehaviorStart { loopId: 1014, loopName: 'The%20Fetal%20Loop', given: 'Curling%20knees%20to%20chest', when: 'sitting%20on%20a%20chair%2Fcouch', then: 'the%20body%20occupies%20the%20smallest%20volume%20possible%20(The%20Seed%20Operator)', result: 'signaling%20%22I%20am%20not%20a%20threat%22%20or%20%22I%20am%20cold%2Flonely.%22', operatorName: 'The%20Seed%20Operator', operatorMechanism: 'the%20body%20occupies%20the%20smallest%20volume%20possible', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1014_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1014_then_branch: BehaviorEmit { emission: 'then', text: 'the%20body%20occupies%20the%20smallest%20volume%20possible%20(The%20Seed%20Operator)' })
+(loop_1014_verdict: BehaviorVerdict { loopId: 1014, loopName: 'The%20Fetal%20Loop', then: 'the%20body%20occupies%20the%20smallest%20volume%20possible%20(The%20Seed%20Operator)', result: 'signaling%20%22I%20am%20not%20a%20threat%22%20or%20%22I%20am%20cold%2Flonely.%22', operatorName: 'The%20Seed%20Operator', operatorMechanism: 'the%20body%20occupies%20the%20smallest%20volume%20possible', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1014_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20on%20a%20chair%2Fcouch' })
+
+// Topology
+(loop_1014_start)-[:PROCESS]->(loop_1014_given_gate)
+(loop_1014_given_gate)-[:PROCESS { case: "ok" }]->(loop_1014_when_gate)
+(loop_1014_given_gate)-[:PROCESS { case: "err" }]->(loop_1014_inactive)
+(loop_1014_when_gate)-[:PROCESS { case: "ok" }]->(loop_1014_context)
+(loop_1014_when_gate)-[:PROCESS { case: "err" }]->(loop_1014_inactive)
+(loop_1014_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1014_context_branch | loop_1014_then_branch | loop_1014_operator_branch | loop_1014_result_branch | loop_1014_taxonomy_branch | loop_1014_intervention_recognize | loop_1014_intervention_interdict | loop_1014_intervention_minimize)
+(loop_1014_context_branch | loop_1014_then_branch | loop_1014_operator_branch | loop_1014_result_branch | loop_1014_taxonomy_branch | loop_1014_intervention_recognize | loop_1014_intervention_interdict | loop_1014_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1014_verdict)
+(loop_1014_inactive)-[:PROCESS]->(loop_1014_sink)
+(loop_1014_verdict)-[:PROCESS]->(loop_1014_sink)
+(loop_1014_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1014_then_branch)
+(loop_1014_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1014_then_branch)
+(loop_1014_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1014_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-402.gg
+// Executable Gnosis projection for The Tooth Gap Loop.
+
+// Nodes
+(loop_402_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_402_context_branch: BehaviorEmit { emission: 'context' })
+(loop_402_given_gate: BehaviorAssess { stage: 'given', text: 'Space%20between%20front%20incisors' })
+(loop_402_inactive: BehaviorTerminal { loopId: 402, loopName: 'The%20Tooth%20Gap%20Loop' })
+(loop_402_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Create%20transition%20rituals%20between%20contexts' })
+(loop_402_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_402_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20who%20moves%20toward%2Faway%20from%20whom' })
+(loop_402_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Madonna%2FModel%20Operator', mechanism: 'it%20signals%20%22Whimsy%2C%22%20%22Luck%2C%22%20or%20%22Nature%22' })
+(loop_402_result_branch: BehaviorEmit { emission: 'result', text: 'a%20memorable%2C%20iconic%20look%20that%20aids%20in%20**Personal%20Branding**' })
+(loop_402_sink: BehaviorSink)
+(loop_402_start: BehaviorStart { loopId: 402, loopName: 'The%20Tooth%20Gap%20Loop', given: 'Space%20between%20front%20incisors', when: 'smiling', then: 'it%20signals%20%22Whimsy%2C%22%20%22Luck%2C%22%20or%20%22Nature%22%20(The%20Madonna%2FModel%20Operator)', result: 'a%20memorable%2C%20iconic%20look%20that%20aids%20in%20**Personal%20Branding**', operatorName: 'The%20Madonna%2FModel%20Operator', operatorMechanism: 'it%20signals%20%22Whimsy%2C%22%20%22Luck%2C%22%20or%20%22Nature%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Pay%20attention%20to%20who%20moves%20toward%2Faway%20from%20whom', intervention_interdict: 'Create%20transition%20rituals%20between%20contexts', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_402_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_402_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Whimsy%2C%22%20%22Luck%2C%22%20or%20%22Nature%22%20(The%20Madonna%2FModel%20Operator)' })
+(loop_402_verdict: BehaviorVerdict { loopId: 402, loopName: 'The%20Tooth%20Gap%20Loop', then: 'it%20signals%20%22Whimsy%2C%22%20%22Luck%2C%22%20or%20%22Nature%22%20(The%20Madonna%2FModel%20Operator)', result: 'a%20memorable%2C%20iconic%20look%20that%20aids%20in%20**Personal%20Branding**', operatorName: 'The%20Madonna%2FModel%20Operator', operatorMechanism: 'it%20signals%20%22Whimsy%2C%22%20%22Luck%2C%22%20or%20%22Nature%22', origin: 'ENVIRONMENTAL', modality: 'PROXEMIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_402_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_402_start)-[:PROCESS]->(loop_402_given_gate)
+(loop_402_given_gate)-[:PROCESS { case: "ok" }]->(loop_402_when_gate)
+(loop_402_given_gate)-[:PROCESS { case: "err" }]->(loop_402_inactive)
+(loop_402_when_gate)-[:PROCESS { case: "ok" }]->(loop_402_context)
+(loop_402_when_gate)-[:PROCESS { case: "err" }]->(loop_402_inactive)
+(loop_402_context)-[:FORK { strategy: "behavior-branches" }]->(loop_402_context_branch | loop_402_then_branch | loop_402_operator_branch | loop_402_result_branch | loop_402_taxonomy_branch | loop_402_intervention_recognize | loop_402_intervention_interdict | loop_402_intervention_minimize)
+(loop_402_context_branch | loop_402_then_branch | loop_402_operator_branch | loop_402_result_branch | loop_402_taxonomy_branch | loop_402_intervention_recognize | loop_402_intervention_interdict | loop_402_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_402_verdict)
+(loop_402_inactive)-[:PROCESS]->(loop_402_sink)
+(loop_402_verdict)-[:PROCESS]->(loop_402_sink)
+(loop_402_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_402_then_branch)
+(loop_402_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_402_then_branch)
+(loop_402_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_402_then_branch)

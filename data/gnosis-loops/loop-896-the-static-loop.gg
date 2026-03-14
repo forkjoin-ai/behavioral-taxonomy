@@ -1,0 +1,33 @@
+// behavioral-loop-896.gg
+// Executable Gnosis projection for The Static Loop.
+
+// Nodes
+(loop_896_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_896_context_branch: BehaviorEmit { emission: 'context' })
+(loop_896_given_gate: BehaviorAssess { stage: 'given', text: 'Fine%20hair%20standing%20up%20due%20to%20electricity' })
+(loop_896_inactive: BehaviorTerminal { loopId: 896, loopName: 'The%20Static%20Loop' })
+(loop_896_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_896_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_896_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_896_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Einstein%20Operator', mechanism: 'the%20hair%20goes%20wild' })
+(loop_896_result_branch: BehaviorEmit { emission: 'result', text: 'a%20%22Mad%20Scientist%22%20or%20%22Messy%22%20aesthetic' })
+(loop_896_sink: BehaviorSink)
+(loop_896_start: BehaviorStart { loopId: 896, loopName: 'The%20Static%20Loop', given: 'Fine%20hair%20standing%20up%20due%20to%20electricity', when: 'taking%20off%20a%20coat', then: 'the%20hair%20goes%20wild%20(The%20Einstein%20Operator)', result: 'a%20%22Mad%20Scientist%22%20or%20%22Messy%22%20aesthetic', operatorName: 'The%20Einstein%20Operator', operatorMechanism: 'the%20hair%20goes%20wild', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_896_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_896_then_branch: BehaviorEmit { emission: 'then', text: 'the%20hair%20goes%20wild%20(The%20Einstein%20Operator)' })
+(loop_896_verdict: BehaviorVerdict { loopId: 896, loopName: 'The%20Static%20Loop', then: 'the%20hair%20goes%20wild%20(The%20Einstein%20Operator)', result: 'a%20%22Mad%20Scientist%22%20or%20%22Messy%22%20aesthetic', operatorName: 'The%20Einstein%20Operator', operatorMechanism: 'the%20hair%20goes%20wild', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_896_when_gate: BehaviorAssess { stage: 'when', text: 'taking%20off%20a%20coat' })
+
+// Topology
+(loop_896_start)-[:PROCESS]->(loop_896_given_gate)
+(loop_896_given_gate)-[:PROCESS { case: "ok" }]->(loop_896_when_gate)
+(loop_896_given_gate)-[:PROCESS { case: "err" }]->(loop_896_inactive)
+(loop_896_when_gate)-[:PROCESS { case: "ok" }]->(loop_896_context)
+(loop_896_when_gate)-[:PROCESS { case: "err" }]->(loop_896_inactive)
+(loop_896_context)-[:FORK { strategy: "behavior-branches" }]->(loop_896_context_branch | loop_896_then_branch | loop_896_operator_branch | loop_896_result_branch | loop_896_taxonomy_branch | loop_896_intervention_recognize | loop_896_intervention_interdict | loop_896_intervention_minimize)
+(loop_896_context_branch | loop_896_then_branch | loop_896_operator_branch | loop_896_result_branch | loop_896_taxonomy_branch | loop_896_intervention_recognize | loop_896_intervention_interdict | loop_896_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_896_verdict)
+(loop_896_inactive)-[:PROCESS]->(loop_896_sink)
+(loop_896_verdict)-[:PROCESS]->(loop_896_sink)
+(loop_896_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_896_then_branch)
+(loop_896_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_896_then_branch)
+(loop_896_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_896_then_branch)

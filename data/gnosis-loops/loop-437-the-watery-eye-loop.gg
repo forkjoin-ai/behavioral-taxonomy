@@ -1,0 +1,33 @@
+// behavioral-loop-437.gg
+// Executable Gnosis projection for The Watery Eye Loop.
+
+// Nodes
+(loop_437_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_437_context_branch: BehaviorEmit { emission: 'context' })
+(loop_437_given_gate: BehaviorAssess { stage: 'given', text: 'Blocked%20tear%20ducts%20or%20allergy' })
+(loop_437_inactive: BehaviorTerminal { loopId: 437, loopName: 'The%20Watery%20Eye%20Loop' })
+(loop_437_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_437_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_437_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_437_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Fragility%20Operator', mechanism: 'the%20eyes%20look%20like%20they%20are%20%22About%20to%20Cry%22' })
+(loop_437_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20moderating%20their%20tone%2C%20afraid%20of%20causing%20a%20breakdown' })
+(loop_437_sink: BehaviorSink)
+(loop_437_start: BehaviorStart { loopId: 437, loopName: 'The%20Watery%20Eye%20Loop', given: 'Blocked%20tear%20ducts%20or%20allergy', when: 'speaking%20normally', then: 'the%20eyes%20look%20like%20they%20are%20%22About%20to%20Cry%22%20(The%20Fragility%20Operator)', result: 'peers%20moderating%20their%20tone%2C%20afraid%20of%20causing%20a%20breakdown', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20eyes%20look%20like%20they%20are%20%22About%20to%20Cry%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_437_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_437_then_branch: BehaviorEmit { emission: 'then', text: 'the%20eyes%20look%20like%20they%20are%20%22About%20to%20Cry%22%20(The%20Fragility%20Operator)' })
+(loop_437_verdict: BehaviorVerdict { loopId: 437, loopName: 'The%20Watery%20Eye%20Loop', then: 'the%20eyes%20look%20like%20they%20are%20%22About%20to%20Cry%22%20(The%20Fragility%20Operator)', result: 'peers%20moderating%20their%20tone%2C%20afraid%20of%20causing%20a%20breakdown', operatorName: 'The%20Fragility%20Operator', operatorMechanism: 'the%20eyes%20look%20like%20they%20are%20%22About%20to%20Cry%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_437_when_gate: BehaviorAssess { stage: 'when', text: 'speaking%20normally' })
+
+// Topology
+(loop_437_start)-[:PROCESS]->(loop_437_given_gate)
+(loop_437_given_gate)-[:PROCESS { case: "ok" }]->(loop_437_when_gate)
+(loop_437_given_gate)-[:PROCESS { case: "err" }]->(loop_437_inactive)
+(loop_437_when_gate)-[:PROCESS { case: "ok" }]->(loop_437_context)
+(loop_437_when_gate)-[:PROCESS { case: "err" }]->(loop_437_inactive)
+(loop_437_context)-[:FORK { strategy: "behavior-branches" }]->(loop_437_context_branch | loop_437_then_branch | loop_437_operator_branch | loop_437_result_branch | loop_437_taxonomy_branch | loop_437_intervention_recognize | loop_437_intervention_interdict | loop_437_intervention_minimize)
+(loop_437_context_branch | loop_437_then_branch | loop_437_operator_branch | loop_437_result_branch | loop_437_taxonomy_branch | loop_437_intervention_recognize | loop_437_intervention_interdict | loop_437_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_437_verdict)
+(loop_437_inactive)-[:PROCESS]->(loop_437_sink)
+(loop_437_verdict)-[:PROCESS]->(loop_437_sink)
+(loop_437_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_437_then_branch)
+(loop_437_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_437_then_branch)
+(loop_437_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_437_then_branch)

@@ -1,0 +1,31 @@
+// behavioral-loop-251.gg
+// Executable Gnosis projection for The Bird Loop.
+
+// Nodes
+(loop_251_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_251_context_branch: BehaviorEmit { emission: 'context' })
+(loop_251_given_gate: BehaviorAssess { stage: 'given', text: 'Excessive%20cervical%20length' })
+(loop_251_inactive: BehaviorTerminal { loopId: 251, loopName: 'The%20Bird%20Loop' })
+(loop_251_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_251_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_251_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'the%20movement%20looks%20%22Inquisitive%22%20or%20%22Quirky%22' })
+(loop_251_result_branch: BehaviorEmit { emission: 'result', text: 'being%20treated%20as%20a%20whimsical%20character%20rather%20than%20a%20serious%20authority' })
+(loop_251_sink: BehaviorSink)
+(loop_251_start: BehaviorStart { loopId: 251, loopName: 'The%20Bird%20Loop', given: 'Excessive%20cervical%20length', when: 'looking%20around', then: 'the%20movement%20looks%20%22Inquisitive%22%20or%20%22Quirky%22%20(The%20Novelty%20Operator)', result: 'being%20treated%20as%20a%20whimsical%20character%20rather%20than%20a%20serious%20authority', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20movement%20looks%20%22Inquisitive%22%20or%20%22Quirky%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_251_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_251_then_branch: BehaviorEmit { emission: 'then', text: 'the%20movement%20looks%20%22Inquisitive%22%20or%20%22Quirky%22%20(The%20Novelty%20Operator)' })
+(loop_251_verdict: BehaviorVerdict { loopId: 251, loopName: 'The%20Bird%20Loop', then: 'the%20movement%20looks%20%22Inquisitive%22%20or%20%22Quirky%22%20(The%20Novelty%20Operator)', result: 'being%20treated%20as%20a%20whimsical%20character%20rather%20than%20a%20serious%20authority', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'the%20movement%20looks%20%22Inquisitive%22%20or%20%22Quirky%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_251_when_gate: BehaviorAssess { stage: 'when', text: 'looking%20around' })
+
+// Topology
+(loop_251_start)-[:PROCESS]->(loop_251_given_gate)
+(loop_251_given_gate)-[:PROCESS { case: "ok" }]->(loop_251_when_gate)
+(loop_251_given_gate)-[:PROCESS { case: "err" }]->(loop_251_inactive)
+(loop_251_when_gate)-[:PROCESS { case: "ok" }]->(loop_251_context)
+(loop_251_when_gate)-[:PROCESS { case: "err" }]->(loop_251_inactive)
+(loop_251_context)-[:FORK { strategy: "behavior-branches" }]->(loop_251_context_branch | loop_251_then_branch | loop_251_operator_branch | loop_251_result_branch | loop_251_taxonomy_branch | loop_251_intervention_recognize | loop_251_intervention_leverage)
+(loop_251_context_branch | loop_251_then_branch | loop_251_operator_branch | loop_251_result_branch | loop_251_taxonomy_branch | loop_251_intervention_recognize | loop_251_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_251_verdict)
+(loop_251_inactive)-[:PROCESS]->(loop_251_sink)
+(loop_251_verdict)-[:PROCESS]->(loop_251_sink)
+(loop_251_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_251_then_branch)
+(loop_251_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_251_result_branch)

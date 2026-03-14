@@ -1,0 +1,33 @@
+// behavioral-loop-1080.gg
+// Executable Gnosis projection for The Main Character Loop.
+
+// Nodes
+(loop_1080_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1080_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1080_given_gate: BehaviorAssess { stage: 'given', text: "Only%20having%20access%20to%20one's%20own%20consciousness" })
+(loop_1080_inactive: BehaviorTerminal { loopId: 1080, loopName: 'The%20Main%20Character%20Loop' })
+(loop_1080_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_1080_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1080_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1080_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: "it%20is%20viewed%20as%20a%20%22Plot%20Point%22%20in%20one's%20own%20story%20(The%20Narrative%20Absorption)" })
+(loop_1080_result_branch: BehaviorEmit { emission: 'result', text: 'tragedy%20becoming%20content' })
+(loop_1080_sink: BehaviorSink)
+(loop_1080_start: BehaviorStart { loopId: 1080, loopName: 'The%20Main%20Character%20Loop', given: "Only%20having%20access%20to%20one's%20own%20consciousness", when: 'a%20tragedy%20happens%20to%20someone%20else', then: "it%20is%20viewed%20as%20a%20%22Plot%20Point%22%20in%20one's%20own%20story%20(The%20Narrative%20Absorption)", result: 'tragedy%20becoming%20content', operatorName: 'Unknown%20Operator', operatorMechanism: "it%20is%20viewed%20as%20a%20%22Plot%20Point%22%20in%20one's%20own%20story%20(The%20Narrative%20Absorption)", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_1080_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1080_then_branch: BehaviorEmit { emission: 'then', text: "it%20is%20viewed%20as%20a%20%22Plot%20Point%22%20in%20one's%20own%20story%20(The%20Narrative%20Absorption)" })
+(loop_1080_verdict: BehaviorVerdict { loopId: 1080, loopName: 'The%20Main%20Character%20Loop', then: "it%20is%20viewed%20as%20a%20%22Plot%20Point%22%20in%20one's%20own%20story%20(The%20Narrative%20Absorption)", result: 'tragedy%20becoming%20content', operatorName: 'Unknown%20Operator', operatorMechanism: "it%20is%20viewed%20as%20a%20%22Plot%20Point%22%20in%20one's%20own%20story%20(The%20Narrative%20Absorption)", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1080_when_gate: BehaviorAssess { stage: 'when', text: 'a%20tragedy%20happens%20to%20someone%20else' })
+
+// Topology
+(loop_1080_start)-[:PROCESS]->(loop_1080_given_gate)
+(loop_1080_given_gate)-[:PROCESS { case: "ok" }]->(loop_1080_when_gate)
+(loop_1080_given_gate)-[:PROCESS { case: "err" }]->(loop_1080_inactive)
+(loop_1080_when_gate)-[:PROCESS { case: "ok" }]->(loop_1080_context)
+(loop_1080_when_gate)-[:PROCESS { case: "err" }]->(loop_1080_inactive)
+(loop_1080_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1080_context_branch | loop_1080_then_branch | loop_1080_operator_branch | loop_1080_result_branch | loop_1080_taxonomy_branch | loop_1080_intervention_recognize | loop_1080_intervention_interdict | loop_1080_intervention_minimize)
+(loop_1080_context_branch | loop_1080_then_branch | loop_1080_operator_branch | loop_1080_result_branch | loop_1080_taxonomy_branch | loop_1080_intervention_recognize | loop_1080_intervention_interdict | loop_1080_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1080_verdict)
+(loop_1080_inactive)-[:PROCESS]->(loop_1080_sink)
+(loop_1080_verdict)-[:PROCESS]->(loop_1080_sink)
+(loop_1080_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1080_then_branch)
+(loop_1080_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1080_then_branch)
+(loop_1080_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1080_then_branch)

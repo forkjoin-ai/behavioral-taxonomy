@@ -1,0 +1,33 @@
+// behavioral-loop-602.gg
+// Executable Gnosis projection for The Bar Fly Loop.
+
+// Nodes
+(loop_602_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_602_context_branch: BehaviorEmit { emission: 'context' })
+(loop_602_given_gate: BehaviorAssess { stage: 'given', text: 'Smell%20of%20metabolized%20alcohol' })
+(loop_602_inactive: BehaviorTerminal { loopId: 602, loopName: 'The%20Bar%20Fly%20Loop' })
+(loop_602_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_602_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_602_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20scent-triggered%20emotional%20responses' })
+(loop_602_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Liability%20Operator', mechanism: 'immediate%20loss%20of%20job%20security' })
+(loop_602_result_branch: BehaviorEmit { emission: 'result', text: 'being%20monitored%2Fdrug%20tested' })
+(loop_602_sink: BehaviorSink)
+(loop_602_start: BehaviorStart { loopId: 602, loopName: 'The%20Bar%20Fly%20Loop', given: 'Smell%20of%20metabolized%20alcohol', when: 'at%20work', then: 'immediate%20loss%20of%20job%20security%20(The%20Liability%20Operator)', result: 'being%20monitored%2Fdrug%20tested', operatorName: 'The%20Liability%20Operator', operatorMechanism: 'immediate%20loss%20of%20job%20security', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Be%20aware%20of%20scent-triggered%20emotional%20responses', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_602_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_602_then_branch: BehaviorEmit { emission: 'then', text: 'immediate%20loss%20of%20job%20security%20(The%20Liability%20Operator)' })
+(loop_602_verdict: BehaviorVerdict { loopId: 602, loopName: 'The%20Bar%20Fly%20Loop', then: 'immediate%20loss%20of%20job%20security%20(The%20Liability%20Operator)', result: 'being%20monitored%2Fdrug%20tested', operatorName: 'The%20Liability%20Operator', operatorMechanism: 'immediate%20loss%20of%20job%20security', origin: 'BEHAVIORAL', modality: 'OLFACTORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_602_when_gate: BehaviorAssess { stage: 'when', text: 'at%20work' })
+
+// Topology
+(loop_602_start)-[:PROCESS]->(loop_602_given_gate)
+(loop_602_given_gate)-[:PROCESS { case: "ok" }]->(loop_602_when_gate)
+(loop_602_given_gate)-[:PROCESS { case: "err" }]->(loop_602_inactive)
+(loop_602_when_gate)-[:PROCESS { case: "ok" }]->(loop_602_context)
+(loop_602_when_gate)-[:PROCESS { case: "err" }]->(loop_602_inactive)
+(loop_602_context)-[:FORK { strategy: "behavior-branches" }]->(loop_602_context_branch | loop_602_then_branch | loop_602_operator_branch | loop_602_result_branch | loop_602_taxonomy_branch | loop_602_intervention_recognize | loop_602_intervention_interdict | loop_602_intervention_minimize)
+(loop_602_context_branch | loop_602_then_branch | loop_602_operator_branch | loop_602_result_branch | loop_602_taxonomy_branch | loop_602_intervention_recognize | loop_602_intervention_interdict | loop_602_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_602_verdict)
+(loop_602_inactive)-[:PROCESS]->(loop_602_sink)
+(loop_602_verdict)-[:PROCESS]->(loop_602_sink)
+(loop_602_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_602_then_branch)
+(loop_602_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_602_then_branch)
+(loop_602_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_602_then_branch)

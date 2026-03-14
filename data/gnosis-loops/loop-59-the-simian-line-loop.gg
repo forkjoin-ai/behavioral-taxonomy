@@ -1,0 +1,33 @@
+// behavioral-loop-59.gg
+// Executable Gnosis projection for The Simian Line Loop.
+
+// Nodes
+(loop_59_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_59_context_branch: BehaviorEmit { emission: 'context' })
+(loop_59_given_gate: BehaviorAssess { stage: 'given', text: 'distinct%20hand%20marking' })
+(loop_59_inactive: BehaviorTerminal { loopId: 59, loopName: 'The%20Simian%20Line%20Loop' })
+(loop_59_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_59_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_59_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20touch%20aversion%20or%20seeking%20behaviors' })
+(loop_59_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%20Operator', mechanism: 'distinctiveness%20is%20noted' })
+(loop_59_result_branch: BehaviorEmit { emission: 'result', text: 'a%20sense%20of%20being%20%22Marked%20for%20Fate.%22' })
+(loop_59_sink: BehaviorSink)
+(loop_59_start: BehaviorStart { loopId: 59, loopName: 'The%20Simian%20Line%20Loop', given: 'distinct%20hand%20marking', when: 'palm%20reading%20or%20hand%20examination%20occurs', then: 'distinctiveness%20is%20noted%20(The%20Novelty%20Operator)', result: 'a%20sense%20of%20being%20%22Marked%20for%20Fate.%22', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'distinctiveness%20is%20noted', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20touch%20aversion%20or%20seeking%20behaviors', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_59_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_59_then_branch: BehaviorEmit { emission: 'then', text: 'distinctiveness%20is%20noted%20(The%20Novelty%20Operator)' })
+(loop_59_verdict: BehaviorVerdict { loopId: 59, loopName: 'The%20Simian%20Line%20Loop', then: 'distinctiveness%20is%20noted%20(The%20Novelty%20Operator)', result: 'a%20sense%20of%20being%20%22Marked%20for%20Fate.%22', operatorName: 'The%20Novelty%20Operator', operatorMechanism: 'distinctiveness%20is%20noted', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_59_when_gate: BehaviorAssess { stage: 'when', text: 'palm%20reading%20or%20hand%20examination%20occurs' })
+
+// Topology
+(loop_59_start)-[:PROCESS]->(loop_59_given_gate)
+(loop_59_given_gate)-[:PROCESS { case: "ok" }]->(loop_59_when_gate)
+(loop_59_given_gate)-[:PROCESS { case: "err" }]->(loop_59_inactive)
+(loop_59_when_gate)-[:PROCESS { case: "ok" }]->(loop_59_context)
+(loop_59_when_gate)-[:PROCESS { case: "err" }]->(loop_59_inactive)
+(loop_59_context)-[:FORK { strategy: "behavior-branches" }]->(loop_59_context_branch | loop_59_then_branch | loop_59_operator_branch | loop_59_result_branch | loop_59_taxonomy_branch | loop_59_intervention_recognize | loop_59_intervention_interdict | loop_59_intervention_minimize)
+(loop_59_context_branch | loop_59_then_branch | loop_59_operator_branch | loop_59_result_branch | loop_59_taxonomy_branch | loop_59_intervention_recognize | loop_59_intervention_interdict | loop_59_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_59_verdict)
+(loop_59_inactive)-[:PROCESS]->(loop_59_sink)
+(loop_59_verdict)-[:PROCESS]->(loop_59_sink)
+(loop_59_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_59_then_branch)
+(loop_59_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_59_then_branch)
+(loop_59_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_59_then_branch)

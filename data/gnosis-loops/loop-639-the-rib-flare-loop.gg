@@ -1,0 +1,33 @@
+// behavioral-loop-639.gg
+// Executable Gnosis projection for The Rib Flare Loop.
+
+// Nodes
+(loop_639_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_639_context_branch: BehaviorEmit { emission: 'context' })
+(loop_639_given_gate: BehaviorAssess { stage: 'given', text: 'Lower%20ribs%20protruding%20forward' })
+(loop_639_inactive: BehaviorTerminal { loopId: 639, loopName: 'The%20Rib%20Flare%20Loop' })
+(loop_639_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_639_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_639_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_639_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Cage%20Operator', mechanism: 'the%20torso%20looks%20%22Disjointed%22' })
+(loop_639_result_branch: BehaviorEmit { emission: 'result', text: 'aesthetic%20disruption%20of%20the%20%22V-taper.%22' })
+(loop_639_sink: BehaviorSink)
+(loop_639_start: BehaviorStart { loopId: 639, loopName: 'The%20Rib%20Flare%20Loop', given: 'Lower%20ribs%20protruding%20forward', when: 'lying%20down%20or%20standing', then: 'the%20torso%20looks%20%22Disjointed%22%20(The%20Cage%20Operator)', result: 'aesthetic%20disruption%20of%20the%20%22V-taper.%22', operatorName: 'The%20Cage%20Operator', operatorMechanism: 'the%20torso%20looks%20%22Disjointed%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_639_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_639_then_branch: BehaviorEmit { emission: 'then', text: 'the%20torso%20looks%20%22Disjointed%22%20(The%20Cage%20Operator)' })
+(loop_639_verdict: BehaviorVerdict { loopId: 639, loopName: 'The%20Rib%20Flare%20Loop', then: 'the%20torso%20looks%20%22Disjointed%22%20(The%20Cage%20Operator)', result: 'aesthetic%20disruption%20of%20the%20%22V-taper.%22', operatorName: 'The%20Cage%20Operator', operatorMechanism: 'the%20torso%20looks%20%22Disjointed%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DISRUPTION' })
+(loop_639_when_gate: BehaviorAssess { stage: 'when', text: 'lying%20down%20or%20standing' })
+
+// Topology
+(loop_639_start)-[:PROCESS]->(loop_639_given_gate)
+(loop_639_given_gate)-[:PROCESS { case: "ok" }]->(loop_639_when_gate)
+(loop_639_given_gate)-[:PROCESS { case: "err" }]->(loop_639_inactive)
+(loop_639_when_gate)-[:PROCESS { case: "ok" }]->(loop_639_context)
+(loop_639_when_gate)-[:PROCESS { case: "err" }]->(loop_639_inactive)
+(loop_639_context)-[:FORK { strategy: "behavior-branches" }]->(loop_639_context_branch | loop_639_then_branch | loop_639_operator_branch | loop_639_result_branch | loop_639_taxonomy_branch | loop_639_intervention_recognize | loop_639_intervention_interdict | loop_639_intervention_minimize)
+(loop_639_context_branch | loop_639_then_branch | loop_639_operator_branch | loop_639_result_branch | loop_639_taxonomy_branch | loop_639_intervention_recognize | loop_639_intervention_interdict | loop_639_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_639_verdict)
+(loop_639_inactive)-[:PROCESS]->(loop_639_sink)
+(loop_639_verdict)-[:PROCESS]->(loop_639_sink)
+(loop_639_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_639_then_branch)
+(loop_639_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_639_then_branch)
+(loop_639_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_639_then_branch)

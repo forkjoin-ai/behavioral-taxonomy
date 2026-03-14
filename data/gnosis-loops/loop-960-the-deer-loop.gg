@@ -1,0 +1,33 @@
+// behavioral-loop-960.gg
+// Executable Gnosis projection for The Deer Loop.
+
+// Nodes
+(loop_960_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_960_context_branch: BehaviorEmit { emission: 'context' })
+(loop_960_given_gate: BehaviorAssess { stage: 'given', text: 'High%20upper%20eyelids%20showing%20white' })
+(loop_960_inactive: BehaviorTerminal { loopId: 960, loopName: 'The%20Deer%20Loop' })
+(loop_960_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_960_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_960_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_960_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Headlights%20Operator', mechanism: 'it%20looks%20like%20%22Terror%22%20or%20%22Surprise%22' })
+(loop_960_result_branch: BehaviorEmit { emission: 'result', text: 'being%20treated%20as%20fragile%20or%20easily%20startled' })
+(loop_960_sink: BehaviorSink)
+(loop_960_start: BehaviorStart { loopId: 960, loopName: 'The%20Deer%20Loop', given: 'High%20upper%20eyelids%20showing%20white', when: 'neutral', then: 'it%20looks%20like%20%22Terror%22%20or%20%22Surprise%22%20(The%20Headlights%20Operator)', result: 'being%20treated%20as%20fragile%20or%20easily%20startled', operatorName: 'The%20Headlights%20Operator', operatorMechanism: 'it%20looks%20like%20%22Terror%22%20or%20%22Surprise%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_960_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_960_then_branch: BehaviorEmit { emission: 'then', text: 'it%20looks%20like%20%22Terror%22%20or%20%22Surprise%22%20(The%20Headlights%20Operator)' })
+(loop_960_verdict: BehaviorVerdict { loopId: 960, loopName: 'The%20Deer%20Loop', then: 'it%20looks%20like%20%22Terror%22%20or%20%22Surprise%22%20(The%20Headlights%20Operator)', result: 'being%20treated%20as%20fragile%20or%20easily%20startled', operatorName: 'The%20Headlights%20Operator', operatorMechanism: 'it%20looks%20like%20%22Terror%22%20or%20%22Surprise%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_960_when_gate: BehaviorAssess { stage: 'when', text: 'neutral' })
+
+// Topology
+(loop_960_start)-[:PROCESS]->(loop_960_given_gate)
+(loop_960_given_gate)-[:PROCESS { case: "ok" }]->(loop_960_when_gate)
+(loop_960_given_gate)-[:PROCESS { case: "err" }]->(loop_960_inactive)
+(loop_960_when_gate)-[:PROCESS { case: "ok" }]->(loop_960_context)
+(loop_960_when_gate)-[:PROCESS { case: "err" }]->(loop_960_inactive)
+(loop_960_context)-[:FORK { strategy: "behavior-branches" }]->(loop_960_context_branch | loop_960_then_branch | loop_960_operator_branch | loop_960_result_branch | loop_960_taxonomy_branch | loop_960_intervention_recognize | loop_960_intervention_interdict | loop_960_intervention_minimize)
+(loop_960_context_branch | loop_960_then_branch | loop_960_operator_branch | loop_960_result_branch | loop_960_taxonomy_branch | loop_960_intervention_recognize | loop_960_intervention_interdict | loop_960_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_960_verdict)
+(loop_960_inactive)-[:PROCESS]->(loop_960_sink)
+(loop_960_verdict)-[:PROCESS]->(loop_960_sink)
+(loop_960_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_960_then_branch)
+(loop_960_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_960_then_branch)
+(loop_960_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_960_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-281.gg
+// Executable Gnosis projection for The Keloid Loop.
+
+// Nodes
+(loop_281_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_281_context_branch: BehaviorEmit { emission: 'context' })
+(loop_281_given_gate: BehaviorAssess { stage: 'given', text: 'Overgrowth%20of%20scar%20tissue%20(raised%20scars)' })
+(loop_281_inactive: BehaviorTerminal { loopId: 281, loopName: 'The%20Keloid%20Loop' })
+(loop_281_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_281_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_281_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_281_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Novelty%2FScrutiny%20Operator', mechanism: 'observers%20stare%20at%20the%20texture' })
+(loop_281_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20covering%20up%20with%20scarves%2Fhair%2C%20leading%20to%20**Body%20Shame**' })
+(loop_281_sink: BehaviorSink)
+(loop_281_start: BehaviorStart { loopId: 281, loopName: 'The%20Keloid%20Loop', given: 'Overgrowth%20of%20scar%20tissue%20(raised%20scars)', when: 'visible%20on%20ears%20or%20chest', then: 'observers%20stare%20at%20the%20texture%20(The%20Novelty%2FScrutiny%20Operator)', result: 'the%20individual%20covering%20up%20with%20scarves%2Fhair%2C%20leading%20to%20**Body%20Shame**', operatorName: 'The%20Novelty%2FScrutiny%20Operator', operatorMechanism: 'observers%20stare%20at%20the%20texture', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_281_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_281_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20stare%20at%20the%20texture%20(The%20Novelty%2FScrutiny%20Operator)' })
+(loop_281_verdict: BehaviorVerdict { loopId: 281, loopName: 'The%20Keloid%20Loop', then: 'observers%20stare%20at%20the%20texture%20(The%20Novelty%2FScrutiny%20Operator)', result: 'the%20individual%20covering%20up%20with%20scarves%2Fhair%2C%20leading%20to%20**Body%20Shame**', operatorName: 'The%20Novelty%2FScrutiny%20Operator', operatorMechanism: 'observers%20stare%20at%20the%20texture', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_281_when_gate: BehaviorAssess { stage: 'when', text: 'visible%20on%20ears%20or%20chest' })
+
+// Topology
+(loop_281_start)-[:PROCESS]->(loop_281_given_gate)
+(loop_281_given_gate)-[:PROCESS { case: "ok" }]->(loop_281_when_gate)
+(loop_281_given_gate)-[:PROCESS { case: "err" }]->(loop_281_inactive)
+(loop_281_when_gate)-[:PROCESS { case: "ok" }]->(loop_281_context)
+(loop_281_when_gate)-[:PROCESS { case: "err" }]->(loop_281_inactive)
+(loop_281_context)-[:FORK { strategy: "behavior-branches" }]->(loop_281_context_branch | loop_281_then_branch | loop_281_operator_branch | loop_281_result_branch | loop_281_taxonomy_branch | loop_281_intervention_recognize | loop_281_intervention_interdict | loop_281_intervention_minimize)
+(loop_281_context_branch | loop_281_then_branch | loop_281_operator_branch | loop_281_result_branch | loop_281_taxonomy_branch | loop_281_intervention_recognize | loop_281_intervention_interdict | loop_281_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_281_verdict)
+(loop_281_inactive)-[:PROCESS]->(loop_281_sink)
+(loop_281_verdict)-[:PROCESS]->(loop_281_sink)
+(loop_281_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_281_then_branch)
+(loop_281_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_281_then_branch)
+(loop_281_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_281_then_branch)

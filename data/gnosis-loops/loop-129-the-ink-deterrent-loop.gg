@@ -1,0 +1,33 @@
+// behavioral-loop-129.gg
+// Executable Gnosis projection for The Ink Deterrent Loop.
+
+// Nodes
+(loop_129_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_129_context_branch: BehaviorEmit { emission: 'context' })
+(loop_129_given_gate: BehaviorAssess { stage: 'given', text: 'Visible%20Tattoos%20above%20the%20collar' })
+(loop_129_inactive: BehaviorTerminal { loopId: 129, loopName: 'The%20Ink%20Deterrent%20Loop' })
+(loop_129_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_129_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_129_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_129_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20observer%20triggers%20the%20%22Threat%22%20or%20%22Deviance%22%20Operator' })
+(loop_129_result_branch: BehaviorEmit { emission: 'result', text: 'exclusion%20from%20median-income%20roles%2C%20pushing%20the%20individual%20into%20**High-Risk%2FHigh-Reward**%20economies%20(Nightlife%2C%20Manual%20Trades%2C%20Crime)' })
+(loop_129_sink: BehaviorSink)
+(loop_129_start: BehaviorStart { loopId: 129, loopName: 'The%20Ink%20Deterrent%20Loop', given: 'Visible%20Tattoos%20above%20the%20collar', when: 'entering%20a%20traditional%20job%20market%20or%20public%20space', then: 'the%20observer%20triggers%20the%20%22Threat%22%20or%20%22Deviance%22%20Operator', result: 'exclusion%20from%20median-income%20roles%2C%20pushing%20the%20individual%20into%20**High-Risk%2FHigh-Reward**%20economies%20(Nightlife%2C%20Manual%20Trades%2C%20Crime)', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20observer%20triggers%20the%20%22Threat%22%20or%20%22Deviance%22%20Operator', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_129_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_129_then_branch: BehaviorEmit { emission: 'then', text: 'the%20observer%20triggers%20the%20%22Threat%22%20or%20%22Deviance%22%20Operator' })
+(loop_129_verdict: BehaviorVerdict { loopId: 129, loopName: 'The%20Ink%20Deterrent%20Loop', then: 'the%20observer%20triggers%20the%20%22Threat%22%20or%20%22Deviance%22%20Operator', result: 'exclusion%20from%20median-income%20roles%2C%20pushing%20the%20individual%20into%20**High-Risk%2FHigh-Reward**%20economies%20(Nightlife%2C%20Manual%20Trades%2C%20Crime)', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20observer%20triggers%20the%20%22Threat%22%20or%20%22Deviance%22%20Operator', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_129_when_gate: BehaviorAssess { stage: 'when', text: 'entering%20a%20traditional%20job%20market%20or%20public%20space' })
+
+// Topology
+(loop_129_start)-[:PROCESS]->(loop_129_given_gate)
+(loop_129_given_gate)-[:PROCESS { case: "ok" }]->(loop_129_when_gate)
+(loop_129_given_gate)-[:PROCESS { case: "err" }]->(loop_129_inactive)
+(loop_129_when_gate)-[:PROCESS { case: "ok" }]->(loop_129_context)
+(loop_129_when_gate)-[:PROCESS { case: "err" }]->(loop_129_inactive)
+(loop_129_context)-[:FORK { strategy: "behavior-branches" }]->(loop_129_context_branch | loop_129_then_branch | loop_129_operator_branch | loop_129_result_branch | loop_129_taxonomy_branch | loop_129_intervention_recognize | loop_129_intervention_interdict | loop_129_intervention_minimize)
+(loop_129_context_branch | loop_129_then_branch | loop_129_operator_branch | loop_129_result_branch | loop_129_taxonomy_branch | loop_129_intervention_recognize | loop_129_intervention_interdict | loop_129_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_129_verdict)
+(loop_129_inactive)-[:PROCESS]->(loop_129_sink)
+(loop_129_verdict)-[:PROCESS]->(loop_129_sink)
+(loop_129_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_129_then_branch)
+(loop_129_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_129_then_branch)
+(loop_129_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_129_then_branch)

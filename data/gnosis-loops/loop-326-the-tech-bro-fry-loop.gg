@@ -1,0 +1,33 @@
+// behavioral-loop-326.gg
+// Executable Gnosis projection for The Tech Bro Fry Loop.
+
+// Nodes
+(loop_326_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_326_context_branch: BehaviorEmit { emission: 'context' })
+(loop_326_given_gate: BehaviorAssess { stage: 'given', text: 'Low-register%20creakiness%20%2B%20fast%20tempo' })
+(loop_326_inactive: BehaviorTerminal { loopId: 326, loopName: 'The%20Tech%20Bro%20Fry%20Loop' })
+(loop_326_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_326_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_326_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_326_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Elite%20Operator', mechanism: 'observers%20perceive%20%22Bored%20Intelligence%22%20or%20%22Silicon%20Valley%20Status%22' })
+(loop_326_result_branch: BehaviorEmit { emission: 'result', text: 'assumption%20of%20**Competence**%20despite%20lack%20of%20clarity' })
+(loop_326_sink: BehaviorSink)
+(loop_326_start: BehaviorStart { loopId: 326, loopName: 'The%20Tech%20Bro%20Fry%20Loop', given: 'Low-register%20creakiness%20%2B%20fast%20tempo', when: 'explaining%20a%20concept', then: 'observers%20perceive%20%22Bored%20Intelligence%22%20or%20%22Silicon%20Valley%20Status%22%20(The%20Elite%20Operator)', result: 'assumption%20of%20**Competence**%20despite%20lack%20of%20clarity', operatorName: 'The%20Elite%20Operator', operatorMechanism: 'observers%20perceive%20%22Bored%20Intelligence%22%20or%20%22Silicon%20Valley%20Status%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_326_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_326_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Bored%20Intelligence%22%20or%20%22Silicon%20Valley%20Status%22%20(The%20Elite%20Operator)' })
+(loop_326_verdict: BehaviorVerdict { loopId: 326, loopName: 'The%20Tech%20Bro%20Fry%20Loop', then: 'observers%20perceive%20%22Bored%20Intelligence%22%20or%20%22Silicon%20Valley%20Status%22%20(The%20Elite%20Operator)', result: 'assumption%20of%20**Competence**%20despite%20lack%20of%20clarity', operatorName: 'The%20Elite%20Operator', operatorMechanism: 'observers%20perceive%20%22Bored%20Intelligence%22%20or%20%22Silicon%20Valley%20Status%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_326_when_gate: BehaviorAssess { stage: 'when', text: 'explaining%20a%20concept' })
+
+// Topology
+(loop_326_start)-[:PROCESS]->(loop_326_given_gate)
+(loop_326_given_gate)-[:PROCESS { case: "ok" }]->(loop_326_when_gate)
+(loop_326_given_gate)-[:PROCESS { case: "err" }]->(loop_326_inactive)
+(loop_326_when_gate)-[:PROCESS { case: "ok" }]->(loop_326_context)
+(loop_326_when_gate)-[:PROCESS { case: "err" }]->(loop_326_inactive)
+(loop_326_context)-[:FORK { strategy: "behavior-branches" }]->(loop_326_context_branch | loop_326_then_branch | loop_326_operator_branch | loop_326_result_branch | loop_326_taxonomy_branch | loop_326_intervention_recognize | loop_326_intervention_interdict | loop_326_intervention_minimize)
+(loop_326_context_branch | loop_326_then_branch | loop_326_operator_branch | loop_326_result_branch | loop_326_taxonomy_branch | loop_326_intervention_recognize | loop_326_intervention_interdict | loop_326_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_326_verdict)
+(loop_326_inactive)-[:PROCESS]->(loop_326_sink)
+(loop_326_verdict)-[:PROCESS]->(loop_326_sink)
+(loop_326_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_326_then_branch)
+(loop_326_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_326_then_branch)
+(loop_326_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_326_then_branch)

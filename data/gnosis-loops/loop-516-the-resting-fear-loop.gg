@@ -1,0 +1,33 @@
+// behavioral-loop-516.gg
+// Executable Gnosis projection for The Resting Fear Loop.
+
+// Nodes
+(loop_516_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_516_context_branch: BehaviorEmit { emission: 'context' })
+(loop_516_given_gate: BehaviorAssess { stage: 'given', text: 'Large%20eyes%20with%20visible%20white%20above%2Fbelow%20iris' })
+(loop_516_inactive: BehaviorTerminal { loopId: 516, loopName: 'The%20Resting%20Fear%20Loop' })
+(loop_516_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_516_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_516_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_516_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Anxiety%20Operator', mechanism: 'the%20individual%20looks%20%22Terrified%22%20or%20%22Caffeinated%22' })
+(loop_516_result_branch: BehaviorEmit { emission: 'result', text: 'constant%20%22Calm%20down%22%20instructions%20when%20the%20person%20is%20actually%20fine' })
+(loop_516_sink: BehaviorSink)
+(loop_516_start: BehaviorStart { loopId: 516, loopName: 'The%20Resting%20Fear%20Loop', given: 'Large%20eyes%20with%20visible%20white%20above%2Fbelow%20iris', when: 'sitting%20still', then: 'the%20individual%20looks%20%22Terrified%22%20or%20%22Caffeinated%22%20(The%20Anxiety%20Operator)', result: 'constant%20%22Calm%20down%22%20instructions%20when%20the%20person%20is%20actually%20fine', operatorName: 'The%20Anxiety%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Terrified%22%20or%20%22Caffeinated%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_516_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_516_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20looks%20%22Terrified%22%20or%20%22Caffeinated%22%20(The%20Anxiety%20Operator)' })
+(loop_516_verdict: BehaviorVerdict { loopId: 516, loopName: 'The%20Resting%20Fear%20Loop', then: 'the%20individual%20looks%20%22Terrified%22%20or%20%22Caffeinated%22%20(The%20Anxiety%20Operator)', result: 'constant%20%22Calm%20down%22%20instructions%20when%20the%20person%20is%20actually%20fine', operatorName: 'The%20Anxiety%20Operator', operatorMechanism: 'the%20individual%20looks%20%22Terrified%22%20or%20%22Caffeinated%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_516_when_gate: BehaviorAssess { stage: 'when', text: 'sitting%20still' })
+
+// Topology
+(loop_516_start)-[:PROCESS]->(loop_516_given_gate)
+(loop_516_given_gate)-[:PROCESS { case: "ok" }]->(loop_516_when_gate)
+(loop_516_given_gate)-[:PROCESS { case: "err" }]->(loop_516_inactive)
+(loop_516_when_gate)-[:PROCESS { case: "ok" }]->(loop_516_context)
+(loop_516_when_gate)-[:PROCESS { case: "err" }]->(loop_516_inactive)
+(loop_516_context)-[:FORK { strategy: "behavior-branches" }]->(loop_516_context_branch | loop_516_then_branch | loop_516_operator_branch | loop_516_result_branch | loop_516_taxonomy_branch | loop_516_intervention_recognize | loop_516_intervention_interdict | loop_516_intervention_minimize)
+(loop_516_context_branch | loop_516_then_branch | loop_516_operator_branch | loop_516_result_branch | loop_516_taxonomy_branch | loop_516_intervention_recognize | loop_516_intervention_interdict | loop_516_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_516_verdict)
+(loop_516_inactive)-[:PROCESS]->(loop_516_sink)
+(loop_516_verdict)-[:PROCESS]->(loop_516_sink)
+(loop_516_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_516_then_branch)
+(loop_516_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_516_then_branch)
+(loop_516_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_516_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-285.gg
+// Executable Gnosis projection for The Raccoon Eye Loop.
+
+// Nodes
+(loop_285_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_285_context_branch: BehaviorEmit { emission: 'context' })
+(loop_285_given_gate: BehaviorAssess { stage: 'given', text: 'Thin%20skin%2Fdark%20veins%20under%20eyes%20(Genetic)' })
+(loop_285_inactive: BehaviorTerminal { loopId: 285, loopName: 'The%20Raccoon%20Eye%20Loop' })
+(loop_285_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait' })
+(loop_285_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_285_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_285_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Concern%2FJudgment%20Operator', mechanism: 'colleagues%20say%20%22You%20look%20tired%22' })
+(loop_285_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20feeling%20gaslit%20about%20their%20own%20energy%20levels%2C%20leading%20to%20**Performative%20Energy**%20(acting%20hyper)' })
+(loop_285_sink: BehaviorSink)
+(loop_285_start: BehaviorStart { loopId: 285, loopName: 'The%20Raccoon%20Eye%20Loop', given: 'Thin%20skin%2Fdark%20veins%20under%20eyes%20(Genetic)', when: 'arriving%20at%20work%20fully%20rested', then: 'colleagues%20say%20%22You%20look%20tired%22%20(The%20Concern%2FJudgment%20Operator)', result: 'the%20individual%20feeling%20gaslit%20about%20their%20own%20energy%20levels%2C%20leading%20to%20**Performative%20Energy**%20(acting%20hyper)', operatorName: 'The%20Concern%2FJudgment%20Operator', operatorMechanism: 'colleagues%20say%20%22You%20look%20tired%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Focus%20on%20complementary%20strengths%20that%20offset%20this%20trait', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_285_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_285_then_branch: BehaviorEmit { emission: 'then', text: 'colleagues%20say%20%22You%20look%20tired%22%20(The%20Concern%2FJudgment%20Operator)' })
+(loop_285_verdict: BehaviorVerdict { loopId: 285, loopName: 'The%20Raccoon%20Eye%20Loop', then: 'colleagues%20say%20%22You%20look%20tired%22%20(The%20Concern%2FJudgment%20Operator)', result: 'the%20individual%20feeling%20gaslit%20about%20their%20own%20energy%20levels%2C%20leading%20to%20**Performative%20Energy**%20(acting%20hyper)', operatorName: 'The%20Concern%2FJudgment%20Operator', operatorMechanism: 'colleagues%20say%20%22You%20look%20tired%22', origin: 'GENETIC', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_285_when_gate: BehaviorAssess { stage: 'when', text: 'arriving%20at%20work%20fully%20rested' })
+
+// Topology
+(loop_285_start)-[:PROCESS]->(loop_285_given_gate)
+(loop_285_given_gate)-[:PROCESS { case: "ok" }]->(loop_285_when_gate)
+(loop_285_given_gate)-[:PROCESS { case: "err" }]->(loop_285_inactive)
+(loop_285_when_gate)-[:PROCESS { case: "ok" }]->(loop_285_context)
+(loop_285_when_gate)-[:PROCESS { case: "err" }]->(loop_285_inactive)
+(loop_285_context)-[:FORK { strategy: "behavior-branches" }]->(loop_285_context_branch | loop_285_then_branch | loop_285_operator_branch | loop_285_result_branch | loop_285_taxonomy_branch | loop_285_intervention_recognize | loop_285_intervention_interdict | loop_285_intervention_minimize)
+(loop_285_context_branch | loop_285_then_branch | loop_285_operator_branch | loop_285_result_branch | loop_285_taxonomy_branch | loop_285_intervention_recognize | loop_285_intervention_interdict | loop_285_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_285_verdict)
+(loop_285_inactive)-[:PROCESS]->(loop_285_sink)
+(loop_285_verdict)-[:PROCESS]->(loop_285_sink)
+(loop_285_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_285_then_branch)
+(loop_285_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_285_then_branch)
+(loop_285_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_285_then_branch)

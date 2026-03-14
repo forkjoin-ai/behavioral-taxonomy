@@ -1,0 +1,33 @@
+// behavioral-loop-3301.gg
+// Executable Gnosis projection for The Cynical Hermit (Ti-Ni Loop).
+
+// Nodes
+(loop_3301_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_3301_context_branch: BehaviorEmit { emission: 'context' })
+(loop_3301_given_gate: BehaviorAssess { stage: 'given', text: 'Dominant%20Introverted%20Thinking%20(Ti)%20%2B%20Introverted%20Intuition%20(Ni)%20bypassing%20Extroverted%20Sensing%20(Se)' })
+(loop_3301_inactive: BehaviorTerminal { loopId: 3301, loopName: 'The%20Cynical%20Hermit%20(Ti-Ni%20Loop)' })
+(loop_3301_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_3301_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3301_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Pay%20attention%20to%20body%20language%20shifts' })
+(loop_3301_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'Unknown%20mechanism' })
+(loop_3301_result_branch: BehaviorEmit { emission: 'result', text: 'Nihilism%3B%20the%20subject%20figures%20out%20' })
+(loop_3301_sink: BehaviorSink)
+(loop_3301_start: BehaviorStart { loopId: 3301, loopName: 'The%20Cynical%20Hermit%20(Ti-Ni%20Loop)', given: 'Dominant%20Introverted%20Thinking%20(Ti)%20%2B%20Introverted%20Intuition%20(Ni)%20bypassing%20Extroverted%20Sensing%20(Se)', when: 'Boredom%20strikes%20or%20physical%20action%20is%20blocked', then: 'Subject%20detaches%20from%20reality%20to%20formulate%20elaborate%20theories%20about%20why%20things%20are%20stupid%2Ffutile', result: 'Nihilism%3B%20the%20subject%20figures%20out%20', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Pay%20attention%20to%20body%20language%20shifts', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_3301_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3301_then_branch: BehaviorEmit { emission: 'then', text: 'Subject%20detaches%20from%20reality%20to%20formulate%20elaborate%20theories%20about%20why%20things%20are%20stupid%2Ffutile' })
+(loop_3301_verdict: BehaviorVerdict { loopId: 3301, loopName: 'The%20Cynical%20Hermit%20(Ti-Ni%20Loop)', then: 'Subject%20detaches%20from%20reality%20to%20formulate%20elaborate%20theories%20about%20why%20things%20are%20stupid%2Ffutile', result: 'Nihilism%3B%20the%20subject%20figures%20out%20', operatorName: 'Unknown%20Operator', operatorMechanism: 'Unknown%20mechanism', origin: 'BEHAVIORAL', modality: 'META', mutability: 'FLUID', valences: 'SUBMISSION' })
+(loop_3301_when_gate: BehaviorAssess { stage: 'when', text: 'Boredom%20strikes%20or%20physical%20action%20is%20blocked' })
+
+// Topology
+(loop_3301_start)-[:PROCESS]->(loop_3301_given_gate)
+(loop_3301_given_gate)-[:PROCESS { case: "ok" }]->(loop_3301_when_gate)
+(loop_3301_given_gate)-[:PROCESS { case: "err" }]->(loop_3301_inactive)
+(loop_3301_when_gate)-[:PROCESS { case: "ok" }]->(loop_3301_context)
+(loop_3301_when_gate)-[:PROCESS { case: "err" }]->(loop_3301_inactive)
+(loop_3301_context)-[:FORK { strategy: "behavior-branches" }]->(loop_3301_context_branch | loop_3301_then_branch | loop_3301_operator_branch | loop_3301_result_branch | loop_3301_taxonomy_branch | loop_3301_intervention_recognize | loop_3301_intervention_interdict | loop_3301_intervention_minimize)
+(loop_3301_context_branch | loop_3301_then_branch | loop_3301_operator_branch | loop_3301_result_branch | loop_3301_taxonomy_branch | loop_3301_intervention_recognize | loop_3301_intervention_interdict | loop_3301_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_3301_verdict)
+(loop_3301_inactive)-[:PROCESS]->(loop_3301_sink)
+(loop_3301_verdict)-[:PROCESS]->(loop_3301_sink)
+(loop_3301_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_3301_then_branch)
+(loop_3301_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_3301_then_branch)
+(loop_3301_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_3301_then_branch)

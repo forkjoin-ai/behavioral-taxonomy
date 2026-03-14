@@ -1,0 +1,33 @@
+// behavioral-loop-375.gg
+// Executable Gnosis projection for The Drummer Loop.
+
+// Nodes
+(loop_375_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_375_context_branch: BehaviorEmit { emission: 'context' })
+(loop_375_given_gate: BehaviorAssess { stage: 'given', text: 'Rhythmic%20tapping%20of%20fingers' })
+(loop_375_inactive: BehaviorTerminal { loopId: 375, loopName: 'The%20Drummer%20Loop' })
+(loop_375_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_375_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_375_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_375_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Time%20Anxiety%20Operator', mechanism: 'it%20signals%20%22Impatience%22' })
+(loop_375_result_branch: BehaviorEmit { emission: 'result', text: 'others%20rushing%20to%20finish%20their%20points%2C%20often%20lowering%20quality' })
+(loop_375_sink: BehaviorSink)
+(loop_375_start: BehaviorStart { loopId: 375, loopName: 'The%20Drummer%20Loop', given: 'Rhythmic%20tapping%20of%20fingers', when: 'in%20a%20quiet%20room', then: 'it%20signals%20%22Impatience%22%20(The%20Time%20Anxiety%20Operator)', result: 'others%20rushing%20to%20finish%20their%20points%2C%20often%20lowering%20quality', operatorName: 'The%20Time%20Anxiety%20Operator', operatorMechanism: 'it%20signals%20%22Impatience%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_375_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_375_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Impatience%22%20(The%20Time%20Anxiety%20Operator)' })
+(loop_375_verdict: BehaviorVerdict { loopId: 375, loopName: 'The%20Drummer%20Loop', then: 'it%20signals%20%22Impatience%22%20(The%20Time%20Anxiety%20Operator)', result: 'others%20rushing%20to%20finish%20their%20points%2C%20often%20lowering%20quality', operatorName: 'The%20Time%20Anxiety%20Operator', operatorMechanism: 'it%20signals%20%22Impatience%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_375_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20quiet%20room' })
+
+// Topology
+(loop_375_start)-[:PROCESS]->(loop_375_given_gate)
+(loop_375_given_gate)-[:PROCESS { case: "ok" }]->(loop_375_when_gate)
+(loop_375_given_gate)-[:PROCESS { case: "err" }]->(loop_375_inactive)
+(loop_375_when_gate)-[:PROCESS { case: "ok" }]->(loop_375_context)
+(loop_375_when_gate)-[:PROCESS { case: "err" }]->(loop_375_inactive)
+(loop_375_context)-[:FORK { strategy: "behavior-branches" }]->(loop_375_context_branch | loop_375_then_branch | loop_375_operator_branch | loop_375_result_branch | loop_375_taxonomy_branch | loop_375_intervention_recognize | loop_375_intervention_interdict | loop_375_intervention_minimize)
+(loop_375_context_branch | loop_375_then_branch | loop_375_operator_branch | loop_375_result_branch | loop_375_taxonomy_branch | loop_375_intervention_recognize | loop_375_intervention_interdict | loop_375_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_375_verdict)
+(loop_375_inactive)-[:PROCESS]->(loop_375_sink)
+(loop_375_verdict)-[:PROCESS]->(loop_375_sink)
+(loop_375_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_375_then_branch)
+(loop_375_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_375_then_branch)
+(loop_375_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_375_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-338.gg
+// Executable Gnosis projection for The Arm Cross Loop.
+
+// Nodes
+(loop_338_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_338_context_branch: BehaviorEmit { emission: 'context' })
+(loop_338_given_gate: BehaviorAssess { stage: 'given', text: 'Folding%20arms%20across%20chest' })
+(loop_338_inactive: BehaviorTerminal { loopId: 338, loopName: 'The%20Arm%20Cross%20Loop' })
+(loop_338_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_338_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_338_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_338_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Closed%20Operator', mechanism: 'it%20creates%20a%20physical%20wall' })
+(loop_338_result_branch: BehaviorEmit { emission: 'result', text: "exclusion%20from%20the%20conversation%20flow%20(%22They%20don't%20want%20to%20talk%22)" })
+(loop_338_sink: BehaviorSink)
+(loop_338_start: BehaviorStart { loopId: 338, loopName: 'The%20Arm%20Cross%20Loop', given: 'Folding%20arms%20across%20chest', when: 'in%20a%20social%20circle', then: 'it%20creates%20a%20physical%20wall%20(The%20Closed%20Operator)', result: "exclusion%20from%20the%20conversation%20flow%20(%22They%20don't%20want%20to%20talk%22)", operatorName: 'The%20Closed%20Operator', operatorMechanism: 'it%20creates%20a%20physical%20wall', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_338_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_338_then_branch: BehaviorEmit { emission: 'then', text: 'it%20creates%20a%20physical%20wall%20(The%20Closed%20Operator)' })
+(loop_338_verdict: BehaviorVerdict { loopId: 338, loopName: 'The%20Arm%20Cross%20Loop', then: 'it%20creates%20a%20physical%20wall%20(The%20Closed%20Operator)', result: "exclusion%20from%20the%20conversation%20flow%20(%22They%20don't%20want%20to%20talk%22)", operatorName: 'The%20Closed%20Operator', operatorMechanism: 'it%20creates%20a%20physical%20wall', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_338_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20social%20circle' })
+
+// Topology
+(loop_338_start)-[:PROCESS]->(loop_338_given_gate)
+(loop_338_given_gate)-[:PROCESS { case: "ok" }]->(loop_338_when_gate)
+(loop_338_given_gate)-[:PROCESS { case: "err" }]->(loop_338_inactive)
+(loop_338_when_gate)-[:PROCESS { case: "ok" }]->(loop_338_context)
+(loop_338_when_gate)-[:PROCESS { case: "err" }]->(loop_338_inactive)
+(loop_338_context)-[:FORK { strategy: "behavior-branches" }]->(loop_338_context_branch | loop_338_then_branch | loop_338_operator_branch | loop_338_result_branch | loop_338_taxonomy_branch | loop_338_intervention_recognize | loop_338_intervention_interdict | loop_338_intervention_minimize)
+(loop_338_context_branch | loop_338_then_branch | loop_338_operator_branch | loop_338_result_branch | loop_338_taxonomy_branch | loop_338_intervention_recognize | loop_338_intervention_interdict | loop_338_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_338_verdict)
+(loop_338_inactive)-[:PROCESS]->(loop_338_sink)
+(loop_338_verdict)-[:PROCESS]->(loop_338_sink)
+(loop_338_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_338_then_branch)
+(loop_338_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_338_then_branch)
+(loop_338_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_338_then_branch)

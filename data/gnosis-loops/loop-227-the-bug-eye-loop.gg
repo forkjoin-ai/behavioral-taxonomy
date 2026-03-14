@@ -1,0 +1,33 @@
+// behavioral-loop-227.gg
+// Executable Gnosis projection for The Bug Eye Loop.
+
+// Nodes
+(loop_227_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_227_context_branch: BehaviorEmit { emission: 'context' })
+(loop_227_given_gate: BehaviorAssess { stage: 'given', text: "Proptosis%20(Bulging%20eyes%2C%20e.g.%2C%20Graves'%20disease)" })
+(loop_227_inactive: BehaviorTerminal { loopId: 227, loopName: 'The%20Bug%20Eye%20Loop' })
+(loop_227_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20community%20with%20others%20managing%20similar%20conditions' })
+(loop_227_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_227_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_227_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20High-Arousal%20Operator', mechanism: 'observers%20perceive%20%22Terror%2C%22%20%22Surprise%2C%22%20or%20%22Mania%22' })
+(loop_227_result_branch: BehaviorEmit { emission: 'result', text: 'peers%20trying%20to%20%22calm%20down%22%20the%20individual%20when%20they%20are%20perfectly%20fine%2C%20causing%20**Frustration**' })
+(loop_227_sink: BehaviorSink)
+(loop_227_start: BehaviorStart { loopId: 227, loopName: 'The%20Bug%20Eye%20Loop', given: "Proptosis%20(Bulging%20eyes%2C%20e.g.%2C%20Graves'%20disease)", when: 'resting%20facial%20expression%20is%20neutral', then: 'observers%20perceive%20%22Terror%2C%22%20%22Surprise%2C%22%20or%20%22Mania%22%20(The%20High-Arousal%20Operator)', result: 'peers%20trying%20to%20%22calm%20down%22%20the%20individual%20when%20they%20are%20perfectly%20fine%2C%20causing%20**Frustration**', operatorName: 'The%20High-Arousal%20Operator', operatorMechanism: 'observers%20perceive%20%22Terror%2C%22%20%22Surprise%2C%22%20or%20%22Mania%22', origin: 'PATHOLOGICAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20community%20with%20others%20managing%20similar%20conditions', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_227_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'PATHOLOGICAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_227_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20perceive%20%22Terror%2C%22%20%22Surprise%2C%22%20or%20%22Mania%22%20(The%20High-Arousal%20Operator)' })
+(loop_227_verdict: BehaviorVerdict { loopId: 227, loopName: 'The%20Bug%20Eye%20Loop', then: 'observers%20perceive%20%22Terror%2C%22%20%22Surprise%2C%22%20or%20%22Mania%22%20(The%20High-Arousal%20Operator)', result: 'peers%20trying%20to%20%22calm%20down%22%20the%20individual%20when%20they%20are%20perfectly%20fine%2C%20causing%20**Frustration**', operatorName: 'The%20High-Arousal%20Operator', operatorMechanism: 'observers%20perceive%20%22Terror%2C%22%20%22Surprise%2C%22%20or%20%22Mania%22', origin: 'PATHOLOGICAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_227_when_gate: BehaviorAssess { stage: 'when', text: 'resting%20facial%20expression%20is%20neutral' })
+
+// Topology
+(loop_227_start)-[:PROCESS]->(loop_227_given_gate)
+(loop_227_given_gate)-[:PROCESS { case: "ok" }]->(loop_227_when_gate)
+(loop_227_given_gate)-[:PROCESS { case: "err" }]->(loop_227_inactive)
+(loop_227_when_gate)-[:PROCESS { case: "ok" }]->(loop_227_context)
+(loop_227_when_gate)-[:PROCESS { case: "err" }]->(loop_227_inactive)
+(loop_227_context)-[:FORK { strategy: "behavior-branches" }]->(loop_227_context_branch | loop_227_then_branch | loop_227_operator_branch | loop_227_result_branch | loop_227_taxonomy_branch | loop_227_intervention_recognize | loop_227_intervention_interdict | loop_227_intervention_minimize)
+(loop_227_context_branch | loop_227_then_branch | loop_227_operator_branch | loop_227_result_branch | loop_227_taxonomy_branch | loop_227_intervention_recognize | loop_227_intervention_interdict | loop_227_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_227_verdict)
+(loop_227_inactive)-[:PROCESS]->(loop_227_sink)
+(loop_227_verdict)-[:PROCESS]->(loop_227_sink)
+(loop_227_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_227_then_branch)
+(loop_227_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_227_then_branch)
+(loop_227_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_227_then_branch)

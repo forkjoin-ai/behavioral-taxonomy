@@ -1,0 +1,33 @@
+// behavioral-loop-63.gg
+// Executable Gnosis projection for The Wide Hips Loop.
+
+// Nodes
+(loop_63_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_63_context_branch: BehaviorEmit { emission: 'context' })
+(loop_63_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20Shoulder-to-Hip%20Ratio%20(Male)' })
+(loop_63_inactive: BehaviorTerminal { loopId: 63, loopName: 'The%20Wide%20Hips%20Loop' })
+(loop_63_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_63_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_63_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_63_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Nurture%20Operator', mechanism: 'peers%20perceive%20less%20%22Threat%22' })
+(loop_63_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20relying%20on%20**Diplomacy**%20rather%20than%20force' })
+(loop_63_sink: BehaviorSink)
+(loop_63_start: BehaviorStart { loopId: 63, loopName: 'The%20Wide%20Hips%20Loop', given: 'Low%20Shoulder-to-Hip%20Ratio%20(Male)', when: 'in%20athletic%20or%20dominance%20settings', then: 'peers%20perceive%20less%20%22Threat%22%20(The%20Nurture%20Operator)', result: 'the%20individual%20relying%20on%20**Diplomacy**%20rather%20than%20force', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'peers%20perceive%20less%20%22Threat%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_63_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_63_then_branch: BehaviorEmit { emission: 'then', text: 'peers%20perceive%20less%20%22Threat%22%20(The%20Nurture%20Operator)' })
+(loop_63_verdict: BehaviorVerdict { loopId: 63, loopName: 'The%20Wide%20Hips%20Loop', then: 'peers%20perceive%20less%20%22Threat%22%20(The%20Nurture%20Operator)', result: 'the%20individual%20relying%20on%20**Diplomacy**%20rather%20than%20force', operatorName: 'The%20Nurture%20Operator', operatorMechanism: 'peers%20perceive%20less%20%22Threat%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_63_when_gate: BehaviorAssess { stage: 'when', text: 'in%20athletic%20or%20dominance%20settings' })
+
+// Topology
+(loop_63_start)-[:PROCESS]->(loop_63_given_gate)
+(loop_63_given_gate)-[:PROCESS { case: "ok" }]->(loop_63_when_gate)
+(loop_63_given_gate)-[:PROCESS { case: "err" }]->(loop_63_inactive)
+(loop_63_when_gate)-[:PROCESS { case: "ok" }]->(loop_63_context)
+(loop_63_when_gate)-[:PROCESS { case: "err" }]->(loop_63_inactive)
+(loop_63_context)-[:FORK { strategy: "behavior-branches" }]->(loop_63_context_branch | loop_63_then_branch | loop_63_operator_branch | loop_63_result_branch | loop_63_taxonomy_branch | loop_63_intervention_recognize | loop_63_intervention_interdict | loop_63_intervention_minimize)
+(loop_63_context_branch | loop_63_then_branch | loop_63_operator_branch | loop_63_result_branch | loop_63_taxonomy_branch | loop_63_intervention_recognize | loop_63_intervention_interdict | loop_63_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_63_verdict)
+(loop_63_inactive)-[:PROCESS]->(loop_63_sink)
+(loop_63_verdict)-[:PROCESS]->(loop_63_sink)
+(loop_63_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_63_then_branch)
+(loop_63_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_63_then_branch)
+(loop_63_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_63_then_branch)

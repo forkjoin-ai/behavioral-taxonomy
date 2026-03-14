@@ -1,0 +1,33 @@
+// behavioral-loop-845.gg
+// Executable Gnosis projection for The Wallflower Loop.
+
+// Nodes
+(loop_845_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_845_context_branch: BehaviorEmit { emission: 'context' })
+(loop_845_given_gate: BehaviorAssess { stage: 'given', text: 'Proprioceptive%20need%20for%20back%20support%20(wall%2Fcorner)' })
+(loop_845_inactive: BehaviorTerminal { loopId: 845, loopName: 'The%20Wallflower%20Loop' })
+(loop_845_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_845_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_845_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_845_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Furniture%20Operator', mechanism: 'the%20individual%20merges%20with%20the%20architecture' })
+(loop_845_result_branch: BehaviorEmit { emission: 'result', text: 'being%20overlooked%20for%20introductions' })
+(loop_845_sink: BehaviorSink)
+(loop_845_start: BehaviorStart { loopId: 845, loopName: 'The%20Wallflower%20Loop', given: 'Proprioceptive%20need%20for%20back%20support%20(wall%2Fcorner)', when: 'at%20a%20party', then: 'the%20individual%20merges%20with%20the%20architecture%20(The%20Furniture%20Operator)', result: 'being%20overlooked%20for%20introductions', operatorName: 'The%20Furniture%20Operator', operatorMechanism: 'the%20individual%20merges%20with%20the%20architecture', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_845_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_845_then_branch: BehaviorEmit { emission: 'then', text: 'the%20individual%20merges%20with%20the%20architecture%20(The%20Furniture%20Operator)' })
+(loop_845_verdict: BehaviorVerdict { loopId: 845, loopName: 'The%20Wallflower%20Loop', then: 'the%20individual%20merges%20with%20the%20architecture%20(The%20Furniture%20Operator)', result: 'being%20overlooked%20for%20introductions', operatorName: 'The%20Furniture%20Operator', operatorMechanism: 'the%20individual%20merges%20with%20the%20architecture', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_845_when_gate: BehaviorAssess { stage: 'when', text: 'at%20a%20party' })
+
+// Topology
+(loop_845_start)-[:PROCESS]->(loop_845_given_gate)
+(loop_845_given_gate)-[:PROCESS { case: "ok" }]->(loop_845_when_gate)
+(loop_845_given_gate)-[:PROCESS { case: "err" }]->(loop_845_inactive)
+(loop_845_when_gate)-[:PROCESS { case: "ok" }]->(loop_845_context)
+(loop_845_when_gate)-[:PROCESS { case: "err" }]->(loop_845_inactive)
+(loop_845_context)-[:FORK { strategy: "behavior-branches" }]->(loop_845_context_branch | loop_845_then_branch | loop_845_operator_branch | loop_845_result_branch | loop_845_taxonomy_branch | loop_845_intervention_recognize | loop_845_intervention_interdict | loop_845_intervention_minimize)
+(loop_845_context_branch | loop_845_then_branch | loop_845_operator_branch | loop_845_result_branch | loop_845_taxonomy_branch | loop_845_intervention_recognize | loop_845_intervention_interdict | loop_845_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_845_verdict)
+(loop_845_inactive)-[:PROCESS]->(loop_845_sink)
+(loop_845_verdict)-[:PROCESS]->(loop_845_sink)
+(loop_845_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_845_then_branch)
+(loop_845_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_845_then_branch)
+(loop_845_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_845_then_branch)

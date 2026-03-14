@@ -1,0 +1,33 @@
+// behavioral-loop-573.gg
+// Executable Gnosis projection for The Static Cling Loop.
+
+// Nodes
+(loop_573_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_573_context_branch: BehaviorEmit { emission: 'context' })
+(loop_573_given_gate: BehaviorAssess { stage: 'given', text: 'Synthetic%20fabrics%20%2B%20dry%20skin' })
+(loop_573_inactive: BehaviorTerminal { loopId: 573, loopName: 'The%20Static%20Cling%20Loop' })
+(loop_573_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_573_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_573_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_573_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Reveal%20Operator', mechanism: 'the%20clothes%20stick%20to%20the%20legs%2Fcrotch' })
+(loop_573_result_branch: BehaviorEmit { emission: 'result', text: 'awkward%20anatomical%20highlighting' })
+(loop_573_sink: BehaviorSink)
+(loop_573_start: BehaviorStart { loopId: 573, loopName: 'The%20Static%20Cling%20Loop', given: 'Synthetic%20fabrics%20%2B%20dry%20skin', when: 'walking', then: 'the%20clothes%20stick%20to%20the%20legs%2Fcrotch%20(The%20Reveal%20Operator)', result: 'awkward%20anatomical%20highlighting', operatorName: 'The%20Reveal%20Operator', operatorMechanism: 'the%20clothes%20stick%20to%20the%20legs%2Fcrotch', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_573_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_573_then_branch: BehaviorEmit { emission: 'then', text: 'the%20clothes%20stick%20to%20the%20legs%2Fcrotch%20(The%20Reveal%20Operator)' })
+(loop_573_verdict: BehaviorVerdict { loopId: 573, loopName: 'The%20Static%20Cling%20Loop', then: 'the%20clothes%20stick%20to%20the%20legs%2Fcrotch%20(The%20Reveal%20Operator)', result: 'awkward%20anatomical%20highlighting', operatorName: 'The%20Reveal%20Operator', operatorMechanism: 'the%20clothes%20stick%20to%20the%20legs%2Fcrotch', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_573_when_gate: BehaviorAssess { stage: 'when', text: 'walking' })
+
+// Topology
+(loop_573_start)-[:PROCESS]->(loop_573_given_gate)
+(loop_573_given_gate)-[:PROCESS { case: "ok" }]->(loop_573_when_gate)
+(loop_573_given_gate)-[:PROCESS { case: "err" }]->(loop_573_inactive)
+(loop_573_when_gate)-[:PROCESS { case: "ok" }]->(loop_573_context)
+(loop_573_when_gate)-[:PROCESS { case: "err" }]->(loop_573_inactive)
+(loop_573_context)-[:FORK { strategy: "behavior-branches" }]->(loop_573_context_branch | loop_573_then_branch | loop_573_operator_branch | loop_573_result_branch | loop_573_taxonomy_branch | loop_573_intervention_recognize | loop_573_intervention_interdict | loop_573_intervention_minimize)
+(loop_573_context_branch | loop_573_then_branch | loop_573_operator_branch | loop_573_result_branch | loop_573_taxonomy_branch | loop_573_intervention_recognize | loop_573_intervention_interdict | loop_573_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_573_verdict)
+(loop_573_inactive)-[:PROCESS]->(loop_573_sink)
+(loop_573_verdict)-[:PROCESS]->(loop_573_sink)
+(loop_573_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_573_then_branch)
+(loop_573_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_573_then_branch)
+(loop_573_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_573_then_branch)

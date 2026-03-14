@@ -1,0 +1,31 @@
+// behavioral-loop-827.gg
+// Executable Gnosis projection for The Upspeak Loop.
+
+// Nodes
+(loop_827_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_827_context_branch: BehaviorEmit { emission: 'context' })
+(loop_827_given_gate: BehaviorAssess { stage: 'given', text: 'Ending%20statements%20with%20a%20question%20pitch' })
+(loop_827_inactive: BehaviorTerminal { loopId: 827, loopName: 'The%20Upspeak%20Loop' })
+(loop_827_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_827_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_827_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Insecure%20Operator', mechanism: 'it%20sounds%20like%20a%20%22Question%22' })
+(loop_827_result_branch: BehaviorEmit { emission: 'result', text: 'total%20loss%20of%20authority' })
+(loop_827_sink: BehaviorSink)
+(loop_827_start: BehaviorStart { loopId: 827, loopName: 'The%20Upspeak%20Loop', given: 'Ending%20statements%20with%20a%20question%20pitch', when: 'asserting%20a%20fact', then: 'it%20sounds%20like%20a%20%22Question%22%20(The%20Insecure%20Operator)', result: 'total%20loss%20of%20authority', operatorName: 'The%20Insecure%20Operator', operatorMechanism: 'it%20sounds%20like%20a%20%22Question%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Balance%20with%20warmth%20signals%20to%20avoid%20intimidation' })
+(loop_827_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_827_then_branch: BehaviorEmit { emission: 'then', text: 'it%20sounds%20like%20a%20%22Question%22%20(The%20Insecure%20Operator)' })
+(loop_827_verdict: BehaviorVerdict { loopId: 827, loopName: 'The%20Upspeak%20Loop', then: 'it%20sounds%20like%20a%20%22Question%22%20(The%20Insecure%20Operator)', result: 'total%20loss%20of%20authority', operatorName: 'The%20Insecure%20Operator', operatorMechanism: 'it%20sounds%20like%20a%20%22Question%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_827_when_gate: BehaviorAssess { stage: 'when', text: 'asserting%20a%20fact' })
+
+// Topology
+(loop_827_start)-[:PROCESS]->(loop_827_given_gate)
+(loop_827_given_gate)-[:PROCESS { case: "ok" }]->(loop_827_when_gate)
+(loop_827_given_gate)-[:PROCESS { case: "err" }]->(loop_827_inactive)
+(loop_827_when_gate)-[:PROCESS { case: "ok" }]->(loop_827_context)
+(loop_827_when_gate)-[:PROCESS { case: "err" }]->(loop_827_inactive)
+(loop_827_context)-[:FORK { strategy: "behavior-branches" }]->(loop_827_context_branch | loop_827_then_branch | loop_827_operator_branch | loop_827_result_branch | loop_827_taxonomy_branch | loop_827_intervention_recognize | loop_827_intervention_leverage)
+(loop_827_context_branch | loop_827_then_branch | loop_827_operator_branch | loop_827_result_branch | loop_827_taxonomy_branch | loop_827_intervention_recognize | loop_827_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_827_verdict)
+(loop_827_inactive)-[:PROCESS]->(loop_827_sink)
+(loop_827_verdict)-[:PROCESS]->(loop_827_sink)
+(loop_827_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_827_then_branch)
+(loop_827_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_827_result_branch)

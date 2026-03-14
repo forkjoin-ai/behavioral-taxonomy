@@ -1,0 +1,33 @@
+// behavioral-loop-784.gg
+// Executable Gnosis projection for The Lean Back Loop.
+
+// Nodes
+(loop_784_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_784_context_branch: BehaviorEmit { emission: 'context' })
+(loop_784_given_gate: BehaviorAssess { stage: 'given', text: 'Reclining%20with%20hands%20behind%20head' })
+(loop_784_inactive: BehaviorTerminal { loopId: 784, loopName: 'The%20Lean%20Back%20Loop' })
+(loop_784_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_784_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_784_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_784_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Power%20Move%20Operator', mechanism: 'it%20signals%20%22Confidence%22%20or%20%22Arrogance%22' })
+(loop_784_result_branch: BehaviorEmit { emission: 'result', text: 'subordinates%20feeling%20%22Small%22%20and%20superiors%20feeling%20%22Challenged.%22' })
+(loop_784_sink: BehaviorSink)
+(loop_784_start: BehaviorStart { loopId: 784, loopName: 'The%20Lean%20Back%20Loop', given: 'Reclining%20with%20hands%20behind%20head', when: 'in%20a%20meeting', then: 'it%20signals%20%22Confidence%22%20or%20%22Arrogance%22%20(The%20Power%20Move%20Operator)', result: 'subordinates%20feeling%20%22Small%22%20and%20superiors%20feeling%20%22Challenged.%22', operatorName: 'The%20Power%20Move%20Operator', operatorMechanism: 'it%20signals%20%22Confidence%22%20or%20%22Arrogance%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_784_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_784_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Confidence%22%20or%20%22Arrogance%22%20(The%20Power%20Move%20Operator)' })
+(loop_784_verdict: BehaviorVerdict { loopId: 784, loopName: 'The%20Lean%20Back%20Loop', then: 'it%20signals%20%22Confidence%22%20or%20%22Arrogance%22%20(The%20Power%20Move%20Operator)', result: 'subordinates%20feeling%20%22Small%22%20and%20superiors%20feeling%20%22Challenged.%22', operatorName: 'The%20Power%20Move%20Operator', operatorMechanism: 'it%20signals%20%22Confidence%22%20or%20%22Arrogance%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_784_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20meeting' })
+
+// Topology
+(loop_784_start)-[:PROCESS]->(loop_784_given_gate)
+(loop_784_given_gate)-[:PROCESS { case: "ok" }]->(loop_784_when_gate)
+(loop_784_given_gate)-[:PROCESS { case: "err" }]->(loop_784_inactive)
+(loop_784_when_gate)-[:PROCESS { case: "ok" }]->(loop_784_context)
+(loop_784_when_gate)-[:PROCESS { case: "err" }]->(loop_784_inactive)
+(loop_784_context)-[:FORK { strategy: "behavior-branches" }]->(loop_784_context_branch | loop_784_then_branch | loop_784_operator_branch | loop_784_result_branch | loop_784_taxonomy_branch | loop_784_intervention_recognize | loop_784_intervention_interdict | loop_784_intervention_minimize)
+(loop_784_context_branch | loop_784_then_branch | loop_784_operator_branch | loop_784_result_branch | loop_784_taxonomy_branch | loop_784_intervention_recognize | loop_784_intervention_interdict | loop_784_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_784_verdict)
+(loop_784_inactive)-[:PROCESS]->(loop_784_sink)
+(loop_784_verdict)-[:PROCESS]->(loop_784_sink)
+(loop_784_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_784_then_branch)
+(loop_784_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_784_then_branch)
+(loop_784_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_784_then_branch)

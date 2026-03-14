@@ -1,0 +1,33 @@
+// behavioral-loop-940.gg
+// Executable Gnosis projection for The Pretzel Loop.
+
+// Nodes
+(loop_940_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_940_context_branch: BehaviorEmit { emission: 'context' })
+(loop_940_given_gate: BehaviorAssess { stage: 'given', text: 'Crossing%20legs%20and%20wrapping%20arms' })
+(loop_940_inactive: BehaviorTerminal { loopId: 940, loopName: 'The%20Pretzel%20Loop' })
+(loop_940_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_940_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_940_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_940_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Knot%20Operator', mechanism: 'the%20body%20takes%20up%20minimum%20space' })
+(loop_940_result_branch: BehaviorEmit { emission: 'result', text: 'being%20overlooked%20or%20ignored%20in%20group%20dynamics' })
+(loop_940_sink: BehaviorSink)
+(loop_940_start: BehaviorStart { loopId: 940, loopName: 'The%20Pretzel%20Loop', given: 'Crossing%20legs%20and%20wrapping%20arms', when: 'feeling%20insecure', then: 'the%20body%20takes%20up%20minimum%20space%20(The%20Knot%20Operator)', result: 'being%20overlooked%20or%20ignored%20in%20group%20dynamics', operatorName: 'The%20Knot%20Operator', operatorMechanism: 'the%20body%20takes%20up%20minimum%20space', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_940_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_940_then_branch: BehaviorEmit { emission: 'then', text: 'the%20body%20takes%20up%20minimum%20space%20(The%20Knot%20Operator)' })
+(loop_940_verdict: BehaviorVerdict { loopId: 940, loopName: 'The%20Pretzel%20Loop', then: 'the%20body%20takes%20up%20minimum%20space%20(The%20Knot%20Operator)', result: 'being%20overlooked%20or%20ignored%20in%20group%20dynamics', operatorName: 'The%20Knot%20Operator', operatorMechanism: 'the%20body%20takes%20up%20minimum%20space', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_940_when_gate: BehaviorAssess { stage: 'when', text: 'feeling%20insecure' })
+
+// Topology
+(loop_940_start)-[:PROCESS]->(loop_940_given_gate)
+(loop_940_given_gate)-[:PROCESS { case: "ok" }]->(loop_940_when_gate)
+(loop_940_given_gate)-[:PROCESS { case: "err" }]->(loop_940_inactive)
+(loop_940_when_gate)-[:PROCESS { case: "ok" }]->(loop_940_context)
+(loop_940_when_gate)-[:PROCESS { case: "err" }]->(loop_940_inactive)
+(loop_940_context)-[:FORK { strategy: "behavior-branches" }]->(loop_940_context_branch | loop_940_then_branch | loop_940_operator_branch | loop_940_result_branch | loop_940_taxonomy_branch | loop_940_intervention_recognize | loop_940_intervention_interdict | loop_940_intervention_minimize)
+(loop_940_context_branch | loop_940_then_branch | loop_940_operator_branch | loop_940_result_branch | loop_940_taxonomy_branch | loop_940_intervention_recognize | loop_940_intervention_interdict | loop_940_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_940_verdict)
+(loop_940_inactive)-[:PROCESS]->(loop_940_sink)
+(loop_940_verdict)-[:PROCESS]->(loop_940_sink)
+(loop_940_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_940_then_branch)
+(loop_940_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_940_then_branch)
+(loop_940_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_940_then_branch)

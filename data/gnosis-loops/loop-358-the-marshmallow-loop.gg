@@ -1,0 +1,33 @@
+// behavioral-loop-358.gg
+// Executable Gnosis projection for The Marshmallow Loop.
+
+// Nodes
+(loop_358_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_358_context_branch: BehaviorEmit { emission: 'context' })
+(loop_358_given_gate: BehaviorAssess { stage: 'given', text: 'Low%20muscle%20tone%20and%20soft%20edges' })
+(loop_358_inactive: BehaviorTerminal { loopId: 358, loopName: 'The%20Marshmallow%20Loop' })
+(loop_358_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_358_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_358_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)' })
+(loop_358_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Victim%20Operator', mechanism: 'aggressors%20view%20the%20individual%20as%20a%20%22Safe%20Target%22' })
+(loop_358_result_branch: BehaviorEmit { emission: 'result', text: 'frequent%20bullying%20or%20being%20spoken%20over%20in%20meetings' })
+(loop_358_sink: BehaviorSink)
+(loop_358_start: BehaviorStart { loopId: 358, loopName: 'The%20Marshmallow%20Loop', given: 'Low%20muscle%20tone%20and%20soft%20edges', when: 'in%20a%20confrontation', then: 'aggressors%20view%20the%20individual%20as%20a%20%22Safe%20Target%22%20(The%20Victim%20Operator)', result: 'frequent%20bullying%20or%20being%20spoken%20over%20in%20meetings', operatorName: 'The%20Victim%20Operator', operatorMechanism: 'aggressors%20view%20the%20individual%20as%20a%20%22Safe%20Target%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Listen%20for%20voice%20changes%20(pitch%2C%20pace%2C%20volume)', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_358_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_358_then_branch: BehaviorEmit { emission: 'then', text: 'aggressors%20view%20the%20individual%20as%20a%20%22Safe%20Target%22%20(The%20Victim%20Operator)' })
+(loop_358_verdict: BehaviorVerdict { loopId: 358, loopName: 'The%20Marshmallow%20Loop', then: 'aggressors%20view%20the%20individual%20as%20a%20%22Safe%20Target%22%20(The%20Victim%20Operator)', result: 'frequent%20bullying%20or%20being%20spoken%20over%20in%20meetings', operatorName: 'The%20Victim%20Operator', operatorMechanism: 'aggressors%20view%20the%20individual%20as%20a%20%22Safe%20Target%22', origin: 'BEHAVIORAL', modality: 'AUDITORY', mutability: '1', valences: 'SUBMISSION' })
+(loop_358_when_gate: BehaviorAssess { stage: 'when', text: 'in%20a%20confrontation' })
+
+// Topology
+(loop_358_start)-[:PROCESS]->(loop_358_given_gate)
+(loop_358_given_gate)-[:PROCESS { case: "ok" }]->(loop_358_when_gate)
+(loop_358_given_gate)-[:PROCESS { case: "err" }]->(loop_358_inactive)
+(loop_358_when_gate)-[:PROCESS { case: "ok" }]->(loop_358_context)
+(loop_358_when_gate)-[:PROCESS { case: "err" }]->(loop_358_inactive)
+(loop_358_context)-[:FORK { strategy: "behavior-branches" }]->(loop_358_context_branch | loop_358_then_branch | loop_358_operator_branch | loop_358_result_branch | loop_358_taxonomy_branch | loop_358_intervention_recognize | loop_358_intervention_interdict | loop_358_intervention_minimize)
+(loop_358_context_branch | loop_358_then_branch | loop_358_operator_branch | loop_358_result_branch | loop_358_taxonomy_branch | loop_358_intervention_recognize | loop_358_intervention_interdict | loop_358_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_358_verdict)
+(loop_358_inactive)-[:PROCESS]->(loop_358_sink)
+(loop_358_verdict)-[:PROCESS]->(loop_358_sink)
+(loop_358_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_358_then_branch)
+(loop_358_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_358_then_branch)
+(loop_358_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_358_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-1073.gg
+// Executable Gnosis projection for The Queue Loop.
+
+// Nodes
+(loop_1073_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1073_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1073_given_gate: BehaviorAssess { stage: 'given', text: 'An%20invisible%20line' })
+(loop_1073_inactive: BehaviorTerminal { loopId: 1073, loopName: 'The%20Queue%20Loop' })
+(loop_1073_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_1073_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1073_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1073_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20collective%20rage%20is%20disproportionate%20to%20the%20time%20lost%20(The%20Fairness%20Trigger)' })
+(loop_1073_result_branch: BehaviorEmit { emission: 'result', text: 'civilization%20enforcing%20order%20through%20shame' })
+(loop_1073_sink: BehaviorSink)
+(loop_1073_start: BehaviorStart { loopId: 1073, loopName: 'The%20Queue%20Loop', given: 'An%20invisible%20line', when: 'someone%20cuts%20it', then: 'the%20collective%20rage%20is%20disproportionate%20to%20the%20time%20lost%20(The%20Fairness%20Trigger)', result: 'civilization%20enforcing%20order%20through%20shame', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20collective%20rage%20is%20disproportionate%20to%20the%20time%20lost%20(The%20Fairness%20Trigger)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1073_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1073_then_branch: BehaviorEmit { emission: 'then', text: 'the%20collective%20rage%20is%20disproportionate%20to%20the%20time%20lost%20(The%20Fairness%20Trigger)' })
+(loop_1073_verdict: BehaviorVerdict { loopId: 1073, loopName: 'The%20Queue%20Loop', then: 'the%20collective%20rage%20is%20disproportionate%20to%20the%20time%20lost%20(The%20Fairness%20Trigger)', result: 'civilization%20enforcing%20order%20through%20shame', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20collective%20rage%20is%20disproportionate%20to%20the%20time%20lost%20(The%20Fairness%20Trigger)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1073_when_gate: BehaviorAssess { stage: 'when', text: 'someone%20cuts%20it' })
+
+// Topology
+(loop_1073_start)-[:PROCESS]->(loop_1073_given_gate)
+(loop_1073_given_gate)-[:PROCESS { case: "ok" }]->(loop_1073_when_gate)
+(loop_1073_given_gate)-[:PROCESS { case: "err" }]->(loop_1073_inactive)
+(loop_1073_when_gate)-[:PROCESS { case: "ok" }]->(loop_1073_context)
+(loop_1073_when_gate)-[:PROCESS { case: "err" }]->(loop_1073_inactive)
+(loop_1073_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1073_context_branch | loop_1073_then_branch | loop_1073_operator_branch | loop_1073_result_branch | loop_1073_taxonomy_branch | loop_1073_intervention_recognize | loop_1073_intervention_interdict | loop_1073_intervention_minimize)
+(loop_1073_context_branch | loop_1073_then_branch | loop_1073_operator_branch | loop_1073_result_branch | loop_1073_taxonomy_branch | loop_1073_intervention_recognize | loop_1073_intervention_interdict | loop_1073_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1073_verdict)
+(loop_1073_inactive)-[:PROCESS]->(loop_1073_sink)
+(loop_1073_verdict)-[:PROCESS]->(loop_1073_sink)
+(loop_1073_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1073_then_branch)
+(loop_1073_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1073_then_branch)
+(loop_1073_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1073_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-1051.gg
+// Executable Gnosis projection for The Masking Loop.
+
+// Nodes
+(loop_1051_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1051_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1051_given_gate: BehaviorAssess { stage: 'given', text: 'Neurodivergence%20in%20a%20neurotypical%20world' })
+(loop_1051_inactive: BehaviorTerminal { loopId: 1051, loopName: 'The%20Masking%20Loop' })
+(loop_1051_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.' })
+(loop_1051_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1051_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_1051_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'every%20gesture%20is%20manually%20calculated%2C%20not%20felt%20(The%20Manual%20Pilot)' })
+(loop_1051_result_branch: BehaviorEmit { emission: 'result', text: '%22Social%20Hangovers%22%20requiring%20days%20of%20isolation%20to%20recover' })
+(loop_1051_sink: BehaviorSink)
+(loop_1051_start: BehaviorStart { loopId: 1051, loopName: 'The%20Masking%20Loop', given: 'Neurodivergence%20in%20a%20neurotypical%20world', when: 'in%20public', then: 'every%20gesture%20is%20manually%20calculated%2C%20not%20felt%20(The%20Manual%20Pilot)', result: '%22Social%20Hangovers%22%20requiring%20days%20of%20isolation%20to%20recover', operatorName: 'Unknown%20Operator', operatorMechanism: 'every%20gesture%20is%20manually%20calculated%2C%20not%20felt%20(The%20Manual%20Pilot)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Proactively%20seek%20social%20exposure%20in%20safe%2C%20low-stakes%20environments%20to%20break%20the%20cycle.', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_1051_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1051_then_branch: BehaviorEmit { emission: 'then', text: 'every%20gesture%20is%20manually%20calculated%2C%20not%20felt%20(The%20Manual%20Pilot)' })
+(loop_1051_verdict: BehaviorVerdict { loopId: 1051, loopName: 'The%20Masking%20Loop', then: 'every%20gesture%20is%20manually%20calculated%2C%20not%20felt%20(The%20Manual%20Pilot)', result: '%22Social%20Hangovers%22%20requiring%20days%20of%20isolation%20to%20recover', operatorName: 'Unknown%20Operator', operatorMechanism: 'every%20gesture%20is%20manually%20calculated%2C%20not%20felt%20(The%20Manual%20Pilot)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1051_when_gate: BehaviorAssess { stage: 'when', text: 'in%20public' })
+
+// Topology
+(loop_1051_start)-[:PROCESS]->(loop_1051_given_gate)
+(loop_1051_given_gate)-[:PROCESS { case: "ok" }]->(loop_1051_when_gate)
+(loop_1051_given_gate)-[:PROCESS { case: "err" }]->(loop_1051_inactive)
+(loop_1051_when_gate)-[:PROCESS { case: "ok" }]->(loop_1051_context)
+(loop_1051_when_gate)-[:PROCESS { case: "err" }]->(loop_1051_inactive)
+(loop_1051_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1051_context_branch | loop_1051_then_branch | loop_1051_operator_branch | loop_1051_result_branch | loop_1051_taxonomy_branch | loop_1051_intervention_recognize | loop_1051_intervention_interdict | loop_1051_intervention_minimize)
+(loop_1051_context_branch | loop_1051_then_branch | loop_1051_operator_branch | loop_1051_result_branch | loop_1051_taxonomy_branch | loop_1051_intervention_recognize | loop_1051_intervention_interdict | loop_1051_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1051_verdict)
+(loop_1051_inactive)-[:PROCESS]->(loop_1051_sink)
+(loop_1051_verdict)-[:PROCESS]->(loop_1051_sink)
+(loop_1051_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1051_then_branch)
+(loop_1051_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1051_then_branch)
+(loop_1051_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1051_then_branch)

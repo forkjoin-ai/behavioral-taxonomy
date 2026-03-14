@@ -1,0 +1,33 @@
+// behavioral-loop-633.gg
+// Executable Gnosis projection for The Puffy Gum Loop.
+
+// Nodes
+(loop_633_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_633_context_branch: BehaviorEmit { emission: 'context' })
+(loop_633_given_gate: BehaviorAssess { stage: 'given', text: 'Overgrown%20gums%20covering%20teeth' })
+(loop_633_inactive: BehaviorTerminal { loopId: 633, loopName: 'The%20Puffy%20Gum%20Loop' })
+(loop_633_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_633_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_633_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_633_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Swelling%20Operator', mechanism: 'teeth%20look%20%22Tiny%22%20or%20%22Drowning%22' })
+(loop_633_result_branch: BehaviorEmit { emission: 'result', text: 'assumptions%20of%20medication%20use%20or%20poor%20hygiene' })
+(loop_633_sink: BehaviorSink)
+(loop_633_start: BehaviorStart { loopId: 633, loopName: 'The%20Puffy%20Gum%20Loop', given: 'Overgrown%20gums%20covering%20teeth', when: 'smiling', then: 'teeth%20look%20%22Tiny%22%20or%20%22Drowning%22%20(The%20Swelling%20Operator)', result: 'assumptions%20of%20medication%20use%20or%20poor%20hygiene', operatorName: 'The%20Swelling%20Operator', operatorMechanism: 'teeth%20look%20%22Tiny%22%20or%20%22Drowning%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_633_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_633_then_branch: BehaviorEmit { emission: 'then', text: 'teeth%20look%20%22Tiny%22%20or%20%22Drowning%22%20(The%20Swelling%20Operator)' })
+(loop_633_verdict: BehaviorVerdict { loopId: 633, loopName: 'The%20Puffy%20Gum%20Loop', then: 'teeth%20look%20%22Tiny%22%20or%20%22Drowning%22%20(The%20Swelling%20Operator)', result: 'assumptions%20of%20medication%20use%20or%20poor%20hygiene', operatorName: 'The%20Swelling%20Operator', operatorMechanism: 'teeth%20look%20%22Tiny%22%20or%20%22Drowning%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_633_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_633_start)-[:PROCESS]->(loop_633_given_gate)
+(loop_633_given_gate)-[:PROCESS { case: "ok" }]->(loop_633_when_gate)
+(loop_633_given_gate)-[:PROCESS { case: "err" }]->(loop_633_inactive)
+(loop_633_when_gate)-[:PROCESS { case: "ok" }]->(loop_633_context)
+(loop_633_when_gate)-[:PROCESS { case: "err" }]->(loop_633_inactive)
+(loop_633_context)-[:FORK { strategy: "behavior-branches" }]->(loop_633_context_branch | loop_633_then_branch | loop_633_operator_branch | loop_633_result_branch | loop_633_taxonomy_branch | loop_633_intervention_recognize | loop_633_intervention_interdict | loop_633_intervention_minimize)
+(loop_633_context_branch | loop_633_then_branch | loop_633_operator_branch | loop_633_result_branch | loop_633_taxonomy_branch | loop_633_intervention_recognize | loop_633_intervention_interdict | loop_633_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_633_verdict)
+(loop_633_inactive)-[:PROCESS]->(loop_633_sink)
+(loop_633_verdict)-[:PROCESS]->(loop_633_sink)
+(loop_633_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_633_then_branch)
+(loop_633_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_633_then_branch)
+(loop_633_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_633_then_branch)

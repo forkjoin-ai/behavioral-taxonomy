@@ -1,0 +1,33 @@
+// behavioral-loop-589.gg
+// Executable Gnosis projection for The C-Spine Loop.
+
+// Nodes
+(loop_589_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_589_context_branch: BehaviorEmit { emission: 'context' })
+(loop_589_given_gate: BehaviorAssess { stage: 'given', text: 'Permanent%20curvature%20of%20upper%20back%20from%20phone%20use' })
+(loop_589_inactive: BehaviorTerminal { loopId: 589, loopName: 'The%20C-Spine%20Loop' })
+(loop_589_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20app%20limits%2C%20grayscale%2C%20or%20notification%20management' })
+(loop_589_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_589_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_589_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Gamer%20Operator', mechanism: 'the%20head%20still%20juts%20forward' })
+(loop_589_result_branch: BehaviorEmit { emission: 'result', text: 'looking%20%22Unathletic%22%20and%20%22Submissive.%22' })
+(loop_589_sink: BehaviorSink)
+(loop_589_start: BehaviorStart { loopId: 589, loopName: 'The%20C-Spine%20Loop', given: 'Permanent%20curvature%20of%20upper%20back%20from%20phone%20use', when: 'standing%20%22straight%22', then: 'the%20head%20still%20juts%20forward%20(The%20Gamer%20Operator)', result: 'looking%20%22Unathletic%22%20and%20%22Submissive.%22', operatorName: 'The%20Gamer%20Operator', operatorMechanism: 'the%20head%20still%20juts%20forward', origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '8', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20app%20limits%2C%20grayscale%2C%20or%20notification%20management', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_589_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_589_then_branch: BehaviorEmit { emission: 'then', text: 'the%20head%20still%20juts%20forward%20(The%20Gamer%20Operator)' })
+(loop_589_verdict: BehaviorVerdict { loopId: 589, loopName: 'The%20C-Spine%20Loop', then: 'the%20head%20still%20juts%20forward%20(The%20Gamer%20Operator)', result: 'looking%20%22Unathletic%22%20and%20%22Submissive.%22', operatorName: 'The%20Gamer%20Operator', operatorMechanism: 'the%20head%20still%20juts%20forward', origin: 'DIGITAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_589_when_gate: BehaviorAssess { stage: 'when', text: 'standing%20%22straight%22' })
+
+// Topology
+(loop_589_start)-[:PROCESS]->(loop_589_given_gate)
+(loop_589_given_gate)-[:PROCESS { case: "ok" }]->(loop_589_when_gate)
+(loop_589_given_gate)-[:PROCESS { case: "err" }]->(loop_589_inactive)
+(loop_589_when_gate)-[:PROCESS { case: "ok" }]->(loop_589_context)
+(loop_589_when_gate)-[:PROCESS { case: "err" }]->(loop_589_inactive)
+(loop_589_context)-[:FORK { strategy: "behavior-branches" }]->(loop_589_context_branch | loop_589_then_branch | loop_589_operator_branch | loop_589_result_branch | loop_589_taxonomy_branch | loop_589_intervention_recognize | loop_589_intervention_interdict | loop_589_intervention_minimize)
+(loop_589_context_branch | loop_589_then_branch | loop_589_operator_branch | loop_589_result_branch | loop_589_taxonomy_branch | loop_589_intervention_recognize | loop_589_intervention_interdict | loop_589_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_589_verdict)
+(loop_589_inactive)-[:PROCESS]->(loop_589_sink)
+(loop_589_verdict)-[:PROCESS]->(loop_589_sink)
+(loop_589_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_589_then_branch)
+(loop_589_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_589_then_branch)
+(loop_589_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_589_then_branch)

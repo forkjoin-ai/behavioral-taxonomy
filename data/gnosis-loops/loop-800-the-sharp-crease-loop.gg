@@ -1,0 +1,31 @@
+// behavioral-loop-800.gg
+// Executable Gnosis projection for The Sharp Crease Loop.
+
+// Nodes
+(loop_800_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_800_context_branch: BehaviorEmit { emission: 'context' })
+(loop_800_given_gate: BehaviorAssess { stage: 'given', text: 'Razor-sharp%20pant%20lines' })
+(loop_800_inactive: BehaviorTerminal { loopId: 800, loopName: 'The%20Sharp%20Crease%20Loop' })
+(loop_800_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_800_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_800_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Crisp%20Operator', mechanism: 'it%20signals%20%22Control%22%20and%20%22Preparation%22' })
+(loop_800_result_branch: BehaviorEmit { emission: 'result', text: 'visual%20authority' })
+(loop_800_sink: BehaviorSink)
+(loop_800_start: BehaviorStart { loopId: 800, loopName: 'The%20Sharp%20Crease%20Loop', given: 'Razor-sharp%20pant%20lines', when: 'standing', then: 'it%20signals%20%22Control%22%20and%20%22Preparation%22%20(The%20Crisp%20Operator)', result: 'visual%20authority', operatorName: 'The%20Crisp%20Operator', operatorMechanism: 'it%20signals%20%22Control%22%20and%20%22Preparation%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_leverage: 'Use%20to%20establish%20credibility%20before%20high-stakes%20moments' })
+(loop_800_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_800_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Control%22%20and%20%22Preparation%22%20(The%20Crisp%20Operator)' })
+(loop_800_verdict: BehaviorVerdict { loopId: 800, loopName: 'The%20Sharp%20Crease%20Loop', then: 'it%20signals%20%22Control%22%20and%20%22Preparation%22%20(The%20Crisp%20Operator)', result: 'visual%20authority', operatorName: 'The%20Crisp%20Operator', operatorMechanism: 'it%20signals%20%22Control%22%20and%20%22Preparation%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_800_when_gate: BehaviorAssess { stage: 'when', text: 'standing' })
+
+// Topology
+(loop_800_start)-[:PROCESS]->(loop_800_given_gate)
+(loop_800_given_gate)-[:PROCESS { case: "ok" }]->(loop_800_when_gate)
+(loop_800_given_gate)-[:PROCESS { case: "err" }]->(loop_800_inactive)
+(loop_800_when_gate)-[:PROCESS { case: "ok" }]->(loop_800_context)
+(loop_800_when_gate)-[:PROCESS { case: "err" }]->(loop_800_inactive)
+(loop_800_context)-[:FORK { strategy: "behavior-branches" }]->(loop_800_context_branch | loop_800_then_branch | loop_800_operator_branch | loop_800_result_branch | loop_800_taxonomy_branch | loop_800_intervention_recognize | loop_800_intervention_leverage)
+(loop_800_context_branch | loop_800_then_branch | loop_800_operator_branch | loop_800_result_branch | loop_800_taxonomy_branch | loop_800_intervention_recognize | loop_800_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_800_verdict)
+(loop_800_inactive)-[:PROCESS]->(loop_800_sink)
+(loop_800_verdict)-[:PROCESS]->(loop_800_sink)
+(loop_800_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_800_then_branch)
+(loop_800_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_800_result_branch)

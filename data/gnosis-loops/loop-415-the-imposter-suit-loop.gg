@@ -1,0 +1,31 @@
+// behavioral-loop-415.gg
+// Executable Gnosis projection for The Imposter Suit Loop.
+
+// Nodes
+(loop_415_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_415_context_branch: BehaviorEmit { emission: 'context' })
+(loop_415_given_gate: BehaviorAssess { stage: 'given', text: 'Suit%20jacket%20shoulders%20extending%20past%20natural%20shoulders' })
+(loop_415_inactive: BehaviorTerminal { loopId: 415, loopName: 'The%20Imposter%20Suit%20Loop' })
+(loop_415_intervention_leverage: BehaviorEmit { emission: 'intervention', interventionKind: 'leverage', text: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_415_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_415_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Amateur%20Operator', mechanism: "the%20individual%20looks%20like%20a%20%22Kid%20in%20Dad's%20Suit%22" })
+(loop_415_result_branch: BehaviorEmit { emission: 'result', text: 'total%20lack%20of%20authority%20in%20court%20or%20business' })
+(loop_415_sink: BehaviorSink)
+(loop_415_start: BehaviorStart { loopId: 415, loopName: 'The%20Imposter%20Suit%20Loop', given: 'Suit%20jacket%20shoulders%20extending%20past%20natural%20shoulders', when: 'gesturing', then: "the%20individual%20looks%20like%20a%20%22Kid%20in%20Dad's%20Suit%22%20(The%20Amateur%20Operator)", result: 'total%20lack%20of%20authority%20in%20court%20or%20business', operatorName: 'The%20Amateur%20Operator', operatorMechanism: "the%20individual%20looks%20like%20a%20%22Kid%20in%20Dad's%20Suit%22", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_leverage: 'Display%20in%20leadership%20or%20authority%20situations' })
+(loop_415_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_415_then_branch: BehaviorEmit { emission: 'then', text: "the%20individual%20looks%20like%20a%20%22Kid%20in%20Dad's%20Suit%22%20(The%20Amateur%20Operator)" })
+(loop_415_verdict: BehaviorVerdict { loopId: 415, loopName: 'The%20Imposter%20Suit%20Loop', then: "the%20individual%20looks%20like%20a%20%22Kid%20in%20Dad's%20Suit%22%20(The%20Amateur%20Operator)", result: 'total%20lack%20of%20authority%20in%20court%20or%20business', operatorName: 'The%20Amateur%20Operator', operatorMechanism: "the%20individual%20looks%20like%20a%20%22Kid%20in%20Dad's%20Suit%22", origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'DOMINANCE' })
+(loop_415_when_gate: BehaviorAssess { stage: 'when', text: 'gesturing' })
+
+// Topology
+(loop_415_start)-[:PROCESS]->(loop_415_given_gate)
+(loop_415_given_gate)-[:PROCESS { case: "ok" }]->(loop_415_when_gate)
+(loop_415_given_gate)-[:PROCESS { case: "err" }]->(loop_415_inactive)
+(loop_415_when_gate)-[:PROCESS { case: "ok" }]->(loop_415_context)
+(loop_415_when_gate)-[:PROCESS { case: "err" }]->(loop_415_inactive)
+(loop_415_context)-[:FORK { strategy: "behavior-branches" }]->(loop_415_context_branch | loop_415_then_branch | loop_415_operator_branch | loop_415_result_branch | loop_415_taxonomy_branch | loop_415_intervention_recognize | loop_415_intervention_leverage)
+(loop_415_context_branch | loop_415_then_branch | loop_415_operator_branch | loop_415_result_branch | loop_415_taxonomy_branch | loop_415_intervention_recognize | loop_415_intervention_leverage)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_415_verdict)
+(loop_415_inactive)-[:PROCESS]->(loop_415_sink)
+(loop_415_verdict)-[:PROCESS]->(loop_415_sink)
+(loop_415_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_415_then_branch)
+(loop_415_intervention_leverage)-[:INTERFERE { mode: "constructive" }]->(loop_415_result_branch)

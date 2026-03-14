@@ -1,0 +1,33 @@
+// behavioral-loop-184.gg
+// Executable Gnosis projection for The Fluorosis Loop.
+
+// Nodes
+(loop_184_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_184_context_branch: BehaviorEmit { emission: 'context' })
+(loop_184_given_gate: BehaviorAssess { stage: 'given', text: 'Mottled%20enamel%20from%20excess%20fluoride%2Fminerals' })
+(loop_184_inactive: BehaviorTerminal { loopId: 184, loopName: 'The%20Fluorosis%20Loop' })
+(loop_184_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_184_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_184_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_184_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Class%20Operator', mechanism: 'observers%20associate%20it%20with%20%22Rural%20Origin%22%20or%20%22Water%20Quality%22%20issues' })
+(loop_184_result_branch: BehaviorEmit { emission: 'result', text: 'subtle%20class-based%20assumptions%2Fdiscrimination' })
+(loop_184_sink: BehaviorSink)
+(loop_184_start: BehaviorStart { loopId: 184, loopName: 'The%20Fluorosis%20Loop', given: 'Mottled%20enamel%20from%20excess%20fluoride%2Fminerals', when: 'smiling', then: 'observers%20associate%20it%20with%20%22Rural%20Origin%22%20or%20%22Water%20Quality%22%20issues%20(The%20Class%20Operator)', result: 'subtle%20class-based%20assumptions%2Fdiscrimination', operatorName: 'The%20Class%20Operator', operatorMechanism: 'observers%20associate%20it%20with%20%22Rural%20Origin%22%20or%20%22Water%20Quality%22%20issues', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_184_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_184_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20associate%20it%20with%20%22Rural%20Origin%22%20or%20%22Water%20Quality%22%20issues%20(The%20Class%20Operator)' })
+(loop_184_verdict: BehaviorVerdict { loopId: 184, loopName: 'The%20Fluorosis%20Loop', then: 'observers%20associate%20it%20with%20%22Rural%20Origin%22%20or%20%22Water%20Quality%22%20issues%20(The%20Class%20Operator)', result: 'subtle%20class-based%20assumptions%2Fdiscrimination', operatorName: 'The%20Class%20Operator', operatorMechanism: 'observers%20associate%20it%20with%20%22Rural%20Origin%22%20or%20%22Water%20Quality%22%20issues', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_184_when_gate: BehaviorAssess { stage: 'when', text: 'smiling' })
+
+// Topology
+(loop_184_start)-[:PROCESS]->(loop_184_given_gate)
+(loop_184_given_gate)-[:PROCESS { case: "ok" }]->(loop_184_when_gate)
+(loop_184_given_gate)-[:PROCESS { case: "err" }]->(loop_184_inactive)
+(loop_184_when_gate)-[:PROCESS { case: "ok" }]->(loop_184_context)
+(loop_184_when_gate)-[:PROCESS { case: "err" }]->(loop_184_inactive)
+(loop_184_context)-[:FORK { strategy: "behavior-branches" }]->(loop_184_context_branch | loop_184_then_branch | loop_184_operator_branch | loop_184_result_branch | loop_184_taxonomy_branch | loop_184_intervention_recognize | loop_184_intervention_interdict | loop_184_intervention_minimize)
+(loop_184_context_branch | loop_184_then_branch | loop_184_operator_branch | loop_184_result_branch | loop_184_taxonomy_branch | loop_184_intervention_recognize | loop_184_intervention_interdict | loop_184_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_184_verdict)
+(loop_184_inactive)-[:PROCESS]->(loop_184_sink)
+(loop_184_verdict)-[:PROCESS]->(loop_184_sink)
+(loop_184_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_184_then_branch)
+(loop_184_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_184_then_branch)
+(loop_184_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_184_then_branch)

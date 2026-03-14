@@ -1,0 +1,33 @@
+// behavioral-loop-501.gg
+// Executable Gnosis projection for The Butterfly Loop.
+
+// Nodes
+(loop_501_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_501_context_branch: BehaviorEmit { emission: 'context' })
+(loop_501_given_gate: BehaviorAssess { stage: 'given', text: 'Red%20rash%20across%20nose%2Fcheeks%20(Lupus%2FRosacea)' })
+(loop_501_inactive: BehaviorTerminal { loopId: 501, loopName: 'The%20Butterfly%20Loop' })
+(loop_501_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_501_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_501_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_501_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Heat%20Operator', mechanism: 'observers%20assume%20%22Fever%2C%22%20%22Alcohol%2C%22%20or%20%22Sunburn%22' })
+(loop_501_result_branch: BehaviorEmit { emission: 'result', text: 'constant%20inquiries%20about%20health' })
+(loop_501_sink: BehaviorSink)
+(loop_501_start: BehaviorStart { loopId: 501, loopName: 'The%20Butterfly%20Loop', given: 'Red%20rash%20across%20nose%2Fcheeks%20(Lupus%2FRosacea)', when: 'without%20makeup', then: 'observers%20assume%20%22Fever%2C%22%20%22Alcohol%2C%22%20or%20%22Sunburn%22%20(The%20Heat%20Operator)', result: 'constant%20inquiries%20about%20health', operatorName: 'The%20Heat%20Operator', operatorMechanism: 'observers%20assume%20%22Fever%2C%22%20%22Alcohol%2C%22%20or%20%22Sunburn%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Reframe%20the%20situation%3A%20what%20would%20an%20objective%20observer%20see%3F' })
+(loop_501_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_501_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Fever%2C%22%20%22Alcohol%2C%22%20or%20%22Sunburn%22%20(The%20Heat%20Operator)' })
+(loop_501_verdict: BehaviorVerdict { loopId: 501, loopName: 'The%20Butterfly%20Loop', then: 'observers%20assume%20%22Fever%2C%22%20%22Alcohol%2C%22%20or%20%22Sunburn%22%20(The%20Heat%20Operator)', result: 'constant%20inquiries%20about%20health', operatorName: 'The%20Heat%20Operator', operatorMechanism: 'observers%20assume%20%22Fever%2C%22%20%22Alcohol%2C%22%20or%20%22Sunburn%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_501_when_gate: BehaviorAssess { stage: 'when', text: 'without%20makeup' })
+
+// Topology
+(loop_501_start)-[:PROCESS]->(loop_501_given_gate)
+(loop_501_given_gate)-[:PROCESS { case: "ok" }]->(loop_501_when_gate)
+(loop_501_given_gate)-[:PROCESS { case: "err" }]->(loop_501_inactive)
+(loop_501_when_gate)-[:PROCESS { case: "ok" }]->(loop_501_context)
+(loop_501_when_gate)-[:PROCESS { case: "err" }]->(loop_501_inactive)
+(loop_501_context)-[:FORK { strategy: "behavior-branches" }]->(loop_501_context_branch | loop_501_then_branch | loop_501_operator_branch | loop_501_result_branch | loop_501_taxonomy_branch | loop_501_intervention_recognize | loop_501_intervention_interdict | loop_501_intervention_minimize)
+(loop_501_context_branch | loop_501_then_branch | loop_501_operator_branch | loop_501_result_branch | loop_501_taxonomy_branch | loop_501_intervention_recognize | loop_501_intervention_interdict | loop_501_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_501_verdict)
+(loop_501_inactive)-[:PROCESS]->(loop_501_sink)
+(loop_501_verdict)-[:PROCESS]->(loop_501_sink)
+(loop_501_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_501_then_branch)
+(loop_501_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_501_then_branch)
+(loop_501_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_501_then_branch)

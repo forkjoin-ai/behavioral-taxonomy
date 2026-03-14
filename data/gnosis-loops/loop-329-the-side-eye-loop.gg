@@ -1,0 +1,33 @@
+// behavioral-loop-329.gg
+// Executable Gnosis projection for The Side-Eye Loop.
+
+// Nodes
+(loop_329_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_329_context_branch: BehaviorEmit { emission: 'context' })
+(loop_329_given_gate: BehaviorAssess { stage: 'given', text: 'Head%20turned%20away%20%2B%20eyes%20looking%20back' })
+(loop_329_inactive: BehaviorTerminal { loopId: 329, loopName: 'The%20Side-Eye%20Loop' })
+(loop_329_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_329_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_329_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_329_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Suspicion%20Operator', mechanism: 'the%20look%20signals%20%22Judgment%2C%22%20%22Skepticism%2C%22%20or%20%22Distrust%22' })
+(loop_329_result_branch: BehaviorEmit { emission: 'result', text: 'the%20speaker%20becoming%20defensive%20and%20**Withholding%20Information**' })
+(loop_329_sink: BehaviorSink)
+(loop_329_start: BehaviorStart { loopId: 329, loopName: 'The%20Side-Eye%20Loop', given: 'Head%20turned%20away%20%2B%20eyes%20looking%20back', when: 'listening', then: 'the%20look%20signals%20%22Judgment%2C%22%20%22Skepticism%2C%22%20or%20%22Distrust%22%20(The%20Suspicion%20Operator)', result: 'the%20speaker%20becoming%20defensive%20and%20**Withholding%20Information**', operatorName: 'The%20Suspicion%20Operator', operatorMechanism: 'the%20look%20signals%20%22Judgment%2C%22%20%22Skepticism%2C%22%20or%20%22Distrust%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '6', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Prepare%20counter-narratives%20in%20advance%20for%20recurring%20situations' })
+(loop_329_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_329_then_branch: BehaviorEmit { emission: 'then', text: 'the%20look%20signals%20%22Judgment%2C%22%20%22Skepticism%2C%22%20or%20%22Distrust%22%20(The%20Suspicion%20Operator)' })
+(loop_329_verdict: BehaviorVerdict { loopId: 329, loopName: 'The%20Side-Eye%20Loop', then: 'the%20look%20signals%20%22Judgment%2C%22%20%22Skepticism%2C%22%20or%20%22Distrust%22%20(The%20Suspicion%20Operator)', result: 'the%20speaker%20becoming%20defensive%20and%20**Withholding%20Information**', operatorName: 'The%20Suspicion%20Operator', operatorMechanism: 'the%20look%20signals%20%22Judgment%2C%22%20%22Skepticism%2C%22%20or%20%22Distrust%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_329_when_gate: BehaviorAssess { stage: 'when', text: 'listening' })
+
+// Topology
+(loop_329_start)-[:PROCESS]->(loop_329_given_gate)
+(loop_329_given_gate)-[:PROCESS { case: "ok" }]->(loop_329_when_gate)
+(loop_329_given_gate)-[:PROCESS { case: "err" }]->(loop_329_inactive)
+(loop_329_when_gate)-[:PROCESS { case: "ok" }]->(loop_329_context)
+(loop_329_when_gate)-[:PROCESS { case: "err" }]->(loop_329_inactive)
+(loop_329_context)-[:FORK { strategy: "behavior-branches" }]->(loop_329_context_branch | loop_329_then_branch | loop_329_operator_branch | loop_329_result_branch | loop_329_taxonomy_branch | loop_329_intervention_recognize | loop_329_intervention_interdict | loop_329_intervention_minimize)
+(loop_329_context_branch | loop_329_then_branch | loop_329_operator_branch | loop_329_result_branch | loop_329_taxonomy_branch | loop_329_intervention_recognize | loop_329_intervention_interdict | loop_329_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_329_verdict)
+(loop_329_inactive)-[:PROCESS]->(loop_329_sink)
+(loop_329_verdict)-[:PROCESS]->(loop_329_sink)
+(loop_329_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_329_then_branch)
+(loop_329_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_329_then_branch)
+(loop_329_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_329_then_branch)

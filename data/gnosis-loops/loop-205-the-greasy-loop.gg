@@ -1,0 +1,33 @@
+// behavioral-loop-205.gg
+// Executable Gnosis projection for The Greasy Loop.
+
+// Nodes
+(loop_205_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_205_context_branch: BehaviorEmit { emission: 'context' })
+(loop_205_given_gate: BehaviorAssess { stage: 'given', text: 'Hyper-active%20sebaceous%20glands' })
+(loop_205_inactive: BehaviorTerminal { loopId: 205, loopName: 'The%20Greasy%20Loop' })
+(loop_205_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_205_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_205_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_205_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Disgust%20Operator', mechanism: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Depression%22' })
+(loop_205_result_branch: BehaviorEmit { emission: 'result', text: 'social%20avoidance%20despite%20the%20individual%20showering%20daily' })
+(loop_205_sink: BehaviorSink)
+(loop_205_start: BehaviorStart { loopId: 205, loopName: 'The%20Greasy%20Loop', given: 'Hyper-active%20sebaceous%20glands', when: 'seen%20late%20in%20the%20day', then: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Depression%22%20(The%20Disgust%20Operator)', result: 'social%20avoidance%20despite%20the%20individual%20showering%20daily', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Depression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION', interventionDifficulty: '6', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_205_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_205_then_branch: BehaviorEmit { emission: 'then', text: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Depression%22%20(The%20Disgust%20Operator)' })
+(loop_205_verdict: BehaviorVerdict { loopId: 205, loopName: 'The%20Greasy%20Loop', then: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Depression%22%20(The%20Disgust%20Operator)', result: 'social%20avoidance%20despite%20the%20individual%20showering%20daily', operatorName: 'The%20Disgust%20Operator', operatorMechanism: 'observers%20assume%20%22Poor%20Hygiene%22%20or%20%22Depression%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'REPULSION' })
+(loop_205_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20late%20in%20the%20day' })
+
+// Topology
+(loop_205_start)-[:PROCESS]->(loop_205_given_gate)
+(loop_205_given_gate)-[:PROCESS { case: "ok" }]->(loop_205_when_gate)
+(loop_205_given_gate)-[:PROCESS { case: "err" }]->(loop_205_inactive)
+(loop_205_when_gate)-[:PROCESS { case: "ok" }]->(loop_205_context)
+(loop_205_when_gate)-[:PROCESS { case: "err" }]->(loop_205_inactive)
+(loop_205_context)-[:FORK { strategy: "behavior-branches" }]->(loop_205_context_branch | loop_205_then_branch | loop_205_operator_branch | loop_205_result_branch | loop_205_taxonomy_branch | loop_205_intervention_recognize | loop_205_intervention_interdict | loop_205_intervention_minimize)
+(loop_205_context_branch | loop_205_then_branch | loop_205_operator_branch | loop_205_result_branch | loop_205_taxonomy_branch | loop_205_intervention_recognize | loop_205_intervention_interdict | loop_205_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_205_verdict)
+(loop_205_inactive)-[:PROCESS]->(loop_205_sink)
+(loop_205_verdict)-[:PROCESS]->(loop_205_sink)
+(loop_205_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_205_then_branch)
+(loop_205_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_205_then_branch)
+(loop_205_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_205_then_branch)

@@ -1,0 +1,33 @@
+// behavioral-loop-823.gg
+// Executable Gnosis projection for The Age Spot Loop.
+
+// Nodes
+(loop_823_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_823_context_branch: BehaviorEmit { emission: 'context' })
+(loop_823_given_gate: BehaviorAssess { stage: 'given', text: 'Brown%20macules%20on%20hands%2Fface' })
+(loop_823_inactive: BehaviorTerminal { loopId: 823, loopName: 'The%20Age%20Spot%20Loop' })
+(loop_823_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_823_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_823_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions' })
+(loop_823_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Sun%20Operator', mechanism: 'it%20signals%20%22Cumulative%20Damage%22' })
+(loop_823_result_branch: BehaviorEmit { emission: 'result', text: 'visual%20confirmation%20of%20seniority' })
+(loop_823_sink: BehaviorSink)
+(loop_823_start: BehaviorStart { loopId: 823, loopName: 'The%20Age%20Spot%20Loop', given: 'Brown%20macules%20on%20hands%2Fface', when: 'seen%20in%20high%20contrast', then: 'it%20signals%20%22Cumulative%20Damage%22%20(The%20Sun%20Operator)', result: 'visual%20confirmation%20of%20seniority', operatorName: 'The%20Sun%20Operator', operatorMechanism: 'it%20signals%20%22Cumulative%20Damage%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Be%20aware%20of%20physical%20comfort%2Fdiscomfort%20in%20interactions', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Seek%20feedback%20from%20trusted%20allies%20about%20perception%20gaps' })
+(loop_823_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_823_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Cumulative%20Damage%22%20(The%20Sun%20Operator)' })
+(loop_823_verdict: BehaviorVerdict { loopId: 823, loopName: 'The%20Age%20Spot%20Loop', then: 'it%20signals%20%22Cumulative%20Damage%22%20(The%20Sun%20Operator)', result: 'visual%20confirmation%20of%20seniority', operatorName: 'The%20Sun%20Operator', operatorMechanism: 'it%20signals%20%22Cumulative%20Damage%22', origin: 'BEHAVIORAL', modality: 'HAPTIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_823_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20in%20high%20contrast' })
+
+// Topology
+(loop_823_start)-[:PROCESS]->(loop_823_given_gate)
+(loop_823_given_gate)-[:PROCESS { case: "ok" }]->(loop_823_when_gate)
+(loop_823_given_gate)-[:PROCESS { case: "err" }]->(loop_823_inactive)
+(loop_823_when_gate)-[:PROCESS { case: "ok" }]->(loop_823_context)
+(loop_823_when_gate)-[:PROCESS { case: "err" }]->(loop_823_inactive)
+(loop_823_context)-[:FORK { strategy: "behavior-branches" }]->(loop_823_context_branch | loop_823_then_branch | loop_823_operator_branch | loop_823_result_branch | loop_823_taxonomy_branch | loop_823_intervention_recognize | loop_823_intervention_interdict | loop_823_intervention_minimize)
+(loop_823_context_branch | loop_823_then_branch | loop_823_operator_branch | loop_823_result_branch | loop_823_taxonomy_branch | loop_823_intervention_recognize | loop_823_intervention_interdict | loop_823_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_823_verdict)
+(loop_823_inactive)-[:PROCESS]->(loop_823_sink)
+(loop_823_verdict)-[:PROCESS]->(loop_823_sink)
+(loop_823_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_823_then_branch)
+(loop_823_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_823_then_branch)
+(loop_823_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_823_then_branch)

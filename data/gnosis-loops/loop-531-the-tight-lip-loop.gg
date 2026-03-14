@@ -1,0 +1,33 @@
+// behavioral-loop-531.gg
+// Executable Gnosis projection for The Tight Lip Loop.
+
+// Nodes
+(loop_531_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_531_context_branch: BehaviorEmit { emission: 'context' })
+(loop_531_given_gate: BehaviorAssess { stage: 'given', text: 'Smiling%20without%20parting%20lips%20(Straight%20horizontal%20line)' })
+(loop_531_inactive: BehaviorTerminal { loopId: 531, loopName: 'The%20Tight%20Lip%20Loop' })
+(loop_531_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations' })
+(loop_531_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_531_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_531_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Stoic%20Operator', mechanism: 'it%20signals%20%22Polite%20Tolerance%22%20not%20%22Amusement%22' })
+(loop_531_result_branch: BehaviorEmit { emission: 'result', text: 'the%20joker%20feeling%20unfunny%20and%20stopping' })
+(loop_531_sink: BehaviorSink)
+(loop_531_start: BehaviorStart { loopId: 531, loopName: 'The%20Tight%20Lip%20Loop', given: 'Smiling%20without%20parting%20lips%20(Straight%20horizontal%20line)', when: 'hearing%20a%20joke', then: 'it%20signals%20%22Polite%20Tolerance%22%20not%20%22Amusement%22%20(The%20Stoic%20Operator)', result: 'the%20joker%20feeling%20unfunny%20and%20stopping', operatorName: 'The%20Stoic%20Operator', operatorMechanism: 'it%20signals%20%22Polite%20Tolerance%22%20not%20%22Amusement%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Practice%20deliberate%20counter-behaviors%20in%20low-stakes%20situations', intervention_minimize: 'Use%20grounding%20techniques%20to%20avoid%20emotional%20hijacking' })
+(loop_531_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_531_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Polite%20Tolerance%22%20not%20%22Amusement%22%20(The%20Stoic%20Operator)' })
+(loop_531_verdict: BehaviorVerdict { loopId: 531, loopName: 'The%20Tight%20Lip%20Loop', then: 'it%20signals%20%22Polite%20Tolerance%22%20not%20%22Amusement%22%20(The%20Stoic%20Operator)', result: 'the%20joker%20feeling%20unfunny%20and%20stopping', operatorName: 'The%20Stoic%20Operator', operatorMechanism: 'it%20signals%20%22Polite%20Tolerance%22%20not%20%22Amusement%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_531_when_gate: BehaviorAssess { stage: 'when', text: 'hearing%20a%20joke' })
+
+// Topology
+(loop_531_start)-[:PROCESS]->(loop_531_given_gate)
+(loop_531_given_gate)-[:PROCESS { case: "ok" }]->(loop_531_when_gate)
+(loop_531_given_gate)-[:PROCESS { case: "err" }]->(loop_531_inactive)
+(loop_531_when_gate)-[:PROCESS { case: "ok" }]->(loop_531_context)
+(loop_531_when_gate)-[:PROCESS { case: "err" }]->(loop_531_inactive)
+(loop_531_context)-[:FORK { strategy: "behavior-branches" }]->(loop_531_context_branch | loop_531_then_branch | loop_531_operator_branch | loop_531_result_branch | loop_531_taxonomy_branch | loop_531_intervention_recognize | loop_531_intervention_interdict | loop_531_intervention_minimize)
+(loop_531_context_branch | loop_531_then_branch | loop_531_operator_branch | loop_531_result_branch | loop_531_taxonomy_branch | loop_531_intervention_recognize | loop_531_intervention_interdict | loop_531_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_531_verdict)
+(loop_531_inactive)-[:PROCESS]->(loop_531_sink)
+(loop_531_verdict)-[:PROCESS]->(loop_531_sink)
+(loop_531_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_531_then_branch)
+(loop_531_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_531_then_branch)
+(loop_531_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_531_then_branch)

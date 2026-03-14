@@ -1,0 +1,33 @@
+// behavioral-loop-439.gg
+// Executable Gnosis projection for The Cloudy Eye Loop.
+
+// Nodes
+(loop_439_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_439_context_branch: BehaviorEmit { emission: 'context' })
+(loop_439_given_gate: BehaviorAssess { stage: 'given', text: 'Grey%20ring%20around%20the%20iris%20(cholesterol)' })
+(loop_439_inactive: BehaviorTerminal { loopId: 439, loopName: 'The%20Cloudy%20Eye%20Loop' })
+(loop_439_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Build%20awareness%20through%20journaling%20or%20recording' })
+(loop_439_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_439_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Watch%20for%20snap%20judgments%20based%20on%20appearance' })
+(loop_439_operator_branch: BehaviorEmit { emission: 'operator', name: 'The%20Unhealth%20Operator', mechanism: 'it%20signals%20%22Premature%20Aging%22%20or%20%22Metabolic%20Issue%22' })
+(loop_439_result_branch: BehaviorEmit { emission: 'result', text: 'subtle%20discrimination%20in%20health-conscious%20mating%20markets' })
+(loop_439_sink: BehaviorSink)
+(loop_439_start: BehaviorStart { loopId: 439, loopName: 'The%20Cloudy%20Eye%20Loop', given: 'Grey%20ring%20around%20the%20iris%20(cholesterol)', when: 'seen%20in%20a%20younger%20person', then: 'it%20signals%20%22Premature%20Aging%22%20or%20%22Metabolic%20Issue%22%20(The%20Unhealth%20Operator)', result: 'subtle%20discrimination%20in%20health-conscious%20mating%20markets', operatorName: 'The%20Unhealth%20Operator', operatorMechanism: 'it%20signals%20%22Premature%20Aging%22%20or%20%22Metabolic%20Issue%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '7', intervention_recognize: 'Watch%20for%20snap%20judgments%20based%20on%20appearance', intervention_interdict: 'Build%20awareness%20through%20journaling%20or%20recording', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_439_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_439_then_branch: BehaviorEmit { emission: 'then', text: 'it%20signals%20%22Premature%20Aging%22%20or%20%22Metabolic%20Issue%22%20(The%20Unhealth%20Operator)' })
+(loop_439_verdict: BehaviorVerdict { loopId: 439, loopName: 'The%20Cloudy%20Eye%20Loop', then: 'it%20signals%20%22Premature%20Aging%22%20or%20%22Metabolic%20Issue%22%20(The%20Unhealth%20Operator)', result: 'subtle%20discrimination%20in%20health-conscious%20mating%20markets', operatorName: 'The%20Unhealth%20Operator', operatorMechanism: 'it%20signals%20%22Premature%20Aging%22%20or%20%22Metabolic%20Issue%22', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_439_when_gate: BehaviorAssess { stage: 'when', text: 'seen%20in%20a%20younger%20person' })
+
+// Topology
+(loop_439_start)-[:PROCESS]->(loop_439_given_gate)
+(loop_439_given_gate)-[:PROCESS { case: "ok" }]->(loop_439_when_gate)
+(loop_439_given_gate)-[:PROCESS { case: "err" }]->(loop_439_inactive)
+(loop_439_when_gate)-[:PROCESS { case: "ok" }]->(loop_439_context)
+(loop_439_when_gate)-[:PROCESS { case: "err" }]->(loop_439_inactive)
+(loop_439_context)-[:FORK { strategy: "behavior-branches" }]->(loop_439_context_branch | loop_439_then_branch | loop_439_operator_branch | loop_439_result_branch | loop_439_taxonomy_branch | loop_439_intervention_recognize | loop_439_intervention_interdict | loop_439_intervention_minimize)
+(loop_439_context_branch | loop_439_then_branch | loop_439_operator_branch | loop_439_result_branch | loop_439_taxonomy_branch | loop_439_intervention_recognize | loop_439_intervention_interdict | loop_439_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_439_verdict)
+(loop_439_inactive)-[:PROCESS]->(loop_439_sink)
+(loop_439_verdict)-[:PROCESS]->(loop_439_sink)
+(loop_439_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_439_then_branch)
+(loop_439_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_439_then_branch)
+(loop_439_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_439_then_branch)

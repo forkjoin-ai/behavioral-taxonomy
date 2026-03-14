@@ -1,0 +1,33 @@
+// behavioral-loop-1059.gg
+// Executable Gnosis projection for The Golden Child Loop.
+
+// Nodes
+(loop_1059_context: Destructure { from: 'value', fields: 'context,loop' })
+(loop_1059_context_branch: BehaviorEmit { emission: 'context' })
+(loop_1059_given_gate: BehaviorAssess { stage: 'given', text: 'Early%20success%20or%20high%20attractiveness' })
+(loop_1059_inactive: BehaviorTerminal { loopId: 1059, loopName: 'The%20Golden%20Child%20Loop' })
+(loop_1059_intervention_interdict: BehaviorEmit { emission: 'intervention', interventionKind: 'interdict', text: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22' })
+(loop_1059_intervention_minimize: BehaviorEmit { emission: 'intervention', interventionKind: 'minimize', text: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1059_intervention_recognize: BehaviorEmit { emission: 'intervention', interventionKind: 'recognize', text: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong' })
+(loop_1059_operator_branch: BehaviorEmit { emission: 'operator', name: 'Unknown%20Operator', mechanism: 'the%20group%20ignores%20it%20to%20maintain%20the%20fantasy%20(The%20Halo%20Protection)' })
+(loop_1059_result_branch: BehaviorEmit { emission: 'result', text: 'the%20individual%20never%20developing%20resilience%2C%20leading%20to%20a%20catastrophic%20mid-life%20collapse' })
+(loop_1059_sink: BehaviorSink)
+(loop_1059_start: BehaviorStart { loopId: 1059, loopName: 'The%20Golden%20Child%20Loop', given: 'Early%20success%20or%20high%20attractiveness', when: 'they%20make%20a%20minor%20mistake', then: 'the%20group%20ignores%20it%20to%20maintain%20the%20fantasy%20(The%20Halo%20Protection)', result: 'the%20individual%20never%20developing%20resilience%2C%20leading%20to%20a%20catastrophic%20mid-life%20collapse', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20group%20ignores%20it%20to%20maintain%20the%20fantasy%20(The%20Halo%20Protection)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION', interventionDifficulty: '5', intervention_recognize: 'Notice%20when%20first%20impressions%20feel%20unusually%20strong', intervention_interdict: 'Use%20implementation%20intentions%3A%20%22When%20X%20happens%2C%20I%20will%20do%20Y%22', intervention_minimize: 'Recognize%20the%20loop%20is%20triggering%20and%20pause%20before%20reacting' })
+(loop_1059_taxonomy_branch: BehaviorEmit { emission: 'taxonomy', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1059_then_branch: BehaviorEmit { emission: 'then', text: 'the%20group%20ignores%20it%20to%20maintain%20the%20fantasy%20(The%20Halo%20Protection)' })
+(loop_1059_verdict: BehaviorVerdict { loopId: 1059, loopName: 'The%20Golden%20Child%20Loop', then: 'the%20group%20ignores%20it%20to%20maintain%20the%20fantasy%20(The%20Halo%20Protection)', result: 'the%20individual%20never%20developing%20resilience%2C%20leading%20to%20a%20catastrophic%20mid-life%20collapse', operatorName: 'Unknown%20Operator', operatorMechanism: 'the%20group%20ignores%20it%20to%20maintain%20the%20fantasy%20(The%20Halo%20Protection)', origin: 'BEHAVIORAL', modality: 'VISUAL_STATIC', mutability: '1', valences: 'SUBMISSION' })
+(loop_1059_when_gate: BehaviorAssess { stage: 'when', text: 'they%20make%20a%20minor%20mistake' })
+
+// Topology
+(loop_1059_start)-[:PROCESS]->(loop_1059_given_gate)
+(loop_1059_given_gate)-[:PROCESS { case: "ok" }]->(loop_1059_when_gate)
+(loop_1059_given_gate)-[:PROCESS { case: "err" }]->(loop_1059_inactive)
+(loop_1059_when_gate)-[:PROCESS { case: "ok" }]->(loop_1059_context)
+(loop_1059_when_gate)-[:PROCESS { case: "err" }]->(loop_1059_inactive)
+(loop_1059_context)-[:FORK { strategy: "behavior-branches" }]->(loop_1059_context_branch | loop_1059_then_branch | loop_1059_operator_branch | loop_1059_result_branch | loop_1059_taxonomy_branch | loop_1059_intervention_recognize | loop_1059_intervention_interdict | loop_1059_intervention_minimize)
+(loop_1059_context_branch | loop_1059_then_branch | loop_1059_operator_branch | loop_1059_result_branch | loop_1059_taxonomy_branch | loop_1059_intervention_recognize | loop_1059_intervention_interdict | loop_1059_intervention_minimize)-[:FOLD { strategy: "behavior-synthesis" }]->(loop_1059_verdict)
+(loop_1059_inactive)-[:PROCESS]->(loop_1059_sink)
+(loop_1059_verdict)-[:PROCESS]->(loop_1059_sink)
+(loop_1059_intervention_recognize)-[:INTERFERE { mode: "destructive" }]->(loop_1059_then_branch)
+(loop_1059_intervention_interdict)-[:INTERFERE { mode: "destructive" }]->(loop_1059_then_branch)
+(loop_1059_intervention_minimize)-[:INTERFERE { mode: "destructive" }]->(loop_1059_then_branch)
