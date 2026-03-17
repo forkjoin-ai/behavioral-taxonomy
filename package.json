@@ -56,12 +56,12 @@
   "license": "CC-BY-4.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/affectively-ai/behavioral-taxonomy.git"
+    "url": "git+https://github.com/forkjoin-ai/behavioral-taxonomy.git"
   },
   "bugs": {
-    "url": "https://github.com/affectively-ai/behavioral-taxonomy/issues"
+    "url": "https://github.com/forkjoin-ai/behavioral-taxonomy/issues"
   },
-  "homepage": "https://github.com/affectively-ai/behavioral-taxonomy#readme",
+  "homepage": "https://github.com/forkjoin-ai/behavioral-taxonomy#readme",
   "devDependencies": {
     "tsup": "^8.0.0",
     "typescript": "^5.9.0"

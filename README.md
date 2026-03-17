@@ -62,6 +62,8 @@ import traits from '@affectively/behavioral-taxonomy/data/traits';
 
 ## License
 
+Copyright Taylor William Buley. All rights reserved.
+
 This dataset is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## Why This README Is Grounded

@@ -5,7 +5,7 @@
  * cognitive biases, and personality traits.
  *
  * @license CC-BY-4.0
- * @see https://github.com/affectively-ai/behavioral-taxonomy
+ * @see https://github.com/forkjoin-ai/behavioral-taxonomy
  */
 
 import behavioralLoopsData from '../data/behavioralLoops.json';
