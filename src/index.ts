@@ -1,5 +1,5 @@
 /**
- * @affectively/behavioral-taxonomy
+ * @a0n/behavioral-taxonomy
  *
  * A comprehensive taxonomy of human behavioral loops, emotions,
  * cognitive biases, and personality traits.
