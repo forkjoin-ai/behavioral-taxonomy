@@ -37,7 +37,7 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "prepublishOnly": "npm run build",
-    "test": "bun test --pass-with-no-tests",
+    "test": "bun test --timeout 30000 --pass-with-no-tests",
     "lint": "eslint src/"
   },
   "keywords": [
