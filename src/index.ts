@@ -127,7 +127,7 @@ export interface Emotion {
   valence: 'Positive' | 'Negative' | 'Neutral' | 'Mixed';
   arousal: 'High' | 'Medium' | 'Moderate' | 'Low' | 'Very High' | 'Very Low';
   color?: string;
-  ekmanCategory?: string;
+  physicsCategory?: string;
   relatedEmotions?: string[];
   example?: string;
   reflectionTip?: string;
@@ -241,7 +241,7 @@ interface RawEmotionRecord {
   valence?: string;
   arousal?: string;
   color?: string;
-  ekmanCategory?: string;
+  physicsCategory?: string;
   example?: string;
   reflectionTip?: string;
   deescalationTip?: string;
@@ -267,7 +267,7 @@ function normalizeEmotion(
     valence: (raw.valence as Emotion['valence']) ?? 'Neutral',
     arousal: (raw.arousal as Emotion['arousal']) ?? 'Medium',
     color: raw.color,
-    ekmanCategory: raw.ekmanCategory,
+    physicsCategory: raw.physicsCategory,
     example: raw.example,
     reflectionTip: raw.reflectionTip,
     deescalationTip: raw.deescalationTip,
