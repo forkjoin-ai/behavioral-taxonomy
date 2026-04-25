@@ -5,6 +5,7 @@ NODES == {"loop_206_context", "loop_206_context_branch", "loop_206_given_gate", 
 ROOTS == {"loop_206_start"}
 TERMINALS == {"loop_206_sink"}
 FOLD_TARGETS == {"loop_206_verdict"}
+CORRIDOR_TARGETS == {}
 EFFECTS == {}
 DECLARED_EFFECTS == {}
 INFERRED_EFFECTS == {}
@@ -34,10 +35,10 @@ Edge_02_PROCESS ==
   /\ beta1' = beta1
   /\ payloadPresent' = payloadPresent
   /\ consensusReached' = consensusReached \/ ({"loop_206_when_gate"} \cap FOLD_TARGETS # {})
-Edge_03_PROCESS ==
+Edge_03_VENT ==
   /\ CanFire({"loop_206_given_gate"})
   /\ active' = UpdateActive({"loop_206_given_gate"}, {"loop_206_inactive"})
-  /\ beta1' = beta1
+  /\ beta1' = Max2(0, beta1 - 1)
   /\ payloadPresent' = payloadPresent
   /\ consensusReached' = consensusReached \/ ({"loop_206_inactive"} \cap FOLD_TARGETS # {})
 Edge_04_PROCESS ==
@@ -46,10 +47,10 @@ Edge_04_PROCESS ==
   /\ beta1' = beta1
   /\ payloadPresent' = payloadPresent
   /\ consensusReached' = consensusReached \/ ({"loop_206_context"} \cap FOLD_TARGETS # {})
-Edge_05_PROCESS ==
+Edge_05_VENT ==
   /\ CanFire({"loop_206_when_gate"})
   /\ active' = UpdateActive({"loop_206_when_gate"}, {"loop_206_inactive"})
-  /\ beta1' = beta1
+  /\ beta1' = Max2(0, beta1 - 1)
   /\ payloadPresent' = payloadPresent
   /\ consensusReached' = consensusReached \/ ({"loop_206_inactive"} \cap FOLD_TARGETS # {})
 Edge_06_FORK ==
@@ -76,13 +77,19 @@ Edge_09_PROCESS ==
   /\ beta1' = beta1
   /\ payloadPresent' = payloadPresent
   /\ consensusReached' = consensusReached \/ ({"loop_206_sink"} \cap FOLD_TARGETS # {})
-Edge_10_INTERFERE ==
+Edge_10_MEASURE ==
+  /\ CanFire({"loop_206_verdict"})
+  /\ active' = UpdateActive({"loop_206_verdict"}, {"loop_206_sink"})
+  /\ beta1' = beta1
+  /\ payloadPresent' = payloadPresent
+  /\ consensusReached' = consensusReached \/ ({"loop_206_sink"} \cap FOLD_TARGETS # {})
+Edge_11_PROCESS ==
   /\ CanFire({"loop_206_intervention_recognize"})
   /\ active' = UpdateActive({"loop_206_intervention_recognize"}, {"loop_206_then_branch"})
   /\ beta1' = beta1
   /\ payloadPresent' = payloadPresent
   /\ consensusReached' = consensusReached \/ ({"loop_206_then_branch"} \cap FOLD_TARGETS # {})
-Edge_11_INTERFERE ==
+Edge_12_PROCESS ==
   /\ CanFire({"loop_206_intervention_leverage"})
   /\ active' = UpdateActive({"loop_206_intervention_leverage"}, {"loop_206_result_branch"})
   /\ beta1' = beta1
@@ -92,15 +99,16 @@ Edge_11_INTERFERE ==
 Next ==
   \/ Edge_01_PROCESS
   \/ Edge_02_PROCESS
-  \/ Edge_03_PROCESS
+  \/ Edge_03_VENT
   \/ Edge_04_PROCESS
-  \/ Edge_05_PROCESS
+  \/ Edge_05_VENT
   \/ Edge_06_FORK
   \/ Edge_07_FOLD
   \/ Edge_08_PROCESS
   \/ Edge_09_PROCESS
-  \/ Edge_10_INTERFERE
-  \/ Edge_11_INTERFERE
+  \/ Edge_10_MEASURE
+  \/ Edge_11_PROCESS
+  \/ Edge_12_PROCESS
 
 TypeInvariant ==
   /\ active \subseteq NODES
@@ -110,8 +118,11 @@ TypeInvariant ==
 
 NoLostPayloadInvariant == payloadPresent = TRUE
 HasFoldTargets == FOLD_TARGETS # {}
+HasCorridorTargets == CORRIDOR_TARGETS # {}
 EventuallyTerminal == <> (active \cap TERMINALS # {})
 EventuallyConsensus == IF HasFoldTargets THEN <> consensusReached ELSE TRUE
+EventuallyMiddleOutCompression == IF HasCorridorTargets THEN <> (active \cap CORRIDOR_TARGETS # {}) ELSE TRUE
+FirstSufficientCompression == IF HasCorridorTargets THEN <> ((active \cap CORRIDOR_TARGETS # {}) /\ beta1 <= Cardinality(CORRIDOR_TARGETS)) ELSE TRUE
 DeadlockFree == []<>(ENABLED Next)
 
 Spec ==
