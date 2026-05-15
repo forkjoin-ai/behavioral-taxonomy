@@ -38,7 +38,9 @@
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "prepublishOnly": "npm run build",
     "test": "bun test --timeout 30000 --pass-with-no-tests",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "type-check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "behavioral-science",
