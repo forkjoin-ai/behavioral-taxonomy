@@ -344,7 +344,7 @@ export function getStatistics(): {
   const data = getBehavioralLoops();
   const allLoops = getAllLoops();
 
-  const loopsByOrigin = allLoops.reduce((acc, loop) => {
+  const loopsByOrigin = allLoops.reduce((acc: unknown, loop: unknown) => {
     const origin = loop.taxonomy.origin;
     acc[origin] = (acc[origin] || 0) + 1;
     return acc;

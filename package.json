@@ -66,9 +66,11 @@
   "homepage": "https://github.com/forkjoin-ai/behavioral-taxonomy#readme",
   "devDependencies": {
     "tsup": "^8.0.0",
-    "typescript": "^5.9.0"
+    "typescript": "^5.9.0",
+    "bun:test": "latest"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "dependencies": {}
 }
