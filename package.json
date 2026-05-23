@@ -1,5 +1,5 @@
 {
-  "name": "@affectively/behavioral-taxonomy",
+  "name": "@a0n/behavioral-taxonomy",
   "version": "5.0.0",
   "description": "A structured taxonomy of 1,140+ human behavioral loops, emotions, cognitive biases, and personality traits for affective computing applications.",
   "main": "dist/index.js",
