@@ -1,0 +1,124 @@
+# behavioral-taxonomy — easy-deploy site (driven entirely by this file).
+#
+# Deploy with:  a0 xr deploy
+#
+# This package has no worker `main`; the [site] block makes it a topology-driven
+# site. x-ranger synthesizes a worker that renders this content with the
+# `oss-template` kit via the @a0n/aeon-flux runtime.
+#
+# Content is sourced from open-source/behavioral-taxonomy/README.md — keep it honest.
+
+name = "behavioral-taxonomy-site"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+[site]
+kit = "oss-template"
+title = "behavioral-taxonomy — a structured taxonomy of human behavior for affective computing"
+
+[site.project]
+name = "Behavioral Taxonomy"
+tagline = "1,140+ human behavioral loops, emotions, biases, and traits — machine-readable."
+description = "A comprehensive, structured taxonomy of 1,140+ human behavioral loops, emotions, cognitive biases, and personality traits for affective computing applications. The foundational behavioral-science data structures used by the AFFECTIVELY platform."
+logo = "orb"
+accent = "#c084fc"
+theme = "dark"
+repo = "forkjoin-ai/behavioral-taxonomy"
+
+[site.sigil]
+seed = "behavioral-taxonomy"
+motion = "drift"
+coherence = "ring"
+frame = "circle"
+
+[site.nav]
+links = ["Features|#features", "Quickstart|#quickstart", "FAQ|#faq", "Source|https://forgo.cloud/forkjoin-ai/behavioral-taxonomy"]
+
+[site.hero]
+eyebrow = "Emotion AI · NLP · behavioral analysis · 279 categories"
+install = "npm install @affectively/behavioral-taxonomy"
+cta_primary = "Get started"
+cta_primary_href = "#quickstart"
+cta_secondary = "Browse the source"
+cta_secondary_href = "https://forgo.cloud/forkjoin-ai/behavioral-taxonomy"
+
+[site.badges]
+items = ["loops:1,140+", "categories:279", "license:CC-BY-4.0", "format:typescript+json"]
+
+[[site.features]]
+icon = "layers"
+title = "1,140+ behavioral loops"
+body = "Each loop follows a structured given/when/then/result logic format with a named psychological operator and mechanism — categorized across 279 categories from digital-cognitive to ocular, olfactory, and micro-movement signals."
+
+[[site.features]]
+icon = "cpu"
+title = "Built for affective computing"
+body = "Categorizes human behavior into structured, machine-readable formats suited to Emotion AI, Natural Language Processing, behavioral analysis, mental-health applications, HCI research, and game design & narrative systems."
+
+[[site.features]]
+icon = "gauge"
+title = "Veracity & intervention scoring"
+body = "Every loop carries veracity scores (objective grounding, social consensus, recursive amplification, friction index) and an intervention model: difficulty plus how to interdict, minimize, recognize, and leverage it."
+
+[[site.features]]
+icon = "branch"
+title = "A typed taxonomy"
+body = "Loops are tagged by origin (genetic, behavioral, narrative, digital, environmental), modality, mutability, and valences — alongside companion taxonomies for emotions, cognitive biases, and personality traits."
+
+[[site.features]]
+icon = "globe"
+title = "Direct JSON access"
+body = "Import the typed helpers, or pull the raw JSON for behavioral-loops, emotions, biases, and traits directly. ESM and CommonJS entry points are both provided."
+
+[[site.features]]
+icon = "shield"
+title = "CC BY 4.0 — share & adapt"
+body = "Licensed under Creative Commons Attribution 4.0 International. Free to share and adapt for any purpose, even commercially, with attribution to AFFECTIVELY."
+
+[site.quickstart]
+title = "Load the taxonomy"
+
+[[site.quickstart.tab]]
+label = "Install"
+code = "npm install @affectively/behavioral-taxonomy\n# or\nyarn add @affectively/behavioral-taxonomy\n# or\nbun add @affectively/behavioral-taxonomy"
+
+[[site.quickstart.tab]]
+label = "Use"
+code = "import {\n  getBehavioralLoops,\n  getEmotions,\n  getBiases,\n  getTraits,\n} from '@affectively/behavioral-taxonomy';\n\nconst loops = getBehavioralLoops();\nconsole.log(`Loaded ${loops.metadata.totalLoops} behavioral loops`);\n\n// Find loops by category\nconst digitalLoops = loops.categories.find(c => c.id === 'digital-cognitive');"
+
+[[site.quickstart.tab]]
+label = "Raw JSON"
+code = "// ESM\nimport behavioralLoops from '@affectively/behavioral-taxonomy/data/behavioral-loops';\nimport emotions from '@affectively/behavioral-taxonomy/data/emotions';\n\n// CommonJS\nconst biases = require('@affectively/behavioral-taxonomy/data/biases');"
+
+[[site.faq]]
+q = "What does a behavioral loop look like?"
+a = "Each loop has a given/when/then/result logic block, a taxonomy (origin, modality, mutability, valences), a named operator with its mechanism, veracity scores, an intervention model, and meta tags — fully typed in TypeScript."
+
+[[site.faq]]
+q = "How is the data organized?"
+a = "Loops are organized into 279 categories, including Digital & Cognitive, Dental & Oral Signals, Dermatological & Tactile Signals, Aging & Temporal Biomarkers, Ocular & Gaze, Olfactory & Chemical, Micro-movement & Gait, and many more."
+
+[[site.faq]]
+q = "What is it for?"
+a = "It provides the foundational behavioral-science data structures used by the AFFECTIVELY platform — suitable for Emotion AI / affective computing, NLP, behavioral analysis, mental-health applications, HCI research, and game design & narrative systems."
+
+[[site.faq]]
+q = "What license is it under?"
+a = "Creative Commons Attribution 4.0 International (CC BY 4.0). You may share and adapt the material for any purpose, even commercially, as long as you give appropriate credit to AFFECTIVELY and indicate any changes."
+
+[site.footer]
+quote = "The foundational behavioral-science data structures behind the AFFECTIVELY platform."
+license = "CC-BY-4.0"
+copyright = "© 2026 AFFECTIVELY · behavioral-taxonomy contributors"
+
+[[site.footer.column]]
+title = "Taxonomies"
+links = ["Behavioral loops", "Emotions", "Cognitive biases", "Personality traits"]
+
+[[site.footer.column]]
+title = "Use cases"
+links = ["Emotion AI", "NLP", "Behavioral analysis", "Game & narrative design"]
+
+[[site.footer.column]]
+title = "More"
+links = ["Source|https://forgo.cloud/forkjoin-ai/behavioral-taxonomy", "License"]
