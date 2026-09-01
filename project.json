@@ -1,0 +1,27 @@
+{
+  "name": "@a0n/behavioral-taxonomy",
+  "sourceRoot": "open-source/behavioral-taxonomy/src",
+  "projectType": "library",
+  "tags": [
+    "npm:public"
+  ],
+  "targets": {
+    "build": {
+      "executor": "a0:run-commands",
+      "dependsOn": [
+        "^build"
+      ],
+      "options": {
+        "cwd": "open-source/behavioral-taxonomy",
+        "command": "bun run build"
+      }
+    },
+    "test": {
+      "executor": "a0:run-commands",
+      "options": {
+        "cwd": "open-source/behavioral-taxonomy",
+        "command": "bun run test"
+      }
+    }
+  }
+}
