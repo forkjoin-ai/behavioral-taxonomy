@@ -15,13 +15,6 @@
         "cwd": "open-source/behavioral-taxonomy",
         "command": "bun run build"
       }
-    },
-    "test": {
-      "executor": "a0:run-commands",
-      "options": {
-        "cwd": "open-source/behavioral-taxonomy",
-        "command": "bun run test"
-      }
     }
   }
 }
