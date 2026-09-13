@@ -1,5 +1,12 @@
 # @affectively/behavioral-taxonomy
 
+## Failure and risk boundary
+
+Taxonomy labels are authored application categories, not diagnosis, immutable
+identity, intent, causality, or universal cultural truth. Unknown, overlapping,
+and insufficient evidence must remain representable. Tests can verify schema and
+mapping consistency but cannot validate a label about a person.
+
 A comprehensive, structured taxonomy of **1,140+ human behavioral loops**, emotions, cognitive biases, and personality traits for affective computing applications.
 
 [![npm version](https://img.shields.io/npm/v/@affectively/behavioral-taxonomy.svg)](https://www.npmjs.com/package/@affectively/behavioral-taxonomy)

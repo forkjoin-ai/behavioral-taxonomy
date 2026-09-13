@@ -1,0 +1,34 @@
+{
+  "name": "@a0n/behavioral-taxonomy",
+  "sourceRoot": "open-source/behavioral-taxonomy/src",
+  "projectType": "library",
+  "tags": [
+    "npm:public"
+  ],
+  "targets": {
+    "build": {
+      "executor": "a0:run-commands",
+      "dependsOn": [
+        "^build"
+      ],
+      "options": {
+        "cwd": "open-source/behavioral-taxonomy",
+        "command": "node ../gnosis/bin/gnode.js x tsup src/index.ts --format cjs,esm --dts",
+        "monster": {
+          "nodeLeaf": {
+            "args": [
+              "../gnosis/bin/gnode.js",
+              "x",
+              "tsup",
+              "src/index.ts",
+              "--format",
+              "cjs,esm",
+              "--dts"
+            ],
+            "reason": "tsup (the package build: cjs+esm+dts bundle) through the Gnosis bridge (gnode x tsup) as an audited node leaf; replaces bun run build."
+          }
+        }
+      }
+    }
+  }
+}
