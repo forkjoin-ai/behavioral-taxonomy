@@ -13,7 +13,21 @@
       ],
       "options": {
         "cwd": "open-source/behavioral-taxonomy",
-        "command": "bun run build"
+        "command": "node ../gnosis/bin/gnode.js x tsup src/index.ts --format cjs,esm --dts",
+        "monster": {
+          "nodeLeaf": {
+            "args": [
+              "../gnosis/bin/gnode.js",
+              "x",
+              "tsup",
+              "src/index.ts",
+              "--format",
+              "cjs,esm",
+              "--dts"
+            ],
+            "reason": "tsup (the package build: cjs+esm+dts bundle) through the Gnosis bridge (gnode x tsup) as an audited node leaf; replaces bun run build."
+          }
+        }
       }
     }
   }
