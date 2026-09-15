@@ -35,7 +35,8 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "clean": "rm -rf dist",
+    "build": "rm -rf dist && node ../gnosis/bin/gnode.js x tsc -p tsconfig.build.json && node ../gnosis/bin/gnode.js x tsc -p tsconfig.cjs.json && node ../gnosis/bin/gnode.js run ../../scripts/tsc-dual-emit.mjs --from dist/.tsc-esm/src --to dist --ext .mjs --format esm --dts-ext .d.mts --json-attributes && node ../gnosis/bin/gnode.js run ../../scripts/tsc-dual-emit.mjs --from dist/.tsc-cjs/src --to dist --ext .js --format cjs --dts-ext .d.ts && rm -rf dist/.tsc-esm dist/.tsc-cjs",
     "prepublishOnly": "npm run build",
     "test": "bun test",
     "lint": "eslint src/"
